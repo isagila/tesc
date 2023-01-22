@@ -1,6 +1,6 @@
 book_blue
-README
+Tesc
 
 :th
-Это README
+Welcome in tesc!
 :end
