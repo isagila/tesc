@@ -3,4 +3,6 @@ Tesc
 
 :th
 Welcome in tesc!
+
+Please, see [[readme]]!
 :end
