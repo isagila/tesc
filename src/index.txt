@@ -1,11 +1,3 @@
-book_blue test.png
-Tesc
-
 :th
 Welcome in tesc!
-
-Please, see [[readme]]!
-
-:img example.png
-
 :end
