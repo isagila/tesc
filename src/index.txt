@@ -1,3 +1,3 @@
 :th
-Welcome in tesc!
+Hello world!
 :end
