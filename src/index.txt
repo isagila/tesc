@@ -4,5 +4,5 @@ icon: gear_green
 cover:
 
 :th
-Blah-blah
+Some text
 :end
