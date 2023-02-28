@@ -1,6 +1,6 @@
 page_id: 6251dbe712e84262814029a48f74e97e
 title: New title2
-icon: checkmark_green
+icon: green_green
 cover:
 
 :th
