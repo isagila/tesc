@@ -1,3 +1,8 @@
+page_id: 6251dbe712e84262814029a48f74e97e
+title: Example
+icon: 
+cover:
+
 :th
 Something new
 :end
