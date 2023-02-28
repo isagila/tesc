@@ -1,8 +1,8 @@
 page_id: 6251dbe712e84262814029a48f74e97e
-title: Example
+title: New title
 icon: 
 cover:
 
 :th
-Something new
+Blah-blah
 :end
