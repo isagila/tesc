@@ -1,8 +1,0 @@
-page_id: 61814787813d48f28883840cd06be957
-title: README
-icon: checkmark_green
-cover:
-
-:th
-Hello in README!
-:end
