@@ -19,10 +19,9 @@ jobs:
         uses: xu-cheng/latex-action@v2
         with:
           working_directory: ${{ env.BRANCH }}
-          root_file: ${{ env.BRANCH }}/main.tex
+          root_file: main.tex
 
       - name: Set datetime release
-        working-directory: ./${{ env.BRANCH }}
         run: |
           export CUR_DATE=$(date +%Y-%m-%d-%T)
           echo "CUR_DATE=$CUR_DATE" >> $GITHUB_ENV
@@ -36,4 +35,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ${{ env.BRANCH }}-${{ env.CUR_DATE_TAG }}
-          path: ./${{ env.BRANCH }}/${{ env.BRANCH }}-${{ env.CUR_DATE_TAG }}.pdf
+          path: ${{ env.BRANCH }}/${{ env.BRANCH }}-${{ env.CUR_DATE_TAG }}.pdf
