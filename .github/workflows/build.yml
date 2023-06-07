@@ -38,8 +38,8 @@ jobs:
         run: mv "main.pdf" "$BRANCH-$CUR_DATE_TAG.pdf"
 
       - name: Upload artifact
-        working-directory: ./${{ env.BRANCH }}
         uses: actions/upload-artifact@v3
+        working-directory: ./${{ env.BRANCH }}
         with:
           name: ${{ env.BRANCH }}-${{ env.CUR_DATE_TAG }}
           path: ${{ env.BRANCH }}-${{ env.CUR_DATE_TAG }}.pdf
