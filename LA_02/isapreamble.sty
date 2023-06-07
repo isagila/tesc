@@ -1,0 +1,132 @@
+\ProvidesPackage{isapreamble}
+
+\usepackage[
+  left = 10mm,
+  right = 10mm,
+  top = 10mm,
+  bottom = 20mm,
+  bindingoffset = 0cm
+]{geometry}
+
+\usepackage{booktabs}
+\usepackage{enumerate}
+\usepackage{float}
+\usepackage{multirow}
+\usepackage{extarrows}
+\usepackage{graphicx}
+\usepackage{pdfpages}
+\usepackage{microtype}
+\usepackage{titlepic}
+\usepackage{epigraph}
+\usepackage{fixltx2e}
+\usepackage{blkarray}
+\usepackage{scalerel}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+%%% Работа с русским языком
+\usepackage{cmap}                   % поиск в PDF
+\usepackage{mathtext}               % русские буквы в формулах
+\usepackage{indentfirst}            % отступ первого параграфа
+\usepackage[T2A]{fontenc}           % кодировка
+\usepackage[utf8]{inputenc}         % кодировка исходного текста
+\usepackage[english,russian]{babel} % локализация и переносы
+
+%% Кастомизация списков
+\usepackage[inline]{enumitem}
+
+%%% Дополнительная работа с математикой
+\usepackage{amsfonts,amssymb,amsthm,mathtools}
+% \usepackage[intlimits]{amsmath}
+\usepackage{esint} % для ориентированных интегралов
+\usepackage{icomma} % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
+
+%% Номера формул
+\mathtoolsset{showonlyrefs=true} % Показывать номера только у тех формул, на которые есть \eqref{} в тексте.
+
+%% Дифференциалы и все что с ними связано
+\usepackage{physics}
+
+%% Графики функций
+\usepackage{pgfplots}
+\usepackage{tikz}
+\pgfplotsset{every axis/.style = {scale only axis}}
+\pgfplotsset{compat = 1.16}
+
+%% Время
+\usepackage{datetime}
+\renewcommand{\dateseparator}{.}
+
+%% Оглавление с ссылками и ссылки на разные вещи
+\usepackage[
+  unicode = true,
+  colorlinks = true,
+  linkcolor = blue,
+  urlcolor = blue
+]{hyperref}
+\usepackage{nameref}
+
+%% Ссылки на пункты description
+\makeatletter
+\let\orgdescriptionlabel\descriptionlabel
+\renewcommand*{\descriptionlabel}[1]{
+  \let\orglabel\label
+  \let\label\@gobble
+  \phantomsection
+  \protected@edef\@currentlabel{#1\unskip}
+  \let\label\orglabel
+  \orgdescriptionlabel{#1}
+}
+\makeatother
+
+%% Красивые <= и >=
+\renewcommand{\geq}{\geqslant}
+\renewcommand{\leq}{\leqslant}
+
+%% Более привычные греческие буквы
+\renewcommand{\phi}{\varphi}
+\renewcommand{\epsilon}{\varepsilon}
+\newcommand{\eps}{\varepsilon}
+
+%% Перенос знаков в формулах (по Львовскому)
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}
+  {\hbox{$\mathsurround=0pt #1$}}{}}
+
+\newcommand\iso{\xrightarrow{
+    \,\smash{\raisebox{-0.65ex}{\ensuremath{\scriptstyle\sim}}}\,}}
+
+\newcommand{\RomanNumeralCaps}[1]
+{\MakeUppercase{\romannumeral #1}}
+
+\newenvironment{amatrix}[2]{
+  \left(\begin{array}{@{}*{#1}{c}|*{#2}{c}@{}}
+    }{
+  \end{array}\right)
+}
+
+%% Сокращения для обозначения множеств
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\EE}{\mathbb{E}}
+
+% \DeclareSymbolFontAlphabet{\mathbbold}{bbold}
+\DeclareSymbolFontAlphabet{\mathbb}{AMSb}
+
+\newcommand\enumtocitem[3]{\item\textbf{#1}\addtocounter{#2}{1}\addcontentsline{toc}{#2}{\protect{\numberline{#3}} #1}}
+\newcommand\question[1]{\enumtocitem{#1}{subsection}{\thesubsection}}
+
+\newlist{questions}{enumerate}{1}
+\setlist[questions]{
+  label = \textbf{\arabic{questions}.\arabic*.}
+}
+
+\pagestyle{fancy}
+\fancyhead{}
+\fancyfoot{}
+\fancyfoot[C]{\thepage/\pageref*{LastPage}}
+
+\renewcommand{\headrulewidth}{0pt}
