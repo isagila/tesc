@@ -19,10 +19,13 @@ jobs:
 
       - name: Extract branch name
         shell: bash
-        run: echo "BRANCH=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
+        run: echo "BRANCH=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV\
+      
+      - name: Change dir
+        run: cd "$BRANCH"
 
       - name: Build PDF
-        run: latexmk -xelatex -shell-escape "$BRANCH/main.tex"
+        run: latexmk -xelatex -shell-escape "main.tex"
 
       - name: Set datetime release
         run: |
@@ -31,7 +34,7 @@ jobs:
           echo "CUR_DATE_TAG=$(echo $CUR_DATE | tr : -)" >> $GITHUB_ENV
 
       - name: Rename main.pdf
-        run: mv "$BRANCH/main.pdf" "$BRANCH-$CUR_DATE_TAG.pdf"
+        run: mv "main.pdf" "$BRANCH-$CUR_DATE_TAG.pdf"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
