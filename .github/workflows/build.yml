@@ -18,7 +18,7 @@ jobs:
       - name: Build PDF
         uses: xu-cheng/latex-action@v2
         with:
-          working-directory: ${{ env.BRANCH }}
+          working_directory: ${{ env.BRANCH }}
           root_file: ${{ env.BRANCH }}/main.tex
 
       - name: Set datetime release
