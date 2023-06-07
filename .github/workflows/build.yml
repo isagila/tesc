@@ -39,7 +39,6 @@ jobs:
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
-        working-directory: ./${{ env.BRANCH }}
         with:
           name: ${{ env.BRANCH }}-${{ env.CUR_DATE_TAG }}
-          path: ${{ env.BRANCH }}-${{ env.CUR_DATE_TAG }}.pdf
+          path: ./${{ env.BRANCH }}/${{ env.BRANCH }}-${{ env.CUR_DATE_TAG }}.pdf
