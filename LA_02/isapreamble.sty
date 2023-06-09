@@ -119,14 +119,14 @@
 \renewcommand\thesection{\arabic{section}.}
 \renewcommand\thesubsection{\thesection\arabic{subsection}.}
 
-%% Стили для определений, теорем
-\newtheoremstyle{dfnstyle} % <name>
+%% Стиль для замечаний
+\newtheoremstyle{remarkstyle} % <name>
 {3pt} % <Space above>
 {3pt} % <Space below>
 {} % <Body font>
 {} % <Indent amount>
 {\itshape} % <Theorem head font>
-{:} % <Punctuation after theorem head>
+{.} % <Punctuation after theorem head>
 {.5em} % <Space after theorem headi>
 {} % <Theorem head spec (can be left empty, meaning `normal')>
 
@@ -136,23 +136,30 @@
 \renewcommand{\thedefinition}{\thesubsection\arabic{definition}}
 
 \theoremstyle{definition}
-\newtheorem{theorem}[subsection]{\underline{Теорема}}
+\newtheorem{theorem}[definition]{\underline{Теорема}}
 \renewcommand{\thetheorem}{\thesubsection\arabic{theorem}}
 
-\theoremstyle{definition}
-\newtheorem{remark}[subsection]{\textit{Замечание}}
+\theoremstyle{remarkstyle}
+\newtheorem{remark}[definition]{\textit{Замечание}}
 \renewcommand{\theremark}{\thesubsection\arabic{remark}}
 
-\theoremstyle{definition}
-\newtheorem{corollary}[subsection]{\textit{Следствие}}
+\theoremstyle{remarkstyle}
+\newtheorem{corollary}[definition]{\textit{Следствие}}
 \renewcommand{\thecorollary}{\thesubsection\arabic{corollary}}
 
-\theoremstyle{definition}
-\newtheorem{lemma}[subsection]{Lemma}
+\theoremstyle{remarkstyle}
+\newtheorem{lemma}[definition]{Lemma}
 \renewcommand{\thelemma}{\thesubsection\arabic{lemma}}
 
 \renewcommand*{\proofname}{\textit{Доказательство.}}
 \renewcommand\qedsymbol{\(\blacksquare\)}
+
+%% Выражения
+\newenvironment{lequation}[1]{
+  \begin{equation*}\label{eq:#1}\begin{aligned}
+      }{
+    \end{aligned}\end{equation*}
+}
 
 %% Заголовки
 \newcommand\enumtocitem[3]{
@@ -188,3 +195,22 @@
   stringstyle = \color{red}\ttfamily,
   breaklines = true
 }
+
+%% Красивые дроби
+\usepackage{xfrac}
+\usepackage[
+  locale = DE,
+  list-separator = {;\,},
+  list-final-separator = {;\,},
+  list-pair-separator = {;\,},
+  list-units = single,
+  range-units = single,
+  range-phrase = {\text{\ensuremath{-}}},
+  % quotient-mode = fraction, % красивые дроби могут не соответствовать ГОСТ
+  fraction-function = \sfrac,
+  separate-uncertainty,
+]{siunitx}[=v2] % Размерности SI
+\sisetup{inter-unit-product = \ensuremath{{}\cdot{}}}
+
+%% Символ "Пусть"
+\newcommand{\lets}{\Big\rbrack}

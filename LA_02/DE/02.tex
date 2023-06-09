@@ -1,2 +1,29 @@
 \question{Уравнение с разделяющимися переменными.}
 
+\begin{definition}
+  Уравнение вида
+  \begin{lequation}{sep-var}
+    m(x) N(y) \dd x + M(x) n(y) \dd y = 0
+  \end{lequation}
+  называется уравнением с разделяющимися переменными.
+\end{definition}
+
+Для решения таких уравнений необходимо разделить обе части на \(M(x) N(y)\),
+перенести одно из слагаемых в правую часть, после чего проинтегрировать обе
+части.
+
+\begin{lequation}{sep-var-sln}
+  m(x) N(y) \dd x + M(x) n(y) \dd y = 0 \\
+  \frac{m(x)}{M(x)} \dd x + \frac{n(y)}{N(y)} \dd y = 0 \\
+  \int \frac{m(x)}{M(x)} \dd x = - \int \frac{n(y)}{N(y)} \dd y 
+\end{lequation}
+
+\begin{remark}
+  В случае, если \(M(x) = 0\) или \(N(y) = 0\), то уравнение решается
+  непосредственным интегрированием.
+\end{remark}
+
+\begin{remark}
+  Решения вида \(x = const, y = const\) не всегда получаемы из общего решения.
+\end{remark}
+

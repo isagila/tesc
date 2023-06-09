@@ -1,2 +1,45 @@
 \question{Однородное уравнение.}
 
+\begin{definition}
+  Функция \(f(x, y)\) называется \textit{однородной} \(m\)-ого измерения
+  (\(m \ge 0\)), если \(f(\lambda x, \lambda y) = \lambda^{m} f(x, y)\).
+\end{definition}
+
+\begin{definition}
+  Дифференциальное уравнение \(P(x, y) \dd x + Q(x, y) \dd y = 0\) называется
+  \textit{однородным}, если \(P(x, y)\) и \(Q(x, y)\) однородные функции 
+  одного измерения \(m\).
+\end{definition}
+
+Однородные уравнения решаются заменой \(t = \dfrac{y}{x}\). Покажем, откуда
+появляется подобная замена. Преобразуем функции \(P(x, y)\) и \(Q(x, y)\):
+
+\begin{lequation}{homogen}
+  P(x, y) = P \left( x \cdot 1, x \cdot \frac{y}{x} \right)
+    = x^{m} P \left( 1, \frac{y}{x} \right) \\
+  Q(x, y) = Q \left( x \cdot 1, x \cdot \frac{y}{x} \right)
+    = x^{m} Q \left( 1, \frac{y}{x} \right)
+\end{lequation}
+
+Вернемся к исходному уравнению:
+
+\begin{lequation}{homogen-sln}
+  P(x, y) \dd x + Q(x, y) \dd y = 0 \mid \colon \dd x \\
+  y'
+  = -\frac{P(1, \sfrac{y}{x})}{Q(1, \sfrac{y}{x})}
+  = f \left( 1, \frac{y}{x} \right) \\
+  \frac{y}{x} = t \implies \begin{cases}
+    f(1, \sfrac{y}{x}) = \tilde{f}(t) \\
+    y = xt, \; y'_{x} = t + x t'
+  \end{cases} \\
+  t + x t' = \tilde{f}(t) \\
+  x \cdot \frac{\dd t}{\dd x} = \tilde{f}(t) - t \\
+  \frac{\dd t}{\tilde{f}(t) - t} = \frac{\dd x}{x}
+\end{lequation}
+
+Таким образом исходное однородное уравнение сводится к уравнению с разделяющими
+переменными.
+
+\begin{remark}
+  Случай \(\tilde{f}(t) - t = 0\) нужно рассмотреть отдельно.
+\end{remark}
