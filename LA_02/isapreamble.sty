@@ -36,6 +36,11 @@
 \usepackage[utf8]{inputenc}         % кодировка исходного текста
 \usepackage[english,russian]{babel} % локализация и переносы
 
+%% Шрифты
+\usepackage{euscript} % Шрифт Евклид
+\usepackage{mathrsfs} % Красивый матшрифт
+\usepackage[bbgreekl]{mathbbol}
+
 %% Кастомизация списков
 \usepackage[inline]{enumitem}
 
@@ -98,6 +103,9 @@
 \newcommand*{\hm}[1]{#1\nobreak\discretionary{}
   {\hbox{$\mathsurround=0pt #1$}}{}}
 
+\DeclareSymbolFontAlphabet{\mathbbold}{bbold}
+\DeclareSymbolFontAlphabet{\mathbb}{AMSb}
+
 %% Сокращения для обозначения множеств
 \newcommand{\NN}{\mathbb{N}}
 \newcommand{\ZZ}{\mathbb{Z}}
@@ -116,6 +124,10 @@
 \newcommand{\Ker}{\text{Ker}}
 \newcommand{\Img}{\text{Im}}
 \newcommand{\Rang}{\text{rang}}
+
+%% Базис
+\newcommand{\basis}{\mathbbold{e}}
+\newcommand{\Basis}{\mathcal{E}}
 
 %% Округление
 \DeclarePairedDelimiter\ceil{\lceil}{\rceil}
