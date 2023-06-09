@@ -40,13 +40,10 @@
 \usepackage[inline]{enumitem}
 
 %%% Дополнительная работа с математикой
-\usepackage{amsfonts,amssymb,amsthm,mathtools}
+\usepackage{amsfonts, amssymb, amsthm, mathtools}
 % \usepackage[intlimits]{amsmath}
 \usepackage{esint} % для ориентированных интегралов
 \usepackage{icomma} % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
-
-%% Номера формул
-\mathtoolsset{showonlyrefs=true} % Показывать номера только у тех формул, на которые есть \eqref{} в тексте.
 
 %% Дифференциалы и все что с ними связано
 \usepackage{physics}
@@ -160,6 +157,11 @@
       }{
     \end{aligned}\end{equation*}
 }
+\newenvironment{tequation}[2]{
+  \begin{equation*}\label{eq:#1}\tag{#2}
+    }{
+  \end{equation*}
+}
 
 %% Заголовки
 \newcommand\enumtocitem[3]{
@@ -213,3 +215,6 @@
 \sisetup{inter-unit-product = \ensuremath{{}\cdot{}}}
 
 \newcommand{\todo}{\textbf{\color{red} TODO: \hspace{6pt}}}
+
+%% Символ "пусть"
+\newcommand{\lets}{\sqsupset}
