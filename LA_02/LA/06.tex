@@ -1,2 +1,110 @@
 \question{Обратный оператор. Взаимно-однозначный оператор. Ядро и образ оператора. Теорема о размерностях.}
 
+\begin{definition}
+  Оператор \(\opI \colon V^{n} \to V^{n}\) называется тождественным оператором,
+  если \(\opI x = x, \forall x \in V^{n}\).
+\end{definition}
+
+\begin{definition}
+  Пусть даны операторы \(\opA, \opB \colon V^{n} \to V^{n}\). Оператор \(\opB\)
+  называется обратным для оператора \(\opA\), если их композиция равна
+  тождественному оператору.
+  \begin{lequation}{inv-lo-def}
+    \opB = \opA^{-1} \iff \opA \cdot \opB = \opB \cdot \opA = \opI
+  \end{lequation}
+\end{definition}
+
+\begin{definition}
+  Оператор \(\opA \colon V^{n} \to V^{n}\) называется взаимно-однозначным, если
+  разным \(x \in V^{n}\) сопоставляются разные \(y \in V^{n}\).
+  
+  \begin{lequation}{bij-lo-def}
+    x \neq y \implies \opA x \neq \opA y \hspace{10pt} \forall x, y \in V^{n}
+  \end{lequation}
+\end{definition}
+
+\begin{lemma}\label{bij-lo-lm}
+  Если оператор \(\opA \colon V^{n} \to V^{n}\) взаимно-однозначный, то
+  \(\opA x = 0 \implies x = 0\).
+\end{lemma}
+\begin{proof}
+  От противного
+  \begin{lequation}{bij-lo-lm-1}
+    \lets x = x_{1} - x_{2} \neq 0 \implies x_{1} \neq x_{2} \\
+    \opA x = \opA (x_{1} - x_{2}) = \opA x_{1} - \opA x_{2} = 0
+    \implies \opA x_{1} = \opA x_{2}
+  \end{lequation}
+  Это невозможно, т.к. \(\opA\) взаимно-однозначный.
+\end{proof}
+
+\begin{theorem}
+  Взаимно-однозначный оператор переводит линейно-независимый набор в
+  линейно-независимый набор.
+\end{theorem}
+\begin{proof}
+  Пусть дан взаимно-однозначный оператор \(\opA \colon V^{n} \to V^{n}\) и
+  линейно-независимый набор \(\{ x_{1}, \dotsc, x_{n}\}\). Построим
+  набор образов \(\{ \opA x_{1}, \dotsc, \opA x_{n}\}\). Составим его нулевую
+  линейную комбинацию, после чего воспользуемся линейностью оператора:
+
+  \begin{lequation}{bij-lo-lis2lis}
+    \lambda_{1} \opA x_{1} + \dotsc + \lambda_{n} \opA x_{n} = 0 \\
+    \opA \Big( \lambda_{1} x_{1} + \dotsc + \lambda_{n} x_{n} \Big) = 0 \\
+  \end{lequation}
+
+  По \ref{bij-lo-lm} получаем, что
+  \(\lambda_{1} x_{1} + \dotsc + \lambda_{n} x_{n} = 0\).
+  Т.к. набор \(\{ x_{1}, \dotsc, x_{n}\}\) линейно независим, то
+  \(\forall \lambda_{i} = 0\)
+\end{proof}
+
+\begin{corollary}
+  Взаимно-однозначный оператор переводит базис в базис.
+\end{corollary}
+
+\begin{theorem}
+  Оператор \(\opA \colon V^{n} \to V^{n}\) взаимно-однозначный
+  \(\iff \exists \opA^{-1}\).
+\end{theorem}
+\begin{proof}
+
+  \(\implies\) Пусть \(x \xrightarrow{\opA} y\).
+  Рассмотрим оператор \(\opB\) такой, что \(y \xrightarrow{\opB} x\). Т.к.
+  \(\opA\) взаимно-однозначный, то \(\opA \cdot \opB = I\).
+
+  \(\impliedby\) От противного
+  \begin{lequation}{bij-lo-iff-inv}
+    \lets x_{1} \neq x_{2}, \opA x_{1} = \opA x_{2} = x\\
+    x_{1} = \opA^{-1} \opA x_{1} = \opA^{-1} x \\
+    x_{2} = \opA^{-1} \opA x_{2} = \opA^{-1} x \\
+    x_{1} \neq x_{2} \implies \opA^{-1} x \neq \opA^{-1} x
+  \end{lequation}
+  Получили противоречие.
+\end{proof}
+
+\begin{definition}
+  Пусть дан линейный оператор \(\opA \colon V^{n} \to W^{m}\).
+  Множество \(\Ker \opA = \{ x \in V^{n} \mid \opA x = 0\}\)
+  называется ядром оператора \(\opA\).
+\end{definition}
+
+\begin{lemma}
+  Оператор \(\opA \colon V^{n} \to V^{n}\) взаимно-однозначный
+  \(\implies \Ker \opA = \{ 0 \}\).  
+\end{lemma}
+\begin{proof}
+  От противного, пусть \(x \neq 0 \in \Ker \opA\).
+  Тогда по \ref{bij-lo-lm} \(\opA \; 0 = 0\), но в то же время
+  \(\opA x = 0, x \neq 0 \). Нарушается взаимно-однозначность.
+\end{proof}
+
+\begin{definition}
+  Пусть дан линейный оператор \(\opA \colon V^{n} \to W^{m}\).
+  Множество
+  \(\Img \opA = \{ y \in W^{m} \mid \exists x \in V^{n} \colon y = \opA x\}\)
+  называется образом оператора \(\opA\).
+\end{definition}
+
+\begin{theorem}
+  
+\end{theorem}
