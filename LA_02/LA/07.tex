@@ -1,2 +1,48 @@
 \question{Матрица линейного оператора. Преобразование матрицы при переходе к новому базису.}
 
+Пусть дан оператор \(\opA \colon V^{n} \to V^{n}\) и \(x, y \in V^{n}\),
+\(\opA x = y\).
+
+Выделим в \(V^{n}\) базис, разложим \(x\) по этому базису. После чего применим
+к нему оператор \(\opA\):
+
+\begin{lequation}{lo-mtx-1}
+  \Basis = \{ \basis_{1}, \dots, \basis_{n} \} \\
+  x = x_{1} \basis_{1} + \dots + x_{n} \basis_{n} \\
+  y = x_{1} \opA \basis_{1} + \dots + x_{n} \opA \basis_{n} \\
+\end{lequation}
+
+Далее применим оператор к каждому из базисных векторов:
+
+\begin{lequation}{lo-mtx-2}
+  \opA \basis_{i} = a_{1,i} \basis_{1} + \dotsc + a_{n, i} \basis_{n} \\
+  y
+  = x_{1} \Big( a_{1,1} \basis_{1} + \dotsc + a_{n,1} \basis_{n} \Big)
+  + \dots
+  + x_{n} \Big( a_{1,n} \basis_{1} + \dotsc + a_{n,n} \basis_{n} \Big) \\
+  y
+  = \basis_{1} \Big( x_{1} a_{1,1} + \dotsc + x_{n} a_{1,n} \Big)
+  + \dots
+  + \basis_{n} \Big( x_{1} a_{n,1} + \dotsc + x_{n} a_{n,n} \Big)
+\end{lequation}
+
+Заметим, что \(y\) также можно разложить по базису. Составим СЛАУ и запишем её
+в матричном виде:
+
+\begin{lequation}{lo-mtx-3}
+  \begin{Bmatrix}
+    x_{1} a_{1,1} & + \dotsc + & x_{n} a_{1,n} = & y_{1} \\
+    \vdots        & \ddots    & \vdots          & \vdots \\
+    x_{n} a_{n,1} & + \dotsc + & x_{n} a_{n,n} = & y_{n} 
+  \end{Bmatrix} \iff AX = Y
+\end{lequation}
+
+\begin{definition}
+  Матрицей оператора \(\opA\) \textbf{в данном базисе} называется матрица
+  составленная из столбцов-коэффициентов разложения образов базисных векторов
+  по этому же базису.
+\end{definition}
+
+\begin{remark}
+  Если \(A^{-1} = A^{T}\), то матрица оператора называется ортогональной.
+\end{remark}
