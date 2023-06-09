@@ -1,2 +1,74 @@
 \question{Решение ЛОДУ\(_2\) с постоянными коэффициентами для случая комплексных корней характеристического уравнения.}
 
+\textbf{\eqref{eq:lode2-cases} случай III}:
+\(k_{1,2} = \alpha + \beta i, k_{1,2} \in \CC\)
+
+В заданных ограничениях получаем
+
+\begin{lequation}{lode2-sln-3-3-1}
+  C_{2}'(x) = c_{1} e^{(k_{1} - k_{2}) x} \\
+  C_{2}(x) = \frac{c_1}{k_{1} - k_{2}} e^{(k_{1} - k_{2}) x} + \tilde{c_{2}} \\
+  y(x)
+  = C_{2}(x) y_{1}(x)
+  = \underbrace{\frac{c_1}{k_{1} - k_{2}}}_{\tilde{c_1}} e^{k_{1} x}
+  + \tilde{c_2} e^{k_{2} x} \\
+  y(x) = \tilde{c_{1}} e^{k_{1}x} + \tilde{c_{2}} e^{k_{2}x} \\
+  y(x)
+  = \tilde{c_{1}} e^{\alpha x} e^{\beta i x}
+  + \tilde{c_{2}} e^{\alpha x} e^{-\beta i x}
+\end{lequation}
+
+Далее используем формулу \(e^{i \phi} = \cos \phi + i \sin \phi\):
+
+\begin{lequation}{lode2-sln-3-3-2}
+  y(x) = e^{\alpha x} \bigg(
+    \tilde{c_{1}} \Big(\cos (\beta x) + i \sin (\beta x)\Big) +
+    \tilde{c_{2}} \Big(\cos (\beta x) - i \sin (\beta x)\Big)
+  \bigg) \\
+  y(x) = e^{\alpha x} \bigg(
+    \cos (\beta x)
+      \underbrace{\Big(\tilde{c_{1}} + \tilde{c_{2}}\Big)}_{\widehat{c_{1}}}
+    +
+    i \sin (\beta x)
+    \underbrace{\Big(\tilde{c_{1}} - \tilde{c_{2}}\Big)}_{\widehat{c_{2}}}
+  \bigg) \\
+  y(x) = e^{\alpha x} \Big(
+    \widehat{c_{1}} \cos (\beta x) +
+    \widehat{c_{2}} i \sin (\beta x)
+  \Big)
+\end{lequation}
+
+\todo Конспект не очень хороший в этом моменте, возможно что-то неправильно
+
+\begin{lemma} \label{lode2-sln-3-3-lm}
+  Если \(y(x) = u(x) + i v(x)\) это решение ЛОДУ\(_2\), то
+  \(y(x) = u(x) + v(x)\) также являются решением ЛОДУ\(_2\).
+\end{lemma}
+\begin{proof}
+  Рассмотрим функцию \(y(x) = u(x) + v(x)\):
+  \begin{lequation}{lode2-sln-3-3-lm-1}
+    \begin{cases}
+      y(x) = u(x) + v(x) \\
+      y'(x) = u'(x) + v'(x) \\
+      y''(x) = u''(x) + v''(x)
+    \end{cases} \\
+    y''(x) + p y'(x) + q y(x)
+    = u''(x) + v''(x) + p u'(x) + p v'(x) + u(x) + q u(x) + q v(x) = 0 \\
+    \Big( u''(x) + p u'(x) + q u(x) \Big) +
+    \Big( v''(x) + p v'(x) + q v(x) \Big) = 0
+  \end{lequation}
+  Это равенство верно, т.к. \(u(x)\) и \(v(x)\) решения ЛОДУ\(_2\).
+\end{proof}
+
+Значит, по \ref{lode2-sln-3-3-lm} общее решение \eqref{eq:lode2-cases} в третьем
+случае будет иметь вид
+
+\begin{lequation}{}
+  y(x) = e^{\alpha x} \Big(
+    \widehat{c_{1}} \cos (\beta x) +
+    \widehat{c_{2}} \sin (\beta x)
+  \Big)
+\end{lequation}
+
+
+
