@@ -1,2 +1,72 @@
 \question{Евклидово пространство: определение, неравенство Коши-Буняковского. Нормированное евклидово пространство.}
 
+\begin{definition}
+  Скалярным произведением называется функция двух элементов линейного
+  пространства \(x, y \in L^{n}\) обозначаемая \((x, y) \to \RR\),
+  для которой выполнены аксиомы: \(\forall x, y \in L^{n}, \lambda \in \CC\)
+
+  \begin{enumerate}
+    \item \((x, y) = (y, x)\)
+    \item \((\lambda x, y) = \lambda (x, y)\)
+    \item \((x_{1} + x_{2}, y) = (x_{1}, y) + (x_{2}, y)\)
+    \item \((x, x) \ge 0\), \((x, x) = 0 \implies x = 0\)
+  \end{enumerate}
+\end{definition}
+
+\begin{definition}
+  Линейное пространство с введенным скалярным произведением называется
+  евклидовым пространством \(E^{n}\).
+\end{definition}
+
+\begin{remark}
+  Если \(L = C_{[a; b]}\), то скалярное произведение обычно определяется как
+  \((f, g) = \int_{a}^{b} f(x) g(x) \dd x\)
+\end{remark}
+
+\begin{theorem}
+  Неравенство Коши-Буняковского
+  \begin{lequation}{CB}
+    (x, y)^{2} \le (x, x) (y, y)
+  \end{lequation}
+\end{theorem}
+\begin{proof}
+  Рассмотрим скалярное произведение:
+
+  \begin{lequation}{CB-proof-1}
+    (\lambda x - y, \lambda x - y) \ge 0 \\
+    (\lambda x - y, \lambda x - y)
+    = \lambda^2 (x, x) - 2 \lambda (x, y) + (y, y) \ge 0
+  \end{lequation}
+  
+  Полученное выражение можно рассмотреть как квадратное уравнение относительно
+  \(\lambda\). Т.к. оно неотрицательно \(\forall \lambda\), то его дискриминант
+  будет \(\le 0\). Таким образом
+
+  \begin{lequation}{CB-proof-2}
+    4 \lambda^2 (x, y)^2 - 4 \lambda^2 (x, x) (y, y) \le 0 \\
+    (x, y)^2 - (x, x) (y, y) \le 0 \\
+    (x, y)^2 \le (x, x) (y, y)
+  \end{lequation}
+\end{proof}
+
+\begin{definition}
+  Нормой называется функция одного элемента линейного пространства
+  \(x \in L^{n}\), обозначаемая \(\norm{x}\) и определяемая аксиомами:
+  \(\forall x, y \in L^{n}, \lambda \in \CC\):
+
+  \begin{enumerate}
+    \item \(\norm{\lambda x} = \lambda \norm{x}\)
+    \item \(\norm{x + y} \le \norm{x} + \norm{y}\)
+    \item \(\norm{x} \ge 0\), \(\norm{x} = 0 \implies x = 0\)
+  \end{enumerate}
+\end{definition}
+
+\begin{definition}
+  Евклидово пространство называется \textit{нормированным}, если в нем
+  определена норма.
+\end{definition}
+
+\begin{remark}
+  Чаще всего норма определяется как \(\norm{x} = \sqrt{(x, x)}\).
+\end{remark}
+
