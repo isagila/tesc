@@ -1,2 +1,158 @@
 \question{Свойства решений ЛОДУ\(_2\): линейная независимость решений, определитель Вронского. Теоремы 1,2.}
 
+Рассмотрим множество \(\Omega\) непрерывных функций с непрерывными производными
+2ого порядка. Определим линейный дифференциальный оператор
+\(\Linear{y} = y'' + py' + q \to f(x)\).
+
+\begin{definition}
+  Будем называть функции \(y_{1}, \dotsc, y_{n}\) линейно-независимыми на
+  отрезке \([a; b]\), если
+
+  \begin{lequation}{ind-func}
+    \sum_{i = 1}^{n} c_{i} y_{i} = 0 \implies \forall c_{i} = 0
+  \end{lequation}
+\end{definition}
+
+\begin{definition}
+  Определитель Вронского (вронскиан) \(\Wrn\) это определитель, составленный из
+  \(n\) функций и всех их производных вплоть до \((n - 1)\)-ого порядка. Он
+  имеет вид:
+
+  \begin{lequation}{wrn-def}
+    \Wrn = \begin{vmatrix}
+      y_{1}  & \dotsc  & y_{n} \\
+      \vdots & \ddots & \vdots \\
+      y^{(n - 1)}_{1}  & \dotsc  & y^{(n - 1)}_{n}
+    \end{vmatrix}
+  \end{lequation}
+\end{definition}
+
+\begin{lemma}\label{wrn-prop-1}
+  Если два решения ЛОДУ\(_2\) линейно-зависимы на \([a; b]\), то их
+  вронскиан на \([a; b]\) равен нулю.
+
+  \begin{lequation}{wrn-lm-1}
+    \begin{rcases}
+      \Linear{y_{1}} = 0 \\
+      \Linear{y_{2}} = 0 \\
+      y_{1} = \lambda y_{2}
+    \end{rcases} \implies \Wrn = 0
+  \end{lequation}
+\end{lemma}
+\begin{proof}
+  \begin{lequation}{wrn-lm-1-proof}
+    \Wrn = \begin{vmatrix}
+      y_{1} & y_{2} \\
+      y'_{1} & y'_{2} \\
+    \end{vmatrix} = \begin{vmatrix}
+      \lambda y_{2} & y_{2} \\
+      \lambda y'_{2} & y'_{2} \\
+    \end{vmatrix} = \lambda \begin{vmatrix}
+      y_{2} & y_{2} \\
+      y'_{2} & y'_{2} \\
+    \end{vmatrix} = 0
+  \end{lequation}
+\end{proof}
+
+\begin{lemma}\label{wrn-prop-2}
+  Если два решения ЛОДУ\(_2\) линейно-независимы на \([a; b]\), то их
+  вронскиан на \([a; b]\) не равен нулю.
+
+  \begin{lequation}{wrn-lm-2}
+    \begin{rcases}
+      \Linear{y_{1}} = 0 \\
+      \Linear{y_{2}} = 0 \\
+      y_{1} \neq \lambda y_{2}
+    \end{rcases} \implies \Wrn \neq 0
+  \end{lequation}
+\end{lemma}
+\begin{proof}
+  От противного
+  \begin{lequation}{wrn-lm-2-proof}
+    \lets \Wrn = 0 = \begin{vmatrix}
+      y_{1} & y_{2} \\
+      y'_{1} & y'_{2} \\
+    \end{vmatrix} = y_{1} y'_{2} - y'_{1} y_{2} \mid \colon y_{1}^{2} \neq 0 \\
+    \frac{y_{1} y'_{2} - y'_{1} y_{2}}{y_{1}^{2}} = 0 \\
+    \left(\frac{y_{2}}{y_{1}}\right)' = 0 \\
+    \frac{y_{2}}{y_{1}} = const \\
+    y_{1} = \lambda y_{2}
+  \end{lequation}
+  Получили противоречие.
+\end{proof}
+
+\begin{theorem}
+  Линейная зависимость/независимость функций определяется равенством их
+  вронскиана нулю.
+\end{theorem}
+\begin{proof}
+  Следствие из \ref{wrn-prop-1} и \ref{wrn-prop-2}.
+\end{proof}
+
+\begin{remark}
+  Для проверки набора функций на линейную зависимость/независимость лучше
+  использовать именно вронскиан, а не непосредственное определение линейной
+  зависимости функций на отрезке.
+\end{remark}
+
+\begin{theorem}\label{wrn-prop-3}
+  Рассмотрим функции на отрезке \([a; b]\). Если на этом отрезке найдется точка,
+  в которой вронскиан равен нулю, вронскиан будет равен нулю на всем отрезке.
+  Дуально, если найдется точка, в которой вронскиан не равен нулю, то он будет
+  не равен нулю на всем отрезке.
+
+  \begin{lequation}{wrn-prop-3-def}
+    \exists x_{0} \in [a; b] \mid W(x_{0}) = W_{0} \neq 0
+      \implies \forall x \in [a, b] \colon W(x) \neq 0 \\
+    \exists x_{0} \in [a; b] \mid W(x_{0}) = W_{0} = 0
+      \implies \forall x \in [a, b] \colon W(x) = 0 \\
+  \end{lequation}
+\end{theorem}
+\begin{proof}
+  Пусть \(y_{1}\) и \(y_{2}\) это решения ДУ, тогда
+
+  \begin{lequation}{wrn-prop-3-proof-1}
+    \begin{cases}
+      y_{2}'' + p y_{2}' + q y_{2} = 0 \cdot \; y_{1}
+      y_{1}'' + p y_{1}' + q y_{1} = 0 \mid \cdot \; y_{2} \\
+    \end{cases} - \\
+    (y_{1} y_{2}'' - y_{2} y_{1}'') + p (y_{1} y_{2}' - y_{1}' y_{2}) = 0
+  \end{lequation}
+
+  Заметим, что выражение в левой скобке это \(\Wrn'\), а во правой~--- \(\Wrn\):
+
+  \begin{lequation}{wrn-prop-3-proof-2}
+    \Wrn = y_{1} y_{2}' - y_{1}' y_{2} \\
+    \Wrn'
+    = (y_{1} y_{2}' - y_{1}' y_{2})'
+    = y_{1}' y_{2}' + y_{1} y_{2}'' - y_{1}'' y_{2} - y_{1}' y_{2}'
+    = y_{1} y_{2}'' - y_{1}'' y_{2}
+  \end{lequation}
+
+  Подставим это в полученное ранее уравнение:
+
+  \begin{lequation}{wrn-prop-3-proof-3}
+    (y_{1} y_{2}'' - y_{2} y_{1}'') + p (y_{1} y_{2}' - y_{1}' y_{2}) = 0 \\
+    \Wrn' + p \Wrn = 0 \\
+    \Wrn = c_{1} e^{-\int p \dd x} \\
+    \Wrn(x_{0})
+    = c_{1} e^{-\int_{x_{0}}^{x_{0}} p \dd x}
+    = c_{1}
+    = \Wrn_{0}
+    \\
+    \Wrn(x)
+    = c_{1} e^{-\int_{x_{0}}^{x} p \dd x}
+    = \Wrn_{0} e^{-\int_{x_{0}}^{x} p \dd x}
+  \end{lequation}
+
+  Таким образом, если \(\Wrn_{0} = 0\), то \(\Wrn(x) = 0\) на всем отрезке
+  \([a; b]\). Дуально, если \(\Wrn_{0} \neq 0\), то т.к. второй множитель всегда
+  больше нуля (это экспонента) \(\Wrn(x) \neq 0\).
+
+  \todo Откуда такие границы в интегралах?
+\end{proof}
+
+\begin{remark}
+  Таким образом, чтобы узнать равен ли вронскиан нулю на отрезке, достаточно
+  узнать его значение в одной произвольной точке этого отрезка.
+\end{remark}
