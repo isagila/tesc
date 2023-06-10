@@ -154,8 +154,10 @@
 {} % <Theorem head spec (can be left empty, meaning `normal')>
 
 %% Леммы-леммы теоремы
+\newcounter{points}[subsection]
+
 \theoremstyle{definition}
-\newtheorem{definition}{Def}[subsection]
+\newtheorem{definition}{Def}[points]
 \renewcommand{\thedefinition}{\thesubsection\arabic{definition}}
 
 \theoremstyle{definition}
@@ -192,7 +194,7 @@
 %% Заголовки
 \newcommand\enumtocitem[3]{
   \item\textbf{\color{blue} #1}
-  \addtocounter{#2}{1}
+  \stepcounter{#2}
   \addcontentsline{toc}{#2}
   {\protect{\numberline{#3}} #1}
 }
