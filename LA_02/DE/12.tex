@@ -32,3 +32,27 @@
   Множество решений ЛОДУ образует линейное пространство.
 \end{corollary}
 
+\begin{theorem}
+  О существовании и единственности решения ЛОДУ\(_2\).
+
+  \begin{lequation}{lode-ex-un-sol-1}
+    y'' = g(x, y, y') = f(x) - p y' - qy
+  \end{lequation}
+
+  Если \(g, g'_{y}, g'_{y'}\) непрерывны в области \(D \owns (x_{0}, y_{0})\),
+  то задача Коши
+
+  \begin{lequation}{lode-ex-un-sol-2}
+    \begin{cases}
+      \Linear{y} = f(x) \\
+      y_{0} = y(x_{0}) \\
+      y'_{0} = y'(x_{0})
+    \end{cases}
+  \end{lequation}
+
+  имеет единственное решение.
+\end{theorem}
+\begin{proof}
+  \textit{(Без доказательства)}
+\end{proof}
+
