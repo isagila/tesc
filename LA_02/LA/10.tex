@@ -1,2 +1,73 @@
 \question{Структура образа самосопряженного оператора. Проектор. Спектральное разложение оператора.}
 
+\begin{theorem}\label{sconj-lo-img}
+  Образ самосопряженного оператора \(\opA\) имеет вид
+
+  \begin{lequation}{sconj-lo-img-def}
+    \Img \opA = \left\{
+      \sum_{i = 1}^{n}
+      \lambda_{i} (x, \basis_{i}) \basis_{i}
+    \right\}
+  \end{lequation}
+
+  где \(\Basis = \{ \basis_{i} \}_{i = 1}^{n}\) это ортонормированный базис,
+  \(\lambda_{i}\)~--- собственные числа оператора \(\opA\).
+\end{theorem}
+\begin{proof}
+  \begin{lequation}{sconj-lo-img-proof}
+    \opA x = y =
+    \\
+      y_{1} \basis_{1}
+        + \dotsc + y_{n} \basis_{n} =
+    \\
+      (y, \basis_{1}) \basis_{1}
+        + \dotsc + (y, \basis_{n}) \basis_{n} =
+    \\
+      (\opA x, \basis_{1}) \basis_{1}
+        + \dotsc + (\opA x, \basis_{n}) \basis_{n} =
+    \\
+      (x, \opA \basis_{1}) \basis_{1}
+        + \dotsc + (x, \opA \basis_{n}) \basis_{n} =
+    \\
+      (x, \lambda_{1} \basis_{1}) \basis_{1}
+        + \dotsc + (x, \lambda_{n} \basis_{n}) \basis_{n} =
+    \\
+      \lambda_{1} (x, \basis_{1}) \basis_{1}
+        + \dotsc + \lambda_{n} (x,\basis_{n}) \basis_{n} =
+    \\
+    \sum_{i = 1}^{n} \lambda_{i} (x, \basis_{i}) \basis_{i}
+  \end{lequation}
+\end{proof}
+
+\todo Конспект не очень в этом моменте
+
+\begin{remark}
+  \((x, \basis_{i})\) это проекция вектора \(x\) на собственный вектор.
+\end{remark}
+
+\begin{definition}\label{lo-proj}
+  Оператор вида
+
+  \begin{lequation}{lo-proj-def}
+    P_{i}(x) = (x, \basis_{i}) \basis_{i}
+  \end{lequation}
+
+  называется проектором на одномерное пространство, порожденное собственным
+  вектором.
+\end{definition}
+
+\begin{remark}
+  Проектор является самосопряженным оператором.
+\end{remark}
+
+\begin{definition}
+  Спектральным разложением оператора называется представление его в виде
+  линейной комбинации проекторов
+
+  \begin{lequation}{lo-spec-als}
+    \opA = \sum_{i = 1}^{n} \lambda_{i} P_{i}
+  \end{lequation}
+
+  Корректность такого представления следует из \ref{sconj-lo-img} и
+  \ref{lo-proj}.
+\end{definition}
