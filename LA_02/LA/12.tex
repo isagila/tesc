@@ -1,2 +1,67 @@
 \question{Билинейные формы: определения, свойства. Матрица билинейной формы.}
 
+\begin{definition}
+  Функция \(\BiLinear \colon V^{n} \to \RR\) обозначаемая
+  \(\BiLinear(u, v) \; (u, v \in V^{n})\) называется билинейной формой, если
+  выполняются следующие требования:
+  \(\forall u, w, v \in V^{n}, \lambda \in \RR\):
+
+  \begin{enumerate}
+    \item \(\BiLinear(u + w, v) = \BiLinear(u, v) + \BiLinear(w, v)\)
+    \item \(\BiLinear(u, v + w) = \BiLinear(u, v) + \BiLinear(u, w)\)
+    \item \(\BiLinear(\lambda u, v) = \lambda \BiLinear(u, v)\)
+    \item \(\BiLinear(u, \lambda v) = \lambda \BiLinear(u, v)\)
+  \end{enumerate}
+\end{definition}
+
+\begin{definition}
+  Если к каждой паре базисных векторов применить билинейную форму, то
+  полученные числа можно использовать как коэффициенты матрицы. Это матрица
+  будет называться матрицей билинейной формы \textbf{в данном базисе}.
+
+  Таким образом матрица \(B\) билинейной формы \(\BiLinear\) в базисе
+  \(\Basis = \{ \basis \}_{i = 1}^{n}\) имеет вид:
+
+  \begin{lequation}{blf-mtx}
+    \begin{pmatrix}
+      \BiLinear(\basis_{1}, \basis_{1})
+        & \dots & \BiLinear(\basis_{1}, \basis_{n}) \\
+      \vdots & \ddots & \vdots \\
+      \BiLinear(\basis_{n}, \basis_{1})
+        & \dots & \BiLinear(\basis_{n}, \basis_{n})
+    \end{pmatrix}
+  \end{lequation}
+\end{definition}
+
+\begin{definition}
+  Билинейная форма \(\BiLinear\) называется симметричной, если
+  \(\BiLinear(u, v) = \BiLinear(v, u)\).
+\end{definition}
+
+\begin{definition}
+  Билинейная форма \(\BiLinear\) называется кососимметричной (антисимметричной),
+  если \(\BiLinear(u, v) = -\BiLinear(v, u)\).
+\end{definition}
+
+\begin{remark}
+  Применение билинейной формы \(\BiLinear\) к элементам \(u\) и \(v\) можно
+  отождествлять с умножением матриц в виде \(u^{T} B v\).
+
+  Тогда можно говорить о ранге билинейной формы и о её преобразовании при смене
+  базиса.
+\end{remark}
+
+\begin{lemma}
+  Ранг билинейной формы это инвариант относительно смены базиса \(T\).
+\end{lemma}
+\begin{proof}
+  \(B_{\basis'} = T_{\basis' \to \basis} B_{\basis} T_{\basis \to \basis'}\)
+
+  Т.к. матрица \(T_{\basis' \to \basis}\) невырождена, то
+  \(\Rang B_{\basis'} = \Rang B_{\basis}\)
+\end{proof}
+
+\begin{definition}
+  Если ранг билинейной формы \(\BiLinear \colon V^{n} \to \RR\) равен \(n\), то
+  такая билинейная форма называется невырожденной.
+\end{definition}
