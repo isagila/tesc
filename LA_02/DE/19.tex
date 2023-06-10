@@ -1,2 +1,71 @@
 \question{Системы дифференциальных уравнений: определения, решение матричным методом в случае различных вещественных собственных чисел.}
 
+Обозначим
+\((y_{1}, \dotsc, y_{n}) = Y\)~--- вектор неизвестных,
+\(\{a_{i,j}\} = A\)~--- коэффициенты,
+\((y'_{1}, \dotsc, y'_{n}) = Y'\)~--- вектор производных.
+
+Тогда СДУ можно записать в матричном виде как \(Y' = AY\). Пусть \(A\) это
+матрица линейного оператора \(\opA\). Для этого оператора можно найти
+собственные числа и соответствующие им собственные векторы.
+
+Обозначим собственные числа \(\lambda_{1}, \dotsc, \lambda_{n}\), а
+\(\Gamma_{1}, \dotsc, \Gamma_{n}\)~--- соответствующие им собственные векторы.
+
+Можно убедиться, что \(Y_{i} = \Gamma_{i} e^{\lambda_{i} x}\) будет являться
+решением СДУ:
+
+\begin{lequation}{sde-mtx-1}
+  \begin{cases}
+    Y'_{i}
+      = \Gamma_{i} \lambda_{i} e^{\lambda_{i} x}
+      = \lambda_{i} (\Gamma_{i} e^{\lambda_{i} x}) \\  
+    \opA Y_{i}
+      = \opA (\Gamma_{i} e^{\lambda_{i} x})
+      = \lambda_{i} (\Gamma_{i} e^{\lambda_{i} x})
+  \end{cases} \implies Y'_{i} = \opA Y_{i}
+\end{lequation}
+
+Пусть все собственные числа различные и вещественные, тогда
+\(\forall \lambda_{i} \colon Y_{i} = \Gamma_{i} e^{\lambda_{i} x}\) это решение,
+причем \(\forall i \neq j \colon Y_{i}\) и \(Y_{j}\) линейно-независимы.
+Общее решение СДУ можно записать в виде:
+
+\begin{lequation}{sde-mtx-2}
+  \overline{Y} = c_{1} Y_{1} + \dotsc + c_{n} Y_{n}
+\end{lequation}
+
+\underline{Пример}:
+
+\begin{lequation}{sde-mtx-ex}
+  \begin{cases}
+    x' = x + y \\
+    y' = 8x + 3y
+  \end{cases} \iff
+  Y' = \begin{pmatrix}
+    1 & 1 \\
+    8 & 3
+  \end{pmatrix} Y \iff
+  \begin{cases}
+    \lambda_{1} = -1
+      \implies \Gamma_{1} = \begin{pmatrix} -1 \\ 2 \end{pmatrix}
+    \\
+    \lambda_{2} = 5
+      \implies \Gamma_{2} = \begin{pmatrix} 1 \\ 4 \end{pmatrix}
+  \end{cases} \\
+  \begin{cases}
+    Y_{1} = \Gamma_{1} e^{\lambda_{1} t}  \\
+    Y_{2} = \Gamma_{2} e^{\lambda_{2} t}  \\
+  \end{cases} \iff
+  \begin{cases}
+    \overline{x}(t)
+      = c_{1} \cdot (-1) \cdot e^{-t}
+      + c_{2} \cdot 1 \cdot e^{5t}
+    \\
+    \overline{y}(t)
+      = c_{1} \cdot 2 \cdot e^{-t}
+      + c_{2} \cdot 4 \cdot e^{5t}
+    \\
+  \end{cases}
+\end{lequation}
+
