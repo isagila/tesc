@@ -1,2 +1,142 @@
 \question{Собственные числа и собственные векторы оператора. Теоремы о диагональной матрице оператора.}
 
+\begin{definition}
+  Пусть дан оператор \(\opA \colon V^{n} \to V^{n}\) с матрицей \(A\) в
+  некотором базисе \(\Basis = \{ \basis_i \}_{i = 1}^{n}\). Тогда многочлен
+
+  \begin{lequation}{lo-ch-pol}
+    \det (A - \lambda E) 
+  \end{lequation}
+
+  относительно \(\lambda \in \RR\) называется характеристическим многочленом.
+\end{definition}
+
+\begin{definition}
+  Пусть дан оператор \(\opA \colon V^{n} \to V^{n}\). Подпространство
+  \(U \subseteq V^{n}\) называется \textit{инвариантным}, если
+
+  \begin{lequation}{lo-inv-subspace}
+    \forall x \in U \colon \opA x \in U
+  \end{lequation}
+\end{definition}
+
+\begin{definition}
+  Пусть дан оператор \(\opA \colon V^{n} \to V^{n}\) с матрицей \(A\) в
+  некотором базисе \(\Basis = \{ \basis_i \}_{i = 1}^{n}\).
+  
+  \(x \neq 0 \in V^{n}\) называется собственным вектором для оператора \(\opA\),
+  если
+
+  \begin{lequation}{lo-eival-def}
+    \exists \lambda \in \CC \colon \opA x = \lambda x
+  \end{lequation}
+
+  Тогда \(\lambda\) называется собственным числом (собственным значением)
+  оператора \(\opA\).
+\end{definition}
+
+\begin{theorem}\label{lo-ei-roots}
+  Собственные числа оператора являются корнями характеристического многочлена
+  \(\det(A - \lambda E)\).
+\end{theorem}
+\begin{proof}
+  \(\implies\) Пусть \(\lambda\) -- собственное число, тогда
+  
+  \begin{lequation}{lo-ei-roots-proof-1}
+    \exists x \neq 0 \in V^{n} \mid \opA x = \lambda x \\
+    \opA x = \lambda x
+    \implies A x = (\lambda E) x
+    \implies (A - \lambda E) x = 0
+  \end{lequation}
+
+  Теперь рассмотрим оператор
+  \(\opB \colon V^{n} \to V^{n}, \opB = \opA - \lambda I\):
+
+  \begin{lequation}{lo-ei-roots-proof-2}
+    (A - \lambda E) x = 0 \implies \opB x = 0 \\
+    x \neq 0 \in \Ker \opB \implies \dim \Ker \opB > 0 \\
+    \begin{cases}
+      \dim \Ker \opB + \dim \Im \opB = n \; (\ref{lo-sum-dim}) \\
+      \dim \Ker \opB > 0
+    \end{cases}
+    \implies \dim \Im \opB < n
+    \\
+    \dim \Im \opB < n
+    \implies \Rang \opB < n
+    \implies \Rang B < n
+    \\
+    \Rang B < n
+    \implies \Rang (A - \lambda E) < n
+    \implies \det (A - \lambda E) = 0
+  \end{lequation}
+
+  \(\impliedby\) Аналогичные рассуждения, но в обратную сторону
+  \begin{lequation}{lo-ei-roots-proof-3}
+    \det (A - \lambda E) = 0 
+    \implies \Rang (A - \lambda E) < n
+    \implies \Rang B < n
+    \\
+    \Rang B < n
+    \implies \Rang \opB < n
+    \implies \dim \Im \opB < n
+    \\
+    \begin{cases}
+      \dim \Ker \opB + \dim \Im \opB = n \; (\ref{lo-sum-dim}) \\
+      \dim \Im \opB < n
+    \end{cases}
+    \implies \dim \Ker \opB > 0
+    \\
+    \dim \Ker \opB > 0
+    \implies \exists x \neq 0 \colon \opB x = 0
+    \\
+    \opB x = 0
+    \implies (A - \lambda E) x = 0
+    \implies \opA x = \lambda x
+  \end{lequation}
+\end{proof}
+
+\begin{definition}
+  Полученное в процессе доказательства \ref{lo-ei-roots} уравнение
+
+  \begin{lequation}{lo-ch-eq}
+    (A - \lambda E) x = 0
+  \end{lequation}
+
+  называют характеристическим (вековым) уравнением.
+\end{definition}
+
+\begin{definition}
+  Базис, составленный из собственных векторов, называют собственным базисом.
+\end{definition}
+
+\begin{theorem}
+  Матрица оператора в собственном базисе диагональна.
+\end{theorem}
+\begin{proof}
+  Матрица оператора в некотором базисе это коэффициенты разложения образов
+  базисных векторов по этому же базису. Рассмотрим первый базисный вектор:
+
+  \begin{lequation}{op-eibs-proof-1}
+    \begin{cases}
+      \opA \basis_1 = a_{1,1} \basis_{1} + \dots + a_{n,1} \basis_{n} \\
+      \opA \basis_1 = \lambda_{1} \basis_1 \\
+    \end{cases}
+    \implies
+    \begin{cases}
+      a_{1,1} = \lambda_{1}, \\
+      a_{i,1} = 0 \; \forall i \neq 1
+    \end{cases}
+  \end{lequation}
+
+  Аналогично можно рассмотреть все оставшиеся базисные векторы. Таким образом
+  матрица оператора в базисе из собственных векторов будет иметь вид
+
+  \begin{lequation}{op-eibs-proof-1}
+    A = \begin{pmatrix}
+      \lambda_{1} & 0           & \dots  & 0           \\
+      0           & \lambda_{2} & \dots  & 0           \\
+      \vdots      & \vdots      & \ddots & \vdots      \\
+      0           & 0           & \dots  & \lambda_{n} \\
+    \end{pmatrix}
+  \end{lequation}
+\end{proof}
