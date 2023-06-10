@@ -47,4 +47,85 @@
   Если \(A^{-1} = A^{T}\), то матрица оператора называется ортогональной.
 \end{remark}
 
-\todo Переход к новому базису
+\begin{definition}
+  Матрица 
+
+  \begin{lequation}{trs-mtx}
+    \begin{pmatrix}
+      \tau_{1,1} & \dots & \tau_{1,n} \\
+      \vdots & \ddots & \vdots \\
+      \tau_{n,1} & \dots & \tau_{n,n} \\
+    \end{pmatrix}
+  \end{lequation}
+
+  такая, что при переходе из базиса \(\{ \basis_{i} \}_{i = 1}^{n}\) в базис
+  \(\{ \basis_{i}' \}_{i = 1}^{n}\) выполняется равенство
+  \(\basis' = T \basis\), называется матрицей преобразования координат.
+\end{definition}
+
+\begin{theorem}
+  Пусть дан линейный оператор \(\opA \colon V^{n} \to V^{n}\), который в базисе
+  \(\Basis = \{ \basis_{i} \}_{i = 1}^{n}\) имеет матрицу \(A\), в базисе
+  \(\Basis' = \{ \basis_{i} \}_{i = 1}^{n}\)~---\(A'\).
+  Тогда
+
+  \begin{lequation}{trs-lo-mtx}
+    A' = T A T^{-1}
+  \end{lequation}
+\end{theorem}
+\begin{proof}
+  Рассмотрим столбцы \(x, y\) в базисе \(\Basis\) такие, что \(A x = y\). В
+  базисе \(\Basis'\) будет выполняться равенство \(A' x' = y'\), получаем:
+
+  \begin{lequation}{trs-lo-mtx-proof}
+    \begin{cases}
+      x' = T x \\
+      y' = T y
+    \end{cases}
+    \implies A' x' = y'
+    \implies A' (T x) = (T y) \mid \cdot T^{-1} \\
+    T^{-1} A' T x = T^{-1} T y \\
+    y = T^{-1} A' T x \\
+    A = T^{-1} A' T \\
+    A' = T A T^{-1} \\
+  \end{lequation}
+\end{proof}
+
+\todo Я запутался, на практике было \(A' = T^{-1} A T\), где
+\(T: \basis' \to \basis\), а тут наоборот.
+
+Некоторые свойства замены базиса:
+\begin{enumerate}
+  \item \(\opA, \opB \colon V^{n} \to V^{n}, \lambda \in \CC\), тогда
+  
+  \begin{lequation}{trs-lo-prop-1}
+    \begin{matrix}
+      \Basis \colon && A + \lambda B \\
+      \Basis' \colon & T (A + \lambda B) T^{-1} = & A' + \lambda B'\\
+    \end{matrix}
+  \end{lequation}
+
+  \item Матрица тождественного оператора в любом базисе единичная.
+  
+  \begin{lequation}{trs-lo-prop-2}
+    \begin{matrix}
+      \Basis \colon && E \\
+      \Basis' \colon & T E T^{-1} = & E\\
+    \end{matrix}
+  \end{lequation}
+
+\end{enumerate}
+
+\begin{lemma}
+  Определитель матрицы оператора не зависит от базиса, в котором эта матрица
+  рассматривается.
+\end{lemma}
+\begin{proof}
+  \begin{lequation}{trs-lo-prop-3}
+    \det A'
+    = \det (T A T^{-1})
+    = \det T \cdot \det A \cdot \det T^{-1}
+    = \det A \cdot \det T \cdot \det T^{-1}
+    = \det A
+  \end{lequation}
+\end{proof}
