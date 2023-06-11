@@ -1,2 +1,106 @@
 \question{Определение и свойства неопределенного интеграла.}
 
+\begin{definition}
+  Кусочная дифференцируемая функция \(F(x)\) называется первообразной для
+  функции \(f(x)\), если \(F'(x) = f(x)\).
+\end{definition}
+
+\begin{theorem}
+  Разность двух первообразных для одной и той же функции~--- константа.
+\end{theorem}
+\begin{proof}
+  Пусть дана функция \(f(x)\) и две её первообразные \(F_{1}(x)\), \(F_{2}(x)\).
+  Обозначим из разность как \(\phi(x) = F_{1}(x) - F_{2}(x)\). Производная этой
+  функции будет равна \(
+    \phi'(x)
+    = (F_{1}(x) - F_{2}(x))'
+    = F'_{1}(x) - F'_{2}(x)
+    = f(x) - f(x)
+    = 0
+  \).
+
+  Из множества дифференцируемости \(F_{1}(x)\) и \(F_{2}(x)\) выберем наименьшее
+  и выделим в нем отрезок \([a; x]\). По т. Лагранжа:
+
+  \begin{lequation}{ad-diff-proof-1}
+    \exists \xi \in (a; x) \colon \phi'(\xi) = \frac{\phi(x) - \phi(a)}{x - a}
+  \end{lequation}
+
+  Т.к. \(\forall \xi \colon \phi'(\xi) = 0\), то \(\phi(x) - \phi(a) = 0\), т.е.
+  \(\phi(x) = \phi(a)\). Т.к. отрезок произвольный, то это значения функции
+  \(\phi(x)\) равны во всех точках, т.е. она константа.
+\end{proof}
+
+\begin{corollary}
+  Первообразные для \(f(x)\) составляют множество функций вида
+  \(\{ F(x) + C \mid C \in \RR \}\), где \(F(x)\) это какая-либо первообразная.
+\end{corollary}
+
+\begin{definition}
+  Семейство первообразных функции \(f(x)\) называется неопределенным интегралом
+  функции \(f(x)\) по аргументу \(x\).
+\end{definition}
+
+\begin{remark}
+  О существовании первообразной
+
+  Не для каждой функции существует первообразная, но для каждой непрерывной на
+  отрезке. Даже если первообразная существует, то она не всегда выражается в
+  элементарных функциях, например, \(\int e^{-x^2} \dd x\).
+\end{remark}
+
+Далее рассмотрим некоторые свойства неопределенного интеграла.
+
+\begin{lemma}\label{ad-prop-1}
+  \begin{lequation}{ad-prop-1-def}
+    \int \dd F(x) = F(x) + C
+  \end{lequation}
+\end{lemma}
+\begin{proof}
+  \begin{lequation}{ad-prop-1-proof}
+    \dd F(x) = F'(x) \dd x = f(x) \dd x
+    \implies
+    \int \dd F(x) = \int f(x) \dd x = \dd F(x) + C
+  \end{lequation}
+\end{proof}
+
+\begin{lemma}
+  \begin{lequation}{ad-prop-2-def}
+    \left( \int f(x) \dd x \right)' = f(x)
+  \end{lequation}
+\end{lemma}
+\begin{proof}
+  \begin{lequation}{ad-prop-2-proof}
+    \left( \int f(x) \dd x \right)' = (F(x) + C)' = F'(x) = f(x)
+  \end{lequation}
+\end{proof}
+
+\begin{lemma}
+  Линейность
+
+  \begin{lequation}{ad-prop-3-def}
+    \int \alpha f(x) \dd x = \alpha \int f(x) \dd x \\
+    \int (f(x) + g(x)) \dd x = \int f(x) \dd x + \int g(x) \dd x
+  \end{lequation}
+\end{lemma}
+\begin{proof}
+  \begin{lequation}{ad-prop-3-proof}
+    \int \alpha f(x) \dd x
+    = \int \dd (\alpha F(x))
+    = \alpha F(x) + C
+  \end{lequation}
+
+  При первым переходе используется свойство линейности дифференциала,
+  а при втором~--- \ref{ad-prop-1}. Доказательство для суммы функций аналогично.
+\end{proof}
+
+% \begin{lemma}
+%   \begin{lequation}{ad-prop-2-def}
+    
+%   \end{lequation}
+% \end{lemma}
+% \begin{proof}
+%   \begin{lequation}{ad-prop-2-proof}
+    
+%   \end{lequation}
+% \end{proof}
