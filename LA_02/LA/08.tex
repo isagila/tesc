@@ -168,16 +168,34 @@
   \(\{ \basis_{1}, \dotsc, \basis_{k} \}\)
   линейно-независима, покажем, что система
   \(\{ \basis_{1}, \dotsc, \basis_{k}, \basis_{k + 1}\}\)
-  также линейно-независима. Составим её нулевую линейную комбинацию, а потом
-  применим к ней оператор:
-
-  \begin{lequation}{ind-eivec-proof-1}
-    \opA \Big( c_{1} \basis_{1} + \dotsc + c_{k + 1} \basis_{k + 1} \Big) = 0
-    \\
-    c_{1} \opA \basis_{1} + \dotsc + c_{k + 1} \opA \basis_{k + 1} = 0
-    \\
-    c_{1} \lambda_{1} + \dotsc + c_{k + 1} \lambda_{k + 1} = 0
+  также линейно-независима. 
+  
+  Составим её нулевую линейную комбинацию $c_1e_1 + \dots +c_{k+1}e_{k+1}$.
+  Докажем, что она правильна $\opA(c_1e_1 + \dots +c_{k+1}e_{k+1}) = c_1 \opA e_1 + \dots + c_{k+1} \opA e_{k+1} = $
+  ($e_i$ - собственный вектор)
+  \begin{equation}
+    c_1 \lambda_1 e_1 + \dots + c_{k+1}\lambda_{k+1}e_{k+1} = 0
+  \end{equation}
+  Домножим $\sum\limits_{i=1}^{k+1}c_i e_i$ на  $\lambda_{k+1}$
+  \begin{equation}
+    \sum\limits_{i=1}^{k+1}c_{i}\lambda_{k+1}e_{i} = 0
+  \end{equation}
+  Вычтем (1) - (2):
+  \begin{lequation}
+    \, c_{1}e_{1}(\lambda_{1} - \lambda_{k-1}) + \dots + c_{k}e_{k}(\lambda_{k} - \lambda_{k-1}) +  \underbrace{c_{k-1}e_{k-1}(\lambda_{k-1} - \lambda_{k-1})}_{= 0} = 0
   \end{lequation}
+  $\sum\limits_{i=1}^{k}\underbrace{c_{i}e_{i}}_{=0}\underbrace{(\lambda_i - \lambda_{k+1})}_{\neq  0} = 0$ - нулевая k-комбинация. Так как $e_1 \dots e_k$ -
+  линейно-независимы, то она тривиальна $\implies \forall c_i = 0 \,\, i = 1, \, \dots, \, k$. Тогда 
+  $\sum\limits_{i=1}^{k+1}c_{i}e_{i} = \sum\limits_{i=1}^{k}0 \cdot c_{i}e_{i} + c_{k+1}e_{k+1} = 0$
+  $\implies c_{k+1} = 0$, то есть $\forall c_i = 0 \,\, i= 1 \dots k+1$
+\end{proof}
+\begin{corollary}
+  $\let \opA: \, V^n \to V^n \,\,\, \lambda_1 \dots \lambda_{n}$ - собственные числа, $e_1 \dots e_{n}$ - собственные векторы
 
-  \todo В конспекте что-то непонятное дальше
+  Тогда $A$ (матрица $\opA$) в некотором базисе диагональна. (это базис ${e_i}$) 
+\end{corollary}
+\begin{proof}
+  $\lambda_i \neq \lambda_j$; $i, \, j = 1 \dots n \implies {e_1 \dots e_n}$ - линейно-независимая система n-размерности, то есть ${e_1}^{n}_{i=1}$ - базис.
+
+  В базисе собственных векторов А диагональна.
 \end{proof}
