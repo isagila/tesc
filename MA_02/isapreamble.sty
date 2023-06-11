@@ -23,6 +23,10 @@
 \usepackage{scalerel}
 \usepackage{fancyhdr}
 \usepackage{lastpage}
+\usepackage{sectsty}
+\usepackage{bigints}
+\usepackage{listings}
+\usepackage{xcolor}
 
 %%% Работа с русским языком
 \usepackage{cmap}                   % поиск в PDF
@@ -32,17 +36,19 @@
 \usepackage[utf8]{inputenc}         % кодировка исходного текста
 \usepackage[english,russian]{babel} % локализация и переносы
 
+%% Шрифты
+\usepackage{euscript} % Шрифт Евклид
+\usepackage{mathrsfs} % Красивый матшрифт
+\usepackage[bbgreekl]{mathbbol}
+
 %% Кастомизация списков
 \usepackage[inline]{enumitem}
 
 %%% Дополнительная работа с математикой
-\usepackage{amsfonts,amssymb,amsthm,mathtools}
+\usepackage{amsfonts, amssymb, amsthm, mathtools}
 % \usepackage[intlimits]{amsmath}
 \usepackage{esint} % для ориентированных интегралов
 \usepackage{icomma} % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
-
-%% Номера формул
-\mathtoolsset{showonlyrefs=true} % Показывать номера только у тех формул, на которые есть \eqref{} в тексте.
 
 %% Дифференциалы и все что с ними связано
 \usepackage{physics}
@@ -82,27 +88,22 @@
 %% Красивые <= и >=
 \renewcommand{\geq}{\geqslant}
 \renewcommand{\leq}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\le}{\leqslant}
+
+%% \int = \int\limits
+\renewcommand{\int}{\intop}
 
 %% Более привычные греческие буквы
 \renewcommand{\phi}{\varphi}
 \renewcommand{\epsilon}{\varepsilon}
-\newcommand{\eps}{\varepsilon}
 
 %% Перенос знаков в формулах (по Львовскому)
 \newcommand*{\hm}[1]{#1\nobreak\discretionary{}
   {\hbox{$\mathsurround=0pt #1$}}{}}
 
-\newcommand\iso{\xrightarrow{
-    \,\smash{\raisebox{-0.65ex}{\ensuremath{\scriptstyle\sim}}}\,}}
-
-\newcommand{\RomanNumeralCaps}[1]
-{\MakeUppercase{\romannumeral #1}}
-
-\newenvironment{amatrix}[2]{
-  \left(\begin{array}{@{}*{#1}{c}|*{#2}{c}@{}}
-    }{
-  \end{array}\right)
-}
+\DeclareSymbolFontAlphabet{\mathbbold}{bbold}
+\DeclareSymbolFontAlphabet{\mathbb}{AMSb}
 
 %% Сокращения для обозначения множеств
 \newcommand{\NN}{\mathbb{N}}
@@ -113,16 +114,97 @@
 \newcommand{\QQ}{\mathbb{Q}}
 \newcommand{\EE}{\mathbb{E}}
 
-% \DeclareSymbolFontAlphabet{\mathbbold}{bbold}
-\DeclareSymbolFontAlphabet{\mathbb}{AMSb}
+%% Линейные операторы
+\newcommand{\opA}{\mathcal{A}}
+\newcommand{\opB}{\mathcal{B}}
+\newcommand{\opC}{\mathcal{C}}
+\newcommand{\opI}{I}
+\newcommand{\opZero}{\Theta}
+\newcommand{\Linear}[1]{\mathcal{L}[#1]}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Img}{Im}
+\DeclareMathOperator{\Rang}{rang}
+\newcommand{\BiLinear}{\mathscr{B}}
+\newcommand{\Quad}{\mathscr{K}}
 
-\newcommand\enumtocitem[3]{\item\textbf{#1}\addtocounter{#2}{1}\addcontentsline{toc}{#2}{\protect{\numberline{#3}} #1}}
-\newcommand\question[1]{\enumtocitem{#1}{subsection}{\thesubsection}}
+%% Базис
+\newcommand{\basis}{\mathbbold{e}}
+\newcommand{\Basis}{\mathcal{E}}
+
+%% Дифференциальные уравнения
+\newcommand{\Wrn}{\mathcal{W}}
+
+%% Округление
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+%% Настройки заголовков
+\sectionfont{\color{blue}}
+\renewcommand\thesection{\arabic{section}.}
+\renewcommand\thesubsection{\thesection\arabic{subsection}.}
+
+%% Стиль для замечаний
+\newtheoremstyle{remarkstyle} % <name>
+{3pt} % <Space above>
+{3pt} % <Space below>
+{} % <Body font>
+{} % <Indent amount>
+{\itshape} % <Theorem head font>
+{.} % <Punctuation after theorem head>
+{.5em} % <Space after theorem headi>
+{} % <Theorem head spec (can be left empty, meaning `normal')>
+
+%% Леммы-леммы теоремы
+\newcounter{points}[subsection]
+
+\theoremstyle{definition}
+\newtheorem{definition}{Def}[points]
+\renewcommand{\thedefinition}{\thesubsection\arabic{definition}}
+
+\theoremstyle{definition}
+\newtheorem{theorem}[definition]{\underline{Теорема}}
+\renewcommand{\thetheorem}{\thesubsection\arabic{theorem}}
+
+\theoremstyle{remarkstyle}
+\newtheorem{remark}[definition]{\textit{Замечание}}
+\renewcommand{\theremark}{\thesubsection\arabic{remark}}
+
+\theoremstyle{remarkstyle}
+\newtheorem{corollary}[definition]{\textit{Следствие}}
+\renewcommand{\thecorollary}{\thesubsection\arabic{corollary}}
+
+\theoremstyle{definition}
+\newtheorem{lemma}[definition]{\underline{Lm}}
+\renewcommand{\thelemma}{\thesubsection\arabic{lemma}}
+
+\renewcommand*{\proofname}{\textit{Доказательство.}}
+\renewcommand\qedsymbol{\(\blacksquare\)}
+
+%% Выражения
+\newenvironment{lequation}[1]{
+  \begin{equation*}\label{eq:#1}\begin{aligned}
+      }{
+    \end{aligned}\end{equation*}
+}
+\newenvironment{tequation}[2]{
+  \begin{equation*}\label{eq:#1}\tag{#2}
+    }{
+  \end{equation*}
+}
+
+%% Заголовки
+\newcommand\enumtocitem[3]{
+  \item\textbf{\color{blue} #1}
+  \stepcounter{#2}
+  \addcontentsline{toc}{#2}
+  {\protect{\numberline{#3}} #1}
+}
+\newcommand\question[1]{
+  \enumtocitem{#1}{subsection}{\thesubsection}
+}
 
 \newlist{questions}{enumerate}{1}
-\setlist[questions]{
-  label = \textbf{\arabic*.}
-}
+\setlist[questions]{label = \textbf{\color{blue} \thesection\arabic*.}}
 
 \pagestyle{fancy}
 \fancyhead{}
@@ -130,3 +212,38 @@
 \fancyfoot[C]{\thepage/\pageref*{LastPage}}
 
 \renewcommand{\headrulewidth}{0pt}
+
+%% С++ code
+\lstset{
+  basicstyle = \small\ttfamily,
+  tabsize = 2,
+  showstringspaces = false,
+  numbers = left,
+  commentstyle = \color{green},
+  morecomment = [l][\color{magenta}]{\#},
+  keywordstyle = \color{blue},
+  language = C++,
+  stringstyle = \color{red}\ttfamily,
+  breaklines = true
+}
+
+%% Красивые дроби
+\usepackage{xfrac}
+\usepackage[
+  locale = DE,
+  list-separator = {;\,},
+  list-final-separator = {;\,},
+  list-pair-separator = {;\,},
+  list-units = single,
+  range-units = single,
+  range-phrase = {\text{\ensuremath{-}}},
+  % quotient-mode = fraction, % красивые дроби могут не соответствовать ГОСТ
+  fraction-function = \sfrac,
+  separate-uncertainty,
+]{siunitx}[=v2] % Размерности SI
+\sisetup{inter-unit-product = \ensuremath{{}\cdot{}}}
+
+\newcommand{\todo}{\textbf{\color{red} TODO: \hspace{6pt}}}
+
+%% Символ "пусть"
+\newcommand{\lets}{\sqsupset}
