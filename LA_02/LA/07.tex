@@ -70,7 +70,7 @@
   Тогда
 
   \begin{lequation}{trs-lo-mtx}
-    A' = T A T^{-1}
+    A' = T^{-1} A T
   \end{lequation}
 \end{theorem}
 \begin{proof}
@@ -79,20 +79,15 @@
 
   \begin{lequation}{trs-lo-mtx-proof}
     \begin{cases}
-      x' = T x \\
-      y' = T y
+      x = T x' \\
+      y = T y'
     \end{cases}
-    \implies A' x' = y'
-    \implies A' (T x) = (T y) \mid \cdot T^{-1} \\
-    T^{-1} A' T x = T^{-1} T y \\
-    y = T^{-1} A' T x \\
-    A = T^{-1} A' T \\
-    A' = T A T^{-1} \\
+    \implies A (T x') = (T y') \mid \cdot T^{-1} \\
+    T^{-1} A T x' = T^{-1} T y' \\
+    T^{-1} A T x' = y' \\
+    A' = T^{-1} A T \\
   \end{lequation}
 \end{proof}
-
-\todo Я запутался, на практике было \(A' = T^{-1} A T\), где
-\(T: \basis' \to \basis\), а тут наоборот.
 
 Некоторые свойства замены базиса:
 \begin{enumerate}
