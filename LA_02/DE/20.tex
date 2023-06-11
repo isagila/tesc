@@ -1,2 +1,82 @@
-\question{Теория устойчивости: определение устойчивости по Ляпунову, фазовая плоскость, траектории ДУ. Примеры устойчивого и неустойчивого решения}
+\question{Теория устойчивости: определение устойчивости по Ляпунову, фазовая плоскость, траектории ДУ. Примеры устойчивого и неустойчивого решения.}
 
+\begin{definition}
+  Пусть дана СДУ
+
+  \begin{lequation}{st-def-1}
+    \begin{cases}
+      x' = f_{1}(t, x, y) \\
+      y' = f_{2}(t, x, y)
+    \end{cases}
+  \end{lequation}
+
+  и \(x(t), y(t)\) это её решение, удовлетворяющее начальным условиям
+  \(x(t = 0) = x_{0}, y(t = 0) = y_{0}\). Рассмотрим
+  \(\widetilde{x}(t), \widetilde{y}(t)\)~--- другое решение, удовлетворяющее
+  начальным условиям с отклонением \(
+    \widetilde{x}(t = 0) = \widetilde{x}_{0},
+    \widetilde{y}(t = 0) = \widetilde{y}_{0}
+  \).
+
+  Решение \(x(t), y(t)\) называется \textit{устойчивым по Ляпунову}, если
+
+  \begin{lequation}{st-def-2}
+    \forall \epsilon > 0 \;\;
+    \exists \delta > 0 \mid
+    \forall t > 0 \;\;
+    \forall x_{0}, y_{0}, \widetilde{x}_{0}, \widetilde{y}_{0} \colon
+    \begin{cases}
+      \abs{x_{0} - \widetilde{x}_{0}} < \delta \\
+      \abs{y_{0} - \widetilde{y}_{0}} < \delta
+    \end{cases}
+    \implies
+    \begin{cases}
+      \abs{\widetilde{x}(t) - x(t)} < \epsilon \\
+      \abs{\widetilde{y}(t) - y(t)} < \epsilon
+    \end{cases}
+  \end{lequation}
+\end{definition}
+
+\todo А зачем тут пример?
+
+\underline{Пример}:
+
+Рассмотрим ДУ:
+\(y' + y = 1, \;\; y(0) = 1, \widetilde{y}(0) = \widetilde{y}_{0}\)
+
+Найдем опорное решение \(y(t)\):
+
+\begin{lequation}{st-ex-1}
+  y' + y = 1 \\
+  y(t) = c_{1} e^{-t} + 1 \\
+  \begin{cases}
+    y(t) = c_{1} e^{-t} + 1 \\
+    y(0) = 1
+  \end{cases}
+  \implies c_{1} = 0 \\
+  y(t) = 1
+\end{lequation}
+
+Теперь найдем решение при измененных начальных условиях
+
+\begin{lequation}{st-ex-2}
+  \begin{cases}
+    \widetilde{y}(t) = c_{1} e^{-t} + 1 \\
+    \widetilde{y}(0) = \widetilde{y}_{0}
+  \end{cases}
+  \implies c_{1} = \widetilde{y}_{0} - 1 \\
+  \widetilde{y}(t) = (\widetilde{y}_{0} - 1) e^{-t} + 1 \\
+\end{lequation}
+
+Далее посмотрим на разницу полученных решений при \(t \to \infty\):
+
+\begin{lequation}{st-ex-3}
+  \widetilde{y}(t) - y(t)
+  = (\widetilde{y}_{0} - 1) e^{-t} + 1 - 1
+  = (\widetilde{y}_{0} - 1) e^{-t}
+  \xrightarrow{t \to \infty}
+  0
+\end{lequation}
+
+Таким образом при \(\abs{\widetilde{y}_{0} - 1} < \delta\) получаем
+\(\abs{\widetilde{y}(t) - y(t)} < \epsilon \implies\) решение устойчиво.
