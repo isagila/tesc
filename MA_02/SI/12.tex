@@ -19,7 +19,7 @@
 функций на симметричном промежутке
 
 \begin{multicols}{2}
-  \begin{lemma}k
+  \begin{lemma}
     Если \(f(x)\) нечетная функция, то
 
     \begin{equation*}
@@ -43,7 +43,7 @@
 \begin{tikzpicture}
 
   \draw[very thin, gray!30, step = 1cm] (-3, -3.5) grid (3, 3.5);
-  \fill[lightgray, domain=-2:2, variable=\x]
+  \fill[lightgray, domain = -2 : 2, variable = \x]
     (-2, -3.2)
     -- plot ({\x}, {0.4 * \x * \x * \x })
     -- (2, 0)
@@ -61,7 +61,7 @@
 \begin{tikzpicture}
 
   \draw[very thin, gray!30, step = 1cm] (-3, -3.5) grid (3, 3.5);
-  \fill[lightgray, domain=-2:2, variable=\x]
+  \fill[lightgray, domain = -2 : 2, variable = \x]
     (-2, -3.2)
     -- plot ({\x}, {(\x * \x - 1) / (\x * \x - 6) + 2})
     -- (2, 0)
