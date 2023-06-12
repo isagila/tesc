@@ -1,2 +1,39 @@
 \question{Несобственные интегралы 2-го рода (от неограниченной функции). Определение, вычисление и свойства.}
 
+\begin{definition}
+  Пусть \(f(x) \in C_{[a; b]}\) и \(b\) это точка бесконечного разрыва
+  (\(\lim_{x \to b} f(x) = \infty\)), тогда интеграл 
+
+  \begin{align*}
+    \int_{a}^{b} f(x) \dd x
+    \transition{def}
+    \lim_{\beta \to b} \int_{a}^{\beta} f(x) \dd x
+  \end{align*}
+
+  называется несобственным интегралом 2-ого рода.
+\end{definition}
+
+\begin{remark}
+  Существуют также другие формы несобственных интегралов 2-ого рода:
+
+  \begin{align*}
+    \int_{a}^{b} f(x) \dd x
+    \transition{def}
+    \lim_{\alpha \to a} \int_{\alpha}^{b} f(x) \dd x
+    \\
+    \int_{a}^{b} f(x) \dd x
+    \transition{def}
+    \int_{a}^{c} f(x) \dd x + \int_{c}^{b} f(x) \dd x
+  \end{align*}
+
+  В первом случае точкой бесконечного разрыва является точка \(a\), а во 
+  втором~--- \(c \in (a; b)\).
+\end{remark}
+
+Несобственные интегралы второго рода обладают теми же свойствами (линейность,
+аддитивность, сравнение) и вычисляются так же, как и несобственные интегралы
+1-ого рода:
+
+\begin{align*}
+  \int_{a}^{b} f(x) \dd x = \lim_{\beta \to b} F(x) \bigg\vert_{a}^{\beta}
+\end{align*}
