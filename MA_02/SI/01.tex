@@ -22,9 +22,9 @@
   Из множества дифференцируемости \(F_{1}(x)\) и \(F_{2}(x)\) выберем наименьшее
   и выделим в нем отрезок \([a; x]\). По т. Лагранжа:
 
-  \begin{lequation}{ad-diff-proof-1}
+  \begin{align*}
     \exists \xi \in (a; x) \colon \phi'(\xi) = \frac{\phi(x) - \phi(a)}{x - a}
-  \end{lequation}
+  \end{align*}
 
   Т.к. \(\forall \xi \colon \phi'(\xi) = 0\), то \(\phi(x) - \phi(a) = 0\), т.е.
   \(\phi(x) = \phi(a)\). Т.к. отрезок произвольный, то это значения функции
@@ -52,55 +52,44 @@
 Далее рассмотрим некоторые свойства неопределенного интеграла.
 
 \begin{lemma}\label{ad-prop-1}
-  \begin{lequation}{ad-prop-1-def}
+  \begin{align*}
     \int \dd F(x) = F(x) + C
-  \end{lequation}
+  \end{align*}
 \end{lemma}
 \begin{proof}
-  \begin{lequation}{ad-prop-1-proof}
+  \begin{align*}
     \dd F(x) = F'(x) \dd x = f(x) \dd x
     \implies
     \int \dd F(x) = \int f(x) \dd x = \dd F(x) + C
-  \end{lequation}
+  \end{align*}
 \end{proof}
 
-\begin{lemma}
-  \begin{lequation}{ad-prop-2-def}
+\begin{lemma}\label{ad-prop-2}
+  \begin{align*}
     \left( \int f(x) \dd x \right)' = f(x)
-  \end{lequation}
+  \end{align*}
 \end{lemma}
 \begin{proof}
-  \begin{lequation}{ad-prop-2-proof}
+  \begin{align*}
     \left( \int f(x) \dd x \right)' = (F(x) + C)' = F'(x) = f(x)
-  \end{lequation}
+  \end{align*}
 \end{proof}
 
-\begin{lemma}
+\begin{lemma}\label{ad-prop-3}
   Линейность
 
-  \begin{lequation}{ad-prop-3-def}
+  \begin{align*}
     \int \alpha f(x) \dd x = \alpha \int f(x) \dd x \\
     \int (f(x) + g(x)) \dd x = \int f(x) \dd x + \int g(x) \dd x
-  \end{lequation}
+  \end{align*}
 \end{lemma}
 \begin{proof}
-  \begin{lequation}{ad-prop-3-proof}
+  \begin{align*}
     \int \alpha f(x) \dd x
     = \int \dd (\alpha F(x))
     = \alpha F(x) + C
-  \end{lequation}
+  \end{align*}
 
   При первым переходе используется свойство линейности дифференциала,
   а при втором~--- \ref{ad-prop-1}. Доказательство для суммы функций аналогично.
 \end{proof}
-
-% \begin{lemma}
-%   \begin{lequation}{ad-prop-2-def}
-    
-%   \end{lequation}
-% \end{lemma}
-% \begin{proof}
-%   \begin{lequation}{ad-prop-2-proof}
-    
-%   \end{lequation}
-% \end{proof}

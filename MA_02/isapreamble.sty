@@ -93,6 +93,15 @@
 
 %% \int = \int\limits
 \renewcommand{\int}{\intop}
+\newcommand{\transition}[1]{
+  \mathrel{
+    \overset{#1}{
+      \resizebox{\widthof{\ensuremath{#1}}}
+      {\heightof{$=$}}
+      {$=$}
+    }
+  }
+}
 
 %% Более привычные греческие буквы
 \renewcommand{\phi}{\varphi}
@@ -179,18 +188,6 @@
 
 \renewcommand*{\proofname}{\textit{Доказательство.}}
 \renewcommand\qedsymbol{\(\blacksquare\)}
-
-%% Выражения
-\newenvironment{lequation}[1]{
-  \begin{equation*}\label{eq:#1}\begin{aligned}
-      }{
-    \end{aligned}\end{equation*}
-}
-\newenvironment{tequation}[2]{
-  \begin{equation*}\label{eq:#1}\tag{#2}
-    }{
-  \end{equation*}
-}
 
 %% Заголовки
 \newcommand\enumtocitem[3]{
