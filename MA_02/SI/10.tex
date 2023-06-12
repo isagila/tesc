@@ -30,7 +30,7 @@
   с подвижным правым краем.
 \end{remark}
 
-\begin{theorem}
+\begin{theorem}\label{Barrow}
   Теорема Барроу
 
   Пусть \(f \in C_{[a; b]}\) и определен \(\Phi(x) = \int_{a}^{x} f(t) \dd t\).
@@ -55,10 +55,10 @@
     \lim_{x \to 0} \frac{\int_{x}^{x + \Delta x} f(t) \dd t}{\Delta x}
     = \lim_{x \to 0} \frac{f(\xi) \Delta x}{\Delta x}
     = \begin{bmatrix}
-      \begin{cases}
+      \begin{rcases}
         \Delta x \to 0 \\
         \xi \in (x, x + \Delta x)
-      \end{cases}
+      \end{rcases}
       \implies \xi \to x
     \end{bmatrix}
     = f(x)

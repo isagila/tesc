@@ -1,2 +1,43 @@
 \question{Вычисление определенного интеграла. Формула Ньютона-Лейбница.}
 
+\begin{theorem}\label{NL}
+  Формула Ньютона-Лейбница
+
+  Пусть \(f(x) \in C_{[a; b]}\), определен \(\int_{a}^{b} f(x) \dd x\) и
+  \(F(x)\) это некоторая первообразная для \(f(x)\). Тогда
+
+  \begin{align*}
+    \int_{a}^{b} f(x) \dd x = F(b) - F(a) = F(x) \Big\vert_{a}^{b}
+  \end{align*}
+\end{theorem}
+\begin{proof}
+  Рассмотрим функцию \(\Phi(x) = \int_{a}^{x} f(t) \dd t\),
+  где \(x \in [a ; b]\).
+  Тогда по т. Барроу (\ref{Barrow}) \(\Phi(x) = F(x) + C\).
+
+  Найдем значение функции \(\Phi(x)\) в точке \(a\):
+
+  \begin{align*}
+    \begin{rcases}
+      \Phi(a) = \int_{a}^{a} f(t) \dd t = 0 \\
+      \Phi(a) = F(a) + C
+    \end{rcases}
+    \implies C = -F(a)
+  \end{align*}
+
+  Теперь найдем значение функции \(\Phi(x)\) в точке \(b\):
+
+  \begin{align*}
+    \begin{rcases}
+      \Phi(b) = \int_{a}^{b} f(t) \dd t \\
+      \Phi(b) = F(b) + C = F(b) - F(a)
+    \end{rcases}
+    \implies \int_{a}^{b} f(t) \dd t = F(b) - F(a)
+  \end{align*}
+\end{proof}
+
+\begin{remark}
+  Формула Ньютона-Лейбница работает в тех случаях, когда можно найти \(F(x)\)
+  или хотя бы её значения на концах отрезка \([a; b]\).
+\end{remark}
+
