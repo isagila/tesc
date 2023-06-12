@@ -1,2 +1,51 @@
 \question{Интегрирование тригонометрических функций. Универсальная тригонометрическая подстановка.}
 
+\begin{remark}
+  Всякая рациональная дробь интегрируемая, поэтому можно попытаться с помощью
+  замены свести функции другого вида к рациональным дробям.
+\end{remark}
+
+Если требуется вычислить интеграл вида \(\int R(\sin x, \cos x) \dd x\), где
+\(R\) это некоторая \textit{рациональная} функция, то можно применить
+универсальную тригонометрическую подстановку:
+
+\begin{align*}
+  x = 2 \arctg t \iff t = \tg \frac{x}{2}
+\end{align*}
+
+Тогда составляющие интеграла преобразуется следующим образом:
+
+\begin{align*}
+  \sin x
+  =
+  2 \sin \frac{x}{2} \cos \frac{x}{2}
+  = 
+  \frac{2 \sin \sfrac{x}{2} \cos \sfrac{x}{2}}
+  {\sin^2 \sfrac{x}{2} + \cos^2 \sfrac{x}{2}}
+  =
+  \frac{2 \tg \sfrac{x}{2}}{\tg^2 \sfrac{x}{2} + 1}
+  =
+  \frac{2 t}{1 + t^2}
+  \\
+  \cos x
+  =
+  \cos^2 \frac{x}{2} - \sin^2 \frac{x}{2}
+  = 
+  \frac{\cos^2 \sfrac{x}{2} - \sin^2 \sfrac{x}{2}}
+  {\sin^2 \sfrac{x}{2} + \cos^2 \sfrac{x}{2}}
+  =
+  \frac{1 - \tg^2 \sfrac{x}{2}}{\tg^2 \sfrac{x}{2} + 1}
+  =
+  \frac{1 - t^2}{1 + t^2}
+  \\
+  \dd x = \dd (2 \arctg t) = \frac{2}{1 + t^2} \dd t
+\end{align*}
+
+Подставляя полученные выражения в исходный интеграл, получаем:
+
+\begin{align*}
+  \int R(\sin x, \cos x) \dd x
+  \transition{\text{УТП}}
+  \int R \left(\frac{2 t}{1 + t^2}, \frac{1 - t^2}{1 + t^2}\right)
+    \cdot \frac{2}{1 + t^2} \dd t
+\end{align*}
