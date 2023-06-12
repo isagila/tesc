@@ -63,16 +63,11 @@
 
 \begin{theorem}\label{pifagor-thr}
   \textbf{Пифагора}:
-
-  \begin{figure}[H]
-  \begin{center}
-    \includegraphics[width=100pt]{LA/Pifagor.png}
-  \end{center}
-  \label{ris:Pifagor}
-  \end{figure}
-  
-  \begin{lequation}
-        |||x-x'||^2 = ||\underbrace{x - x_0}_{n} + x_0 - x'||^2 = \, \text{(Пифагор)} \, ||x-x_0||^2 + ||x_0-x'||^2 > ||x-x_0||^2 \, (\neq, \text{т.к. } x' \neq x_0) \\
-        ||h'|| > ||h|| \, \text{(длина наклонной больше длины перпендикуляра)}
-      \end{lequation}
+  $x, \, y \in E^n, \, x \perp y.$ Тогда $||x+y||^2 = ||x||^2 + ||y||^2$. ($||x+y||^2$ - квадрат гипотенузы)
 \end{theorem}
+
+\begin{proof}
+  \begin{lequation}
+    |||x+y||^2 = (x+y, \, x+y) = \text{(по свойствам скалярного произведения)} (x, \, x) + 2(x, \, y) + (y, \, y) = ||x||^2 + ||y||^2
+  \end{lequation}
+  \end{proof}
