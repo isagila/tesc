@@ -3,7 +3,7 @@
 **.fdb_latexmk
 **.fls
 **.log
-# **.pdf # minus CI/CD :kappa:
+**.pdf
 **.synctex.gz
 **.toc
 **.out
