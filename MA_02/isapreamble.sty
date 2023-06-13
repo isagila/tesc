@@ -48,7 +48,7 @@
 
 %%% Дополнительная работа с математикой
 \usepackage{amsfonts, amssymb, amsthm, mathtools}
-% \usepackage[intlimits]{amsmath}
+\usepackage[intlimits]{amsmath}
 \usepackage{esint} % для ориентированных интегралов
 \usepackage{icomma} % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
 
@@ -96,6 +96,7 @@
 %% \int = \int\limits
 \renewcommand{\int}{\intop}
 \renewcommand{\iint}{\iintop}
+\renewcommand{\iiint}{\iiintop}
 
 \newcommand{\converge}{\succ}
 \newcommand{\notconverge}{\prec}
