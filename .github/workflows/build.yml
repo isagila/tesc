@@ -74,10 +74,16 @@ jobs:
       url: ${{steps.deployment.outputs.page_url}}
       
     steps:
+    - uses: actions/checkout@v3
+
     - name: Extract branch name
       working-directory: ./${{ env.BRANCH }}
       shell: bash
       run: echo "BRANCH=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
+
+    - uses: actions/checkout@v3
+      with:
+        ref: gh-pages
 
     - uses: actions/download-artifact@master
       with:
