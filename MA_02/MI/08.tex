@@ -1,2 +1,27 @@
 \question{Криволинейные интегралы 1-го и 2-го рода: формула связи.}
 
+\begin{multicols}{2}
+  \begin{align*}
+    \int_{AB} P \dd x + Q \dd y = \\
+    \int_{AB} (P, Q) \cdot (\dd x, \dd y) = \\
+    \int_{AB} (P, Q) \cdot (\cos \alpha \dd l, \sin \alpha \dd l) = \\
+    \int_{AB} \Big( P \cos \alpha + Q \sin \alpha \Big) \dd l
+  \end{align*}
+  \columnbreak
+
+  \input{figures/MI/08/triangle.tex}
+\end{multicols}
+
+Таким образом получили формулу связи криволинейных интегралов 1-ого и 2-ого
+рода.
+
+\begin{remark}
+  Если обозначить \(\vec{s} = (\cos \alpha, \cos \beta)\), то можно записать
+  криволинейный интеграл 2-ого рода в векторной форме:
+
+  \begin{align*}
+    \int_{AB} P \dd x + Q \dd y
+    = \int_{AB} \vec{F} \cdot (\cos \alpha, \cos \beta) \dd l
+    = \int_{AB} \vec{F} \cdot \vec{s} \dd l
+  \end{align*}
+\end{remark}
