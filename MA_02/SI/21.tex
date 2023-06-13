@@ -1,2 +1,39 @@
 \question{Признаки сходимости несобственных интегралов: первый признак сравнения (в неравенствах).}
 
+\begin{theorem}
+  Пусть \(f(x), g(x) \colon [a, +\infty] \to \RR\) и на этом отрезке выполняется
+  неравенство \(f(x) \ge g(x) \ge 0\). Тогда:
+
+  \begin{align}
+    \int_{a}^{+\infty} f(x) \dd x \converge
+    \implies \int_{a}^{+\infty} g(x) \dd x \converge
+    \label{eq:cnv-cmp-a}\tag{a}
+    \\
+    \int_{a}^{+\infty} g(x) \dd x \notconverge
+    \implies \int_{a}^{+\infty} f(x) \dd x \notconverge
+    \label{eq:cnv-cmp-b}\tag{b}
+  \end{align}
+\end{theorem}
+\begin{proof}
+  \eqref{eq:cnv-cmp-a} Сначала докажем первое утверждение.
+  Т.к. \(f(x) \ge 0\), то
+  \(I = \int_{a}^{b} f(x) \dd x \ge 0 \in \RR\),
+  при этом т.к. этот интеграл сходится, то \(I \in \RR\).
+  Далее рассмотрим второй интеграл, по определению имеем:
+
+  \begin{align*}
+    \int_{a}^{+\infty} g(x) \dd x
+    = \lim_{\beta \to +\infty}
+      \underbrace{\int_{a}^{\beta} g(x) \dd x}_{h(\beta)}
+  \end{align*}
+
+  Заметим, т.к. \(g(x) \ge 0\), то функция \(h(\beta)\) монотонно возрастает при
+  \(\beta \to +\infty\). При этом значение этой функции ограничено сверху
+  числом \(I \in \RR\). Значит по свойствам пределов данный предел конечен, из
+  чего следует, что интеграл \(\int_{a}^{+\infty} g(x) \dd x\) сходится.
+
+  \eqref{eq:cnv-cmp-b} Доказательство второго утверждения вытекает из первого.
+  От противного: пусть \(\int_{a}^{+\infty} f(x)\) сходится. Тогда по
+  пункту \ref{eq:cnv-cmp-a} интеграл \(\int_{a}^{+\infty} g(x)\) тоже должен
+  сходится. Противоречие.
+\end{proof}
