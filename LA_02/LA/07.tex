@@ -110,7 +110,7 @@
   \begin{lequation}{trs-lo-prop-1}
     \begin{matrix}
       \Basis \colon && A + \lambda B \\
-      \Basis' \colon & T (A + \lambda B) T^{-1} = & A' + \lambda B'\\
+      \Basis' \colon & T^{-1} (A + \lambda B) T = & A' + \lambda B'\\
     \end{matrix}
   \end{lequation}
 
@@ -119,7 +119,7 @@
   \begin{lequation}{trs-lo-prop-2}
     \begin{matrix}
       \Basis \colon && E \\
-      \Basis' \colon & T E T^{-1} = & E\\
+      \Basis' \colon & T^{-1} E T = & E\\
     \end{matrix}
   \end{lequation}
 
@@ -132,9 +132,9 @@
 \begin{proof}
   \begin{lequation}{trs-lo-prop-3}
     \det A'
-    = \det (T A T^{-1})
-    = \det T \cdot \det A \cdot \det T^{-1}
-    = \det A \cdot \det T \cdot \det T^{-1}
+    = \det (T^{-1} A T)
+    = \det T^{-1} \cdot \det A \cdot \det T
+    = \det A \cdot \det T^{-1} \cdot \det T
     = \det A
   \end{lequation}
 \end{proof}
