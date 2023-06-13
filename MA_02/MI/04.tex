@@ -1,2 +1,42 @@
 \question{Криволинейные координаты.}
 
+Полярные координаты определяются как:
+
+\begin{align*}
+  \begin{cases}
+    x = \rho \cos \phi \\
+    y = \rho \sin \phi \\
+  \end{cases}
+  \rho \ge 0, \phi \in [0; 2 \pi) \\
+  \dd x \dd y \longrightarrow \rho \dd \rho \dd \phi
+\end{align*}
+
+Цилиндрические координаты определяются как:
+
+\begin{align*}
+  \begin{cases}
+    x = \rho \cos \phi \\
+    y = \rho \sin \phi \\
+    z = z
+  \end{cases}
+  \rho \ge 0, \phi \in [0; 2 \pi), z \in \RR \\
+  \dd x \dd y \dd z \longrightarrow \rho \dd \rho \dd \phi \dd z
+\end{align*}
+
+Сферические координаты определяются как:
+
+\begin{align*}
+  \begin{cases}
+    x = \rho \cos \phi \sin \theta \\
+    y = \rho \sin \phi \sin \theta \\
+    z = z \cos \theta
+  \end{cases}
+  \rho \ge 0, \phi \in [0; 2 \pi), \theta \in [0, \pi] \\
+  \dd x \dd y \dd z \longrightarrow
+    \rho^2 \sin \theta \dd \rho \dd \phi \dd \theta
+\end{align*}
+
+\begin{remark}
+  О том, почему элементы объема имеют именно такое задание можно прочитать в
+  следующем вопросе.
+\end{remark}
