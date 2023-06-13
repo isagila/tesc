@@ -8,46 +8,47 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+    - uses: actions/checkout@v3
 
-      - name: Extract branch name
-        working-directory: ./${{ env.BRANCH }}
-        shell: bash
-        run: echo "BRANCH=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV\
+    - name: Build PDF
+      uses: xu-cheng/latex-action@v2
+      with:
+        working_directory: ${{ env.BRANCH }}
+        root_file: main.tex
 
-      - name: Build PDF
-        uses: xu-cheng/latex-action@v2
-        with:
-          working_directory: ${{ env.BRANCH }}
-          root_file: main.tex
+    - name: Set datetime release
+      run: |
+        export CUR_DATE=$(date +%Y-%m-%d-%T)
+        echo "CUR_DATE=$CUR_DATE" >> $GITHUB_ENV
+        echo "CUR_DATE_TAG=$(echo $CUR_DATE | tr : -)" >> $GITHUB_ENV
 
-      - name: Set datetime release
-        run: |
-          export CUR_DATE=$(date +%Y-%m-%d-%T)
-          echo "CUR_DATE=$CUR_DATE" >> $GITHUB_ENV
-          echo "CUR_DATE_TAG=$(echo $CUR_DATE | tr : -)" >> $GITHUB_ENV
-      - name: Rename main.pdf
-        working-directory: ./${{ env.BRANCH }}
-        run: mv "main.pdf" "$BRANCH.pdf"
+    - name: Rename main.pdf
+      working-directory: ./${{ env.BRANCH }}
+      run: mv "main.pdf" "$BRANCH.pdf"
 
-      - name: Upload pages artifact
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: ${{ env.BRANCH }}/${{ env.BRANCH }}.pdf
+    - name: Upload pages artifact
+      uses: actions/upload-artifact@master
+      with:
+        name: ${{ env.BRANCH }}
+        path: "$BRANCH/$BRANCH.pdf"
+        if-no-files-found: error
 
   deploy:
+    runs-on: ubuntu-latest
     needs: build
-
-    permissions:
-      pages: write
-      id-token: write
-
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    runs-on: ubuntu-latest
+      url: ${{steps.deployment.outputs.page_url}}
+      
     steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v2
+    - uses: actions/download-artifact@master
+      with:
+        name: ${{ env.BRANCH }}
+        path: .
+        
+    - uses: actions/configure-pages@v1
+    - uses: actions/upload-pages-artifact@v1
+      with:
+        path: .
+    - id: deployment
+      uses: actions/deploy-pages@main
