@@ -15,7 +15,7 @@
   \end{lequation}
 \end{definition}
 
-\begin{theorem}
+\begin{theorem}\label{ort-basic}
   Во всяком \(E^{n}\) можно выделить ортонормированный базис размера \(n\).
 \end{theorem}
 \begin{proof}
@@ -27,7 +27,7 @@
 
   \textbf{Процесс ортогонализации Грама-Шмидта:}
 
-  Будем добавлять векторы в базис \(\Basis\) из базиса \(B\) по-одному:
+  Будем добавлять векторы в базис \(\Basis'\) из базиса \(B\) по-одному:
 
   \textbf{База:} начнем с одного произвольного вектора \(\beta_1\).
   Тогда \(\basis'_{1} = \beta_{1}\).
@@ -83,6 +83,13 @@
     - \frac{(\beta_{k}, \basis'_{1})}
       {(\basis'_{1}, \basis'_{1})} \cdot \basis'_{1}
   \end{lequation}
+
+  Далее каждый вектор из получившегося ортогонального базиса поделим на его норму и получим ортонормированный базис \(\Basis\):
+
+  \begin{lequation}{ort-basic-proof-5}
+    \Basis = \Bigg\{ \frac{\basis'_{1}}{\norm{\basis'_{1}}}, \dotsc, \frac{\basis'_{n}}{\norm{\basis'_{n}}} \Bigg\} = \{ \basis_{1}, \dotsc, \basis_{n} \}
+  \end{lequation}
+
 \end{proof}
 
 \begin{definition}
