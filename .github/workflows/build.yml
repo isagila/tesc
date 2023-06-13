@@ -1,4 +1,4 @@
-name: Build LaTeX
+name: Build and publish LaTeX
 
 on:
   pull_request:
@@ -28,10 +28,26 @@ jobs:
           echo "CUR_DATE_TAG=$(echo $CUR_DATE | tr : -)" >> $GITHUB_ENV
       - name: Rename main.pdf
         working-directory: ./${{ env.BRANCH }}
-        run: mv "main.pdf" "$BRANCH-$CUR_DATE_TAG.pdf"
+        run: mv "main.pdf" "$BRANCH.pdf"
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
+      - name: Upload pages artifact
+        uses: actions/upload-pages-artifact@v1
         with:
-          name: ${{ env.BRANCH }}-${{ env.CUR_DATE_TAG }}
-          path: ${{ env.BRANCH }}/${{ env.BRANCH }}-${{ env.CUR_DATE_TAG }}.pdf
+          path: ${{ env.BRANCH }}/${{ env.BRANCH }}.pdf
+
+    deploy:
+      needs: build
+
+      permissions:
+        pages: write
+        id-token: write
+
+      environment:
+        name: github-pages
+        url: ${{ steps.deployment.outputs.page_url }}
+
+      runs-on: ubuntu-latest
+      steps:
+        - name: Deploy to GitHub Pages
+          id: deployment
+          uses: actions/deploy-pages@v2
