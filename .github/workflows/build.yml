@@ -94,9 +94,10 @@ jobs:
         name: ${{ env.BRANCH }}
         path: .
         
-    - uses: actions/configure-pages@v1
-    - uses: actions/upload-pages-artifact@v1
-      with:
-        path: .
-    - id: deployment
-      uses: actions/deploy-pages@main
+     - name: Commit and push changes
+        run: |
+          git config --global user.name isagila
+          git config --global user.email "isagila@mail.ru"
+          git add "$BRANCH.pdf"
+          git commit -m "Update $BRANCH.pdf"
+          git push
