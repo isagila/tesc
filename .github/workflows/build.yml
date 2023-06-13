@@ -15,6 +15,34 @@ jobs:
       shell: bash
       run: echo "BRANCH=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
 
+    - name: Get Date
+      id: get-date
+      run: echo "::set-output name=date::$(/bin/date -u "+%Y%m%d")"
+      shell: bash
+
+    - name: Cache
+      uses: actions/cache@v2.1.3
+      with:
+        path: |
+          *.aux
+          *.lof
+          *.lot
+          *.fls
+          *.out
+          *.toc
+          *.fmt
+          *.fot
+          *.cb
+          *.cb2
+          .*.lb
+          *.bbl
+          *.bcf
+          *.blg
+          *-blx.aux
+          *-blx.bib
+          *.run.xml
+        key: ${{ runner.os }}-${{ steps.get-date.outputs.date }}
+
     - name: Build PDF
       uses: xu-cheng/latex-action@v2
       with:
@@ -35,7 +63,7 @@ jobs:
       uses: actions/upload-artifact@master
       with:
         name: ${{ env.BRANCH }}
-        path: "$BRANCH/$BRANCH.pdf"
+        path: ${{ env.BRANCH }}/${{ env.BRANCH }}.pdf
         if-no-files-found: error
 
   deploy:
