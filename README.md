@@ -1,2 +1,0 @@
-# tesc
-ITMO study materials
