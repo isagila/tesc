@@ -1,4 +1,4 @@
-name: Build LaTeX
+name: Build and publish LaTeX
 
 on:
   pull_request:
@@ -8,30 +8,95 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+    - uses: actions/checkout@v3
 
-      - name: Extract branch name
-        working-directory: ./${{ env.BRANCH }}
-        shell: bash
-        run: echo "BRANCH=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV\
+    - name: Extract branch name
+      working-directory: ./${{ env.BRANCH }}
+      shell: bash
+      run: echo "BRANCH=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
 
-      - name: Build PDF
-        uses: xu-cheng/latex-action@v2
-        with:
-          working_directory: ${{ env.BRANCH }}
-          root_file: main.tex
+    - name: Get Date
+      id: get-date
+      run: echo "::set-output name=date::$(/bin/date -u "+%Y%m%d")"
+      shell: bash
 
-      - name: Set datetime release
-        run: |
-          export CUR_DATE=$(date +%Y-%m-%d-%T)
-          echo "CUR_DATE=$CUR_DATE" >> $GITHUB_ENV
-          echo "CUR_DATE_TAG=$(echo $CUR_DATE | tr : -)" >> $GITHUB_ENV
-      - name: Rename main.pdf
-        working-directory: ./${{ env.BRANCH }}
-        run: mv "main.pdf" "$BRANCH-$CUR_DATE_TAG.pdf"
+    - name: Cache
+      uses: actions/cache@v2.1.3
+      with:
+        path: |
+          *.aux
+          *.lof
+          *.lot
+          *.fls
+          *.out
+          *.toc
+          *.fmt
+          *.fot
+          *.cb
+          *.cb2
+          .*.lb
+          *.bbl
+          *.bcf
+          *.blg
+          *-blx.aux
+          *-blx.bib
+          *.run.xml
+        key: ${{ runner.os }}-${{ steps.get-date.outputs.date }}
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: ${{ env.BRANCH }}-${{ env.CUR_DATE_TAG }}
-          path: ${{ env.BRANCH }}/${{ env.BRANCH }}-${{ env.CUR_DATE_TAG }}.pdf
+    - name: Build PDF
+      uses: xu-cheng/latex-action@v2
+      with:
+        working_directory: ${{ env.BRANCH }}
+        root_file: main.tex
+
+    - name: Set datetime release
+      run: |
+        export CUR_DATE=$(date +%Y-%m-%d-%T)
+        echo "CUR_DATE=$CUR_DATE" >> $GITHUB_ENV
+        echo "CUR_DATE_TAG=$(echo $CUR_DATE | tr : -)" >> $GITHUB_ENV
+
+    - name: Rename main.pdf
+      working-directory: ./${{ env.BRANCH }}
+      run: mv "main.pdf" "$BRANCH.pdf"
+
+    - name: Upload pages artifact
+      uses: actions/upload-artifact@master
+      with:
+        name: ${{ env.BRANCH }}
+        path: ${{ env.BRANCH }}/${{ env.BRANCH }}.pdf
+        if-no-files-found: error
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    permissions:
+      id-token: write
+      contents: write
+      pages: write
+    environment:
+      name: github-pages
+      url: ${{steps.deployment.outputs.page_url}}
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Extract branch name
+      working-directory: ./${{ env.BRANCH }}
+      shell: bash
+      run: echo "BRANCH=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
+
+    - uses: actions/checkout@v3
+      with:
+        ref: gh-pages
+
+    - uses: actions/download-artifact@master
+      with:
+        name: ${{ env.BRANCH }}
+        path: .
+        
+    - name: Commit and push changes
+      run: |
+        git config --global user.name isagila
+        git config --global user.email "isagila@mail.ru"
+        git add "$BRANCH.pdf"
+        git commit -m "Update $BRANCH.pdf"
+        git push
