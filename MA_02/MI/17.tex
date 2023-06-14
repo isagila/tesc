@@ -1,2 +1,86 @@
 \question{Теорема Гаусса-Остроградского.}
 
+\begin{multicols}{2}
+  \input{figures/MI/17/object.tex}
+  \columnbreak
+
+  Пусть дано правильное в направлении \(Oz\) замкнутое тело \(T\), образованное
+  поверхностями \(S_{1}\), \(S_{2}\) и \(S_{3}\).
+
+  В области, содержащей тело, определена тройка скалярных функций
+  \(P(x, y, z)\), \(Q(x, y, z)\), \(R(x, y, z)\), каждая из которых
+  дифференцируема и имеет непрерывные частные производные.
+\end{multicols}
+  
+\begin{theorem}\label{GO}
+  Теорема Гаусса-Остроградского.
+
+  При выполнении условий, описанных выше, справедливо равенство
+  
+  \begin{align*}
+    \iiint_{T} \left(
+      \frac{\partial P}{\partial x} +
+      \frac{\partial Q}{\partial y} +
+      \frac{\partial R}{\partial z}
+    \right) \dd x \dd y \dd z
+    =
+    \iint_{S_{T}} \left(
+      P \cos \alpha +
+      Q \cos \beta +
+      R \cos \gamma
+    \right) \dd \sigma
+  \end{align*}
+\end{theorem}  
+\begin{proof}
+  Рассмотрим одну из частей тройного интеграла и перейдем к повторному:
+
+  \begin{align*}
+    \iiint_{T} \frac{\partial R}{\partial z} \dd x \dd y \dd z
+    = \iint_{D_{xy}} \dd x \dd y \int_{z_{2}(x, y)}^{z_{1}(x, y)}
+      \frac{\partial R}{\partial z} \dd z
+    = \iint_{D_{xy}} R(x, y, z_{1}(x, y)) \dd x \dd y
+      - \iint_{D_{xy}} R(x, y, z_{2}(x, y)) \dd x \dd y
+  \end{align*}
+
+  Теперь, используя формулу вычисления \eqref{eq:surf-int-proj-calc} в обратную
+  сторону, перейдем к поверхностному интегралу:
+  
+  \begin{align*}
+    \iint_{D_{xy}} R(x, y, z_{1}(x, y)) \dd x \dd y
+      - \iint_{D_{xy}} R(x, y, z_{2}(x, y)) \dd x \dd y
+    = \iint_{S_{1}^{+}} R(x, y, z) \dd x \dd y
+      + \iint_{S_{2}^{-}} R(x, y, z) \dd x \dd y
+  \end{align*}
+
+  \todo Минуса в направлении обхода вообще не видно
+
+  Заметим, что
+
+  \begin{align*}
+    \gamma_{3} = 90 \degree
+    \implies \cos \gamma \dd \sigma = 0 = \dd x \dd y
+    \implies \iint_{S_{3}^{+}} R(x, y, z) = 0
+  \end{align*}
+
+  поэтому этот интеграл можно добавить к полученному ранее выражению и собрать
+  три полученных поверхностных интеграла в один интеграл по поверхности тела:
+
+  \begin{align*}
+    \iint_{S_{1}^{+}} R(x, y, z) \dd x \dd y
+      + \iint_{S_{2}^{-}} R(x, y, z) \dd x \dd y
+      + \iint_{S_{3}^{+}} R(x, y, z) \dd x \dd y
+    = \iint_{S_{T}} R(x, y, z) \dd x \dd y
+    =\iint_{S_{T}} R(x, y, z) \cos \gamma \dd \sigma
+  \end{align*}
+
+  Таким образом мы получили первое слагаемое в поверхностном интеграле в правой
+  части формулы. Аналогично можно показать, что
+
+  \begin{align*}
+    \iiint_{T} \frac{\partial P}{\partial x} \dd x \dd y \dd z =
+      P \cos \alpha \dd \sigma
+    \qquad
+    \iiint_{T} \frac{\partial Q}{\partial y} \dd x \dd y \dd z =
+      Q \cos \beta \dd \sigma
+  \end{align*}
+\end{proof}
