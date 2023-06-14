@@ -1,0 +1,102 @@
+%% based on https://tex.stackexchange.com/questions/488865/3d-volume-in-tikz/488869#488869
+
+\tdplotsetmaincoords{60}{110}
+\begin{tikzpicture}[
+  tdplot_main_coords,
+  >= stealth,
+  declare function = {
+    pfft(\x) = pi + 0.3 * sin(deg(\x));
+  }
+]
+  \draw[->] (0, 0, 0) coordinate (O) -- (4, 0, 0) coordinate(X)
+    node[pos = 1.1] {\(x\)};
+  \draw[->] (O) -- (0, 3, 0)
+    node[pos = 1.1] {\(y\)};
+  \draw[->] (O) -- (0, 0, 4)
+    node[pos = 1.1] {\(z\)};
+
+  \begin{scope}[
+    decoration = {
+      markings,
+      mark = between positions 0.1 and 1 step 30pt with
+        {\arrow[line width = 2pt]{>}}
+    }
+  ]
+    \draw[thick, postaction = { decorate }] plot[
+      variable = \x,
+      domain = 0.3 * pi : 0.9 * pi
+    ] (3.0, \x, { pfft(2 * \x) }) coordinate (T1)
+    -- plot[
+      variable = \x,
+      domain = 0.9 * pi : 0.3 * pi
+    ] (0.8, \x, { pfft(2 * \x) }) coordinate (T3)
+    -- cycle;
+  \end{scope}
+
+  \begin{scope}[
+    decoration = {
+      markings,
+      mark = at position 0.7 with {\arrow[line width = 2pt]{>}}
+    },
+    every path/.style = {
+      dashed,
+    }
+  ] 
+    \draw[postaction = { decorate }]
+      (3, 0.3 * pi, 0) coordinate (B4)
+      -- (3, 0.9 * pi, 0) coordinate (B1);
+    \draw[postaction = { decorate }]
+      (0.8, 0.9 * pi, 0) coordinate (B2)
+    -- (0.8, 0.3 * pi, 0) coordinate (B3);
+    \draw[postaction = { decorate }] (B1) -- (B2);
+    \draw[postaction = { decorate }] (B3) -- (B4);
+  \end{scope}
+
+  % \path (3, 0.3 * pi, { pfft(2 * 0.3 * pi) }) coordinate (T4)
+  %   (0.8, 0.9 * pi,{ pfft(2 * 0.9 * pi) }) coordinate (T2);
+
+  % \foreach \X in {1, ..., 4} {
+  %   \draw[dashed] (B\X) -- (T\X);
+  % }
+
+  \path[
+    opacity = 0.3,
+    left color = blue,
+    right color = blue,
+    middle color = blue!20,
+    shading angle = 72
+  ] plot[
+    variable = \x,
+    domain = 0 : 1.1 * pi,
+    smooth
+  ] (3.5, \x, { pfft(2 * \x) })
+  -- plot[
+    variable = \x,
+    domain = 1.1 * pi : 0,
+    smooth
+  ] (0, \x, { pfft(2 * \x) })
+  -- cycle;
+
+  \draw plot[
+    variable = \x,
+    domain = 0 : 1.1 * pi,
+    smooth
+  ] (3.5, \x, { pfft(2 * \x) })
+  -- plot[
+    variable = \x,
+    domain = 1.1 * pi : 0,
+    smooth
+  ] (0, \x, { pfft(2 * \x) })
+  -- cycle;
+
+  \draw node at (1.9, 1.9, 0) {\(D_{xy}\)};
+  \draw[fill = black] (1.8, 1.8, 3) circle (1pt);
+
+  \draw[red, thick, ->] (1.8, 1.8, 3) -- (2.9, 2.9, 5.5)
+    node[color = black, above right] {\(\vec{n^{+}}\)};
+  \draw[dashed, blue, thick, ->] (1.8, 1.8, 3) -- (0, 0.4, 0.1)
+    node[color = black, pos = 1.3] {\(\vec{n^{-}}\)};
+
+  \draw[->] (1.8, 1.8, 3) -- (2.1, 2.1, 5.5)
+    node[color = black, above] {\(\vec{u}\)};
+\end{tikzpicture}

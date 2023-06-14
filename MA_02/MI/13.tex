@@ -54,7 +54,8 @@
 
   \begin{align*}
     \iint_{S} f(x, y, z) \dd \sigma
-    = \iint_{D_{xy}} f(x, y, z(x, y)) \dd x \dd y
+    = \iint_{D_{xy}} f(x, y, z(x, y))
+      \sqrt{1 + (z'_{x})^2 + (z'_{y})^2} \dd x \dd y
   \end{align*}
 
   При необходимости можно вводить другую параметризацию и проектировать
