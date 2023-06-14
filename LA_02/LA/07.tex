@@ -60,13 +60,27 @@
 
   такая, что при переходе из базиса \(\{ \basis_{i} \}_{i = 1}^{n}\) в базис
   \(\{ \basis_{i}' \}_{i = 1}^{n}\) выполняется равенство
-  \(\basis' = T \basis\), называется матрицей преобразования координат.
+  \((e_1', e_2', \dots, e_n') = (e_1, e_2, \dots, e_n)T\), называется матрицей преобразования координат.
 \end{definition}
+
+\textit{Примечание от автора:}
+  Матрицей перехода от старого базиса $(e_1, \dots, e_n)$ к новому $(e_1', \dots, e_n')$,
+  называется матрица $T = (t_{ij})$, в столбцах которой стоят координаты новых базисных векторов
+  в старом базисе. Таким образом,
+  $$(e_1', e_2', \dots, e_n') = (e_1, e_2, \dots, e_n)T,$$
+
+  а координаты вектора x в старом и новом базисах связаны равенствами
+  $x_i = \sum^{n}_{j=1}t_{ij}x_{j}'$, или, в матричной записи,
+  $$\begin{pmatrix}
+    x_1 \\ x_2 \\ \vdots \\ x_n
+  \end{pmatrix} = T \begin{pmatrix}  
+    x_1' \\ x_2' \\ \vdots \\ x_n'  
+  \end{pmatrix}$$
 
 \begin{theorem}
   Пусть дан линейный оператор \(\opA \colon V^{n} \to V^{n}\), который в базисе
   \(\Basis = \{ \basis_{i} \}_{i = 1}^{n}\) имеет матрицу \(A\), в базисе
-  \(\Basis' = \{ \basis_{i} \}_{i = 1}^{n}\)~---\(A'\).
+  \(\Basis' = \{ \basis_{i}' \}_{i = 1}^{n}\)~---\(A'\).
   Тогда
 
   \begin{lequation}{trs-lo-mtx}
@@ -96,7 +110,7 @@
   \begin{lequation}{trs-lo-prop-1}
     \begin{matrix}
       \Basis \colon && A + \lambda B \\
-      \Basis' \colon & T (A + \lambda B) T^{-1} = & A' + \lambda B'\\
+      \Basis' \colon & T^{-1} (A + \lambda B) T = & A' + \lambda B'\\
     \end{matrix}
   \end{lequation}
 
@@ -105,7 +119,7 @@
   \begin{lequation}{trs-lo-prop-2}
     \begin{matrix}
       \Basis \colon && E \\
-      \Basis' \colon & T E T^{-1} = & E\\
+      \Basis' \colon & T^{-1} E T = & E\\
     \end{matrix}
   \end{lequation}
 
@@ -118,9 +132,9 @@
 \begin{proof}
   \begin{lequation}{trs-lo-prop-3}
     \det A'
-    = \det (T A T^{-1})
-    = \det T \cdot \det A \cdot \det T^{-1}
-    = \det A \cdot \det T \cdot \det T^{-1}
+    = \det (T^{-1} A T)
+    = \det T^{-1} \cdot \det A \cdot \det T
+    = \det A \cdot \det T^{-1} \cdot \det T
     = \det A
   \end{lequation}
 \end{proof}
