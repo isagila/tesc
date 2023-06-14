@@ -1,2 +1,42 @@
 \question{Следствие теоремы о независимости от пути (формула Ньютона-Лейбница).}
 
+\begin{theorem}
+  Формула Ньютона-Лейбница для интегралов, не зависящих от пути интегрирования
+
+  Пусть выполнены условия теоремы \ref{path-ind-cr}, тогда
+
+  \begin{align*}
+    \int_{AB} P \dd x + Q \dd y = \Phi(B) - \Phi(A)
+  \end{align*}
+\end{theorem}
+\begin{proof}
+  Параметризуем дугу \(\breve{AB}\):
+
+  \begin{align*}
+    x = \phi(t) \implies \dd x = x'_{t} \dd t \\
+    y = \psi(t) \implies \dd y = y'_{t} \dd t \\
+    t \in [t_{1}; t_{2}] \iff A \to B
+  \end{align*}
+
+  Подставим это в исходный интеграл:
+
+  \begin{align*}
+    \int_{AB} P \dd x + Q \dd y
+    = \int_{AB} \frac{\partial \Phi}{\partial x} \dd x
+      + \frac{\partial \Phi}{\partial y} \dd y
+    = \int_{t_{1}}^{t_{2}} \left(
+      \frac{\partial \Phi}{\partial x} \cdot \frac{\dd x}{\dd t} 
+      + \frac{\partial \Phi}{\partial y} \cdot \frac{\dd y}{\dd t} 
+    \right) \dd t  
+  \end{align*}
+
+  Заметим, что то, что стоит в скобках, это полная производная \(\Phi\) по
+  \(t\). Тогда имеем:
+
+  \begin{align*}
+    \int_{t_{1}}^{t_{2}} \frac{\dd \Phi(x(t), y(t))}{\dd t} \dd t
+    = \Phi \Big( x(t), y(t) \Big) \bigg\vert_{t_{1}}^{t_{2}}
+    = \Phi(B) - \Phi(A)
+  \end{align*}
+\end{proof}
+
