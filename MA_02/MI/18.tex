@@ -1,2 +1,150 @@
 \question{Теорема Стокса.}
 
+\begin{multicols}{2}
+  \input{figures/MI/18/object.tex}
+  \columnbreak
+
+  Пусть поверхность \(S\) опирается на замкнутый контур \(L\).
+  \(D_{xy} = S_{\text{пр. } Oxy}\), \(K = L_{\text{пр. } Oxy}\)
+  
+  В области, содержащей \(S\), определена тройка скалярных функций
+  \(P(x, y, z)\), \(Q(x, y, z)\), \(R(x, y, z)\), каждая из которых
+  дифференцируема и имеет непрерывные частные производные.
+\end{multicols}
+  
+\begin{theorem}\label{ST}
+  Теорема Стокса.
+
+  При выполнении условий, описанных выше, справедливо равенство
+  
+  \begin{align*}
+    \iint_{S}
+      \left(
+        \frac{\partial P}{\partial z} \cos \beta
+        - \frac{\partial P}{\partial y} \cos \gamma
+      \right)
+      + \left(
+        \frac{\partial Q}{\partial x} \cos \gamma
+        - \frac{\partial Q}{\partial z} \cos \alpha
+      \right)
+      + \left(
+        \frac{\partial R}{\partial y} \cos \alpha
+        - \frac{\partial R}{\partial x} \cos \beta
+      \right) \dd \sigma
+    = \oint_{L^{+}} P \dd x + Q \dd y + R \dd z
+  \end{align*}
+\end{theorem}  
+\begin{proof}
+  Рассмотрим слагаемое \(\displaystyle \oint_{L^{+}} P \dd x\) в интеграле в
+  правой части. Применяя формулу вычисления в обратную сторону, получаем, что
+
+  \todo ref
+
+  \begin{align*}\label{eq:ST-proof-1}\tag{1}
+    \oint_{L^{+}} P \dd x
+    = \oint_{K^{+}} P(x, y, z(x, y)) \dd x + 0 \; \dd y
+    \transition{\ref{Green}}
+    \iint_{D_{xy}} \left(0 - \frac{\partial P}{\partial y} \right) \dd x \dd y
+    = -\iint_{D_{xy}} \frac{\partial P}{\partial y} \dd x \dd y
+  \end{align*}
+
+  Возьмем производную в подынтегральном выражении, учитывая то, что \(x\) и
+  \(y\) это независимые переменные, а \(P\)~--- сложная функция:
+
+  \begin{align*}
+    \frac{\partial P}{\partial y}
+    = \frac{\partial P}{\partial x} \cdot \frac{\partial x}{\partial y}
+      + \frac{\partial P}{\partial y} \cdot \frac{\partial y}{\partial y}
+      + \frac{\partial P}{\partial z} \cdot \frac{\partial z}{\partial y}
+    = \frac{\partial P}{\partial y}
+      + \frac{\partial P}{\partial z} \cdot \frac{\partial z}{\partial y}
+  \end{align*}
+
+  Первое слагаемое будет равно нулю, т.к \(x\) и \(y\) это независимые
+  переменные. Подставим это в \eqref{eq:ST-proof-1}, а также заменим
+  \(\dd x \dd y\) на \(\cos \gamma \dd \sigma\):
+
+  \begin{align*}\label{eq:ST-proof-2}\tag{2}
+    -\iint_{D_{xy}} \left(
+      \frac{\partial P}{\partial y}
+      + \frac{\partial P}{\partial z} \cdot \frac{\partial z}{\partial y}
+    \right) \cos \gamma \dd \sigma
+    =
+    -\iint_{D_{xy}} \left(
+      \frac{\partial P}{\partial y} \cos \gamma
+      + \frac{\partial P}{\partial z}
+        \cdot \frac{\partial z}{\partial y} \cos \gamma
+    \right) \dd \sigma
+  \end{align*}
+
+  Упростим второе слагаемое, используя полученные ранее формулы для косинусов
+  \eqref{eq:surf-angles}:
+
+  \begin{align*}\label{eq:ST-proof-3}\tag{3}
+    \frac{\partial z}{\partial y} \cos \gamma
+    = \frac{z'_{y}}{\sqrt{1 + (z'_{x})^2 + (z'_{y})^2}}
+    = -\cos \beta
+  \end{align*}
+
+  Подставим \eqref{eq:ST-proof-3} в \eqref{eq:ST-proof-2} и получим:
+
+  \begin{align*}
+    -\iint_{D_{xy}} \left(
+      \frac{\partial P}{\partial y} \cos \gamma
+      - \frac{\partial P}{\partial z} \cos \beta
+    \right) \dd \sigma
+    =
+    \iint_{D_{xy}} \left(
+      \frac{\partial P}{\partial z} \cos \beta
+      - \frac{\partial P}{\partial y} \cos \gamma
+    \right) \dd \sigma
+  \end{align*}
+
+  Таким образом мы получили первое слагаемое в поверхностном интеграле в левой
+  части формулы. Аналогично можно рассмотреть
+  \(\displaystyle \oint_{L^{+}} Q \dd y\),
+  \(\displaystyle \oint_{L^{+}} R \dd z\)
+  получить и оставшиеся два слагаемых.
+\end{proof}
+
+\begin{remark}
+  Формулу Стокса можно записать в другом виде, если собрать коэффициенты при
+  косинусах:
+
+  \begin{align*}
+    \iint_{S}
+      \left(
+        \frac{\partial R}{\partial y} 
+        - \frac{\partial Q}{\partial z}
+      \right) \cos \alpha \dd \sigma
+      + \left(
+        \frac{\partial P}{\partial z} 
+        - \frac{\partial R}{\partial x}
+      \right) \cos \beta \dd \sigma
+      + \left(
+        \frac{\partial Q}{\partial x} 
+        - \frac{\partial P}{\partial y}
+      \right) \cos \gamma \dd \sigma
+    = \oint_{L^{+}} P \dd x + Q \dd y + R \dd z
+  \end{align*}
+
+  Также можно представить интеграл в левой части в виде поверхностного интеграла
+  2-ого рода:
+
+  \begin{align*}
+    \iint_{S}
+      \left(
+        \frac{\partial R}{\partial y} 
+        - \frac{\partial Q}{\partial z}
+      \right) \dd y \dd z
+      + \left(
+        \frac{\partial P}{\partial z} 
+        - \frac{\partial R}{\partial x}
+      \right) \dd x \dd z
+      + \left(
+        \frac{\partial Q}{\partial x} 
+        - \frac{\partial P}{\partial y}
+      \right) \dd y \dd z
+    = \oint_{L^{+}} P \dd x + Q \dd y + R \dd z
+  \end{align*}
+\end{remark}
