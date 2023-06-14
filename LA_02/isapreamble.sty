@@ -27,6 +27,10 @@
 \usepackage{bigints}
 \usepackage{listings}
 \usepackage{xcolor}
+\usepackage{multicol}
+\usepackage{subcaption}
+\usepackage{esvect}
+\usepackage{gensymb}
 
 %%% Работа с русским языком
 \usepackage{cmap}                   % поиск в PDF
@@ -48,7 +52,7 @@
 \usepackage{amsfonts, amssymb, amsthm, mathtools}
 % \usepackage[intlimits]{amsmath}
 \usepackage{esint} % для ориентированных интегралов
-\usepackage{icomma} % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
+% \usepackage{icomma} % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
 
 %% Дифференциалы и все что с ними связано
 \usepackage{physics}
@@ -56,6 +60,8 @@
 %% Графики функций
 \usepackage{pgfplots}
 \usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usetikzlibrary{decorations.markings}
 \pgfplotsset{every axis/.style = {scale only axis}}
 \pgfplotsset{compat = 1.16}
 
@@ -91,8 +97,27 @@
 \renewcommand{\ge}{\geqslant}
 \renewcommand{\le}{\leqslant}
 
-%% \int = \int\limits
+%% Границы интегралов
 \renewcommand{\int}{\intop}
+\renewcommand{\iint}{\iintop}
+\renewcommand{\iiint}{\iiintop}
+\renewcommand{\oint}{\ointop}
+
+%% Длинные знаки векторов
+\renewcommand{\vec}{\vv}
+
+\newcommand{\converge}{\succ}
+\newcommand{\notconverge}{\prec}
+
+\newcommand{\transition}[1]{
+  \mathrel{
+    \overset{#1}{
+      \resizebox{\widthof{\ensuremath{#1}}}
+      {\heightof{$=$}}
+      {$=$}
+    }
+  }
+}
 
 %% Более привычные греческие буквы
 \renewcommand{\phi}{\varphi}
@@ -180,18 +205,6 @@
 \renewcommand*{\proofname}{\textit{Доказательство.}}
 \renewcommand\qedsymbol{\(\blacksquare\)}
 
-%% Выражения
-\newenvironment{lequation}[1]{
-  \begin{equation*}\label{eq:#1}\begin{aligned}
-      }{
-    \end{aligned}\end{equation*}
-}
-\newenvironment{tequation}[2]{
-  \begin{equation*}\label{eq:#1}\tag{#2}\begin{aligned}
-      }{
-    \end{aligned}\end{equation*}
-}
-
 %% Заголовки
 \newcommand\enumtocitem[3]{
   \item\textbf{\color{blue} #1}
@@ -247,3 +260,6 @@
 
 %% Символ "пусть"
 \newcommand{\lets}{\sqsupset}
+
+%% TikZ
+\definecolor{lightgray}{rgb}{0.83, 0.83, 0.83}
