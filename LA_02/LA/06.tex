@@ -2,25 +2,26 @@
 
 \begin{definition}
   Оператор \(\opI \colon V^{n} \to V^{n}\) называется тождественным оператором,
-  если \(\opI x = x, \forall x \in V^{n}\).
+  если \(\forall x \in V^{n} \colon \opI x = x\).
 \end{definition}
 
 \begin{definition}
   Пусть даны операторы \(\opA, \opB \colon V^{n} \to V^{n}\). Оператор \(\opB\)
   называется обратным для оператора \(\opA\), если их композиция равна
   тождественному оператору.
-  \begin{lequation}{inv-lo-def}
-    \opB = \opA^{-1} \iff \opA \cdot \opB = \opB \cdot \opA = \opI
-  \end{lequation}
+
+  \begin{align*}
+    \opB = \opA^{-1} \bydef \opA \cdot \opB = \opB \cdot \opA = \opI
+  \end{align*}
 \end{definition}
 
 \begin{definition}
   Оператор \(\opA \colon V^{n} \to V^{n}\) называется взаимно-однозначным, если
   разным \(x \in V^{n}\) сопоставляются разные \(y \in V^{n}\).
   
-  \begin{lequation}{bij-lo-def}
-    x \neq y \implies \opA x \neq \opA y \hspace{10pt} \forall x, y \in V^{n}
-  \end{lequation}
+  \begin{align*}
+    \forall x, y \in V^{n} \colon x \neq y \implies \opA x \neq \opA y
+  \end{align*}
 \end{definition}
 
 \begin{lemma}\label{bij-lo-lm}
@@ -28,16 +29,18 @@
   \(\opA x = 0 \implies x = 0\).
 \end{lemma}
 \begin{proof}
-  От противного
-  \begin{lequation}{bij-lo-lm-1}
+  От противного:
+
+  \begin{align*}
     \lets x = x_{1} - x_{2} \neq 0 \implies x_{1} \neq x_{2} \\
     \opA x = \opA (x_{1} - x_{2}) = \opA x_{1} - \opA x_{2} = 0
     \implies \opA x_{1} = \opA x_{2}
-  \end{lequation}
-  Это невозможно, т.к. \(\opA\) взаимно-однозначный.
+  \end{align*}
+
+  Противоречие, т.к. \(\opA\) взаимно-однозначный.
 \end{proof}
 
-\begin{theorem}\label{bij-lo-ind2ind}
+\begin{theorem}\label{bij-lo-ind-to-ind}
   Взаимно-однозначный оператор переводит линейно-независимый набор в
   линейно-независимый набор.
 \end{theorem}
@@ -47,15 +50,15 @@
   набор образов \(\{ \opA x_{1}, \dotsc, \opA x_{n}\}\). Составим его нулевую
   линейную комбинацию, после чего воспользуемся линейностью оператора:
 
-  \begin{lequation}{bij-lo-lis2lis}
+  \begin{align*}
     \lambda_{1} \opA x_{1} + \dotsc + \lambda_{n} \opA x_{n} = 0 \\
     \opA \Big( \lambda_{1} x_{1} + \dotsc + \lambda_{n} x_{n} \Big) = 0 \\
-  \end{lequation}
+  \end{align*}
 
-  По \ref{bij-lo-lm} получаем, что
+  Т.к. \(\opA\) взаимно-однозначный, то по \ref{bij-lo-lm} получаем, что
   \(\lambda_{1} x_{1} + \dotsc + \lambda_{n} x_{n} = 0\).
-  Т.к. набор \(\{ x_{1}, \dotsc, x_{n}\}\) линейно независим, то
-  \(\forall \lambda_{i} = 0\)
+  Набор \(\{ x_{1}, \dotsc, x_{n}\}\) линейно независим, значит
+  \(\forall \lambda_{i} = 0\).
 \end{proof}
 
 \begin{corollary}
@@ -67,18 +70,19 @@
   \(\iff \exists \opA^{-1}\).
 \end{theorem}
 \begin{proof}
-
   \(\implies\) Пусть \(x \xrightarrow{\opA} y\).
   Рассмотрим оператор \(\opB\) такой, что \(y \xrightarrow{\opB} x\). Т.к.
   \(\opA\) взаимно-однозначный, то \(\opA \cdot \opB = I\).
 
   \(\impliedby\) От противного
-  \begin{lequation}{bij-lo-iff-inv}
-    \lets x_{1} \neq x_{2}, \opA x_{1} = \opA x_{2} = x\\
-    x_{1} = \opA^{-1} \opA x_{1} = \opA^{-1} x \\
-    x_{2} = \opA^{-1} \opA x_{2} = \opA^{-1} x \\
-    x_{1} \neq x_{2} \implies \opA^{-1} x \neq \opA^{-1} x
-  \end{lequation}
+
+  \begin{align*}
+    \lets x_{1} \neq x_{2}, \opA x_{1} = \opA x_{2}\\
+    \opA x_{1} = \opA x_{2}
+    \implies \opA^{-1} \opA x_{1} = \opA^{-1} \opA x_{2}
+    \implies x_{1} = x_{2}
+  \end{align*}
+
   Получили противоречие.
 \end{proof}
 
@@ -88,14 +92,14 @@
   называется ядром оператора \(\opA\).
 \end{definition}
 
-\begin{lemma}
+\begin{lemma}\label{lo-bij-ker}
   Оператор \(\opA \colon V^{n} \to V^{n}\) взаимно-однозначный
   \(\implies \Ker \opA = \{ 0 \}\).  
 \end{lemma}
 \begin{proof}
   От противного, пусть \(x \neq 0 \in \Ker \opA\).
-  Тогда по \ref{bij-lo-lm} \(\opA \; 0 = 0\), но в то же время
-  \(\opA x = 0, x \neq 0 \). Нарушается взаимно-однозначность.
+  Тогда \(\opA x = 0\), но в то же время \(\opA \; 0 = 0\).
+  Нарушается взаимно-однозначность.
 \end{proof}
 
 \begin{definition}
@@ -107,9 +111,10 @@
 
 \begin{theorem}\label{lo-sum-dim}
   Пусть дан оператор \(\opA \colon V^{n} \to V^{n}\). Тогда
-  \begin{lequation}{lo-dim-def}
+
+  \begin{align*}
     \dim{\Ker \opA} + \dim{\Img \opA} = n
-  \end{lequation}
+  \end{align*}
 \end{theorem}
 \begin{proof}
   Т.к. \(\Ker{\opA}\) и \(\Img{\opA}\) это подпространства \(V^{n}\), то
@@ -119,22 +124,24 @@
 
   Сначала покажем, что \(\opA \colon W \to \Img \opA\) взаимно-однозначный.
   От противного: 
-  \begin{lequation}{lo-dim-subproof}
+
+  \begin{align*}
     \lets x_{1} \neq x_{2} \in W \colon \opA x_{1} = \opA x_{2} \\
     \opA x_{1} = \opA x_{2}
       \implies \opA (x_{1} - x_{2}) = 0
       \implies (x_{1} - x_{2}) \in \Ker \opA
     \\  
     x_{1}, x_{2} \in W \implies (x_{1} - x_{2}) \in W
-  \end{lequation}
+  \end{align*}
+
   Но это невозможно, т.к.
   \(W \oplus \Ker{A} = V^{n} \implies W \cap \Ker A = \varnothing\).
 
   В \(\Img \opA\) выделим базис \( \{ y_{1}, \dotsc, y_{k} \}\). Т.к. \(\opA\)
   взаимно-однозначный, то выделенный базис порождается линейно-независимым
-  набором (см. \ref{bij-lo-ind2ind})
-  \(\{ x_{1}, \dotsc, x_{k} \}, x_{i} \in W\). Значит
-  \(\dim{W} \ge \dim{\Img \opA}\).
+  набором \(\{ x_{1}, \dotsc, x_{k} \}, x_{i} \in W\)
+  (по \ref{bij-lo-ind-to-ind}).
+  Значит \(\dim{W} \ge \dim{\Img \opA}\).
 
   Предположим, что \(\dim{W} > \dim{\Img \opA}\). Обозначим \(\dim{W} = p\),
   дополним систему \(\{ x_{1}, \dotsc, x_{k} \}\) до \(p\) линейно-независимых
@@ -146,7 +153,8 @@
 
 \begin{remark}
   Можно доказать, что
-  \begin{lequation}{lo-dim-rem}
+
+  \begin{align*}
     \begin{cases}
       V_{1} \subset V^{n} \\
       V_{2} \subset V^{n} \\
@@ -155,22 +163,23 @@
     \exists \opA \colon V^{n} \to V^{n},
     \Ker \opA = V_{1},
     \Img \opA = V_{2}
-  \end{lequation}
+  \end{align*}
 \end{remark}
 
 \begin{definition}
   Рангом оператора \(\opA \colon V^{n} \to V^{n}\) называется размерность его
   образа:
-  \begin{lequation}{lo-rang}
+
+  \begin{align*}
     \Rang \opA = \dim{\Img \opA}
-  \end{lequation}
+  \end{align*}
 \end{definition}
 
 Пусть \(\opA, \opB \colon V^{n} \to V^{n}\). Рассмотрим некоторые свойства
 ранга линейного оператора:
 \begin{enumerate}
   \item Если оператор \(\opA\) взаимно-однозначный, то
-  \(\Rang \opA = n\) (это следствие из \ref{lo-sum-dim}).
+  \(\Rang \opA = n\) (это следствие из \ref{lo-bij-ker} и \ref{lo-sum-dim}).
   \item
     \(\Rang (\opA \cdot \opB) \le \Rang \opA\),
     \(\Rang (\opA \cdot \opB) \le \Rang \opB\)

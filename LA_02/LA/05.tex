@@ -1,10 +1,10 @@
 \question{Линейный оператор: определение, основные свойства.}
 
 \begin{definition}
-  Пусть \(V^{n}, W^{m}\) линейные пространства. Отображение
-  \(\opA \colon V^{n} \to W^{m}\), которое \(\forall x \in V^{n}\) сопоставляет
-  \(y \in W^{m}\) называется линейным оператором при выполнении следующих
-  условий: \(\forall x_{1}, x_{2} \in V^{n}, \lambda \in \CC\):
+  Пусть \(V^{n}\), \(W^{m}\) линейные пространства.
+  Отображение \(\opA \colon V^{n} \to W^{m}\), которое \(\forall x \in V^{n}\)
+  сопоставляет \(y \in W^{m}\) называется линейным оператором при выполнении
+  следующих условий: \(\forall x_{1}, x_{2} \in V^{n}, \lambda \in \CC\):
 
   \begin{enumerate}
     \item \(\opA(x_{1} + x_{2}) = \opA x_{1} + \opA x_{2}\)
@@ -13,7 +13,7 @@
 \end{definition}
 
 \begin{remark}
-  \(y = \opA x\) означает, что \(y\) порождается применением оператора \(\opA\)
+  \(y = \opA x\) означает, что \(y\) порождается применением оператора \(\opA\).
 \end{remark}
 
 Обозначим некоторые базовые свойства линейных операторов. Пусть
@@ -32,18 +32,21 @@
 В общем случае она не коммутативна \(\opA \cdot \opB \neq \opB \cdot \opA\).
 
 Свойства композиции операторов:
-\begin{enumerate}
-  \item \(\lambda (\opA \cdot \opB) = (\lambda \opA) \cdot \opB\)
-  \item \((\opA + \opB) \cdot \opC = \opA \cdot \opC + \opB \cdot \opC\)
-  \item \(\opA \cdot (\opB + \opC) = \opA \cdot \opB + \opA \cdot \opC\)
-  \item \(\opA \cdot (\opB \cdot C) = (\opA \cdot \opB) \cdot \opC\)
-\end{enumerate}
+\begin{multicols}{2}
+  \begin{enumerate}
+    \item \(\lambda (\opA \cdot \opB) = (\lambda \opA) \cdot \opB\)
+    \item \(\opA \cdot (\opB \cdot C) = (\opA \cdot \opB) \cdot \opC\)
+    \item \((\opA + \opB) \cdot \opC = \opA \cdot \opC + \opB \cdot \opC\)
+    \item \(\opA \cdot (\opB + \opC) = \opA \cdot \opB + \opA \cdot \opC\)
+  \end{enumerate}
+\end{multicols}
 
 \begin{definition}
   Композиция оператора самим с собой \(n\) раз называется \(n\)-ой степенью
-  оператора: \(\opA^{n} = \underbrace{A \cdot \dotsc \cdot A}_{n}\)
+  оператора: \(\opA^{n} = \under{A \cdot \dotsc \cdot A}{n}\)
 \end{definition}
 
-Для степени оператора справедливо равенство
-\(\opA^{n + m} = \opA^{n} \cdot \opA^{m}\)
-
+\begin{remark}
+  Для степени оператора справедливо равенство
+  \(\opA^{n + m} = \opA^{n} \cdot \opA^{m}\)
+\end{remark}

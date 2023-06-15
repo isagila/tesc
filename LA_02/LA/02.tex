@@ -1,25 +1,31 @@
 \question{Ортонормированный базис, ортогонализация базиса. Матрица Грама.}
 
 \begin{definition}
-  \textit{Углом} между двумя элементами Евклидова пространства называется
-  \begin{lequation}{angle-def}
+  Косинусом \textit{yгла} между двумя элементами Евклидова пространства
+  называется
+
+  \begin{align*}
     \cos \angle (x, y) = \frac{(x, y)}{\norm{x} \cdot \norm{y}}
-  \end{lequation}
+  \end{align*}
 \end{definition}
 
-\begin{definition}
+\begin{definition}\label{item-ort}
   Для элемента Евклидова пространства ортогональны, если их скалярное
   произведение равно нулю.
-  \begin{lequation}{ort-def}
-    x \bot y \iff (x, y) = 0
-  \end{lequation}
+
+  \begin{align*}
+    x \perp y \bydef (x, y) = 0
+  \end{align*}
 \end{definition}
 
 \begin{theorem}\label{ort-basic}
-  Во всяком \(E^{n}\) можно выделить ортонормированный базис размера \(n\).
+  Во всяком Евклидовом пространстве \(E^{n}\) можно выделить ортонормированный
+  базис размера \(n\).
 \end{theorem}
 \begin{proof}
-  Пусть у нас есть базис \(B = \{ \beta_{1}, \dotsc, \beta_{n} \}\).
+  Т.к. Евклидово пространство является линейным пространством, то по свойству
+  линейного пространства в нем можно выделить базис размера \(n\).
+  Обозначим этот базис \(B = \{ \beta_{1}, \dotsc, \beta_{n} \}\).
   Ортогонализируем его, полученный базис обозначим
   \(\Basis' = \{ \basis'_{1}, \dotsc, \basis'_{n} \}\).
   Этот базис можно нормировать и получить искомый ортонормированный базис
@@ -33,48 +39,48 @@
   Тогда \(\basis'_{1} = \beta_{1}\).
 
   \textbf{Переход:} пусть у нас уже выделен набор из \(k - 1\) ортогональных
-  векторов \(\{ \basis'_{1}, \dotsc, \basis'_{k - 1} \}\) и в него требуется
-  добавить вектор \(\beta_{k}\).
+  векторов \(\Basis'_{k} = \{ \basis'_{1}, \dotsc, \basis'_{k - 1} \}\) и в него
+  требуется добавить вектор \(\beta_{k}\).
 
   Будем искать \(\basis'_{k}\) в виде
 
-  \begin{lequation}{ort-basic-proof-1}
+  \begin{align*}
     \basis'_{k}
       = \beta_{k}
       + \lambda_{1} \basis'_{k - 1}
       + \lambda_{2} \basis'_{k - 2}
       + \dotsc
       + \lambda_{k - 1} \basis'_{1}
-  \end{lequation}
+  \end{align*}
 
   Чтобы \(\basis'_{k}\) был ортогонален остальным векторам уже построенной
   системы, необходимо, чтобы скалярные произведение \(\basis'_{k}\) с остальными
   векторами системы равнялись нулю. Рассмотрим на примере \(\basis'_{1}\):
 
-  \begin{lequation}{ort-basic-proof-2}
+  \begin{align*}
     (\basis'_{k}, \basis'_{1})
       = (\beta_{k}, \basis'_{1})
       + \lambda_{1} (\basis'_{k - 1}, e'_{1})
       + \dotsc
       + \lambda_{k - 1} (\basis'_{1}, \basis'_{1})
       = 0
-  \end{lequation}
+  \end{align*}
 
-  Учитывая то, что построенная система ортогональна, то
-  \((\basis'_{i}, \basis'_{j}) = 0 \; (i, j < k)\).
+  Учитывая то, что система \(\Basis'_{k}\) ортогональна, то
+  \((\basis'_{i}, \basis'_{j}) = 0 \; (\forall i \neq j, i < k, j < k)\).
   Значит выражение выше упрощается и остается:
 
-  \begin{lequation}{ort-basic-proof-3}
+  \begin{align*}
      (\beta_{k}, \basis'_{1})
      + \lambda_{k - 1} (\basis'_{1}, \basis'_{1}) = 0 \\
      \lambda_{k - 1}
      = -\frac{(\beta_{k}, \basis'_{1})}{(\basis'_{1}, \basis'_{1})}
-  \end{lequation}
+  \end{align*}
 
   Аналогично можно получить оставшиеся коэффициенты \(\lambda_{i}\). Тогда
   добавляемый в систему вектор \(\basis'_{k}\) будет иметь вид:
 
-  \begin{lequation}{ort-basic-proof-4}
+  \begin{align*}
     \basis'_{k}
     = \beta_{k}
     - \frac{(\beta_{k}, \basis'_{k - 1})}
@@ -82,26 +88,32 @@
     - \dotsc
     - \frac{(\beta_{k}, \basis'_{1})}
       {(\basis'_{1}, \basis'_{1})} \cdot \basis'_{1}
-  \end{lequation}
+  \end{align*}
 
-  Далее каждый вектор из получившегося ортогонального базиса поделим на его норму и получим ортонормированный базис \(\Basis\):
+  Далее каждый вектор из получившегося ортогонального базиса поделим на его
+  норму и получим ортонормированный базис \(\Basis\):
 
-  \begin{lequation}{ort-basic-proof-5}
-    \Basis = \Bigg\{ \frac{\basis'_{1}}{\norm{\basis'_{1}}}, \dotsc, \frac{\basis'_{n}}{\norm{\basis'_{n}}} \Bigg\} = \{ \basis_{1}, \dotsc, \basis_{n} \}
-  \end{lequation}
-
+  \begin{align*}
+    \Basis = \left\{
+      \frac{\basis'_{1}}{\norm{\basis'_{1}}},
+      \dotsc,
+      \frac{\basis'_{n}}{\norm{\basis'_{n}}}
+    \right\}
+    = \{ \basis_{1}, \dotsc, \basis_{n} \}
+  \end{align*}
 \end{proof}
 
 \begin{definition}
   Матрицей Грама называется матрица составленная из скалярных произведений
 
-  \begin{lequation}{G-mtx}
+  \begin{align*}
+    \Gmtx =
     \begin{pmatrix}
       (\basis_{1}, \basis_{1}) & \dots  & (\basis_{k}, \basis_{1}) \\
       \vdots                   & \ddots & \vdots                   \\
       (\basis_{1}, \basis_{k}) & \dots  & (\basis_{k}, \basis_{k}) \\
     \end{pmatrix}
-  \end{lequation}
+  \end{align*}
 \end{definition}
 
 \begin{remark}

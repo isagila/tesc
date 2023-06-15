@@ -1,65 +1,108 @@
 \question{Задача о перпендикуляре.}
 
-\begin{figure}[H]
-    \begin{center}
-      \includegraphics[width=100pt]{LA/Pifagor.png}
-    \end{center}
-\end{figure}
+\begin{multicols}{2}
+  \input{figures/LA/01/perpendicular.tex}
+  \columnbreak
 
-\textit{Задача.  } Требуется найти перпендикуляр $h: x_0 + h = x$ ($h = x - x_0$), то есть нужно найти точку $M_0$ - 
-проекцию $M$ или вектор $x_0$ - ортогональная проекция $X$ на $G$.
+  \underline{Постановка задачи}: необходимо найти перпендикуляр
+  \(h \perp G \colon x_{0} + h = x \; (x_{0} \in G, x \in E^{n})\), т.е. нужно
+  найти точку \(M_{0}\)~--- проекцию \(M\) на \(G\).
 
-\begin{remark}
-    $h$ задаёт кратчайшее расстояние $MM_0$ (доказательство ниже)
-\end{remark}
+  В таком случае \(x_{0}\) называется \textit{ортогональной} проекцией \(x\) на
+  \(G\).
 
-\begin{theorem}
-    $x_0$ - ортогональная проекция $x$ на $G$, $h=x-x_0$, $h \perp G$, $x_0 \in G$, $x \in E^n$
-    
-    Тогда $h$ задаёт кратчайшее расстояние от $x$ до $G$, то есть $\forall x' \in G \neq x_0 \,\,\, ||x-x'|| > ||x-x_0||$ 
-\end{theorem}
+  \begin{theorem}
+    В описанных выше условиях \(h\) задает кратчайшее расстояние от \(x\) до
+    \(G\):
+
+    \begin{align*}
+      \forall x' \in G \mid x' \neq x_{0} \colon
+        \under{\abs{x - x'}}{h'} > \under{\abs{x - x_{0}}}{h}
+    \end{align*}
+  \end{theorem}
+\end{multicols}
+
 \begin{proof}
-    Так как $x', \, x_0 \in G$, то $-x'+x_0 \in G$. Так как $h = x - x_0 \perp G$, то $h \perp (-x' + x_0)$
-    \begin{lequation}
-        |||x-x'||^2 = ||\underbrace{x - x_0}_{h} + x_0 - x'||^2 = \, \text{(Пифагор)} \, ||x-x_0||^2 + ||x_0-x'||^2 > ||x-x_0||^2 \, (\neq, \text{т.к. } x' \neq x_0) \\
-        ||h'|| > ||h|| \, \text{(длина наклонной больше длины перпендикуляра)}
-    \end{lequation}
-    \begin{remark}
-        Это проекция $x$ на $G$, отстоящая от $x$ на наименьшее расстояние
-    \end{remark}
+  \begin{align*}
+    \begin{rcases}
+      x', x_{0} \in G \implies x_{0} - x' \in G \\
+      h \perp G
+    \end{rcases}
+    \implies h \perp (x_{0} - x') \\
+    \norm{h'}^2
+    = \norm{x - x'}^2
+    = \norm{x - x_{0} + x_{0} - x'}
+    \eqby{\ref{pythagoras}}
+    \under{\norm{x - x_{0}}^2}{\norm{h}^2} + \norm{x_{0} - x'}
+    \\
+    \norm{h'}^2 = \norm{h}^2 + \norm{x_{0} - x'}
+    \\
+    x' \neq x_{0}
+    \implies \norm{x_{0} - x'} > 0
+    \implies \norm{h'}^2 > \norm{h}^2
+  \end{align*}
 \end{proof}
 
-\textit{Вычисление. } Ортогональная проекция $x_0$
+\begin{remark}
+  \(x_{0}\) это проекция \(x\) на \(G\), отстоящая от \(x\) на наименьшее
+  расстояние.
+\end{remark}
 
-$x \in E^n$, $G \subset E^n$, $x_0$ - ортогональная проекция $x$ на $G$
+\begin{remark}
+  О вычислении ортогональной проекции
 
-Найти $x_0$ значит найти $x_0=\lambda_{1}e_{1} + \dots + \lambda_{k}e_{k}$, 
-где $\{e_1, \dots, e_k\}$ - базис $G$ (не обязательно ортонормированный). 
+  В \(G\) выделим базис \(\Basis\) и разложим \(x_{0}\) по этому базису:
 
-Перпендикуляр $h = x-x_0 \perp G \implies (h, e_i) = 0$, то есть $(x-x_0, e_i) = (x, e_i) - (x_0, e_i) = 0$
+  \begin{align*}\label{eq:ort-proj-calc-1}\tag{1}
+    x_{0} = \lambda_{1} \basis_{1} + \dotsc + \lambda_{k} \basis_{k}
+  \end{align*}
 
-Таким образом, $(x_0, e_i) = \lambda_1(e_1, e_i) + \dots + \lambda_k(e_k, e_i) = (x, e_i)$
+  Теперь задача состоит в поиске коэффициентов \(\lambda_{i}\).
+  воспользуемся тем, что \(h\) это перпендикуляр к \(G\):
 
-$i = 1 \dots k \implies$ получаем СЛАУ k-ого порядка, где неизвестны $\lambda_1 \dots \lambda_k$ - 
-коэффициенты $a_{ji} = (e_j, e_i)$
+  \begin{align*}\label{eq:ort-proj-calc-2}\tag{2}
+    \begin{rcases}
+      h = x - x_{0} \\
+      h \perp G \bydef \forall \basis_{i} \in \Basis \colon h \perp \basis_{i}
+    \end{rcases}
+    \implies (x - x_{0}, \basis_{i}) = 0
+    \implies (x_{0}, \basis_{i}) = (x, \basis_{i})
+    \hspace{20pt} (\forall \basis_{i} \in \Basis)
+  \end{align*}
 
-В матричной форме:
-\begin{lequation}
-    .\text{Матрица Грама } g = \begin{pmatrix}
-        (e_1, e_1) & \dots & (e_k, e_1) \\
-        \vdots & \ddots & \vdots \\
-        (e_1, e_k) & \dots & (e_k, e_k)
-    \end{pmatrix} 
+  Подставим \eqref{eq:ort-proj-calc-1} в \eqref{eq:ort-proj-calc-2} и
+  воспользуемся свойствами скалярного произведения:
+
+  \begin{align*}
+    \forall \basis_{i} \in \Basis \colon
+      \lambda_{1} (\basis_{1}, \basis_{i}) + \dotsc
+        + \lambda_{n} (\basis_{n}, \basis_{i})
+      = (x, e_{i})
+  \end{align*}
+
+  Для каждого \(\basis_{i} \in \Basis\) получаем свое уравнение \(\implies\)
+  можно составить СЛАУ:
+
+  \begin{align*}
     \begin{pmatrix}
-        \lambda_1 \\ 
-        \vdots \\
-        \lambda_k
-    \end{pmatrix} =
-    \begin{pmatrix}
-        (x, e_1) \\
-        \vdots \\
-        (x, e_k)
+      (\basis_{1}, \basis_{1}) & \dots  & (\basis_{k}, \basis_{1}) \\
+      \vdots                   & \ddots & \vdots                   \\
+      (\basis_{1}, \basis_{k}) & \dots  & (\basis_{k}, \basis_{k}) \\
     \end{pmatrix}
-\end{lequation}
+    \begin{pmatrix}
+      \lambda_1 \\ 
+      \vdots \\
+      \lambda_k
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+      (x, \basis_{1}) \\
+      \vdots \\
+      (x, \basis_{k})
+    \end{pmatrix}
+  \end{align*}
+\end{remark}
 
-По теореме Крамера существует единственное решение (определитель $ g \neq 0$)
+Заметим, что матрица коэффициентов полученной СЛАУ это матрица Грамма.
+По т. Крамера эта СЛАУ будет иметь единственное решение, если
+\(\det \Gmtx \neq 0\).

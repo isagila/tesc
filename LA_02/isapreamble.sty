@@ -50,9 +50,7 @@
 
 %%% Дополнительная работа с математикой
 \usepackage{amsfonts, amssymb, amsthm, mathtools}
-% \usepackage[intlimits]{amsmath}
 \usepackage{esint} % для ориентированных интегралов
-% \usepackage{icomma} % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
 
 %% Дифференциалы и все что с ними связано
 \usepackage{physics}
@@ -64,6 +62,7 @@
 \usetikzlibrary{decorations.markings}
 \pgfplotsset{every axis/.style = {scale only axis}}
 \pgfplotsset{compat = 1.16}
+\definecolor{lightgray}{rgb}{0.83, 0.83, 0.83}
 
 %% Время
 \usepackage{datetime}
@@ -91,6 +90,32 @@
 }
 \makeatother
 
+%% Круглые скобки снизу
+%% https://tex.stackexchange.com/questions/260565/newcommand-underbrace-parentheses
+\makeatletter
+\newcommand\underparen[1]{%
+  \mathop{%
+    \vtop{
+      \m@th
+      \ialign{%
+        ##\crcr
+        $\hfil\displaystyle{#1}\hfil$\crcr
+        \noalign{\kern3\p@\nointerlineskip}%
+        \upparenfill\crcr
+      }%
+    }%
+  }\limits
+}
+\newcommand\upparenfill{%
+  $\m@th\setbox\z@\hbox{$\braceld$}%
+    \bracelu\leaders\vrule \@height\ht\z@ \@depth\z@\hfill\braceru$%
+}
+\makeatother
+
+\newcommand{\under}[2]{\underparen{#1}_{#2}}
+
+\renewcommand{\bar}{\overline}
+
 %% Красивые <= и >=
 \renewcommand{\geq}{\geqslant}
 \renewcommand{\leq}{\leqslant}
@@ -103,29 +128,32 @@
 \renewcommand{\iiint}{\iiintop}
 \renewcommand{\oint}{\ointop}
 
-%% Длинные знаки векторов
-\renewcommand{\vec}{\vv}
-
 \newcommand{\converge}{\succ}
 \newcommand{\notconverge}{\prec}
 
-\newcommand{\transition}[1]{
-  \mathrel{
-    \overset{#1}{
-      \resizebox{\widthof{\ensuremath{#1}}}
-      {\heightof{$=$}}
-      {$=$}
-    }
-  }
+%% Длинные знаки векторов
+\renewcommand{\vec}{\vv}
+
+%% Символ "пусть"
+\newcommand{\lets}{\sqsupset}
+
+%% Для переходов в доказательствах
+\newcommand{\idenby}[1]{
+  \xLeftrightarrow{\text{#1}}
+}
+\renewcommand{\implies}[1][]{
+  \xLongrightarrow{\text{#1}}
+}
+\newcommand{\eqby}[1]{
+  \xlongequal{\text{#1}}
+}
+\newcommand{\bydef}{
+  \idenby{\text{def}}
 }
 
 %% Более привычные греческие буквы
 \renewcommand{\phi}{\varphi}
 \renewcommand{\epsilon}{\varepsilon}
-
-%% Перенос знаков в формулах (по Львовскому)
-\newcommand*{\hm}[1]{#1\nobreak\discretionary{}
-  {\hbox{$\mathsurround=0pt #1$}}{}}
 
 \DeclareSymbolFontAlphabet{\mathbbold}{bbold}
 \DeclareSymbolFontAlphabet{\mathbb}{AMSb}
@@ -151,6 +179,7 @@
 \DeclareMathOperator{\Rang}{rang}
 \newcommand{\BiLinear}{\mathscr{B}}
 \newcommand{\Quad}{\mathscr{K}}
+\newcommand{\Gmtx}{\Gamma}
 
 %% Базис
 \newcommand{\basis}{\mathbbold{e}}
@@ -169,15 +198,7 @@
 \renewcommand\thesubsection{\thesection\arabic{subsection}.}
 
 %% Стиль для замечаний
-\newtheoremstyle{remarkstyle} % <name>
-{3pt} % <Space above>
-{3pt} % <Space below>
-{} % <Body font>
-{} % <Indent amount>
-{\itshape} % <Theorem head font>
-{.} % <Punctuation after theorem head>
-{.5em} % <Space after theorem headi>
-{} % <Theorem head spec (can be left empty, meaning `normal')>
+\newtheoremstyle{remarkstyle}{3pt}{3pt}{}{}{\itshape}{.}{.5em}{}
 
 %% Леммы-леммы теоремы
 \newcounter{points}[subsection]
@@ -204,6 +225,22 @@
 
 \renewcommand*{\proofname}{\textit{Доказательство.}}
 \renewcommand\qedsymbol{\(\blacksquare\)}
+
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \vspace{-\topsep}
+  \pushQED{\qed}
+  \normalfont
+  \topsep0pt \partopsep0pt
+  \trivlist
+  \item[\hskip\labelsep
+              \itshape
+              #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endtrivlist\@endpefalse
+  \addvspace{6pt plus 6pt}
+}
+\makeatother
 
 %% Заголовки
 \newcommand\enumtocitem[3]{
@@ -257,9 +294,3 @@
 \sisetup{inter-unit-product = \ensuremath{{}\cdot{}}}
 
 \newcommand{\todo}{\textbf{\color{red} TODO: \hspace{6pt}}}
-
-%% Символ "пусть"
-\newcommand{\lets}{\sqsupset}
-
-%% TikZ
-\definecolor{lightgray}{rgb}{0.83, 0.83, 0.83}
