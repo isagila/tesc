@@ -5,51 +5,51 @@
 
 Рассмотрим на примере:
 
-\begin{lequation}{lhde-L-ex-1}
+\begin{align*}
   y'' - 3 y' + 2y = 2 e^{3x} \\
   k^{2} - 3k +  2 = 0 \\
   k_{1} = 1, k_{2} = 2 \\
   \overline{y}
-  = c_{1} \underbrace{e^{x}}_{y_{1}}
-  + c_{2} \underbrace{e^{2x}}_{y_{2}}
-\end{lequation}
+  = c_{1} \under{e^{x}}{y_{1}}
+  + c_{2} \under{e^{2x}}{y_{2}}
+\end{align*}
 
 Будем искать \(y(x)\) в виде \(y(x) = C_{1}(x) y_{1} + C_{2}(x) y_{2}(x)\).
 Пусть \(C_{1}(x) = g(x) + c_{1}, C_{2}(x) = h(x) + c_{2}\), тогда:
 
-\begin{lequation}{lhde-L-ex-2}
+\begin{align*}
   y(x) = (g(x) + c_{1}) y_{1} + (h(x) + c_{2}) y_{2} \\
   y(x)
-    = \underbrace{c_{1} y_{1} + c_{2} y_{2}}_{\overline{y}}
-    + \underbrace{g(x) y_{1} + h(x) y_{2}}_{y^{*}}
-  \\
-\end{lequation}
+    = \under{c_{1} y_{1} + c_{2} y_{2}}{\overline{y}}
+    + \under{g(x) y_{1} + h(x) y_{2}}{y^{*}}
+\end{align*}
 
 В нашем примере получаем, что \(y^{*} = g(x) e^{x} + h(x) e^{2x}\). Заметим, что
 функции \(g(x)\) и \(h(x)\) можно представить по-разному. Подберем их так, чтобы
 выполнялось равенство
 
-\begin{tequation}{lhde-L-second}{\(\blacktriangle\)}
+\begin{align*}\label{lhde-L-second}\tag{\(\blacktriangle\)}
   C'_{1}(x) y_{1} + C'_{2}(x) y_{2} = 0
-\end{tequation}
+\end{align*}
 
 Вычислим производные \(y'(x)\) и \(y''(x)\):
 
-\begin{lequation}{lhde-L-ex-3}
-  y(x) = y(x) = C_{1}(x) y_{1} + C_{2}(x) y_{2}(x)
+\begin{align*}
+  y(x) = C_{1}(x) y_{1} + C_{2}(x) y_{2}(x)
   \\
   y'(x)
-    = \underbrace{C'_{1}(x) y_{1} + C'_{2}(x) y_{2}}_{\blacktriangle \to 0}
+    = \under{C'_{1}(x) y_{1} + C'_{2}(x) y_{2}}
+      {\text{\ref{lhde-L-second}} = 0}
     + C_{1}(x) y'_{1} + C_{2}(x) y'_{2}
   \\
   y''(x)
     = C'_{1}(x) y'_{1} + C_{1}(x) y''_{1}
     + C'_{2}(x) y'_{2} + C_{2}(x) y''_{2}
-\end{lequation}
+\end{align*}
 
 Вернемся к исходному ДУ и подставим в него все полученные равенства:
 
-\begin{lequation}{lhde-L-ex-4}
+\begin{align*}
   \begin{matrix}
     y''(x) & = &
     C'_{1}(x) y'_{1} & + & C_{1}(x) y''_{1}
@@ -61,17 +61,17 @@
     \\
     f(x) & = & C'_{1}(x) y'_{1} & + & 0 & + & C'_{2}(x) y'_{2} & + & 0
   \end{matrix}
-\end{lequation}
+\end{align*}
 
 Суммы во втором и четвертом столбцах обнуляются, т.к. если вынести из них
 \(C_{1}(x)\) и \(C_{2}(x)\) соответственно, то в скобках останется ЛОДУ\(_2\),
 а \(y_{1}, y_{2}\)~--- его корни.
 
 Таким образом мы получили второе условие для системы (первое условие это
-\eqref{eq:lhde-L-second}) для нахождения \(C_{1}(x)\) и \(C_{2}(x)\). Искомая
+\ref{lhde-L-second}) для нахождения \(C_{1}(x)\) и \(C_{2}(x)\). Искомая
 система будет иметь вид:
 
-\begin{lequation}{lhde-L-ex-5}
+\begin{align*}
   \begin{cases}
     C'_{1}(x) y_{1} + C'_{2}(x) y_{2} = 0 \\
     C'_{1}(x) y'_{1} + C'_{2}(x) y'_{2} = f(x)
@@ -89,7 +89,7 @@
     0 \\
     f(x)
   \end{pmatrix}
-\end{lequation}
+\end{align*}
 
 Подведем итог и обобщим алгоритм решения ЛНДУ\(_n\):
 \begin{enumerate}
@@ -98,7 +98,7 @@
 
   \item Составляем СЛАУ следующего вида:
   
-  \begin{lequation}{lhde-L-eq}
+  \begin{align*}
     \begin{pmatrix}
       y_{1} & \dotsc & y_{n} \\
      \vdots & \ddots & \vdots \\
@@ -115,7 +115,7 @@
       \vdots \\
       f(x)
     \end{pmatrix}
-  \end{lequation}
+  \end{align*}
 
   \item Решаем её и находим производные варьируемых функций. Интегрируем их
   (не забывая про константу).

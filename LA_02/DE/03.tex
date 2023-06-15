@@ -14,16 +14,16 @@
 Однородные уравнения решаются заменой \(t = \dfrac{y}{x}\). Покажем, откуда
 появляется подобная замена. Преобразуем функции \(P(x, y)\) и \(Q(x, y)\):
 
-\begin{lequation}{homogen}
+\begin{align*}
   P(x, y) = P \left( x \cdot 1, x \cdot \frac{y}{x} \right)
     = x^{m} P \left( 1, \frac{y}{x} \right) \\
   Q(x, y) = Q \left( x \cdot 1, x \cdot \frac{y}{x} \right)
     = x^{m} Q \left( 1, \frac{y}{x} \right)
-\end{lequation}
+\end{align*}
 
 Вернемся к исходному уравнению:
 
-\begin{lequation}{homogen-sln}
+\begin{align*}
   P(x, y) \dd x + Q(x, y) \dd y = 0 \mid \colon \dd x \\
   y'
   = -\frac{P(1, \sfrac{y}{x})}{Q(1, \sfrac{y}{x})}
@@ -35,11 +35,13 @@
   t + x t' = \tilde{f}(t) \\
   x \cdot \frac{\dd t}{\dd x} = \tilde{f}(t) - t \\
   \frac{\dd t}{\tilde{f}(t) - t} = \frac{\dd x}{x}
-\end{lequation}
+\end{align*}
 
 Таким образом исходное однородное уравнение сводится к уравнению с разделяющими
 переменными.
 
 \begin{remark}
-  Случай \(\tilde{f}(t) - t = 0\) нужно рассмотреть отдельно.
+  Случай \(\tilde{f}(t) - t = 0\) нужно рассмотреть отдельно. Также в ходе
+  решения было произведено деление на \(\dd x \implies\) нужно рассмотреть
+  случай \(x = const\).
 \end{remark}

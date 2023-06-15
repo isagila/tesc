@@ -3,28 +3,65 @@
 \begin{definition}
   Дифференциальное уравнение \(P(x, y) \dd x + Q(x, y) \dd y = 0\) называется
   уравнением в полных дифференциалах, если
-  \begin{lequation}{full-diff-def}
+  
+  \begin{align*}
     \exists z(x, y) \colon \dd z = P(x, y) \dd x + Q(x, y) \dd y
-  \end{lequation}
+  \end{align*}
 \end{definition}
 
 Критерием того, что данное уравнение является уравнением в полных
 дифференциалах может служить равенство
 
-\begin{lequation}{full-diff-crt}
+\begin{align*}
   \frac{\partial P}{\partial x} = \frac{\partial Q}{\partial y} 
-\end{lequation}
+\end{align*}
 
 Решение уравнений в полных дифференциалах сводится к поиску функции \(z(x, y)\),
-удовлетворяющей условиям. Про то, как найти такую функцию можно прочитать в
-конспекте по матанализу в разделе про интегралы, независящие от пути. После
-того, как такая функция будет найдена, решить ДУ не составит проблем:
+удовлетворяющей описанным условиям. После того, как такая функция будет найдена,
+решение ДУ очевидно:
 
-\begin{lequation}{full-diff-sln}
-  P(x, y) \dd x + Q(x, y) \dd y = 0 \\
-  \dd z = 0 \\
-  z = C
-\end{lequation}
+\begin{align*}
+  P(x, y) \dd x + Q(x, y) \dd y = 0
+  \implies \dd z = 0
+  \implies z = C
+\end{align*}
 
-\textit{Примечание от автора: можете почитать про интегрирующий множитель, 
-на лекциях и практиках этого не было, но выглядит прикольно}
+\begin{remark}
+  О поиске \(z(x, y)\)
+
+  \begin{align*}\label{eq:find-potential-1}\tag{\(1\)}
+    z'_{x} = P(x, y) \implies z(x, y) = \int P(x, y) \dd x + \phi(y) \\
+    z'_{y} = Q(x, y) = \left(\int P(x, y) \dd x\right)'_{y} + \phi'(y)
+    \implies \phi'(y) = Q(x, y) - \left(\int P(x, y) \dd x\right)'_{y}
+  \end{align*}
+
+  Покажем, что \((\phi')'_{x} = 0\):
+
+  \begin{align*}
+    (\phi')'_{x}
+    = Q(x, y)'_{x} - \left(\int P(x, y) \dd x\right)''_{yx}
+    = Q(x, y)'_{x} - P(x, y)'_{y}
+    = 0
+  \end{align*}
+
+  Таким образом из \eqref{eq:find-potential-1} получаем, что
+
+  \begin{align*}
+    \phi(y) = \int \phi'(y) \dd y
+  \end{align*}
+
+  Итого алгоритм поиска \(z(x, y)\) выглядит следующим образом:
+  \begin{enumerate}
+    \item Находим \(\int P(x, y) \dd x\) и прибавляем к нему некоторую
+      неизвестную функцию \(\phi(y)\).
+
+    \item Считаем производную по \(y\) от полученного выражения и приравниваем
+      её к \(Q(x, y)\).
+
+    \item Находим \(\phi'(y)\) из полученного выражения.
+    
+    \item Интегрируем её и подставляем в выражение, полученное в первом пункте.
+  \end{enumerate}
+\end{remark}
+
+

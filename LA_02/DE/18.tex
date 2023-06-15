@@ -4,7 +4,7 @@
   Пусть \(y_{1}, \dots, y_{n}\)~--- функции от \(x\), дифференцируемые \(m\)
   раз. Тогда система
 
-  \begin{lequation}{sde-def}
+  \begin{align*}
     \begin{cases}
       f_{1}(x,
         y_{1}, \dotsc, y_{n},
@@ -15,7 +15,7 @@
       \dotsc \\
       f_{n} (\cdots) = 0
     \end{cases}
-  \end{lequation}
+  \end{align*}
 
   называется системой дифференциальных уравнений (СДУ).
 \end{definition}
@@ -31,12 +31,12 @@
   её уравнений не зависят явно от \(x\).
 \end{definition}
 
-\begin{remark}\label{de2sde}
+\begin{remark}\label{de-to-sde}
   С помощью введения новых переменных ДУ
   \(y^{(n)} = f(x, y, y', \dotsc, y^{(n - 1)})\) можно свести к системе ДУ
   следующего вида
 
-  \begin{lequation}{de2sde-def}
+  \begin{align*}
     \begin{cases}
       y = y_{1} \\
       y' = y_{2} \\
@@ -44,62 +44,62 @@
       y^{(n - 1)} = y_{n} \\
       y^{(n)} = f(x, y_{1}, \dotsc, y_{n})
     \end{cases}
-  \end{lequation}
+  \end{align*}
 
   где \(y_{1}, \dotsc, y_{n}\)~--- новые переменные.
 \end{remark}
 
 \begin{definition}
   Порядком системы называется сумма порядков старших производных каждого из
-  уравнений системы. Порядок системы равен порядку ДУ, соответствующего ей.
+  уравнений системы. Порядок системы равен порядку ДУ, соответствующему ей.
 \end{definition}
 
 \textbf{Решение СДУ методом исключения}:
 
 Пусть дана следующая СДУ:
 
-\begin{lequation}{sde-sln-1}
+\begin{align*}
   \begin{cases}
     \frac{\dd y_{1}}{\dd x} = f_{1}(x, y_{1}, \dotsc, y_{n}) \\
     \frac{\dd y_{2}}{\dd x} = f_{2}(x, y_{1}, \dotsc, y_{n}) \\ 
     \dots, \\
     \frac{\dd y_{2}}{\dd x} = f_{n}(x, y_{1}, \dotsc, y_{n})
   \end{cases}  
-\end{lequation}
+\end{align*}
 
 Обозначим \(f_{1}(x, y_{1}, \dotsc, y_{n}) = F_{1}(x, y_{1}, \dotsc, y_{n})\).
 Дифференцируем первое уравнение по \(x\), получим:
 
-\begin{lequation}{sde-sln-2}
+\begin{align*}
   \frac{\dd^{2} y_{1}}{\dd x^{2}}
     = \frac{\partial f_{1}}{\partial x} 
     + \frac{\partial f_{1}}{\partial y_{1}} \cdot 
-     \underbrace{\frac{\dd y_{1}}{\dd x} }_{f_{1}}
+     \under{\frac{\dd y_{1}}{\dd x} }{f_{1}}
     + \dotsc
     + \frac{\partial f_{1}}{\partial y_{n}} \cdot 
-     \underbrace{\frac{\dd y_{n}}{\dd x} }_{f_{n}}
+     \under{\frac{\dd y_{n}}{\dd x} }{f_{n}}
     = F_{2}(x, y_{1}, \dotsc, y_{n})
-\end{lequation}
+\end{align*}
 
 Полученное выражение можно продифференцировать еще раз. Подставляя производные
 из изначального СДУ можно получить аналогичные функции вплоть до
 \(F_{n}(x, y_{1}, \dotsc, y_{n})\). Итого получится следующая система:
 
-\begin{lequation}{sde-sln-3}
+\begin{align*}
   \begin{cases}
     \frac{\dd y_{1}}{\dd x} = F_{1}(x, y_{1}, \dotsc, y_{n}) \\
     \frac{\dd^{2} y_{1}}{\dd x^{2}} = F_{2}(x, y_{1}, \dotsc, y_{n}) \\ 
     \dots, \\
-    \frac{\dd^{n} y_{2}}{\dd x^{n}} = F_{n}(x, y_{1}, \dotsc, y_{n})
+    \frac{\dd^{n} y_{1}}{\dd x^{n}} = F_{n}(x, y_{1}, \dotsc, y_{n})
   \end{cases}  
-\end{lequation}
+\end{align*}
 
-Как видно из \ref{de2sde} полученный вид системы свидетельствует о том, что её
-можно свести к равносильному ДУ \(\phi(x, y_{1}, \dotsc, y_{1}^{(n)})\).
+Как видно из \ref{de-to-sde} полученный вид системы свидетельствует о том, что
+её можно свести к равносильному ДУ \(\phi(x, y_{1}, \dotsc, y_{1}^{(n)})\).
 
 \underline{Пример}:
 
-\begin{lequation}{de2sde-ex-1}
+\begin{align*}
   \begin{cases}
     y' = y + 5x \\
     x' = -y - 3x
@@ -116,19 +116,19 @@
     y'' = y' - 5y + 15x \\
     x' = -y - 3x
   \end{cases}
-\end{lequation}
+\end{align*}
 
 Выразим \(x\) из первого уравнения изначальной системы и подставим его в первое
 уравнение полученной системы:
 
-\begin{lequation}{de2sde-ex-2}
+\begin{align*}
   \begin{cases}
     y' = y + 5x \implies x = \frac{1}{5} (y' - y) \\
     y'' = y' - 5y + 15x 
   \end{cases}
   \implies y'' = y' - 5y + 3y' - 3y 
   \implies y'' - 4y' + 8y = 0
-\end{lequation}
+\end{align*}
 
 Из полученного ЛОДУ\(_2\) можно найти \(y\), после чего подставить его в СДУ и
 найти \(x\).

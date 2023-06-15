@@ -3,9 +3,9 @@
 \begin{definition}
   Специальной правой частью называется (СПЧ)
 
-  \begin{lequation}{srs-def}
+  \begin{align*}
     f(x) = e^{\alpha x} (P_{n}(x) \cos \beta x + Q_{m}(x) \sin \beta x)
-  \end{lequation}
+  \end{align*}
 
   где \(\alpha, \beta, n, m\) некоторые коэффициенты.
 \end{definition}
@@ -16,10 +16,10 @@
 предположить, что она была получена дифференцированием функции со схожей
 структурой, поэтому будем искать частное решение ЛНДУ\(_n\) в виде
 
-\begin{lequation}{srs-as-par-sln}
+\begin{align*}
   y^{*} = x^{r} e^{\alpha x} (U_{l}(x) \cos \beta x + W_{l}(x) \sin \beta x),
   \; l = max(n, m)
-\end{lequation}
+\end{align*}
 
 \underline{Алгоритм}:
 \begin{enumerate}
@@ -34,44 +34,44 @@
 \end{enumerate}
 
 \underline{Пример \#01}:
-\begin{lequation}{src-ex-1-1}
+\begin{align*}
   y'' - 3 y' + 2y = 2 e^{3x} \\
   k^{2} - 3k + 2 = 0 \\
   k_{1} = 1, k_{2} = 2 \\
   2 e^{3x} \implies \alpha = 3, \beta = 0, n = 0, m = 0
-\end{lequation}
+\end{align*}
 
 Число  \(\alpha + i \beta\) не совпадает с корнями характеристического
 уравнения, поэтому будем искать частное решение в виде \(y^{*} = A e^{3x}\):
 
-\begin{lequation}{src-ex-1-2}
+\begin{align*}
   (A e^{3x})'' - 3 (A e^{3x})' + 2 (A e^{3x}) = 2 e^{3x} \\
   9A e^{3x} - 9A e^{3x} + 2A e^{3x} = 2 e^{3x} \mid \colon e^{3x} \\
   9A - 9A + 2A = 2 \\
   A = 1
-\end{lequation}
+\end{align*}
 
 Итого: частное решение будет равно \(y^{*} = e^{3x}\)
 
 \underline{Пример \#02}:
-\begin{lequation}{src-ex-2-1}
+\begin{align*}
   y'' - 3 y' + 2y = e^{x} \\
   k^{2} - 3k + 2 = 0 \\
   k_{1} = 1, k_{2} = 2 \\
   e^{x} \implies \alpha = 1, \beta = 0, n = 0, m = 0
-\end{lequation}
+\end{align*}
 
 Корень характеристического уравнения \(k_{1}\) совпал с числом
 \(\alpha + i \beta\), поэтому будем искать частное решение в виде
 \(y^{*} = Ax e^{x}\):
 
-\begin{lequation}{src-ex-1-2}
+\begin{align*}
   (Ax e^{x})'' - 3 (Ax e^{x})' + 2 (Ax e^{x}) = e^{x} \\
   e^{x} (2A + Ax) - 3 e^{x} (A + Ax) + 2Ax e^{3x} = 2 e^{3x}
     \mid \colon e^{x} \\
   2A + Ax - 3A - 3Ax + 2Ax = 2 \\
   A = -2
-\end{lequation}
+\end{align*}
 
 Итого: частное решение будет равно \(y^{*} = -2 e^{x}\)
 

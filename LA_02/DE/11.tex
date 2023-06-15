@@ -8,9 +8,9 @@
   Будем называть функции \(y_{1}, \dotsc, y_{n}\) линейно-независимыми на
   отрезке \([a; b]\), если
 
-  \begin{lequation}{ind-func}
+  \begin{align*}
     \sum_{i = 1}^{n} c_{i} y_{i} = 0 \implies \forall c_{i} = 0
-  \end{lequation}
+  \end{align*}
 \end{definition}
 
 \begin{definition}
@@ -18,29 +18,29 @@
   \(n\) функций и всех их производных вплоть до \((n - 1)\)-ого порядка. Он
   имеет вид:
 
-  \begin{lequation}{wrn-def}
+  \begin{align*}
     \Wrn = \begin{vmatrix}
       y_{1}  & \dotsc  & y_{n} \\
       \vdots & \ddots & \vdots \\
       y^{(n - 1)}_{1}  & \dotsc  & y^{(n - 1)}_{n}
     \end{vmatrix}
-  \end{lequation}
+  \end{align*}
 \end{definition}
 
 \begin{lemma}\label{wrn-prop-1}
   Если два решения ЛОДУ\(_2\) линейно-зависимы на \([a; b]\), то их
   вронскиан на \([a; b]\) равен нулю.
 
-  \begin{lequation}{wrn-lm-1}
+  \begin{align*}
     \begin{rcases}
       \Linear{y_{1}} = 0 \\
       \Linear{y_{2}} = 0 \\
       y_{1} = \lambda y_{2}
     \end{rcases} \implies \Wrn = 0
-  \end{lequation}
+  \end{align*}
 \end{lemma}
 \begin{proof}
-  \begin{lequation}{wrn-lm-1-proof}
+  \begin{align*}
     \Wrn = \begin{vmatrix}
       y_{1} & y_{2} \\
       y'_{1} & y'_{2} \\
@@ -51,24 +51,24 @@
       y_{2} & y_{2} \\
       y'_{2} & y'_{2} \\
     \end{vmatrix} = 0
-  \end{lequation}
+  \end{align*}
 \end{proof}
 
 \begin{lemma}\label{wrn-prop-2}
   Если два решения ЛОДУ\(_2\) линейно-независимы на \([a; b]\), то их
   вронскиан на \([a; b]\) не равен нулю.
 
-  \begin{lequation}{wrn-lm-2}
+  \begin{align*}
     \begin{rcases}
       \Linear{y_{1}} = 0 \\
       \Linear{y_{2}} = 0 \\
       y_{1} \neq \lambda y_{2}
     \end{rcases} \implies \Wrn \neq 0
-  \end{lequation}
+  \end{align*}
 \end{lemma}
 \begin{proof}
   От противного
-  \begin{lequation}{wrn-lm-2-proof}
+  \begin{align*}
     \lets \Wrn = 0 = \begin{vmatrix}
       y_{1} & y_{2} \\
       y'_{1} & y'_{2} \\
@@ -77,7 +77,7 @@
     \left(\frac{y_{2}}{y_{1}}\right)' = 0 \\
     \frac{y_{2}}{y_{1}} = const \\
     y_{1} = \lambda y_{2}
-  \end{lequation}
+  \end{align*}
   Получили противоречие.
 \end{proof}
 
@@ -101,37 +101,37 @@
   Дуально, если найдется точка, в которой вронскиан не равен нулю, то он будет
   не равен нулю на всем отрезке.
 
-  \begin{lequation}{wrn-prop-3-def}
+  \begin{align*}
     \exists x_{0} \in [a; b] \mid W(x_{0}) = W_{0} \neq 0
       \implies \forall x \in [a, b] \colon W(x) \neq 0 \\
     \exists x_{0} \in [a; b] \mid W(x_{0}) = W_{0} = 0
       \implies \forall x \in [a, b] \colon W(x) = 0 \\
-  \end{lequation}
+  \end{align*}
 \end{theorem}
 \begin{proof}
   Пусть \(y_{1}\) и \(y_{2}\) это решения ДУ, тогда
 
-  \begin{lequation}{wrn-prop-3-proof-1}
+  \begin{align*}
     \begin{cases}
-      y_{2}'' + p y_{2}' + q y_{2} = 0 \cdot \; y_{1}
-      y_{1}'' + p y_{1}' + q y_{1} = 0 \mid \cdot \; y_{2} \\
+      y_{2}'' + p y_{2}' + q y_{2} = 0 \mid \cdot \; y_{1} \\
+      y_{1}'' + p y_{1}' + q y_{1} = 0 \mid \cdot \; y_{2}
     \end{cases} - \\
     (y_{1} y_{2}'' - y_{2} y_{1}'') + p (y_{1} y_{2}' - y_{1}' y_{2}) = 0
-  \end{lequation}
+  \end{align*}
 
   Заметим, что выражение в левой скобке это \(\Wrn'\), а во правой~--- \(\Wrn\):
 
-  \begin{lequation}{wrn-prop-3-proof-2}
+  \begin{align*}
     \Wrn = y_{1} y_{2}' - y_{1}' y_{2} \\
     \Wrn'
     = (y_{1} y_{2}' - y_{1}' y_{2})'
     = y_{1}' y_{2}' + y_{1} y_{2}'' - y_{1}'' y_{2} - y_{1}' y_{2}'
     = y_{1} y_{2}'' - y_{1}'' y_{2}
-  \end{lequation}
+  \end{align*}
 
   Подставим это в полученное ранее уравнение:
 
-  \begin{lequation}{wrn-prop-3-proof-3}
+  \begin{align*}
     (y_{1} y_{2}'' - y_{2} y_{1}'') + p (y_{1} y_{2}' - y_{1}' y_{2}) = 0 \\
     \Wrn' + p \Wrn = 0 \\
     \Wrn = c_{1} e^{-\int p \dd x} \\
@@ -143,11 +143,11 @@
     \Wrn(x)
     = c_{1} e^{-\int_{x_{0}}^{x} p \dd x}
     = \Wrn_{0} e^{-\int_{x_{0}}^{x} p \dd x}
-  \end{lequation}
+  \end{align*}
 
   Таким образом, если \(\Wrn_{0} = 0\), то \(\Wrn(x) = 0\) на всем отрезке
   \([a; b]\). Дуально, если \(\Wrn_{0} \neq 0\), то т.к. второй множитель всегда
-  больше нуля (это экспонента) \(\Wrn(x) \neq 0\).
+  больше нуля, то \(\Wrn(x) \neq 0\).
 \end{proof}
 
 \begin{remark}

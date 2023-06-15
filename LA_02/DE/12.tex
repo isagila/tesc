@@ -3,7 +3,7 @@
 \begin{lemma}\label{lode-sol-lc}
   Линейная комбинация решений ЛОДУ\(_2\) также является решением.
 
-  \begin{lequation}{lode-sol-lc-def}
+  \begin{align*}
     \begin{rcases}
       \Linear{y_{1}} = 0 \\
       \Linear{y_{2}} = 0
@@ -12,17 +12,17 @@
       \Linear{y_{1} + y_{2}} = 0 \\
       \Linear{\lambda y_{1}} = 0 \; (\forall \lambda \in \RR) \\
     \end{cases}
-  \end{lequation}
+  \end{align*}
 \end{lemma}
 \begin{proof}
   Рассмотрим на примере \(y = y_{1} + y_{2}\). Подставим в исходное ДУ,
   раскроем и сгруппируем
 
-  \begin{lequation}{lode-sol-lc-def}
+  \begin{align*}
     y'' + p y' + q y = 0 \\
     (y_{1} + y_{2})'' + p (y_{1} + y_{2})' + q (y_{1} + y_{2}) = 0 \\
     (y_{1}'' + p y_{1}' + q y_{1}) + (y_{2}'' + p y_{2}' + q y_{2}) = 0 \\
-  \end{lequation}
+  \end{align*}
 
   Это верно, т.к. \(y_{1}\) и \(y_{2}\) это решения исходного ДУ. Случай
   \(y = \lambda y_{1}\) рассматривает аналогично.
@@ -35,24 +35,20 @@
 \begin{theorem}
   О существовании и единственности решения ЛОДУ\(_2\).
 
-  \begin{lequation}{lode-ex-un-sol-1}
+  \begin{align*}
     y'' = g(x, y, y') = f(x) - p y' - qy
-  \end{lequation}
+  \end{align*}
 
   Если \(g, g'_{y}, g'_{y'}\) непрерывны в области \(D \owns (x_{0}, y_{0})\),
   то задача Коши
 
-  \begin{lequation}{lode-ex-un-sol-2}
+  \begin{align*}
     \begin{cases}
       \Linear{y} = f(x) \\
       y_{0} = y(x_{0}) \\
       y'_{0} = y'(x_{0})
     \end{cases}
-  \end{lequation}
+  \end{align*}
 
   имеет единственное решение.
 \end{theorem}
-\begin{proof}
-  \textit{(Без доказательства)}
-\end{proof}
-

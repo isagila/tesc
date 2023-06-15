@@ -3,9 +3,9 @@
 \begin{definition}
   Обыкновенным ДУ\(_{n}\) называется
 
-  \begin{lequation}{de-def}
+  \begin{align*}
     F(x, y, \dotsc, y^{(n)}) = 0
-  \end{lequation}
+  \end{align*}
 \end{definition}
 
 \begin{remark}
@@ -43,7 +43,7 @@
 \begin{definition}
   Система из ДУ\(_{n}\) и \(n\) начальных условий вида
 
-  \begin{lequation}{Cp-def}
+  \begin{align*}
     \begin{cases}
       \text{ДУ}_n \\
       y_0 = y(x_0) \\
@@ -51,7 +51,7 @@
       \dots \\
       y^{(n - 1)}_0 = y^{(n - 1)}(x_0)
     \end{cases}
-  \end{lequation}
+  \end{align*}
 
   называется задачей Коши. \(n\) начальных условий необходимы для определения
   \(n\) констант \(c_{i}\).
@@ -70,7 +70,7 @@
 
 Составим ДУ и решим его:
 
-\begin{lequation}{de-basic-ex-1}
+\begin{align*}
   \frac{\dd Q}{\dd t} = -k Q \mid \colon Q \neq 0
   \\
   \frac{\dd Q}{Q \dd t} = -k
@@ -83,7 +83,7 @@
   \\
   \ln Q + kt = c_{1} \\
   Q = \widehat{c_{1}} e^{-k t}
-\end{lequation}
+\end{align*}
 
 Из полученных интегральных кривых выбираем одну, которая соответствует
 заданным начальным условиям.
@@ -95,14 +95,14 @@
 
 Составим ДУ и решим его:
 
-\begin{lequation}{de-basic-ex-2}
+\begin{align*}
   \vec{F} = m \vec{a} = m \vec{g} \implies a = y''(t) = g \\
   \frac{\dd^{2} y(t)}{\dd t^{2}} = g
   \implies \frac{\dd v(t)}{\dd t} = g 
   \implies v(t) = g t + c_{1} \\
   \frac{\dd y(t)}{\dd t}  = v(t) = g t + c_{1}
   \implies y(t) = \frac{g t^{2}}{2} + c_{1} t + c_{2}
-\end{lequation}
+\end{align*}
 
 Как и в первой задаче здесь получено общее решение. Константы можно найти
 подстановкой начальных условий.

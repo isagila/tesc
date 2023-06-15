@@ -3,20 +3,21 @@
 \begin{definition}
   Линейным однородным уравнением первого порядка (ЛОДУ\(_1\)) называется
   уравнение вида
-  \begin{lequation}{lode-def}
+
+  \begin{align*}
     y' + p(x) y = 0
-  \end{lequation}
+  \end{align*}
 \end{definition}
 
 ЛОДУ\(_1\) является уравнением с разделяющими переменными, поэтому оно решается
 следующим образом:
 
-\begin{lequation}{lode-sln}
+\begin{align*}
   y' + p(x) y = 0 \\
   \frac{\dd y}{\dd x} = -p(x) y \\
   \frac{\dd y}{y} = -p(x) \dd x \\
-  \overline{y} = C \cdot \underbrace{e^{-\int p(x) \dd x}}_{y_1}
-\end{lequation}
+  \overline{y} = C \cdot \under{e^{-\int p(x) \dd x}}{y_1}
+\end{align*}
 
 \begin{remark}
   При решении данного уравнения мы поделили на \(y \neq 0\). Заметим, что
@@ -27,9 +28,10 @@
 \begin{definition}
   Линейным неоднородным уравнением первого порядка (ЛНДУ\(_1\)) называется
   уравнение вида
-  \begin{lequation}{lhde-def}
+
+  \begin{align*}
     y' + p(x) y = q(x), \hspace{10pt} q(x) \neq 0
-  \end{lequation}
+  \end{align*}
 \end{definition}
 
 \textbf{Метод Лагранжа} (метод вариации произвольной постоянной) для решения
@@ -38,52 +40,52 @@
 \begin{enumerate}
   \item Найдем частное решение \(y_{1}\) соответствующего однородного уравнения.
   \item Будем искать решение ЛНДУ\(_1\) в виде \(y(x) = y_{1}(x) \cdot C(x)\).
-  Преобразуем ДУ в соответствии с этой заменой
-  \begin{lequation}{lhde-sln}
-    y' + p(x) y = q(x) \\
-    y_{1}'(x) C(x) + y_{1}(x) C'(x) + p(x) y_{1}(x)  C(x) = q(x) \\
-    y_{1}(x) C'(x) + C(x) 
-    \underbrace{\Big( y_{1}'(x) + p(x) y_{1}(x) \Big)}_{= 0}
-    = q(x) \\
-    y_{1}(x) C'(x) = q(x) \\
-    C(x) = \int \frac{q(x)}{y_{1}(x)} \dd x + C
-  \end{lequation}
+    Преобразуем ДУ в соответствии с этой заменой:
+
+    \begin{align*}
+      y' + p(x) y = q(x) \\
+      y_{1}'(x) C(x) + y_{1}(x) C'(x) + p(x) y_{1}(x)  C(x) = q(x) \\
+      y_{1}(x) C'(x) + C(x) 
+      \under{\Big( y_{1}'(x) + p(x) y_{1}(x) \Big)}{\text{= 0}}
+      = q(x) \\
+      y_{1}(x) C'(x) = q(x) \\
+      C(x) = \int \frac{q(x)}{y_{1}(x)} \dd x + C
+    \end{align*}
+
   \item Подставим найденную функцию \(C(x)\) в \(y(x) = y_{1}(x) \cdot C(x)\).
 \end{enumerate}
 
 \begin{remark}
-  Помимо рассмотренных интегрируемыми являются уравнения Лагранжа, Клеро, Рекатти, Бернулли. 
+  Помимо рассмотренных интегрируемыми являются уравнения Лагранжа, Клеро,
+  Риккати, Бернулли. 
 \end{remark}
 
-\textit{Примечание от автора: Далевская не захотела их разбирать, поэтому и спрашивать их не должна}
+\begin{definition}
+  ДУ называется уравнением Бернулли, если его можно привести к виду   
 
- На всякий:
+  \begin{align*}
+    y' + p(x) y = q(x) y^{n}
+  \end{align*}
 
-ДУ называется уравнением Бернулли, если его пможно привести к виду 
-\begin{lequation}
-  .y' + p(x)y = q(x)y^n
-\end{lequation}
+  Оно решается с помощью  подстановки Бернулли:
 
-Используем подстановку Бернулли:
+  \begin{align*}
+    y(x) = u(x) \cdot v(x) \\
+    y'(x) = u'(x) \cdot v(x) + u(x) \cdot v'(x)
+  \end{align*}
+\end{definition}
 
-\begin{lequation}
-  .y = uv \\ y' = uv' + u'v
-\end{lequation}
+\underline{Пример}:
 
-Далее подставим, вынесем p(x)v за скобку, а скобку приравняем к нулю.
-Получаем систему уравнений: скобка, равная нулю, и само уравнение. 
-
-Пример:
-\begin{lequation}
-  .y' + 2y = y^2e^x \\
-  u'v + uv' = v^2u^2e^x - 2uv \\
-  u'v + u(v'+ 2v) = u^2v^2e^x \\
+\begin{align*}
+  y' + 2 y = y^2 e^x \\
+  u' v + u v' + 2 u v = v^2 u^2 e^x \\
+  u' v + u(v'+ 2v) = u^2v^2e^x \\
   \begin{cases}
     v' + 2v = 0 \\
-    u'v = u^2v^2e^x
+    u'v = u^2 v^2 e^x
   \end{cases}
-\end{lequation}
+\end{align*}
 
-Решим систему, подставим, получим ответ.
-
-
+Из первого полученного уравнения находим \(v(x)\), потом подставляем его во
+второе уравнение и находим \(u(x)\). Ответом будет \(y(x) = u(x) \cdot v(x)\).

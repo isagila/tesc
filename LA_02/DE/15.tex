@@ -5,18 +5,18 @@
 
   Пусть 
 
-  \begin{lequation}{loden-ex-un-sol-1}
+  \begin{align*}
     y^{(n)} = g(x, y, y', \dotsc, y^{(n - 1)})
-  \end{lequation}
+  \end{align*}
 
   при этом \(y, y', \dots, y^{(n - 1)}, g\) непрерывны и ограничены в области
 
-  \begin{lequation}{loden-ex-un-sol-2}
+  \begin{align*}
     \abs{x - x_{0}} < h_{0}, \\
     \abs{y - y_{0}} < h_{1}, \\
     \dots \\
     \abs{y^{(n - 1)} - y^{(n - 1)}_{0}} < h_{n},
-  \end{lequation}
+  \end{align*}
 
   где \((x_{0}, y_{0}, \dots, y^{(n - 1)}_{0})\) это начальные условия.
   Тогда существует единственное решение задачи Коши.
@@ -26,7 +26,7 @@
 По аналогии с ЛОДУ\(_2\) для ЛОДУ\(_n\) можно составить характеристическое
 уравнение:
 
-\begin{lequation}{lode-char-eq}
+\begin{align*}
   \Linear{y}
   = y^{(n)}(x) + p_{1} y^{(n - 1)} (x) + \dotsc + p_{n - 1} y' + p_{n} y = 0
   \hspace{10pt} p_{i} \in \RR
@@ -36,7 +36,7 @@
   \mid \colon e^{k x} \neq 0 
   \\
   k^{n} + p_{1} k^{n - 1}+ \dotsc + p_{n} = 0
-\end{lequation}
+\end{align*}
 
 Далее аналогично рассмотрим некоторые случаи:
 \begin{enumerate}
@@ -60,7 +60,7 @@
   \item Каждой паре кратности \(m\) вида \(k = \alpha + i \beta\) соответствует
   \(m\) пар частных линейно-независимых решений однородного уравнения вида
   
-  \begin{lequation}{loden-cases-4}
+  \begin{align*}
     \begin{matrix}
       y_{1} & = & e^{\alpha x} \cos \beta x, &&
         y_{2} & = & e^{\alpha x} \sin \beta x \\
@@ -70,7 +70,7 @@
       y_{2m - 1} & = & x^{m - 1} e^{\alpha x} \cos \beta x, &&
       y_{2m} & = & x^{m - 1} e^{\alpha x} \sin \beta x  
     \end{matrix}
-  \end{lequation}
+  \end{align*}
 \end{enumerate}
 
 \begin{remark}

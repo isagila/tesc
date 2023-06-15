@@ -15,7 +15,7 @@
 Можно убедиться, что \(Y_{i} = \Gamma_{i} e^{\lambda_{i} x}\) будет являться
 решением СДУ:
 
-\begin{lequation}{sde-mtx-1}
+\begin{align*}
   \begin{cases}
     Y'_{i}
       = \Gamma_{i} \lambda_{i} e^{\lambda_{i} x}
@@ -24,20 +24,20 @@
       = \opA (\Gamma_{i} e^{\lambda_{i} x})
       = \lambda_{i} (\Gamma_{i} e^{\lambda_{i} x})
   \end{cases} \implies Y'_{i} = \opA Y_{i}
-\end{lequation}
+\end{align*}
 
 Пусть все собственные числа различные и вещественные, тогда
 \(\forall \lambda_{i} \colon Y_{i} = \Gamma_{i} e^{\lambda_{i} x}\) это решение,
 причем \(\forall i \neq j \colon Y_{i}\) и \(Y_{j}\) линейно-независимы.
 Общее решение СДУ можно записать в виде:
 
-\begin{lequation}{sde-mtx-2}
+\begin{align*}
   \overline{Y} = c_{1} Y_{1} + \dotsc + c_{n} Y_{n}
-\end{lequation}
+\end{align*}
 
 \underline{Пример}:
 
-\begin{lequation}{sde-mtx-ex}
+\begin{align*}
   \begin{cases}
     x' = x + y \\
     y' = 8x + 3y
@@ -67,5 +67,5 @@
       + c_{2} \cdot 4 \cdot e^{5t}
     \\
   \end{cases}
-\end{lequation}
+\end{align*}
 

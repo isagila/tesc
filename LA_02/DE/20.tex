@@ -3,12 +3,12 @@
 \begin{definition}
   Пусть дана СДУ
 
-  \begin{lequation}{st-def-1}
+  \begin{align*}
     \begin{cases}
       x' = f_{1}(t, x, y) \\
       y' = f_{2}(t, x, y)
     \end{cases}
-  \end{lequation}
+  \end{align*}
 
   и \(x(t), y(t)\) это её решение, удовлетворяющее начальным условиям
   \(x(t = 0) = x_{0}, y(t = 0) = y_{0}\). Рассмотрим
@@ -20,7 +20,7 @@
 
   Решение \(x(t), y(t)\) называется \textit{устойчивым по Ляпунову}, если
 
-  \begin{lequation}{st-def-2}
+  \begin{align*}
     \forall \epsilon > 0 \;\;
     \exists \delta > 0 \mid
     \forall t > 0 \;\;
@@ -34,7 +34,7 @@
       \abs{\widetilde{x}(t) - x(t)} < \epsilon \\
       \abs{\widetilde{y}(t) - y(t)} < \epsilon
     \end{cases}
-  \end{lequation}
+  \end{align*}
 \end{definition}
 
 \underline{Пример}:
@@ -44,7 +44,7 @@
 
 Найдем опорное решение \(y(t)\):
 
-\begin{lequation}{st-ex-1}
+\begin{align*}
   y' + y = 1 \\
   y(t) = c_{1} e^{-t} + 1 \\
   \begin{cases}
@@ -53,28 +53,28 @@
   \end{cases}
   \implies c_{1} = 0 \\
   y(t) = 1
-\end{lequation}
+\end{align*}
 
 Теперь найдем решение при измененных начальных условиях
 
-\begin{lequation}{st-ex-2}
+\begin{align*}
   \begin{cases}
     \widetilde{y}(t) = c_{1} e^{-t} + 1 \\
     \widetilde{y}(0) = \widetilde{y}_{0}
   \end{cases}
   \implies c_{1} = \widetilde{y}_{0} - 1 \\
   \widetilde{y}(t) = (\widetilde{y}_{0} - 1) e^{-t} + 1 \\
-\end{lequation}
+\end{align*}
 
 Далее посмотрим на разницу полученных решений при \(t \to \infty\):
 
-\begin{lequation}{st-ex-3}
+\begin{align*}
   \widetilde{y}(t) - y(t)
   = (\widetilde{y}_{0} - 1) e^{-t} + 1 - 1
   = (\widetilde{y}_{0} - 1) e^{-t}
   \xrightarrow{t \to \infty}
   0
-\end{lequation}
+\end{align*}
 
 Таким образом при \(\abs{\widetilde{y}_{0} - 1} < \delta\) получаем
 \(\abs{\widetilde{y}(t) - y(t)} < \epsilon \implies\) решение устойчиво.
