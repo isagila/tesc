@@ -4,9 +4,9 @@
   Пусть дан оператор \(\opA \colon V^{n} \to V^{n}\) с матрицей \(A\) в
   некотором базисе \(\Basis = \{ \basis_i \}_{i = 1}^{n}\). Тогда многочлен
 
-  \begin{lequation}{lo-ch-pol}
+  \begin{align*}
     \det (A - \lambda E) 
-  \end{lequation}
+  \end{align*}
 
   относительно \(\lambda \in \RR\) называется характеристическим многочленом.
 \end{definition}
@@ -15,9 +15,9 @@
   Пусть дан оператор \(\opA \colon V^{n} \to V^{n}\). Подпространство
   \(U \subseteq V^{n}\) называется \textit{инвариантным}, если
 
-  \begin{lequation}{lo-inv-subspace}
+  \begin{align*}
     \forall x \in U \colon \opA x \in U
-  \end{lequation}
+  \end{align*}
 \end{definition}
 
 \begin{definition}
@@ -27,9 +27,9 @@
   \(x \neq 0 \in V^{n}\) называется собственным вектором для оператора \(\opA\),
   если
 
-  \begin{lequation}{lo-eival-def}
+  \begin{align*}
     \exists \lambda \in \CC \colon \opA x = \lambda x
-  \end{lequation}
+  \end{align*}
 
   Тогда \(\lambda\) называется собственным числом (собственным значением)
   оператора \(\opA\).
@@ -42,17 +42,17 @@
 \begin{proof}
   \(\implies\) Пусть \(\lambda\) -- собственное число, тогда
   
-  \begin{lequation}{lo-ei-roots-proof-1}
+  \begin{align*}
     \exists x \neq 0 \in V^{n} \mid \opA x = \lambda x \\
     \opA x = \lambda x
     \implies A x = (\lambda E) x
     \implies (A - \lambda E) x = 0
-  \end{lequation}
+  \end{align*}
 
   Теперь рассмотрим оператор
   \(\opB \colon V^{n} \to V^{n}, \opB = \opA - \lambda I\):
 
-  \begin{lequation}{lo-ei-roots-proof-2}
+  \begin{align*}
     (A - \lambda E) x = 0 \implies \opB x = 0 \\
     x \neq 0 \in \Ker \opB \implies \dim \Ker \opB > 0 \\
     \begin{cases}
@@ -68,89 +68,20 @@
     \Rang B < n
     \implies \Rang (A - \lambda E) < n
     \implies \det (A - \lambda E) = 0
-  \end{lequation}
+  \end{align*}
 
-  \(\impliedby\) Аналогичные рассуждения, но в обратную сторону
-  \begin{lequation}{lo-ei-roots-proof-3}
-    \det (A - \lambda E) = 0 
-    \implies \Rang (A - \lambda E) < n
-    \implies \Rang B < n
-    \\
-    \Rang B < n
-    \implies \Rang \opB < n
-    \implies \dim \Im \opB < n
-    \\
-    \begin{cases}
-      \dim \Ker \opB + \dim \Im \opB = n \; (\ref{lo-sum-dim}) \\
-      \dim \Im \opB < n
-    \end{cases}
-    \implies \dim \Ker \opB > 0
-    \\
-    \dim \Ker \opB > 0
-    \implies \exists x \neq 0 \colon \opB x = 0
-    \\
-    \opB x = 0
-    \implies (A - \lambda E) x = 0
-    \implies \opA x = \lambda x
-  \end{lequation}
+  \(\impliedby\) Аналогичные рассуждения, но в обратную сторону.
 \end{proof}
 
 \begin{definition}
   Полученное в процессе доказательства \ref{lo-ei-roots} уравнение
 
-  \begin{lequation}{lo-ch-eq}
+  \begin{align*}
     (A - \lambda E) x = 0
-  \end{lequation}
+  \end{align*}
 
   называют характеристическим (вековым) уравнением.
 \end{definition}
-
-\begin{definition}
-  Базис, составленный из собственных векторов, называют собственным базисом.
-\end{definition}
-
-\begin{theorem}\label{eibasis-diag}
-  Матрица оператора в собственном базисе диагональна.
-\end{theorem}
-\begin{proof}
-  Матрица оператора в некотором базисе это коэффициенты разложения образов
-  базисных векторов по этому же базису. Рассмотрим первый базисный вектор:
-
-  \begin{lequation}{op-eibs-proof-1}
-    \begin{cases}
-      \opA \basis_1 = a_{1,1} \basis_{1} + \dots + a_{n,1} \basis_{n} \\
-      \opA \basis_1 = \lambda_{1} \basis_1 \\
-    \end{cases}
-    \implies
-    \begin{cases}
-      a_{1,1} = \lambda_{1}, \\
-      a_{i,1} = 0 \; \forall i \neq 1
-    \end{cases}
-  \end{lequation}
-
-  Аналогично можно рассмотреть все оставшиеся базисные векторы. Таким образом
-  матрица оператора в базисе из собственных векторов будет иметь вид
-
-  \begin{lequation}{op-eibs-proof-1}
-    A = \begin{pmatrix}
-      \lambda_{1} & 0           & \dots  & 0           \\
-      0           & \lambda_{2} & \dots  & 0           \\
-      \vdots      & \vdots      & \ddots & \vdots      \\
-      0           & 0           & \dots  & \lambda_{n} \\
-    \end{pmatrix}
-  \end{lequation}
-\end{proof}
-\begin{corollary}
-  Если у оператора \(\opA \colon V^{n} \to V^{n}\) есть \(n\) различных
-  собственных чисел, то существует базис, в котором матрица этого оператора
-  диагональна.
-\end{corollary}
-\begin{proof}
-  Т.к. все собственные числа различны, то соответствующие им \(n\) собственных
-  векторов будут линейно независимы (см. \ref{ind-eivec}). Составим из них
-  базис, по только что доказанной теореме \ref{eibasis-diag} матрица оператора
-  \(\opA\) в этом базисе будет диагональной.
-\end{proof}
 
 \begin{theorem}\label{ind-eivec}
   Пусть дан оператор \(\opA \colon V^{n} \to V^{n}\), у которого \(m\) различных
@@ -172,7 +103,7 @@
 
   Составим её нулевую линейную комбинацию и применим к ней оператор \(\opA\):
 
-  \begin{tequation}{ind-eivec-proof-1}{\(1\)}
+  \begin{align*}\label{eq:ind-eivec-proof-1}\tag{\(1\)}
     c_{1} \basis_{1} + \dotsc + c_{k + 1} \basis_{k + 1} = 0
     \\
     \opA(c_{1} \basis_{1} + \dotsc + c_{k + 1} \basis_{k + 1}) = 0
@@ -181,22 +112,22 @@
     \\
     c_{1} \lambda_{1} \basis_{1}
       + \dotsc + c_{k + 1} \lambda_{k + 1} \basis_{k + 1} = 0
-  \end{tequation}
+  \end{align*}
   
   Далее снова составим нулевую линейную комбинацию этой системы и домножим её
   на \(\lambda_{k + 1}\):
   
-  \begin{tequation}{ind-eivec-proof-2}{\(2\)}
+  \begin{align*}\label{eq:ind-eivec-proof-2}\tag{\(2\)}
     c_{1} \basis_{1} + \dotsc + c_{k + 1} \basis_{k + 1} = 0
       \mid \cdot \lambda_{k + 1}
     \\
     c_{1} \lambda_{k + 1} \basis_{1}
       + \dotsc + c_{k + 1} \lambda_{k + 1} \basis_{k + 1} = 0 
-  \end{tequation}
+  \end{align*}
 
   Теперь из \eqref{eq:ind-eivec-proof-1} вычтем \eqref{eq:ind-eivec-proof-2}:
 
-  \begin{lequation}{ind-eivec-proof-3}
+  \begin{align*}
     c_{1} \basis_{1} (\lambda_{1} - \lambda_{k + 1})
     + \dotsc
     + c_{k} \basis_{k} (\lambda_{k} - \lambda_{k + 1})
@@ -205,7 +136,7 @@
     c_{1} \basis_{1} (\lambda_{1} - \lambda_{k + 1})
     + \dotsc
     + c_{k} \basis_{k} (\lambda_{k} - \lambda_{k + 1}) = 0
-  \end{lequation}
+  \end{align*}
     
   Каждая из скобок \((\lambda_{i} - \lambda_{k + 1})\) не равна нулю, т.к. все
   собственные числа различны. Т.к. система
@@ -215,12 +146,59 @@
 
   Подставляя это в исходную нулевую линейную комбинацию, получаем, что
 
-  \begin{lequation}{ind-eivec-proof-3}
+  \begin{align*}
     c_{1} \basis_{1} + \dotsc + c_{k + 1} \basis_{k + 1} = 0 \\
     c_{k + 1} \basis_{k + 1} = 0
-  \end{lequation}
+  \end{align*}
 
   Т.к. собственный вектор \(\basis_{k + 1}\) ненулевой по определению, то
   \(c_{k + 1} = 0\). Таким образом \(\forall c_{i} = 0\), значит нулевая
   линейная комбинация тривиальна, т.е. полученная система линейно независима.
+\end{proof}
+
+\begin{definition}
+  Базис, составленный из собственных векторов, называют собственным базисом.
+\end{definition}
+
+\begin{theorem}\label{eibasis-diag}
+  Матрица оператора в собственном базисе диагональна.
+\end{theorem}
+\begin{proof}
+  Матрица оператора в некотором базисе это коэффициенты разложения образов
+  базисных векторов по этому же базису. Рассмотрим первый базисный вектор:
+
+  \begin{align*}
+    \begin{cases}
+      \opA \basis_1 = a_{1,1} \basis_{1} + \dots + a_{n,1} \basis_{n} \\
+      \opA \basis_1 = \lambda_{1} \basis_1 \\
+    \end{cases}
+    \implies
+    \begin{cases}
+      a_{1,1} = \lambda_{1}, \\
+      a_{i,1} = 0 \; \forall i \neq 1
+    \end{cases}
+  \end{align*}
+
+  Аналогично можно рассмотреть все оставшиеся базисные векторы. Таким образом
+  матрица оператора в базисе из собственных векторов будет иметь вид
+
+  \begin{align*}
+    A = \begin{pmatrix}
+      \lambda_{1} & 0           & \dots  & 0           \\
+      0           & \lambda_{2} & \dots  & 0           \\
+      \vdots      & \vdots      & \ddots & \vdots      \\
+      0           & 0           & \dots  & \lambda_{n} \\
+    \end{pmatrix}
+  \end{align*}
+\end{proof}
+\begin{corollary}
+  Если у оператора \(\opA \colon V^{n} \to V^{n}\) есть \(n\) различных
+  собственных чисел, то существует базис, в котором матрица этого оператора
+  диагональна.
+\end{corollary}
+\begin{proof}
+  Т.к. все собственные числа различны, то соответствующие им \(n\) собственных
+  векторов будут линейно независимы (по \ref{ind-eivec}). Составим из них
+  базис, по только что доказанной теореме матрица оператора \(\opA\) в этом
+  базисе будет диагональной.
 \end{proof}

@@ -4,9 +4,9 @@
   Рассмотрим оператор \(\opA \colon E^{n}_{\RR} \to E^{n}_{\RR}\). Оператор
   \(\opA^{*}\) называется сопряженным оператором для \(\opA\), если
   
-  \begin{lequation}{conj-lo-1-def}
+  \begin{align*}
     (\opA x, y) = (x, \opA^{*} y)
-  \end{lequation}
+  \end{align*}
 \end{definition}
 
 \begin{definition}\label{conj-lo-2}
@@ -23,13 +23,13 @@
   Выберем произвольный ортонормированный базис \(\Basis\). В нем векторам \(x\)
   и \(y\) соответствуют координатные столбцы \(X\) и \(Y\).
 
-  Скалярное произведение \(\opA x, y\) можно записать в виде
+  Скалярное произведение \((\opA x, y)\) можно записать в виде
   \((A X)^{T} Y\), т.к. мы работаем в ортонормированном базисе. Преобразуем
   это выражение:
 
-  \begin{lequation}{conj-lo-2-proof}
+  \begin{align*}
     (A X)^{T} Y = X^{T} A^{T} Y = X^{T} A^{*} Y \implies (x, \opA^{*} y)
-  \end{lequation}
+  \end{align*}
 \end{proof}
 
 Некоторые базовые свойства сопряженного оператора:
@@ -45,9 +45,9 @@
 \begin{definition}
   Самосопряженный оператор это оператор, который равен своему сопряженному.
 
-  \begin{lequation}{sconj-lo}
+  \begin{align*}
     \opA = \opA^{*}
-  \end{lequation}
+  \end{align*}
 \end{definition}
 
 \begin{corollary}
@@ -63,14 +63,14 @@
   Пусть \(\opA\)~--- самосопряженный оператор. Рассмотрим собственное число
   \(\lambda\) и собственный вектор \(x\), соответствующий ему:
 
-  \begin{lequation}{sconj-lo-eival}
+  \begin{align*}
     (\opA x, x) \in \RR \\
     (\opA x, x) = (\lambda x, x) = \lambda \norm{x}^{2} \\
     \begin{cases}
       \lambda \norm{x}^{2} \in \RR \\
       \norm{x}^{2} \in \RR
     \end{cases} \implies \lambda \in \RR
-  \end{lequation}
+  \end{align*}
 \end{proof}
 
 \begin{lemma}
@@ -82,7 +82,7 @@
   \(\lambda_{1} \neq \lambda_{2}\) и собственные векторы \(x_{1}, x_{2}\),
   соответствующие им:
 
-  \begin{lequation}{sconj-lo-eivec}
+  \begin{align*}
     \begin{cases}
       (\opA x_{1}, x_{2}) = (x_{1}, \opA x_{2}) \\
       (\opA x_{1}, x_{2}) = \lambda_{1} (x_{1}, x_{2}) \\
@@ -90,7 +90,7 @@
     \end{cases}
     \implies \lambda_{1} (x_{1}, x_{2}) = \lambda_{2} (x_{1}, x_{2})
     \implies (\lambda_{1} - \lambda_{2}) (x_{1}, x_{2}) = 0
-  \end{lequation}
+  \end{align*}
 
   Т.к. \(\lambda_{1} \neq \lambda_{2}\), то первая скобка не может
   равняться нулю, значит \((x_{1}, x_{2}) = 0 \implies x_{1} \bot x_{2}\).
@@ -105,29 +105,29 @@
 
 \begin{lemma}\label{sconj-subspace-inv}
   Пусть дан самосопряженный оператор \(\opA \colon V^{n} \to V^{n}\), а
-  \(\basis_{f}\)~--- его собственный вектор. Тогда подпространство
-  \(V_{1} = \{ x \in V^{n} \mid x \bot \basis_{f} \}\) инвариантно относительно
+  \(\basis\)~--- его собственный вектор. Тогда подпространство
+  \(V_{1} = \{ x \in V^{n} \mid x \bot \basis \}\) инвариантно относительно
   оператора \(\opA\) и его размерность равна \(n - 1\).
 \end{lemma}
 \begin{proof}
   Собственный вектор \(\basis\) это линейная оболочка некоторого \(\basis_{f}\),
   т.е. это подпространство \(V_{n}\). Если \(x \in V_{1}\), то
-  \(x \bot \basis_{f} \implies x \bot \basis\), таким образом \(V_{1}\) это
-  ортогональное дополнение \(\basis\).
+  \(x \bot \basis \implies x \bot \basis_{f}\), таким образом \(V_{1}\) это
+  ортогональное дополнение \(\basis_{f}\).
 
   \(\dim \basis = 1\), т.к. это линейная оболочка одного вектора \(\basis_{f}\).
   Значит \(\dim V_{1} = n - 1\).
 
   Теперь докажем, что это пространство инвариантно:
 
-  \begin{lequation}{}
+  \begin{align*}{}
     x \bot \basis \implies (x, \basis) = 0 \\
     (\opA x, \basis) =
     (x, \opA \basis) =
     (x, \lambda \basis) =
     \lambda (x, \basis) = 0
     \implies \opA x \bot \basis
-  \end{lequation}
+  \end{align*}
 
   Таким образом \(\opA x \in V_{1}\) по определению \(V_{1}\).
 \end{proof}

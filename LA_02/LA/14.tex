@@ -21,31 +21,31 @@
 \begin{definition}
   Квадратичная форма \(\Quad(u)\) называется квазиположительноопределенной, если 
 
-  \(\exists \widehat{u} \colon \Quad(u) = 0\) и
+  \(\exists \widehat{u} \neq 0 \colon \Quad(\widehat{u}) = 0\) и
   \(\forall u \neq \widehat{u} \colon \Quad(u) > 0\).
 \end{definition}
 
 \begin{definition}
   Квадратичная форма \(\Quad(u)\) называется квазиотрицательноопределенной, если 
 
-  \(\exists \widehat{u} \colon \Quad(u) = 0\) и
+  \(\exists \widehat{u} \neq 0 \colon \Quad(\widehat{u}) = 0\) и
   \(\forall u \neq \widehat{u} \colon \Quad(u) < 0\).
 \end{definition}
 
-\begin{lemma}
+\begin{remark}
   Если квазиопределенная квадратичная форма порождена симметричной билинейной
   формой, то эта билинейная форма является скалярным произведением.
-\end{lemma}
+\end{remark}
 
 Пусть дана квадратичная форма \(\Quad^{0}(x)\) в нормальной форме, тогда её
 можно записать в виде
 
-\begin{lequation}{quad-sd-def}
+\begin{align*}
   \Quad^{0}(x)
   = (x_{1}^2 + \dotsc + x_{p}^2)
   - (x_{p + 1}^2 + \dotsc + x_{k}^2)
   + 0 \cdot (x_{k}^2 + \dotsc + x_{n}^2)
-\end{lequation}
+\end{align*}
 
 где в первой скобке находятся квадраты, у которых в нормальной форме был
 коэффициент \(1\), а во второй~--- квадраты с коэффициентом \(-1\). Квадраты с
@@ -71,7 +71,7 @@
 
   \(\implies\) От противного
 
-  \begin{lequation}{quad-sd-proof-1}
+  \begin{align*}
     \lets p < n
     \implies
     \exists \widehat{u} = (
@@ -83,16 +83,16 @@
       \widehat{u} \neq 0 \\
       \Quad(\widehat{u}) \le 0
     \end{cases}
-  \end{lequation}
+  \end{align*}
 
   Получаем противоречие.
 
   \(\impliedby\) Если \(p = n\), то квадратичная форма имеет следующий
   нормальный вид:
   
-  \begin{lequation}{quad-sd-proof-2}
+  \begin{align*}
     \Quad^{0}(u) = u_{1}^2 + \dotsc + u_{n}^2
-  \end{lequation}
+  \end{align*}
 
   Очевидно, что \(\forall u \neq 0\) она будет больше нуля, а для
   \(u = 0\) она будет равна нулю. Таким образом она положительно определенная по
@@ -136,7 +136,7 @@
   противного: пусть \(\Delta_{k} = 0\), тогда рассмотрим квадратичную форму
   \(\Quad_{k}\), которая образована угловой матрицей размера \(k\):
 
-  \begin{lequation}{SV-proof-1}
+  \begin{align*}
     \begin{pmatrix}
       b_{1,1} & \dots  & b_{1,k} \\
       \vdots  & \ddots & \vdots \\
@@ -144,7 +144,7 @@
     \end{pmatrix}
     \widetilde{u}
     = \vec{0}
-  \end{lequation}
+  \end{align*}
 
   Т.к. \(\det_{k} = 0\), то построенное уравнение имеет нетривиальное решение
   \(\widetilde{u}\). Далее составим вектор \(\widehat{u}\) такой, что первые его
@@ -158,21 +158,21 @@
   метод Якоби. Т.к. квадратичная форма положительно определенная, то все её
   собственные числа положительны, итого:
 
-  \begin{lequation}{SV-proof-2}
+  \begin{align*}
     \forall \lambda_{i} = \frac{\Delta_{i}}{\Delta_{i - 1}} > 0
     \implies \forall \Delta_{i} > 0
-  \end{lequation}
+  \end{align*}
 
   \(\impliedby\) Применим метод Якоби
 
-  \begin{lequation}{SV-proof-3}
+  \begin{align*}
     \forall \Delta_{i} > 0
     \implies \forall \lambda_{i} = \frac{\Delta_{i}}{\Delta_{i - 1}} > 0
     \implies \begin{cases}
       \Quad^{d} = \lambda_{1} u_{1}^2 + \dotsc + \lambda_{n} u_{n}^2 \\
       \forall \lambda_{i} > 0
     \end{cases}
-  \end{lequation}
+  \end{align*}
 
   Легко заметить, что полученная квадратичная форма положительно определенная.
 \end{proof}

@@ -109,14 +109,15 @@
   \begin{align*}
     \Gmtx =
     \begin{pmatrix}
-      (\basis_{1}, \basis_{1}) & \dots  & (\basis_{k}, \basis_{1}) \\
+      (\basis_{1}, \basis_{1}) & \dots  & (\basis_{1}, \basis_{k}) \\
       \vdots                   & \ddots & \vdots                   \\
-      (\basis_{1}, \basis_{k}) & \dots  & (\basis_{k}, \basis_{k}) \\
+      (\basis_{k}, \basis_{1}) & \dots  & (\basis_{k}, \basis_{k}) \\
     \end{pmatrix}
   \end{align*}
 \end{definition}
 
 \begin{remark}
-  В ортогональном базисе матрица Грама диагональная, а в ортонормированном~---
+  В силу свойств скалярного произведения матрица Грамма всегда симметричная,
+  причем в ортогональном базисе она диагональная, а в ортонормированном~---
   единичная.
 \end{remark}

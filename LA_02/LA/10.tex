@@ -1,20 +1,21 @@
 \question{Структура образа самосопряженного оператора. Проектор. Спектральное разложение оператора.}
 
 \begin{theorem}\label{sconj-lo-img}
-  Образ самосопряженного оператора \(\opA\) имеет вид
+  Образ самосопряженного оператора \(\opA \colon V^{n} \to V^{n}\) имеет вид
 
-  \begin{lequation}{sconj-lo-img-def}
+  \begin{align*}
     \Img \opA = \left\{
       \sum_{i = 1}^{n}
       \lambda_{i} (x, \basis_{i}) \basis_{i}
+      \mid x \in V^{n}
     \right\}
-  \end{lequation}
+  \end{align*}
 
   где \(\Basis = \{ \basis_{i} \}_{i = 1}^{n}\) это ортонормированный базис,
   \(\lambda_{i}\)~--- собственные числа оператора \(\opA\).
 \end{theorem}
 \begin{proof}
-  \begin{lequation}{sconj-lo-img-proof}
+  \begin{align*}
     \opA x = y =
     \\
       y_{1} \basis_{1}
@@ -36,22 +37,23 @@
         + \dotsc + \lambda_{n} (x,\basis_{n}) \basis_{n} =
     \\
     \sum_{i = 1}^{n} \lambda_{i} (x, \basis_{i}) \basis_{i}
-  \end{lequation}
+  \end{align*}
 \end{proof}
-
-Таким образом y получен так: x проецируется на $e_1, \, \dots, \, e_n$, 
-затем проекции "растягиваются" в $\lambda_1, \, \dots, \, \lambda_n$ раз и суммируются в y.
 
 \begin{remark}
   \((x, \basis_{i})\) это проекция вектора \(x\) на собственный вектор.
+
+  Таким образом \(y\) получается следующим образом: \(x\) проецируется на 
+  \(\basis_{1}, \dotsc, \basis_{n}\), после чего проекции 'растягиваются' в
+  \(\lambda_{1}, \dotsc, \lambda_{n}\) раз и суммируются.
 \end{remark}
 
 \begin{definition}\label{lo-proj}
   Оператор вида
 
-  \begin{lequation}{lo-proj-def}
+  \begin{align*}
     P_{i}(x) = (x, \basis_{i}) \basis_{i}
-  \end{lequation}
+  \end{align*}
 
   называется проектором на одномерное пространство, порожденное собственным
   вектором.
@@ -65,9 +67,9 @@
   Спектральным разложением оператора называется представление его в виде
   линейной комбинации проекторов
 
-  \begin{lequation}{lo-spec-als}
+  \begin{align*}
     \opA = \sum_{i = 1}^{n} \lambda_{i} P_{i}
-  \end{lequation}
+  \end{align*}
 
   Корректность такого представления следует из \ref{sconj-lo-img} и
   \ref{lo-proj}.

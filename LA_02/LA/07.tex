@@ -3,18 +3,18 @@
 Пусть дан оператор \(\opA \colon V^{n} \to V^{n}\) и \(x, y \in V^{n}\),
 \(\opA x = y\).
 
-Выделим в \(V^{n}\) базис, разложим \(x\) по этому базису. После чего применим
-к нему оператор \(\opA\):
+Выделим в \(V^{n}\) базис \(\Basis\), разложим \(x\) по этому базису.
+После чего применим к нему оператор \(\opA\):
 
-\begin{lequation}{lo-mtx-1}
+\begin{align*}
   \Basis = \{ \basis_{1}, \dots, \basis_{n} \} \\
   x = x_{1} \basis_{1} + \dots + x_{n} \basis_{n} \\
-  y = x_{1} \opA \basis_{1} + \dots + x_{n} \opA \basis_{n} \\
-\end{lequation}
+  y = \opA x = x_{1} \opA \basis_{1} + \dots + x_{n} \opA \basis_{n} \\
+\end{align*}
 
 Далее применим оператор к каждому из базисных векторов:
 
-\begin{lequation}{lo-mtx-2}
+\begin{align*}
   \opA \basis_{i} = a_{1,i} \basis_{1} + \dotsc + a_{n, i} \basis_{n} \\
   y
   = x_{1} \Big( a_{1,1} \basis_{1} + \dotsc + a_{n,1} \basis_{n} \Big)
@@ -24,18 +24,18 @@
   = \basis_{1} \Big( x_{1} a_{1,1} + \dotsc + x_{n} a_{1,n} \Big)
   + \dots
   + \basis_{n} \Big( x_{1} a_{n,1} + \dotsc + x_{n} a_{n,n} \Big)
-\end{lequation}
+\end{align*}
 
 Заметим, что \(y\) также можно разложить по базису. Составим СЛАУ и запишем её
 в матричном виде:
 
-\begin{lequation}{lo-mtx-3}
+\begin{align*}
   \begin{Bmatrix}
-    x_{1} a_{1,1} & + \dotsc + & x_{n} a_{1,n} = & y_{1} \\
-    \vdots        & \ddots    & \vdots          & \vdots \\
+    x_{1} a_{1,1} & + \dotsc + & x_{n} a_{1,n} = & y_{1}  \\
+    \vdots        & \ddots     & \vdots          & \vdots \\
     x_{n} a_{n,1} & + \dotsc + & x_{n} a_{n,n} = & y_{n} 
   \end{Bmatrix} \iff AX = Y
-\end{lequation}
+\end{align*}
 
 \begin{definition}
   Матрицей оператора \(\opA\) \textbf{в данном базисе} называется матрица
@@ -50,32 +50,29 @@
 \begin{definition}
   Матрица 
 
-  \begin{lequation}{trs-mtx}
+  \begin{align*}
+    T =
     \begin{pmatrix}
       \tau_{1,1} & \dots & \tau_{1,n} \\
       \vdots & \ddots & \vdots \\
       \tau_{n,1} & \dots & \tau_{n,n} \\
     \end{pmatrix}
-  \end{lequation}
+  \end{align*}
 
-  такая, что при переходе из базиса \(\{ \basis_{i} \}_{i = 1}^{n}\) в базис
-  \(\{ \basis_{i}' \}_{i = 1}^{n}\) выполняется равенство
-  \((e_1', e_2', \dots, e_n') = (e_1, e_2, \dots, e_n)T\), называется матрицей преобразования координат.
+  такая, что при переходе из базиса \(\Basis = \{ \basis_{i} \}_{i = 1}^{n}\)
+  в базис \(\Basis' = \{ \basis_{i}' \}_{i = 1}^{n}\) выполняется равенство
+  \(\Basis' = \Basis T\) называется матрицей перехода к новому базису.
 \end{definition}
 
-\textit{Примечание от автора:}
-  Матрицей перехода от старого базиса $(e_1, \dots, e_n)$ к новому $(e_1', \dots, e_n')$,
-  называется матрица $T = (t_{ij})$, в столбцах которой стоят координаты новых базисных векторов
-  в старом базисе. Таким образом,
-  $$(e_1', e_2', \dots, e_n') = (e_1, e_2, \dots, e_n)T,$$
+\begin{remark}
+  В матрице перехода \(T\) в каждом столбце стоят коэффициенты разложения нового
+  базиса по старому. При этом координаты вектора \(x\) в базисах \(\Basis\) и
+  \(\Basis'\) связаны соотношением:
 
-  а координаты вектора x в старом и новом базисах связаны равенствами
-  $x_i = \sum^{n}_{j=1}t_{ij}x_{j}'$, или, в матричной записи,
-  $$\begin{pmatrix}
-    x_1 \\ x_2 \\ \vdots \\ x_n
-  \end{pmatrix} = T \begin{pmatrix}  
-    x_1' \\ x_2' \\ \vdots \\ x_n'  
-  \end{pmatrix}$$
+  \begin{align*}
+    x = T x'
+  \end{align*}
+\end{remark}
 
 \begin{theorem}
   Пусть дан линейный оператор \(\opA \colon V^{n} \to V^{n}\), который в базисе
@@ -83,15 +80,15 @@
   \(\Basis' = \{ \basis_{i}' \}_{i = 1}^{n}\)~---\(A'\).
   Тогда
 
-  \begin{lequation}{trs-lo-mtx}
+  \begin{align*}
     A' = T^{-1} A T
-  \end{lequation}
+  \end{align*}
 \end{theorem}
 \begin{proof}
   Рассмотрим столбцы \(x, y\) в базисе \(\Basis\) такие, что \(A x = y\). В
   базисе \(\Basis'\) будет выполняться равенство \(A' x' = y'\), получаем:
 
-  \begin{lequation}{trs-lo-mtx-proof}
+  \begin{align*}
     \begin{cases}
       x = T x' \\
       y = T y'
@@ -100,28 +97,28 @@
     T^{-1} A T x' = T^{-1} T y' \\
     T^{-1} A T x' = y' \\
     A' = T^{-1} A T \\
-  \end{lequation}
+  \end{align*}
 \end{proof}
 
 Некоторые свойства замены базиса:
 \begin{enumerate}
   \item \(\opA, \opB \colon V^{n} \to V^{n}, \lambda \in \CC\), тогда
   
-  \begin{lequation}{trs-lo-prop-1}
+  \begin{align*}
     \begin{matrix}
       \Basis \colon && A + \lambda B \\
       \Basis' \colon & T^{-1} (A + \lambda B) T = & A' + \lambda B'\\
     \end{matrix}
-  \end{lequation}
+  \end{align*}
 
   \item Матрица тождественного оператора в любом базисе единичная.
   
-  \begin{lequation}{trs-lo-prop-2}
+  \begin{align*}
     \begin{matrix}
       \Basis \colon && E \\
       \Basis' \colon & T^{-1} E T = & E\\
     \end{matrix}
-  \end{lequation}
+  \end{align*}
 
 \end{enumerate}
 
@@ -130,11 +127,11 @@
   рассматривается.
 \end{lemma}
 \begin{proof}
-  \begin{lequation}{trs-lo-prop-3}
+  \begin{align*}
     \det A'
     = \det (T^{-1} A T)
     = \det T^{-1} \cdot \det A \cdot \det T
     = \det A \cdot \det T^{-1} \cdot \det T
     = \det A
-  \end{lequation}
+  \end{align*}
 \end{proof}
