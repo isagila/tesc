@@ -37,48 +37,121 @@
   \end{align*}
 \end{definition}
 
-\underline{Пример}:
+\underline{Исследование на устойчивость линейной автономной системы ДУ}:
 
-Рассмотрим ДУ:
-\(y' + y = 1, \;\; y(0) = 1, \widetilde{y}(0) = \widetilde{y}_{0}\)
+Пусть дана ДУ:
 
-Найдем опорное решение \(y(t)\):
-
-\begin{align*}
-  y' + y = 1 \\
-  y(t) = c_{1} e^{-t} + 1 \\
+\begin{align*}\label{eq:given-sde}\tag{\(\blacklozenge\)}
   \begin{cases}
-    y(t) = c_{1} e^{-t} + 1 \\
-    y(0) = 1
+    \frac{\dd x}{\dd t} = a x + b y \\
+    \frac{\dd y}{\dd t} = c x + m y
   \end{cases}
-  \implies c_{1} = 0 \\
-  y(t) = 1
+  \implies \frac{\frac{\dd y}{\dd t} }{\frac{\dd x}{\dd t}}
+  = \frac{\dd y}{\dd x} 
+  = \frac{c x + m y}{a x + b y} 
 \end{align*}
 
-Теперь найдем решение при измененных начальных условиях
+\begin{multicols}{2}
+  \input{figures/DE/20/phase.tex}
+  \columnbreak
+
+  \begin{definition}
+    Общий интеграл для \ref{eq:given-sde} \(\phi(x, y) = C\) (семейство
+    интегральных кривых) называется фазовым портретом системы или траекторией
+    ДУ.
+  \end{definition}
+
+  \begin{remark}
+    Решения \(x = 0\), \(y = 0\) являются особыми для \ref{eq:given-sde}.
+  \end{remark}
+\end{multicols}
+
+Запишем СДУ в матричном виде:
 
 \begin{align*}
+  Y' = \begin{pmatrix}
+    a & b \\
+    c & m
+  \end{pmatrix} Y
+  \implies \begin{vmatrix}
+    a - \alpha & b \\
+    c & m - \lambda
+  \end{vmatrix} = 0
+\end{align*}
+
+Далее все зависит от количества решений:
+
+\begin{align*}
+  \begin{matrix}
+    \lambda_{1} \neq \lambda_{2} \in \RR
+      & \implies & c_{1} e^{\lambda_{1} t} + c_{2} e^{\lambda_{2} t}
+    \\
+    \lambda_{1} = \lambda_{2} = \lambda \in \RR
+      & \implies & c_{1} e^{\lambda t} + c_{2} t \cdot e^{\lambda t}
+    \\
+    \lambda_{1, 2} = \alpha + i \beta \in \CC
+      & \implies & e^{\alpha t} (\cos \beta t + \sin \beta t)
+  \end{matrix}
+\end{align*}
+
+Подробно рассмотрим случай \(\lambda_{1} \neq \lambda_{2} \in \RR\) причем
+\(\lambda_{1}, \lambda_{2} < 0\).
+
+Решаем ДУ методом исключения. Составим характеристическое уравнение:
+\(\lambda^2 - (a + m) \lambda + (a m - b c) = 0\). Получаем:
+
+\begin{align*}\label{sde-generic}
   \begin{cases}
-    \widetilde{y}(t) = c_{1} e^{-t} + 1 \\
-    \widetilde{y}(0) = \widetilde{y}_{0}
+    x(t) = c_{1} e^{\lambda_{1} t} + c_{2} e^{\lambda_{2} t} \\
+    y(t) = \frac{1}{b} \left(
+      c_{1} e^{\lambda_{1} t} (\lambda_{1} - a)
+        + c_{2} e^{\lambda_{2} t} (\lambda_{2} - a)
+    \right)
   \end{cases}
-  \implies c_{1} = \widetilde{y}_{0} - 1 \\
-  \widetilde{y}(t) = (\widetilde{y}_{0} - 1) e^{-t} + 1 \\
 \end{align*}
 
-Далее посмотрим на разницу полученных решений при \(t \to \infty\):
+Подберем константы, соответствующие начальным условиям \(x(t = 0) = x_{0}\),
+\(y(t = 0) = y_{0}\) (отклонение от начальных условий \((0, 0)\)):
 
 \begin{align*}
-  \widetilde{y}(t) - y(t)
-  = (\widetilde{y}_{0} - 1) e^{-t} + 1 - 1
-  = (\widetilde{y}_{0} - 1) e^{-t}
-  \xrightarrow{t \to \infty}
-  0
+  x(t) =
+    \frac{a x_{0} + b y_{0} - \lambda_{2} x_{0}}
+    {\lambda_{1} - \lambda_{2}} e^{\lambda_{1} t}
+    +
+    \frac{-a x_{0} - b y_{0} + \lambda_{1} x_{0}}
+    {\lambda_{1} - \lambda_{2}} e^{\lambda_{2} t}
+  \\
+  y(t) = \frac{1}{b} \left(
+    \frac{a x_{0} + b y_{0} - \lambda_{2} x_{0}}
+    {\lambda_{1} - \lambda_{2}} (\lambda_{1} - a) e^{\lambda_{1} t}
+    +
+    \frac{-a x_{0} - b y_{0} + \lambda_{1} x_{0}}
+    {\lambda_{1} - \lambda_{2}} (\lambda_{2} - a) e^{\lambda_{2} t}
+  \right)
 \end{align*}
 
-Таким образом при \(\abs{\widetilde{y}_{0} - 1} < \delta\) получаем
-\(\abs{\widetilde{y}(t) - y(t)} < \epsilon \implies\) решение устойчиво.
+Таким образом
 
-\todo Исследование на устойчивость линейной автономной системы ДУ.
-Разбор случаев.
+\begin{align*}
+  \forall \epsilon > 0 \; \exists \delta > 0 \colon
+    \abs{x_{0}} < \delta, \abs{y_{0}} < \delta
+  \implies x(t) < \epsilon, y(t) < \epsilon
+  \iff \begin{cases}
+    t \to \infty \\
+    x_{0} \to 0 \\
+    y_{0} \to 0
+  \end{cases} \implies \begin{cases}
+    x(t) \to 0 \\
+    y(t) \to 0
+  \end{cases}
+\end{align*}
 
+Значит решение \(x = 0, y = 0\) устойчивое.
+
+Для остальных случаев приведем пример и построим фазовый портрет:
+
+\input{figures/DE/20/rational.tex}
+
+\input{figures/DE/20/complex.tex}
+
+\input{figures/DE/20/improper.tex}
