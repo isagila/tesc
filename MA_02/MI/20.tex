@@ -1,2 +1,102 @@
 \question{Виды векторных полей и их свойства (теоремы о поле градиента и поле вихря).}
 
+\begin{definition}
+  Если \(\rot \vec{F} = 0\), то поле \(\vec{F}\) называется безвихревым.
+\end{definition}
+
+\begin{definition}
+  Если \(\div \vec{F} = 0\), то поле \(\vec{F}\) называется соленоидальным.
+\end{definition}
+
+\begin{multicols}{2}
+  \input{figures/MI/20/field_types.tex}
+  \columnbreak
+
+  \begin{remark}
+    Безвихревому полю соответствуют незамкнутые векторные линии, а
+    соленоидальному~--- замкнутые.
+  \end{remark}
+\end{multicols}
+
+\begin{remark}
+  В действительности поле может быть сложнее, но можно показать, что всякое поле
+  является композицией этих двух типов.
+\end{remark}
+
+\begin{definition}
+  Векторное поле \(\vec{F}\) называется потенциальным, если
+
+  \begin{align*}
+    \exists u(x, y, z) \colon \vec{F} = \grad u
+  \end{align*}
+\end{definition}
+
+\begin{theorem}
+  Всякое безвихревое потенциально. Другими словами
+
+  \begin{align*}
+    \rot \vec{F} = 0 \iff \exists u(x, y, z) \colon \vec{F} = \grad u
+  \end{align*}
+\end{theorem}
+\begin{proof}
+  \(\implies\) По определению ротора (в координатной форме):
+
+  \begin{align*}
+    \rot \vec{F} =
+    \left(\frac{\partial R}{\partial y} - \frac{\partial Q}{\partial z}\right)
+      \vec{i} +
+    \left(\frac{\partial P}{\partial z} - \frac{\partial R}{\partial x}\right)
+      \vec{j} +
+    \left(\frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y}\right)
+      \vec{k}
+    = 0
+    \\
+    \frac{\partial R}{\partial y} = \frac{\partial Q}{\partial z}
+    \qquad
+    \frac{\partial P}{\partial z} = \frac{\partial R}{\partial x}
+    \qquad
+    \frac{\partial Q}{\partial x} = \frac{\partial P}{\partial y}
+  \end{align*}
+
+  Подберем \(u(x, y, z)\) так, чтобы \(u'_{x} = P\), \(u'_{y} = Q\) и
+  \(u'_{z} = R\). Тогда:
+
+  \begin{align*}
+    \frac{\partial R}{\partial y}
+    = \frac{\partial^2 u}{\partial y \partial z} 
+    = \frac{\partial Q}{\partial z}
+  \end{align*}
+
+  \(\impliedby\) Пусть \(\exists u(x, y, z) \colon \vec{F} = \grad u\).
+  Тогда по определению ротора (в векторной форме):
+
+  \begin{align*}
+    \rot \vec{F}
+    = \rot \grad u
+    = \grad \times \grad \cdot u
+    = \under{(\grad \times \grad)}{\text{= 0}} \cdot u
+    = 0
+  \end{align*}
+\end{proof}
+
+\begin{corollary}
+  \begin{align*}
+    \rot \grad u = 0
+  \end{align*}
+\end{corollary}
+
+\begin{theorem}
+  \begin{align*}
+    \div \rot \vec{F} = 0
+  \end{align*}
+\end{theorem}
+\begin{proof}
+  По определению дивергенции и ротора (в векторной форме)
+
+  \begin{align*}
+    \div \rot \vec{F}
+    = \grad \cdot (\grad \times \vec{F})
+    = \under{(\grad \times \grad)}{\text{= 0 }} \cdot \vec{F}
+    = 0
+  \end{align*}
+\end{proof}

@@ -191,9 +191,10 @@
 
 %% Векторный анализ
 \renewcommand{\grad}{\vec{\nabla}}
-\renewcommand{\div}{\text{div}}
+\let\div\relax
+\DeclareMathOperator\div{div}
 \renewcommand{\laplacian}{\Delta}
-\newcommand{\rot}{\text{rot}}
+\DeclareMathOperator\rot{rot}
 \newcommand{\flow}{\Pi}
 \newcommand{\circulation}{\Gamma}
 
