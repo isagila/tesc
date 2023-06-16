@@ -66,51 +66,51 @@
 
 \item Интегрирование простейших дробей \(IV\)-его типа
 
-Рассмотрим на примере:
-
-\begin{align*}\label{eq:int-basic-frac-4-1}\tag{1}
-  \int \frac{\dd x}{(x^2 + 1)^2} =
-  \int \frac{x^2 + 1 - x^2}{(x^2 + 1)^2} \dd x =
-  \int \frac{\dd x}{x^2 + 1} - \int \frac{x^2}{(x^2 + 1)^2} \dd x
-\end{align*}
-
-Первый из полученных интегралов мы уже вычислить, это простейшая дробь
-\(III\)-ого типа. Таким образом этот интеграл будет равен \(\arctg x + C\).
-Далее работаем со вторым интегралом:
-
-\begin{align*}\label{eq:int-basic-frac-4-2}\tag{2}
-  \int \frac{x^2}{(x^2 + 1)^2} \dd x =
-  \frac{1}{2} \cdot \int \frac{x \dd (x^2 + 1)}{(x^2 + 1)^2} =
-  \left[
-    \frac{\dd t}{t^2} = -\dd \left(\frac{1}{t}\right)
-  \right] =
-  -\frac{1}{2} \cdot \int x \cdot \dd \left( \frac{1}{x^2 + 1} \right) 
-\end{align*}
-
-Полученный интеграл возьмем по частям:
-
-\begin{align*}\label{eq:int-basic-frac-4-3}\tag{3}
-  \int \underbrace{x}_{u} \dd \underbrace{\left(\frac{1}{x^2 + 1}\right)}_{v} =
-  \frac{x}{x^2 + 1} - \int \frac{\dd x}{x^2 + 1} =
-  \frac{x}{x^2 + 1} - \arctg x + C 
-\end{align*}
-
-Подставим \eqref{eq:int-basic-frac-4-3} в \eqref{eq:int-basic-frac-4-2}, а
-полученное выражение в исходный интеграл \eqref{eq:int-basic-frac-4-1}:
-
-\begin{align*}
-  \int \frac{\dd x}{(x^2 + 1)^2} =
-  \int \frac{\dd x}{x^2 + 1} - \int \frac{x^2}{(x^2 + 1)^2} \dd x = \\
-  \arctg x + \frac{1}{2} \left(\frac{x}{x^2 + 1} - \arctg x\right) + C = \\
-  \frac{1}{2} \arctg x + \frac{x}{2 (x^2 + 1)} + C
-\end{align*}
-
-\begin{remark}
-  В случаях с более высокой степенью каждая подобная итерация будет приводить
-  к уменьшению степени знаменателя на единицу.
-\end{remark}
-
-\todo И вообще это рекуррентные интегралы, которые считаются последовательно от
-\(1\)-ой степени до данной.
+\begin{example}
+  \begin{align*}\label{eq:int-basic-frac-4-1}\tag{1}
+    \int \frac{\dd x}{(x^2 + 1)^2} =
+    \int \frac{x^2 + 1 - x^2}{(x^2 + 1)^2} \dd x =
+    \int \frac{\dd x}{x^2 + 1} - \int \frac{x^2}{(x^2 + 1)^2} \dd x
+  \end{align*}
+  
+  Первый из полученных интегралов мы уже вычислить, это простейшая дробь
+  \(III\)-ого типа. Таким образом этот интеграл будет равен \(\arctg x + C\).
+  Далее работаем со вторым интегралом:
+  
+  \begin{align*}\label{eq:int-basic-frac-4-2}\tag{2}
+    \int \frac{x^2}{(x^2 + 1)^2} \dd x =
+    \frac{1}{2} \cdot \int \frac{x \dd (x^2 + 1)}{(x^2 + 1)^2} =
+    \left[
+      \frac{\dd t}{t^2} = -\dd \left(\frac{1}{t}\right)
+    \right] =
+    -\frac{1}{2} \cdot \int x \cdot \dd \left( \frac{1}{x^2 + 1} \right) 
+  \end{align*}
+  
+  Полученный интеграл возьмем по частям:
+  
+  \begin{align*}\label{eq:int-basic-frac-4-3}\tag{3}
+    \int \underbrace{x}_{u} \dd \underbrace{\left(\frac{1}{x^2 + 1}\right)}_{v} =
+    \frac{x}{x^2 + 1} - \int \frac{\dd x}{x^2 + 1} =
+    \frac{x}{x^2 + 1} - \arctg x + C 
+  \end{align*}
+  
+  Подставим \eqref{eq:int-basic-frac-4-3} в \eqref{eq:int-basic-frac-4-2}, а
+  полученное выражение в исходный интеграл \eqref{eq:int-basic-frac-4-1}:
+  
+  \begin{align*}
+    \int \frac{\dd x}{(x^2 + 1)^2} =
+    \int \frac{\dd x}{x^2 + 1} - \int \frac{x^2}{(x^2 + 1)^2} \dd x = \\
+    \arctg x + \frac{1}{2} \left(\frac{x}{x^2 + 1} - \arctg x\right) + C = \\
+    \frac{1}{2} \arctg x + \frac{x}{2 (x^2 + 1)} + C
+  \end{align*}
+  
+  \begin{remark}
+    В случаях с более высокой степенью каждая подобная итерация будет приводить
+    к уменьшению степени знаменателя на единицу.
+  \end{remark}
+  
+  \todo И вообще это рекуррентные интегралы, которые считаются последовательно от
+  \(1\)-ой степени до данной.
+\end{example}
 
 \end{itemize}

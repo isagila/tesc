@@ -40,23 +40,23 @@
   \end{align*}
 \end{remark}
 
-\underline{Пример}:
+\begin{example}
+  Вычислим 'длинный' логарифм:
 
-Вычислим 'длинный' логарифм:
-
-\begin{align*}
-  \int \frac{\dd x}{\sqrt{1 + x^2}} = 
-  \begin{bmatrix}
-    x = \sinh u \implies 1 + x^2 = \cosh^2 u \\
-    \dd x = \dd (\sinh u) = \cosh u \dd u \\
-    u = \ln \abs{
-      \underbrace{x}_{\sinh u} + \underbrace{\sqrt{1 + x^2}
-    }_{\cosh u}} \;\; (\ref{hpr-rep})
-  \end{bmatrix} =
-  \int \frac{\cosh u}{\cosh u} \dd u =
-  u + C =
-  \ln \abs{x + \sqrt{1 + x^2}} + C
-\end{align*}
+  \begin{align*}
+    \int \frac{\dd x}{\sqrt{1 + x^2}} = 
+    \begin{bmatrix}
+      x = \sinh u \implies 1 + x^2 = \cosh^2 u \\
+      \dd x = \dd (\sinh u) = \cosh u \dd u \\
+      u = \ln \abs{
+        \underbrace{x}_{\sinh u} + \underbrace{\sqrt{1 + x^2}
+      }_{\cosh u}} \;\; (\ref{hpr-rep})
+    \end{bmatrix} =
+    \int \frac{\cosh u}{\cosh u} \dd u =
+    u + C =
+    \ln \abs{x + \sqrt{1 + x^2}} + C
+  \end{align*}
+\end{example}
 
 \item Интегралы вида \(\int R(\sqrt{1 - x^2}, x) \dd x\) решаются с помощью
 замены \(x\) на синус или косинус.
