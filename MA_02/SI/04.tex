@@ -37,16 +37,16 @@
 Подставим это в \eqref{eq:int-basic-frac-3}:
 
 \begin{align*}
-  \int \frac{(2x + p) + h}{x^2 + px + q} \dd x =
-  \int \frac{2x + p}{x^2 + px + q} \dd x + \int \frac{h}{x^2 + px + q} \dd x
+  \int \frac{\frac{M}{2} (2x + p) + h}{x^2 + px + q} \dd x =
+  \frac{M}{2} \cdot \int \frac{2x + p}{x^2 + px + q} \dd x + \int \frac{h}{x^2 + px + q} \dd x
 \end{align*}
 
 Далее вычислим каждый из интегралов по-отдельности:
 
 \begin{align*}
-  \int \frac{2x + p}{x^2 + px + q} \dd x =
-  \int \frac{\dd (x^2 + px + q)}{x^2 + px + q} =
-  \ln \abs{x^2 + px + q} + C
+  \frac{M}{2} \cdot \int \frac{2x + p}{x^2 + px + q} \dd x =
+  \frac{M}{2} \cdot \int \frac{\dd (x^2 + px + q)}{x^2 + px + q} =
+  \frac{M}{2} \cdot \ln \abs{x^2 + px + q} + C
   \\
   \int \frac{h}{x^2 + px + q} \dd x =
   h \cdot \int \frac{1}{(x + \sfrac{p}{2})^2 +
@@ -59,7 +59,7 @@
 
 \begin{align*}
   \int \frac{Mx + N}{x^2 + px + q} \dd x =  
-  \ln \abs{x^2 + px + q} +
+  \frac{M}{2} \cdot \ln \abs{x^2 + px + q} +
   \frac{h}{g} \cdot \arctg \left(\frac{x + \sfrac{p}{2}}{g}\right) + C \\
   h = \left( N - \frac{Mp}{2} \right), g = q - \left(\frac{p}{2}\right)^2
 \end{align*}
