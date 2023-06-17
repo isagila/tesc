@@ -25,7 +25,7 @@
     \left( \int f(x) \dd x \right)'_{x} = f(x) \\
     \left( \int f(\phi(t)) \phi'(t) \dd t \right)'_{x} =
     \left( \int f(\phi(t)) \phi'(t) \dd t \right)'_{t} \frac{\dd t}{\dd x}
-    \transition{\ref{ad-prop-2}}
+    \eqby{\ref{ad-prop-2}}
     f(\phi(t)) \phi'(t) \frac{\dd t}{\dd x} =
     f(\phi(t)) \phi'(t) \frac{1}{\phi'(t)} =
     f(\phi(t)) =
@@ -38,15 +38,15 @@
 
   \begin{align*}
     \int \frac{e^{\sqrt{x}}}{\sqrt{x}} \dd x
-    \transition{\sqrt{x} = t}
+    \eqby{\(\sqrt{x} = t\)}
     \int \frac{e^{t}}{t} 2t \dd t =
     2 e^{t} + C =
     2 e^{\sqrt{x}} + C
   \end{align*}
 
   \begin{align*}
-    \int e^{x^{2}} \underbrace{2x \dd x}_{\dd x^2}
-    \transition{x^2 = t}
+    \int e^{x^{2}} \under{2x \dd x}{\dd x^2}
+    \eqby{\(x^2 = t\)}
     \int e^{t} \dd t =
     e^{t} + C =
     e^{x^2} + C

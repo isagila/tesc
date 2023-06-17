@@ -38,12 +38,10 @@
   Рассмотрим слагаемое \(\displaystyle \oint_{L^{+}} P \dd x\) в интеграле в
   правой части. Применяя формулу вычисления в обратную сторону, получаем, что
 
-  \todo ref
-
   \begin{align*}\label{eq:ST-proof-1}\tag{1}
     \oint_{L^{+}} P \dd x
     = \oint_{K^{+}} P(x, y, z(x, y)) \dd x + 0 \; \dd y
-    \transition{\ref{Green}}
+    \eqby{\ref{Green}}
     \iint_{D_{xy}} \left(0 - \frac{\partial P}{\partial y} \right) \dd x \dd y
     = -\iint_{D_{xy}} \frac{\partial P}{\partial y} \dd x \dd y
   \end{align*}

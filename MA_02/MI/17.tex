@@ -24,7 +24,7 @@
       \frac{\partial R}{\partial z}
     \right) \dd x \dd y \dd z
     =
-    \iint_{S_{T}} \left(
+    \oiint_{S_{T}} \left(
       P \cos \alpha +
       Q \cos \beta +
       R \cos \gamma
@@ -52,8 +52,6 @@
       + \iint_{S_{2}^{-}} R(x, y, z) \dd x \dd y
   \end{align*}
 
-  \todo Минуса в направлении обхода вообще не видно
-
   Заметим, что
 
   \begin{align*}
@@ -69,8 +67,8 @@
     \iint_{S_{1}^{+}} R(x, y, z) \dd x \dd y
       + \iint_{S_{2}^{-}} R(x, y, z) \dd x \dd y
       + \iint_{S_{3}^{+}} R(x, y, z) \dd x \dd y
-    = \iint_{S_{T}} R(x, y, z) \dd x \dd y
-    =\iint_{S_{T}} R(x, y, z) \cos \gamma \dd \sigma
+    = \oiint_{S_{T}} R(x, y, z) \dd x \dd y
+    = \oiint_{S_{T}} R \cos \gamma \dd \sigma
   \end{align*}
 
   Таким образом мы получили первое слагаемое в поверхностном интеграле в правой
@@ -78,9 +76,9 @@
 
   \begin{align*}
     \iiint_{T} \frac{\partial P}{\partial x} \dd x \dd y \dd z =
-      P \cos \alpha \dd \sigma
+      \oiint_{S_{T}} P \cos \alpha \dd \sigma
     \qquad
     \iiint_{T} \frac{\partial Q}{\partial y} \dd x \dd y \dd z =
-      Q \cos \beta \dd \sigma
+      \oiint_{S_{T}} Q \cos \beta \dd \sigma
   \end{align*}
 \end{proof}

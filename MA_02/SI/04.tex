@@ -31,7 +31,7 @@
   (Mx + N)
   = \frac{M}{2} \left( 2x + \frac{2N}{M} \right)
   = \frac{M}{2} \left( 2x + p + \frac{2N}{M} - p \right)
-  = \frac{M}{2} (2x + p) + \underbrace{\left( N - \frac{Mp}{2} \right)}_{h}
+  = \frac{M}{2} (2x + p) + \under{\left( N - \frac{Mp}{2} \right)}{h}
 \end{align*}
 
 Подставим это в \eqref{eq:int-basic-frac-3}:
@@ -50,7 +50,7 @@
   \\
   \int \frac{h}{x^2 + px + q} \dd x =
   h \cdot \int \frac{1}{(x + \sfrac{p}{2})^2 +
-    \underbrace{q - (\sfrac{p}{2})^2}_{g}
+    \under{q - (\sfrac{p}{2})^2}{g^2}
   } \dd x =
   \frac{h}{g} \cdot \arctg \left(\frac{x + \sfrac{p}{2}}{g}\right) + C
 \end{align*}
@@ -89,7 +89,7 @@
   Полученный интеграл возьмем по частям:
   
   \begin{align*}\label{eq:int-basic-frac-4-3}\tag{3}
-    \int \underbrace{x}_{u} \dd \underbrace{\left(\frac{1}{x^2 + 1}\right)}_{v} =
+    \int \under{x}{u} \dd \under{\left(\frac{1}{x^2 + 1}\right)}{v} =
     \frac{x}{x^2 + 1} - \int \frac{\dd x}{x^2 + 1} =
     \frac{x}{x^2 + 1} - \arctg x + C 
   \end{align*}
