@@ -36,18 +36,18 @@
 
   \begin{align*}
     \Phi'(x)
-    = \lim_{x \to 0} \frac{\Phi(x + \Delta x) - \Phi(x)}{\Delta x}
-    = \lim_{x \to 0} \frac{
+    = \lim_{\Delta x \to 0} \frac{\Phi(x + \Delta x) - \Phi(x)}{\Delta x}
+    = \lim_{\Delta x \to 0} \frac{
       \int_{a}^{x + \Delta x} f(t) \dd t - \int_{a}^{x} f(t) \dd t
     }{\Delta x}
-    = \lim_{x \to 0} \frac{\int_{x}^{x + \Delta x} f(t) \dd t}{\Delta x}
+    = \lim_{\Delta x \to 0} \frac{\int_{x}^{x + \Delta x} f(t) \dd t}{\Delta x}
   \end{align*}
 
   Далее по т. Лагранжа (\ref{L-mid-int}) \(\exists \xi \in (a; b)\) такая, что:
 
   \begin{align*}
-    \lim_{x \to 0} \frac{\int_{x}^{x + \Delta x} f(t) \dd t}{\Delta x}
-    = \lim_{x \to 0} \frac{f(\xi) \Delta x}{\Delta x}
+    \lim_{\Delta x \to 0} \frac{\int_{x}^{x + \Delta x} f(t) \dd t}{\Delta x}
+    = \lim_{\Delta x \to 0} \frac{f(\xi) \Delta x}{\Delta x}
     = \begin{bmatrix}
       \begin{rcases}
         \Delta x \to 0 \\
