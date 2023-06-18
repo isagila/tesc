@@ -8,34 +8,37 @@
 
 Упростим задачу: пусть нужно посчитать площадь криволинейной трапеции.
 
-\vspace{10pt}
+\begin{minipage}{\linewidth}
+  \begin{multicols*}{2}
+    \input{figures/SI/08/int_def.tex}
+    \columnbreak
 
-\begin{multicols}{2}
-\input{figures/SI/08/int_def.tex}
+    \begin{enumerate}
+      \item Разбиение области \([a;b]\):
+      \(a = x_{0} < x_{1} < \dotsc < x_{n} = b\).
+      Отрезок \([x_{i - 1}, x_{i}]\) назовем частичным, если длину обозначим 
+      \(\Delta x_{i} = x_{i} - x_{i - 1}\).
+      Разбиение (дробление) обозначим \(T = \{ x_{i} \}_{i = 0}^{n}\). Введем
+      понятие \textit{ранга} дробления \(\tau\): \(\tau = \max \Delta x_{i}\).
 
-\begin{enumerate}
-  \item Разбиение области \([a;b]\): \(a = x_{0} < x_{1} < \dotsc < x_{n} = b\).
-  Отрезок \([x_{i - 1}, x_{i}]\) назовем частичным, если длину обозначим 
-  \(\Delta x_{i} = x_{i} - x_{i - 1}\).
-  Разбиение (дробление) обозначим \(T = \{ x_{i} \}_{i = 0}^{n}\). Введем
-  понятие \textit{ранга} дробления \(\tau\): \(\tau = \max \Delta x_{i}\).
+      \item Выберем среднюю точку \(\xi_{i} \in [x_{i - 1}, x_{i}]\). Тогда
+      \(f(\xi_{i})\) это высота элементарного прямоугольника. Значит площадь
+      элементарного прямоугольника будет равна
+      \(S_{e} = f(\xi_{i}) \Delta x_{i}\).
 
-  \item Выберем среднюю точку \(\xi_{i} \in [x_{i - 1}, x_{i}]\). Тогда
-  \(f(\xi_{i})\) это высота элементарного прямоугольника. Значит площадь
-  элементарного прямоугольника будет равна \(S_{e} = f(\xi_{i}) \Delta x_{i}\).
+      \item Просуммируем площади всех элементарных прямоугольников:
+      \(\sum_{i = 1}^{n} f(\xi_{i}) \Delta x_{i}\). Данная сумма называется
+      интегральной суммой Римана.
 
-  \item Просуммируем площади всех элементарных прямоугольников:
-  \(\sum_{i = 1}^{n} f(\xi_{i}) \Delta x_{i}\). Данная сумма называется
-  интегральной суммой Римана.
-
-  \item Возьмем предел при \(n \to \infty\) и \(\tau \to 0\):
-  
-  \begin{align*}\label{eq:lim-int-sum}\tag{1}
-    \lim_{\substack{n \to \infty \\ \tau \to 0}}
-      \sum_{i = 1}^{n} f(\xi_{i}) \Delta x_{i}
-  \end{align*}
-\end{enumerate}
-\end{multicols}
+      \item Возьмем предел при \(n \to \infty\) и \(\tau \to 0\):
+      
+      \begin{align*}\label{eq:lim-int-sum}\tag{1}
+        \lim_{\substack{n \to \infty \\ \tau \to 0}}
+          \sum_{i = 1}^{n} f(\xi_{i}) \Delta x_{i}
+      \end{align*}
+    \end{enumerate}
+  \end{multicols*}
+\end{minipage}
 
 \begin{definition}
   Если полученный предел интегральных сумм \eqref{eq:lim-int-sum} существует,
