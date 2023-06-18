@@ -1,14 +1,14 @@
 \question{Интегрирование тригонометрических функций вида \(R(\sin^m x, \cos^n x)\), \(R(\sin mx, \cos nx)\).}
 
-Рассмотрим интегралы вида \(\int \sin^m x \cos^m x \dd x\)
+Рассмотрим интегралы вида \(\int \sin^m x \cos^n x \dd x\)
 
 \begin{enumerate}
 \item \(n\) или \(m\) нечетное
 
-Пусть \(m\) нечетное, тогда \(m = 2k + 1\). Подставим это в исходный интеграл:
+Пусть \(n\) нечетное, тогда \(n = 2k + 1\). Подставим это в исходный интеграл:
 
 \begin{align*}
-  \int \sin^m x \cos^m \dd x =
+  \int \sin^m x \cos^n \dd x =
   \int \sin^m x \cos^{2k} \cos x \dd x =
   \int \sin^m x (1 - \sin^2 x)^k \dd (\sin x)
   \eqby{\(t = \sin x\)}
@@ -17,12 +17,12 @@
 
 Получили интеграл от полинома \(\implies\) умеем его решать.
 
-\item \(n\) и \(m\) четные
+\item \(m\) и \(n\) четные
 
-Обозначим \(n = 2p\), \(m = 2q\), тогда:
+Обозначим \(m = 2p\), \(n = 2q\), тогда:
 
 \begin{align*}
-  \int \sin^m x \cos^m \dd x =
+  \int \sin^m x \cos^n \dd x =
   \int (\sin^2 x)^p (\cos^2 x)^q \dd x =
   \int \left(\frac{1 - \cos 2x}{2}\right)^p
     \left(\frac{1 + \cos 2x}{2}\right)^q \dd x
@@ -47,5 +47,5 @@
   \cos mx \cos nx = \frac{1}{2}\Big(\cos((m - n) x) + \cos((m + n) x)\Big) \\
 \end{align*}
 
-\todo На лекции были интегралы вида \(\int \sin^m x \cos^m \dd x\), а не 
+\todo На лекции были интегралы вида \(\int \sin^m x \cos^m x \dd x\), а не 
 \(R(\sin^m x, \cos^n x)\).
