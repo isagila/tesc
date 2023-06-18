@@ -121,6 +121,15 @@
 
 \newcommand{\under}[2]{\underparen{#1}_{#2}}
 
+%% Текст в две колонки
+\newenvironment{twocolumns}{
+  \begin{minipage}{\linewidth}
+    \begin{multicols}{2}
+}{
+    \end{multicols}
+  \end{minipage}
+}
+
 \renewcommand{\bar}{\overline}
 
 %% Красивые <= и >=
