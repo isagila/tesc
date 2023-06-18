@@ -31,6 +31,7 @@
 \usepackage{subcaption}
 \usepackage{esvect}
 \usepackage{gensymb}
+\usepackage{tabularx}
 
 %%% Работа с русским языком
 \usepackage{cmap}                   % поиск в PDF
@@ -90,6 +91,12 @@
 }
 \makeatother
 
+%% Добавление лидирующего нуля при необходимости
+%% https://tex.stackexchange.com/questions/256015/leading-zero-in-foreach-of-a-tikz-calendar
+\makeatletter
+\let\twodigits\two@digits
+\makeatother
+
 %% Круглые скобки снизу
 %% https://tex.stackexchange.com/questions/260565/newcommand-underbrace-parentheses
 \makeatletter
@@ -114,6 +121,15 @@
 
 \newcommand{\under}[2]{\underparen{#1}_{#2}}
 
+%% Текст в две колонки
+\newenvironment{twocolumns}{
+  \begin{minipage}{\linewidth}
+    \begin{multicols}{2}
+      }{
+    \end{multicols}
+  \end{minipage}
+}
+
 \renewcommand{\bar}{\overline}
 
 %% Красивые <= и >=
@@ -122,11 +138,12 @@
 \renewcommand{\ge}{\geqslant}
 \renewcommand{\le}{\leqslant}
 
-%% Границы интегралов
+%% Интегралы
 \renewcommand{\int}{\intop}
 \renewcommand{\iint}{\iintop}
 \renewcommand{\iiint}{\iiintop}
 \renewcommand{\oint}{\ointop}
+\renewcommand{\oiint}{\oiintop}
 
 \newcommand{\converge}{\succ}
 \newcommand{\notconverge}{\prec}
@@ -188,6 +205,15 @@
 %% Дифференциальные уравнения
 \newcommand{\Wrn}{\mathcal{W}}
 
+%% Векторный анализ
+\renewcommand{\grad}{\vec{\nabla}}
+\let\div\relax
+\DeclareMathOperator\div{div}
+\renewcommand{\laplacian}{\Delta}
+\DeclareMathOperator\rot{rot}
+\newcommand{\flow}{\Pi}
+\newcommand{\circulation}{\Gamma}
+
 %% Округление
 \DeclarePairedDelimiter\ceil{\lceil}{\rceil}
 \DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
@@ -222,6 +248,10 @@
 \theoremstyle{definition}
 \newtheorem{lemma}[definition]{\underline{Lm}}
 \renewcommand{\thelemma}{\thesubsection\arabic{lemma}}
+
+\theoremstyle{remarkstyle}
+\newtheorem{example}[definition]{\underline{Пример}}
+\renewcommand{\theexample}{\thesubsection\arabic{example}}
 
 \renewcommand*{\proofname}{\textit{Доказательство.}}
 \renewcommand\qedsymbol{\(\blacksquare\)}
