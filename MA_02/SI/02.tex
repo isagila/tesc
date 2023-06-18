@@ -1,6 +1,45 @@
 \question{Замена переменной в неопределенном интеграле. Интегрирование по частям.}
 
 \begin{remark}
+  Таблица интегралов
+
+  \begin{align*}
+    \int 0 \dd x & = C
+    && \qquad &
+      \int \frac{\dd x}{\sin^2 x} & = -\ctg x + C
+    \\
+      \int 1 \dd x & = x + C
+    && \qquad &
+      \int \frac{\dd x}{\cos^2 x} & = -\tg x + C
+    \\
+      \int x^n \dd x & = \frac{x^{n + 1}}{n + 1} + C,
+      & \hspace{6pt} n \neq -1, x > 0
+    & \qquad &
+      \int \frac{\dd x}{\sqrt{a^2 - x^2}} & = \arcsin \frac{x}{a} + C,
+      & \hspace{6pt} \abs{x} < \abs{a}
+    \\
+      \int \frac{\dd x}{x} & = \ln \abs{x} + C
+    && \qquad &
+      \int \frac{\dd x}{a^2 + x^2} & = \frac{1}{a} \arctg \frac{x}{a} + C
+    \\
+      \int a^{x} \dd x & = \frac{a^{x}}{\ln a} + C
+    && \qquad &
+      \int \frac{\dd x}{a^2 - x^2}
+      & = \frac{1}{2a} \ln \abs{\frac{a + x}{a - x}} + C,
+      & \hspace{6pt} \abs{x} \neq a
+    \\
+      \int e^{x} \dd x & = e^{x} + C
+    && \qquad &
+      \int \frac{\dd x}{\sqrt{x^2 \pm a^2}}
+      & = \ln \abs{x + \sqrt{x^2 \pm a^2}} + C
+    \\
+      \int \sin x \dd x & = -\cos x + C
+    && \qquad &
+      \int \cos x \dd x & = \sin x + C
+  \end{align*}
+\end{remark}
+
+\begin{remark}
   Интеграл сохраняет инвариантность своей формы, т.е.
 
   \begin{align*}
