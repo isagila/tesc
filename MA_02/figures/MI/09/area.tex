@@ -4,7 +4,14 @@
   \draw[thick] [->] (0, 0) -- (7, 0) node[right, below] {\(x\)};
   \draw[thick] [->] (0, 0) -- (0, 5) node[above, left] {\(y\)};
 
-  \draw (3.5, 2.5) ellipse (2.5cm and 1.5cm);
+  \begin{scope}[
+    decoration = {
+      markings,
+      mark = at position 0.85 with {\arrow[line width = 1pt]{>}}
+    }
+  ]
+    \draw[postaction = { decorate }] (3.5, 2.5) ellipse (2.5cm and 1.5cm);
+  \end{scope}
 
   \draw node[below] at (1, 0) {\(a\)};
   \draw node[below] at (6, 0) {\(b\)};
@@ -30,5 +37,8 @@
     node[pos = 0.3, above, sloped] {\(x_{2}(y)\)};
   \draw[draw = none] (3.5, 4) arc (90 : 270 : 2.5cm and 1.5cm)
     node[pos = 0.3, below, sloped] {\(x_{1}(y)\)};
+  
+  \draw node at (3.5, 2.5) {\(D\)};
+  \draw node at (5, 1) {\(K^{+}\)};
 
 \end{tikzpicture}
