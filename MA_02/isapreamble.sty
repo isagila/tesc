@@ -91,6 +91,12 @@
 }
 \makeatother
 
+%% Добавление лидирующего нуля при необходимости
+%% https://tex.stackexchange.com/questions/256015/leading-zero-in-foreach-of-a-tikz-calendar
+\makeatletter
+\let\twodigits\two@digits
+\makeatother
+
 %% Круглые скобки снизу
 %% https://tex.stackexchange.com/questions/260565/newcommand-underbrace-parentheses
 \makeatletter
