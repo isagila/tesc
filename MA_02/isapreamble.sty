@@ -125,7 +125,7 @@
 \newenvironment{twocolumns}{
   \begin{minipage}{\linewidth}
     \begin{multicols}{2}
-}{
+      }{
     \end{multicols}
   \end{minipage}
 }
@@ -290,7 +290,10 @@
 \fancyhead{}
 \fancyfoot{}
 \fancyfoot[C]{\thepage/\pageref*{LastPage}}
-
+\fancypagestyle{mainpage}{
+  \fancyfoot{}
+  \fancyfoot[C]{\url{https://github.com/isagila/tesc}}
+}
 \renewcommand{\headrulewidth}{0pt}
 
 %% С++ code
