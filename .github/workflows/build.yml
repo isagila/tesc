@@ -30,7 +30,7 @@ jobs:
           echo "SUBJECT=${{ steps.split.outputs._2 }}" >> $GITHUB_ENV
 
       - name: Lint LaTeX
-        uses: isagila/latex-lint-action@v1.0.6
+        uses: isagila/latex-lint-action@main
         with:
           working_directory: ${{ env.SEMESTER }}/${{ env.SUBJECT }}
           files: main.tex
