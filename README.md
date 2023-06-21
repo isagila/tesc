@@ -1,9 +1,7 @@
 # tEsc
 
-### Математический анализ
+### II семестр
 
-- [Экзамен II](https://isagila.github.io/tesc/MA_02.pdf)
-
-### Линейная алгебра
-
-- [Экзамен II](https://isagila.github.io/tesc/LA_02.pdf)
+- [Линейная алгебра](https://isagila.github.io/tesc/02/LA.pdf)
+- [Математический анализ](https://isagila.github.io/tesc/02/MA.pdf)
+- [Дискретная математика](https://isagila.github.io/tesc/02/DM.pdf)
