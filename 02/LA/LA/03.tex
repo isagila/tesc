@@ -1,0 +1,101 @@
+\question{Ортогональность вектора подпространству. Ортогональное дополнение. Теорема Пифагора.}
+
+\begin{definition}\label{ort-subspace}
+  Пусть дано Евклидово пространство \(E^{n}\).
+  Элемент \(h \in E^{n}\) называется ортогональным (перпендикулярным)
+  подпространству \(G \subset E^{n}\), если
+
+  \begin{align*}
+    \forall x \in G \colon h \perp x \bydef h \perp G
+  \end{align*}
+\end{definition}
+
+\begin{corollary}\label{ort-subspace-by-basis}
+  Выделим в подпространстве \(G\) базис
+  \(\Basis = \{\basis_{1}, \dotsc, \basis_{k} \}\). Тогда
+
+  \begin{align*}
+    \forall \basis_{i} \in \Basis \colon h \perp e_{i}
+    \implies h \bot G
+  \end{align*}
+\end{corollary}
+\begin{proof}
+  Выберем произвольный элемент \(x \in G\), разложим его по базису \(\Basis\),
+  после чего воспользуемся свойствами скалярного произведения:
+
+  \begin{align*}
+    x = \sum_{i = 1}^{k} \lambda_{i} \basis_{i}
+    \implies
+    (h, x)
+    = \sum_{i = 1}^{k} \lambda_{i} \under{(h, \basis_{i})}{\text{= 0}}
+    = 0 
+    \implies[\ref{item-ort}] \forall x \in G \colon h \perp x
+    \idenby{\ref{ort-subspace}} h \perp G
+  \end{align*}
+\end{proof}
+
+\begin{definition}\label{ort-compl}
+  Пусть дано Евклидово пространство \(E^{n}\).
+  Ортогональным дополнением \(F^{\perp}\) к подпространству
+  \(F \subset E^{n}\) называется совокупность векторов \(h \perp F\).
+\end{definition}
+
+\begin{remark}
+  Из определения \ref{ort-subspace} следует, что \(F\) также является
+  подпространством \(E^{n}\).
+\end{remark}
+
+\begin{theorem}
+  Евклидово пространство \(E^{n}\) является прямой суммой подпространства
+  \(F \subset E^{n}\) и его ортогонального дополнения \(F^{\perp}\).
+  
+  \begin{align*}
+    E^{n} = F \oplus F^{\bot}
+  \end{align*}
+\end{theorem}
+\begin{proof}
+  В \(E^{n}\) выделим ортогональный базис \(\Basis\) (по \ref{ort-basic}), после
+  чего разложим произвольный \(x \in E^{n}\) по этому базису:
+
+  \begin{align*}
+    \Basis = \{
+      \under{\basis_{1}, \dots, \basis_{k}}{\text{Базис } F},
+      \basis_{k + 1}, \dots \basis_{n}
+    \}
+    \implies x
+    = \under{x_{1} \basis_{1} + \dots + x_{k} \basis_{k}}{\hat{x}}
+    + \under{x_{k + 1} \basis_{k + 1} + \dots + x_{n} \basis_{n}}{\bar{x}}
+    = \hat{x} + \bar{x}
+  \end{align*}
+
+  Т.к. базис \(\Basis\) ортогональный, то вектор \(\basis_{k + 1}\) ортогонален
+  каждому из векторов базиса \(F\)
+  \(\implies[\ref{ort-subspace-by-basis}] \basis_{k + 1} \perp F\).
+  Аналогично остальные векторы, не входящие в базис \(F\), также \(\perp F\).
+  Значит \(\bar{x} \perp F\) как их линейная комбинация. Множество \(\bar{x}\)
+  и составляет \(F^{\perp}\) по определению ортогонального дополнения
+  (\ref{ort-compl}).
+\end{proof}
+
+\begin{theorem}\label{pythagoras}
+  Теорема Пифагора
+
+  \begin{align*}
+    \forall x, y \in E^{n} \colon
+      x \perp y \implies \norm{x + y}^2 = \norm{x}^2 + \norm{y}^2
+  \end{align*}
+\end{theorem}
+\begin{proof}
+
+  Раскроем норму как корень из скалярного произведения элемента на себя, после
+  чего воспользуемся свойствами скалярного произведения:
+
+  \begin{align*}
+    \norm{x + y}^2
+    = (x + y, x + y)
+    = (x, x) + 2 (x, y) + (y, y)
+    \eqby{\(x \perp y \implies (x, y) = 0\)}
+    (x, x) + (y, y)
+    = \norm{x}^2 + \norm{y}^2
+  \end{align*}
+\end{proof}
