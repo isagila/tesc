@@ -177,8 +177,19 @@
 \DeclarePairedDelimiter{\Triple}\langle\rangle
 
 %% Теория графов
+\newcommand{\operator}[1]{\operatorname*{#1}}
+\newcommand{\dist}[1]{\operator{dist}(#1)}
 \newcommand{\minDegree}[1]{\delta(#1)}
 \newcommand{\maxDegree}[1]{\Delta(#1)}
+\newcommand{\eccentricity}[1]{\varepsilon(#1)}
+\newcommand{\graphRadius}[1]{\operator{rad}(#1)}
+\newcommand{\graphDiameter}[1]{\operator{diam}(#1)}
+\newcommand{\graphGirth}[1]{\operator{girth}(#1)}
+\newcommand{\graphCenter}[1]{\operator{center}(#1)}
+\newcommand{\graphCentroid}[1]{\operator{centroid}(#1)}
+\newcommand{\vertexConnectivity}[1]{\varkappa(#1)}
+\newcommand{\edgeConnectivity}[1]{\lambda(#1)}
+\newcommand{\blockGraph}[1]{\operator{B}(#1)}
 
 %% Округление
 \DeclarePairedDelimiter\ceil{\lceil}{\rceil}
