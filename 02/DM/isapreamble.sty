@@ -138,18 +138,6 @@
 \renewcommand{\ge}{\geqslant}
 \renewcommand{\le}{\leqslant}
 
-%% Интегралы
-\renewcommand{\int}{\intop}
-\renewcommand{\iint}{\iintop}
-\renewcommand{\iiint}{\iiintop}
-\renewcommand{\oint}{\ointop}
-\renewcommand{\oiint}{\oiintop}
-
-\newcommand{\converge}{\succ}
-\newcommand{\notconverge}{\prec}
-
-%% Длинные знаки векторов
-\renewcommand{\vec}{\vv}
 
 %% Символ "пусть"
 \newcommand{\lets}{\sqsupset}
@@ -179,40 +167,18 @@
 \newcommand{\NN}{\mathbb{N}}
 \newcommand{\ZZ}{\mathbb{Z}}
 \newcommand{\RR}{\mathbb{R}}
-\newcommand{\CC}{\mathbb{C}}
-\newcommand{\FF}{\mathbb{F}}
-\newcommand{\QQ}{\mathbb{Q}}
-\newcommand{\EE}{\mathbb{E}}
+\newcommand{\BB}{\mathbb{B}}
 
-%% Линейные операторы
-\newcommand{\opA}{\mathcal{A}}
-\newcommand{\opB}{\mathcal{B}}
-\newcommand{\opC}{\mathcal{C}}
-\newcommand{\opI}{I}
-\newcommand{\opZero}{\Theta}
-\newcommand{\Linear}[1]{\mathcal{L}[#1]}
-\DeclareMathOperator{\Ker}{Ker}
-\DeclareMathOperator{\Img}{Im}
-\DeclareMathOperator{\Rang}{rang}
-\newcommand{\BiLinear}{\mathscr{B}}
-\newcommand{\Quad}{\mathscr{K}}
-\newcommand{\Gmtx}{\Gamma}
+\newcommand{\minL}{\min\limits}
+\newcommand{\maxL}{\max\limits}
 
-%% Базис
-\newcommand{\basis}{\mathbbold{e}}
-\newcommand{\Basis}{\mathcal{E}}
+%% Теория множеств
+\DeclarePairedDelimiter{\Pair}\langle\rangle
+\DeclarePairedDelimiter{\Triple}\langle\rangle
 
-%% Дифференциальные уравнения
-\newcommand{\Wrn}{\mathcal{W}}
-
-%% Векторный анализ
-\renewcommand{\grad}{\vec{\nabla}}
-\let\div\relax
-\DeclareMathOperator\div{div}
-\renewcommand{\laplacian}{\Delta}
-\DeclareMathOperator\rot{rot}
-\newcommand{\flow}{\Pi}
-\newcommand{\circulation}{\Gamma}
+%% Теория графов
+\newcommand{\minDegree}[1]{\delta(#1)}
+\newcommand{\maxDegree}[1]{\Delta(#1)}
 
 %% Округление
 \DeclarePairedDelimiter\ceil{\lceil}{\rceil}
