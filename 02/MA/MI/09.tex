@@ -1,0 +1,91 @@
+\question{Теорема (формула) Грина.}
+
+\begin{twocolumns}
+  \begin{theorem}\label{Green}
+    Теорема Грина
+
+    Пусть \(D\) правильная \(\uparrow Ox, \uparrow Oy\), \(\Gamma_{D} = K\)
+    
+    Даны функции \(P(x, y), Q(x, y) \colon K, D \to \RR\)
+
+    Определен \(\displaystyle \oint_{K^{+}} P \dd x + Q \dd y\)
+    
+    Тогда
+
+    \begin{align*}
+      \boxed{
+        \oint_{K^{+}} P \dd x + Q \dd y
+        = \iint_{D}^{} \left(
+          \frac{\partial Q}{\partial x} -
+          \frac{\partial P}{\partial y}
+        \right) \dd x \dd y
+      }
+    \end{align*}
+  \end{theorem}
+  \vfill\null
+  \columnbreak
+
+  \input{figures/MI/09/area.tex}
+\end{twocolumns}
+
+\begin{proof}
+  Рассмотрим двойной интеграл
+  \(\displaystyle \iint_{D} \frac{\partial P}{\partial y} \dd x \dd y\)
+  и сведем его к повторному:
+
+  \begin{align*}
+    \iint_{D} \frac{\partial P}{\partial y} \dd x \dd y
+    = \int_{a}^{b} \dd x \int_{y_{1}(x)}^{y_{2}(x)}
+      \frac{\partial P}{\partial y} \dd y
+    = \int_{a}^{b} \left(
+      P(x, y) \bigg\vert_{y_{1}(x)}^{y_{2}(x)}
+    \right) \dd x
+    = \int_{a}^{b} P(x, y_{2}(x)) \dd x
+      - \int_{a}^{b} P(x, y_{1}(x)) \dd x 
+  \end{align*}
+
+  Используя формулу вычисления криволинейного интеграла 2-ого рода
+  (\ref{curve-int-2-calc}) в обратную сторону получаем:
+
+  \begin{align*}
+    \int_{a}^{b} P(x, y_{2}(x)) \dd x - \int_{a}^{b} P(x, y_{1}(x)) \dd x = \\
+    \int_{MLN} P(x, y) \dd x - \int_{MAN} P(x, y) \dd x = \\
+    -\int_{NLM} P(x, y) \dd x - \int_{MAN} P(x, y) \dd x = \\
+    -\oint_{K^{+}} P(x, y) \dd x 
+  \end{align*}
+
+  Аналогично можно показать, что \(\displaystyle
+    \iint_{D} \frac{\partial Q}{\partial x} \dd x \dd y
+    = \oint_{K^{+}} Q(x, y) \dd y 
+  \). Объединяя эти равенства получаем, что
+
+  \begin{align*}
+    \oint_{K^{+}} P(x, y) \dd x + Q(x, y) \dd y
+    = \oint_{K^{+}} Q (x, y) \dd y - \left(-\oint_{K^{+}} P(x, y) \dd x \right)
+    = \iint_{D} \left(
+      \frac{\partial Q}{\partial x}
+      - \frac{\partial P}{\partial y}
+    \right) \dd x \dd y
+  \end{align*}
+\end{proof}
+
+\begin{remark}
+  Формула Грина работает в обе стороны. Вычисляется тот интеграл, который проще.
+\end{remark}
+
+\begin{corollary}
+  С помощью формулы Грина можно получить формулу для площади фигуры через
+  криволинейный интеграл 2-ого рода:
+
+  \begin{align*}
+    S = \iint_{D} \dd x \dd y = \begin{bmatrix}
+      \begin{rcases}
+        P = -\sfrac{y}{2} \\
+        Q = \sfrac{x}{2}
+      \end{rcases}
+      \implies Q'_{x} - P'_{y} = 1
+    \end{bmatrix}
+    = \oint_{K^{+}} -\frac{y}{2} \dd x + \frac{x}{2} \dd y
+    = \frac{1}{2} \oint_{K^{+}} x \dd y - y \dd x
+  \end{align*}
+\end{corollary}

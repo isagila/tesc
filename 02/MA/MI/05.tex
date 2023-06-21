@@ -1,0 +1,93 @@
+\question{Замена переменных в двойном и тройном интегралах. Якобиан.}
+
+\input{figures/MI/05/curve_coords.tex}
+
+Дробление в выбранной СК проводится соответствующими координатными
+линиями/поверхностями. Потребуем малости \(\dd u\), \(\dd v\). Тогда площадь
+криволинейного прямоугольника будет мало отличать от площади обычного
+прямоугольника \(ABCD\), значит:
+
+\begin{align*}\label{eq:curve_coords_det}\tag{1}
+  \dd S'
+  = \abs{\vec{AB} \times \vec{AD}}
+  = \abs{\begin{vmatrix}
+    \vec{i} & \vec{j} & \vec{k} \\
+    B_{x} - A_{x} & B_{y} - A_{y} & 0 \\
+    D_{x} - A_{x} & D_{y} - A_{y} & 0
+  \end{vmatrix}}
+\end{align*}
+
+Рассмотрим полученные разницы координат точек:
+
+\begin{align*}
+  B_{x} - A_{x}
+  = \phi(u, v + \Delta v) - \phi(u, v)
+  =  \Delta_{v} \phi \approx \frac{\partial \phi}{\partial v} \dd v
+  \\
+  B_{y} - A_{y}
+  = \psi(u, v + \Delta v) - \psi(u, v)
+  =  \Delta_{v} \psi \approx \frac{\partial \psi}{\partial v} \dd v
+  \\
+  D_{x} - A_{x}
+  = \phi(u + \Delta u, v) - \phi(u, v)
+  =  \Delta_{u} \phi \approx \frac{\partial \phi}{\partial u} \dd u
+  \\
+  D_{y} - A_{y}
+  = \psi(u + \Delta u, v) - \psi(u, v)
+  =  \Delta_{u} \psi \approx \frac{\partial \psi}{\partial u} \dd u
+\end{align*}
+
+Подставим это в \eqref{eq:curve_coords_det}. Имеем:
+
+\begin{align*}
+  \dd S' \approx \abs{ \left(
+    \frac{\partial \phi}{\partial v} \dd v \cdot
+      \frac{\partial \psi}{\partial u} \dd u 
+    -
+    \frac{\partial \psi}{\partial v} \dd v \cdot 
+    \frac{\partial \phi}{\partial u} \dd u
+  \right)}
+  = \under{\abs{
+    \frac{\partial \phi}{\partial v} \cdot
+    \frac{\partial \psi}{\partial u}
+    -
+    \frac{\partial \psi}{\partial v} \cdot 
+    \frac{\partial \phi}{\partial u}
+  }}{\abs{J}} \cdot \dd u \dd v
+\end{align*}
+
+\(\abs{J}\) можно записать в виде определителя:
+
+\begin{align*}
+  \abs{J} = \abs{\begin{vmatrix}
+    \phi'_{v} & \phi'_{u} \\
+    \psi'_{v} & \psi'_{u}
+  \end{vmatrix}}
+\end{align*}
+
+\begin{definition}
+  Определитель \(J\) составленный из частных производных исходных переменных
+  по каждой из новых переменных называется определителем Якоби (якобианом).
+
+  Его геометрический смысл заключается в том, что он является коэффициентом
+  искажения при переходе от одной СК к другой.
+\end{definition}
+
+В итоге получаем, что \(\dd S = \dd x \dd y = \abs{J} \dd \rho \dd \phi\),
+причем \(\displaystyle
+  \abs{J}
+  = \lim_{\Delta S, \Delta S' \to 0} \frac{\Delta S'}{\Delta S}
+\). Итоговая формула замены при смене СК имеет вид:
+
+\begin{align*}
+  \iint_{D} f(x, y) \dd x \dd y
+  = \iint_{D'} f(x(u, v), y(u, v)) \abs{J} \dd u \dd v
+\end{align*}
+
+\begin{remark}
+  Якобиан при стандартном переходе в полярные координаты
+  (\(x = \rho \cos \phi, y = \rho \sin \phi\)) равен \(\rho\).
+\end{remark}
+
+В тройном интеграле замены проводятся аналогично (только якобиан будет третьей
+размерности). Некоторые стандартные замены можно найти в предыдущем вопросе.

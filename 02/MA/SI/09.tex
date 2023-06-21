@@ -1,0 +1,106 @@
+\question{Геометрический смысл определенного интеграла. Оценка определенного интеграла. Теорема о среднем.}
+
+Геометрический смысл определенного интеграла следует из его построения:
+определенный интеграл по модулю равен площади криволинейной трапеции.
+
+\begin{lemma}\label{int-est}
+  Пусть \(f \in C_{[a;b]}\) и определен \(\int_{a}^{b} f(x) \dd x\).
+  \(m\), \(M\)~--- наименьшее и наибольшее значения функции \(f(x)\) на
+  отрезке \([a;b]\). Тогда
+
+  \begin{align*}
+    (b - a) m \le \int_{a}^{b} f(x) \dd x \le (b - a) M
+  \end{align*}
+\end{lemma}
+\begin{proof}
+  \begin{align*}
+    \forall x \in [a;b] \colon m \le f(x) \le M
+    \implies \forall \xi_{i} \in [a;b] \colon m \le f(\xi_{i}) \le M
+    \\
+    m \Delta x_{i} \le f(\xi_{i}) \Delta x_{i} \le M \Delta x_{i}
+    \\
+      m \sum_{i = 1}^{n} \Delta x_{i}
+    \le 
+      \sum_{i = 1}^{n} f(\xi_{i}) \Delta x_{i}
+    \le 
+      M \sum_{i = 1}^{n} \Delta x_{i}
+    \\
+      m \lim_{\substack{n \to \infty \\ \tau \to 0}}
+      \sum_{i = 1}^{n} \Delta x_{i}
+    \le 
+      \lim_{\substack{n \to \infty \\ \tau \to 0}}
+      \sum_{i = 1}^{n} f(\xi_{i}) \Delta x_{i}
+    \le 
+      M \lim_{\substack{n \to \infty \\ \tau \to 0}}
+      \sum_{i = 1}^{n} \Delta x_{i}
+    \\
+    (b - a) m \le \int_{a}^{b} f(x) \dd x \le (b - a) M
+  \end{align*}
+\end{proof}
+
+\begin{theorem}\label{L-mid-int}
+  Теорема Лагранжа о среднем (в интегральной форме)
+
+  Пусть \(f \in C_{[a;b]}\) и определен \(\int_{a}^{b} f(x) \dd x\). Тогда
+
+  \begin{align*}
+    \exists \xi \in (a; b) \colon \int_{a}^{b} f(x) \dd x = f(\xi) (b - a)
+  \end{align*}
+\end{theorem}
+\begin{proof}
+  Воспользуемся леммой \ref{int-est}:
+
+  \begin{align*}
+    (b - a) m \le \int_{a}^{b} f(x) \dd x \le (b - a) M
+    \implies m \le \frac{1}{b - a} \cdot \int_{a}^{b} f(x) \dd x \le M
+  \end{align*}
+
+  По т. Больцано-Коши функция \(f(x)\) принимает все значения от минимального
+  \(m\) до максимального \(M\). Значит \(\exists \xi \in (a; b)\), что
+
+  \begin{align*}
+    f(\xi) = \frac{1}{b - a} \cdot \int_{a}^{b} f(x) \dd x
+    \implies \int_{a}^{b} f(x) \dd x = f(\xi) (b - a)
+  \end{align*}
+\end{proof}
+
+\begin{remark}
+  Геометрический смысл теоремы Лагранжа заключается в том, что на промежутке
+  \((a; b)\) всегда найдется такая точка \(\xi\), что площадь криволинейной
+  трапеции будет в точности равна площади прямоугольника со сторонами
+  \((b - a)\) и \(f(\xi)\).
+\end{remark}
+
+\begin{lemma}
+  Если \(f(x), g(x) \in C_{[a; b]}\), определены
+  \(\int_{a}^{b} f(x) \dd x\), \(\int_{a}^{b} g(x) \dd x\)
+  и при этом
+  \(\forall x \in [a; b] \colon f(x) \ge g(x)\), то
+
+  \begin{align*}
+    \int_{a}^{b} f(x) \dd x \ge \int_{a}^{b} g(x) \dd x
+  \end{align*}
+\end{lemma}
+\begin{proof}
+  Рассмотрим \(h(x) = f(x) - g(x)\). Она будет неотрицательная на отрезке
+  \([a; b]\), значит \(\int_{a}^{b} h(x) \dd x \ge 0\). Далее пользуемся
+  аддитивноcтью и получаем искомое неравенство.
+\end{proof}
+
+\begin{lemma}\label{dint-abs-prop}
+  Пусть \(f \in C_{[a;b]}\) и определен \(\int_{a}^{b} f(x) \dd x\). Тогда
+
+  \begin{align*}
+    \abs{\int_{a}^{b} f(x) \dd x} \le \int_{a}^{b} \abs{f(x)} \dd x
+  \end{align*}
+\end{lemma}
+\begin{proof}
+  Т.к. определенный интеграл это предел интегральных сумм, то можно
+  воспользоваться предельных переходом, а затем свойством о том, что модуль
+  суммы не превосходит сумму модулей.
+\end{proof}
+
+\begin{remark}
+  Выкалывание из отрезка \([a; b]\) конечного числа точек не меняет значение
+  интеграла.
+\end{remark}

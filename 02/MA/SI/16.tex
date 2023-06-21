@@ -1,0 +1,31 @@
+\question{Приложения определенного интеграла: вычисление длины дуги кривой, заданной параметрически.}
+
+Рассмотрим формулу \(L = \int_{a}^{b} \sqrt{1 + y'(x)^2} \dd x\) при условии,
+что кривая задана параметрически. Получим:
+
+\begin{align*}
+  x = \phi(t), y = \psi(t) \\
+  \dd x = \phi'(t) \dd t \\
+  a = \phi(\alpha), b = \phi(\beta), t \in [\alpha; \beta] \\
+  y'(x) = \frac{\dd y}{\dd x} = \frac{\psi'(t)}{\phi'(t)}
+\end{align*}
+
+Подставим это в исходную формулу:
+
+\begin{align*}
+  L
+  = \int_{a}^{b} \sqrt{1 + y'(x)^2} \dd x
+  = \int_{\alpha}^{\beta}
+    \sqrt{1 + \left(\frac{\psi'(t)}{\phi'(t)}\right)^2} \phi'(t) \dd t
+  = \int_{\alpha}^{\beta} \sqrt{\phi'(t)^2 + \psi'(t)^2} \dd t \\
+  a = \phi(\alpha), b = \phi(\beta)
+\end{align*}
+
+\begin{remark}\label{arc-diff-param}
+  Таким образом, дифференциал дуги в при параметрическом задании будет равен
+  
+  \begin{align*}
+    \dd l = \sqrt{\phi'(t)^2 + \psi'(t)^2} \dd t \\
+    x = \phi(t), y = \psi(t) \\
+  \end{align*}
+\end{remark}

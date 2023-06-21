@@ -1,0 +1,122 @@
+\question{Интегрирование рациональных функций. Интегрирование простейших дробей 1,2,3.}\label{int-basic-frac}
+
+\begin{itemize}
+\item Интегрирование простейших дробей \(I\)-ого типа
+
+\begin{align*}
+  \int \frac{A}{x - a}\dd x
+  = A \int \frac{\dd (x - a)}{x - a}
+  = \ln \abs{x - a} + C
+\end{align*}
+
+\item Интегрирование простейших дробей \(II\)-ого типа
+
+\begin{align*}
+  \int \frac{A}{(x - a)^{k}}\dd x
+  = A \int (x - a)^{-k} \dd (x - a)
+  = \frac{A}{1 - k} \cdot (x - a)^{1 - k}
+  =\frac{A}{1 - k} \cdot \frac{1}{(x - a)^{k - 1}}
+\end{align*}
+
+\item Интегрирование простейших дробей \(III\)-его типа
+
+\begin{align}\label{eq:int-basic-frac-3}\tag{1}
+  \int \frac{Mx + N}{x^2 + px + q} \dd x
+\end{align}
+
+Попытаемся внести числитель под дифференциал:
+
+\begin{align*}
+  \dd (x^2 + px + q) = (2x + p) \dd x \\
+  (Mx + N)
+  = \frac{M}{2} \left( 2x + \frac{2N}{M} \right)
+  = \frac{M}{2} \left( 2x + p + \frac{2N}{M} - p \right)
+  = \frac{M}{2} (2x + p) + \under{\left( N - \frac{Mp}{2} \right)}{h}
+\end{align*}
+
+Подставим это в \eqref{eq:int-basic-frac-3}:
+
+\begin{align*}
+  \int \frac{\frac{M}{2} (2x + p) + h}{x^2 + px + q} \dd x =
+  \frac{M}{2} \cdot \int \frac{2x + p}{x^2 + px + q} \dd x + \int \frac{h}{x^2 + px + q} \dd x
+\end{align*}
+
+Далее вычислим каждый из интегралов по-отдельности:
+
+\begin{align*}
+  \frac{M}{2} \cdot \int \frac{2x + p}{x^2 + px + q} \dd x =
+  \frac{M}{2} \cdot \int \frac{\dd (x^2 + px + q)}{x^2 + px + q} =
+  \frac{M}{2} \cdot \ln \abs{x^2 + px + q} + C
+  \\
+  \int \frac{h}{x^2 + px + q} \dd x =
+  h \cdot \int \frac{1}{(x + \sfrac{p}{2})^2 +
+    \under{q - (\sfrac{p}{2})^2}{g^2}
+  } \dd x =
+  \frac{h}{g} \cdot \arctg \left(\frac{x + \sfrac{p}{2}}{g}\right) + C
+\end{align*}
+
+Подставим полученные выражения в исходный интеграл \eqref{eq:int-basic-frac-3}:
+
+\begin{align*}
+  \int \frac{Mx + N}{x^2 + px + q} \dd x =  
+  \frac{M}{2} \cdot \ln \abs{x^2 + px + q} +
+  \frac{h}{g} \cdot \arctg \left(\frac{x + \sfrac{p}{2}}{g}\right) + C \\
+  h = \left(N - \frac{Mp}{2} \right), g^2 = q - \left(\frac{p}{2}\right)^2
+\end{align*}
+
+\item Интегрирование простейших дробей \(IV\)-его типа
+
+\begin{example}
+  \begin{align*}\label{eq:int-basic-frac-4-1}\tag{1}
+    \int \frac{\dd x}{(x^2 + 1)^2} =
+    \int \frac{x^2 + 1 - x^2}{(x^2 + 1)^2} \dd x =
+    \int \frac{\dd x}{x^2 + 1} - \int \frac{x^2}{(x^2 + 1)^2} \dd x
+  \end{align*}
+  
+  Первый из полученных интегралов мы уже вычислить, это простейшая дробь
+  \(III\)-ого типа. Таким образом этот интеграл будет равен \(\arctg x + C\).
+  Далее работаем со вторым интегралом:
+  
+  \begin{align*}\label{eq:int-basic-frac-4-2}\tag{2}
+    \int \frac{x^2}{(x^2 + 1)^2} \dd x =
+    \frac{1}{2} \cdot \int \frac{x \dd (x^2 + 1)}{(x^2 + 1)^2} =
+    \left[
+      \frac{\dd t}{t^2} = -\dd \left(\frac{1}{t}\right)
+    \right] =
+    -\frac{1}{2} \cdot \int x \cdot \dd \left( \frac{1}{x^2 + 1} \right) 
+  \end{align*}
+  
+  Полученный интеграл возьмем по частям:
+  
+  \begin{align*}\label{eq:int-basic-frac-4-3}\tag{3}
+    \int \under{x}{u} \dd \under{\left(\frac{1}{x^2 + 1}\right)}{v} =
+    \frac{x}{x^2 + 1} - \int \frac{\dd x}{x^2 + 1} =
+    \frac{x}{x^2 + 1} - \arctg x + C 
+  \end{align*}
+  
+  Подставим \eqref{eq:int-basic-frac-4-3} в \eqref{eq:int-basic-frac-4-2}, а
+  полученное выражение в исходный интеграл \eqref{eq:int-basic-frac-4-1}:
+  
+  \begin{align*}
+    \int \frac{\dd x}{(x^2 + 1)^2} =
+    \int \frac{\dd x}{x^2 + 1} - \int \frac{x^2}{(x^2 + 1)^2} \dd x = \\
+    \arctg x + \frac{1}{2} \left(\frac{x}{x^2 + 1} - \arctg x\right) + C = \\
+    \frac{1}{2} \arctg x + \frac{x}{2 (x^2 + 1)} + C
+  \end{align*}
+  
+  \begin{remark}
+    В случаях с более высокой степенью каждая подобная итерация будет приводить
+    к уменьшению степени знаменателя на единицу. Обычно подобные интегралы
+    раскладываются с помощью подведения под дифференциал и линейности, после
+    чего используется следующая рекуррентная формула:
+
+    \begin{align*}
+      I_{n}
+      = \int \frac{\dd x}{(x^2 + a^2)^n}
+      = \frac{x}{2 a^2 (n - 1) (x^2 + a^2)^{n - 1}}
+        + \frac{2n - 3}{2 a^2 (n - 1)} \cdot I_{n - 1}
+    \end{align*}
+  \end{remark}
+\end{example}
+
+\end{itemize}

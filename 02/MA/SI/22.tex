@@ -1,0 +1,49 @@
+\question{Признаки сходимости несобственных интегралов: второй признак сравнения (предельный).}
+
+\begin{theorem}
+  Пусть \(f(x), g(x) \colon [a; +\infty] \to \RR\) и \(f(x) > 0, g(x) > 0\).
+  Тогда если предел
+
+  \begin{align*}
+    \lim_{x \to +\infty} \frac{f(x)}{g(x)} = r \in \RR \setminus \{ 0 \} 
+  \end{align*}
+
+  существует, конечен и не равен нулю, то функции оба интеграла
+  \(\int_{a}^{+\infty} f(x) \dd x\), \(\int_{a}^{+\infty} g(x) \dd x\)
+  ведут себя одинаково в плане сходимости (т.е. либо оба сходятся, либо оба
+  расходятся).
+\end{theorem}
+\begin{proof}
+  По определению предела получаем:
+
+  \begin{align*}
+    \lim_{x \to +\infty} \frac{f(x)}{g(x)} = r
+    \iff
+    \forall \epsilon > 0 \exists \delta > 0 \mid
+    \forall x \in [a; +\infty], x > \delta \colon
+    \abs{\frac{f(x)}{g(x)} - r} < \epsilon
+    \\
+    r - \epsilon < \frac{f(x)}{g(x)} < r + \epsilon \mid \cdot \; g(x) > 0
+    \\
+    (r - \epsilon) g(x) < f(x) < (r + \epsilon) g(x)
+  \end{align*}
+
+  Далее используем признак сравнения в неравенствах (\ref{cnv-cmp}). Рассмотрим
+  два случая:
+
+  \begin{align*}
+    \lets \int_{a}^{+\infty} f(x) \dd x \converge
+    \implies \int_{a}^{+\infty} (r - \epsilon) g(x) \dd x \converge
+  \end{align*}
+
+  Т.к. \(r \in \RR\), а \(\epsilon > 0\) произвольное положительное число, то
+  интеграл \(\int_{a}^{+\infty} g(x) \dd x\) также будет сходится. Второй случай
+  рассматривается аналогично:
+
+  \begin{align*}
+    \lets \int_{a}^{+\infty} f(x) \dd x \notconverge
+    \implies \int_{a}^{+\infty} (r + \epsilon) g(x) \dd x \notconverge
+    \implies \int_{a}^{+\infty} g(x) \dd x \notconverge
+  \end{align*}
+\end{proof}
+

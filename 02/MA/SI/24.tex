@@ -1,0 +1,93 @@
+\question{Сходимость интегралов 1-го и 2-го рода от степенных функций.}
+
+\begin{definition}
+  Интегралы, про сходимость которых известно, называются \textit{эталонными}.
+  Обычно они используются в признаках сравнения.
+\end{definition}
+
+Исследуем на сходимость интеграл
+\(\displaystyle \int_{1}^{+\infty} \frac{\dd x}{x^{\alpha}}\).
+Рассмотрим три случая:
+
+\begin{align*}
+  \alpha = 1 &
+  \qquad
+  \int_{1}^{+\infty} \frac{\dd x}{x}
+  = \ln \abs{x} \bigg\vert_{1}^{+\infty}
+  & \implies \int_{1}^{+\infty} \frac{\dd x}{x} \notconverge
+  \\
+  \alpha > 1 &
+  \qquad
+  \int_{1}^{+\infty} \frac{\dd x}{x^{\alpha}}
+  = \left(\frac{x^{1 - \alpha}}{1 - \alpha}\right) \bigg\vert_{1}^{+\infty}
+  = \frac{1}{1 - \alpha} \lim_{x \to \infty} x^{1 - \alpha}
+    - \frac{1}{1 - \alpha}
+    & \implies \int_{1}^{+\infty} \frac{\dd x}{x^{\alpha}} \converge
+  \\
+  \alpha < 1 &
+  \qquad
+  \int_{1}^{+\infty} \frac{\dd x}{x^{\alpha}}
+  = \left(\frac{x^{1 - \alpha}}{1 - \alpha}\right) \bigg\vert_{1}^{+\infty}
+  = \frac{1}{1 - \alpha} \lim_{x \to \infty} x^{1 - \alpha}
+    - \frac{1}{1 - \alpha}
+  & \implies \int_{1}^{+\infty} \frac{\dd x}{x^{\alpha}} \notconverge
+\end{align*}
+
+Исследуем на сходимость интеграл
+\(\displaystyle \int_{a}^{b} \frac{\dd x}{(x - a)^{\alpha}}\).
+Также рассмотрим три случая:
+
+\begin{align*}
+  \alpha = 1 &
+  \qquad
+  \int_{a}^{b} \frac{\dd x}{(x - a)}
+  = \ln \abs{x - a} \bigg\vert_{a}^{b}
+  & \implies \int_{a}^{b} \frac{\dd x}{x - a} \notconverge
+  \\
+  \alpha > 1 &
+  \qquad
+  \int_{a}^{b} \frac{\dd x}{(x - a)^{\alpha}}
+  = \frac{(x - a)^{1 - \alpha}}{1 - \alpha} \bigg\vert_{a}^{b}
+  = \frac{(b - a)^{1 - \alpha}}{1 - \alpha} -
+    \lim_{x \to a+} \frac{(x - a)^{1 - \alpha}}{1 - \alpha}
+  & \implies \int_{a}^{b} \frac{\dd x}{(x - a)^{\alpha}} \notconverge
+  \\
+  \alpha < 1 &
+  \qquad
+  \int_{a}^{b} \frac{\dd x}{(x - a)^{\alpha}}
+  = \frac{(x - a)^{1 - \alpha}}{1 - \alpha} \bigg\vert_{a}^{b}
+  = \frac{(b - a)^{1 - \alpha}}{1 - \alpha} -
+    \lim_{x \to a+} \frac{(x - a)^{1 - \alpha}}{1 - \alpha}
+  & \implies \int_{a}^{b} \frac{\dd x}{(x - a)^{\alpha}} \converge
+\end{align*}
+
+Аналогично можно исследовать сходимость интеграла
+\(\displaystyle \int_{a}^{b} \frac{\dd x}{(b - x)^{\alpha}}\).
+Таким образом получаем:
+
+\begin{align*}
+  \int_{1}^{+\infty} \frac{\dd x}{x^{\alpha}} \converge \; \alpha > 1 
+  \qquad
+  \int_{a}^{b} \frac{\dd x}{(x - a)^{\alpha}} \converge \; \alpha < 1
+  \qquad
+  \int_{a}^{b} \frac{\dd x}{(b - x)^{\alpha}} \converge \; \alpha < 1
+  \\
+  \int_{a}^{+\infty} \frac{\dd x}{x^{\alpha}} \notconverge \; \alpha \le 1
+  \qquad
+  \int_{a}^{b} \frac{\dd x}{(x - a)^{\alpha}} \notconverge \; \alpha \ge 1
+  \qquad
+  \int_{a}^{b} \frac{\dd x}{(b - x)^{\alpha}} \notconverge \; \alpha \ge 1
+\end{align*}
+
+\begin{remark}
+  Как правило для проверки на сходимость интегралов разного вида используют
+  разные эталонные интегралы:
+
+  \begin{align*}
+    \int_{a}^{+\infty} f(x) \dd x
+      \longrightarrow \int_{1}^{+\infty} \frac{\dd x}{x^{\alpha}}
+    \\
+    \int_{a}^{b} f(x) \dd x
+      \longrightarrow \int_{a}^{b} \frac{\dd x}{(x - a)^{\alpha}}
+  \end{align*}
+\end{remark}

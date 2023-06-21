@@ -1,0 +1,44 @@
+\begin{tikzpicture}
+  \draw[very thin, gray!30, step = 1cm] (-0.5, -0.5) grid (7.5, 5.5);
+
+  \draw[thick] [->] (0, 0) -- (7, 0) node[right, below] {\(x\)};
+  \draw[thick] [->] (0, 0) -- (0, 5) node[above, left] {\(y\)};
+
+  \begin{scope}[
+    decoration = {
+      markings,
+      mark = at position 0.85 with {\arrow[line width = 1pt]{>}}
+    }
+  ]
+    \draw[postaction = { decorate }] (3.5, 2.5) ellipse (2.5cm and 1.5cm);
+  \end{scope}
+
+  \draw node[below] at (1, 0) {\(a\)};
+  \draw node[below] at (6, 0) {\(b\)};
+  \draw[dashed] (1, 0) -- (1, 2.5);
+  \draw[dashed] (6, 0) -- (6, 2.5);
+
+  \draw node[left] at (0, 1) {\(\alpha\)};
+  \draw node[left] at (0, 4) {\(\beta\)};
+  \draw[dashed] (0, 1) -- (4, 1);
+  \draw[dashed] (0, 4) -- (4, 4);
+
+  \draw node[left] at (1, 2.5) {\(M\)};
+  \draw node[above] at (3.5, 4) {\(L\)};
+  \draw node[right] at (6, 2.5) {\(N\)};
+  \draw node[below] at (3.5, 1) {\(A\)};
+
+  \draw[draw = none] (6, 2.5) arc (0 : 180 : 2.5cm and 1.5cm)
+    node[pos = 0.4, below, sloped] {\(y_{2}(x)\)};
+  \draw[draw = none] (1, 2.5) arc (180 : 360 : 2.5cm and 1.5cm)
+    node[pos = 0.4, above, sloped] {\(y_{1}(x)\)};
+
+  \draw[draw = none] (3.5, 1) arc (-90 : 90 : 2.5cm and 1.5cm)
+    node[pos = 0.3, above, sloped] {\(x_{2}(y)\)};
+  \draw[draw = none] (3.5, 4) arc (90 : 270 : 2.5cm and 1.5cm)
+    node[pos = 0.3, below, sloped] {\(x_{1}(y)\)};
+  
+  \draw node at (3.5, 2.5) {\(D\)};
+  \draw node at (5, 1) {\(K^{+}\)};
+
+\end{tikzpicture}

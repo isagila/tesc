@@ -1,0 +1,94 @@
+%% based on https://tex.stackexchange.com/questions/488865/3d-volume-in-tikz/488869#488869
+
+\tdplotsetmaincoords{60}{110}
+\begin{tikzpicture}[
+  tdplot_main_coords,
+  >= stealth,
+  declare function = {
+    pfft(\x) = pi + 0.3 * sin(deg(\x));
+  }
+]
+  \draw[->] (0, 0, 0) coordinate (O) -- (3, 0, 0) coordinate(X)
+    node[pos = 1.1] {\(x\)};
+  \draw[->] (O) -- (0, 5, 0)
+    node[pos = 1.1] {\(y\)};
+  \draw[->] (O) -- (0, 0, 4)
+    node[pos = 1.1] {\(z\)};
+
+  \draw[thick] plot[
+    variable = \x,
+    domain = 0.8 * pi : 1.2 * pi,
+    smooth
+  ] (2.2, \x, { pfft(2 * \x) }) coordinate (T1)
+  -- plot[
+    variable = \x,
+    domain = 1.2 * pi : 0.8 * pi,
+    smooth
+  ] (0.8, \x, { pfft(2 * \x) }) coordinate (T3)
+  -- cycle;
+
+  \draw[dashed] (2.2, 0.8 * pi, 0) coordinate (B4)
+  -- (2.2, 1.2 * pi, 0) coordinate (B1)
+  -- (0.8, 1.2 * pi, 0) coordinate (B2)
+  -- (0.8, 0.8 * pi, 0) coordinate (B3)
+  -- cycle;
+
+  \path (2.2, 0.8 * pi, { pfft(2 * 0.8 * pi) }) coordinate (T4)
+    (0.8, 1.2 * pi,{ pfft(2 * 1.2 * pi) }) coordinate (T2);
+
+  \foreach \X in {1, ..., 4} {
+    \draw[dashed] (B\X) -- (T\X);
+  }
+
+  \path[
+    opacity = 0.3,
+    left color = blue,
+    right color = blue,
+    middle color = blue!20,
+    shading angle = 72
+  ] plot[
+    variable = \x,
+    domain = 0 : 1.1 * pi,
+    smooth
+  ] (3, \x, { pfft(2 * \x) })
+  -- plot[
+    variable = \x,
+    domain = 1.1 * pi : 0,
+    smooth
+  ] (0, \x, { pfft(2 * \x) })
+  -- cycle;
+
+  \path[
+    opacity = 0.3,
+    left color = blue,
+    right color = blue,
+    middle color = blue!20,
+    shading angle = 72
+  ] plot[
+    variable = \x,
+    domain = 1.1 * pi : 2.2 * pi,
+    smooth
+  ] (3, \x, { pfft(2 * \x) })
+  -- plot[
+    variable = \x,
+    domain = 2.2 * pi : 1.1 * pi,
+    smooth
+  ] (0, \x, { pfft(2 * \x) })
+  -- cycle;
+
+  \draw plot[
+    variable = \x,
+    domain = 0 : 2.2 * pi,
+    smooth
+  ] (3, \x, { pfft(2 * \x) })
+  -- plot[
+    variable = \x,
+    domain = 2.2 * pi : 0,
+    smooth
+  ] (0, \x, { pfft(2 * \x) })
+  -- cycle;
+
+  \draw node at (1.1, 3, 2.9) {\(\dd \sigma\)};
+  \draw node at (0, 3, 4.3) {\(S \colon z = z(x, y)\)};
+  \draw node at (1.55, 3.05, 0) {\(D_{xy}\)};
+\end{tikzpicture}

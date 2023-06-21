@@ -1,0 +1,62 @@
+\question{Несобственные интегралы 1-го рода (на неограниченном промежутке). Определение и свойства.}
+
+\begin{definition}\label{imp-int-1}
+  Интеграл от функции на неограниченном промежутке называет несобственным
+  интегралом 1-ого рода.
+
+  \begin{align*}
+    \int_{a}^{+\infty} f(x) \dd x
+    \bydef
+    \lim_{\beta \to +\infty} \int_{a}^{\beta} f(x) \dd x
+    \\
+    \int_{-\infty}^{a} f(x) \dd x
+    \bydef
+    \lim_{\beta \to -\infty} \int_{\beta}^{a} f(x) \dd x
+    \\
+    \int_{-\infty}^{+\infty} f(x) \dd x
+    \bydef
+    \int_{-\infty}^{c} f(x) \dd x + \int_{c}^{+\infty} f(x) \dd x, \; c \in \RR
+  \end{align*}
+\end{definition}
+
+\begin{definition}
+  Если предел в определении \ref{imp-int-1} существует и конечен, то говорят,
+  что интеграл \textit{сходится} (\(\converge\)), в противном случае говорят, что
+  интеграл \textit{расходится} (\(\notconverge\)).
+\end{definition}
+
+Несобственные интегралы 1-ого рода обладают теми же свойствами, что и
+рассмотренные ранее интегралы:
+\begin{enumerate}
+  \item Линейность
+  
+  \begin{align*}
+    \int_{a}^{b} (\lambda f(x) + \mu g(x)) \dd x =
+    \lambda \int_{a}^{b} f(x) \dd x + \mu \int_{a}^{b} g(x) \dd x
+  \end{align*}
+
+  \item Аддитивность
+  
+  \begin{align*}
+    \int_{a}^{b} f(x) \dd x =
+    \int_{a}^{c} f(x) \dd x + \int_{c}^{b} f(x) \dd x
+  \end{align*}
+
+  \item Сравнение
+  
+  \begin{align*}
+    \forall x \in [a; +\infty] \colon f(x) \ge g(x)
+    \implies \int_{a}^{+\infty} f(x) \dd x \ge \int_{a}^{+\infty} g(x) \dd x
+  \end{align*}
+\end{enumerate}
+
+\begin{remark}
+  Если 
+  \begin{align*}
+    \int_{-\infty}^{+\infty} f(x) \dd x
+    =
+    \int_{-\infty}^{c} f(x) \dd x + \int_{c}^{+\infty} f(x) \dd x
+  \end{align*}
+  и при этом один из двух полученных интегралов расходится, то расходится и
+  изначальный интеграл.
+\end{remark}

@@ -1,0 +1,13 @@
+\begin{tikzpicture}[
+  decoration = {
+    markings,
+    mark = between positions 0.1 and 1 step 30pt with
+      {\arrow[line width = 1pt]{>}}
+  }
+] 
+  \foreach \h in {0, 1, 2} {
+    \draw[postaction = { decorate }] (0, \h) ellipse (1 and 0.3);
+  };
+  \draw[dashed] (-1, 0) -- (-1, 2);
+  \draw[dashed] (1, 0) -- (1, 2);
+\end{tikzpicture}

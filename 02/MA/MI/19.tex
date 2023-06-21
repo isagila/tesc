@@ -1,0 +1,146 @@
+\question{Скалярное и векторное поля: определения, геометрические характеристики. Дифференциальные и интегральные характеристики полей (определения).}
+
+\begin{definition}
+  Скалярная функция \(u = u(x, y, z) \colon \RR^3 \to R\) называется скалярным
+  полем.
+\end{definition}
+
+\begin{definition}
+  Тройка скалярных функций \(P(x, y, z)\), \(Q(x, y, z)\), \(R(x, y, z)\),
+  действующих из \(\RR^3\) в \(\RR\) определяют векторное поле, т.е. векторную
+  величину \(\vec{F} = (P, Q, R)\), действующую в каждой точке пространства.
+\end{definition}
+
+\bgroup
+\def\arraystretch{1.5}
+\begin{tabularx}{\linewidth}{
+  >{\hsize = 0.18\hsize}X |
+  >{\hsize = 0.41\hsize}X |
+  >{\hsize = 0.41\hsize}X
+}
+  & Скалярное поле
+  & Векторное поле
+  \\ \hline
+  Геометрические характеристики
+  &
+    Линии (поверхности) уровня \(u(x, y) = const\).
+  &
+    Векторные линии и векторные трубки
+  \\ \hline
+  Дифференциальные характеристики
+  & 
+    Производная по направлению и градиент
+
+    \begin{align*}
+      \frac{\partial u}{\partial s} = \grad u \cdot \vec{s}_{0}\\
+      \vec{\text{grad}} u = \grad u = \left(
+        \frac{\partial u}{\partial x};
+        \frac{\partial u}{\partial y};
+        \frac{\partial u}{\partial z}
+      \right)
+    \end{align*}
+  &
+    Дивергенция и ротор(вихрь)
+
+    %% если поставить здесь align*, то все сломается
+    \[
+      \div \vec{F} \bydef 
+        \frac{\partial P}{\partial x} + 
+        \frac{\partial Q}{\partial y} +
+        \frac{\partial R}{\partial z}
+      \bydef \grad \cdot \vec{F}
+    \]
+
+    \[
+      \rot \vec{F} \bydef 
+        \begin{vmatrix}
+          \vec{i} & \vec{j} & \vec{k} \\
+          \grad_{x} & \grad_{y} & \grad_{z} \\
+          \vec{F}_{x} & \vec{F}_{y} & \vec{F}_{z}
+        \end{vmatrix}
+      \bydef \grad \times \vec{F}
+    \]
+  \\ \hline
+  Интегральные характеристики
+  &
+   \todo Кажется их нет
+  &
+    Поток и циркуляция
+
+    \begin{align*}
+      \flow 
+      \bydef \iint_{S} \vec{F} \vec{n}_{0} \dd \sigma
+      \bydef \iint_{S} \vec{F}_{n} \dd \sigma
+      \\
+      \circulation = \oint_{L} \vec{F} \vec{\dd l}
+    \end{align*}
+\end{tabularx}
+\egroup
+
+\begin{definition}
+  Векторная линия векторного поля это кривая, в каждой точке которой вектор поля
+  \(\vec{F}\) является касательным к ней.
+\end{definition}
+
+\begin{definition}
+  Объединении непересекающихся векторных линий называется векторной трубкой.
+\end{definition}
+
+\begin{remark}
+  Отыскание векторных линий сводится к нахождению интегральных кривых из условия
+
+  \begin{align*}
+    \frac{\dd x}{P} = \frac{\dd y}{Q} = \frac{\dd z}{R}
+  \end{align*}
+\end{remark}
+
+\begin{example}
+  Дано векторное поле \(\vec{F} = y \vec{i} - x \vec{j}\). Требуется найти
+  векторную линию, проходящую через \(M_{0}(1, 0)\).
+  
+  В данном примере \(P(x, y) = y\), а \(Q(x, y) = -x\). Составим ДУ и решим его:
+
+  \begin{align*}
+    \frac{\dd x}{y} = \frac{\dd y}{-x}
+    \implies x \dd x + y \dd y = 0 
+    \implies \frac{x^2}{2} + \frac{y^2}{2} = C
+  \end{align*}
+
+  Подставим начальные условия \(y(1) = 0\):
+
+  \begin{align*}
+    \begin{cases}
+      x^2 + y^2 = 2C \\
+      1 + 0 = 2C
+    \end{cases}
+    \implies x^2 + y^2 = 1
+  \end{align*}
+\end{example}
+
+\begin{definition}
+  Оператор Гамильтона/Набла
+
+  \begin{align*}
+    \grad = \left(
+      \frac{\partial}{\partial x};
+      \frac{\partial}{\partial y};
+      \frac{\partial}{\partial z}
+    \right)
+  \end{align*}
+\end{definition}
+
+\begin{definition}
+  Оператор Лапласа (лапласиан)
+
+  \begin{align*}
+    \laplacian
+    = \grad^2
+    = \left(
+      \frac{\partial^2}{\partial x^2};
+      \frac{\partial^2}{\partial y^2};
+      \frac{\partial^2}{\partial z^2}
+    \right)
+  \end{align*}
+\end{definition}
+
+

@@ -1,0 +1,10 @@
+\begin{tikzpicture}
+  \draw[very thin, gray!30, step = 1cm] (0, 0) grid (5, 4);
+  \draw[domain = 1 : 4, variable = \x]
+    plot ({\x}, {3 / (1 + e^(2 - \x))});
+
+  \draw[dashed] (1, 0) -- (1, 0.807);
+  \draw[dashed] (4, 0) -- (4, 2.642);
+  \draw node[below] at (1, 0) {\(a\)};
+  \draw node[below] at (4, 0) {\(x\)};
+\end{tikzpicture}

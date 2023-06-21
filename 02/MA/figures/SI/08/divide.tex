@@ -1,0 +1,11 @@
+\begin{tikzpicture}
+  \def\Shift{6}
+  \fill[lightgray] plot [smooth cycle] coordinates {
+    (0, 0) (1, 1) (3, 1) (2, 0) (2, -1)
+  };
+  \draw[->, line width = 1mm] (\Shift - 2, 0) -- (\Shift - 1, 0);
+  \fill[lightgray] plot [smooth cycle] coordinates {
+    (\Shift, 0) (\Shift + 1, 1) (\Shift + 3, 1) (\Shift + 2, 0) (\Shift + 2, -1)
+  };
+  \draw[step = 0.5, red, thin] (\Shift - 0.2, -1.2) grid (\Shift + 3.2, 1.7);
+\end{tikzpicture}

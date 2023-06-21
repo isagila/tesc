@@ -1,0 +1,46 @@
+\question{Приложения определенного интеграла: вычисление площади криволинейного сектора в полярных координатах.}
+
+\begin{twocolumns}
+  \input{figures/SI/14/curve_sec_square.tex}
+  \columnbreak
+
+  Построим интеграл:
+  \begin{enumerate}
+    \item Дробление отрезка \([\alpha, \beta]\) на подотрезки
+      \([\phi_{i - 1}, \phi_{i}]\), \(\tau = \max \Delta \phi_{i}\).
+
+    \item В каждом отрезке выбираем среднюю точку \(\xi_{i}\). Ищем
+      \(\rho(\xi_{i})\), приближаем площадь элементарного сектора площадью
+      кругового.
+    
+      \begin{align*}
+        S_{sec}
+        = \frac{\pi \rho^2(\xi_{i})}{2 \pi} \cdot \Delta \phi_{i}
+        = \frac{1}{2} \rho^2(\xi_{i}) \Delta \phi_{i}
+      \end{align*}
+
+    \item Площадь это предел интегральных сумм
+    
+    \begin{align*}
+      S = \lim_{\substack{n \to \infty \\ \tau \to 0}}
+        \sum_{i = 1}^{n} \frac{1}{2} \rho^2(\xi_{i}) \Delta \phi_{i}
+    \end{align*}
+    
+    \item Переход к интегралу
+    \begin{align*}
+      S = \frac{1}{2} \int_{\alpha}^{\beta} \rho^2(\phi) \dd \phi
+    \end{align*}
+  \end{enumerate}
+\end{twocolumns}
+
+\begin{remark}
+  Если кривая задана параметрически \(x = \phi(t), y = \psi(t)\), то площадь
+  можно вычислить по формуле:
+
+  \begin{align*}
+    S
+    = \int_{a}^{b} f(x) \dd x
+    = \int_{\alpha}^{\beta} \psi(t) \phi'(t) \dd t \\
+    a = \phi(\alpha), b = \phi(\beta)
+  \end{align*}
+\end{remark}

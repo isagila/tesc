@@ -1,0 +1,39 @@
+\question{Замена переменной в определенном интеграле. Интегрирование по частям.}
+
+Замена в определенном интеграле выполняется также, как и в неопределенном за
+исключением смены пределов интегрирования. Более формально:
+
+\begin{align*}
+  \int_{a}^{b} f(x) \dd x = \int_{\alpha}^{\beta} f(\phi(t)) \phi'(t) \dd t \\
+  \phi(\alpha) = a, \phi(\beta) = b
+\end{align*}
+
+Интегрирование по частям для определенных интегралов выполняется также, как и
+для неопределенных:
+
+\begin{align*}
+  \int_{a}^{b} u \dd v = u v \bigg\vert_{a}^{b} - \int_{a}^{b} v \dd u
+\end{align*}
+
+Стоит отметить несколько свойств определенных интегралов для четных и нечетных
+функций на симметричном промежутке:
+
+\begin{twocolumns}
+  \begin{lemma}
+    Если \(f(x)\) нечетная функция, то
+
+    \begin{equation*}
+      \int_{-a}^{a} f(x) \dd x = 0
+    \end{equation*}
+  \end{lemma}
+  
+  \begin{lemma}
+    Если \(f(x)\) четная функция, то
+    
+    \begin{align*}
+      \int_{-a}^{a} f(x) \dd x = 2 \int_{0}^{a} f(x) \dd x
+    \end{align*}
+  \end{lemma}  
+\end{twocolumns}
+
+\input{figures/SI/12/even_odd_int_prop.tex}

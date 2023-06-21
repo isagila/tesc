@@ -1,0 +1,124 @@
+\question{Замена переменной в неопределенном интеграле. Интегрирование по частям.}
+
+\begin{remark}
+  Таблица интегралов
+
+  \begin{align*}
+    \int 0 \dd x & = C
+    && \qquad &
+      \int \frac{\dd x}{\sin^2 x} & = -\ctg x + C
+    \\
+      \int 1 \dd x & = x + C
+    && \qquad &
+      \int \frac{\dd x}{\cos^2 x} & = \tg x + C
+    \\
+      \int x^n \dd x & = \frac{x^{n + 1}}{n + 1} + C,
+      & \hspace{6pt} n \neq -1, x > 0
+    & \qquad &
+      \int \frac{\dd x}{\sqrt{a^2 - x^2}} & = \arcsin \frac{x}{a} + C,
+      & \hspace{6pt} \abs{x} < \abs{a}
+    \\
+      \int \frac{\dd x}{x} & = \ln \abs{x} + C
+    && \qquad &
+      \int \frac{\dd x}{a^2 + x^2} & = \frac{1}{a} \arctg \frac{x}{a} + C
+    \\
+      \int a^{x} \dd x & = \frac{a^{x}}{\ln a} + C
+    && \qquad &
+      \int \frac{\dd x}{a^2 - x^2}
+      & = \frac{1}{2a} \ln \abs{\frac{a + x}{a - x}} + C,
+      & \hspace{6pt} \abs{x} \neq a
+    \\
+      \int e^{x} \dd x & = e^{x} + C
+    && \qquad &
+      \int \frac{\dd x}{\sqrt{x^2 \pm a^2}}
+      & = \ln \abs{x + \sqrt{x^2 \pm a^2}} + C
+    \\
+      \int \sin x \dd x & = -\cos x + C
+    && \qquad &
+      \int \cos x \dd x & = \sin x + C
+  \end{align*}
+\end{remark}
+
+\begin{remark}
+  Интеграл сохраняет инвариантность своей формы, т.е.
+
+  \begin{align*}
+    \int f(\clubsuit) \dd \clubsuit = F(\clubsuit) + C
+  \end{align*}
+\end{remark}
+
+\begin{theorem}\label{ad-rep}
+  О замене производной в неопределенном интеграле
+
+  Если \(x = \phi(t)\), где \(\phi(t)\) обратимая и дифференцируемая
+  функция, то
+
+  \begin{align*}
+    \int f(x) \dd x = \int f(\phi(t)) \phi'(t) \dd t
+  \end{align*}
+\end{theorem}
+\begin{proof}
+  Возьмем производные от обоих частей:
+
+  \begin{align*}
+    \left( \int f(x) \dd x \right)'_{x} = f(x) \\
+    \left( \int f(\phi(t)) \phi'(t) \dd t \right)'_{x} =
+    \left( \int f(\phi(t)) \phi'(t) \dd t \right)'_{t} \frac{\dd t}{\dd x}
+    \eqby{\ref{ad-prop-2}}
+    f(\phi(t)) \phi'(t) \frac{\dd t}{\dd x} =
+    f(\phi(t)) \phi'(t) \frac{1}{\phi'(t)} =
+    f(\phi(t)) =
+    f(x)
+  \end{align*}
+\end{proof}
+
+\begin{remark}
+  Формула работает в обе стороны:
+
+  \begin{align*}
+    \int \frac{e^{\sqrt{x}}}{\sqrt{x}} \dd x
+    \eqby{\(\sqrt{x} = t\)}
+    \int \frac{e^{t}}{t} 2t \dd t =
+    2 e^{t} + C =
+    2 e^{\sqrt{x}} + C
+  \end{align*}
+
+  \begin{align*}
+    \int e^{x^{2}} \under{2x \dd x}{\dd x^2}
+    \eqby{\(x^2 = t\)}
+    \int e^{t} \dd t =
+    e^{t} + C =
+    e^{x^2} + C
+  \end{align*}
+\end{remark}
+
+\begin{theorem}
+  Интегрирование по частям
+
+  \begin{align*}
+    \int u \dd v = u v - \int v \dd u
+  \end{align*}
+\end{theorem}
+\begin{proof}
+  Рассмотрим равенство \((u v)' = u' v + u v'\) и проинтегрируем обе его части:
+
+  \begin{align*}
+    (u v)' = u' v + u v'
+    \\
+    \int (u v)' \dd x = \int (u' v + u v') \dd x
+    \\
+    u v = \int u' v \dd x + \int u v' \dd x
+      \tag*{Линейность интеграла (\ref{ad-prop-3})}
+    \\
+    u v = \int v \dd u + \int u \dd v
+      \tag*{Внесение под дифференциал (\ref{ad-rep})}
+    \\
+    \int u \dd v = u v - \int v \dd u
+  \end{align*}
+\end{proof}
+
+\begin{remark}
+  Интегрирование по частям используется если \(\int v \dd u\) вычисляется проще,
+  чем интеграл \(\int u \dd v\). В качестве функции \(u\) выбирают ту, которая
+  упрощается при дифференцировании.
+\end{remark}

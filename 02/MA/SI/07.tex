@@ -1,0 +1,70 @@
+\question{Интегрирование некоторых иррациональных функций, метод тригонометрической подстановки.}
+
+\begin{itemize}
+\item Интегралы вида \(\int R(\sqrt{x^2 \pm 1}, x) \dd x\) решаются с помощью
+замены \(x\) на гиперболическую функцию:
+
+\begin{align*}
+  \sinh u = \frac{e^u - e^{-u}}{2} \qquad
+  \cosh u = \frac{e^u + e^{-u}}{2}
+\end{align*}
+
+Данные функции называются гиперболическим синусом и гиперболическим косинусом
+соответственно.
+
+\begin{lemma}
+  Основное гиперболическое тождество
+
+  \begin{align*}
+    \cosh^2 u - \sinh^2 u = 1
+  \end{align*}
+\end{lemma}
+\begin{proof}
+  \begin{align*}
+    \cosh^2 u - \sinh^2 u=
+    \left(\frac{e^{u} + e^{-u}}{2}\right)^2
+      - \left(\frac{e^{u} - e^{-u}}{2}\right)^2 =
+    \frac{1}{4} \left(e^{2u} + 2 + e^{-2u} - e^{2u} + 2 - e^{-2u} \right) = 1
+  \end{align*}
+\end{proof}
+
+\begin{remark}\label{hpr-rep}
+  Заметим, что
+
+  \begin{align*}
+    \ln \abs{\sinh u + \cosh u}
+    = \ln \abs{\frac{e^u - e^{-u}}{2} + \frac{e^u + e^{-u}}{2}}
+    = \ln e^{u}
+    = u
+  \end{align*}
+\end{remark}
+
+\begin{example}
+  Вычислим 'длинный' логарифм:
+
+  \begin{align*}
+    \int \frac{\dd x}{\sqrt{1 + x^2}} = 
+    \begin{bmatrix}
+      x = \sinh u \implies 1 + x^2 = \cosh^2 u \\
+      \dd x = \dd (\sinh u) = \cosh u \dd u \\
+      u = \ln \abs{
+        \under{x}{\sinh u} + \under{\sqrt{1 + x^2}}{\cosh u}
+      } \;\; (\ref{hpr-rep})
+    \end{bmatrix} =
+    \int \frac{\cosh u}{\cosh u} \dd u =
+    u + C =
+    \ln \abs{x + \sqrt{1 + x^2}} + C
+  \end{align*}
+\end{example}
+
+\item Интегралы вида \(\int R(\sqrt{1 - x^2}, x) \dd x\) решаются с помощью
+замены \(x\) на синус или косинус.
+
+\item Интегралы вида \(\int R(\sqrt[k_{1}]{x}, \dots, \sqrt[k_{n}]{x}) \dd x\)
+решаются с помощью замены \(t = \sqrt[K]{x}\), где \(K\) это НОД для
+\(k_{1}, \dotsc, k_{n}\).
+
+\item Интегралы вида \(\int R(\sqrt{ax + b}, x) \dd x\) решаются с помощью
+замены \(t = \sqrt{ax + b}\). При этом \(x = \frac{t^2 - b}{a}\),
+\(\dd x = \frac{2t}{a} \dd t\).
+\end{itemize}

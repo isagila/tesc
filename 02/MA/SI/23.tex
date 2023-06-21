@@ -1,0 +1,60 @@
+\question{Признаки сходимости несобственных интегралов: теорема об абсолютной сходимости. Понятие условной сходимости.}
+
+\begin{theorem}
+  Пусть \(f(x) \colon [a; +\infty] \to \RR\). Тогда
+
+  \begin{align*}
+    \int_{a}^{+\infty} \abs{f(x)} \dd x \converge
+    \implies \int_{a}^{+\infty} f(x) \dd x \converge
+  \end{align*}
+\end{theorem}
+\begin{proof}
+  Раскроем интегралы
+  \(\abs{\int_{a}^{+\infty} f(x) \dd x}\)
+  и
+  \(\int_{a}^{+\infty} \abs{f(x)} \dd x\)
+  по определению:
+
+  \begin{align*}
+    \abs{\int_{a}^{+\infty} f(x) \dd x}
+    = \abs{\lim_{\beta \to +\infty} \int_{a}^{\beta} f(x) \dd x}
+    = \lim_{\beta \to +\infty} \abs{\int_{a}^{\beta} f(x) \dd x}
+    \\
+    \int_{a}^{+\infty} \abs{f(x)} \dd x
+    = \lim_{\beta \to +\infty} \int_{a}^{\beta} \abs{f(x)} \dd x
+  \end{align*}
+
+  Далее воспользуемся свойством определенных интегралов (\ref{dint-abs-prop})
+  \(\abs{\int_{a}^{b} f(x) \dd x} \le \int_{a}^{b} \abs{f(x)} \dd x\) и
+  предельным переходом:
+
+  \begin{align*}
+    \lim_{\beta \to +\infty} \abs{\int_{a}^{\beta} f(x) \dd x}
+    \le
+    \lim_{\beta \to +\infty} \int_{a}^{\beta} \abs{f(x)} \dd x
+    \\
+    \abs{\int_{a}^{+\infty} f(x) \dd x} \le \int_{a}^{+\infty} \abs{f(x)} \dd x
+  \end{align*}
+
+  Т.к. интеграл в правой части сходится, то обозначим его значение
+  \(r \in \RR\). Раскрывая модуль по определению получаем:
+
+  \begin{align*}
+    -r \le \int_{a}^{+\infty} f(x) \dd x \le r
+  \end{align*}
+
+  Другими словами значение интеграла ограничено, а значит интеграл сходится.
+\end{proof}
+
+\begin{definition}
+  Если \(\int_{a}^{+\infty} \abs{f(x)} \dd x \converge\), то интеграл
+  \(\int_{a}^{+\infty} f(x) \dd x\) называется абсолютного сходящимся.
+\end{definition}
+
+\begin{definition}
+  Если \(\int_{a}^{+\infty} \abs{f(x)} \dd x \notconverge\), а
+  \(I = \int_{a}^{+\infty} f(x) \dd x \converge\) интеграл \(I\) называется
+  условно сходящимся.
+\end{definition}
+
+

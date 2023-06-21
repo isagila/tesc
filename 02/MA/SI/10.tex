@@ -1,0 +1,59 @@
+\question{Интеграл с переменным верхним пределом. Теорема Барроу.}
+
+\begin{twocolumns}
+  \input{figures/SI/10/int_diff_upper_boud.tex}
+  \columnbreak
+
+  \begin{definition}
+    Интегралом с переменным верхним пределом называется
+    
+    \begin{align*}
+      \int_{a}^{x} f(t) \dd t
+    \end{align*}
+
+    где \(x\)~--- переменный верхний предел.
+  \end{definition}
+
+  \begin{remark}
+    \(\forall x \in [a; +\infty]\) соответствует определенное значение
+    \(\Phi(x) = \int_{a}^{x} f(t) \dd t\), т.е. определена функция верхнего
+    предела, которая геометрически является площадью криволинейной трапеции
+    с подвижным правым краем.
+  \end{remark}
+\end{twocolumns}
+
+\begin{theorem}\label{Barrow}
+  Теорема Барроу
+
+  Пусть \(f \in C_{[a; b]}\) и определен \(\Phi(x) = \int_{a}^{x} f(t) \dd t\).
+  Тогда \(\Phi'(x) = f(x)\).
+\end{theorem}
+\begin{proof}
+  Раскроем производную \(\Phi'(x)\) по определению, после чего воспользуемся
+  линейностью интеграла:
+
+  \begin{align*}
+    \Phi'(x)
+    = \lim_{\Delta x \to 0} \frac{\Phi(x + \Delta x) - \Phi(x)}{\Delta x}
+    = \lim_{\Delta x \to 0} \frac{
+      \int_{a}^{x + \Delta x} f(t) \dd t - \int_{a}^{x} f(t) \dd t
+    }{\Delta x}
+    = \lim_{\Delta x \to 0} \frac{\int_{x}^{x + \Delta x} f(t) \dd t}{\Delta x}
+  \end{align*}
+
+  Далее по т. Лагранжа (\ref{L-mid-int}) \(\exists \xi \in (x; x + \Delta x)\)
+  такая, что:
+
+  \begin{align*}
+    \lim_{\Delta x \to 0} \frac{\int_{x}^{x + \Delta x} f(t) \dd t}{\Delta x}
+    = \lim_{\Delta x \to 0} \frac{f(\xi) \Delta x}{\Delta x}
+    = \begin{bmatrix}
+      \begin{rcases}
+        \Delta x \to 0 \\
+        \xi \in (x, x + \Delta x)
+      \end{rcases}
+      \implies \xi \to x
+    \end{bmatrix}
+    = f(x)
+  \end{align*}
+\end{proof}
