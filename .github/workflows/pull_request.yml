@@ -1,0 +1,29 @@
+name: Create pull request for new release branch
+
+on: create
+
+jobs:
+  create_pull_request:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    if: ${{ contains(github.ref, 'refs/heads/release/') }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Split branch name
+        id: split
+        uses: rishabhgupta/split-by@v1
+        with:
+          string: ${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
+          split-by: "/"
+
+      - name: Extract fragments from branch name
+        run: |
+          echo "SEMESTER=${{ steps.split.outputs._1 }}" >> $GITHUB_ENV
+          echo "SUBJECT=${{ steps.split.outputs._2 }}" >> $GITHUB_ENV
+          echo "BRANCH=${{ github.ref_name }}" >> $GITHUB_ENV
+
+      - name: Create pull request
+        run: gh pr create -B main --title '${{ env.SEMESTER }} ${{ env.SUBJECT }}' --body ''
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
