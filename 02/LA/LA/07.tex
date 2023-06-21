@@ -1,0 +1,137 @@
+\question{Матрица линейного оператора. Преобразование матрицы при переходе к новому базису.}
+
+Пусть дан оператор \(\opA \colon V^{n} \to V^{n}\) и \(x, y \in V^{n}\),
+\(\opA x = y\).
+
+Выделим в \(V^{n}\) базис \(\Basis\), разложим \(x\) по этому базису.
+После чего применим к нему оператор \(\opA\):
+
+\begin{align*}
+  \Basis = \{ \basis_{1}, \dots, \basis_{n} \} \\
+  x = x_{1} \basis_{1} + \dots + x_{n} \basis_{n} \\
+  y = \opA x = x_{1} \opA \basis_{1} + \dots + x_{n} \opA \basis_{n} \\
+\end{align*}
+
+Далее применим оператор к каждому из базисных векторов:
+
+\begin{align*}
+  \opA \basis_{i} = a_{1,i} \basis_{1} + \dotsc + a_{n, i} \basis_{n} \\
+  y
+  = x_{1} \Big( a_{1,1} \basis_{1} + \dotsc + a_{n,1} \basis_{n} \Big)
+  + \dots
+  + x_{n} \Big( a_{1,n} \basis_{1} + \dotsc + a_{n,n} \basis_{n} \Big) \\
+  y
+  = \basis_{1} \Big( x_{1} a_{1,1} + \dotsc + x_{n} a_{1,n} \Big)
+  + \dots
+  + \basis_{n} \Big( x_{1} a_{n,1} + \dotsc + x_{n} a_{n,n} \Big)
+\end{align*}
+
+Заметим, что \(y\) также можно разложить по базису. Составим СЛАУ и запишем её
+в матричном виде:
+
+\begin{align*}
+  \begin{Bmatrix}
+    x_{1} a_{1,1} & + \dotsc + & x_{n} a_{1,n} = & y_{1}  \\
+    \vdots        & \ddots     & \vdots          & \vdots \\
+    x_{n} a_{n,1} & + \dotsc + & x_{n} a_{n,n} = & y_{n} 
+  \end{Bmatrix} \iff AX = Y
+\end{align*}
+
+\begin{definition}
+  Матрицей оператора \(\opA\) \textbf{в данном базисе} называется матрица
+  составленная из столбцов-коэффициентов разложения образов базисных векторов
+  по этому же базису.
+\end{definition}
+
+\begin{remark}
+  Если \(A^{-1} = A^{T}\), то матрица оператора называется ортогональной.
+\end{remark}
+
+\begin{definition}
+  Матрица 
+
+  \begin{align*}
+    T =
+    \begin{pmatrix}
+      \tau_{1,1} & \dots & \tau_{1,n} \\
+      \vdots & \ddots & \vdots \\
+      \tau_{n,1} & \dots & \tau_{n,n} \\
+    \end{pmatrix}
+  \end{align*}
+
+  такая, что при переходе из базиса \(\Basis = \{ \basis_{i} \}_{i = 1}^{n}\)
+  в базис \(\Basis' = \{ \basis_{i}' \}_{i = 1}^{n}\) выполняется равенство
+  \(\Basis' = \Basis T\) называется матрицей перехода к новому базису.
+\end{definition}
+
+\begin{remark}
+  В матрице перехода \(T\) в каждом столбце стоят коэффициенты разложения нового
+  базиса по старому. При этом координаты вектора \(x\) в базисах \(\Basis\) и
+  \(\Basis'\) связаны соотношением:
+
+  \begin{align*}
+    x = T x'
+  \end{align*}
+\end{remark}
+
+\begin{theorem}
+  Пусть дан линейный оператор \(\opA \colon V^{n} \to V^{n}\), который в базисе
+  \(\Basis = \{ \basis_{i} \}_{i = 1}^{n}\) имеет матрицу \(A\), в базисе
+  \(\Basis' = \{ \basis_{i}' \}_{i = 1}^{n}\)~---\(A'\).
+  Тогда
+
+  \begin{align*}
+    A' = T^{-1} A T
+  \end{align*}
+\end{theorem}
+\begin{proof}
+  Рассмотрим столбцы \(x, y\) в базисе \(\Basis\) такие, что \(A x = y\). В
+  базисе \(\Basis'\) будет выполняться равенство \(A' x' = y'\), получаем:
+
+  \begin{align*}
+    \begin{cases}
+      x = T x' \\
+      y = T y'
+    \end{cases}
+    \implies A (T x') = (T y') \mid \cdot T^{-1} \\
+    T^{-1} A T x' = T^{-1} T y' \\
+    T^{-1} A T x' = y' \\
+    A' = T^{-1} A T \\
+  \end{align*}
+\end{proof}
+
+Некоторые свойства замены базиса:
+\begin{enumerate}
+  \item \(\opA, \opB \colon V^{n} \to V^{n}, \lambda \in \CC\), тогда
+  
+  \begin{align*}
+    \begin{matrix}
+      \Basis \colon && A + \lambda B \\
+      \Basis' \colon & T^{-1} (A + \lambda B) T = & A' + \lambda B'\\
+    \end{matrix}
+  \end{align*}
+
+  \item Матрица тождественного оператора в любом базисе единичная.
+  
+  \begin{align*}
+    \begin{matrix}
+      \Basis \colon && E \\
+      \Basis' \colon & T^{-1} E T = & E\\
+    \end{matrix}
+  \end{align*}
+
+\end{enumerate}
+
+\begin{lemma}
+  Определитель матрицы оператора не зависит от базиса, в котором эта матрица
+  рассматривается.
+\end{lemma}
+\begin{proof}
+  \begin{align*}
+    \det A'
+    = \det (T^{-1} A T)
+    = \det T^{-1} \cdot \det A \cdot \det T
+    = \det A \cdot \det T^{-1} \cdot \det T
+    = \det A
+  \end{align*}
+\end{proof}

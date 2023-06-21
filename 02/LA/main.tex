@@ -1,0 +1,49 @@
+\documentclass[a4paper]{article}
+
+\usepackage{isapreamble}
+
+\title{\huge \textbf{LA E\(\chi\) 02}}
+\author{
+  isagila
+  \and
+  \href{https://t.me/pochtineploho}{@pochtineploho}
+  \and
+  \href{https://t.me/DUBSTEPHAVEGUN}{@DUBSTEPHAVEGUN}
+}
+\date{Собрано {\ddmmyyyydate\today} в \currenttime}
+\titlepic{\includegraphics[width = \textwidth]{misc/title.png}}
+
+\begin{document}
+
+%% Отступы перед/после формул
+\setlength{\abovedisplayskip}{-5pt}
+\setlength{\abovedisplayshortskip}{0pt}
+\setlength{\belowdisplayskip}{0pt}
+\setlength{\belowdisplayshortskip}{0pt}
+
+\clearpage
+\maketitle
+\thispagestyle{mainpage}
+\newpage
+\setcounter{page}{2}
+\tableofcontents
+
+\newpage
+\section{Линейная алгебра}
+
+\begin{questions}
+  \foreach \idx in {01, ..., 14} {
+    \input{./LA/\twodigits\idx}
+  }
+\end{questions}
+
+\newpage
+\section{Дифференциальные уравнения}
+
+\begin{questions}
+  \foreach \idx in {01, ..., 20} {
+    \input{./DE/\twodigits\idx}
+  }
+\end{questions}
+
+\end{document}

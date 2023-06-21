@@ -1,0 +1,67 @@
+\begin{tikzpicture}
+  \draw[->] (-3, 0) -- (3, 0) node[right] {\(x\)};
+  \draw[->] (0, -3) -- (0, 3) node[above] {\(y\)};
+   
+  \begin{scope}[
+    decoration = {
+      markings,
+      mark = between positions 0.2 and 0.8 step 0.1 with
+        {\arrow[line width = 1pt]{stealth}},
+    }
+  ]
+    \foreach \d in {1, 2, 3, 4} {
+      \draw[domain = 0.5 : 2.5, variable = \x, postaction = { decorate }]
+        plot ({\x}, {\d / (3 * \x)});
+    }  
+  \end{scope}
+
+  \begin{scope}[
+    decoration = {
+      markings,
+      mark = between positions 0.2 and 0.8 step 0.1 with
+        {\arrow[line width = 1pt]{stealth}},
+    }
+  ]
+    \foreach \d in {1, 2, 3, 4} {
+      \draw[domain = 0.5 : 2.5, variable = \x, postaction = { decorate }]
+        plot ({\x}, {-\d / (3 * \x)});
+    }  
+  \end{scope}
+
+  \begin{scope}[
+    decoration = {
+      markings,
+      mark = between positions 0.2 and 0.8 step 0.1 with
+        {\arrowreversed[line width = 1pt]{stealth}},
+    }
+  ]
+    \foreach \d in {1, 2, 3, 4} {
+      \draw[domain = -2.5 : -0.5, variable = \x, postaction = { decorate }]
+        plot ({\x}, {\d / (3 * \x)});
+    }  
+  \end{scope}
+
+  \begin{scope}[
+    decoration = {
+      markings,
+      mark = between positions 0.2 and 0.8 step 0.1 with
+        {\arrowreversed[line width = 1pt]{stealth}},
+    }
+  ]
+    \foreach \d in {1, 2, 3, 4} {
+      \draw[domain = -2.5 : -0.5, variable = \x, postaction = { decorate }]
+        plot ({\x}, {-\d / (3 * \x)});
+    }  
+  \end{scope}
+
+  \node at (-1, -3.3) {\(\begin{cases}
+    x' = x \\
+    y' = -2y
+  \end{cases}\)};
+  \node at (1.4, -3.3) {\(
+    \begin{matrix}
+      \lambda_{1} \neq \lambda_{2} \in \RR \\
+      \lambda_{1} \lambda_{2} <  0
+    \end{matrix}
+  \)};
+\end{tikzpicture}

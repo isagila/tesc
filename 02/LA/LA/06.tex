@@ -1,0 +1,187 @@
+\question{Обратный оператор. Взаимно-однозначный оператор. Ядро и образ оператора. Теорема о размерностях.}
+
+\begin{definition}
+  Оператор \(\opI \colon V^{n} \to V^{n}\) называется тождественным оператором,
+  если \(\forall x \in V^{n} \colon \opI x = x\).
+\end{definition}
+
+\begin{definition}
+  Пусть даны операторы \(\opA, \opB \colon V^{n} \to V^{n}\). Оператор \(\opB\)
+  называется обратным для оператора \(\opA\), если их композиция равна
+  тождественному оператору.
+
+  \begin{align*}
+    \opB = \opA^{-1} \bydef \opA \cdot \opB = \opB \cdot \opA = \opI
+  \end{align*}
+\end{definition}
+
+\begin{definition}
+  Оператор \(\opA \colon V^{n} \to V^{n}\) называется взаимно-однозначным, если
+  разным \(x \in V^{n}\) сопоставляются разные \(y \in V^{n}\).
+  
+  \begin{align*}
+    \forall x, y \in V^{n} \colon x \neq y \implies \opA x \neq \opA y
+  \end{align*}
+\end{definition}
+
+\begin{lemma}\label{bij-lo-lm}
+  Если оператор \(\opA \colon V^{n} \to V^{n}\) взаимно-однозначный, то
+  \(\opA x = 0 \implies x = 0\).
+\end{lemma}
+\begin{proof}
+  От противного:
+
+  \begin{align*}
+    \lets x = x_{1} - x_{2} \neq 0 \implies x_{1} \neq x_{2} \\
+    \opA x = \opA (x_{1} - x_{2}) = \opA x_{1} - \opA x_{2} = 0
+    \implies \opA x_{1} = \opA x_{2}
+  \end{align*}
+
+  Противоречие, т.к. \(\opA\) взаимно-однозначный.
+\end{proof}
+
+\begin{theorem}\label{bij-lo-ind-to-ind}
+  Взаимно-однозначный оператор переводит линейно-независимый набор в
+  линейно-независимый набор.
+\end{theorem}
+\begin{proof}
+  Пусть дан взаимно-однозначный оператор \(\opA \colon V^{n} \to V^{n}\) и
+  линейно-независимый набор \(\{ x_{1}, \dotsc, x_{n}\}\). Построим
+  набор образов \(\{ \opA x_{1}, \dotsc, \opA x_{n}\}\). Составим его нулевую
+  линейную комбинацию, после чего воспользуемся линейностью оператора:
+
+  \begin{align*}
+    \lambda_{1} \opA x_{1} + \dotsc + \lambda_{n} \opA x_{n} = 0 \\
+    \opA \Big( \lambda_{1} x_{1} + \dotsc + \lambda_{n} x_{n} \Big) = 0 \\
+  \end{align*}
+
+  Т.к. \(\opA\) взаимно-однозначный, то по \ref{bij-lo-lm} получаем, что
+  \(\lambda_{1} x_{1} + \dotsc + \lambda_{n} x_{n} = 0\).
+  Набор \(\{ x_{1}, \dotsc, x_{n}\}\) линейно независим, значит
+  \(\forall \lambda_{i} = 0\).
+\end{proof}
+
+\begin{corollary}
+  Взаимно-однозначный оператор переводит базис в базис.
+\end{corollary}
+
+\begin{theorem}
+  Оператор \(\opA \colon V^{n} \to V^{n}\) взаимно-однозначный
+  \(\iff \exists \opA^{-1}\).
+\end{theorem}
+\begin{proof}
+  \(\implies\) Пусть \(x \xrightarrow{\opA} y\).
+  Рассмотрим оператор \(\opB\) такой, что \(y \xrightarrow{\opB} x\). Т.к.
+  \(\opA\) взаимно-однозначный, то \(\opA \cdot \opB = I\).
+
+  \(\impliedby\) От противного
+
+  \begin{align*}
+    \lets x_{1} \neq x_{2}, \opA x_{1} = \opA x_{2}\\
+    \opA x_{1} = \opA x_{2}
+    \implies \opA^{-1} \opA x_{1} = \opA^{-1} \opA x_{2}
+    \implies x_{1} = x_{2}
+  \end{align*}
+
+  Получили противоречие.
+\end{proof}
+
+\begin{definition}
+  Пусть дан линейный оператор \(\opA \colon V^{n} \to W^{m}\).
+  Множество \(\Ker \opA = \{ x \in V^{n} \mid \opA x = 0\}\)
+  называется ядром оператора \(\opA\).
+\end{definition}
+
+\begin{lemma}\label{lo-bij-ker}
+  Оператор \(\opA \colon V^{n} \to V^{n}\) взаимно-однозначный
+  \(\implies \Ker \opA = \{ 0 \}\).  
+\end{lemma}
+\begin{proof}
+  От противного, пусть \(x \neq 0 \in \Ker \opA\).
+  Тогда \(\opA x = 0\), но в то же время \(\opA \; 0 = 0\).
+  Нарушается взаимно-однозначность.
+\end{proof}
+
+\begin{definition}
+  Пусть дан линейный оператор \(\opA \colon V^{n} \to W^{m}\).
+  Множество
+  \(\Img \opA = \{ y \in W^{m} \mid \exists x \in V^{n} \colon y = \opA x\}\)
+  называется образом оператора \(\opA\).
+\end{definition}
+
+\begin{theorem}\label{lo-sum-dim}
+  Пусть дан оператор \(\opA \colon V^{n} \to V^{n}\). Тогда
+
+  \begin{align*}
+    \dim{\Ker \opA} + \dim{\Img \opA} = n
+  \end{align*}
+\end{theorem}
+\begin{proof}
+  Т.к. \(\Ker{\opA}\) и \(\Img{\opA}\) это подпространства \(V^{n}\), то
+  \(\exists W \subset V^{n} \mid W \oplus \Ker{A} = V^{n}\). Тогда
+  \(\dim{W} + \dim{\Ker A} = n\). Требуется доказать, что
+  \(\dim{W} = \dim{\Img \opA}\).
+
+  Сначала покажем, что \(\opA \colon W \to \Img \opA\) взаимно-однозначный.
+  От противного: 
+
+  \begin{align*}
+    \lets x_{1} \neq x_{2} \in W \colon \opA x_{1} = \opA x_{2} \\
+    \opA x_{1} = \opA x_{2}
+      \implies \opA (x_{1} - x_{2}) = 0
+      \implies (x_{1} - x_{2}) \in \Ker \opA
+    \\  
+    x_{1}, x_{2} \in W \implies (x_{1} - x_{2}) \in W
+  \end{align*}
+
+  Но это невозможно, т.к.
+  \(W \oplus \Ker{A} = V^{n} \implies W \cap \Ker A = \varnothing\).
+
+  В \(\Img \opA\) выделим базис \( \{ y_{1}, \dotsc, y_{k} \}\). Т.к. \(\opA\)
+  взаимно-однозначный, то выделенный базис порождается линейно-независимым
+  набором \(\{ x_{1}, \dotsc, x_{k} \}, x_{i} \in W\)
+  (по \ref{bij-lo-ind-to-ind}).
+  Значит \(\dim{W} \ge \dim{\Img \opA}\).
+
+  Предположим, что \(\dim{W} > \dim{\Img \opA}\). Обозначим \(\dim{W} = p\),
+  дополним систему \(\{ x_{1}, \dotsc, x_{k} \}\) до \(p\) линейно-независимых
+  векторов. Т.к. оператор \(\opA \colon W \to \Img \opA\) взаимно-однозначный,
+  то он должен перевести полученную линейно-независимую систему в
+  линейно-независимую. Однако это невозможно, т.к. \(\Img \opA\) имеет базис
+  меньшей размерности.
+\end{proof}
+
+\begin{remark}
+  Можно доказать, что
+
+  \begin{align*}
+    \begin{cases}
+      V_{1} \subset V^{n} \\
+      V_{2} \subset V^{n} \\
+      \dim{V_{1}} + \dim{V_{2}} = n
+    \end{cases} \implies
+    \exists \opA \colon V^{n} \to V^{n},
+    \Ker \opA = V_{1},
+    \Img \opA = V_{2}
+  \end{align*}
+\end{remark}
+
+\begin{definition}
+  Рангом оператора \(\opA \colon V^{n} \to V^{n}\) называется размерность его
+  образа:
+
+  \begin{align*}
+    \Rang \opA = \dim{\Img \opA}
+  \end{align*}
+\end{definition}
+
+Пусть \(\opA, \opB \colon V^{n} \to V^{n}\). Рассмотрим некоторые свойства
+ранга линейного оператора:
+\begin{enumerate}
+  \item Если оператор \(\opA\) взаимно-однозначный, то
+  \(\Rang \opA = n\) (это следствие из \ref{lo-bij-ker} и \ref{lo-sum-dim}).
+  \item
+    \(\Rang (\opA \cdot \opB) \le \Rang \opA\),
+    \(\Rang (\opA \cdot \opB) \le \Rang \opB\)
+  \item \(\Rang (\opA \cdot \opB) = \Rang \opA + \Rang \opB - \dim{V}\)
+\end{enumerate}

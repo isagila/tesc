@@ -1,0 +1,157 @@
+\question{Теория устойчивости: определение устойчивости по Ляпунову, фазовая плоскость, траектории ДУ. Примеры устойчивого и неустойчивого решения.}
+
+\begin{definition}
+  Пусть дана СДУ
+
+  \begin{align*}
+    \begin{cases}
+      x' = f_{1}(t, x, y) \\
+      y' = f_{2}(t, x, y)
+    \end{cases}
+  \end{align*}
+
+  и \(x(t), y(t)\) это её решение, удовлетворяющее начальным условиям
+  \(x(t = 0) = x_{0}, y(t = 0) = y_{0}\). Рассмотрим
+  \(\widetilde{x}(t), \widetilde{y}(t)\)~--- другое решение, удовлетворяющее
+  начальным условиям с отклонением \(
+    \widetilde{x}(t = 0) = \widetilde{x}_{0},
+    \widetilde{y}(t = 0) = \widetilde{y}_{0}
+  \).
+
+  Решение \(x(t), y(t)\) называется \textit{устойчивым по Ляпунову}, если
+
+  \begin{align*}
+    \forall \epsilon > 0 \;\;
+    \exists \delta > 0 \mid
+    \forall t > 0 \;\;
+    \forall x_{0}, y_{0}, \widetilde{x}_{0}, \widetilde{y}_{0} \colon
+    \begin{cases}
+      \abs{x_{0} - \widetilde{x}_{0}} < \delta \\
+      \abs{y_{0} - \widetilde{y}_{0}} < \delta
+    \end{cases}
+    \implies
+    \begin{cases}
+      \abs{\widetilde{x}(t) - x(t)} < \epsilon \\
+      \abs{\widetilde{y}(t) - y(t)} < \epsilon
+    \end{cases}
+  \end{align*}
+\end{definition}
+
+\underline{Исследование на устойчивость линейной автономной системы ДУ}:
+
+Пусть дана ДУ:
+
+\begin{align*}\label{eq:given-sde}\tag{\(\blacklozenge\)}
+  \begin{cases}
+    \frac{\dd x}{\dd t} = a x + b y \\
+    \frac{\dd y}{\dd t} = c x + m y
+  \end{cases}
+  \implies \frac{\frac{\dd y}{\dd t} }{\frac{\dd x}{\dd t}}
+  = \frac{\dd y}{\dd x} 
+  = \frac{c x + m y}{a x + b y} 
+\end{align*}
+
+\begin{multicols}{2}
+  \input{figures/DE/20/phase.tex}
+  \columnbreak
+
+  \begin{definition}
+    Общий интеграл для \ref{eq:given-sde} \(\phi(x, y) = C\) (семейство
+    интегральных кривых) называется фазовым портретом системы или траекторией
+    ДУ.
+  \end{definition}
+
+  \begin{remark}
+    Решения \(x = 0\), \(y = 0\) являются особыми для \ref{eq:given-sde}.
+  \end{remark}
+\end{multicols}
+
+Запишем СДУ в матричном виде:
+
+\begin{align*}
+  Y' = \begin{pmatrix}
+    a & b \\
+    c & m
+  \end{pmatrix} Y
+  \implies \begin{vmatrix}
+    a - \lambda & b \\
+    c & m - \lambda
+  \end{vmatrix} = 0
+\end{align*}
+
+Далее все зависит от количества решений:
+
+\begin{align*}
+  \begin{matrix}
+    \lambda_{1} \neq \lambda_{2} \in \RR
+      & \implies & c_{1} e^{\lambda_{1} t} + c_{2} e^{\lambda_{2} t}
+    \\
+    \lambda_{1} = \lambda_{2} = \lambda \in \RR
+      & \implies & c_{1} e^{\lambda t} + c_{2} t \cdot e^{\lambda t}
+    \\
+    \lambda_{1, 2} = \alpha + i \beta \in \CC
+      & \implies & e^{\alpha t} (c_{1} \cos \beta t + c_{2} \sin \beta t)
+  \end{matrix}
+\end{align*}
+
+Подробно рассмотрим случай \(\lambda_{1} \neq \lambda_{2} \in \RR\) причем
+\(\lambda_{1}, \lambda_{2} < 0\).
+
+Решаем ДУ методом исключения. Составим характеристическое уравнение:
+\(\lambda^2 - (a + m) \lambda + (a m - b c) = 0\). Получаем:
+
+\begin{align*}\label{sde-generic}
+  \begin{cases}
+    x(t) = c_{1} e^{\lambda_{1} t} + c_{2} e^{\lambda_{2} t} \\
+    y(t) = \frac{1}{b} \left(
+      c_{1} e^{\lambda_{1} t} (\lambda_{1} - a)
+        + c_{2} e^{\lambda_{2} t} (\lambda_{2} - a)
+    \right)
+  \end{cases}
+\end{align*}
+
+Подберем константы, соответствующие начальным условиям \(x(t = 0) = x_{0}\),
+\(y(t = 0) = y_{0}\) (отклонение от начальных условий \((0, 0)\)):
+
+\begin{align*}
+  x(t) =
+    \frac{a x_{0} + b y_{0} - \lambda_{2} x_{0}}
+    {\lambda_{1} - \lambda_{2}} e^{\lambda_{1} t}
+    +
+    \frac{-a x_{0} - b y_{0} + \lambda_{1} x_{0}}
+    {\lambda_{1} - \lambda_{2}} e^{\lambda_{2} t}
+  \\
+  y(t) = \frac{1}{b} \left(
+    \frac{a x_{0} + b y_{0} - \lambda_{2} x_{0}}
+    {\lambda_{1} - \lambda_{2}} (\lambda_{1} - a) e^{\lambda_{1} t}
+    +
+    \frac{-a x_{0} - b y_{0} + \lambda_{1} x_{0}}
+    {\lambda_{1} - \lambda_{2}} (\lambda_{2} - a) e^{\lambda_{2} t}
+  \right)
+\end{align*}
+
+Таким образом
+
+\begin{align*}
+  \forall \epsilon > 0 \; \exists \delta > 0 \colon
+    \abs{x_{0}} < \delta, \abs{y_{0}} < \delta
+  \implies x(t) < \epsilon, y(t) < \epsilon
+  \iff \begin{cases}
+    t \to \infty \\
+    x_{0} \to 0 \\
+    y_{0} \to 0
+  \end{cases} \implies \begin{cases}
+    x(t) \to 0 \\
+    y(t) \to 0
+  \end{cases}
+\end{align*}
+
+Значит решение \(x = 0, y = 0\) устойчивое.
+
+Для остальных случаев приведем пример и построим фазовый портрет:
+
+\input{figures/DE/20/rational.tex}
+
+\input{figures/DE/20/complex.tex}
+
+\input{figures/DE/20/improper.tex}
