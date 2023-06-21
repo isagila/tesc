@@ -1,70 +1,74 @@
-name: Build and publish LaTeX
+name: Lint, build and deploy
 
 on:
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    permissions:
+      checks: write
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Extract branch name
+        run: echo "BRANCH=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
+
+      - name: Split branch name
+        id: split
+        uses: rishabhgupta/split-by@v1
+        with:
+          string: ${{ env.BRANCH }}
+          split-by: "/"
+
+      - name: Extract fragments from branch name
+        run: |
+          echo "SEMESTER=${{ steps.split.outputs._1 }}" >> $GITHUB_ENV
+          echo "SUBJECT=${{ steps.split.outputs._2 }}" >> $GITHUB_ENV
+
+      - name: Lint LaTeX
+        uses: isagila/latex-lint-action@main
+        with:
+          working_directory: ${{ env.SEMESTER }}/${{ env.SUBJECT }}
+          files: main.tex
+
   build:
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Extract branch name
-      working-directory: ./${{ env.BRANCH }}
-      shell: bash
-      run: echo "BRANCH=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
+      - name: Extract branch name
+        run: echo "BRANCH=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
 
-    - name: Get Date
-      id: get-date
-      run: echo "::set-output name=date::$(/bin/date -u "+%Y%m%d")"
-      shell: bash
+      - name: Split branch name
+        id: split
+        uses: rishabhgupta/split-by@v1
+        with:
+          string: ${{ env.BRANCH }}
+          split-by: "/"
 
-    - name: Cache
-      uses: actions/cache@v2.1.3
-      with:
-        path: |
-          *.aux
-          *.lof
-          *.lot
-          *.fls
-          *.out
-          *.toc
-          *.fmt
-          *.fot
-          *.cb
-          *.cb2
-          .*.lb
-          *.bbl
-          *.bcf
-          *.blg
-          *-blx.aux
-          *-blx.bib
-          *.run.xml
-        key: ${{ runner.os }}-${{ steps.get-date.outputs.date }}
+      - name: Extract fragments from branch name
+        run: |
+          echo "SEMESTER=${{ steps.split.outputs._1 }}" >> $GITHUB_ENV
+          echo "SUBJECT=${{ steps.split.outputs._2 }}" >> $GITHUB_ENV
 
-    - name: Build PDF
-      uses: xu-cheng/latex-action@v2
-      with:
-        working_directory: ${{ env.BRANCH }}
-        root_file: main.tex
+      - name: Build PDF
+        uses: xu-cheng/latex-action@v2
+        with:
+          working_directory: ./${{ env.SEMESTER }}/${{ env.SUBJECT }}
+          root_file: main.tex
 
-    - name: Set datetime release
-      run: |
-        export CUR_DATE=$(date +%Y-%m-%d-%T)
-        echo "CUR_DATE=$CUR_DATE" >> $GITHUB_ENV
-        echo "CUR_DATE_TAG=$(echo $CUR_DATE | tr : -)" >> $GITHUB_ENV
+      - name: Upload pages artifact
+        uses: actions/upload-artifact@master
+        with:
+          name: ${{ env.SEMESTER }}_${{ env.SUBJECT }}.pdf
+          path: ./${{ env.SEMESTER }}/${{ env.SUBJECT }}/main.pdf
+          if-no-files-found: error
 
-    - name: Rename main.pdf
-      working-directory: ./${{ env.BRANCH }}
-      run: mv "main.pdf" "$BRANCH.pdf"
-
-    - name: Upload pages artifact
-      uses: actions/upload-artifact@master
-      with:
-        name: ${{ env.BRANCH }}
-        path: ${{ env.BRANCH }}/${{ env.BRANCH }}.pdf
-        if-no-files-found: error
   deploy:
     runs-on: ubuntu-latest
     needs: build
@@ -74,29 +78,44 @@ jobs:
       pages: write
     environment:
       name: github-pages
-      url: ${{steps.deployment.outputs.page_url}}
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Extract branch name
-      working-directory: ./${{ env.BRANCH }}
-      shell: bash
-      run: echo "BRANCH=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
+      - name: Extract branch name
+        run: echo "BRANCH=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
 
-    - uses: actions/checkout@v3
-      with:
-        ref: gh-pages
+      - name: Split branch name
+        id: split
+        uses: rishabhgupta/split-by@v1
+        with:
+          string: ${{ env.BRANCH }}
+          split-by: "/"
 
-    - uses: actions/download-artifact@master
-      with:
-        name: ${{ env.BRANCH }}
-        path: .
-        
-    - name: Commit and push changes
-      run: |
-        git config --global user.name isagila
-        git config --global user.email "isagila@mail.ru"
-        git add "$BRANCH.pdf"
-        git commit -m "Update $BRANCH.pdf"
-        git push
+      - name: Extract fragments from branch name
+        run: |
+          echo "SEMESTER=${{ steps.split.outputs._1 }}" >> $GITHUB_ENV
+          echo "SUBJECT=${{ steps.split.outputs._2 }}" >> $GITHUB_ENV
+
+      - uses: actions/checkout@v3
+        with:
+          ref: gh-pages
+
+      - uses: actions/download-artifact@master
+        with:
+          name: ${{ env.SEMESTER }}_${{ env.SUBJECT }}.pdf
+          path: .
+
+      - name: Move PDF
+        run: |
+          mkdir -p ${{ env.SEMESTER }}
+          mv main.pdf ${{ env.SEMESTER }}/${{ env.SUBJECT }}.pdf
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name isagila
+          git config --global user.email "isagila@mail.ru"
+          git add "${{ env.SEMESTER }}/${{ env.SUBJECT }}.pdf"
+          git commit -m "Update ${{ env.SEMESTER }}/${{ env.SUBJECT }}.pdf"
+          git push
