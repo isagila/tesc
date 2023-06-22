@@ -1,0 +1,31 @@
+\begin{tikzpicture}[
+  dot/.style = {
+    shape = circle,
+    fill = black,
+    minimum size = 4pt,
+    inner sep = 0pt,
+    outer sep = 0pt,
+  },
+  every path/.style = {
+    thick
+  }
+]
+  \node[dot] (v1) at (-1, 0) {};
+  \node[dot] (v2) at (-0.5, 2) {};
+  \node[dot, fill = red] (v3) at (1, 1.5) {};
+  \node[dot, fill = red] (v4) at (1.2, -0.2) {};
+
+  \draw (v1) -- (v2) -- (v3) -- (v4) -- (v1) -- (v3);
+  \draw (v2) -- (v4);
+
+  \node[dot] (v5) at (2.5, 0) {};
+  \node[dot] (v6) at (2.2, 1.5) {};
+  \node[dot] (v7) at (3.5, 2) {};
+  \node[dot] (v8) at (4, 0.6) {};
+
+  \draw (v5) -- (v6) -- (v7) -- (v8) -- (v5) -- (v7);
+  \draw (v6) -- (v8);
+  
+  \draw[very thick, color = blue] (v4) -- (v5);
+  \draw[very thick, color = blue] (v4) -- (v6);
+\end{tikzpicture}
