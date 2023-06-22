@@ -1,0 +1,34 @@
+\begin{tikzpicture}[
+  dot/.style = {
+    shape = circle,
+    fill = black,
+    minimum size = 4pt,
+    inner sep = 0pt,
+    outer sep = 0pt,
+  },
+  every path/.style = {
+    thick
+  }
+]
+  \draw[color = blue] (0, 2.5) ellipse (0.5cm and 1cm);
+  \draw[color = blue] node at (0, 2.5) {\(S\)};
+
+  \draw[color = orange] (0, 0) ellipse (0.5cm and 1cm);
+  \draw[color = orange] node at (0, 0) {\(S'\)};
+
+  \draw node[dot] (L1) at (0, 3) {};
+  \draw node[dot] (L2) at (0, 2) {};
+  \draw node[dot] (L3) at (0, 0.5) {};
+  \draw node[dot] (L4) at (0, -0.5) {};
+
+  \draw node[dot] (R1) at (3, 3.5) {};
+  \draw node[dot] (R2) at (3, 2.5) {};
+  \draw node[dot] (R3) at (3, 1.5) {};
+  \draw node[dot] (R4) at (3, 0.5) {};
+  \draw node[dot] (R5) at (3, -0.5) {};
+
+  \draw[very thick, color = blue] (L1) -- (R1);
+  \draw[very thick, color = blue] (L2) -- (R2);
+  \draw (L3) edge (R1) edge (R3) edge (R4);
+  \draw (L4) edge (R2) edge (R4) edge (R5);
+\end{tikzpicture}
