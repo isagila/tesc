@@ -7,7 +7,8 @@
 
 \underline{Алгоритм}:
 \begin{enumerate}
-  \item Сделаем \(\abs{V} - 1\) итерацию
+  \item Сделаем \(\abs{V} - 1\) итерацию (именно столько, т.к. в кратчайшем
+  пути не более \(\abs{V} - 1\) ребра).
   
   \item На каждой итерации будем проходить по всем ребрам и релаксировать их.
   
@@ -24,7 +25,7 @@
 \begin{itemize}
   \item Изначально:
   \begin{itemize}[label = \textbullet]
-    \item \(\forall v \neq s \in V \colon d[0, v] = +\infty\),
+    \item \(\forall v \neq s \in V \colon d[0, v] = +\infty\)
     \item \(d[0, s] = 0\)
     \item \(\forall v \in V, \forall i > 0 \colon d[i, v] = +\infty\)
   \end{itemize}
