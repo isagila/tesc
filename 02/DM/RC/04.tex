@@ -1,1 +1,27 @@
-\question{Метод Акра~-Бацци.}
+\question{Метод Акра-Бацци.}
+
+Обобщение Мастер теоремы для построение асимптотических оценок рекуррентных
+соотношений следующего вида
+
+\begin{align*}
+  T(n) = \sum_{i = 1}^{k} a_{i} \cdot T(b_{i} n + h_{i}(n)) \\
+  a_{i} > 0 \qquad
+  0 < b_{i} < 1 \qquad
+  f(n) \in O(n^{c}) \qquad
+  h_{i}(n) \in \Theta \left(\frac{n}{\log^{2} n}\right)
+\end{align*}
+
+Для получение асимптотической оценки найдем такое \(p\), что будет верно
+равенство:
+
+\begin{align*}
+  \sum_{i = 1}^{k} a_{i} b_{i}^{p} = 1
+\end{align*}
+
+Тогда асимптотическая оценка будет иметь вид
+
+\begin{align*}
+  T(n) \in \Theta \left(
+    n^{p} \left( 1 + \int_{1}^{n} \frac{f(t)}{t^{p + 1}} \dd t \right)
+  \right)
+\end{align*}
