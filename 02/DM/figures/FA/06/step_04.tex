@@ -28,9 +28,9 @@
     \draw (v1) -- (v2) node {\(a\)};
     \draw (v1) -- (v7) node {\(c\)};
 
-    \draw (v2) -- (v7) node[pos = 0.3] {\(a\)};
+    \draw (v2) -- (v7) node {\(a\)};
 
-    \draw (v3) -- (v5) node[pos = 0.7] {\(a\)};
+    \draw (v3) -- (v5) node {\(a\)};
     \draw (v3) -- (v7) node[pos = 0.3] {\(c\)};
 
     \draw (v4) -- (v5) node {\(c\)};
@@ -40,10 +40,10 @@
     \draw (v7) -- (v6) node {\(c\)};
 
     \draw[line width = 8pt, color = blue]
-      (v1) edge[bend left = 70] node {\(a\)} (v3);
+      (v2) edge[bend right = 20] node {\(a, c\)} (v5);
     \draw[line width = 8pt, color = blue]
-      (v1) edge[bend right = 10] node {\(a\)} (v4);
+      (v3) edge[bend left = 20] node {\(c\)} (v5);
     \draw[line width = 8pt, color = blue]
-      (v1) edge[bend left = 20] node[pos = 0.7] {\(a\)} (v6);
+      (v2) edge[bend left = 20] node {\(c\)} (v7);
   \end{scope}
 \end{tikzpicture}

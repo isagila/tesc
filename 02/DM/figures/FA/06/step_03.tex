@@ -8,11 +8,11 @@
   }
 ]
   \node[vertex] (v1) at (1, 0) {};
-  \node[vertex, fill = green!60] (v2) at (2, 2) {};
-  \node[vertex, fill = green!60] (v3) at (4, 2.8) {};
-  \node[vertex, fill = green!60] (v4) at (6.6,  2.4) {};
+  \node[vertex, fill = blue!30] (v2) at (2, 2) {};
+  \node[vertex, fill = blue!30] (v3) at (4, 2.8) {};
+  \node[vertex] (v4) at (6.6,  2.4) {};
   \node[vertex] (v5) at (7, 0.2) {};
-  \node[vertex, fill = green!60] (v6) at (5, -0.8) {};
+  \node[vertex] (v6) at (5, -0.8) {};
   \node[vertex] (v7) at (3, -1) {};
 
   \draw (6.6, 2.4) circle (8pt);
@@ -34,7 +34,7 @@
     \draw (v3) -- (v4) node {\(\epsilon\)};
     \draw (v3) -- (v5) node {\(a\)};
     \draw (v3) -- (v6) node {\(\epsilon\)};
-    \draw (v3) -- (v7) node {\(c\)};
+    \draw (v3) -- (v7) node[pos = 0.3] {\(c\)};
 
     \draw (v4) -- (v5) node {\(c\)};
 
@@ -43,6 +43,6 @@
     \draw (v7) -- (v6) node {\(c\)};
 
     \draw (v2) edge[bend left = 60] node {\(\epsilon\)} (v4);
-    \draw (v2) edge[bend left = 30] node {\(\epsilon\)} (v6);
+    \draw (v2) edge node[pos = 0.7] {\(\epsilon\)} (v6);
   \end{scope}
 \end{tikzpicture}
