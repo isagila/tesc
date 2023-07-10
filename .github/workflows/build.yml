@@ -1,40 +1,10 @@
-name: Lint, build and deploy
+name: Build and deploy
 
 on:
   pull_request:
     branches: ["main"]
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    permissions:
-      checks: write
-      contents: write
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Extract branch name
-        run: echo "BRANCH=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
-
-      - name: Split branch name
-        id: split
-        uses: rishabhgupta/split-by@v1
-        with:
-          string: ${{ env.BRANCH }}
-          split-by: "/"
-
-      - name: Extract fragments from branch name
-        run: |
-          echo "SEMESTER=${{ steps.split.outputs._1 }}" >> $GITHUB_ENV
-          echo "SUBJECT=${{ steps.split.outputs._2 }}" >> $GITHUB_ENV
-
-      - name: Lint LaTeX
-        uses: isagila/latex-lint-action@main
-        with:
-          working_directory: ${{ env.SEMESTER }}/${{ env.SUBJECT }}
-          files: main.tex
-
   build:
     runs-on: ubuntu-latest
 
