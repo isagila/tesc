@@ -1,0 +1,316 @@
+\ProvidesPackage{isapreamble}
+
+\usepackage[
+  left = 10mm,
+  right = 10mm,
+  top = 10mm,
+  bottom = 20mm,
+  bindingoffset = 0cm
+]{geometry}
+
+\usepackage{booktabs}
+\usepackage{enumerate}
+\usepackage{float}
+\usepackage{multirow}
+\usepackage{extarrows}
+\usepackage{graphicx}
+\usepackage{pdfpages}
+\usepackage{microtype}
+\usepackage{titlepic}
+\usepackage{epigraph}
+\usepackage{fixltx2e}
+\usepackage{blkarray}
+\usepackage{scalerel}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{sectsty}
+\usepackage{bigints}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{multicol}
+\usepackage{subcaption}
+\usepackage{esvect}
+\usepackage{gensymb}
+\usepackage{tabularx}
+\usepackage{wrapfig}
+
+%%% Работа с русским языком
+\usepackage{cmap}                   % поиск в PDF
+\usepackage{mathtext}               % русские буквы в формулах
+\usepackage{indentfirst}            % отступ первого параграфа
+\usepackage[T2A]{fontenc}           % кодировка
+\usepackage[utf8]{inputenc}         % кодировка исходного текста
+\usepackage[english,russian]{babel} % локализация и переносы
+
+%% Шрифты
+\usepackage{euscript} % Шрифт Евклид
+\usepackage{mathrsfs} % Красивый матшрифт
+\usepackage[bbgreekl]{mathbbol}
+
+%% Кастомизация списков
+\usepackage[inline]{enumitem}
+
+%%% Дополнительная работа с математикой
+\usepackage{amsfonts, amssymb, amsthm, mathtools}
+\usepackage{esint} % для ориентированных интегралов
+
+%% Дифференциалы и все что с ними связано
+\usepackage{physics}
+
+%% Графики функций
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usetikzlibrary{
+  decorations.markings,
+  fit,
+  shapes.geometric
+}
+\pgfplotsset{every axis/.style = {scale only axis}}
+\pgfplotsset{compat = 1.16}
+\definecolor{lightgray}{rgb}{0.83, 0.83, 0.83}
+
+%% Время
+\usepackage{datetime}
+\renewcommand{\dateseparator}{.}
+
+%% Оглавление с ссылками и ссылки на разные вещи
+\usepackage[
+  unicode = true,
+  colorlinks = true,
+  linkcolor = blue,
+  urlcolor = blue
+]{hyperref}
+\usepackage{nameref}
+
+%% Ссылки на пункты description
+\makeatletter
+\let\orgdescriptionlabel\descriptionlabel
+\renewcommand*{\descriptionlabel}[1]{
+  \let\orglabel\label
+  \let\label\@gobble
+  \phantomsection
+  \protected@edef\@currentlabel{#1\unskip}
+  \let\label\orglabel
+  \orgdescriptionlabel{#1}
+}
+\makeatother
+
+%% Добавление лидирующего нуля при необходимости
+%% https://tex.stackexchange.com/questions/256015/leading-zero-in-foreach-of-a-tikz-calendar
+\makeatletter
+\let\twodigits\two@digits
+\makeatother
+
+%% Круглые скобки снизу
+%% https://tex.stackexchange.com/questions/260565/newcommand-underbrace-parentheses
+\makeatletter
+\newcommand\underparen[1]{%
+  \mathop{%
+    \vtop{
+      \m@th
+      \ialign{%
+        ##\crcr
+        $\hfil\displaystyle{#1}\hfil$\crcr
+        \noalign{\kern3\p@\nointerlineskip}%
+        \upparenfill\crcr
+      }%
+    }%
+  }\limits
+}
+\newcommand\upparenfill{%
+  $\m@th\setbox\z@\hbox{$\braceld$}%
+    \bracelu\leaders\vrule \@height\ht\z@ \@depth\z@\hfill\braceru$%
+}
+\makeatother
+
+\newcommand{\under}[2]{\underparen{#1}_{#2}}
+
+%% Текст в две колонки
+\newenvironment{twocolumns}{
+  \begin{minipage}{\linewidth}
+    \begin{multicols}{2}
+      }{
+    \end{multicols}
+  \end{minipage}
+}
+
+\renewcommand{\bar}{\overline}
+
+%% Красивые <= и >=
+\renewcommand{\geq}{\geqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\le}{\leqslant}
+
+
+%% Символ "пусть"
+\newcommand{\lets}{\sqsupset}
+
+%% Для переходов в доказательствах
+\newcommand{\idenby}[1]{
+  \xLeftrightarrow{\text{#1}}
+}
+\renewcommand{\implies}[1][]{
+  \xLongrightarrow{\text{#1}}
+}
+\newcommand{\eqby}[1]{
+  \xlongequal{\text{#1}}
+}
+\newcommand{\bydef}{
+  \idenby{\text{def}}
+}
+
+%% Более привычные греческие буквы
+\renewcommand{\phi}{\varphi}
+\renewcommand{\epsilon}{\varepsilon}
+
+\DeclareSymbolFontAlphabet{\mathbbold}{bbold}
+\DeclareSymbolFontAlphabet{\mathbb}{AMSb}
+
+%% Сокращения для обозначения множеств
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\BB}{\mathbb{B}}
+
+\newcommand{\minL}{\min\limits}
+\newcommand{\maxL}{\max\limits}
+
+%% Теория множеств
+\DeclarePairedDelimiter{\Pair}\langle\rangle
+\DeclarePairedDelimiter{\Triple}\langle\rangle
+\DeclarePairedDelimiter{\Tuple}\langle\rangle
+
+%% Теория графов
+\newcommand{\operator}[1]{\operatorname*{#1}}
+\newcommand{\dist}[1]{\operator{dist}(#1)}
+\newcommand{\minDegree}[1]{\delta(#1)}
+\newcommand{\maxDegree}[1]{\Delta(#1)}
+\newcommand{\eccentricity}[1]{\varepsilon(#1)}
+\newcommand{\graphRadius}[1]{\operator{rad}(#1)}
+\newcommand{\graphDiameter}[1]{\operator{diam}(#1)}
+\newcommand{\graphGirth}[1]{\operator{girth}(#1)}
+\newcommand{\graphCenter}[1]{\operator{center}(#1)}
+\newcommand{\graphCentroid}[1]{\operator{centroid}(#1)}
+\newcommand{\vertexConnectivity}[1]{\varkappa(#1)}
+\newcommand{\edgeConnectivity}[1]{\lambda(#1)}
+\newcommand{\blockGraph}[1]{\operator{B}(#1)}
+\DeclareMathOperator{\ran}{ran}
+
+%% Формальные языки
+\newcommand{\Lang}{\mathcal{L}}
+
+%% Округление
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+%% Настройки заголовков
+\sectionfont{\color{blue}}
+\renewcommand\thesection{\arabic{section}.}
+\renewcommand\thesubsection{\thesection\arabic{subsection}.}
+
+%% Стиль для замечаний
+\newtheoremstyle{remarkstyle}{3pt}{3pt}{}{}{\itshape}{.}{.5em}{}
+
+%% Леммы-леммы теоремы
+\newcounter{points}[subsection]
+
+\theoremstyle{definition}
+\newtheorem{definition}{Def}[points]
+\renewcommand{\thedefinition}{\thesubsection\arabic{definition}}
+
+\theoremstyle{definition}
+\newtheorem{theorem}[definition]{\underline{Теорема}}
+\renewcommand{\thetheorem}{\thesubsection\arabic{theorem}}
+
+\theoremstyle{remarkstyle}
+\newtheorem{remark}[definition]{\textit{Замечание}}
+\renewcommand{\theremark}{\thesubsection\arabic{remark}}
+
+\theoremstyle{remarkstyle}
+\newtheorem{corollary}[definition]{\textit{Следствие}}
+\renewcommand{\thecorollary}{\thesubsection\arabic{corollary}}
+
+\theoremstyle{definition}
+\newtheorem{lemma}[definition]{\underline{Lm}}
+\renewcommand{\thelemma}{\thesubsection\arabic{lemma}}
+
+\theoremstyle{remarkstyle}
+\newtheorem{example}[definition]{\underline{Пример}}
+\renewcommand{\theexample}{\thesubsection\arabic{example}}
+
+\renewcommand*{\proofname}{\textit{Доказательство.}}
+\renewcommand\qedsymbol{\(\blacksquare\)}
+
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \vspace{-\topsep}
+  \pushQED{\qed}
+  \normalfont
+  \topsep0pt \partopsep0pt
+  \trivlist
+  \item[\hskip\labelsep
+              \itshape
+              #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endtrivlist\@endpefalse
+  \addvspace{6pt plus 6pt}
+}
+\makeatother
+
+%% Заголовки
+\newcommand\enumtocitem[3]{
+  \item\textbf{\color{blue} #1}
+  \stepcounter{#2}
+  \addcontentsline{toc}{#2}
+  {\protect{\numberline{#3}} #1}
+}
+\newcommand\question[1]{
+  \enumtocitem{#1}{subsection}{\thesubsection}
+}
+
+\newlist{questions}{enumerate}{1}
+\setlist[questions]{label = \textbf{\color{blue} \thesection\arabic*.}}
+
+\pagestyle{fancy}
+\fancyhead{}
+\fancyfoot{}
+\fancyfoot[C]{\thepage/\pageref*{LastPage}}
+\fancypagestyle{mainpage}{
+  \fancyfoot{}
+  \fancyfoot[C]{\url{https://github.com/isagila/tesc}}
+}
+\renewcommand{\headrulewidth}{0pt}
+
+%% С++ code
+\lstset{
+  basicstyle = \small\ttfamily,
+  tabsize = 2,
+  showstringspaces = false,
+  numbers = left,
+  commentstyle = \color{green},
+  morecomment = [l][\color{magenta}]{\#},
+  keywordstyle = \color{blue},
+  language = C++,
+  stringstyle = \color{red}\ttfamily,
+  breaklines = true
+}
+
+%% Красивые дроби
+\usepackage{xfrac}
+\usepackage[
+  locale = DE,
+  list-separator = {;\,},
+  list-final-separator = {;\,},
+  list-pair-separator = {;\,},
+  list-units = single,
+  range-units = single,
+  range-phrase = {\text{\ensuremath{-}}},
+  % quotient-mode = fraction, % красивые дроби могут не соответствовать ГОСТ
+  fraction-function = \sfrac,
+  separate-uncertainty,
+]{siunitx}[=v2] % Размерности SI
+\sisetup{inter-unit-product = \ensuremath{{}\cdot{}}}
+
+\newcommand{\todo}{\textbf{\color{red} TODO: \hspace{6pt}}}

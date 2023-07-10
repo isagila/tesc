@@ -1,0 +1,112 @@
+\question{Асимптотический анализ. Алгоритмы разделяй-и-властвуй.}
+
+Асимптотический анализ это анализ поведения функции на бесконечности.
+
+Пусть \(T(n)\) это функция 'количества работы' (время, память и т.п.) в
+зависимости от объема входных данных, а \(g(n)\) это некоторая функция, тогда:
+
+\begin{definition}
+  \(g(n)\) называется оценкой сверху для \(T(n)\), если
+
+  \begin{align*}
+    T(n) \in O(g(n)) \iff
+      \exists n_{0}, c > 0 \mid \forall n \ge n_{0} \colon T(n) \le c \cdot g(n)
+  \end{align*}
+\end{definition}
+
+\begin{definition}
+  \(g(n)\) называется оценкой cнизу для \(T(n)\), если
+  
+  \begin{align*}
+    T(n) \in \Omega(g(n)) \iff
+      \exists n_{0}, c > 0 \mid \forall n \ge n_{0} \colon c \cdot g(n) \le T(n)
+  \end{align*}
+\end{definition}
+
+\begin{definition}
+  Если \(g(n)\) одновременно является и оценкой сверху, и оценкой снизу, то
+  \(g(n)\) называется точной оценкой.
+
+  \begin{align*}
+    T(n) \in \Theta(g(n)) \iff \begin{cases}
+      T(n) \in O(g(n)) \\
+      T(n) \in \Omega(g(n))
+    \end{cases}
+  \end{align*}
+\end{definition}
+
+Также можно определять оценки через пределы:
+
+\begin{table}[H]
+  \centering
+
+  \renewcommand{\arraystretch}{1.5}
+  \begin{tabular}{c|c|c}
+    \(\lim_{n \to \infty} \frac{f(n)}{g(n)}\) & Оценка & Комментарий
+    \\ \hline 
+    \(c \neq 0, c \neq \infty\)
+      & \(f \in \Theta(g)\)
+      & \(f\) растет так же быстро, как и \(g\)
+    \\
+    \(c \neq \infty\)
+      & \(f \in O(g)\)
+      & \(f\) растет не быстрее \(g\)
+    \\
+      \(c \neq 0\)
+        & \(f \in \Omega(g)\)
+        & \(f\) растет не медленнее \(g\)
+    \\
+      \(c = 1\)
+        & \(f \sim g\)
+        & \(f\) и \(g\) эквивалентны
+    \\
+      \(c = 0\)
+        & \(f \in o(g)\)
+        & \(f\) растет медленнее \(g\)
+    \\
+      \(c = \infty\)
+        & \(f \in \omega(g)\)
+        & \(f\) растет быстрее \(g\)
+  \end{tabular}
+\end{table}
+
+Некоторые свойства асимптотических оценок:
+
+\begin{align*}
+  \begin{rcases}
+    f(n) \in O(g(n)) \\
+    f(n) \in \Omega(g(n))
+  \end{rcases} 
+  \iff f(n) \in \Theta(g(n))
+  \qquad
+  f(n) \sim g(n) \implies f(n) \in \Theta(g(n))
+  \\
+  f(n) \in O(g(n)) \iff g(n) \in \Omega(f(n))
+  \qquad
+  f(n) \in o(g(n)) \implies f(n) \in O(g(n))
+  \\
+  f(n) \in o(g(n)) \iff g(n) \in \omega(f(n))
+  \qquad
+  f(n) \in \omega(g(n)) \implies f(n) \in \Omega(g(n))
+\end{align*}
+
+\begin{definition}
+  Алгоритмы разделяй-и-властвуй основываются на том, что на каждой итерации они
+  дробят текущую задачу на несколько частей, а потом объединяют результаты
+  работы алгоритма для каждой из этих частей. Деление останавливается, когда
+  алгоритм доходит до некоторого базового случая.
+\end{definition}
+
+На примере сортировки слиянияем:
+
+\begin{align*}
+  T(n) = 
+  \under{2 T(n / 2)}{\text{рекурсивная работа}}
+  +
+  \under{n}{\text{работа по разделению и слиянию}}
+\end{align*}
+
+\todo Скобки пофиксить, либо оформить иначе 
+
+Для асимптотической оценки времени работы таких алгоритмов чаще всего
+используется Мастер теорема или метод Акра-Бацци.

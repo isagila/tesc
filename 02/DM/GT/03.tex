@@ -1,0 +1,58 @@
+\question{Пути и расстояния.}
+
+\begin{definition}
+  Маршрут (\textit{walk}) это чередующаяся последовательность из вершин и ребер.
+\end{definition}
+
+\begin{definition}
+  Путь (\textit{trail}) это маршрут без повторяющихся ребер.
+\end{definition}
+
+\begin{definition}
+  Цепь (\textit{path}) это маршрут без повторяющихся вершин.
+\end{definition}
+
+\begin{remark}
+  Для приведенных выше терминов существуют замкнутые версии (т.е. начальная и
+  конечная вершины совпадают):
+
+  \begin{itemize}
+    \item Замкнутый маршрут (\textit{closed walk})
+    \item Замкнутый путь (\textit{closed trail}, \textit{circuit})
+    \item Замкнутая цепь/цикл (\textit{closed path}, \textit{cycle})
+  \end{itemize}
+\end{remark}
+
+\begin{definition}
+  Длина маршрута (пути, цепи) это количество ребер в нем.
+\end{definition}
+
+\begin{definition}
+  Обхват (\textit{girth}) это длина кратчайшего цикла в графе.
+\end{definition}
+
+\begin{definition}
+  Расстояние \(\dist{u, v}\) между двумя вершинами \(u\) и \(v\) это длина
+  кратчайшего пути \(u \leadsto v\).
+\end{definition}
+
+\begin{definition}
+  Длина наибольшего из кратчайших расстояний от данной вершины \(v\) до
+  остальных вершин называется эксцентриситетом
+  \(\eccentricity{v} = \maxL_{u \in V} \dist{u, v}\)
+\end{definition}
+
+\begin{definition}
+  Радиусом графа называется минимальный из эксцентриситетов его вершин
+  \(\graphRadius{G} = \minL_{v \in V} \eccentricity{v}\).
+\end{definition}
+
+\begin{definition}
+  Диаметром графа называется максимальный из эксцентриситетов его вершин
+  \(\graphDiameter{G} = \maxL_{v \in V} \eccentricity{v}\).
+\end{definition}
+
+\begin{definition}
+  Множество вершин, эксцентриситет которых равен радиусу называются центром
+  графа \(\graphCenter{G} = \{ v \mid \eccentricity{v} = \graphRadius{G}\}\).
+\end{definition}

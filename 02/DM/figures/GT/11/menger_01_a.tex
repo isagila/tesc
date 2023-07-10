@@ -1,0 +1,15 @@
+\begin{tikzpicture}[
+  point/.style = {
+    circle,
+    draw = black
+  },
+  every path/.style = {
+    thick
+  }
+]
+  \node[point] (u) at (0, 0) {\(u\)};
+  \node[point] (mid) at (2, 1) {\(x\)};
+  \node[point] (v) at (4, 0) {\(v\)};
+
+  \draw (u) -- (mid) -- (v);
+\end{tikzpicture}

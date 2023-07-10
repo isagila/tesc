@@ -1,0 +1,71 @@
+\question{Принцип включения-исключения.}
+
+\begin{definition}
+  Принцип включений-исключений это комбинаторный принцип, который позволяет
+  вычислить мощность объединения конечного числа множеств, которые могут
+  пересекаться друг с другом.
+\end{definition}
+
+Введем обозначения:
+\begin{itemize}
+  \item \(X\)~--- данное множество элементов
+  \item \(\abs{X} = n\)
+  \item \(P_{1}, \dotsc, P_{m}\)~--- 'плохие' свойства
+  \item \(X_{i} = \{ x \in X \mid x \text{ cодержит свойство } P_{i} \}\)
+  \item \(S \subseteq [m]\)~--- некоторое подмножество свойств
+  \item \(
+    N(S)
+    = \bigcap\limits_{i \in S} X_{i}
+    = \{ x \in X \mid x \text{ cодержит все свойства из } S \}
+  \)
+\end{itemize}
+
+\begin{theorem}
+  \begin{align*}
+    \abs{X \setminus (X_{1} \cup \dotsc \cup X_{m})}
+    = \sum_{S \subseteq [m]} (-1)^{\abs{S}} \cdot \abs{N(S)}
+  \end{align*}
+\end{theorem}
+\begin{proof}
+  Возьмем произвольный \(x \in X\). Возможны два случая:
+  \begin{enumerate}
+    \item \(x\) не содержит ни одного свойства \(P_{1}, \dotsc, P_{m}\), тогда
+    \(x \in N(\varnothing)\) и \(x \notin N(S) \; \forall S \neq \varnothing\).
+    Значит \(x\) 'добавляет' \(1\) к общей сумме.
+
+    \item \(x\) содержит некоторый набор свойств из \(k\) свойств
+    \(T \subseteq [m]\).
+    Значит \(x \in S\) только тогда, когда \(S \subseteq T\). Получаем
+
+    \begin{align*}\label{PIE-1}\tag{1}
+      \sum_{S \subseteq T} (-1)^{\abs{S}} \cdot 1
+      = \sum_{i = 1}^{k} \binom{k}{i} (-1)^{i}
+    \end{align*}
+
+    Заметим, что по биномиальной теореме
+
+    \begin{align*}
+      (1 + (-1))^{k}
+      = \sum_{i = 1}^{k} \binom{k}{i} (-1)^{i} \cdot 1^{k - i}
+      = \sum_{i = 1}^{k} \binom{k}{i} (-1)^{i}
+      = 0
+    \end{align*}
+
+    Подставляя это в \ref{PIE-1} получаем, что \(x\) ничего не вносит в итоговую
+    сумму.
+  \end{enumerate}
+\end{proof}
+
+\begin{definition}
+  Беспорядок~--- это перестановка чисел от \(1\) до \(n\), в которой ни один
+  элемент не стоит на своём месте.
+\end{definition}
+
+\begin{theorem}
+  Количество беспорядков из \(n\) элементов равно субфакториалу числа \(n\) и
+  вычисляется о формуле:
+  
+  \begin{align*}
+    !n = \sum_{i = 0}^{n} (-1)^{i} \cdot \frac{n!}{i!}
+  \end{align*}
+\end{theorem}
