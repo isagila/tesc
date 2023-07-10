@@ -2,7 +2,11 @@ name: Build and deploy
 
 on:
   pull_request:
-    branches: ["main"]
+    branches:
+      - main
+  push:
+    branches:
+      - "release/**/**"
 
 jobs:
   build:
