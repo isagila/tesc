@@ -51,7 +51,7 @@
 
 %%% Дополнительная работа с математикой
 \usepackage{amsfonts, amssymb, amsthm, mathtools}
-\usepackage{esint} % для ориентированных интегралов
+\usepackage{esint}
 
 %% Дифференциалы и все что с ними связано
 \usepackage{physics}
@@ -89,12 +89,6 @@
   \let\label\orglabel
   \orgdescriptionlabel{#1}
 }
-\makeatother
-
-%% Добавление лидирующего нуля при необходимости
-%% https://tex.stackexchange.com/questions/256015/leading-zero-in-foreach-of-a-tikz-calendar
-\makeatletter
-\let\twodigits\two@digits
 \makeatother
 
 %% Круглые скобки снизу
@@ -180,9 +174,6 @@
 \newcommand{\ZZ}{\mathbb{Z}}
 \newcommand{\RR}{\mathbb{R}}
 \newcommand{\CC}{\mathbb{C}}
-\newcommand{\FF}{\mathbb{F}}
-\newcommand{\QQ}{\mathbb{Q}}
-\newcommand{\EE}{\mathbb{E}}
 
 %% Линейные операторы
 \newcommand{\opA}{\mathcal{A}}

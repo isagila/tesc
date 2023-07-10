@@ -1,0 +1,13 @@
+QuoteStyle = Logical
+
+VerbEnvir { lstlisting }
+
+WipeArg
+{
+\label:{} \ref:{} \vref:{} \pageref:{} \index:{} \cite:[]{}
+\input:{} \verbatiminput:[]{} \listinginput:[]{}{}
+\verbatimtabinput:[]{} \include:{} \includeonly:{}
+\bibitem:[]{} \texttt:{} \verb:{} \includegraphics:[]{}
+}
+
+CmdLine { -n 24 }
