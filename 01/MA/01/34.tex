@@ -1,0 +1,236 @@
+\subsection{%
+  Полный дифференциал функции двух переменных. Инвариантность формы.%
+}
+
+\begin{definition}
+  Частным дифференциалом функции двух переменных называется произведение
+  соответствующей частной производной на частное приращение. Например, частный
+  дифференциал по \(x\) имеет вид \(\display{\dd_x z =\partder{z}{x} \Delta
+  x}\).
+\end{definition}
+
+\begin{definition}
+  Функция двух переменных \(z = f(x, y)\) называется дифференцируемой в точке
+  \(M_0 (x_0, y_0)\), если ей полное приращение представимо в виде
+
+  \begin{equation*}
+    \Delta z = A \Delta x + B \Delta y + \smallo(\rho)
+    \qquad
+    \prh{\rho = \sqrt{(\Delta x)^2 + (\Delta y)^2}}
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  Функция двух переменных называется дифференцируемой на множестве \(D\), если
+  она дифференцируема в каждой точке этого множества.
+\end{definition}
+
+\begin{theorem}
+  Если функция \(z = f(x, y)\) дифференцируема в точке \(M_0 (x_0, y_0)\), то у
+  нее существуют частные производные \(z'_x\) и \(z'_y\) в этой точке.
+\end{theorem}
+
+\begin{proof}
+  Т.к. \(f(x, y)\) дифференцируема в точке \(M_0 (x_0, y_0)\), то её полное
+  приращение представимо в виде
+
+  \begin{equation*}
+    \Delta z = A \Delta x + B \Delta y + \smallo(\rho)
+    \qquad
+    \prh{\rho = \sqrt{(\Delta x)^2 + (\Delta y)^2}}
+  \end{equation*}
+
+  Зафиксируем \(y = const\), тогда \(\Delta y = 0\), получим \(\Delta z = A
+  \Delta x + \smallo(\Delta x)\). Из этого по критерию дифференцируемости
+  функции одной переменной следует, что существует производная \(z_x' = A\).
+  Аналогично рассматривая \(y\), получим что существует \(z'_y = B\).
+\end{proof}
+
+\begin{corollary}
+  Таким образом мы доказали, что дифференцируемая функция представима в виде
+
+  \begin{equation*}
+    \Delta z = \partder{z}{x} \Delta x + \partder{z}{y} \Delta y
+      + \smallo(\rho)
+    \qquad
+    \prh{\rho = \sqrt{(\Delta x)^2 + (\Delta y)^2}}
+  \end{equation*}
+\end{corollary}
+
+\begin{definition}
+  Полным дифференциалом функции двух переменных называется линейная относительно
+  \(\Delta x\) и \(\Delta y\) часть её полного приращения.
+
+  \begin{equation*}
+    \dd z = \partder{z}{x} \dd x + \partder{z}{y} \dd y
+  \end{equation*}
+\end{definition}
+
+\begin{remark}
+  Полный дифференциал равен сумме частных дифференциалов.
+\end{remark}
+
+\begin{theorem}[Достаточное условие дифференцируемости функции двух переменных]
+  Если функция \(z = f(x, y)\) в точке \(M_0\) имеет непрерывные частные
+  производные \(z'_x\) и \(z'_y\), то она дифференцируема в этой точке.
+\end{theorem}
+
+\begin{proof}
+  Рассмотрим полное приращение функции \(z = f(x, y)\).
+
+  \begin{equation*}
+    \begin{aligned}
+      \Delta z = z (x + \Delta x, y + \Delta y) - z(x, y)
+    \\
+      \Delta z = \prh[\Big]{z(x + \Delta x, y + \Delta y) - z(x, y + \Delta y)}
+        + \prh[\Big]{z(x, y + \Delta y) - z(x, y)}
+    \end{aligned}
+  \end{equation*}
+
+  В каждой из скобок мы можем рассматривать функцию \(z(x, y)\) как функцию
+  одной переменной в плоскостях \(y + \Delta y\) и \(x\) соответственно.
+  Применим формулу Лагранжа к каждой из скобок, получим
+
+  \begin{equation*}
+    \Delta z = z'_x(\xi, y + \Delta y) \Delta x + z'_y(x, \mu) \Delta y
+    \qquad
+    \begin{cases}
+      \xi \in (x, x + \Delta x) \\
+      \mu \in (y, y + \Delta y)
+    \end{cases}
+  \end{equation*}
+
+  Введем следующие обозначения
+
+  \begin{equation*}
+    \rho = \sqrt{(\Delta x)^2 + (\Delta y)^2}
+    \qquad
+    \rho \to 0 \implies \begin{cases}
+      x \to 0 \\
+      y \to 0
+    \end{cases}
+  \end{equation*}
+
+  Т.к. по условию теоремы частные производные непрерывны, то
+
+  \begin{equation*}
+    \begin{aligned}
+      \begin{rcases}
+        \xi \in (x, x + \Delta x) \\
+        \Delta x \to 0
+      \end{rcases}
+      & \implies
+      \lim_{\rho \to 0} z'_x(\xi, y + \Delta y) = z'_x(x, y)
+    \\
+      \begin{rcases}
+        \mu \in (y, y + \Delta y) \\
+        \Delta y \to 0
+      \end{rcases}
+      & \implies
+      \lim_{\rho \to 0} z'_y(x, \mu) = z'_y(x, y)
+    \end{aligned}
+  \end{equation*}
+
+  Воспользуемся представлением функции пределом.
+
+  \begin{equation*}
+    \begin{aligned}
+      z'_x(\xi, y + \Delta y) = z'_x(x, y) + \alpha(\rho)
+    \\
+      z'_y(x, \mu) = z'_y(x, y) + \beta(\rho)
+    \end{aligned}
+  \end{equation*}
+  
+  Значит полное приращение функции \(f(x, y)\) можно представить в виде
+
+  \begin{equation*}
+    \begin{aligned}
+      \Delta z = (z'_x(x, y) + \alpha(\rho)) \Delta x
+        + (z'_y(x, y) + \beta(\rho)) \Delta y
+    \\
+      \Delta z = z'_x(x, y) \Delta x + z'_y(x, y) \Delta y
+      + \alpha(\rho) \Delta x + \beta(\rho) \Delta y
+    \end{aligned}
+  \end{equation*}
+
+  Докажем, что \(\alpha(\rho) \Delta x + \beta(\rho) \Delta y = \smallo(\rho)\).
+  Для этого рассмотрим предел
+
+  \begin{equation*}
+    \lim_{\rho \to 0} \frac{\alpha(\rho) \Delta x
+      + \beta(\rho) \Delta y}{\rho}
+    = \lim_{\rho \to 0} \prh{\alpha(\rho) \frac{\Delta x}{\rho}} + 
+      \lim_{\rho \to 0} \prh{\beta(\rho) \frac{\Delta y}{\rho}}
+  \end{equation*}
+
+  Заметим, что \(\display{\sqrt{\frac{(\Delta x)^2}{\rho^2} +
+  \frac{(\Delta y)^2}{\rho^2}} = 1}\). Из этого следует, что функции
+  \(\display{\frac{\Delta x}{\rho}}\) и \(\display{\frac{\Delta y}{\rho}}\)
+  ограничены (если быть точным, то каждая из них не превышает единицу). По
+  свойству бесконечно малых получаем
+
+  \begin{equation*}
+    \lim_{\rho \to 0} \prh{\alpha(\rho) \frac{\Delta x}{\rho}} + 
+      \lim_{\rho \to 0} \prh{\beta(\rho) \frac{\Delta y}{\rho}}
+    = \lim_{\rho \to 0} \alpha(\rho) + \lim_{\rho \to 0} \beta(\rho)
+    = 0
+  \end{equation*}
+  
+  Значит \(\alpha(\rho) \Delta x + \beta(\rho) \Delta y = \smallo(\rho)\) по
+  определению бесконечно малой функции более высокого порядка. В итоге получаем,
+  что полное приращение функции \(z = f(x, y)\) представимо в  виде \(\Delta z =
+  z'_x \Delta x + z'_y \Delta y + \smallo(\rho)\). Таким образом функция \(z =
+  f(x, y)\) дифференцируема по определению.
+\end{proof}
+
+\begin{theorem}
+  Первый полный дифференциал сохраняет инвариантность формы.
+\end{theorem}
+
+\begin{proof}
+  Рассмотрим \(z = f(u, v)\), пусть \(u = u(x, y)\) и \(v = v(x, y)\). По
+  определению полного дифференциала получаем 
+
+  \begin{equation*}
+    \begin{aligned}
+      \dd z = \partder{z}{x} \dd x + \partder{z}{y} \dd y
+    \\
+      \dd z = \prh{\partder{z}{u} \cdot \partder{u}{x}
+        + \partder{z}{v} \cdot \partder{v}{x}} \dd x
+        + \prh{\partder{z}{u} \cdot \partder{u}{y}
+        + \partder{z}{v} \cdot \partder{v}{y}} \dd y
+    \\
+      \dd z = \partder{z}{u} \prh{\partder{u}{x} \dd x + \partder{u}{y} \dd y}
+        + \partder{z}{v} \prh{\partder{v}{x} \dd x + \partder{v}{y} \dd y}
+    \\
+      \dd z = \partder{z}{u} \dd u + \partder{z}{v} \dd v
+    \end{aligned}
+  \end{equation*}
+  
+  Таким образом, форма дифференциала не зависит от того, является аргумент
+  функции независимой переменной или функцией другого аргумента.
+\end{proof}
+
+\begin{remark}
+  С помощью дифференциала функции двух переменных можно искать дифференциал
+  функции одной переменной, заданной неявно.
+\end{remark}
+
+\begin{example}
+  Пусть \(F(x, y(x)) = 0\). Рассмотрим её как функцию двух независимых
+  переменных и вычислим дифференциал.
+
+  \begin{equation*}
+    \dd F = \partder{F}{x} \dd x + \partder{F}{y} \dd y
+  \end{equation*}
+
+  Этот дифференциал будет равен нулю (т.к. исходная функция равна нулю), значит
+
+  \begin{equation*}
+    \partder{F}{x} + \partder{F}{y} \cdot \fullder{y}{x} = 0
+    \implies
+    \fullder{y}{x}
+    = -\frac{\partder{F}{x}}{\partder{F}{y}}
+    = -\frac{F'_x}{F'_y}
+  \end{equation*}
+\end{example}

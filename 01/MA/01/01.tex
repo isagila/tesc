@@ -1,0 +1,80 @@
+\subsection{%
+  Вещественная ось. Бесконечность. Окрестность точки.%
+} \label{sec:01-01}
+
+\begin{definition}
+  Вещественная ось это геометрическое изображение множества всех вещественных
+  чисел.
+\end{definition}
+
+\begin{remark}
+  Вещественная ось не содержит \quote{дыр}. Это значит, что переменная проходя
+  все точки интервала \(\interval{a}{b}\) принимает все вещественные значения из
+  интервала \(\interval{a}{b}\). Другими словами, между геометрической осью
+  (множеством точек) и \(\RR\) действует биекция.
+\end{remark}
+
+Отрезок \(A\) лежит \textit{левее} отрезка \(B\), если любая точка из отрезка
+\(A\) не больше любой точки из отрезка \(B\): \(\forall a \in A, b \in B \given
+a \le b\). Если один отрезок лежит левее другого, то между ними найдется как
+минимум одна точка.
+
+\begin{equation*}
+  \forall A \text{ левее } B \given
+  \exists c \in \RR \given
+  \forall a \in A, b \in B \given
+  a \le c \le b
+\end{equation*}
+
+Расширенная вещественная ось определяется следующими аксиомами
+
+\begin{enumerate}
+\item
+  \(\bar{\RR} = \RR \cup \set{\pm\infty}\)
+
+\item
+  \(\forall x \in \RR \given -\infty < x < +\infty\)
+
+\item
+  \(x \cdot \pm \infty = \pm \infty\) (знаки как обычно)
+
+\item
+  \(x + \pm \infty = \pm \infty\)
+
+\item
+  \(x / \pm \Zero = \pm \infty\) (не ноль, а бесконечное приближение к нему)
+
+\item
+  \(x / \pm \infty = \pm \Zero\) (у нуля есть знак)
+\end{enumerate}
+
+\begin{definition}
+  Дельта--окрестностью точки \(a\) называют \(\near{a}{\delta} =
+  \interval{-\delta + a}{a + \delta}\).
+
+  Если \(a = +\infty\), то \(\near{a}{\delta} = \interval{\delta}{+\infty}\).
+  Если \(a = -\infty\), то \(\near{a}{\delta} = \interval{-\infty}{-\delta}\).
+\end{definition}
+
+\begin{definition}
+  Проколотой дельта-окрестностью точки \(a\) называют \(\nearo{a}{\delta} =
+  \near{a}{\delta} \setminus \set{a}\).
+\end{definition}
+
+\begin{remark}
+  Если в некоторых окрестностях \(\delta_1 \dotsc \delta_n\) точки \(a\)
+  выполняются условия \(P_1 \dotsc P_n\), то все эти условия будут выполняться в
+  пересечении этих окрестностей.
+\end{remark}
+
+\begin{remark}
+  Пересечение двух окрестностей одной точки это окрестность меньшего радиуса
+  \(\near{a}{\delta} \cap \near{a}{\epsilon} = \near{a}{\min(\delta,
+  \epsilon)}\).
+\end{remark}
+
+\begin{remark}
+  Для двух различных точек всегда найдутся непересекающиеся окрестности \(a \ne
+  b \implies \exists \delta > 0, \epsilon > 0 \given \near{a}{\delta} \cap
+  \near{b}{\epsilon} = \varnothing\).
+\end{remark}

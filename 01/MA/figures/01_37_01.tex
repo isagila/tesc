@@ -1,0 +1,20 @@
+\begin{tikzpicture}
+  \draw[draw = olive!60, fill = olive!20, very thick]
+    (-1, -1) rectangle (6, 5);
+
+  \draw[dashed, thick] (0, 0) -- (0, 4)
+    node[midway, left] {\(\Delta y\)};
+  \draw[dashed, thick] (0, 0) -- (5, 0)
+    node[midway, below] {\(\Delta x\)};
+
+  \draw[->, thick] (5, 0) -- (0, 4)
+    node[pos = 0, right] {\(M_0\)}
+    node[midway, above right] {\(\rho\)}
+    node[pos = 1, above] {\(M\)};
+  \point{5, 0};
+  \point{0, 4};
+
+  \draw[thick] (4, 0) arc (-180 : -218 : 1)
+    node[midway, above left] {\(\alpha\)};
+
+\end{tikzpicture}

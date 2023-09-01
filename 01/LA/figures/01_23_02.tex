@@ -1,0 +1,15 @@
+\begin{tikzpicture}
+  \draw[draw = olive!60, fill = olive!20, very thick]
+    (-4, -3) rectangle (4, 4);
+
+  \draw[->, thick] (0, 0) -- (0, 3)
+    node[pos = 0.8, right] {\(\vec{c}\)};
+  \draw[->, thick] (0, 0) -- (3, -1)
+    node[midway, above] {\(\vec{b}\)};
+  \draw[->, thick] (0, 0) -- (-2, -2)
+    node[midway, above left] {\(\vec{a}\)};
+
+  \draw[->, very thick, color = blue!80]
+    (-0.8, -1) arc (250 : 310 : 2);
+
+\end{tikzpicture}

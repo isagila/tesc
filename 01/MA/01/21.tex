@@ -1,0 +1,55 @@
+\subsection{%
+  Производные элементарных функций: тангенс и арктангенс.%
+}
+
+\begin{theorem}
+  \begin{equation*}
+    f(x) = \tg x \implies f'(x) = \frac{1}{\cos^2 x}
+  \end{equation*}  
+\end{theorem}
+
+\begin{proof}
+  По определению тангенса
+
+  \begin{equation*}
+    \tg x = \frac{\sin x}{\cos x}
+    \implies
+    f'(x) = \prh{\frac{\sin x}{\cos x}}'
+  \end{equation*}
+
+  Далее пользуемся формулами производной частного, синуса и косинуса, а также
+  основным тригонометрическим тождеством. Итого
+
+  \begin{equation*}
+    f'(x)
+    = \frac{(\sin x)' \cos x - (\cos x)' \sin x}{\cos^2 x}
+    = \frac{\cos^2 x + \sin^2 x}{\cos^2 x}
+    = \frac{1}{\cos^ 2 x}
+  \end{equation*}
+\end{proof}
+
+\begin{theorem}
+  \begin{equation*}
+    f(x) = \arctg x \implies f'(x) = \frac{1}{1 + x^2}
+  \end{equation*}  
+\end{theorem}
+
+\begin{proof}
+  Рассмотрим обратную функцию \(x(y) = \tg y\). Её производная будет равна
+  \(\display{\frac{1}{\cos^2 y}}\). По формуле производной обратной функции
+  получаем, что
+
+  \begin{equation*}
+    f'(x) = \frac{1}{1 / \cos^2 y}
+  \end{equation*}
+
+  Подставим в это равенство известную тригонометрическую формулу
+  \(\display{\frac{1}{\cos^2y} = \tg^2 y + 1}\). Учитывая, что \(y = \arctg x\),
+  получаем
+
+  \begin{equation*}
+    f'(x)
+    = \frac{1}{\tg^2 y + 1}
+    = \frac{1}{x^2 + 1}
+  \end{equation*}
+\end{proof}

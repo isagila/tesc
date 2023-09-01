@@ -1,0 +1,78 @@
+\subsection{%
+  Производные элементарных функций: показательная, логарифмическая функции.%
+}
+
+\begin{theorem}
+  \begin{equation*}
+    f(x) = a^x \implies f'(x) = a^x \ln a    
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  По определению производной 
+
+  \begin{equation*}
+    f'(x) = \lim_{\Delta x \to 0} \frac{f(x_0 + \Delta x) - f(x_0)}{\Delta x}
+  \end{equation*}
+
+  Вычислим значение числителя.
+
+  \begin{equation*}
+    f(x_0 + \Delta x) - f(x_0)
+    =  a^{x_0 + \Delta x} - a^{x_0}
+    = a^{x_0} (a^{\Delta x} - 1)
+  \end{equation*}
+
+  Вернёмся к пределу и заменим скобку  в числителе на эквивалент.
+
+  \begin{equation*}
+    f'(x) = \lim_{\Delta x \to 0} \frac{a^{x_0}(a^{\Delta x} - 1)}{\Delta x}
+    = \lim_{\Delta x \to 0} \frac{a^{x_0} \Delta x \ln a}{\Delta x}
+    = \lim_{\Delta x \to 0}{a^{x_0} \ln a}
+    = a^{x_0} \ln a
+  \end{equation*}
+\end{proof}
+
+\begin{remark}
+  Частный случай производной показательной функции \(a = e\), тогда \((e^x)' =
+  e^x \ln e = e^x\).
+\end{remark}
+
+\begin{theorem}
+  \begin{equation*}
+    f(x) = \log_a x \implies f'(x) = \frac{1}{x \ln a}
+  \end{equation*}  
+\end{theorem}
+
+\begin{proof}
+  По определению производной
+
+  \begin{equation*}
+    f'(x) = \lim_{\Delta x \to 0} \frac{f(x_0 + \Delta x) - f(x_0)}{\Delta x}
+  \end{equation*}
+
+  Вычислим значение числителя, для этого воспользуемся свойствами логарифмов.
+
+  \begin{equation*}
+    f(x_0 + \Delta x) - f(x_0)
+    = \log_a(x_0 + \Delta x) - \log_a(x_0)
+    = \log_a{\frac{x_0 + \Delta x}{x_0}}
+    = \log_a{\prh{1 + \frac{\Delta x}{x_0}}}
+  \end{equation*}
+
+  Вернёмся к пределу и заменим логарифм в числителе на эквивалент.
+
+  \begin{equation*}
+    f'(x) = \lim_{\Delta x \to 0} \frac{\log_a
+      \prh{1 + \frac{\Delta x}{x_0}}}{\Delta x}
+    = \lim_{\Delta x \to 0} \frac{\frac{\Delta x}{x_0}
+      \cdot \frac{1}{\ln a}}{\Delta x}
+    = \lim_{\Delta x \to 0} \frac{1}{x_0 \ln a}
+    = \frac{1}{x_0 \ln a}
+  \end{equation*}
+\end{proof}
+
+\begin{remark}
+  Частный случай производной логарифмической функции \(a = e\), тогда
+  \((\log_e x)' = (\ln x)' = \frac{1}{x \ln e} = \frac{1}{x}\).
+\end{remark}

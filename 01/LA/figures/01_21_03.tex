@@ -1,0 +1,22 @@
+\begin{tikzpicture}
+  \draw[draw = olive!60, fill = olive!20, very thick]
+    (-4, -4) rectangle (4, 4);
+
+  \foreach \radius in {0.5, 1, 1.5, 2, 2.5} {
+    \draw[thick] (0, 0) circle (\radius);
+  }
+  \foreach \angle in {0, 15, 30, 45, 60, 75} {
+    \draw[thick] (0, 0) -- +(\angle : 3);
+    \draw[thick] (0, 0) -- +(90 + \angle : 3);
+    \draw[thick] (0, 0) -- +(180 + \angle : 3);
+    \draw[thick] (0, 0) -- +(270 + \angle : 3);
+  }
+
+  \draw[->, thick] (0, 0) -- (3, 0)
+    node[below] {\(x\)};
+
+  \draw (1.41, 1.5) node[fill = olive!20, above]
+    {\(M (\rho, \phi)\)};
+  \point{1.41, 1.41};
+
+\end{tikzpicture}

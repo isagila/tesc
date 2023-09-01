@@ -1,0 +1,15 @@
+\begin{tikzpicture}
+  \draw[draw = olive!60, fill = olive!20, very thick]
+    (-1.5, -1.5) rectangle (5, 5);
+
+  \draw (0, 0) node[below left] {\(O\)};
+  \draw[->, thick] (0, -0.5) -- (0, 4)
+    node[right] {\(y\)};
+  \draw[->, thick] (-0.5, 0) -- (4, 0)
+    node[below] {\(x\)};
+  
+  \draw[->, thick] (1, 1.5) -- (3, 3)
+    node[pos = 0, below] {\(M_1 (x_1, y_1)\)}
+    node[pos = 1, above] {\(M_2 (x_2, y_2)\)};
+
+\end{tikzpicture}

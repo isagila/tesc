@@ -1,0 +1,35 @@
+\begin{tikzpicture}
+  \draw[draw = olive!60, fill = olive!20, very thick]
+    (-4, -3) rectangle (4, 4.5);
+
+  \draw[thick] (1, -2)
+    edge (2, 1.5)
+    edge (2.5, -0.5);
+  \draw[->, thick] (-3, -2) -- (1, -2)
+    node[midway, below] {\(\vec{a}\)};
+  \draw[thick] (3.5, 3)
+    edge (-0.5, 3)
+    edge (2, 1.5)
+    edge (2.5, -0.5);
+  \draw[thick] (-2, 1.5)
+    edge (-0.5, 3)
+    edge (2, 1.5);
+  \draw[->, thick] (-3, -2) -- (-2, 1.5)
+    node[pos = 0.8, right] {\(\vec{c}\)};
+
+  \draw[dashed, thick] (-1.5, -0.5)
+    edge (2.5, -0.5)
+    edge (-0.5, 3);
+  \draw[->, dashed, thick] (-3, -2) -- (-1.55, -0.55)
+    node[pos = 0.7, above] {\(\vec{b}\)};
+
+  \draw[dashed, thick, color = blue!80]
+    (-3, -2) -- (-3, 1.5)
+    node[midway, left] {\(h\)};
+  \draw[dashed, thick] (-3, 1.5) -- (-3, 3);
+  \draw[dashed, thick] (-3, 1.5) -- (-2, 1.5);
+  
+  \draw (-2.2, -2) arc (0 : 43 : 0.8)
+    node[midway, above right] {\(\alpha\)};
+
+\end{tikzpicture}

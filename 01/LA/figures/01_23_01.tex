@@ -1,0 +1,15 @@
+\begin{tikzpicture}
+  \draw[draw = olive!60, fill = olive!20, very thick]
+    (-4, -3) rectangle (4, 4);
+
+  \draw[dashed, thick]
+    (-3, -2) -- (2, -2) -- (3, 1.5) -- (-2, 1.5) -- cycle;
+
+  \draw[->, thick] (0, 0) -- (0, 3)
+    node[pos = 0.8, right] {\(\vec{c}\)};
+  \draw[->, thick] (0, 0) -- (1.5, -0.5)
+    node[midway, above] {\(\vec{b}\)};
+  \draw[->, thick] (0, 0) -- (-1.5, -1.5)
+    node[midway, above left] {\(\vec{a}\)};
+
+\end{tikzpicture}

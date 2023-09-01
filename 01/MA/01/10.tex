@@ -1,0 +1,199 @@
+\subsection{%
+  Второй замечательный предел. Число \(e\).%
+}
+
+\begin{theorem}
+  Вторым замечательным пределом называется предел
+
+  \begin{equation*}
+    \lim_{x \to \infty} \prh{1 + \frac{1}{x}^x = e
+  \end{equation*}
+\end{theorem}
+
+\todo
+Доказательство этой теоремы делится на два этапа:
+
+Докажем это для натуральных чисел $\lim_{n \to \infty}{(1 + \frac{1}{n})}^n = e$
+Рассмотрим выражение в пределе, распишем его [по биному Ньютона](https://ru.wikipedia.org/wiki/Бином_Ньютона): $\sum_{k = 0}^{n} \Big( 1^{n - k} \cdot \frac{1}{n^k} \cdot C_{n}^k \Big)$, где $\displaystyle{C_{n}^{k} = \frac{n!}{(n - k)! \cdot k!}}$ количество [сочетаний](https://ru.wikipedia.org/wiki/Сочетание) по $k$ из $n$ элементов
+
+Распишем $\displaystyle{1 + 1 + \frac{1}{n^2} \cdot \frac{n \cdot (n - 1)}{2!} + \frac{1}{n^3} \cdot \frac{n \cdot (n - 1) \cdot (n - 2)}{3!} + \dots }$
+
+Упростим $\displaystyle{1 + 1 + \frac{1}{2!} \cdot \frac{n - 1}{n} + \frac{1}{3!} \cdot \frac{n - 1}{n} \cdot \frac{n - 2}{n} + \dots}$
+
+(a) Заметим, что эта сумма больше двух
+
+(b) Также заметим, что каждое слагаемое положительно, значит последовательность монотонно возрастает
+
+Для того, чтобы доказать, что она меньше трёх запишем её в таком виде $\displaystyle{1 + 1 + \frac{1}{2!} (1 - \frac1n) + \frac{1}{3!}(1 - \frac1n)(1 - \frac2n) + \dots}$
+
+Каждая из скобок вида $\displaystyle{(1 - \frac{i}{n})}$ меньше единицы, значит каждое из слагаемых меньше, чем $\displaystyle{\frac{1}{i!}}$
+
+Т.е. например $\displaystyle{\frac{1}{3!}(1 - \frac1n)(1 - \frac2n) < \frac{1}{3!}}$
+
+Теперь заметим, что $\displaystyle{\frac{1}{p!} < \frac{1}{2^{p - 1}}}$ при $p > 2$
+
+Из этих двух фактов следует, что сумма$\displaystyle{1 + 1 + \frac{1}{2!} (1 - \frac1n) + \frac{1}{3!}(1 - \frac1n)(1 - \frac2n) + \dots}$
+
+меньше чем сумма
+
+$\displaystyle{1 + \bigg(\frac{1}{2^0} + \frac{1}{2^1} + \frac{1}{2^2} + \dots + \frac{1}{2^{n - 1}} \bigg)}$
+
+Сумму большой скобки в правой части можно легко вычислить с помощью формулы суммы геометрической прогрессии $\displaystyle{\sum = \frac{b_1 (1 - q^p)}{1 - q}}$
+
+Имеем $b_1 = 1$, $q = 0.5$, $p = n$ (количество элементов прогрессии, т.к. идём от $0$ до $n - 1$)
+Значит сумма в скобках будет равна $\displaystyle{\frac{1 \cdot (1 - 0.5^n)}{0.5} = 2 - 2 \cdot 0.5^n}$
+
+В итоге сумма всей правой части будет равна $3 - 2 \cdot 0.5^n$ (не теряем единичку за большими скобками)
+Т.к. $0.5^n \to 0$ при $n \to \infty$, значит эта сумма меньше трёх
+
+(с) Значит искомая сумма $\displaystyle{1 + 1 + \frac{1}{2!} (1 - \frac1n) + \frac{1}{3!}(1 - \frac1n)(1 - \frac2n) + \dots}$
+также меньше трёх
+
+Из (a) и (c) получаем, что искомая сумма находится в диапазоне $(2;3)$
+
+Таким образом последовательность $\displaystyle{\Big( 1 + \frac{1}{n} \Big)^n}$ ограничена и монотонно возрастает, значит [по теореме Вейерштрасса](https://www.notion.so/004-b90807f1e19444569121d10616f072d6?pvs=21) она сходится
+
+Число, к которому сходится эта последовательность, обозначается $e$ и примерно равно $2.718281828$
+
+
+Теперь докажем, что данный предел справедлив и для вещественных чисел
+1. Рассмотрим случай $x \to +\infty$
+
+Для каждого $x \in \mathbb{R}$ найдется такое число $n \in \mathbb{N}$, что
+
+$n \le x \lt n + 1$
+Преобразуем это двойное неравенство
+
+$\displaystyle{\frac{1}{n} \ge \frac{1}{x} \gt \frac{1}{n + 1}}$
+
+Добавим единицу ко всем частям
+
+$\displaystyle{\frac{1}{n} + 1 \ge \frac{1}{x} + 1 \gt \frac{1}{n + 1} + 1}$
+
+Запишем исходное неравенство, но в другом порядке
+$\displaystyle{n + 1 \gt x \ge n}$
+
+Пусть теперь элементы второго неравенства будут показателями степеней для элементов первого, тогда мы получим
+
+$\displaystyle{(\frac{1}{n} + 1)^{n + 1} \gt (\frac{1}{x} + 1)^x \gt (\frac{1}{n + 1} + 1)^n}$
+
+Причем все знаки стали строгими
+
+Рассмотрим предел левой части:
+
+$\displaystyle{\lim_{n \to \infty}{(\frac1n + 1)^{n + 1}} = \lim_{n \to \infty}{\Big((\frac1n + 1)^n \cdot (\frac1n + 1)\Big)}}$
+
+[Предел произведения равен произведению пределов](https://www.notion.so/007-30f2e98a5df34f7a865a1659c1877cc7?pvs=21), значит
+$\displaystyle{\lim_{n \to \infty}{(\frac1n + 1)^n} \cdot \lim_{n \to \infty}{(\frac1n + 1)}}$
+
+Первый предел равен $e$ по первой части доказательства, второй предел равен единице, значит предел левой части равен $e$
+
+Аналогично рассмотрим предел правой части $\displaystyle{\lim_{n \to \infty}{(\frac{1}{n + 1} + 1)^n} = \lim_{n \to \infty}{\frac{(\frac{1}{n + 1} + 1)^{n + 1}}{(\frac{1}{n + 1} + 1)}} = \frac{e}{1} = e}$
+
+Значит [по теореме о двух жандармах](https://www.notion.so/005-0a0ccd2d21d84da39fc0a8116ce2eef7?pvs=21) $\displaystyle{\lim_{x \to \infty}{(\frac{1}{x} + 1)^x} = e}$
+
+2. Рассмотрим случай $x \to -\infty$
+
+Сделаем замену $t = -(x + 1)$, получим, что
+если $x \to -\infty$, то $t \to \infty$
+
+Выразим $x$: $x = -(t + 1)$, подставим его в исследуемый предел $\displaystyle{\lim_{t \to \infty}{\bigg(\Big(1 + \frac{1}{-(t + 1)}\Big)^{-(t + 1)}\bigg)}}$
+
+Преобразуем выражение в пределе, вынесем минус в основании $\displaystyle{\Big(1 - \frac{1}{t + 1}\Big)^{-(t + 1)}}$
+
+Приведем основание к общему знаменателю и вычислим его $\displaystyle{\Big(\frac{t}{t + 1}\Big)^{-(t + 1)}}$
+
+Вынесем минус единицу в степени и перевернём дробь в основании $\displaystyle{\Big(\frac{t + 1}{t}\Big)^{t + 1}}$
+
+Поделим почленно $\displaystyle{\Big(1 + \frac{1}{t}\Big)^{t + 1}}$
+
+Вернёмся к пределу и представим его в таком виде $\displaystyle{\lim_{t \to \infty}{\Big(1 + \frac{1}{t}\Big)^{t + 1}} = \lim_{t \to \infty}{\Big( (1 + \frac{1}{t})^t \cdot (1 + \frac{1}{t}) \Big)}}$
+
+Пользуясь [свойством предела произведения](https://www.notion.so/007-30f2e98a5df34f7a865a1659c1877cc7?pvs=21) и доказанным на первом шаге получаем, что данный предел равен $e \cdot 1 = e$
+
+\begin{definition}
+  Константа \(e = 2.718281828 \dotsc\) определяется как значение второго
+  замечательного предела.
+\end{definition}
+
+\begin{theorem}
+  \begin{equation*}
+    \log_a (x + 1) \sim \frac{x}{\ln a}
+    \qquad
+    (x \to 0)
+  \end{equation*}
+\end{theorem}
+
+\begin{proof} \todo
+  Рассмотрим предел $\displaystyle{\lim_{x \to 0}{\frac{\log_a (x + 1)}{\frac{x}{\ln a}}}}$
+  Воспользуемся свойством логарифмов: перейдем в основанию $e$:
+  
+  $\displaystyle{\log_a(x+ 1) = \frac{\ln (x + 1)}{\ln a}}$
+  
+  Подставим это в предел и упростим $\displaystyle{\lim_{x \to 0}{\frac{\frac{\ln (x + 1)}{\ln a}}{\frac{x}{\ln a}}} = \lim_{x \to 0}{\frac{\ln (x + 1)}{x}}}$
+  
+  По свойству логарифма внесём $\displaystyle{\frac{1}{x}}$ в степень числа логарифма
+  
+  $\displaystyle{\lim_{x \to 0}{\bigg(\ln \Big( (x + 1)^{1 / x} \Big) \bigg)}}$
+  
+  Т.к. $\ln(x)$ непрерывная функция, то её можно вынести за знак предела
+  
+  $\displaystyle{\ln \bigg( \lim_{x \to 0}{\Big( (x + 1)^{1 / x} \Big) \bigg)}}$
+  
+  Предел в логарифме является вторым замечательным пределом и
+  равен $e$, значит мы получаем $\displaystyle{\ln (e) = 1}$
+  
+  По определению эквивалентных функций получаем $\displaystyle{\log_a(x+ 1)\sim \frac{x}{\ln a}}$
+  
+\end{proof}
+
+\begin{theorem}
+  \begin{equation*}
+    a^x - 1 \sim x \ln a
+    \qquad
+    (x \to 0)
+  \end{equation*}
+\end{theorem}
+
+\begin{proof} \todo
+  Рассмотрим предел $\displaystyle{\lim_{x \to 0}{\frac{a^x - 1}{x \ln a}}}$
+
+Сделаем замену $y = a^x - 1$, тогда $x = \log_a (y + 1)$
+
+Причем $x \to 0 \implies y \to 0$ (т.к. уже доказано, что $\displaystyle{\frac{x}{\ln a} \sim \log_a(x + 1)}$)
+
+После замены получаем $\displaystyle{\lim_{y \to 0}{\frac{y}{\log_a(y + 1) \ln a}}}$
+
+Воспользуемся свойством логарифмов: перейдем в основанию $e$ и упростим выражение $\displaystyle{\lim_{y \to 0}{\frac{y}{\frac{\ln (y + 1)}{\ln a} \ln a}} = \lim_{y \to 0}{\frac{y}{\ln (y + 1)}}}$
+
+[Заменим логарифм на эквивалент](https://www.notion.so/008-90360c88aa8c48fcb30312932f3329b8?pvs=21) (это частный случай правила$\displaystyle{\log_a(x+ 1)\sim \frac{x}{\ln a}}$ при $a  =e$) и вычислим предел $\displaystyle{\lim_{y \to 0}{\frac{y}{y}} = 1}$
+
+По определению эквивалентных функций получаем  $a^x - 1 \sim x \ln a$
+  
+\end{proof}
+
+\begin{theorem}
+  \begin{equation*}
+    (1 + x)^n - 1 \sim x n
+    \qquad
+    (x \to 0)
+  \end{equation*}
+\end{theorem}
+
+\begin{proof} \todo
+  
+Рассмотрим предел $\displaystyle{\lim_{x \to 0}{\frac{(1 + x)^n - 1}{xn}}}$
+
+Заменим скобку в числителе на эквивалент по правилу $x \sim \ln(1 + x)$,
+
+только вместо $x$ будет выступать весь числитель, получим
+
+$\displaystyle{\lim_{x \to 0}{\frac{\ln(1 + (1 + x)^n - 1)}{xn}}}$
+
+Упростим и воспользуемся свойством логарифма: вынесем степень за логарифм  $\displaystyle{\lim_{x \to 0}{\frac{\ln((1 + x)^n)}{xn}} = \lim_{x \to 0}{\frac{n \ln(1 + x)}{xn}} = \lim_{x \to 0}{\frac{\ln(1 + x)}{x}}}$
+
+[Заменим логарифм на эквивалент](https://www.notion.so/008-90360c88aa8c48fcb30312932f3329b8?pvs=21) (это частный случай правила$\displaystyle{\log_a(x+ 1)\sim \frac{x}{\ln a}}$ при $a  =e$) и вычислим предел $\displaystyle{\lim_{x \to 0}{\frac{x}{x}} = 1}$
+
+По определению эквивалентных функций получаем $(1 + x)^n - 1\sim xn$
+  
+\end{proof}

@@ -1,0 +1,61 @@
+\subsection{%
+  Частные производные функции двух переменных.%
+}
+
+\begin{definition}
+  Частным приращением функции двух переменных называется
+
+  \begin{enumerate}
+  \item
+    по переменной \(x \given \Delta_x z = z(x + \Delta x, y) - z(x, y)\)
+
+  \item
+    по переменной \(y \given \Delta_y z = z(x, y + \Delta y) - z(x, y)\)
+  \end{enumerate}
+
+  Т.е. одна из переменных изменяется, а вторая остается константной.
+\end{definition}
+
+\begin{definition}
+  Полным приращение функции двух переменных называется \(\Delta z = z(x + \Delta
+  x, y + \Delta y) - z(x, y)\).
+\end{definition}
+
+\begin{remark}
+  Полное приращение \textbf{НЕ равно} сумме частных приращений.
+\end{remark}
+
+\begin{definition}
+  Частной производной функции двух переменных называют
+
+  \begin{enumerate}
+  \item
+    по переменной \(x \given
+      \display{\frac{\partial z}{\partial x}
+      = z'_x
+      = \lim_{\Delta x \to 0} \frac{\Delta_x z}{\Delta x}}
+    \)
+
+  \item
+    по переменной \(y \given
+      \display{\frac{\partial z}{\partial y}
+      = z'_y
+      =\lim_{\Delta y \to 0} \frac{\Delta_y z}{\Delta y}}
+    \)
+  \end{enumerate}
+\end{definition}
+
+\begin{remark}
+  При нахождении частной производной можно использовать все свойства производной
+  функции одной переменной: другие переменные в этом случае рассматриваются как
+  константы. Таким образом частная производная функции нескольких переменных
+  определяется также, как и для функции одной переменной, только вместо полного
+  приращения функции берется частное приращение по этой переменной. Например,
+  частные производные функции \(z = 2 x^2 y^3 + 3x + 5y\) будут равны
+
+  \begin{equation*}
+    \frac{\partial z}{\partial x} = 4 y^2 x + 3
+    \qquad
+    \frac{\partial z}{\partial y} = 6 x^2 y^2 + 5
+  \end{equation*}
+\end{remark}

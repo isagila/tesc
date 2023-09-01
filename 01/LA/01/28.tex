@@ -1,0 +1,64 @@
+\subsection{%
+  Расстояние от точки до прямой на плоскости.%
+}
+
+\gallerydouble
+  {01_28_01}{Ортогональная проекция}
+  {01_28_02}{Расстояние от точки до прямой}
+
+\begin{definition}
+  \textbf{Ортогональной} проекцией вектора \(\vec{a}\) на вектор \(\vec{b}\)
+  (\figref{01_28_01}) называется 
+
+  \begin{equation*}
+    \proj{\vec{a}}{\vec{b}}
+    = \abs{\vec{a}} \cos \phi
+    = \frac{\dotpdtv{a}{b}}{\abs{\vec{b}}}
+  \end{equation*}
+\end{definition}
+
+\begin{theorem}
+  Расстояние от точки \((x_0, y_0)\) до прямой \(A x + B y + C = 0\) на
+  плоскости может быть найден про формуле
+
+  \begin{equation*}
+    \rho = \frac{\abs{A x_0 + B y_0 + C}}{\sqrt{A^2 + B^2}}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Пусть дана точка \(P (x_0, y_0)\) и прямая \(l \colon A x + B y + C = 0\).
+  Выберем на ней некоторую точку \(Q (x_1, y_1)\) (\figref{01_28_02}) и построим
+  вектор нормали \(\vec{n}\) к прямой из этой точки. Заметим, что искомое
+  расстояние \(d\) будет равно модулю ортогональной проекции вектора
+  \(\vec{QP}\) на вектор нормали.
+
+  \begin{equation*} \label{eq:dist-to-line-1} \tag{1}
+    d = \frac{\dotpdtv{QP}{n}}{\abs{\vec{n}}}
+  \end{equation*}
+
+  Координаты вектора \(\vec{QP}\) будут равны \((x_0 - x_1, y_0 - y_1)\),
+  координаты вектора нормали \((A, B)\), а его длина \(\sqrt{A^2 + B^2}\).
+  Подставим это в \eqref{eq:dist-to-line-1}.
+
+  \begin{equation*} \label{eq:dist-to-line-2} \tag{2}
+    d = \frac{\abs{A x_0 + B y_0 - A x_1 - B y_1}}{\sqrt{A^2 + B^2}}
+  \end{equation*}
+
+  Т.к. точка \(Q\) лежит на прямой \(l\), то \(A x_1 + B y_1 + C = 0\), выразим
+  \(C\) и подставим его в \eqref{eq:dist-to-line-2}.
+
+  \begin{equation*}
+    d = \frac{\abs{A x_0 + B y_0 + C}}{\sqrt{A^2 + B^2}}
+  \end{equation*}
+\end{proof}
+
+\begin{remark}
+  Данная формула может быть перенесена в б\'oльшую размерность. Например,
+  расстояние от точки \((x_0, y_0, z_0)\) до плоскости \(A x + B y + C z + D =
+  0\) в пространстве будет равно
+
+  \begin{equation*}
+    \rho = \frac{\abs{A x_0 + B y_0 + C z_0 + D}}{\sqrt{A^2 + B^2 + C^2}}
+  \end{equation*}
+\end{remark} 

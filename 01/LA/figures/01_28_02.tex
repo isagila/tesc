@@ -1,0 +1,23 @@
+\begin{tikzpicture}
+  \draw[draw = olive!60, fill = olive!20, very thick]
+    (-2, -3.5) rectangle (4, 3);
+  
+  \draw[thick] (-1, 1) -- (2.5, -2.5)
+    node[pos = 0.9, below left] {\(l\)};
+
+  \draw (0, 0) node[below left] {\(Q (x_1, y_1)\)};
+  \point{0, 0};
+
+  \draw[->, thick] (0, 0) -- (2, 2)
+    node[above left] {\(\vec{n}\)};
+  \draw[->, thick] (0, 0) -- (2.5, -0.5)
+    node[right] {\(P (x_0, y_0)\)};
+  
+  \draw[dashed, thick, color = blue!80] (1.5, -1.5) -- (2.5, -0.5)
+    node[midway, below right] {\(d\)};
+  \draw[dashed, thick] (1, 1) -- (2.5, -0.5);
+
+  \draw[thick, color = blue!80] (0, 0) -- (1, 1)
+    node[midway, above left] {\(d\)};
+
+\end{tikzpicture}

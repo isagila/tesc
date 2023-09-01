@@ -1,0 +1,72 @@
+\subsection{%
+  Формула Тейлора.%
+}
+
+\begin{theorem}
+  Формулу Тейлора можно обобщить на случай функции нескольких переменных, тогда
+  она будет иметь вид
+
+  \begin{equation*}
+    z(x, y) = \sum_{k = 0}^n \frac{d^k f(x_0, y_0)}{k!} + r_n(z, x, y)
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Пусть есть функция \(z = f(x, y)\), которая дифференцируема в окрестности
+  точки \(M_0 (x_0, y_0)\). Возьмем точку \((x_0 + \Delta x, y_0 + \Delta y)\)
+  из этой окрестности. Выполним линейную параметризацию \(x = x_0 + t \Delta x\)
+  и \(y = y_0 + t \Delta y\), причем \(t \in \segment{0}{1}\), получим функцию
+  \(g(t) = f(x(t), y(t))\). При линейной параметризации дифференциал сохраняет
+  инвариантность формы, а значит \(\dd^n g(t) = \dd^n z(x, y)\).
+
+  В параметризированных уравнениях возьмем производную по \(t\) и умножим на
+  соответствующее приращение, чтобы вычислить первые дифференциалы функций одной
+  переменной. Получим
+
+  \begin{equation*} \label{eq:T-fml-1} \tag{1}
+    \dd x = \Delta x \dd t
+    \qquad
+    \dd y = \Delta y \dd t
+  \end{equation*}
+
+  Запишем формулу Тейлора для функции \(g(t)\) при \(t = t + \Delta t\) и \(t_0
+  = t\).
+
+  \begin{equation*} \label{eq:T-fml-2} \tag{2}
+    \begin{aligned}
+      g(t + \Delta t) = \sum_{k = 0}^n \frac{g^{(k)}(t)}{k!} \cdot (\Delta t)^k
+        + \frac{g^{(n + 1)}(\xi)}{(n + 1)!} \cdot (\Delta t)^{n + 1}
+      \qquad
+      (\xi \in \interval{t}{t + \Delta t})
+    \\
+      g(t + \Delta t) - g(t) = \sum_{k = 1}^n \frac{d^k g(t)}{k!}
+        + \frac{d^{(n + 1)}g(t + \theta \Delta t)}{(n + 1)!}
+      \qquad
+      (0 < \theta < 1)
+    \end{aligned}
+  \end{equation*}
+
+  Пусть \(t = 0\), а \(\Delta t = 1\), тогда
+
+  \begin{equation*} \label{eq:T-fml-2} \tag{2}
+    \begin{rcases}
+      g(t + \Delta t) = g(1) = f(x + \Delta x, y + \Delta y) \\
+      g(t) = g(0) = f(x, y)
+    \end{rcases}
+    \implies
+    f(x_0 + \Delta x, y_0 + \Delta y) - f(x_0, y_0)
+    = \sum_{k = 1}^n \frac{d^k f(x_0, y_0)}{k!}
+      + \frac{d^{(n + 1)} f(x_0 + \theta \Delta t, y_0
+      + \theta \Delta t)}{(n + 1)!}
+  \end{equation*}
+
+  Причем т.к. \(\Delta t = 1\), то выведенным ранее формулам \eqref{eq:T-fml-1}
+  получаем \(\dd x = \Delta x\) и \(\dd y = \Delta y\). Значит дифференциалы
+  совпали с зафиксированными вначале приращениями \(\Delta x\) и \(\Delta y\),
+  т.е. в этой формуле стоят полные дифференциалы функции \(z(x, y)\). Переписав
+  эту формулу в других обозначениях можно получить искомое равенство
+
+  \begin{equation*}
+    z(x, y) = \sum_{k = 0}^n \frac{d^k f(x_0, y_0)}{k!} + r_n(z, x, y)
+  \end{equation*}
+\end{proof}

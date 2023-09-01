@@ -1,0 +1,87 @@
+\subsection{%
+  Производные элементарных функций: синус и косинус.%
+}
+
+\begin{theorem}
+  \begin{equation*}
+    f(x) = \sin x \implies f'(x) = \cos x
+  \end{equation*}  
+\end{theorem}
+
+\begin{proof}
+  По определению производной
+
+  \begin{equation*}
+    f'(x) = \lim_{\Delta x \to 0} \frac{f(x_0 + \Delta x) - f(x_0)}{\Delta x}
+  \end{equation*}  
+
+  Вычислим значение числителя полученной дроби, для этого воспользуемся
+  некоторыми тригонометрическими формулами.
+
+  \begin{equation*}
+    \begin{aligned}
+      f(x_0 + \Delta x) - f(x_0)
+    = \\
+      \sin (x_0 + \Delta x) - \sin x_0
+    = \\
+      \sin x_0 \cos (\Delta x) + \cos x_0 \sin (\Delta x) - \sin x_0
+    = \\
+      \sin x_0 (\cos (\Delta x) - 1) + \cos x_0 \sin(\Delta x)
+    = \\
+      -\sin x_0 \cdot 2 \sin^2 \prh{\frac{\Delta x}{2}}
+        + \cos x_0 \sin (\Delta x)
+    \end{aligned}
+  \end{equation*}
+
+  Вернёмся к пределу и заменим синусы на эквивалентные степенные функции.
+
+  \begin{equation*}
+    f'(x) = \lim_{\Delta x \to 0} \frac{f(x_0 + \Delta x) - f(x_0)}{\Delta x}
+    = \lim_{\Delta x \to 0} \frac{-\sin x_0 \cdot 0.5 \cdot (\Delta x)^2
+      + \cos x_0 \Delta x}{\Delta x}
+    = \lim_{\Delta x \to 0} \prh{-0.5 \sin x_0  \Delta x + \cos x_0}
+    = \cos x_0
+  \end{equation*}
+\end{proof}
+
+\begin{theorem}
+  \begin{equation*}
+    f(x) = \cos x \implies f'(x) = -\sin x
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  По определению производной
+
+  \begin{equation*}
+    f'(x) = \lim_{\Delta x \to 0} \frac{f(x_0 + \Delta x) - f(x_0)}{\Delta x}
+  \end{equation*}
+
+  Вычислим значение числителя полученной дроби, для этого воспользуемся
+  некоторыми тригонометрическими формулами.
+
+  \begin{equation*}
+    \begin{aligned}
+      f(x_0 + \Delta x) - f(x_0)
+    = \\
+      \cos(x_0 + \Delta x) - \cos x_0 
+    = \\
+      \cos x_0 \cos (\Delta x) - \sin x_0 \sin (\Delta x) - \cos x_0 
+    = \\
+      \cos x_0 (\cos (\Delta x) - 1) - \sin x_0 \sin (\Delta x)
+    = \\
+      -\cos x_0 \cdot 2 \sin^2 \prh{\frac{\Delta x}{2}}
+        - \sin x_0 \sin (\Delta x)
+    \end{aligned}
+  \end{equation*}
+
+  Вернёмся к пределу и заменим синусы на эквивалентные степенные функции.
+
+  \begin{equation*}
+    f'(x) = \lim_{\Delta x \to 0} \frac{f(x_0 + \Delta x) - f(x_0)}{\Delta x}
+    = \lim_{\Delta x \to 0} \frac{-\cos x_0 \cdot 0.5 \cdot (\Delta x)^2
+      - \sin x_0 \Delta x}{\Delta x}
+    = \lim_{\Delta x \to 0} \prh{-0.5 \sin x_0 \Delta x - \sin x_0}
+    = -\sin x_0
+  \end{equation*}
+\end{proof}

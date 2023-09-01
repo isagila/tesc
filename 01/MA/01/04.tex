@@ -1,0 +1,253 @@
+\subsection{%
+  Предел последовательности. Свойства сходящихся последовательностей.%
+}
+
+\begin{definition}
+  \(L \in \RR\) называется конечным пределом последовательности \(\seq{x_n}\),
+  если
+
+  \begin{equation*}
+    \lim_{n \to \infty} x_n = L \iff
+    \forall \epsilon > 0 \exists  n_0 \in \NN \given
+    \forall n \ge n_0 \colon \abs{x_n - L} < \epsilon
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  \(L = \pm \infty\) называется бесконечным пределом последовательности
+  \(\seq{x_n}\), если
+
+  \begin{equation*}
+    \lim_{n \to \infty} x_n = L \iff
+    \forall \epsilon > 0 \exists n_0 \in \NN \given
+    \forall n \ge n_0 \colon \abs{x_n} > \epsilon
+  \end{equation*}
+\end{definition}
+    
+\begin{definition}
+  Последовательность называется сходящейся (т.е. сходится), если она имеет
+  конечный предел.
+\end{definition}
+
+\begin{definition}
+  Подпоследовательность \(\seq{x_{n_k}}\) последовательности \(\seq{x_n}\) это
+  последовательность полученная из \(\seq{x_n}\) удалением некоторых её членов
+  без изменения их порядка.
+\end{definition}
+
+\begin{remark}
+  Если последовательность имеет предел, то любая её подпоследовательность имеет
+  такой же предел.
+
+  \begin{equation*}
+    \lim_{n \to \infty} x_n = L \implies \lim_{k \to \infty} x_{n_k} = L    
+  \end{equation*}
+\end{remark}
+
+\begin{theorem}[Больцано--Вейерштрасса] \label{thr:lim-seq-subseq}
+  Из любой ограниченной последовательности можно выделить сходящуюся
+  подпоследовательность.
+\end{theorem}
+
+\begin{proof}
+  Т.к. последовательность \(\seq{x_n}\) ограничена, то \(\exists a, b \given
+  \forall n \in \NN \colon a \le x_n \le b\). Разделим отрезок \([a; b]\)
+  пополам, тогда хотя бы одна из половин содержит бесконечно много элементов из
+  последовательности \(\seq{x_n}\). Назовём эту половину \([a_1; b_1]\) и
+  возьмём из неё произвольный элемент, который назовём \(x_{n_1}\).
+
+  Продолжим выполнять эти действия, после \(k\)-ого шага получим, что \(x_{n_k}
+  \in [a_k; b_k]\). Т.к. отрезки вложены друг в друга, то найдется единственное
+  число \(c\), такое что \(\forall k \in \NN \colon c \in [a_k; b_k]\). Таким
+  образом границы отрезков стремятся к числу \(c\), значит
+
+  \begin{equation*} \label{eq:conv-sub-seq-1}
+    \lim_{k \to \infty} a_k = \lim_{k \to \infty} b_k = c
+  \end{equation*}
+
+  Но при этом
+
+  \begin{equation*} \label{eq:conv-sub-seq-2}
+    x_{n_k} \in [a_k; b_k]
+    \implies
+    a_k \le x_{n_k} \le b_k
+    \implies[предельный переход]
+    \lim_{k \to \infty} a_k \le \lim_{k \to \infty} x_{n_k}
+      \le \lim_{k \to \infty} b_k
+  \end{equation*}
+
+  Из \eqref{eq:conv-sub-seq-1} и \eqref{eq:conv-sub-seq-2} по теореме о двух
+  милиционерах следует, что \(\lim_{k \to \infty} x_{n_k} = c\). Таким образом
+  последовательность \(x_{n_k}\) имеет конечный предел, а значит она сходится.
+\end{proof}
+
+\begin{definition}
+  Последовательность называется фундаментальной, если
+
+  \begin{equation*}
+    \forall \epsilon > 0 \exists n_0 > 0 \given
+    \forall n > n_0, m > n_0 \colon \abs{x_n - x_m} < \epsilon
+  \end{equation*}
+\end{definition}
+
+\begin{theorem}[Критерий Больцано--Коши для сходимости последовательностей]
+  Последовательность фундаментальна \(\iff\) она сходится.
+\end{theorem}
+
+\begin{proof}
+  \ness Распишем определение предела последовательности.
+
+  \begin{equation*}
+    \lim_{n \to \infty} x_n = L \iff
+    \forall \epsilon > 0 \exists n_0 \given
+    \forall n > n_0 \colon \abs{x_n - L} < \epsilon
+  \end{equation*}
+
+  Пусть \(\display{\epsilon_1 = \epsilon_2 = \frac{\epsilon}{2}}\), тогда
+  
+  \begin{equation*}
+    \begin{aligned}
+      \forall m > n_0 \colon \abs{x_m - L} < \epsilon_1
+    \\
+      \forall n > n_0 \colon \abs{x_n - L} < \epsilon_2
+    \end{aligned}
+  \end{equation*}
+
+  Заметим, что
+
+  \begin{equation*}
+    \begin{aligned}
+      \abs{x_m - x_n}
+      = \abs{(x_m - L) + (L - x_n)}
+      \le \abs{x_m - L} + \abs{L - x_n}
+    \\
+      \begin{rcases}
+        \abs{x_m - L} < \epsilon_1 \\
+        \abs{L - x_n} < \epsilon_2 \\
+        \epsilon_1 + \epsilon_2 = \epsilon
+      \end{rcases}
+      \implies
+      \abs{x_m - x_n } < \epsilon
+    \end{aligned}
+  \end{equation*}
+
+  Таким образом последовательность \(\seq{x_n}\) фундаментальна по определению.
+
+  \suff Покажем, что фундаментальная последовательность ограничена. Пусть
+  \(\seq{x_n}\) фундаментальная последовательность, тогда
+
+  \begin{equation*}
+    \forall \epsilon > 0 \exists n_0 \given
+    \forall n, m \ge n_0 \colon \abs{x_n - x_m} < \epsilon
+  \end{equation*}
+
+  Возьмём \(\epsilon = 1\), тогда
+
+  \begin{equation*}
+    \abs{x_n}
+    = \abs{(x_n - x_{n_0}) + x_{n_0}}
+    \le \abs{x_n - x_{n_0}} + \abs{x_{n_0}}
+  \end{equation*}
+
+  Т.к. \(\seq{x_n}\) фундаментальна и \(\epsilon = 1\), то первый модуль не
+  превосходит единицу. Также заметим, что т.к. мы взяли фиксированный
+  \(\epsilon\), то \(x_{n_0}\) это некая константа. Таким образом \(\forall n >
+  n_0 \colon \abs{x_n} \le A\), где \(A\) это некая константа, которой мы
+  обозначили всю правую часть. Мы видим, что последовательность \(\seq{x_n}\)
+  ограничена.
+
+  Последовательность \(\seq{x_n}\) ограниченна, значит по теореме
+  \ref{thr:lim-seq-subseq} из неё можно выделить сходящуюся
+  подпоследовательность \(\seq{x_{n_k}}\). Допустим эта подпоследовательность
+  имеет предел равный \(L\), покажем, что и исходная последовательность тоже
+  имеет предел \(L\).
+
+  По определению фундаментальной последовательности \(\seq{x_n}\) имеем
+
+  \begin{equation*}
+    \forall \epsilon_1 > 0 \exists n_1 \given
+    \forall n, m > n_1 \colon \abs{x_n - x_m} < \epsilon_1
+  \end{equation*}
+
+  По определению сходящейся последовательности \(\seq{x_{n_k}}\) имеем
+
+  \begin{equation*}
+    \forall \epsilon_2 > 0 \exists n_2 \given
+    \forall n_k > n_2 \given \abs{x_{n_k} - L} < \epsilon_2
+  \end{equation*}
+
+  Пусть \(n_0 = \max(n_1, n_2)\), тогда оба условия выполнены. Обозначим \(m =
+  n_k\) и \(\display{\epsilon_1 = \epsilon_2 = \frac{\epsilon}{2}}\), тогда
+
+  \begin{equation*}
+    \abs{x_n - L}
+    = \abs{(x_n - x_m) + (x_m - L)}
+    < \epsilon_1 + \epsilon_2
+    = \epsilon
+  \end{equation*}
+
+  Итого имеем
+
+  \begin{equation*}
+    \forall \epsilon > 0 \exists n_0 \given
+    \forall n > n_0 \colon \abs{x_n - L} < \epsilon
+  \end{equation*}
+
+  Значит последовательность \(\seq{x_n}\) имеет предел \(L\), а значит она
+  сходится.
+\end{proof}
+
+\begin{theorem}[Вейерштрасса о сходимости последовательности]
+  Если неубывающая (невозрастающая) последовательность ограничена, то она
+  сходится.
+\end{theorem}
+
+\begin{proof}
+  Если последовательность \(\seq{x_n}\) ограничена, то она имеет супремум, т.е.
+  
+  \begin{equation*}
+    \exists S \given \forall \epsilon > 0 \exists n_0 \given
+    S - \epsilon < x_{n_0} \le S
+  \end{equation*}
+
+  Т.к. последовательность неубывает, то \(n_0 < n \implies x_{n_0} \le x_n\).
+  Объединяя эти две формулы, получаем
+
+  \begin{equation*}
+    \begin{aligned}
+      \forall \epsilon > 0 \exists n_0 \given
+      \forall n > n_0 \colon S - \epsilon < x_{n_0} \le x_n \le S
+    \\
+      \forall \epsilon > 0 \exists n_0 \given
+      \forall n > n_0 \colon S - \epsilon < x_n < S + \epsilon
+    \\
+    \forall \epsilon > 0 \exists n_0 \given
+    \forall n > n_0 \colon \abs{x_n - S} < \epsilon
+    \end{aligned}
+  \end{equation*}
+
+  Таким образом последовательность \(\seq{x_n}\) имеет конечный предел по
+  определению, а значит она сходится.
+\end{proof}
+
+\begin{theorem}
+  Если последовательность сходится, то она ограничена.
+\end{theorem}
+
+\begin{proof}
+  Если последовательность сходится, значит она имеет конечный предел \(\lim_{n
+  \to \infty} x_n = L \in \RR\). Распишем предел последовательности по
+  определению, после чего раскроем модуль.
+
+  \begin{equation*}
+    \begin{aligned}
+      \lim_{n \to \infty} x_n = L \iff
+      \forall \epsilon > 0 \exists n_0 \in \NN \given
+      \forall n > n_0 \colon \abs{x_n - L} < \epsilon
+    \\
+      -\epsilon + L < x_n < L + \epsilon
+    \end{aligned}   
+  \end{equation*}
+  
+  Таким образом мы видим, что последовательность ограничена.
+\end{proof}

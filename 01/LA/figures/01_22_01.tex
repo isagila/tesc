@@ -1,0 +1,21 @@
+\begin{tikzpicture}
+  \draw[draw = olive!60, fill = olive!20, very thick]
+    (-1, -1) rectangle (5.5, 4.5);
+
+  \draw (0, 0) node[below left] {\(0\)};
+  \point{0, 0};
+
+  \draw[->, thick] (0, 0) -- (0, 3.5)
+    node[pos = 1.1, right] {\(y\)};
+  \draw[->, thick] (0, 0) -- (4.5, 0)
+    node[pos = 1.1, below] {\(x\)};
+
+  \draw[->, thick] (0, 0) -- (3, 1.5)
+    node[pos = 0.7, above, sloped] {\(\vec{a}\)};
+  
+  \draw[thick, color = red!80] (1.5, 0) arc (0 : 27 : 1.5)
+    node[midway, right] {\(\alpha\)};
+  \draw[thick, color = blue!80] (0, 1) arc (90 : 27 : 1)
+    node[midway, above] {\(\beta\)};
+
+\end{tikzpicture}

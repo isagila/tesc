@@ -1,0 +1,104 @@
+\subsection{%
+  Линейное пространство арифметических векторов. Определение, проверка аксиом.%
+}
+
+\begin{definition}
+  Линейное (векторное) пространство это коммутативная аддитивная группа, в
+  которой (\(\forall \lambda, \mu \in \CC\))
+  
+  \begin{enumerate}
+  \item
+    Определено умножение на число \(\lambda \in \CC\).
+    
+  \item
+    Умножение коммутативно \(\lambda a = a \lambda\).
+    
+  \item
+    Относительно умножения выполняется дистрибутивность \(\lambda (a + b) =
+    \lambda a + \lambda b, (\lambda + \mu) a = \lambda a + \mu a\).
+    
+  \item
+    Относительно умножения выполняется ассоциативность \((\lambda \mu) a =
+    \lambda (\mu a)\).
+    
+  \item
+    Относительно умножение есть нейтральный элемент \(\exists \theta \in \RR
+    \given \forall a \in L \given \theta \cdot a = a\).
+  \end{enumerate}
+\end{definition}
+
+\begin{definition}
+  Арифметическим вектором называется упорядоченный набор из \(n\) чисел вида
+  \((x_1, x_2, \dotsc, x_n)\).
+\end{definition}
+
+\begin{enumerate}
+  \item
+  Сложение определим как \((x_1, \dotsc, x_n) + (y_1, \dotsc, y_n) = (x_1 + y_1,
+  \dotsc, x_n + y_n)\).
+  
+  \item
+  Умножение на число определим как \(\lambda \cdot (x_1, \dotsc, x_n) = (\lambda
+  x_1, \dotsc, \lambda x_n)\).
+\end{enumerate}
+
+\begin{remark}
+  Множество векторов одной размерности образует линейное пространство.
+\end{remark}
+
+\begin{remark}
+  Проверим аксиомы линейного пространства.
+  
+  \begin{enumerate}
+  \item
+    Замкнутость \((x_1, \dotsc, x_n) + (y_1, \dotsc, y_n) = (x_1 + y_1, \dotsc,
+    x_n + y_n) \in L\).
+    
+  \item
+    Ассоциативность \(((x_1, \dotsc, x_n) + (y_1, \dotsc, y_n)) + (z_1, \dotsc,
+    z_n) = (x_1, \dotsc, x_n) + ((y_1, \dotsc, y_n) + (z_1, \dotsc, z_n))\)
+    выполнена, т.к. сложение чисел ассоциативно.
+    
+  \item
+    Наличие нейтрального элемента по сложению \((x_1, \dotsc, x_n) + (0, \dotsc,
+    0) = (x_1, \dotsc, x_n)\). Нейтральный элемент по сложению это нулевой
+    вектор длины \(n\).
+    
+  \item
+    Наличие обратного элемента по сложению \((x_1, \dotsc, x_n) + (-x_1, \dotsc,
+    -x_n) = (0, \dotsc, 0)\).
+    
+  \item
+    Коммутативность выполнена, т.к. сложение и умножение чисел коммутативно.
+    \(
+      (x_1, \dotsc, x_n) + (y_1, \dotsc, y_n)
+      = (y_1, \dotsc, y_n) + (x_1, \dotsc, x_n)
+    \) и \(
+      \lambda (x_1, \dotsc, x_n)
+      = (x_1, \dotsc, x_n) \lambda
+    \). 
+    
+  \item
+    Дистрибутивность и ассоциативность для умножения на число выполнены, т.к.
+    умножение чисел дистрибутивно относительно сложения.
+    
+    \begin{enumerate}
+    \item
+      \(\lambda \cdot ((x_1, \dotsc, x_n) + (y_1, \dotsc, y_n)) = \lambda \cdot
+      (x_1, \dotsc, x_n) + \lambda \cdot (y_1, \dotsc, y_n)\)
+      
+    \item
+      \((\lambda + \mu) \cdot (x_1, \dotsc, x_n) = \lambda \cdot (x_1, \dotsc,
+      x_n) + \mu \cdot (x_1, \dotsc, x_n)\)
+      
+    \item
+      \((\lambda \cdot \mu) \cdot (x_1, \dotsc, x_n) = \lambda \cdot (\mu \cdot
+      (x_1, \dotsc, x_n))\)
+    \end{enumerate}
+    
+  \item
+    Наличие нейтрального элемента относительно умножения на число \((x_1,
+    \dotsc, x_n) \cdot 1 = (x_1, \dotsc, x_n)\). Нейтральный элемент
+    относительно умножения на число это \(1\).
+  \end{enumerate}
+\end{remark}

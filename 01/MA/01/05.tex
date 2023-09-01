@@ -1,0 +1,125 @@
+\subsection{%
+  Предельный переход в неравенствах. Теорема о двух милиционерах.%
+}
+
+\begin{theorem} \label{thr:lim-func}
+  Если функция \(f(x)\) имеет предел в точке \(a\), то она ограничена в
+  некоторой проколотой окрестности этой точки.
+\end{theorem}
+
+\begin{proof}
+  Раскроем модуль в определении предела.
+
+  \begin{equation*}
+    \begin{aligned}
+      \lim_{x \to a} f(x) = L \iff
+      \forall \epsilon > 0 \exists \delta > 0 \given
+      \forall x \in \nearo{a}{\delta} \cap E \implies
+      \abs{f(x) - L} < \epsilon
+    \\
+      L - \epsilon < f(x) < L + \epsilon
+    \end{aligned}
+  \end{equation*}
+
+  Получается, что функция \(f(x)\) ограничена в проколотой окрестности точки
+  \(a\).
+\end{proof}
+
+\begin{theorem}[О стабилизации знака] \label{thr:stable-sign}
+  Если \(\lim_{x \to a} f(x) = A > 0\), то \(f(x) > 0\) в некоторой окрестности
+  \(a\).
+\end{theorem}
+
+\begin{proof}
+  По теореме \ref{thr:lim-func}, получаем, что \(f(x)\) ограничена в некоторой
+  проколотой \(\epsilon\)--окрестности точки \(a\), т.е. \(A - \epsilon < f(x)
+  < A + \epsilon\). Пусть \(\epsilon = \frac{A}{2}\), тогда \(f(x) > A -
+  \frac{A}{2} > 0\).
+\end{proof}
+
+\begin{theorem}[О предельном переходе в неравенствах]
+  Если \(f(x) \le g(x)\) в некоторой окрестности точки \(a\), то 
+  
+  \begin{equation*}
+    \begin{rcases}
+      \lim_{x \to a} f(x) = A \\
+      \lim_{x \to a} g(x) = B
+    \end{rcases}
+    \implies
+    A \le B
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  От противного: пусть \(A > B\), тогда
+
+  \begin{equation*}
+    \lim_{x \to a} f(x) - \lim_{x \to a} g(x)
+    = \lim_{x \to a} (f(x) - g(x))
+    = A - B > 0
+  \end{equation*}
+
+  Тогда по \ref{thr:stable-sign} \(f(x) - g(x) > 0\), т.е. \(f(x) > g(x)\) в
+  некоторой проколотой \(\delta_1\)--окрестности точки \(a\). По условию \(f(x)
+  \le g(x)\) в некоторой \(\delta_2\)-окрестности точки \(a\). Пусть \(\delta =
+  \min(\delta_1, \delta_2)\), тогда по свойству окрестностей оба условия должны
+  выполняться, т.е. \(f(x) \le g(x)\) и \(f(x) > g(x)\). Противоречие.
+\end{proof}
+
+\begin{theorem}[О двух милиционерах] \label{thr:squeezed-func}
+  Если \(f(x) \le h(x) \le g(x)\) в некоторой проколотой окрестности точки
+  \(a\), то
+
+  \begin{equation*}
+    \begin{rcases}
+      \lim_{x \to a} f(x) = A \\
+      \lim_{x \to a} g(x) = A
+    \end{rcases}
+    \implies
+    \lim_{x \to a}h(x) = A
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Запишем условие формально, раскрыв два предела по определению
+
+  \begin{equation*}
+    \begin{aligned}
+      \lim_{x \to a} f(x)  = A \iff
+      \forall \epsilon > 0 \exists \delta_1 > 0 \given
+      \forall x \in \nearo{a}{\delta_1} \cap X \implies
+      \abs{f(x) - A} < \epsilon
+    \\
+      \lim_{x \to a} g(x) = A \iff
+      \forall \epsilon > 0 \exists \delta_2 > 0 \given
+      \forall x \in \nearo{a}{\delta_2} \cap X \implies
+      \abs{g(x) - A} < \epsilon
+    \\
+      \exists \delta_3 > 0 \given
+      \forall x \in \nearo{a}{\delta_3} \cap X \colon
+      f(x) \le h(x) \le g(x)
+    \end{aligned}
+  \end{equation*}
+
+  Пусть \(\delta = \min(\delta_1, \delta_2, \delta_3)\), тогда по свойству
+  окрестностей все условия будут выполняться. Раскроем модули по определению и
+  \quote{склеим} полученные неравенства.
+
+  \begin{equation*}
+    \begin{rcases}
+      A - \epsilon < f(x) < A + \epsilon \\
+      A - \epsilon < g(x) < A + \epsilon
+    \end{rcases}
+    \implies
+    A - \epsilon < f(x) \le h(x) \le g(x) < A + \epsilon
+    \implies
+    A - \epsilon < h(x) < A + \epsilon
+  \end{equation*}
+
+  Причем последнее неравенство выполняется в проколотой окрестности точки \(a\)
+  для любого \(\epsilon\). Таким образом \(\lim_{x \to a} f(x) = A\) по
+  определению предела.
+\end{proof}
+
+Теорема \ref{thr:squeezed-func} также называется теоремой о двух жандармах или
+теоремой о сжатой функции.

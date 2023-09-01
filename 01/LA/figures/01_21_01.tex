@@ -1,0 +1,26 @@
+\begin{tikzpicture}
+  \draw[draw = olive!60, fill = olive!20, very thick]
+    (-3, -3) rectangle (5.5, 3.5);
+
+  \draw[->, thick] (-1.6, -2) -- (2, 2.5)
+    node[right] {\(II\)};
+  \draw[->, thick] (-2, 0) -- (4.5, 0)
+    node[below] {\(I\)};
+  \draw (0, 0) node[below right] {\(O\)};
+
+  \draw[dashed, thick] (-0.1, -2) -- (3.5, 2.5);
+  \draw[dashed, thick] (-2, 1.5) -- (4.5, 1.5);
+
+  \draw (1.35, 0) node[below right] {\(M_1\)};
+  \point{1.5, 0};
+
+  \draw (1.05, 1.5) node[below right] {\(M_2\)};
+  \point{1.2, 1.5};
+
+  \draw (2.95, 1.4) node[above right] {\(M (M_1, M_2)\)};
+  \point{2.7, 1.5};
+
+  \draw[thick] (1, 0) arc (0 : 51 : 1)
+    node[midway, right] {\(\omega\)};
+
+\end{tikzpicture}

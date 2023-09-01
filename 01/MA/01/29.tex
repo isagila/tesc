@@ -1,0 +1,251 @@
+\subsection{%
+  Исследование функции: Монотонность. Экстремумы. Необходимое и достаточное
+  условия экстремума.%
+}
+
+\begin{definition}
+  Функция \(f(x)\) называется возрастающей, если
+
+  \begin{equation*}
+    \forall x, y \given x < y \implies f(x) < f(y)
+    \bydef
+    f(x) \increase \segment{a}{b}
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  Функция \(f(x)\) называется неубывающей, если
+
+  \begin{equation*}
+    \forall x, y \given x < y \implies f(x) \le f(y)
+    \bydef
+    f(x) \nondescrease \segment{a}{b}
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  Функция \(f(x)\) называется убывающей, если
+
+  \begin{equation*}
+    \forall x, y \given x < y \implies f(x) > f(y)
+    \bydef
+    f(x) \decrease \segment{a}{b}
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  Функция \(f(x)\) называется невозрастающей, если
+
+  \begin{equation*}
+    \forall x, y \given x < y \implies f(x) \ge f(y)
+    \bydef
+    f(x) \nonincrease \segment{a}{b}
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  Функция называется монотонной на отрезке, если она либо невозрастающая, либо
+  неубывающая на этом отрезке.
+\end{definition}
+
+\begin{definition}
+  Если функция возрастает (убывает) на отрезке, то она называется строго
+  монотонной.
+\end{definition}
+
+\begin{theorem}[Достаточное условие монотонности на интервале]
+  \begin{equation*}
+    \begin{aligned}
+      \begin{rcases}
+        f(x) \isdiff{\interval{a}{b}} \\
+        \forall x \in \interval{a}{b} \given f'(x) > 0
+      \end{rcases}
+      \implies
+      f(x) \increase \interval{a}{b}
+    \\
+      \begin{rcases}
+        f(x) \isdiff{\interval{a}{b}} \\
+        \forall x \in \interval{a}{b} \given f'(x) < 0
+      \end{rcases}
+      \implies
+      f(x) \decrease \interval{a}{b}
+    \end{aligned}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Рассмотрим случай строго возрастающей функции (для строго убывающей функции
+  доказательство аналогично). Возьмем две произвольные точки \(x_1, x_2 \in
+  \interval{a}{b}\) так, чтобы \(x_1 < x_2\). По теореме Лагранжа получаем
+
+  \begin{equation*}
+    \begin{aligned}
+      \frac{f(x_2) - f(x_1)}{x_2 - x_1} = f'(\xi)
+      & \qquad
+      (\xi \in \interval{a}{b})
+    \\
+      f(x_2) - f(x_1) = f'(\xi) \cdot (x_2 - x_1)
+    \end{aligned}
+  \end{equation*}
+
+  Далее рассмотрим правую часть.
+
+  \begin{equation*}
+    \begin{aligned}
+      \begin{rcases}
+        \forall x \in \interval{a}{b} f'(x) > 0 \text{ (по условию)} \\
+        \xi \in \interval{a}{b} \text{ (по т. Лагранжа)}
+      \end{rcases}
+      \implies
+      f'(\xi) > 0
+    \\
+      \begin{rcases}
+        f'(\xi) > 0 \\  
+        x_2 > x_1 \text{ (по предположению)}
+      \end{rcases}
+      \implies
+      f'(\xi) \cdot (x_2 - x_1) > 0
+    \\
+      \forall x_2 > x_1 \given f(x_2) - f(x_1) > 0
+    \end{aligned}
+  \end{equation*}
+
+  Значит \(f(x)\) строго возрастает по определению.
+\end{proof}
+
+Лемма Ферма (\ref{thr:lem-F}) это необходимое условие только \textbf{гладкого}
+экстремума.
+
+\begin{theorem}[Необходимое условие экстремума]
+  \begin{equation*}
+    \begin{rcases}
+      f(x) \isdiff{\near{x_0}{\delta}} \\
+      f(x) \iscont{x_0} \\
+      x_0 \text{ точка экстремума}
+    \end{rcases}
+    \implies
+    \begin{cases}
+      f'(x_0) \in \set{0, \pm \infty} \\
+      \text{ либо } \\
+      \nexists f'(x_0)
+    \end{cases}
+  \end{equation*}
+\end{theorem}
+
+\begin{theorem}[Достаточное условие экстремума]
+  \begin{equation*}
+    \begin{rcases}
+      f(x) \isdiff{\near{x_0}{\delta}} \\
+      f(x) \iscont{x_0} \\ 
+      f'(x) \text{ меняет свой знак в } x_0  
+    \end{rcases}
+    \implies
+    x_0 \text{ точка экстремума}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Рассмотрим случай смены знака производной с \quote{\(+\)} на \quote{\(-\)}
+  (случай смены \quote{\(-\)} на \quote{\(+\)} доказывается аналогично).
+
+  \subsubheader{Слева}{\(x < x_0, f'(x) > 0\)}
+
+  Распишем производную по определению.
+
+  \begin{equation*}
+    f'(x) = \frac{f(x) - f(x_0)}{x - x_0} > 0
+  \end{equation*}
+
+  Т.к. \(x < x_0\), то \(x - x_0 < 0\), значит знаменатель меньше нуля, но т.к.
+  вся дробь больше нуля, то числитель тоже должен быть меньше нуля, значит
+  \(f(x) - f(x_0) < 0\), т.е. \(f(x) < f(x_0)\).
+
+  \subsubheader{Справа}{\(x > x_0, f'(x) < 0\)}
+
+  Распишем производную по определению.
+
+  \begin{equation*}
+    f'(x) = \frac{f(x) - f(x_0)}{x - x_0} <  0
+  \end{equation*}
+
+  Т.к. \(x > x_0\), то \(x - x_0 > 0\), значит знаменатель больше нуля, но т.к.
+  вся дробь меньше нуля, то числитель тоже должен быть меньше нуля, значит
+  \(f(x) - f(x_0) < 0\), т.е. \(f(x) < f(x_0)\).
+
+  Таким образом \(f(x) < f(x_0)\), значит \(x_0\) это точка максимума, т.е. в
+  ней достигается экстремум.
+\end{proof}
+
+\begin{remark}
+  Для того, чтобы найти точки экстремума сначала с помощью необходимого условия
+  ищем точки, подозрительные на экстремум (точки, в которых производная равна
+  нулю/бесконечности или не существует), а потом проверяем их с помощью
+  достаточного условия.
+\end{remark}
+
+\begin{theorem}
+  В некоторых случая все производные в точке \(x_0\), кроме \((n + 1)\)--ой
+  обнуляются, тогда удобно провести исследование функции на экстремум с помощью
+  формулы Тейлора (при условии, что \((n + 1)\)--ая производная непрерывна).
+
+  \begin{enumerate}
+  \item
+    \(n + 1\)~--- нечетное число \(\implies\) нет экстремума.
+
+  \item
+    \(n + 1\)~--- четное число \(\implies\) есть экстремум, причем
+
+    \begin{enumerate}
+    \item
+      \(f^{(n + 1)}(x_0) > 0 \implies x_0\) это точка минимума.
+      
+    \item 
+      \(f^{(n + 1)}(x_0) < 0 \implies x_0\) это точка максимума.
+    \end{enumerate}
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  Рассмотрим формулу Тейлора с остатком в форме Лагранжа. Т.к. первые \(n\)
+  производных равны нулю, то формула упрощается
+
+  \begin{equation*}
+    \begin{aligned}
+      f(x)
+        = \sum_{k = 0}^n \frac{f^{(k)}(x_0)}{k!} \cdot (x - x_0)^k +
+        \frac{f^{(n + 1)}(\xi)}{(n + 1)!} \cdot (x - x_0)^{n + 1}
+        & \qquad
+        (\xi \in \interval{x_0}{x})
+      \\
+        f(x) - f(x_0)
+        = \frac{f^{(n + 1)}(\xi)}{(n + 1)!} \cdot (x - x_0)^{n + 1}
+    \end{aligned}
+  \end{equation*}
+
+  \(f^{(n + 1)}\) непрерывна и \(\xi \to x_0\) при \(x \to x_0\), значит по
+  теореме о стабилизации знака \(f^{(n + 1)}(\xi)\) имеет такой же знак, как и
+  \(f^{(n + 1)}(x_0)\). Рассмотрим два случая.
+
+  \subsubheader{Случай I}{\(n + 1\) нечетное}
+
+  Тогда \((x - x_0)^{n + 1}\) меняет свой знак при переходе через \(x_0\). При
+  этом \(f^{(n + 1)}(\xi)\) имеет постоянный знак (неважно какой). Значит \(f(x)
+  - f(x_0)\) тоже меняет свой знак при переходе через \(x_0\). Таким образом в
+  \(x_0\) нет экстремума.
+
+  \subsubheader{Случай II}{\(n + 1\) четное}
+
+  Тогда \((x - x_0)^{n + 1} > 0\), а это значит что знак \(f(x) - f(x_0)\)
+  совпадает со знаком \(f^{(n + 1)}(\xi)\), который (как уже было показано)
+  совпадает со знаком \(f^{(n + 1)}(x_0)\). Рассмотрим два варианта.
+
+  \subsubheader{Случай II.a}{\(f^{(n + 1)}(x_0) > 0\)}
+
+  Тогда \(f(x) - f(x_0) > 0\), т.е. \(f(x) > f(x_0)\). Таким образом \(x_0\)
+  точка минимума.
+
+  \subsubheader{Случай II.b}{\(f^{(n + 1)}(x_0) < 0\)}
+
+  Тогда \(f(x) - f(x_0) < 0\), т.е. \(f(x) < f(x_0)\). Таким образом \(x_0\)
+  точка максимума.
+\end{proof}

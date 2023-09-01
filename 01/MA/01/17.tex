@@ -1,0 +1,160 @@
+\subsection{%
+  Правила дифференцирования: производная сложной функции, инвариантность
+  дифференциала.%
+}
+
+\begin{theorem}[Производная сложной функции]
+  \begin{equation*}
+    \begin{rcases}
+      g(x) \isdiffd{x} \\
+      f(g) \isdiffd{g_0 = g(x)}
+    \end{rcases}
+    \implies
+    f'(g(x)) = f'(g) \cdot g'(x)
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  По критерию дифференцируемости имеем
+
+  \begin{equation*} \label{eq:diff-cpx-func-1} \tag{1}
+    \begin{aligned}
+      u = g(x) \isdiffd{x}
+      \implies
+      \Delta u = g'(x) \Delta x + \smallo(\Delta x)
+    \\
+      y = f(g) \isdiffd{g_0}
+      \implies
+      \Delta y = f'(u) \Delta u + \smallo(\Delta u)
+    \\
+      \Delta y = f'(u)(g'(x) \Delta x + \smallo(\Delta x)) + \smallo(\Delta u)
+    \end{aligned}
+  \end{equation*}
+  
+  Также заметим, что 
+
+  \begin{equation*} \label{eq:diff-cpx-func-2} \tag{2}
+    u = g(x) \isdiffd{x} \implies g(x) \iscontd{x}
+    \iff
+    \Delta x \to 0 \implies \Delta u \to 0
+  \end{equation*}
+
+  Напишем определение производной для исходной функции.
+
+  \begin{equation*} \label{eq:diff-cpx-func-3} \tag{3}
+    \prh{f(g(x))}'
+    = \lim_{\Delta x \to 0} \frac{\Delta y}{\Delta x}
+    = \lim_{\Delta x \to 0} f'(u) g'(x)
+      + f'(u) \frac{\smallo(\Delta x)}{\Delta x}
+      + \frac{\smallo(\Delta u)}{\Delta x}
+  \end{equation*}
+
+  Второе и третье слагаемые в дают ноль в пределе, как отношение б.м. функции
+  более высокого порядка и её аргумента (см. \eqref{eq:diff-cpx-func-2}), значит
+  \(\prh{f(g(x)}' = f'(g) g'(x)\).
+\end{proof}
+
+\begin{remark}
+  Если необходимо взять производную от композиции нескольких функций, то можно
+  пользоваться \quote{расширенной} формулой производной композиции функций
+  (правилом цепочки).
+
+  \begin{equation*}
+    \prh{f(g(h(\phi(x))))}' = f'(g) \cdot g'(h) \cdot h'(\phi) \cdot \phi'(x)
+  \end{equation*}
+\end{remark}
+
+\begin{theorem}
+  Первый дифференциал сохраняет инвариантность формы.
+\end{theorem}
+
+\begin{proof}
+  Рассмотрим \(y = f(x)\), пусть \(x = u(t)\). Используя определение
+  дифференциала и производную сложной функции получаем
+
+  \begin{equation*}
+    \dd y
+    = y'_t \dd t
+    = y'_x \cdot \under{x'_t \dd t}{\dd x}
+    = y'_x \dd x
+  \end{equation*}
+  
+  Таким образом, форма дифференциала не зависит от того, является аргумент
+  функции независимой переменной или функцией другого аргумента.
+\end{proof}
+
+\begin{theorem}[Производная обратной функции]
+  \begin{equation*}
+    \begin{rcases}
+      f(x) \isdiffd{x_0} \\
+      f'(x_0) \neq 0 \\
+      \exists g(y) = f^{-1}(y)
+    \end{rcases}
+    \implies
+    g'(y) = \frac{1}{f'(x)}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Раскроем производную по определению и преобразуем.
+
+  \begin{equation*} \label{eq:diff-inv-func-1} \tag{1}
+    f'(x) = \lim_{\Delta x \to 0} \frac{\Delta y}{\Delta x}
+    = \frac{1}{\lim_{\Delta x \to 0} \frac{\Delta x}{\Delta y}}
+  \end{equation*}
+
+  Заметим, что
+
+  \begin{equation*} \label{eq:diff-inv-func-2} \tag{2}
+    \begin{aligned}
+      f(x) \isdiffd{x_0}
+      \implies f(x) \iscontd{x_0}
+      \iff \Delta x \to 0 \implies \Delta y \to 0
+    \\
+      \frac{1}{\lim_{\Delta x \to 0} \frac{\Delta x}{\Delta y}}
+      = \frac{1}{\lim_{\Delta y \to 0} \frac{\Delta x}{\Delta y}}
+    \end{aligned}
+  \end{equation*}
+
+  Выражение в знаменателе это и есть производная обратной функции. Таким образом
+  из \eqref{eq:diff-inv-func-1} и \eqref{eq:diff-inv-func-2} следует, что
+
+  \begin{equation*}
+    f'(x)
+    = \frac{1}{\lim_{\Delta y \to 0} \frac{\Delta x}{\Delta y}}
+    = \frac{1}{g'(y)}
+    \implies \prh{f^{-1}(y)}' = \frac{1}{f'(x)}
+  \end{equation*}
+\end{proof}
+
+\begin{theorem}[Производная параметрически заданной функции]
+  \begin{equation*}
+    \begin{rcases}
+      x = a(t) \isdiffd{t_0} \\
+      y = b(t) \isdiffd{t_0} \\
+      \exists a^{-1}(t) \\
+      a'(t_0) \neq 0
+    \end{rcases}
+    \implies
+    y'(x) = \frac{b'(t_0)}{a'(t_0)}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Т.к. \(a(t)\) обратима, то \(t = A(x)\), тогда по формуле производной сложной
+  функции получаем
+
+  \begin{equation*} \label{eq:diff-param-func-1} \tag{1}
+    \prh{b(A(x))}'_x = b'_A \cdot A'_x
+  \end{equation*}
+  
+  По формуле производной обратной функции \(\display{A'_x = \frac{1}{x'_A}}\).
+  Учитывая, что \(A(x) = t\) и \(b(t) = y\), подставим это в
+  \eqref{eq:diff-param-func-1}.
+
+  \begin{equation*} \label{eq:diff-param-func-2} \tag{2}
+    b(t)'_x = b'_t \cdot \frac{1}{x'_t} 
+    \implies
+    y'(x) = \frac{y'_t}{x'_t}
+  \end{equation*}
+\end{proof}

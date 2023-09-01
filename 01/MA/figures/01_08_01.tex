@@ -1,0 +1,21 @@
+\begin{tikzpicture}
+  \draw[draw = olive!60, fill = olive!20, very thick]
+    (-1, -1) rectangle (8, 7);
+
+  \begin{axis}[
+    xmin = -5,
+    xmax = 5,
+    ymin = -5,
+    ymax = 5,
+    axis x line = middle,
+    axis y line = middle,
+    xlabel = {},
+    ylabel = {},
+    axis line style = {->},
+  ]
+    \addplot[thick, color = red!80, domain = -3 : 3]
+      expression {x};
+    \addplot[thick, color = blue!80, domain = -3 : 3, samples = 5000]
+      expression {sin(deg(x))};
+  \end{axis}
+\end{tikzpicture}

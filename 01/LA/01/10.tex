@@ -1,0 +1,81 @@
+\subsection{%
+  Базис. Определение, основные теоремы.%
+} \label{sec:01-10}
+
+\begin{definition}
+  Базисом \(\Basis\) системы векторов \(A\) называется система, обладающая
+  следующими свойствами
+  
+  \begin{enumerate}
+  \item
+    \(\Basis \subset A\)
+    
+  \item
+    \(\Basis\) линейно независимая система.
+    
+  \item
+    \(\forall \vec{a} \in A \given \Basis \cup \vec{a}\) линейно зависимая
+    система.
+  \end{enumerate}
+\end{definition}
+
+\begin{remark}
+  Последнее свойство можно переформулировать так: \(\forall \vec{a} \in A \given
+  \vec{a}\) разложим по системе \(\Basis\).
+\end{remark}
+
+\begin{theorem}
+  Любой вектор системы разложим по базису единственным образом.
+\end{theorem}
+
+\begin{proof}
+  От противного: пусть существуют два разложения вектора \(\vec{a}_p\) по базису
+  \(\Basis = \set{\basis_1 \dotsc \basis_n}\). Вычтем первое из второго
+  
+  \begin{equation*}
+    \begin{aligned}
+      \vec{a}_p = \lambda_1 \basis_1 + \dotsc + \lambda_n \basis_n
+    \\
+      \vec{a}_p = \mu_1 \basis_1 + \dotsc + \mu_n \basis_n
+    \\
+      0 = (\mu_1 - \lambda_1) \basis_1 + \dotsc + (\mu_n - \lambda_n) \basis_n  
+    \end{aligned}
+  \end{equation*}
+  
+  Т.к. \(\Basis\)~--- базис, то у него есть только одна нулевая линейная
+  комбинация~--- тривиальная. Значит \(\mu_i - \lambda_i = 0 \implies \mu_i =
+  \lambda_i \; \forall i \in [1; n]\), т.е. разложения равны.
+\end{proof}
+
+\begin{lemma} \label{lem:extend-lin-ind}
+  Если \(\bar{\Basis} \subset A\), \(\bar{\Basis}\) линейно независима, но не
+  является базисом, то \(\exists \vec{a}_p \in A \setminus \bar{\Basis} \given
+  \bar{\Basis} \cup \vec{a}\) является линейно независимой системой.
+\end{lemma}
+
+\begin{proof}
+  От противного: если \(\forall a_p \in A \setminus \bar{\Basis} \given
+  \bar{\Basis} \cup \vec{a}\) линейно зависимая система, то \(\Basis\) это базис
+  \(A\) по определению. Противоречие.
+\end{proof}
+
+\begin{theorem}
+  Во всякой системе, содержащий хотя бы один ненулевой вектор, можно выделить
+  базис.
+\end{theorem}
+
+\begin{proof}
+  Пусть у нас есть пустая подсистема.
+
+  \begin{enumerate}  
+  \item
+    Добавим в подсистему один ненулевой вектор, так чтобы она осталась линейно
+    независимой.
+  \item
+    Если подсистема является базисом, то теорема верна.
+  \item
+    Если подсистема не является базисом, то вернёмся к шагу 1. При этом по лемме
+    \ref{lem:extend-lin-ind} обязательно найдется вектор, которым можно
+    дополнить подсистему.
+  \end{enumerate} 
+\end{proof}

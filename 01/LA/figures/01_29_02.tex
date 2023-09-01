@@ -1,0 +1,26 @@
+\begin{tikzpicture}
+  \draw[draw = olive!60, fill = olive!20, very thick]
+    (-3.5, -2) rectangle (3.5, 4);
+
+  \draw[->, thick] (0, -1) -- (0, 3);
+  \draw[->, thick] (-2.5, 0) -- (2.5, 0);
+
+  \draw[thick] (-1.5, -1) -- (-1.5, 2.5)
+    node[pos = 0.9, left] {\(d\)};
+
+  \draw[dashed, thick] (-1.5, 1.5) -- (0.8, 1.5)
+    node[pos = 0.3, above] {\(h\)}
+    node[right] {\(M (x, y)\)};
+  \point{0.8, 1.5};
+  
+  \draw[dashed, thick] (0.8, 1.5) -- (1.5, 0)
+    node[above right] {\(F \prh{\frac{p}{2}, 0}\)};
+  \point{1.5, 0};
+
+  \draw[<->] (-1.5, 0.3) -- (0, 0.3)
+    node[midway, above] {\(\frac{p}{2}\)};
+  \draw[<->] (0, -0.3) -- (1.5, -0.3)
+    node[midway, below] {\(\frac{p}{2}\)};
+  \draw[dashed, thick] (1.5, 0) -- (1.5, -0.3);
+
+\end{tikzpicture}

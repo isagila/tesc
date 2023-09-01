@@ -1,0 +1,114 @@
+\subsection{%
+  Скалярное произведение и норма векторов. Ортонормированный базис.%
+} \label{sec:01-20}
+
+\begin{remark}
+  Для геометрических векторов скалярное произведение определено как
+  \(\dotpdtv{a}{b} = \vec{\abs{a}} \cdot \vec{\abs{b}} \cdot \cos \phi\), где
+  \(\phi\) это угол между векторами \(\vec{a}\) и \(\vec{b}\).
+\end{remark}
+
+\begin{definition}
+  В общем случае скалярным произведением \(x \in L^n\) и \(y \in L^n\)
+  называется число \(G \in \RR\), такое что
+  
+  \begin{enumerate}
+  \item
+    \(\dotpdt{x}{y} = \dotpdt{y}{x}\)
+    
+  \item
+    \(\dotpdt{x_1 + x_2}{y} = \dotpdt{x_1}{y} + \dotpdt{x_2}{y}\)
+    
+  \item
+    \(\dotpdt{\lambda x}{y} = \lambda \dotpdt{x}{y} \; \forall \lambda \in \RR\)
+    
+  \item
+    \(\dotpdt{x}{x} = x^2 \ge 0\), причем \(x^2 = 0 \implies x = 0\)
+  \end{enumerate}
+  
+  Скалярное произведение обозначается как \(\dotpdt{x}{y}\) или \(x \cdot y\).
+\end{definition}
+
+\begin{remark}
+  Совокупность второго и третьего свойств называется линейностью.
+\end{remark}
+
+\begin{remark} \label{rem:dot-pdf}
+  \textbf{В ортонормированном базисе} для пространства числовых наборов \(L^n\)
+  скалярное произведение определено как \(\dotpdt{x}{y} = x_1 y_1 + \dotsc + x_n
+  y_n\). Если оно равно нулю, то векторы перпендикулярны (либо один из векторов
+  нулевой).
+\end{remark}
+
+\begin{remark}
+  Скалярное произведение коммутативно (по первому пункту определения) и
+  дистрибутивно
+  
+  \begin{equation*}
+    (\vec{a} + \vec{b}) \cdot \vec{c}
+    = \vec{a} \cdot \vec{c} + \vec{b} \cdot \vec{c}    
+  \end{equation*}
+\end{remark}
+
+\begin{definition}
+  В общем случае число \(l \in \RR\) называется нормой \(x \in L^n\), если
+  
+  \begin{enumerate}
+  \item
+    \(\norm{\lambda x} = \lambda \norm{x} \given \forall \lambda \in \RR\)
+    
+  \item
+    \(\norm{x + y} \le \norm{x} + \norm{y}\) (неравенство Минковского)
+    
+  \item
+    \(\norm{x} \ge 0\), причем \(\norm{x} = 0 \implies x = 0\)
+  \end{enumerate}
+  
+  Норма обозначается как \(\norm{x}\).
+\end{definition}
+
+\begin{remark}
+  Для пространства числовых наборов \(L^n\) норма определена как \(\norm{x} =
+  \sqrt{x_1^2 + \dotsc + x_n^2}\)
+\end{remark}
+
+\begin{remark}
+  Для геометрических векторов нормой является длина вектора.
+\end{remark}
+
+\begin{remark}
+  \textbf{В ортонормированном базисе} нормой (зачастую) является корень
+  квадратный из скалярного произведения элемента самого на себя \(\norm{x}=
+  \sqrt{\dotpdt{x}{x}} = \sqrt{x^2}\)
+\end{remark}
+
+\begin{definition}
+  Базис называется ортогональным, если все попарные скалярные произведения
+  векторов этого базиса равны нулю. Т.е. базис ортогонален, если все векторы в
+  этом базисе перпендикулярны друг другу.
+\end{definition}
+
+\begin{remark}
+  Нулевой вектор \textbf{не ортогонален} любому вектору, т.к. он коллинеарен
+  любому вектору, а ортогональность любому вектору привела бы к противоречию.
+\end{remark}
+
+\begin{definition}
+  Базис называется нормированным, если норма (в данном случае норма это тоже
+  самое, что и длина) всех векторов в этом базисе равна единице.
+\end{definition}
+
+\begin{definition}
+  Базис \(\set{\basis_i}_{i = 1}^n\) называется ортонормированным, если он
+  ортогональный и нормированный
+  
+  \begin{equation*}
+    \dotpdt{e_i}{e_j}
+    = \begin{cases}
+      1 & i = j \\
+      0 & i \ne j
+    \end{cases}    
+  \end{equation*}
+
+  Первая строчка дает нормированность, а вторая ортогональность.
+\end{definition}

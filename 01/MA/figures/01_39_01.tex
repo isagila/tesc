@@ -1,0 +1,24 @@
+\begin{tikzpicture}
+  \draw[draw = olive!60, fill = olive!20, very thick]
+    (-1, -1) rectangle (6, 5);
+
+  \draw[->, thick] (0, 0) -- (5, 4)
+    node[midway, above, sloped] {\(\Delta s\)}
+    node[pos = 1, above left] {\(\vec{s} = (\Delta x, \Delta y)\)};
+  \draw[dashed, thick] (0, 0) -- (5, 0)
+    node[midway, below] {\(\Delta x\)};
+  \draw[dashed, thick] (5, 0) -- (5, 4)
+    node[midway, right] {\(\Delta y\)};
+
+  \draw[dashed, thick] (0, 0) -- (0, 4);
+
+  \draw[thick] (0.7, 0) arc (0 : 39 : 0.7);
+  \draw[thick] (0.9, 0) arc (0 : 39 : 0.9)
+    node[midway, above right] {\(\alpha\)};
+  
+  \draw[thick] (0, 1.3) arc (90 : 39 : 1.3)
+    node[midway, above] {\(\beta\)};
+  \draw[thick] (5, 3) arc (-90 : -141 : 1)
+    node[midway, below] {\(\beta\)};
+
+\end{tikzpicture}

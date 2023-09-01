@@ -1,0 +1,86 @@
+\subsection{%
+  Правила дифференцирования: производная и дифференциал суммы и произведения
+  функций.%
+} \label{sec:01-15}
+
+\begin{theorem}
+  Производная суммы равна сумме производных.  
+
+  \begin{equation*}
+    \prh{f(x) + g(x)}' = f'(x) + g'(x)
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Воспользуемся определением производной.  
+
+  \begin{equation*}
+    \begin{aligned}
+      (f(x) + g(x))'
+      = \lim_{\Delta x \to 0} \frac{\Delta(f(x) + g(x))}{\Delta x}
+      = \lim_{\Delta x \to 0} \frac{f(x + \Delta x) - f(x) + g(x + \Delta x) -
+        g(x)}{\Delta x}
+    \\
+    (f(x) \cdot g(x))'
+      = \lim_{\Delta x \to 0} \frac{f(x + \Delta x) - f(x)}{\Delta x}
+        + \lim_{\Delta x \to 0} \frac{g(x + \Delta x) - g(x)}{\Delta x}
+    \end{aligned}
+  \end{equation*}
+
+  Два полученных предела равны соответствующим производным по определению.
+\end{proof}
+
+\begin{theorem}
+  Производная произведения функций равна
+
+  \begin{equation*}
+    (f(x) \cdot g(x))' = f'(x) \cdot g(x) + f(x) \cdot g'(x)
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Воспользуемся определением производной.
+
+  \begin{equation*}
+    (f(x) \cdot g(x))'
+    = \lim_{\Delta x \to 0} \frac{\Delta(f(x) \cdot g(x))}{\Delta x}
+    = \lim_{\Delta x \to 0} \frac{f(x + \Delta x) \cdot g(x + \Delta x) - f(x)
+      \cdot g(x)}{\Delta x}
+  \end{equation*}
+
+  В числителе добавим и вычтем \(f(x + \Delta x) \cdot g(x)\), чтобы разложить
+  на множители.
+
+  \begin{equation*}
+    \begin{aligned}
+      (f(x) \cdot g(x))'
+      = \lim_{\Delta x \to 0} \frac{f(x + \Delta x) \cdot (g(x + \Delta x) - g(x))
+        + g(x) (f(x + \Delta x) - f(x))}{\Delta x}
+    \\
+      (f(x) \cdot g(x))'
+      = \lim_{\Delta x \to 0} (f(x + \Delta x)) \cdot
+        \lim_{\Delta x \to 0} \frac{g(x + \Delta x) - g(x)}{\Delta x}
+        + \lim_{\Delta x \to 0} (g(x)) \cdot
+        \lim_{\Delta x \to 0} \frac{f(x + \Delta x) - f(x)}{\Delta x}
+    \end{aligned}
+  \end{equation*}
+
+  По определению производной заменим два предела производными, а оставшиеся
+  пределы просто вычислим и получим искомую формулу.
+
+  \begin{equation*}
+    (f(x) \cdot g(x))' = f(x) \cdot g'(x) + g(x) \cdot f'(x)
+  \end{equation*}
+\end{proof}
+
+\begin{remark}
+  Дифференциалы вычисляются аналогично производным.
+
+  \begin{equation*}
+    \begin{aligned}
+      \dd (f(x) + g(x)) = \dd (f(x)) + \dd (g(x))
+    \\
+      \dd (f(x) \cdot g(x)) = \dd (f(x)) \cdot g(x) + f(x) \cdot \dd (g(x))
+    \end{aligned}
+  \end{equation*}
+\end{remark}

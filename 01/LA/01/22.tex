@@ -1,0 +1,103 @@
+\subsection{%
+  Геометрический вектор в координатном пространстве. Определение,
+  характеристики.%
+}
+
+\begin{remark}
+  Точку (как упорядоченную пару) нельзя полноценно рассматривать как вектор,
+  т.к. для точек на плоскости не определено сложение и умножение на число.
+\end{remark}
+
+Каждому геометрическому вектору в координатном пространстве поставим в
+соответствие упорядоченный набор чисел (которые будут называться его
+координатами в выбранном базисе) так, чтобы данный вектор являлся линейной
+комбинацией базисных векторов с этим набором коэффициентов.
+
+Выберем \quote{удобный} ортонормированный базис в ДСК: векторы \(\vec{i}\) и
+\(\vec{j}\) единичной длины в направлении осей (такие векторы называются
+декартовыми ортами). Тогда 
+
+\begin{equation*}
+  \vec{a} = x \vec{i} + y \vec{j}
+  \qquad
+  \vec{a} \Rarr{} (x, y)
+\end{equation*}
+
+Скалярное произведение определим как обычно (\ref{rem:dot-pdf}):
+
+\begin{equation*}
+  \dotpdtv{a}{b}
+  = a_x b_x + a_y b_y
+  = \abs{\vec{a}} \cdot \abs{\vec{b}} \cdot \cos \angle (\vec{a}, \vec{b})
+\end{equation*}
+
+\begin{definition} \label{def:vec-len}
+  Длиной (нормой) вектора будем называть
+
+  \begin{equation*}
+    \norm{\vec{a}}
+    = \abs{\vec{a}}
+    = \sqrt{a^2}
+    = \sqrt{a_x^2 + a_y^2}
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  Направлением будем называть углы, которые вектор образует с осями
+  (\figref{01_22_01}), а косинусы этих углов~--- направляющими.
+\end{definition}
+
+\galleryone{01_22_01}{Направление вектора}
+
+\begin{theorem}
+  Сумма квадратов направляющих равна единице.
+\end{theorem}
+
+\begin{proof}
+  Выразим косинусы через проекции вектора \(\vec{a}\) на оси.
+
+  \begin{equation*}
+    \begin{cases}
+      a_x = \text{пр}_{Ox} \vec{a} = \abs{\vec{a}} \cos \alpha
+      \implies
+      \cos \alpha = \dfrac{a_x}{\abs{\vec{a}}}
+    \\
+      a_y = \text{пр}_{Oy} \vec{a} = \abs{\vec{a}} \cos \beta
+      \implies
+      \cos \beta = \dfrac{a_y}{\abs{\vec{a}}}
+    \\
+      a_z = \text{пр}_{Oz} \vec{a} = \abs{\vec{a}} \cos \gamma
+      \implies
+      \cos \gamma = \dfrac{a_z}{\abs{\vec{a}}}
+    \end{cases}
+  \end{equation*}
+
+  Сложим квадраты полученных косинусов и раскроем длину вектору по определению
+  \ref{def:vec-len}.
+
+  \begin{equation*}
+    \cos^2 \alpha + \cos^2 \beta + \cos^2 \gamma
+    = \frac{a_x^2}{a_x^2 + a_y^2 + a_z^2}
+    + \frac{a_y^2}{a_x^2 + a_y^2 + a_z^2}
+    + \frac{a_z^2}{a_x^2 + a_y^2 + a_z^2}
+    = 1
+  \end{equation*}
+\end{proof}
+ 
+\begin{remark}
+  Рассмотрим вектор \(\vec{e} = (\cos \alpha, \cos \beta)\). Его длина равна
+  \(1\) (по основному тригонометрическому тождеству, т.к. углы \(\alpha\) и
+  \(\beta\) смежные), при этом
+
+  \begin{equation*}
+    \vec{a} = \abs{\vec{a}}(\cos \alpha, \cos \beta)
+    \qquad
+    \vec{e} = \frac{\vec{a}}{\abs{\vec{a}}}
+  \end{equation*}
+\end{remark}
+
+\begin{definition}
+  Вектор \(\vec{e} = (\cos \alpha, \cos \beta)\) называется единичным в
+  направлении вектора \(\vec{a}\), а операция приведения вектора к единичному в
+  том же направлении называется нормированием.
+\end{definition}

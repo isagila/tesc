@@ -1,0 +1,55 @@
+\subsection{%
+  Правила дифференцирования: производная и дифференциал суммы и отношения
+  функций.%
+}
+
+Про производную суммы написано ранее (\ref{sec:01-15}).
+
+\begin{theorem}
+  Производная отношения функций равна
+  
+  \begin{equation*}
+    \prh{\frac{f(x)}{g(x)}}'
+    = \frac{f'(x) \cdot g(x) - f(x) \cdot g'(x)}{g^2(x)}    
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Воспользуемся определением производной.
+
+  \begin{equation*}
+    \prh{\frac{f(x)}{g(x)}}'
+    = \lim_{\Delta x \to 0} \frac{\Delta \prh{\frac{f(x)}{g(x)}}}{\Delta x}
+    = \lim_{\Delta x \to 0} \frac{\frac{f(x + \Delta x)}{g(x + \Delta x)} -
+      \frac{f(x)}{g(x)}}{\Delta x}
+    = \lim_{\Delta x \to 0} \frac{f(x + \Delta x) \cdot g(x) - f(x) \cdot g(x +
+      \Delta x)}{g(x + \Delta x) \cdot g(x) \cdot \Delta x}
+  \end{equation*}
+
+  Разделим почленно и применим свойства пределов.
+
+  \begin{equation*}
+    \prh{\frac{f(x)}{g(x)}}'
+    = \lim_{\Delta x \to 0} \frac{f(x + \Delta x)}{\Delta x} \cdot
+      \lim_{\Delta x \to 0} \frac{g(x)}{g(x + \Delta x) \cdot g(x)}
+      - \lim_{\Delta x \to 0} \frac{g(x + \Delta x)}{\Delta x} \cdot
+      \lim_{\Delta x \to 0} \frac{f(x)}{g(x + \Delta x) \cdot g(x)}
+  \end{equation*}
+
+  По определению производной заменим два предела производными, а оставшиеся
+  пределы просто вычислим и получим искомую формулу.
+
+  \begin{equation*}
+    f'(x) \cdot \frac{g(x)}{g^2(x)} - g'(x) \cdot \frac{f(x)}{g^2(x)}
+    = \frac{f'(x) \cdot g(x) - f(x) \cdot g'(x)}{g^2(x)}    
+  \end{equation*}
+\end{proof}
+
+\begin{remark}
+  Дифференциал вычисляется аналогично производной.
+
+  \begin{equation*}
+    \dd \prh{\frac{f(x)}{g(x)}}
+    = \frac{\dd (f(x)) \cdot g(x) - f(x) \cdot \dd (g(x))}{g^2(x)}    
+  \end{equation*}
+\end{remark}

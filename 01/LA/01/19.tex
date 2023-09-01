@@ -1,0 +1,214 @@
+\subsection{%
+  Преобразование базиса и координат.%
+}
+
+\subheader{Переход к новому базису}
+
+Пусть есть старый базис \(\set{\basis_i}_{i = 1}^n\) и новый базис
+\(\set{\basis’_i}_{i = 1}^n\) и необходимо перейти от старого базиса к новому.
+Разложим каждый из векторов старого базиса по новому базису.
+
+\begin{equation*}
+  \begin{cases}
+    \basis_1 & = a_{1, 1} \basis'_1 + \dotsc + a_{1, n} \basis'_n \\
+    \vdots & \\
+    \basis_n & = a_{n, 1} \basis'_1 + \dotsc +  a_{n, n} \basis'_n 
+  \end{cases}  
+\end{equation*}
+
+Теперь рассмотрим разложение произвольного вектора \(x\) в старом базисе.
+Заменим в этом разложении каждый из векторов старого базиса на его разложение по
+новому базису, перегруппируем и получим
+
+\begin{equation*}
+  \begin{aligned}
+    x & = b_1 \basis_1 + \dotsc + b_n \basis_n  
+  \\
+    x & = b_1 (a_{1, 1} \basis'_1 + \dotsc + a_{1, n} \basis'_n)
+      + \dotsc
+      + b_n (a_{n, 1} \basis'_1 + \dotsc + a_{n, n} \basis'_n)
+  \\
+    x & = (b_1 a_{1, 1} + \dotsс + b_n a_{n, 1}) \basis'_1
+    + \dotsc
+    + (b_1 a_{1, n} + \dotsc + b_n a_{n, n}) \basis'_n
+  \end{aligned}
+\end{equation*}
+
+\begin{remark}
+  В матричном виде переход к новому базису можно выразить так
+
+  \begin{equation*}
+    B' = A^{-1 }B
+  \end{equation*}
+
+  А новые координаты можно вычислить так
+
+  \begin{equation*}
+    X_{B'} = A^T X_B
+  \end{equation*}
+\end{remark}
+
+\subheader{Преобразования системы координат (СК)}
+
+В качестве преобразований СК будет рассматривать только движения, причем будем
+рассматривать движения именно СК, а не фигуры.
+
+\begin{definition}
+  Движение это отображение пространства в себя, которые сохраняет расстояние
+  между точками.
+
+  \begin{equation*}
+    \begin{aligned}
+      M(x, y) & \rarr{f} M'(x', y')
+    \\
+      O & \rarr{f} O'
+    \\
+      \abs{\vec{OM}} & = \abs{\vec{O'M'}}
+    \end{aligned}
+  \end{equation*}
+\end{definition}
+
+Существует несколько типов движений.
+
+\begin{enumerate}
+\item
+  Осевая симметрия.
+\item
+  Параллельный перенос (сдвиг).
+\item
+  Поворот относительно точки.
+\end{enumerate}
+
+\subheader{Осевая симметрия}
+
+\begin{definition}
+  Осевой симметрией называется симметрия относительно одной (или нескольких) из
+  осей.
+\end{definition}
+
+Координаты при этом меняются следующим образом.
+
+\begin{equation*}
+  \begin{array}{cc}
+    \text{Симметрия относительно \(OY\)}
+    &
+    \text{Симметрия относительно \(OX\)}
+  \\
+    \begin{cases}
+      x' = -x \\
+      y' = y
+    \end{cases}
+    &
+    \begin{cases}
+      x' = x \\
+      y' = -y
+    \end{cases}
+  \end{array}
+\end{equation*}
+
+\subheader{Параллельный перенос}
+
+При параллельном переносе СК на вектор \(\vec{OO'}\) каждая точка переносится на
+этот вектор. Перенос обозначается \(P_{\vec{a}}\), где \(\vec{a}\) это вектор
+переноса.  
+
+Координаты при этом меняются следующим образом:
+
+\begin{equation*}
+  \begin{cases}
+    x = x' + x_0 \\
+    y = y' + y_0
+  \end{cases}
+  \qquad
+  \begin{cases}
+    x' = x - x_0 \\
+    y' = y - y_0
+  \end{cases} 
+\end{equation*}
+
+где \((x_0, y_0)\) координаты точки \(O'\) в старой СК.
+
+\begin{remark}
+  При параллельном переносе направления осей сохраняются, т.е.
+  \(OX \collinear O'X'\) и \(OY \collinear  O'Y'\).
+\end{remark}
+
+\subheader{Поворот СК}
+
+Рассмотрим поворот СК \textbf{вокруг начала координат} на угол \(\alpha\)
+\textbf{против часовой стрелки}.
+
+Координаты при этом меняются следующим образом:
+
+\begin{equation*} \label{eq:CS-rotate} \tag{ROT}
+  \begin{cases}
+    x = x' \cos \alpha - y' \sin \alpha \\
+    y = x' \sin \alpha + y' \cos \alpha
+  \end{cases}
+  \qquad
+  \begin{cases}
+    x' = x \cos \alpha + y \sin \alpha \\
+    y' = -x \sin \alpha + y \cos \alpha
+  \end{cases}
+\end{equation*}
+
+\begin{remark}
+  Матрица \(\display{\mtxp{
+    \cos \alpha & -\sin \alpha \\
+    \sin \alpha & \cos \alpha
+  }}\)  называется матрицей поворота. Если умножить старые координаты на неё, то
+  получатся новые координаты. Матрица обратного преобразования является обратной
+  матрицей к матрице поворота. 
+\end{remark}
+
+\galleryone{01_19_01}{Смена координат при повороте СК}
+ 
+Покажем, как можно получить формулы \eqref{eq:CS-rotate}.
+
+\begin{proof}
+  При повороте центр СК остается прежним и угол между осями не изменяется,
+  значит \(O' = O\) и \(\angle(OX, OY) = \angle(OX', OY')\). Пусть
+  \(\abs{\vec{a}} = \rho\), введём полярную СК (\(O\) полюс, \(OX\) полярная
+  ось). Обозначим \((x, y)\) координаты вектора \(\vec{a}\) в старой СК, а
+  \((x', y')\)~--- в новой. Из \figref{01_19_01} получаем
+
+  \begin{align*}
+    \begin{cases}
+      x' = OB = \rho \cos (\omega - \alpha) \\
+      y' = OA = \rho \sin(\omega - \alpha)
+    \end{cases}
+    \label{eq:CS-rotate-1} \tag{1}
+  \\
+    \begin{cases}
+      x = OC = \rho \cos \omega \\
+      y = OD = \rho \sin \omega
+    \end{cases}
+    \label{eq:CS-rotate-2} \tag{2}
+  \end{align*}
+
+  В \eqref{eq:CS-rotate-1} применим тригонометрические формулы.
+
+  \begin{equation*} \label{eq:CS-rotate-3} \tag{3}
+    \begin{cases}
+      x' = \under{\rho \cos \omega}{x} \cos \alpha
+        + \under{\rho \sin \omega}{y} \sin \alpha
+      \\
+      y' = \under{\rho \sin \omega}{y} \cos \alpha
+        - \under{\rho \cos \omega}{x} \sin \alpha
+    \end{cases}
+  \end{equation*}
+
+  Подставим \eqref{eq:CS-rotate-2} в \eqref{eq:CS-rotate-3}.
+
+  \begin{equation*}
+    \begin{cases}
+      x' = x \cos \alpha + y \sin \alpha \\
+      y' = y \cos \alpha - x \sin \alpha
+    \end{cases}
+    \implies
+    \begin{cases}
+      x' = x \cos\alpha + y \sin \alpha \\
+      y' = -x \sin \alpha + y \cos \alpha
+    \end{cases}
+  \end{equation*}
+\end{proof}

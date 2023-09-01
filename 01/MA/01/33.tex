@@ -1,0 +1,166 @@
+\subsection{%
+  Производная сложной функции. Полная производная.%
+}
+
+\begin{theorem} \label{thr:diff-cpx-2v}
+  Пусть дана функция двух переменных \(z = f(u, v)\), причем \(u = u(x, y)\) и
+  \(v = v(x, y)\), т.е. \(f(u, v)\) это сложная функция двух переменных. Тогда
+  справедливы формулы
+
+  \begin{equation*}
+    \partder{z}{x}
+    = \partder{z}{u} \cdot \partder{u}{x}
+      + \partder{z}{v} \cdot \partder{v}{x}
+    \qquad 
+    \partder{z}{y}
+    = \partder{z}{u} \cdot \partder{u}{y}
+      + \partder{z}{v} \cdot \partder{v}{y}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Т.к. функция \(z = f(u, v)\) дифференцируема, то её полное приращение
+  представимо в виде
+
+  \begin{equation*} \label{eq:diff-cpx-2v-1} \tag{1}
+    \begin{aligned}
+      \Delta z = \partder{z}{u} \Delta u + \partder{z}{v} \Delta v
+        + \smallo(\rho)
+    \\
+      \frac{\Delta z}{\Delta x} = \partder{z}{u} \cdot \frac{\Delta u}{\Delta x}
+      + \partder{z}{v} \cdot \frac{\Delta v}{\Delta x}
+      + \frac{\smallo(\rho)}{\Delta x}
+    \\
+      \lim_{\Delta x \to 0} \frac{\Delta z}{\Delta x}
+      = \lim_{\Delta x \to 0}
+        \prh{\partder{z}{u} \cdot \frac{\Delta u}{\Delta x}}
+      + \lim_{\Delta x \to 0}
+        \prh{\partder{z}{v} \cdot \frac{\Delta v}{\Delta x}}
+      + \lim_{\Delta x \to 0} \frac{\smallo(\rho)}{\Delta x}
+    \\
+      \partder{z}{x}
+      = \lim_{\Delta x \to 0}
+        \prh{\partder{z}{u} \cdot \frac{\Delta u}{\Delta x}}
+      + \lim_{\Delta x \to 0}
+        \prh{\partder{z}{v} \cdot \frac{\Delta v}{\Delta x}}
+      + \lim_{\Delta x \to 0} \frac{\smallo(\rho)}{\Delta x}
+    \end{aligned}
+  \end{equation*}
+
+  Рассмотрим последний предел в полученной сумме и докажем, что он равен нулю.
+
+  \begin{equation*} \label{eq:diff-cpx-2v-2} \tag{2}
+    \begin{aligned}
+      \lim_{\Delta x \to 0} \frac{\smallo(\rho)}{\Delta x}
+      = \lim_{\Delta x \to 0} \frac{\smallo(\rho)}{\rho} \cdot
+        \lim_{\Delta x \to 0} \frac{\rho}{\Delta x}
+    \end{aligned}
+  \end{equation*}
+  
+  Первый из полученных пределов равен нулю по определению бесконечно малой более
+  высокого порядка. Раскроем второй предел
+
+  \begin{equation*} \label{eq:diff-cpx-2v-3} \tag{3}
+    \lim_{\Delta x \to 0} \frac{\rho}{\Delta x}
+    = \lim_{\Delta x \to 0} \sqrt{\frac{(\Delta u)^2
+      + (\Delta v)^2}{(\Delta x)^2}}
+    = \lim_{\Delta x \to 0} \sqrt{(u'_x)^2 + (v'_x)^2}
+  \end{equation*}
+  
+  Т.к. функции \(u\) и \(v\) дифференцируемы, то они имеет конечную производную,
+  другими словами полученных  предел конечен. Вернёмся к
+  \eqref{eq:diff-cpx-2v-2}, т.к. первый равен нулю, а второй конечен, значит их
+  произведение равно нулю. Таким образом исходный предел
+  \eqref{eq:diff-cpx-2v-2} также равен нулю. Подставим это в
+  \eqref{eq:diff-cpx-2v-1} и получим искомую формулу.
+
+  \begin{equation*}
+    \partder{z}{x} = \partder{z}{u} \cdot \partder{u}{x}
+      + \partder{z}{v} \cdot \partder{v}{x}
+  \end{equation*}
+\end{proof}
+
+\begin{example}
+  Найдем частную производную по \(x\) функции \(\display{z(u, v) = \frac{u}{v} +
+  \frac{v}{u}}\) где \(u = y + \sin x\) и \(v = x^2 y\). Сначала найдем частные
+  производные функции \(z\) по \(u\) и по \(v\).
+
+  \begin{equation*}
+    \partder{z}{u} = \frac{1}{v} - \frac{v}{u^2}
+    \qquad
+    \partder{z}{v} = -\frac{u}{v^2} + \frac{1}{u}
+  \end{equation*}
+
+  Далее найдем частные производные функций \(u\) и \(v\) по \(x\).
+
+  \begin{equation*}
+    \partder{u}{x} = \cos x
+    \qquad
+    \partder{x}{v} = 2 x y
+  \end{equation*}
+
+  Подставим все полученное в итоговую формулу и получим
+
+  \begin{equation*}
+    \fullder{z}{y} = \prh{\frac{1}{v} - \frac{v}{u^2}} \cos x
+      + \prh{-\frac{u}{v^2} + \frac{1}{u}} 2 x y
+  \end{equation*}
+
+  Ответ желательно оставить в таком виде, но можно и заменить \(u\) на \(y +
+  \sin x\) и \(v\) на \(x^2 y\).
+\end{example}
+
+\begin{theorem}
+  Пусть дана функция двух переменных \(z = f(x, y)\), причем \(x = x(t)\) и \(y
+  = y(t)\), т.е. \(z(x, y)\) это фактически функция одной переменной \(t\).
+  Тогда справедлива следующая формула
+
+  \begin{equation*}
+    \fullder{z}{t} = \partder{z}{x} \cdot \fullder{d}{t}
+      + \partder{z}{y} \cdot \fullder{y}{t}
+  \end{equation*}
+
+  Стоит обратить внимание на то, что где-то стоят полные производные (символ
+  \(\dd\)), а где-то частные (символ \(\partial\)).
+\end{theorem}
+
+\begin{proof}
+  Доказательство аналогично доказательству предыдущей формулы
+  (\ref{thr:diff-cpx-2v}).
+\end{proof}
+
+\begin{remark}
+  Можно рассмотреть частный случай для формулы описанной выше. Пусть \(x = t\),
+  т.е. \(z = f(x, y(x))\). Формулой полной производной называется формула
+
+  \begin{equation*}
+    \fullder{z}{x} = \partder{z}{x} + \partder{z}{y} \cdot \fullder{y}{x}
+  \end{equation*}
+\end{remark}
+
+\begin{example}
+  Найдем полную производную функции \(z = x y^2 - x^2y\), где \(y = x \sin x\).
+  Для этого сначала частные производные функции \(z\) по \(x\) и по \(y\).
+
+  \begin{equation*}
+    \partder{z}{x} =  y^2 - 2xy
+    \qquad
+    \partder{z}{y} = 2xy - x^2
+  \end{equation*}
+
+  Найдём полную производную функции \(y\) по \(x\) (производная функции одной
+  переменной).
+
+  \begin{equation*}
+    \fullder{y}{x} = \sin x + x \cos x
+  \end{equation*}
+
+  Подставим все полученное в итоговую формулу и получим
+
+  \begin{equation*}
+    \fullder{z}{x} = (y^2 - 2xy) + (2xy - x^2) \cdot (\sin x + x \cos x)
+  \end{equation*}
+
+  Ответ желательно оставить в таком виде, но можно и заменить \(y\) на \(x \sin
+  x\).
+\end{example}

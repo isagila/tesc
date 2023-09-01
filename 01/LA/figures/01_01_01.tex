@@ -1,0 +1,18 @@
+\begin{tikzpicture}
+  \draw[draw = olive!60, fill = olive!20, very thick]
+    (-1, -1) rectangle (5.5, 4.5);
+
+  \draw (0, 0) node[below left] {\(0\)};
+
+  \draw[->, thick] (0, 0) -- (0, 3.5)
+    node[pos = 1.1, right] {\(Im\)};
+  \draw[->, thick] (0, 0) -- (4.5, 0)
+    node[pos = 1.1, below] {\(Re\)};
+
+  \draw[->, thick] (0, 0) -- (3, 2)
+    node[midway, above, sloped] {\(z\)};
+  
+  \draw (1.5, 0) node[below] {\(x\)};
+  \draw[dashed, thick] (3, 0) -- (3, 2)
+    node[midway, right] {\(y\)};
+\end{tikzpicture}

@@ -1,0 +1,162 @@
+\subsection{%
+  Первый замечательный предел.%
+}
+
+\begin{theorem} \label{thr:fst-wond-lim}
+  Первым замечательным пределом называется следующий предел
+
+  \begin{equation*}
+    \lim_{x \to 0} \frac{\sin x}{x} = 1
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Построим единичную окружность и проведем к неё касательную, параллельную оси
+  \(Oy\) (\figref{01_09_01}). Выберем на касательной точку и построим
+  треугольник \(OAB\). По рисунку видно, что 
+
+  \begin{equation*} \label{eq:fst-wond-lim-1} \tag{1}
+    S_{\triangle} OAC < S_{\text{сек}} CA < S_{\triangle} OAB
+  \end{equation*}
+  
+  Выразим эти площади.
+
+  \begin{equation*} \label{eq:fst-wond-lim-2} \tag{2}
+    \begin{aligned}
+      S_{\triangle} OAC
+      = \frac{1}{2} \cdot 1 \cdot 1 \cdot \sin \phi
+      = \frac{1}{2} \sin \phi
+    \\
+      S_{\text{сек}} CA
+      = \frac{1}{2} \phi
+    \\
+    S_{\triangle} OAB
+    = \frac{1}{2} \cdot 1 \cdot AB
+    = \frac{1}{2} \tg \phi
+    & \qquad
+    \prh{\tg \phi = \frac{AB}{1}}
+    \end{aligned}
+  \end{equation*}
+
+  Подставим \eqref{eq:fst-wond-lim-2} в \eqref{eq:fst-wond-lim-1} и преобразуем.
+
+  \begin{equation*} \label{eq:fst-wond-lim-3} \tag{3}
+    \begin{aligned}
+      \frac{1}{2} \sin \phi < \frac{1}{2} \phi < \frac{1}{2} \tg \phi
+    \\
+      1 < \frac{\phi}{\sin \phi} < \frac{1}{\cos \phi}
+    \\
+      1 > \frac{\sin\phi}{\phi} > \cos\phi
+    \\
+      \lim_{\phi \to 0} 1 > \lim_{\phi \to 0} \frac{\sin\phi}{\phi} >
+      \lim_{\phi \to 0} \cos \phi
+    \end{aligned}
+  \end{equation*}
+
+  Левый и правый пределы равны единице, значит по теореме о двух жандармах
+  получаем, что средний предел также равен единице.
+\end{proof}
+
+\galleryone{01_09_01}{Первый замечательный предел}
+
+\begin{theorem}
+  \begin{equation*}
+    x \sim \sin x \qquad (x \to 0)
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Это следствие из первого замечательного предела (\ref{thr:fst-wond-lim}).
+\end{proof}
+
+\begin{theorem}
+  \begin{equation*}
+    x \sim \arcsin x \qquad (x \to 0)
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Рассмотрим соответствующий предел.
+
+  \begin{equation*}
+    \lim_{x \to 0} \frac{x}{\arcsin x}
+    = \mtxb{
+      x = \sin t \\
+      x \to 0 \implies t \to 0
+    }
+    = \lim_{t \to 0} \frac{\sin t}{\arcsin (\sin t)}
+    = \lim_{t \to 0} \frac{\sin t}{t}
+  \end{equation*}
+
+  По первому замечательному пределу это равно \(1\), значит исследуемые функции
+  эквивалентны при \(x \to 0\) по определению.
+\end{proof}
+
+\begin{theorem}
+  \begin{equation*}
+    x \sim \tg x \qquad (x \to 0)
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Рассмотрим соответствующий предел, раскроем тангенс по определению и
+  воспользуемся свойствами пределов.
+
+  \begin{equation*}
+    \lim_{x \to 0} \frac{\tg x}{x}
+    = \lim_{x \to 0} \frac{\sin x}{x \cos x}
+    = \lim_{x \to 0} \frac{1}{\cos x} \cdot \lim_{x \to 0} \frac{\sin x}{x}}
+  \end{equation*}
+
+  Первый предел можно вычислить, он будет равен единице, второй предел также
+  будет равен единице согласно первому замечательному пределу. Это значит, что
+  и исходный предел также будет равен единице. Таким образом получаем, что
+  исследуемые функции эквивалентны при \(x \to 0\) по определению.
+\end{proof}
+
+\begin{theorem}
+  \begin{equation*}
+    x \sim \arctg x \qquad (x \to 0)
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Рассмотрим соответствующий предел.
+
+  \begin{equation*}
+    \lim_{x \to 0} \frac{x}{\arctg x}
+    = \mtxb{
+      x = \tg t \\
+      x \to 0 \implies t \to 0
+    }
+    = \lim_{t \to 0} \frac{\tg t}{\arctg (\tg t)}
+    = \lim_{t \to 0} \frac{\tg t}{t}
+  \end{equation*}
+  
+  Т.к. уже доказано, что \(t \sim \tg t (t \to 0)\), то этот предел равен
+  единице, а значит исследуемые функции эквивалентны при \(x \to 0\) по
+  определению.
+\end{proof}
+
+\begin{theorem}
+  \begin{equation*}
+    1 - \cos x \sim \frac{x^2}{2} \qquad (x \to 0)
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Рассмотрим соответствующий предел, в числителе применим формулу повышения
+  степени после чего заменим получившийся синус на эквивалент согласно первому
+  замечательному пределу.
+
+  \begin{equation*}
+    \lim_{x \to 0} \frac{1 - \cos x}{\frac{x^2}{2}}
+    = \lim_{x \to 0} \frac{2 \sin^2 \prh{\frac{x}{2}}}{\frac{x^2}{2}}
+    = \lim_{x \to 0} \frac{2 \cdot \frac{x^2}{4}}{\frac{x^2}{2}}
+    = \lim_{x \to 0} \frac{\frac{x^2}{2}}{\frac{x^2}{2}}
+    = 1
+  \end{equation*}
+
+  Таким образом получаем, что исследуемые функции эквивалентны при \(x \to 0\)
+  по определению.
+\end{proof}

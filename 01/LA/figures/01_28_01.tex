@@ -1,0 +1,19 @@
+\begin{tikzpicture}
+  \draw[draw = olive!60, fill = olive!20, very thick]
+    (-1, -1.5) rectangle (5, 5);
+
+  \draw (0, 0) node[below left] {\(O\)};
+
+  \draw[->, thick] (0, 0) -- (0.5, 2.5)
+    node[left] {\(\vec{a}\)};
+  \draw[->, thick] (0, 0) -- (3.5, 3.5)
+    node[right] {\(\vec{b}\)};
+
+  \draw[dashed, thick] (0.5, 2.5) -- (1.5, 1.5);
+
+  \draw (1.5, 1.5) node[right] {\(N\)};
+
+  \draw[thick] (0.7, 0.7) arc (45 : 90 : 0.7)
+    node[pos = 0.4, above] {\(\phi\)};
+
+\end{tikzpicture}

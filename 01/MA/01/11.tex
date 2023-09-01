@@ -1,0 +1,163 @@
+\subsection{%
+  Определения непрерывной функции и ее локальные свойства.%
+} \label{sec:01-11}
+
+\begin{important}
+  Запись \(f(x) \iscont{\segment{a}{b}}\) означает, что функция \(f(x)\)
+  непрерывна на отрезке \(\segment{a}{b}\).
+  
+  Запись \(f(x) \iscontd{x_0}\) означает, что функция \(f(x)\)
+  непрерывна в точке \(x_0\).
+\end{important}
+
+\begin{definition} \label{def:cont-func-1}
+  \begin{equation*}
+    f(x) \iscontd{x_0}
+    \bydef
+    \lim_{x \to x_0} f(x) = f(x_0)
+  \end{equation*}
+\end{definition}
+
+\begin{definition} \label{def:cont-func-2}
+  \begin{equation*}
+    f(x) \iscontd{x_0}
+    \bydef
+    \Delta x_0 \to 0 \implies \Delta y(x_0) \to 0
+  \end{equation*}
+\end{definition}
+
+\begin{theorem} 
+  Определения \ref{def:cont-func-1} и \ref{def:cont-func-2} равносильны.
+\end{theorem}
+
+\begin{proof}
+  Рассмотрим предел \(\display{\lim_{x \to x_0} f(x) = f(x_0)}\).Если \(x \to
+  x_0\), то \(\Delta x \to 0\). Получаем равносильный предел.
+
+  \begin{equation*}
+    \begin{aligned}
+      \lim_{\Delta x \to 0} f(x) = f(x_0)
+    \\
+      \lim_{\Delta x \to 0} \under{\prh{f(x) - f(x_0)}}{\Delta y} = 0
+    \\
+      \lim_{\Delta x \to 0} \Delta y = 0
+    \end{aligned}
+  \end{equation*}
+
+  Это равносильно тому, что \(\Delta y \to 0\) при \(\Delta x \to 0\).
+\end{proof}
+
+\begin{definition}
+  Функция называется непрерывной на множестве, если она непрерывна в каждой
+  точке этого множества.
+\end{definition}
+
+\begin{definition}
+  Функция называется непрерывной справа/слева в точке \(x_0\), если
+  соответствующий односторонний предел равен значению функции в точке \(x_0\).
+\end{definition}
+
+\begin{theorem}
+  Пусть \(f(x)\) и \(g(x)\) непрерывны в точке \(a\), тогда следующие функции
+  также непрерывны в точке \(a\)
+
+  \begin{enumerate}
+  \item
+    \(c f(x) \given \forall c \in \RR\)
+
+  \item
+    \(f(x) + g(x)\)
+  
+  \item
+    \(f(x) \cdot g(x)\)
+  
+  \item
+    \(\frac{f(x)}{g(x)} \qquad (g(x) \neq 0)\)
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  Эти свойства доказываются с помощью аналогичных свойств пределов. Например,
+  докажем, что \(f(x) \cdot g(x)\) также непрерывна. Рассмотрим предел
+  \(\display{\lim_{x \to a}(f(x) \cdot  g(x))}\), по свойству пределов имеем
+
+  \begin{equation*}
+    \begin{aligned}
+      \lim_{x \to a}(f(x) \cdot  g(x))
+      = \lim_{x \to a} f(x) \cdot \lim_{x \to a} g(x)
+    \\
+      \begin{rcases}
+        f(x) \iscontd{a} \implies \lim_{x \to a} f(x) = f(a) \\
+        g(x) \iscontd{a} \implies \lim_{x \to a} g(x) = g(a)
+      \end{rcases}
+      \implies
+      \lim_{x \to a}(f(x) \cdot  g(x)) = f(a) \cdot  g(a)
+    \end{aligned}
+  \end{equation*}
+
+  Таким образом функция \(f(x) \cdot g(x)\) также непрерывна в точке \(a\) по
+  определению.
+\end{proof}
+
+\begin{theorem}
+  \begin{equation*}
+    \begin{rcases}
+      g(x) \iscontd{x_0} \\
+      f(g) \iscontd{g_0 = g(x_0)}
+    \end{rcases}
+    \implies
+    f(g(x)) \iscontd{x_0}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Т.к. функции \(f(g)\) и \(g(x)\) непрерывны в точках \(g_0\) и \(x_0\)
+  соответственно, то их пределы в этих точках равны значениям функций в этих
+  точках, распишем пределы по определению.
+
+  \begin{equation*}
+    \begin{aligned}
+      f(g) \colon \qquad
+        \forall \epsilon_1 > 0 \exists \delta_1 > 0 \given
+        \forall g \colon 0 < \abs{g - g_0} < \delta_1 \implies
+        \abs{f(g) - f(g_0)} < \epsilon_1
+      \\
+      g(x) \colon \qquad
+        \forall \epsilon_2 > 0 \exists \delta_2 > 0 \given
+        \forall x \colon 0 < \abs{x - x_0} < \delta_2 \implies
+        \abs{g(x) - g(x_0)} < \epsilon_2
+    \end{aligned}
+  \end{equation*}
+
+  Возьмем произвольное \(\epsilon_1\), а \(\epsilon_2\) пусть будет равно
+  \(\delta_1\). Тогда из второй строчки получаем, что
+
+  \begin{equation*}
+    \forall \epsilon_1 > 0 \exists \delta_1 > 0, \delta_2 > 0 \given
+      \forall x \colon 0 < \abs{x - x_0} < \delta_2,
+      \abs{g(x) - g(x_0)} < \delta_1
+  \end{equation*}
+  
+  Т.к. \(\abs{g(x) - g(x_0)} < \delta_1\) и учитывая то, что \(g(x) - g(x_0) = g
+  - g_0\), подставим получившееся выражение в определение предела для \(f(x)\).
+  
+  \begin{equation*}
+    \forall \epsilon_1 > 0 \exists \delta_1 > 0, \delta_2 > 0 \given
+    \forall x 0 < \abs{x - x_0} < \delta_2 \implies
+    \abs{f(g(x)) - f(g(x_0))} < \epsilon_1
+  \end{equation*}
+  
+  Это определение предела функции \(f(g(x))\) в точке \(x_0\). Этот предел равен
+  \(f(g(x_0))\), значит функция \(f(g(x))\) непрерывна в точке \(x_0\).
+\end{proof}
+
+\begin{theorem}
+  \begin{equation*}
+    \begin{rcases}
+      f(x) \iscontd{x_0} \\
+      \exists f^{-1}(x)
+    \end{rcases}
+    \implies
+    f^{-1}(x) \iscontd{x_0}
+  \end{equation*}
+\end{theorem}

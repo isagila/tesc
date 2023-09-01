@@ -1,0 +1,192 @@
+\subsection{%
+  Приложения: градиент, производная по направлению.%
+}
+
+\begin{definition}
+  Пусть дана функция двух переменных \(z = f(x, y)\), тогда если \(z = const\),
+  то на поверхности будет отсечена линия уровня.
+\end{definition}
+
+\begin{definition}
+  Производной функции \(z = f(x, y)\) по направлению вектора \(\vec{s}\)
+  называют \textbf{число}, равное
+
+  \begin{equation*}
+    \frac{\partial z}{\partial \vec{s}} =
+    \prh{\partder{z}{x}, \partder{z}{y}} \cdot \vec{s}_0
+  \end{equation*}
+
+  где \(\vec{s}_0\) это нормированный вектор \(\vec{s}\).
+\end{definition}
+
+Пусть есть функция \(z = f(x, y)\). Т.к. функция дифференцируема, то её
+приращение представимо в виде
+
+\begin{equation*} \label{eq:dir-der-1} \tag{1}
+  \Delta z = \partder{z}{x} \Delta x + \partder{z}{y} \Delta y + \smallo(\rho)
+  \qquad
+  (\rho = \sqrt{(\Delta x)^2 + (\Delta y)^2})
+\end{equation*}
+
+Рассмотрим вектор \(\vec{s} = (\Delta x, \Delta y)\), обозначим \(\Delta s =
+\rho = \sqrt{(\Delta x)^2 + (\Delta y)^2}\). Вернемся к \eqref{eq:dir-der-1}
+и разделим все на \(\Delta s\).
+
+\begin{equation*} \label{def:dir-der-2} \tag{2}
+  \frac{\Delta z}{\Delta s}
+  = \partder{z}{x} \cdot \frac{\Delta x}{\Delta s}
+    + \partder{z}{y} \cdot \frac{\Delta y}{\Delta s} + \frac{\smallo(s)}{s}
+\end{equation*}
+
+Заметим, что (\figref{01_39_01})
+
+\begin{equation*} \label{eq:dir-der-3} \tag{3}
+  \frac{\Delta x}{\Delta s} = \cos \alpha
+  \qquad
+  \frac{\Delta x}{\Delta s} = \cos \beta
+\end{equation*}
+
+как направляющие вектора \(\vec{s}\). Перейдем к пределу при \(\Delta s \to 0\),
+тогда получим
+
+\begin{equation*} \label{eq:dir-der-4} \tag{4}
+  \begin{aligned}
+    \lim_{\Delta s \to 0}\frac{\Delta z}{\Delta s} 
+    = \lim_{\Delta s \to 0} \prh{\partder{z}{x} \cdot \cos \alpha}
+      + \lim_{\Delta s \to 0} \prh{\partder{z}{y} \cdot \cos \beta}
+      + \lim_{\Delta s \to 0} \frac{\smallo(s)}{s}
+  \\
+    \partder{z}{s}
+    = \partder{z}{x} \cdot \cos \alpha + \partder{z}{y} \cdot \cos \beta
+  \\
+    \frac{\partial z}{\partial \vec{s}}
+    = \prh{\partder{z}{x}, \partder{z}{y}} \cdot \prh{\cos \alpha, \cos \beta}
+  \end{aligned}  
+\end{equation*}
+
+Учитывая, что вектор из направляющих это нормированный вектор, в итоге получаем
+искомую формулу
+
+\begin{equation*} \label{eq:dir-der-5} \tag{5}
+  \frac{\partial z}{\partial \vec{s}}
+  = \prh{\partder{z}{x}, \partder{z}{y}} \cdot \vec{s}_0
+\end{equation*}
+
+\galleryone{01_39_01}{Производная по направлению}
+
+\begin{remark}
+  Производная по направлению определена и для функций с б\'oльшим число
+  аргументов. Например, производная по направлению \(\vec{s}\) для функции \(u =
+  f(x, y, z)\) будет вычисляться по формуле
+
+  \begin{equation*}
+    \frac{\partial u}{\partial \vec{s}}
+    = \prh{\partder{u}{x}, \partder{u}{y}, \partder{u}{z}} \cdot \vec{s}_0
+  \end{equation*}
+\end{remark}
+
+\begin{remark}
+  Производные по направлению осей будут являться соответствующими частными
+  производными. Например, если \(\vec{s} = (1, 0)\), тогда
+
+  \begin{equation*}
+    \frac{\partial z}{\partial \vec{s}}
+    = \prh{\partder{z}{x}, \partder{z}{y}} \cdot (1, 0)
+    = \partder{z}{x}
+  \end{equation*}
+\end{remark}
+
+\begin{definition}
+  Градиентом функции \(z = f(x, y)\) в точке \(M_0\) называется \textbf{вектор},
+  показывающий направление наискорейшего подъема функции.
+
+  \begin{equation*}
+    \vec{\grad_{M_0}} z(x, y)
+    = \partder{z}{x} \cdot \orti + \partder{z}{y} \cdot \ortj
+  \end{equation*}
+\end{definition}
+
+\begin{remark}
+  Также градиент можно определить как вектор, составленный из частных
+  производных.
+
+  \begin{equation*}
+    \gradient = \prh{\partder{z}{x}, \partder{z}{y}}
+  \end{equation*}
+
+  где \(\gradient\) (читается \quote{набла}) это другое обозначение градиента.
+\end{remark}
+
+\begin{remark}
+  Градиент показывает направление наибольшего значения производной по
+  направлению.
+\end{remark}
+
+\begin{theorem}
+  Производная по направлению вектора \(\vec{s}\) это проекция градиента на этот
+  вектор.
+\end{theorem}
+
+\begin{proof}
+  По определению производной по направлению 
+
+  \begin{equation*}
+    \frac{\partial z}{\partial \vec{s}}
+    = \prh{\partder{z}{x}, \partder{z}{y}} \cdot \vec{s}_0
+    = \gradient \cdot \vec{s}_0
+  \end{equation*}
+
+  Раскроем скалярное произведение по геометрического определению. Получаем
+
+  \begin{equation*}
+    \frac{\partial z}{\partial \vec{s}} = \abs{\gradient} \cdot
+      \under{\abs{\vec{s}_0}}{= 1} \cdot \cos \phi
+  \end{equation*}
+
+  где \(\phi\) это угол между \(\vec{s}\) и градиентом. Значит
+  \(\display{\frac{\partial z}{\partial \vec{s}}}\) это проекция градиента на
+  вектор \(\vec{s}\) по определению.
+\end{proof}
+
+\begin{remark}
+  Если вектор перпендикулярен градиенту, то производная по направлению равна
+  нулю и её проекция на градиент это точка.
+
+  \begin{equation*}
+    \vec{s} \perp \nabla \implies \frac{\partial z}{\partial \vec{s}} = 0
+  \end{equation*}
+\end{remark}
+
+\galleryone{01_39_02}{Наклон градиента}
+
+\begin{theorem}
+  Градиент в точке \(M_0\) перпендикулярен линии уровня, проведенной через эту
+  точку.
+\end{theorem}
+
+\begin{proof}
+  Пусть есть функция \(z = f(x, y)\), точка \(M_0\) и линия уровня \(l \colon z
+  = c\). Найдем наклон касательной \(l\) (обозначим его \(k\)). Рассмотрим \(z -
+  c = 0\) как неявную функцию \(F(x, y) = 0\). По формуле, выведенной ранее,
+  получаем, что
+
+  \begin{equation*}
+    k
+    = \fullder{y}{x}
+    = -\frac{\fullder{F}{x}}{\fullder{F}{y}}
+    = -\frac{\partder{z}{x}}{\partder{z}{y}}
+    = - \frac{z'_x}{z'_y}
+  \end{equation*}
+
+  Найдем наклон градиента (обозначим его \(k^*\)). Из определения градиента
+  (\figref{01_39_02}) получаем
+
+  \begin{equation*}
+    k^*
+    = \frac{\partder{z}{y}}{\partder{z}{x}}
+    = \frac{z'_y}{z'_x}
+  \end{equation*}
+
+  Т.к. произведение наклона касательной \(l\) и наклона градиента равно минус
+  единице, то они перпендикулярны.
+\end{proof}

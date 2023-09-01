@@ -1,0 +1,292 @@
+\subsection{%
+  Формула Тейлора.%
+}
+
+Т.к. исследовать некоторые функции достаточно трудно, мы можем заменить их
+некоторым многочленом \(P_n(x - x_0)\), так чтобы \(f(x) \sim P_n(x - x_0)\) при
+\(x \to x_0\).
+
+\begin{theorem}[Формула Тейлора]
+  \begin{equation*}
+    f(x) \isdiffd[n]{x_0}
+    \implies
+    f(x) = \sum_{k = 0}^n \frac{f^{(k)}(x_0)}{k!} \cdot (x - x_0)^k + r_n(f, x)
+  \end{equation*}
+
+  То, что находится под знаком суммы называется многочленом Тейлора, а \(r_n(f,
+  x)\) называется остаточным членом.
+\end{theorem}
+
+\begin{proof}
+  Предположим, что
+
+  \begin{equation*}
+    P_n(x) = c_0 + c_1 (x - x_0)^1 + \dotsc + c_n (x - x_0)^n
+  \end{equation*}
+
+  Выразим коэффициенты \(c_i\).
+
+  \begin{equation*}
+    \begin{aligned}
+      c_0          & = P_n(x_0)       & = f(x_0)
+    \\
+      c_1          & = P'_n(x_0)      & = f'(x_0)
+    \\
+      2 \cdot c_2  & = P''_n(x_0)     & = f''(x_0)
+    \\
+      \dotsc
+    \\
+      i! \cdot c_i & = P^{(i)}_n(x_0) & = f^{(i)}(x_0)
+    \end{aligned}
+  \end{equation*}
+
+  Таким образом \(\display{c_i = \frac{f^{(i)}(x_0)}{i!}}\), значит получим
+  следующий многочлен
+
+  \begin{equation*}
+    f(x_0) + f'(x_0)(x - x_0) + \frac{f''(x_0)(x - x_0)^2}{2} + \dotsc
+  \end{equation*}
+
+  Т.к. этот многочлен является лишь приближением функции, то добавим к нему
+  остаточный член \(r_n(f, x)\), который отвечает за погрешность приближения.
+\end{proof}
+
+\begin{lemma} \label{lem:der-rem-term}
+  \begin{equation*}
+    f(x) \isdiffd{x_0} \implies r'_n(f, x) = r_{n - 1}(f', x)
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  Выразим остаточный член из формулы Тейлора.
+
+  \begin{equation*}
+    r_n(f, x) = f(x) - \sum_{k = 0}^n \frac{f^{(k)}(x_0)}{k!} \cdot (x - x_0)^k
+  \end{equation*}
+
+  Теперь возьмём производную (по \(x\)) и упростим.
+
+  \begin{equation*}
+    \begin{aligned}
+      (r_n(f, x))' = f'(x) - \sum_{k = 1}^n \frac{f^{(k)}(x_0)}{k!} \cdot k
+        \cdot (x - x_0)^{k - 1}
+    \\
+      (r_n(f, x))' = f'(x) - \sum_{k = 1}^n \frac{f^{(k)}(x_0)}{(k - 1)!}
+        \cdot (x - x_0)^{k - 1}
+    \\
+      (r_n(f, x))' = f'(x) - \sum_{k = 0}^{n - 1} \frac{f^{(k + 1)}(x_0)}{k!}
+        \cdot (x - x_0)^k
+    \end{aligned}
+  \end{equation*}
+
+  Далее заметим, что \(f^{(k + 1)} = (f')^{(k)}\), получим
+
+  \begin{equation*}
+    (r_n(f, x))' = f'(x) - \sum_{k = 0}^{n - 1}\ \frac{(f')^{(k)}(x_0)}{k!}
+      \cdot (x - x_0)^k
+  \end{equation*}
+
+  Правая часть является остаточным членом формулы Тейлора для \(f'(x)\) значит
+  \(\display{(r_n(f, x))' = r_{n - 1}(f', x)}\).
+\end{proof}
+
+\begin{theorem}[Остаточный член формулы Тейлора в форме Пеано]
+  \begin{equation*}
+    f(x) \isdiffd[n - 1]{x_0}
+    \implies
+    r_n(f, x) = \smallo((x - x_0)^n)
+    \qquad
+    (x \to x_0)
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Мат. индукция. 
+  
+  \subsubheader{База}{\(n = 1\)}
+
+  При \(n = 1\) формула Тейлора имеет вид
+
+  \begin{equation*} \label{eq:T-Peano-1} \tag{1}
+    \begin{aligned}
+      f(x) = f(x_0) + f'(x)(x - x_0) + \smallo(x - x_0)
+    \\
+      \under{f(x) - f(x_0)}{\Delta y}
+      = f'(x) \under{(x - x_0)}{\Delta x}
+      \smallo \under{(x - x_0)}{\Delta x}
+    \end{aligned}
+  \end{equation*}
+  
+  Это верно по критерию дифференцируемости, т.к. \(f(x) \isdiffd{x_0}\).
+
+  \subsubheader{Переход}{\(n - 1 \to n\)}
+
+  Если в формуле Тейлора \(x = x_0\), то \(r_n(f, x_0) = 0\). Значит \(r_n(f, x)
+  = r_n(f, x) - 0 = r_n(f, x) - r_n(f, x_0)\). Т.к. \(f(x)\) дифференцируема \(n
+  - 1\) раз в окрестности точки \(x_0\), то по теореме Лагранжа получаем
+
+  \begin{equation*} \label{eq:T-Peano-2} \tag{2}
+    r_n(f, x) - r_n(f, x_0) = (r_n(f, \xi))' (x - x_0)
+  \end{equation*}
+
+  где \(\xi\) лежит между \(x\) и \(x_0\). Мы не можем сказать, что \(\xi \in
+  \interval{x}{x_0}\), т.к не знаем, что больше \(x\) или \(x_0\). По лемме о
+  производной остаточного члена (\ref{lem:der-rem-term}) получаем
+
+  \begin{equation*} \label{eq:T-Peano-3} \tag{3}
+    (r_n(f, \xi))'(x - x_0) = r_{n - 1}(f', \xi)(x - x_0)
+  \end{equation*}
+
+  Причем если \(f(x)\) дифференцируема \(n - 1\) раз в некоторой окрестности
+  точки \(x_0\), то \(f'(x)\) дифференцируема \(n - 2\) раз в той же
+  окрестности, значит мы можем выполнить индукционный переход.
+
+  Т.к. мы предполагали, что \(r_n(f, x) = \smallo((x - x_0)^n)\), то
+
+  \begin{equation*} \label{eq:T-Peano-4} \tag{4}
+    r_{n - 1}(f', \xi)(x - x_0) = \smallo((\xi - x_0)^{n - 1})(x - x_0)
+  \end{equation*}
+
+  Т.к. \(\xi\) лежит между \(x\) и \(x_0\), то \(\abs{\xi - x_0} < \abs{x -
+  x_0}\), значит
+
+  \begin{equation*} \label{eq:T-Peano-5} \tag{5}
+    \smallo((\xi - x_0)^{n - 1}) = \smallo((x - x_0)^{n - 1})
+  \end{equation*}
+
+  В итоге получаем равенство
+
+  \begin{equation*}\label{eq:T-Peano-6} \tag{6}
+    r_{n - 1}(f', \xi)(x - x_0) = \smallo((x - x_0)^n)
+  \end{equation*}
+
+  Приравняем \eqref{eq:T-Peano-3} и \eqref{eq:T-Peano-6} и подставим это в
+  \eqref{eq:T-Peano-2}, получим искомое равенство \(r_n(f, x) = \smallo((x -
+  x_0)^n)\).
+\end{proof}
+
+\begin{theorem}[Остаточный член формулы Тейлора в форме Лагранжа]
+  \begin{equation*}
+    \begin{rcases}
+      f^{(n)}(x) \iscont{\segment{x_0}{x}} \\
+      \exists f^{(n + 1)} \in \interval{x_0}{x}
+    \end{rcases}
+    \implies
+    r_n(f, x) = \frac{f^{(n + 1)}(\xi)}{(n + 1)!} \cdot (x - x_0)^{n + 1}
+    \qquad
+    (\xi \in \interval{x_0}{x})
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Мат. индукция.
+
+  \subsubheader{База}{\(n = 0\)}
+
+  При \(n = 0\) формула Тейлора имеет вид
+
+  \begin{equation*} \label{eq:T-L-1} \tag{1}
+    \begin{aligned}
+      f(x) = f(x_0) + f'(\xi) \cdot (x - x_0)
+      \qquad
+      \xi \in \interval{x_0}{x}
+    \\
+      \frac{f(x) - f(x_0)}{x - x_0} = f'(\xi)
+    \end{aligned}
+  \end{equation*}
+  
+  Это верно по теореме Лагранжа.
+
+  \subsubheader{Переход}{\(\frac{f^{(n + 1)}(\xi)}{(n + 1)!}\)}
+
+  Пусть формула 
+  
+  \begin{equation*} \label{eq:T-L-2} \tag{2}
+    r_{n - 1}(f, x) = \frac{f^{(n)}(\xi)}{n!} \cdot (x - x_0)^n
+  \end{equation*}
+
+  справедлива для \(n - 1\). Выразим \(\display{\frac{r_{n}(f, x)}{(x - x_0)^{n
+  + 1}}}\). Если в формуле Тейлора \(x = x_0\), то \(r_n(f, x_0) = 0\), значит
+  
+  \begin{equation*} \label{eq:T-L-3} \tag{3}
+    \frac{r_{n}(f, x)}{(x - x_0)^{n + 1}}
+    = \frac{r_n(f, x) - 0}{(x - x_0)^{n + 1} - 0}
+    = \frac{r_n(f, x) - r_n(f, x_0)}{(x - x_0)^{n + 1} - (x_0 - x_0)^{n + 1}}
+  \end{equation*}
+  
+  Применяя вначале формулу Коши, а потом лемму о производной остаточного члена
+  (\ref{lem:der-rem-term}) получаем
+
+  \begin{equation*} \label{eq:T-L-5} \tag{5}
+    \exists \mu \in \interval{x_0}{x} \given
+    \frac{r_n(f, x) - r_n(f, x_0)}{(x - x_0)^{n + 1} - (x_0 - x_0)^{n + 1}}
+    = \frac{(r_n(f, \mu))'}{(n + 1) \cdot (\mu - x_0)^n}
+    = \frac{r_{n - 1}(f', \mu)}{(n + 1) \cdot (\mu - x_0)^n}}
+  \end{equation*}
+
+  Т.к. мы предполагали, что формула \eqref{eq:T-L-2} истинна то 
+  
+  \begin{equation*} \label{eq:T-L-6} \tag{6}
+    r_{n - 1}(f', \mu) = \frac{(f')^{(n)}(\xi)}{n!} \cdot (\mu - x_0)^n
+  \end{equation*}
+  
+  Подставим это в \eqref{eq:T-L-5}
+  
+  \begin{equation*}
+    \frac{r_{n - 1}(f', \mu)}{(n + 1) \cdot (\mu - x_0)^n}
+    = \frac{f^{(n + 1)}(\xi) \cdot (\mu - x_0)^n}{n! \cdot (n + 1) \cdot (\mu -
+      x_0)^n}
+    = \frac{f^{(n + 1)}(\xi)}{(n + 1)!}
+  \end{equation*}
+  
+  Значит 
+
+  \begin{equation*}
+    \begin{aligned}
+      \frac{r_{n}(f, x)}{(x - x_0)^{n + 1}} =  \frac{f^{(n + 1)}(\xi)}{(n + 1)!}
+    \\
+      r_{n}(f, x) = \frac{f^{(n + 1)}(\xi)}{(n + 1)!} \cdot (x - x_0)^{n + 1}
+    \end{aligned}
+  \end{equation*}  
+\end{proof}
+
+\begin{definition}
+  Формулой Маклорена называется формула Тейлора при \(x_0 = 0\) и с остаточным
+  членом в форме Пеано.
+
+  \begin{equation*}
+    f(x) = \sum_{k = 0}^n \frac{f^{(k)}(0)}{k!} \cdot x^k + \smallo(x^n)
+  \end{equation*}
+\end{definition}
+
+\begin{remark}
+  Разложения некоторых функций по формуле Маклорена.
+
+  \begin{equation*}
+    \begin{aligned}
+      e^x
+        = 1 + \frac{x}{1!}
+        + \dots
+        + \frac{x^n}{n!}
+        + \smallo(x^n)
+    \\
+      \ln(1 + x)
+        = x - \frac{x^2}{2} + \frac{x^3}{3}
+        - \dotsc
+        + (-1)^{n + 1} \cdot \frac{x^n}{n}
+        + \smallo(x^n)
+    \\
+      \sin x
+        = x - \frac{x^3}{3!} + \frac{x^5}{5!}
+        - \dotsc
+        + (-1)^{n - 1} \cdot \frac{x^{2n - 1}}{(2n - 1)!}
+        + \smallo(x^{2n})
+    \\
+      \cos x
+        = 1 - \frac{x^2}{2!} + \frac{x^4}{4!}
+        - \dotsc
+        + (-1)^n \cdot \frac{x^{2n}}{(2n)!}
+        + \smallo(x^{2n + 1})
+    \end{aligned}
+  \end{equation*}
+\end{remark}

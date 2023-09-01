@@ -1,0 +1,82 @@
+\subsection{%
+  Цилиндрические и сферические координаты в пространстве. Преобразование
+  уравнений поверхности.%
+}
+
+В цилиндрических координатах точка имеет три координаты \(M (\rho, \phi, z)\),
+где
+
+\begin{enumerate}
+\item
+  \(\rho\) это расстояние от начала координат до проекции точки \(M\) на
+  плоскость \(Oxy\).
+  
+\item
+  \(\phi\) это угол, которая данная проекция составляет с положительным
+  направлением оси \(Ox\).
+  
+\item
+  \(z\) это \quote{высота} точки над плоскостью \(Oxy\).
+\end{enumerate}
+
+\subheader{Ограничения}
+
+\begin{enumerate}
+\item
+  \(\rho > 0\)
+  
+\item
+  \(\phi \in [0, 2 \pi)\)
+  
+\item
+  \(z \in \RR\)
+\end{enumerate}
+
+Преобразование цилиндрических координат в декартовы:
+
+\begin{equation*}
+  \begin{cases}
+    x = \rho \cos \phi \\
+    y = \rho \sin \phi \\
+    z = z
+  \end{cases}  
+\end{equation*}
+
+В сферических координатах точка имеет три координаты \(M (\rho, \theta, \phi)\),
+где
+
+\begin{enumerate}
+\item
+  \(\rho\) это расстояние от начала координат до точки \(M\).
+  
+\item
+  \(\theta\) это угол между \(OM\) и положительным направлением оси \(Oz\)
+  (зенитный угол).
+  
+\item
+  \(\phi\) это угол между проекцией \(OM\) на плоскость \(Oxy\) и положительным
+  направлением оси \(Ox\) (азимутальный угол).
+\end{enumerate}
+
+\subheader{Ограничения}
+
+\begin{enumerate}
+\item
+  \(\rho > 0\)
+  
+\item
+  \(\phi \in [0, 2 \pi)\)
+  
+\item
+  \(\theta \in [0, \pi)\)
+\end{enumerate}
+
+Преобразование сферических координат в декартовы
+
+\begin{equation*}
+  \begin{cases}
+    x = \rho \sin \theta \cos \phi \\
+    y = \rho \sin \theta \sin \phi \\
+    z = \rho \cos \theta
+  \end{cases}
+\end{equation*}

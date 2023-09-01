@@ -1,0 +1,21 @@
+\begin{tikzpicture}
+  \draw[draw = olive!60, fill = olive!20, very thick]
+    (-4, -4) rectangle (4, 4);
+
+  \draw[->, thick] (0, -3) -- (0, 3);
+  \draw[->, thick] (-3, 0) -- (3, 0);
+
+  \draw[thick] (0, 0) circle (2cm);
+  \draw[thick] (2, -2.5) -- (2, 2.5);
+  \draw[thick] (0, 0) -- (2, 2)
+    node[pos = 0, below left] {\(O\)}
+    node[pos = 1, right] {\(B\)};
+
+  \draw (2, 0) node[below right] {\(A\)};
+  \draw (1.41, 1.5) node[above] {\(C\)};
+
+  \draw[thick] (2, 0) -- (1.41, 1.41);
+  \draw[thick] (1, 0) arc (0 : 45 : 1)
+    node[midway, right] {\(\phi\)};
+
+\end{tikzpicture}

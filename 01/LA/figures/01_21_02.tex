@@ -1,0 +1,16 @@
+\begin{tikzpicture}
+  \draw[draw = olive!60, fill = olive!20, very thick]
+    (-3, -3) rectangle (5.5, 3.5);
+
+  \draw[->, thick] (-1.6, -2) -- (2, 2.5)
+    node[right] {\(II\)};
+  \draw[->, thick] (-2, 0) -- (4.5, 0)
+    node[below] {\(I\)};
+  \draw (0, 0) node[below right] {\(O\)};
+
+  \draw[thick, color = red!80] (1, 0) arc (0 : 51 : 1)
+    node[midway, right] {\(\alpha\)};
+  \draw[thick, color = blue!80] (1, 0) arc (0 : -309 : 1)
+    node[midway, left] {\(\beta\)};
+
+\end{tikzpicture}

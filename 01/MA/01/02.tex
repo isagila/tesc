@@ -1,0 +1,282 @@
+\subsection{%
+  Точка сгущения. Определения предела функции. Односторонние пределы.%
+} \label{sec:01-02}
+
+\begin{definition}
+  Точка \(a \in \bar{\RR}\) называется точкой сгущения (предельной точкой)
+  множества \(E\), если пересечение любой её проколотой \(\delta\)--окрестности
+  с этим множеством не пусто.
+
+  \begin{equation*}
+    \forall \delta > 0 \given \nearo{a}{\delta} \cap E \neq \varnothing
+  \end{equation*}
+\end{definition}
+
+\begin{definition} \label{def:lim-C}
+  \(L\) называется пределом \textbf{по Коши} функции \(f(x)\) в точке \(a\),
+  если
+
+  \begin{equation*}
+    L = \lim_{x \to a} f(x) \iff
+    \forall \epsilon > 0 \exists \delta > 0 \given
+    \forall x \in E \cap \nearo{a}{\delta} \implies
+    f(x) \in \near{L}{\epsilon}
+  \end{equation*}
+\end{definition}
+
+\begin{remark}
+  Предел можно определить не только через окрестности, но также и через
+  неравенства. \(L\) называется пределом функции \(f(x)\) в точке \(a\), если
+
+  \begin{enumerate}
+  \item
+    \(
+      a \in \RR, L \in \RR \implies
+      \lim_{x \to a} f(x) = L \iff
+      \forall \epsilon > 0 \exists \delta > 0 \given
+      \forall x \colon 0 < \abs{x - a} < \delta \implies
+      \abs{f(x) - L} < \epsilon
+    \)
+
+  \item
+    \(
+      a = \pm \infty, L \in \RR \implies
+      \lim_{x \to a} f(x) = L \iff
+      \forall \epsilon > 0 \exists \delta > 0 \given
+      \forall x \colon \abs{x} > \delta \implies
+      \abs{f(x) - L} < \epsilon
+    \)
+
+  \item
+    \(
+      a \in \RR, L = \pm \infty \implies
+      \lim_{x \to a} f(x) = L \iff
+      \forall \epsilon > 0 \exists \delta > 0 \given
+      \forall x \colon 0 < \abs{x - a} < \delta \implies
+      \abs f(x) > \epsilon
+    \)
+
+  \item
+    \(
+      a = \pm \infty, L = \pm \infty \implies
+      \lim_{x \to a} f(x) = L \iff
+      \forall \epsilon > 0 \exists \delta > 0 \given
+      \forall x \colon \abs{x} > \delta \implies
+      \abs f(x) > \epsilon
+    \)
+  \end{enumerate}
+\end{remark}
+
+\begin{remark}
+  Можно рассматривать пределы функции в точке только с одной стороны.
+
+  \begin{enumerate}
+  \item
+    Левосторонний \(
+      \lim_{x \to a-0} f(x) = L \iff
+      \forall \epsilon > 0 \exists \delta > 0 \given
+      \forall x \colon 0 < a - x < \delta \implies
+      \abs{f(x) - L} <\epsilon
+    \)
+  \item
+    Правосторонний \(
+      \lim_{x \to a+0} f(x) = L \iff
+      \forall \epsilon > 0 \exists \delta > 0 \given
+      \forall x \colon 0 < x - a < \delta \implies
+      \abs{f(x) - L} < \epsilon
+    \)
+  \end{enumerate}
+\end{remark}
+
+\begin{definition} \label{def:lim-G}
+  \(L\) называется пределом \textbf{по Гейне} функции \(f(x)\) в точке \(a\),
+  если
+
+  \begin{equation*}
+    \forall \seq{x_n} \given x_n \to a, x_n \neq a \implies f(x_n) \to L
+  \end{equation*}
+\end{definition}
+
+Определение \ref{def:lim-G} не было рассмотрено в курсе, однако оно необходимо
+для доказательства теорем далее (\ref{sec:01-12}).
+
+\begin{remark}
+  С помощью определения предела по Гейне намного проще доказывать то, что предел
+  не существует, например рассмотрим предел \(\lim_{x \to \infty} \sin x\).
+  Пусть \(\display{a_n = \frac{\pi}{2} + 2 \pi n}\) и \(\display{b_n = \frac{3
+  \pi}{2} + 2 \pi n}\).
+  
+  Обе эти последовательности стремятся к бесконечности при \(n \to \infty\), при
+  этом \(\display{\sin \prh{\frac{\pi}{2} + 2 \pi n} = 1}\) и \(\display{\sin
+  \prh{\frac{3 \pi}{2} + 2 \pi n} = -1}\). Таким образом предел функции \(\sin
+  x\) на бесконечности не существует.
+\end{remark}
+
+\begin{theorem}
+  Определения \ref{def:lim-C} и \ref{def:lim-G} равносильны.
+\end{theorem}
+
+\begin{proof}
+  Пусть \(\lim_{x \to a} f(x) = L\).
+
+  \textbf{Коши \(\to\) Гейне}
+
+  Распишем определение предела по Коши.
+
+  \begin{equation*}
+    \forall \epsilon_2 > 0 \exists \delta > 0 \given
+    \forall x \colon 0 < \abs{x - a} < \delta \implies
+    \abs{f(x) - L} < \epsilon_2
+  \end{equation*}
+
+  Возьмём произвольную последовательность \(\seq{x_n} \to a, x_n \neq a\). Т.к.
+  она стремится к \(a\) (но никогда его не достигает), то по определению предела
+  последовательности получаем
+
+  \begin{equation*}
+    \forall \epsilon_1 > 0 \exists n_0 \in \NN \given
+    \forall n > n_0 \colon 0 < \abs{x_n - a} < \epsilon_1    
+  \end{equation*}
+
+  Т.к. это выполняется для любого \(\epsilon_1\), то это выполняется и для
+  \(\epsilon_1 = \delta\), а это значит, что
+
+  \begin{equation*}
+    \exists n_0 \in \NN \given
+    \forall n > n_0 \colon 0 < \abs{x_n - a} < \delta
+  \end{equation*}
+
+  Если выполняется неравенство \(0 < \abs{x_n - a} < \delta\), то из определения
+  по Коши получаем, что для любого \(\epsilon_2\) выполняется \(\abs{f(x_n) - L}
+  < \epsilon_2\). Объединяем все вместе и получаем
+
+  \begin{equation*}
+    \forall \epsilon_2 > 0 \exists n_0 \in \NN \given
+    \forall n > n_0 \colon \abs{f(x_n) - L} < \epsilon_2    
+  \end{equation*}
+
+  Таким образом \(f(x_n) \to L\).
+
+  \textbf{Гейне \(\to\) Коши}
+
+  От противного: пусть предел по Коши не существует, запишем отрицание предела
+  по Коши.
+
+  \begin{equation*}
+    \exists \epsilon > 0 \forall \delta > 0 \given
+    \exists x \colon  0 < \abs{x - a} < \delta \implies
+    \abs{f(x) - L} \ge \epsilon
+  \end{equation*}
+
+  Т.к. это выполнено для любого \(\delta\), то возьмем \(\display{\delta =
+  \frac{1}{n}}\), а \(x\), соответствующий определенному \(\delta\) будем
+  называть \(x_n\), получим \(\display{0 < \abs{x_n - a} < \frac{1}{n}}\). Т.к.
+  \(n \to \infty\), то по теореме о двух жандармах \(x_n \to a\), но \(x_n \ne
+  a\). Таким образом из определения по Гейне получаем, что \(f(x_n) \to L\).
+  Однако из отрицания предела по Коши следует, что \(\exists \epsilon > 0 \colon
+  \abs{f(x_n) - L} \ge \epsilon\), т.е. \(L\) не является пределом для \(x_n\).
+  Противоречие.
+\end{proof}
+
+\begin{theorem} \label{thr:lim-unique}
+  Если предел функции в точке существует, то он единственный.
+\end{theorem}
+
+\begin{proof}
+  От противного: пусть \(\lim_{x \to a} f(x) = A\) и \(\lim_{x \to a} f(x) =
+  B\), при этом \(A \neq B\). Тогда по определению предела имеем
+
+  \begin{equation*}
+    \begin{aligned}
+      \forall \epsilon_1 > 0 \exists \delta_1 > 0 \given
+      \forall x \in E \cap \nearo{a}{\delta_1} \implies
+      f(x) \in \near{A}{\epsilon_1}
+    \\     
+      \forall \epsilon_2 > 0 \exists \delta_2 > 0 \given
+      \forall x \in E \cap \nearo{a}{\delta_2} \implies
+      f(x) \in \near{B}{\epsilon_2}
+    \end{aligned}
+  \end{equation*}
+  
+  Пусть \(\delta = \min(\delta_1, \delta_2)\), тогда по свойству окрестностей
+
+  \begin{equation*}
+    \begin{rcases}
+      f(x) \in \near{A}{\epsilon_1} \cap \near{B}{\epsilon_2}
+    \\
+      \exists \epsilon_1 > 0, \epsilon_2 > 0 \given
+        \near{A}{\epsilon_1} \cap \near{B}{\epsilon_2} = \varnothing
+    \end{rcases}
+    \implies
+    f(x) \in \varnothing
+  \end{equation*}
+
+  Противоречие.
+\end{proof}
+
+\begin{theorem}
+  Предел в точке существует \(\iff\) односторонние пределы в этой точке
+  существуют и равны.
+
+  \begin{equation*}
+    \exists \lim_{x \to a} f(x) = L = A = B
+    \iff
+    \begin{cases}
+      \exists \lim_{x \to a-0} f(x) = A \\
+      \exists \lim_{x \to a+0} f(x) = B \\
+      A = B
+    \end{cases}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  \ness Распишем односторонние пределы по определению.
+
+  \begin{equation*}
+    \begin{aligned}
+      \lim_{x \to a-0} f(x) = A \implies
+      \forall \epsilon_1 > 0 \exists \delta_1 > 0 \given
+      \forall x \colon 0 < a - x < \delta_1 \implies
+      \abs{f(x) - A} < \epsilon_1
+    \\
+      \lim_{x \to a+0} f(x) = B \implies
+      \forall \epsilon_2 > 0 \exists \delta_2 > 0 \given
+      \forall x \colon 0 < x - a < \delta_2 \implies
+      \abs{f(x) - B} < \epsilon_2
+    \end{aligned}
+  \end{equation*}
+  
+  Пусть \(\delta = \min(\delta_1, \delta_2)\), тогда по свойству окрестностей
+  (учитывая, что \(A = B\)) получаем
+
+  \begin{equation*}
+    \begin{rcases}
+      \forall \epsilon_1 > 0 \exists \delta > 0 \given
+      \forall x \colon 0 < a - x < \delta \implies
+      \abs{f(x) - A} < \epsilon_1
+    \\
+      \forall \epsilon_2 > 0 \exists \delta > 0 \given
+      \forall x \colon 0 < x - a < \delta \implies
+      \abs{f(x) - A} < \epsilon_2
+    \end{rcases}
+    \implies
+    \forall \epsilon > 0 \exists \delta > 0 \given
+    \forall x \colon 0 < \abs{x - a} < \delta \implies
+    \abs{f(x) - A} < \epsilon
+  \end{equation*}
+  
+  Это и есть определение предела функции в точке, т.е. \(\lim_{x \to a} f(x) = A
+  = B\).
+  
+  \suff Распишем предел по определению.
+
+  \begin{equation*}
+    \lim_{x \to a} f(x) = L \iff
+    \forall \epsilon > 0 \exists \delta > 0 \given
+    \forall x \colon 0 < \abs{x - a} < \delta \implies
+    \abs{f(x) - L} < \epsilon
+  \end{equation*}
+  
+  Раскрывая модуль по определению, получаем \(0 < a - x < \delta\) и \(0 < x - a
+  < \delta\). Таким образом оба односторонних предела существуют по определению.
+\end{proof}

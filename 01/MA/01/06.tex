@@ -1,0 +1,177 @@
+\subsection{%
+  Бесконечно малые, бесконечно большие функции. Свойства.%
+}
+
+\begin{definition}
+  Функция \(\infsmall(x)\) называется бесконечно малой (б.м.) в точке \(a\),
+  если её предел в этой точке равен нулю.
+\end{definition}
+
+\begin{definition}
+  Функция \(\infbig(x)\) называется бесконечно большой (б.б.) в точке \(a\),
+  если её предел в этой точке равен бесконечности.
+\end{definition}
+
+\begin{remark}
+  Функция не бывает бесконечно малой или бесконечно большой где угодно, только в
+  определённой точке. Например, \(f(x) = \frac{1}{x}\), тогда
+
+  \begin{enumerate}
+  \item
+    \(f(x)\)~--- б.б. в точке \(x = 0\).
+
+  \item
+    \(f(x)\)~--- б.м. в точке \(x = +\infty\).
+  \end{enumerate}  
+\end{remark}
+
+\begin{theorem} \label{thr:sum-inf-a}
+  Сумма бесконечно малых в точке равна бесконечно малой в этой же точке.
+
+  \begin{equation*}
+    \infsmall_1(x) + \infsmall_2(x) = \infsmall(x)
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Распишем бесконечно малые по определению.  
+
+  \begin{equation*}
+    \begin{aligned}
+      \lim_{x \to a} \infsmall_1(x) = 0 \iff
+      \forall \epsilon_1 > 0 \exists \delta_1 > 0 \given
+      \forall x \in \nearo{a}{\delta_1} \cap E \implies
+      \abs{\infsmall_1(x)} < \epsilon_1
+    \\
+      \lim_{x \to a} \infsmall_2(x) = 0 \iff
+      \forall \epsilon_2 > 0 \exists \delta_2 > 0 \given
+      \forall x \in \nearo{a}{\delta_2} \cap E \implies
+      \abs{\infsmall_2(x)} < \epsilon_2
+    \end{aligned}
+  \end{equation*}
+
+  Пусть \(\delta = \min(\delta_1, \delta_2)\), тогда по свойству окрестностей
+  оба условия будет выполняться. Также возьмём \(\epsilon > 0\), такую что
+  \(\epsilon_1 = \epsilon_2 =\frac{\epsilon}{2}\). Т.к. \(\epsilon\) проходит
+  все вещественные значения, то и \(\epsilon_1\) и \(\epsilon_2\) будут
+  проходить все вещественные значения, значит условия в пределе все еще будут
+  истинными, получим
+
+  \begin{equation*}
+    \begin{aligned}
+      \lim_{x \to a} \infsmall_1(x) = 0 \iff
+      \forall \epsilon > 0 \exists \delta > 0 \given
+      \forall x \in \nearo{a}{\delta} \cap E \implies
+      \abs{\infsmall_1(x)} < \frac{\epsilon}{2}
+    \\
+      \lim_{x \to a} \infsmall_2(x) = 0 \iff
+      \forall \epsilon > 0 \exists \delta > 0 \given
+      \forall x \in \nearo{a}{\delta} \cap E \implies
+      \abs{\infsmall_2(x)} < \frac{\epsilon}{2}
+    \end{aligned}
+  \end{equation*}
+
+  Сложим полученные два неравенства и воспользуемся свойством модуля суммы.
+
+  \begin{equation*} \label{eq:sum-inf-a} \tag{MOD}
+    \begin{rcases}
+      \abs{\infsmall_1(x)} + \abs{\infsmall_2(x)} < \epsilon \\
+      \abs{\infsmall_1(x) + \infsmall_2(x)} \le
+        \abs{\infsmall_1(x)} + \abs{\infsmall_2(x)}
+    \end{rcases}
+    \implies
+    \abs{\infsmall_1(x) + \infsmall_2(x)} < \epsilon
+  \end{equation*}
+
+  Итого
+
+  \begin{equation*}
+    \forall \epsilon > 0 \exists \delta > 0 \given
+    \forall x \in \nearo{a}{\delta} \cap E \implies
+    \abs{\infsmall_1(x) + \infsmall_2(x)} < \epsilon
+  \end{equation*}
+
+  Это и есть определение предела, т.е. \(\lim_{x \to a} (\infsmall_1(x) +
+  \infsmall_2(x)) = 0\).
+\end{proof}
+
+\begin{theorem}
+  Сумма бесконечно больших \textbf{одного знака} в точке равна бесконечно
+  большой в этой же точке.
+
+  \begin{equation*}
+    \infbig_1(x) + \infbig_2(x) = \infbig(x)
+    \qquad
+    (\infbig_1(x) \cdot \infbig_2(x) > 0)
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Доказательство аналогично доказательству про сумму б.м. (\ref{thr:sum-inf-a}).
+  При раскрытии модуля \eqref{eq:sum-inf-a} поможет тот факт, что б.б. одного
+  знака.
+
+  \begin{equation*}
+    \abs{\infbig_1(x)} + \abs{\infbig_2(x)} > \epsilon
+    \implies
+    \abs{\infbig_1(x) + \infbig_2(x)} > \epsilon
+  \end{equation*}
+\end{proof}
+
+\begin{theorem}
+  Произведение бесконечно малых в точке равно бесконечно малой в этой же точке.
+  
+  \begin{equation*}
+    \infsmall_1(x) \cdot \infsmall_2(x) = \infsmall(x)
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Доказательство аналогично доказательству про сумму б.м. (\ref{thr:sum-inf-a}).
+  Единственное отличие в том, что нужно положить
+  \(\epsilon_1 = \epsilon_2 = \sqrt{\epsilon}\).
+\end{proof}
+
+\begin{theorem}
+  Произведение бесконечно больших в точке равно бесконечно большой в этой же
+  точке.
+
+  \begin{equation*}
+    \infbig_1(x) \cdot \infbig_2(x) = \infbig(x)
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Доказательство аналогично доказательству про произведение б.м.
+\end{proof}
+
+\begin{theorem}
+  Произведение бесконечно малой в точке на ограниченную функцию равно бесконечно
+  малой в этой же точке.
+
+  \begin{equation*}
+    \infsmall_1(x) \cdot f(x) = \infsmall(x)
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Доказательство аналогично доказательству про сумму б.м. (\ref{thr:sum-inf-a}).
+  Единственное отличие в том, что нужно полагать \(\display{e_1 =
+  \frac{e}{M}}\), где \(M\) это граница функции \(f(x)\).
+\end{proof}
+
+\begin{theorem}
+  Произведение бесконечно большой в точке на ограниченную функцию (не равную
+  нулю) равно бесконечно большой в этой же точке.
+
+  \begin{equation*}
+    \infbig_1(x) \cdot f(x) = \infbig(x)
+    \qquad   
+    (f(a) \neq 0)
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Доказательство аналогично доказательству про произведение б.м. на ограниченную
+  функцию.
+\end{proof}

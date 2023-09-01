@@ -1,0 +1,66 @@
+\subsection{%
+  Производные элементарных функций: константа, степенная функция.%
+}
+
+\begin{theorem}
+  \begin{equation*}
+    f(x) = c \implies f'(x) = 0
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  По определению производной
+
+  \begin{equation*}
+    f'(x) = \lim_{\Delta x \to 0} \frac{\Delta y}{\Delta x}
+  \end{equation*}
+
+  Т.к. \(f(x) = c\), то \(\Delta y = 0\), а значит
+
+  \begin{equation*}
+    f'(x) = \lim_{\Delta x \to 0} \frac{0}{\Delta x} = 0
+  \end{equation*}
+\end{proof}
+
+\begin{theorem}
+  \begin{equation*}
+    f(x) = x^n \implies f'(x) = n x^{n - 1}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  По определению производной
+  
+  \begin{equation*}
+    f'(x)
+    = \lim_{\Delta x \to 0} \frac{\Delta y}{\Delta x}
+    = \lim_{\Delta x \to 0} \frac{f(x_0 + \Delta x) - f(x_0)}{\Delta x}    
+  \end{equation*}
+
+  Воспользуемся биномом Ньютона и вычислим полученную дробь.
+
+  \begin{equation*}
+    \begin{aligned}
+      \frac{f(x_0 + \Delta x) - f(x_0)}{\Delta x}
+    = \\
+      \frac{(x_0 + \Delta x)^n - x_0^n}{\Delta x}
+    = \\
+      \frac{x_0^n + n x_0^{n - 1} \Delta x + \dotsc + (\Delta x)^n -
+        x_0^n}{\Delta x}
+    = \\
+      \frac{n x_0^{n - 1} \Delta x + \dotsc + (\Delta x)^n}{\Delta x}
+    = \\
+      n x_0^{n - 1} + \dotsc + (\Delta x)^{n - 1}
+    \end{aligned}
+  \end{equation*}
+
+  Заметим, что все слагаемые, кроме первого содержат \(\Delta x\), причем мы
+  рассматриваем предел при \(\Delta x \to 0\). Это значит, что в пределе все
+  слагаемые кроме первого обнулятся и получится
+
+  \begin{equation*}
+    f'(x)
+    = \lim_{\Delta x \to 0} (n x_0^{n - 1} + \dotsc + (\Delta x)^{n - 1})
+    = n x_0^{n - 1}
+  \end{equation*}
+\end{proof}

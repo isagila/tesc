@@ -1,0 +1,184 @@
+\subsection{%
+  Сравнение бесконечно малых. Теоремы об эквивалентных функциях.%
+}
+
+Пусть \(\infsmall_1(x)\) и \(\infsmall_2(x)\)~--- б.м. в точке \(a\), тогда
+
+\begin{enumerate}
+\item
+  \(
+    \lim_{x \to a} \frac{\infsmall_1(x)}{\infsmall_2(x)} = 0
+    \implies \infsmall_1(x)
+  \) более высокого порядка, чем \(\infsmall_2(x)\).
+
+\item
+  \(
+    \lim_{x \to a} \frac{\infsmall_1(x)}{\infsmall_2(x)} \in \RR \setminus
+    \set{0} \implies \infsmall_1(x)
+  \) и \(\infsmall_2(x)\) одного порядка.
+
+\item
+  \(
+    \lim_{x \to a} \frac{\infsmall_1(x)}{\infsmall_2(x)} = \infty
+    \implies \infsmall_1(x)
+  \) более низкого порядка, чем \(\infsmall_2(x)\).
+
+\item
+  \(
+    \lim_{x \to a} \frac{\infsmall_1(x)}{\infsmall_2(x)^k} \in \RR \setminus
+    \set{0} \implies \infsmall_1(x)
+  \) имеет порядок \(k\) по отношению к \(\infsmall_2(x)\).
+\end{enumerate}
+
+Пусть \(\infbig_1(x)\) и \(\infbig_2(x)\)~--- б.б. в точке \(a\), тогда
+
+\begin{enumerate}
+\item
+  \(
+    \lim_{x \to a} \frac{\infbig_1(x)}{\infbig_2(x)} = 0
+    \implies \infbig_1(x)
+  \) более низкого порядка, чем \(\infbig_2(x)\).
+
+\item
+  \(
+    \lim_{x \to a} \frac{\infbig_1(x)}{\infbig_2(x)} \in \RR \setminus
+    \set{0} \implies \infbig_1(x)
+  \) и \(\infbig_2(x)\) одного порядка.
+
+\item
+  \(
+    \lim_{x \to a} \frac{\infbig_1(x)}{\infbig_2(x)} = \infty
+    \implies \infbig_1(x)
+  \) более высокого порядка, чем \(\infbig_2(x)\).
+
+\item
+  \(
+    \lim_{x \to a} \frac{\infbig_1(x)}{\infbig_2(x)^k} \in \RR \setminus
+    \set{0} \implies \infbig_1(x)
+  \) имеет порядок \(k\) по отношению к \(\infbig_2(x)\).
+\end{enumerate}
+
+\begin{remark}
+  \(\smallo(f(x))\)~--- обозначение б.м. более высокого порядка для функции
+  \(f(x)\). Обычно это обозначение используют для сравнения с некоторым эталоном
+  \(\Delta x\), например
+
+  \begin{equation*}
+    \infsmall(x) = \smallo(\Delta x)
+    \iff
+    \lim_{x \to a} \frac{\infsmall(x)}{\Delta x} = 0
+  \end{equation*}
+\end{remark}
+
+\begin{remark}
+  Таким образом, разрешение неопределенностей вида
+  \(\display{\left[\frac{0}{0}\right]}\) и
+  \(\display{\left[\frac{\infty}{\infty}\right]}\) это на самом деле сравнение
+  бесконечно малых и бесконечно больших функций.
+\end{remark}
+
+\begin{definition}
+  Если \(\lim_{x \to a} \frac{\infsmall_1(x)}{\infsmall_2(x)} = 1\), то
+  \(\infsmall_1(x)\) и \(\infsmall_2(x)\) называются эквивалентными б.м.
+  функциями.
+
+  \begin{equation*}
+    \lim_{x \to a} \frac{\infsmall_1(x)}{\infsmall_2(x)} = 1
+    \iff
+    \infsmall_1(x) \sim \infsmall_2(x)
+  \end{equation*}
+\end{definition}
+
+\begin{remark}
+  Геометрический смысл эквивалентных функций заключается в том, что в малой
+  окрестности точки \(a\) графики функций сливаются. В качестве примера можно
+  рассмотреть функции \(\sin x\) и \(x\) (\figref{01_08_01}).
+\end{remark}
+
+\galleryone{01_08_01}{Эквивалентные функции}
+
+\begin{theorem}
+  В произведении можно заменять эквивалентные функции друг на друга при
+  условии, что они эквивалентны \textbf{в одной точке}.
+
+  \begin{equation*}
+    \alpha(x) \sim \gamma(x)
+    \implies
+    \lim_{x \to a} \frac{\infsmall(x)}{\beta(x)}
+    = \lim_{x \to a} \frac{\gamma(x)}{\beta(x)}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Домножим на \(\gamma(x)\) и воспользуемся свойством произведения пределов.
+
+  \begin{equation*}
+    \lim_{x \to a} \frac{\alpha(x)}{\beta(x)} 
+    = \lim_{x \to a} \frac{\alpha(x) \cdot \gamma(x)}{\beta(x) \cdot \gamma(x)}
+    = \lim_{x \to a} \frac{\alpha(x)}{\gamma(x)} \cdot
+      \lim_{x \to a} \frac{\gamma(x)}{\beta(x)}
+  \end{equation*}
+
+  По определению эквивалентных функций левый предел равен единице, значит
+
+  \begin{equation*}
+    \lim_{x \to a} \frac{\alpha(x)}{\beta(x)}
+    = \lim_{x \to a} \frac{\gamma(x)}{\beta(x)}
+  \end{equation*}
+\end{proof}
+
+\begin{theorem}
+  Разность эквивалентных \textbf{в одной точке} б.м. функций это б.м. более
+  высокого порядка, чем эти функции.
+
+  \begin{equation*}
+    \alpha(x) \sim \beta(x)
+    \implies
+    \alpha(x) - \beta(x) = \smallo(\alpha(x)) = \smallo(\beta(x))
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Сравним \(\alpha(x) - \beta(x)\) по определению сравнения б.м. функций, для
+  этого вычислим следующий предел
+
+  \begin{equation*}
+    \lim_{x \to a} \frac{\alpha(x) - \beta(x)}{\alpha(x)}
+    = \lim_{x \to a} 1 - \frac{\beta(x)}{\alpha(x)}
+    = 1 - \lim_{x \to a} \frac{\beta(x)}{\alpha(x)}
+  \end{equation*}
+
+  По определению эквивалентных функций правый предел равен единице, значит
+
+  \begin{equation*}
+    \lim_{x \to a} \frac{\alpha(x) - \beta(x)}{\alpha(x)}
+    = 1 - 1
+    = 0
+  \end{equation*}
+
+  Таким образом \(\alpha(x) - \beta(x)\) это б.м. более высокого порядка, чем
+  \(\alpha(x)\). Для \(\beta(x)\) доказательство аналогично.
+\end{proof}
+
+\begin{theorem}
+  Произведение двух б.м. \textbf{в одной точке} функций это б.м. более высокого
+  порядка, чем эти функции.
+
+  \begin{equation*}
+    \alpha(x) \cdot \beta(x) = \smallo(\alpha(x)) = \smallo(\beta(x))
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}  
+  Сравним \(\alpha(x) \cdot \beta(x)\) по определению сравнения б.м. функций,
+  для этого вычислим следующий предел
+
+  \begin{equation*}
+    \lim_{x \to a} \frac{\alpha(x) \cdot \beta(x)}{\alpha(x)}
+    = \lim_{x \to a} \beta(x)
+  \end{equation*}
+
+  По определению б.м. функции этот предел равен нулю. Таким образом \(\alpha(x)
+  \cdot \beta(x)\) это б.м. более высокого порядка, чем \(\alpha(x)\). Для
+  \(\beta(x)\) доказательство аналогично.
+\end{proof}

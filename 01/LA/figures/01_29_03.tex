@@ -1,0 +1,29 @@
+\begin{tikzpicture}
+  \draw[draw = olive!60, fill = olive!20, very thick]
+    (-3.5, -2) rectangle (3.5, 4);
+
+  \draw[->, thick] (0, -1) -- (0, 3);
+  \draw[->, thick] (-2.5, 0) -- (2.5, 0);
+
+  \point{-1.5, 0};
+  \point{1.5, 0};
+
+  \draw (-1.5, 0) node[above left] {\(F_1 (c, 0)\)};
+  \draw[dashed, thick] (-1.5, 0) -- (0.8, 1.5)
+    node[pos = 0.3, above] {\(r_1\)}
+    node[right] {\(M (x, y)\)};
+  \point{0.8, 1.5};
+  
+  \draw[dashed, thick] (0.8, 1.5) -- (1.5, 0)
+    node[pos = 0.6, above right] {\(r_2\)}
+    node[above right] {\(F_2 (c, 0)\)};
+  \point{1.5, 0};
+
+  \draw[<->] (-1.5, -0.2) -- (0, -0.2)
+    node[midway, below] {\(c\)};
+  \draw[dashed, thick] (-1.5, 0) -- (-1.5, -0.2);
+  \draw[<->] (0, -0.4) -- (1.5, -0.4)
+    node[midway, below] {\(c\)};
+  \draw[dashed, thick] (1.5, 0) -- (1.5, -0.4);
+
+\end{tikzpicture}

@@ -1,0 +1,162 @@
+\subsection{%
+  Кривые второго порядка. Универсальные определения. Полярное уравнение. Общее
+  уравнение.%
+}
+
+Используя определения эксцентриситета и директрисы (\ref{sec:01-29}),
+сформулируем две теоремы.
+
+\begin{theorem} \label{thr:conic-ecc}
+  Для эллипса/гиперболы/параболы верно, что отношение расстояния от точки на
+  кривой до фокуса к расстоянию от директрисы до той же точки кривой есть
+  постоянная величина, равная эксцентриситету.
+
+  \begin{equation*}
+    \frac{r_i}{h_i} = \ecc
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}  
+  Рассмотрим эллипс (\figref{01_30_01}). Т.к. \(M (x, y)\) принадлежит
+  эллипсу, то
+
+  \begin{equation*} \label{eq:conic-ecc-1} \tag{1}
+    \frac{x^2}{a^2} + \frac{y^2}{b^2} = 1
+    \implies
+    y^2 = b^2 \cdot \prh{1 - \frac{x^2}{a^2}}
+  \end{equation*}
+
+  Из \figref{01_30_01} выразим \(r_1\), подставим в него
+  \eqref{eq:conic-ecc-1} и упростим полученное выражение.
+
+  \begin{equation*} \label{eq:conic-ecc-2} \tag{2}
+    r_1
+    = \sqrt{(x - c)^2 + y^2}
+    = \sqrt{(x - c)^2 + b^2 \cdot \prh{1 - \frac{x^2}{a^2}}}
+    = \sqrt{\frac{a^2 x^2 - 2 a^2 xc + a^2 c^2 + a^2 b^2 - b^2 x^2}{a^2}}
+  \end{equation*}
+
+  \galleryone{01_30_01}{Дополнение определения эксцентриситета}
+  
+  Т.к. мы рассматриваем эллипс, то
+  
+  \begin{equation*} \label{eq:conic-ecc-3} \tag{3}
+    c^2 = a^2 - b^2
+    \implies
+    \begin{cases}
+      a^2 x^2 - b^2 x^2 = c^2 x^2 \\
+      a^2 c^2 + a^2 b^2 = a^4 - a^2 b^2 + a^2 b^2 = a^4
+    \end{cases}
+  \end{equation*}
+
+  Подставим \eqref{eq:conic-ecc-3} в \eqref{eq:conic-ecc-2} и упростим.
+
+  \begin{equation*} \label{eq:conic-ecc-4} \tag{4}
+    r_1
+    = \sqrt{\frac{a^4 - 2 a^2 xc + c^2 x^2}{a^2}}
+    = \sqrt{\frac{(a^2 - x c)^2}{a^2}}
+    = \abs{\frac{a^2 - x c}{a}}
+    = \abs{a - x \cdot \frac{c}{a}}
+  \end{equation*}
+  
+  Воспользуемся определением эксцентриситета \(\displaystyle{\frac{c}{a} =
+  \ecc}\). Мы рассматриваем эллипс, значит \(\ecc \in [0, 1)\), из чего следует,
+  что \(a \ge x \ecc\). Таким образом  можно раскрыть модуль с плюсом. Применяя
+  все эти соображения к \eqref{eq:conic-ecc-4}, имеем
+
+  \begin{equation*} \label{eq:conic-ecc-5} \tag{5}
+    r_1
+    = \abs{a - x \cdot \frac{c}{a}}
+    = \abs{a - x \cdot \ecc}
+    = a - x \cdot \ecc
+  \end{equation*}
+  
+  Из \figref{01_30_01} выразим \(h_1\).
+
+  \begin{equation*} \label{eq:conic-ecc-6} \tag{6}
+    h_1
+    = \frac{a}{\ecc} - x
+    = \frac{a - x \ecc}{\ecc}
+  \end{equation*}
+
+  Из \eqref{eq:conic-ecc-5} и \eqref{eq:conic-ecc-6} следует, что
+  \(\frac{r_1}{h_1} = \ecc\). Доказательство для \(r_2\) и \(h_2\) аналогично.
+  Доказательство для гиперболы и параболы также аналогично.
+\end{proof}
+
+\begin{theorem}
+  Отношение \(\display{\frac{r_i}{h_i} = \ecc' = const}\) определяет только
+  эллипс/гиперболу/параболу.
+\end{theorem}
+
+Доказанные теоремы позволяют дать общее определение кривой второго порядка.
+
+\begin{definition}
+  Кривой второго порядка называется множество точек плоскости, расстояния от
+  которых до данной точки и до данной прямой находятся в постоянном отношении.
+
+  Данная точка называется фокусом, а данная прямая~--- директрисой. Постоянное
+  отношение называется эксцентриситетом \(\ecc\), причем
+
+  \begin{enumerate}
+    \item
+      \(\ecc < 1 \implies\) эллипс.
+
+    \item
+      \(\ecc = 1 \implies\) парабола.
+
+    \item
+      \(\ecc > 1 \implies\) гипербола.
+  \end{enumerate}
+\end{definition}
+
+\begin{theorem}
+  Уравнение кривой второго порядка в полярных координатах имеет вид
+  
+  \begin{equation*}
+    \rho = \frac{k \ecc}{1 \pm \ecc \cdot \cos \phi}    
+  \end{equation*}
+
+  где \(k\) равно расстоянию от фокуса до директрисы, а \(\pm\) отвечает за то,
+  какой из фокусов мы берём в качестве центра ПСК.
+\end{theorem}
+
+\begin{proof}
+  Введём \quote{удобную} ПСК (\figref{01_30_02}). Обозначим \(k = \dist(F, d)\)
+  расстояние от фокуса до директрисы, тогда \(r = \rho\) и \(h = k + \rho \cos
+  \phi\). Используя определение эксцентриситета, выразим \(\rho\).
+
+  \begin{equation*}
+    \begin{aligned}
+      \ecc = \frac{r}{h} \implies r = h \cdot \ecc
+    \\
+      \rho
+      = (k + \rho \cos \phi) \cdot \ecc
+      = \frac{k \ecc}{1 - \ecc \cdot \cos \phi}
+    \end{aligned}
+  \end{equation*}
+  
+  Однако это было проделано только для одного фокуса, для другого фокуса
+  получится \(\display{\rho = \frac{k \ecc}{1 + \ecc \cdot \cos \phi}}\).
+\end{proof}
+
+\gallerydouble
+  {01_30_02}{Кривые второго порядка в ПСК}
+  {01_30_03}{Гипербола в ПСК}
+
+\begin{remark}
+  При использовании такого уравнения надо помнить, что в начале координат ПСК
+  окажется один из фокусов кривой второго порядка, а не её центр как это было в
+  ДПСК. Например, на \figref{01_30_03} у красной гиперболы левый фокус находится
+  в \((0, 0)\), а у синей~--- правый.
+\end{remark}
+
+\begin{remark}
+  Общее уравнение \textbf{линии} (т.к. могут быть вырожденные случаи) второго
+  порядка имеет вид  
+
+  \begin{equation*}
+    a_{11} x^2 + 2 a_{12} xy + a_{22} y^2 + 2 a_{13} x + 2 a_{23} y + a_{33} = 0
+  \end{equation*}
+\end{remark}
+

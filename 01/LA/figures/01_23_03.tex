@@ -1,0 +1,17 @@
+\begin{tikzpicture}
+  \draw[draw = olive!60, fill = olive!20, very thick]
+    (-4, -3) rectangle (4, 4.5);
+
+  \draw[thick] (3, 2.5)
+    edge (-2, 2.5)
+    edge (2, -1);
+
+  \draw[->, thick] (-3, -1) -- (-2, 2.5)
+    node[midway, left] {\(\vec{a}\)};
+  \draw[->, thick] (-3, -1) -- (2, -1)
+    node[midway, below] {\(\vec{b}\)};
+  
+  \draw (-2.3, -1) arc (0 : 73 : 0.7)
+    node[midway, above right] {\(\alpha\)};
+
+\end{tikzpicture}

@@ -1,0 +1,250 @@
+\subsection{%
+  Вторые производные функции двух переменных. Равенство смешанных производных.%
+}
+
+\begin{definition}
+  Если первые производные функции двух переменных дифференцируемы, то определены
+  вторые производные.
+
+  \begin{equation*}
+    \begin{aligned}
+      z''_{xx} = \frac{\partial^2 z}{\partial x^2}
+      \qquad
+      z''_{xy} = \frac{\partial^2 z}{\partial x \partial y}
+    \\
+      z''_{yx} = \frac{\partial^2 z}{\partial y \partial x}
+      \qquad
+      z''_{yy} = \frac{\partial^2 z}{\partial y^2 }
+    \end{aligned}  
+  \end{equation*}
+
+  Производные \(z''_{xx}\) и \(z''_{yy}\) называются чистыми производными.
+  Производные \(z''_{xy}\) и \(z''_{yx}\) называются смешанными производными.
+\end{definition}
+
+\begin{theorem}[Шварца]
+  Если смешанные производные непрерывны, то они равны.
+\end{theorem}
+
+\begin{proof}
+  Рассмотрим две вспомогательные функции.
+
+  \begin{equation*}
+    \begin{aligned}
+      W = \frac{f(x_0 + \Delta x, y_0 + \Delta y) - f(x_0 + \Delta x, y_0)
+        - f(x_0, y_0 + \Delta y) + f(x_0 , y_0)}{\Delta x \Delta y}
+    \\
+      \phi(x) = \frac{f(x, y_0 + \Delta y) - f(x, y_0)}{\Delta y}
+    \end{aligned}
+  \end{equation*}
+
+  Выразим \(W\) с помощью функции \(\phi(x)\), получим \(\display{W =
+  \frac{\phi(x_0 + \Delta x) - \phi(x_0)}{\Delta x}}\). Т.к. функция \(\phi(x)\)
+  дифференцируема (как разность дифференцируемых функций), значит можно
+  воспользоваться теоремой Лагранжа, т.е.
+
+  \begin{equation*}
+    W = \phi'(\xi_1) = \frac{f'_x(\xi_1, y_0 + \Delta y)
+      - f'_x(\xi_1, y_0)}{\Delta y}
+    \qquad
+    (\xi_1 \in \interval{x_0}{x_0 + \Delta x})
+  \end{equation*}
+
+  Введём вспомогательную функцию \(h(y) = f'_x(\xi_1, y)\) и еще раз применим
+  теорему Лагранжа.
+
+  \begin{equation*}
+    \begin{aligned}
+      W = \frac{h(y_0 + \Delta y) - h(y_0)}{\Delta y}
+    \\
+      W = h'(\zeta_1) = f''_{xy}(\xi_1, \zeta_1)
+      & \qquad
+      (\zeta_1 \in \interval{y_0}{y_0 + \Delta y})
+    \end{aligned}
+  \end{equation*}
+
+  Аналогично можно рассмотреть вспомогательную функцию \(\display{\psi(y) =
+  \frac{f(x_0 + \Delta x, y) - f(x_0, y)}{\Delta x}}\) и в итоге получить, что
+
+  \begin{equation*}
+    W = f''_{yx}(\xi_2, \zeta_2)
+    \qquad
+    (
+      \xi_2 \in \interval{x_0}{x_0 + \Delta x},
+      \zeta_2 \in \interval{y_0}{y_0 + \Delta y}
+    )
+  \end{equation*}
+
+  В итоге, применяя предельный переход при \(\Delta x \to 0\) и \(\Delta y \to
+  0\) имеем
+
+  \begin{equation*}
+    \begin{aligned}
+      W = f''_{xy}(\xi_1, \zeta_1) = f''_{yx}(\xi_2, \zeta_2)
+    \\
+      \lim_{\rho \to 0} f''_{xy}(\xi_1, \zeta_1)
+      = \lim_{\rho \to 0} f''_{xy}(\xi_2, \zeta_2)
+      & \qquad
+      (\rho = \sqrt{(\Delta x)^2 + (\Delta y)^2})
+    \end{aligned}
+  \end{equation*}
+
+  В таком случае \(\xi_1 \to x_0\), \(\xi_2 \to x_0\), \(\zeta_1 \to y_0\) и
+  \(\zeta_2 \to y_0\). По условию теоремы вторые производные непрерывны, значит
+  \(f''_{xy}(x_0, y_0) = f''_{yx}(x_0, y_0)\).
+\end{proof}
+
+\begin{definition}
+  Вторым дифференциалом функции двух переменных называется дифференциал
+  дифференциала функции двух переменных.
+
+  \begin{equation*}
+    \dd^2 z  = \frac{\partial^2 z}{\partial x^2} \dd x^2
+      + 2 \frac{\partial^2 z}{\partial x \partial y} \dd x \dd y
+      + \frac{\partial^2 z}{\partial y^2} \dd y^2
+  \end{equation*}
+\end{definition}
+
+\subheader{Вывод формулы для второго дифференциала}
+
+По определению второй дифференциал равен \(\dd^2 z = \dd (\dd z)\). Подставим
+первый дифференциал, получим
+
+\begin{equation*}
+  \dd^2 z = \dd \prh{\partder{z}{x} \dd x + \partder{z}{y} \dd y}
+\end{equation*}
+
+Еще раз применяем определение первого дифференциала.
+
+\begin{enumerate}
+\item
+  Берем производную по \(x\) от того, что в скобках.
+
+\item
+  Умножаем её на \(\dd x\).
+
+\item
+  Берем производную по \(y\) от того, что в скобках.
+
+\item
+  Умножаем её на \(\dd y\).
+
+\item
+  Ответом будет сумма того, что получилось на шагах 2 и 4.
+\end{enumerate}
+
+Итого имеем
+
+\begin{equation*}
+  \begin{aligned}
+    \dd^2 z
+    = \prh{\partder{z}{x} \dd x + \partder{z}{y} \dd y}'_x \dd x
+      + \prh{\partder{z}{x} \dd x + \partder{z}{y} \dd y}'_y \dd y
+  \\
+    \dd^2 z
+    = \prh{
+        \frac{\partial^2 z}{\partial x^2} \dd x
+        + \frac{\partial^2 z}{\partial y \partial x} \dd y
+      } \dd x
+      + \prh{
+        \frac{\partial^2 z}{\partial x \partial y} \dd x
+        + \frac{\partial^2 z}{\partial y^2} \dd y
+      } \dd y
+  \\
+    \dd^2 z = \frac{\partial^2 z}{\partial x^2} \dd x^2
+      + 2 \frac{\partial^2 z}{\partial x \partial y} \dd x \dd y
+      + \frac{\partial^2 z}{\partial y^2} \dd y^2
+  \end{aligned}
+\end{equation*}
+
+\begin{theorem}
+  Дифференциал второго (и более высокого) порядка функции двух переменных не
+  сохраняет инвариантность формы в общем случае.
+\end{theorem}
+
+\begin{proof}
+  Рассмотрим \(z = f(u, v)\), пусть \(u = u(t)\) и \(v = v(t)\). По определению
+  второго дифференциала получаем
+
+  \begin{equation*}
+    \dd^2 z
+    = \dd (\dd z)
+    = \dd \prh{z'_u \dd u + z'_v \dd v}
+    = \prh{z'_u \under{\dd u}{u'_t \dd t}
+      + z'_v \under{\dd v}{v'_t \dd t}}'_t \dd t
+    = \dd^2 z = (z'_u u'_t \dd t + z'_v v'_t \dd t)'_t \dd t
+  \end{equation*}
+  
+  Вынесем \(\dd t\) за скобки и возьмём производную
+
+  \begin{equation*}
+    \dd^2 z = \prh[\Big]{
+      (z'_u)'_t \cdot u'_t
+      + z'_u u''_{tt}
+      + (z'_v)'_t \cdot v'_t
+      + z'_v v''_{tt}
+    } \dd t^2
+  \end{equation*}
+
+  Рассмотрим \((z'_u)'_t\), это производная сложной функции нескольких двух
+  переменных, поэтому \((z'_u)'_t = z''_{uu}u'_t + z''_{uv}v'_t\). Аналогично
+  \((z'_v)'_t = z''_{vu} u'_t + z''_{vv} v'_t\). Подставляем это в формулу,
+  получаем
+
+  \begin{equation*}
+    \begin{aligned}
+      \dd^2 z = \prh{
+        z''_{uu} (u'_t)^2
+        + z''_{uv} v'_t u'_t
+        + z'_u u''_{tt}
+        + z''_{uv} u'_t v'_t
+        + z''_{uu} (u'_t)^2
+        + z'_v v''_{tt}
+      } \dd t^2
+    \\
+      \dd^2 z = \prh[\bigg]{
+        \prh[\Big]{
+          z''_{uu} (u'_t)^2 + 2 \cdot z''_{uv} v'_t u'_t + z''_{uu} (u'_t)^2
+        }
+        + z'_u u''_{tt}
+        + z'_v v''_{tt}
+      } \dd t^2
+    \end{aligned}
+  \end{equation*}
+
+  Скобка с тремя слагаемыми, умноженная на \(\dd t^2\), это дифференциал функции
+  двух переменных второго порядка, а оставшиеся два слагаемых дают дифференциалы
+  второго порядка функции одной переменной, значит \(\dd^2 z = \dd^2 z + z'_u
+  \dd^2 u + z'_v \dd^2 v\). Противоречие, значит дифференциал второго порядка
+  функции нескольких переменных не сохраняет инвариантность формы в общем
+  случае.
+\end{proof}
+
+\begin{definition}
+  Линейной параметризацией называется параметризация функции \(z = f(u, v)\) с
+  помощью линейной замены \(u = a t + b\) и \(v = ct + d\).
+\end{definition}
+
+\begin{theorem}
+  Дифференциал второго порядка функции двух переменных сохраняет инвариантность
+  формы в случае линейной параметризации.
+\end{theorem}
+
+\begin{proof}
+  В ходе доказательства неинвариантности формы второго дифференциала функции
+  двух переменных было получено следующее равенство
+
+  \begin{equation*}
+    \dd^2 z = \dd^2 z + z'_u \dd^2 u + z'_v \dd^2 v 
+  \end{equation*}
+
+  Однако т.к. \(u\) и \(v\) это линейные функции, то их второй дифференциал
+  будет равен нулю, значит
+
+  \begin{equation*}
+    \dd^2 z = \dd^2 z + z'_u \cdot 0 + z'_v \cdot 0 \implies \dd^2 z = \dd^2 z
+  \end{equation*}
+
+  Получили верное равенство, значит второй дифференциал сохраняет инвариантность
+  формы при линейной параметризации.
+\end{proof}

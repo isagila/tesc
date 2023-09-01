@@ -1,0 +1,184 @@
+\subsection{%
+  Теоремы о пределах.%
+}
+
+\begin{theorem} \label{thr:func-as-lim}
+  Если \(\lim_{x \to a} f(x) = L\), то говорят, что функцию \(f(x)\) можно
+  представить пределом \(f(x) = L + \infsmall(x)\), где \(\infsmall(x)\)~---
+  б.м. в точке \(a\)
+\end{theorem}
+
+\begin{proof}
+  По условию теоремы \(f(x) = L + \infsmall(x) \implies f(x) - L =
+  \infsmall(x)\). Подставим это в определение предела.
+
+  \begin{equation*}
+    \lim_{x \to a} f(x) = L \iff
+    \forall \epsilon > 0 \exists \delta > 0 \given
+    \forall x \in \nearo{a}{\delta} \cap E \implies
+    \abs{f(x) - L} < \epsilon
+  \end{equation*}
+
+  Мы показали, что \(f(x) - L = \infsmall(x) < \epsilon\), значит определение
+  верно.
+\end{proof}
+
+\begin{theorem}
+  Предел константы равен ей самой.
+
+  \begin{equation*}
+    \lim_{x \to a} c = c
+    \qquad
+    (c = const)
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Распишем определение предела через неравенства.
+
+  \begin{equation*}
+    \forall \epsilon > 0 \exists \delta > 0 \given
+    \forall x \colon 0 < \abs{x - a} < \delta \implies
+    \abs{c - c} < \epsilon
+  \end{equation*}
+
+  Последнее неравенство всегда выполняется, т.к. \(\epsilon > 0\).
+\end{proof}
+
+\begin{theorem}
+  Предел суммы равен сумме пределов.
+
+  \begin{equation*}
+    \lim_{x \to a} (f(x) + g(x)) = \lim_{x \to a} f(x) + \lim_{x \to a} g(x)
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Воспользуемся представлением функции пределом (\ref{thr:func-as-lim}) и
+  получим
+
+  \begin{equation*}
+    \begin{aligned}
+      \lim_{x \to a} f(x) = A \iff f(x) = A + \infsmall_1(x)
+    \\
+      \lim_{x \to a} g(x) = B \iff g(x) = B + \infsmall_2(x)
+    \end{aligned}
+  \end{equation*}
+
+  Сложим полученные равенства и применим свойство суммы бесконечно малых
+  функций (\ref{thr:sum-inf-a}).
+
+  \begin{equation*}
+    \begin{aligned}
+      f(x) + g(x) = A + B + \infsmall_1(x) + \infsmall_2(x)
+    \\
+      (f(x) + g(x)) = (A + B) + \infsmall(x)
+    \end{aligned}
+  \end{equation*}
+
+  Далее воспользуемся представлением функции пределом в обратную сторону.
+
+  \begin{equation*}
+    \begin{aligned}
+      \lim_{x \to a} (f(x) + g(x)) = A + B
+    \\
+      \lim_{x \to a} (f(x) + g(x)) = \lim_{x \to a} f(x) + \lim_{x \to a} g(x)
+    \end{aligned}
+  \end{equation*}
+\end{proof}
+
+\begin{theorem}
+  Предел произведения равен произведению пределов.
+
+  \begin{equation*}
+    \lim_{x \to a} (f(x) \cdot  g(x))
+    = \lim_{x \to a} f(x) \cdot  \lim_{x \to a} g(x)
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Воспользуемся представлением функции пределом (\ref{thr:func-as-lim}) и
+  получим
+
+  \begin{equation*}
+    \begin{aligned}
+      \lim_{x \to a} f(x) = A \iff f(x) = A + \infsmall_1(x)
+    \\
+      \lim_{x \to a} g(x) = B \iff g(x) = B + \infsmall_2(x)
+    \end{aligned}
+  \end{equation*}
+
+  Перемножим полученные равенства и применим свойства бесконечно малых функций.
+
+  \begin{equation*}
+    \begin{aligned}
+      f(x) \cdot g(x) = A B + A \infsmall_2(x) + B \infsmall_1(x)
+        + \infsmall_1(x) \infsmall_2(x)
+    \\
+      (f(x) \cdot g(x)) = A B + \infsmall(x)
+    \end{aligned}
+  \end{equation*}
+
+  Далее воспользуемся представлением функции пределом в обратную сторону.
+
+  \begin{equation*}
+    \begin{aligned}
+      \lim_{x \to a} (f(x) \cdot g(x)) = A B
+    \\
+      \lim_{x \to a} (f(x) \cdot g(x))
+      = \lim_{x \to a} f(x) \cdot \lim_{x \to a} g(x)
+    \end{aligned}
+  \end{equation*}
+\end{proof}
+
+\begin{theorem}
+  Предел частного равен частному пределов (при условии, что знаменатель не равен
+  нулю).
+
+  \begin{equation*}
+    \lim_{x \to a} \frac{f(x)}{g(x)}
+    = \frac{\lim_{x \to a} f(x)}{\lim_{x \to a} g(x)}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Воспользуемся представлением функции пределом (\ref{thr:func-as-lim}) и
+  получим
+
+  \begin{equation*} \label{eq:lim-div-1} \tag{1}
+    \begin{aligned}
+      \lim_{x \to a} f(x) = A \iff f(x) = A + \infsmall_1(x)
+    \\
+      \lim_{x \to a} g(x) = B \iff g(x) = B + \infsmall_2(x)
+    \end{aligned}
+  \end{equation*}
+
+  Рассмотрим следующий предел
+
+  \begin{equation*} \label{eq:lim-div-2} \tag{2}
+    \lim_{x \to a} \prh{\frac{f(x)}{g(x)} - \frac{A}{B}}
+  \end{equation*}
+
+  Подставим \eqref{eq:lim-div-1} в \eqref{eq:lim-div-2} и упростим, пользуясь
+  свойствами б.м. функций.
+
+  \begin{equation*}
+    \lim_{x \to a} \prh{\frac{A + \infsmall_1(x)}{B + \infsmall_2(x)}
+      - \frac{A}{B}}
+    = \lim_{x \to a} \prh{\frac{A B + \infsmall_1(x) B - A B
+      - \infsmall_2(x) A}{(B + \infsmall_2(x)) B}}
+    = \lim_{x \to a} \prh{\frac{\infsmall_1(x) - \infsmall_2(x)}{(B +
+      \infsmall_2(x)) B}}
+    = \frac{0 - 0}{(B + 0) B}
+    = 0
+  \end{equation*}
+
+  Получили, что предел \eqref{eq:lim-div-2} равен нулю. Это равносильно
+  следующему
+
+  \begin{equation*}
+    \lim_{x \to a} \frac{f(x)}{g(x)}
+    = \frac{A}{B}
+    = \frac{\lim_{x \to a} f(x)}{\lim_{x \to a} g(x)}
+  \end{equation*}
+\end{proof}

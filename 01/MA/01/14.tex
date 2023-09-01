@@ -1,0 +1,138 @@
+\subsection{%
+  Определение производной функции. Дифференцируемая функция. Дифференциал
+  \(1\)-го порядка.%
+}
+
+\begin{definition}
+  Производной функции в точке \(x_0\) называют предел отношения приращения
+  функции к приращению аргумента.
+
+  \begin{equation*}
+    f'(x_0)
+    = \lim_{\Delta x \to 0} \frac{\Delta y}{\Delta x}
+    = \lim_{\Delta x \to 0} \frac{f(x_0 + \Delta x) - f(x_0)}{\Delta x}
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  Функция дифференцируема в точке \(x_0 \iff \exists A \given \Delta y = A \cdot
+  \Delta x + \smallo(\Delta x)\) при \(\Delta x \to 0\).
+\end{definition}
+
+\begin{theorem}[Критерий дифференцируемости]
+  Функция называется дифференцируемой в точке \(x_0\), если существует конечная
+  производная в этой точке.
+\end{theorem}
+
+\begin{proof}
+  \ness Распишем производную по определению, после чего воспользуемся
+  представлением функции пределом.
+
+  \begin{equation*}
+    \begin{aligned}
+      f'(x) = \lim_{\Delta x \to 0} \frac{\Delta y}{\Delta x}
+    \\
+      \frac{\Delta y}{\Delta x} = f'(x) + \alpha(\Delta x)
+        & \qquad \Big\vert \cdot \Delta x
+    \\
+      \Delta y = f'(x) \Delta x
+        + \under{\alpha(\Delta x) \Delta x}{\smallo(\Delta x)}
+    \end{aligned}
+  \end{equation*}
+
+  Обозначив \(f'(x) = A\), получаем требуемое равенство.
+
+  \suff Имеем \(\Delta y = A \cdot \Delta x + \smallo(\Delta x)\), разделим это
+  на \(\Delta x \neq 0\) и воспользуемся представлением функции пределом в
+  обратную сторону.
+  
+  \begin{equation*}
+    \frac{\Delta y}{\Delta x} = A + \alpha(\Delta x)
+    \implies
+    \lim_{\Delta x \to 0} \frac{\Delta y}{\Delta x} = A = f'(x)  
+  \end{equation*}
+\end{proof}
+
+\begin{definition}
+  Пусть \(\display{\lim_{x \to a} \frac{\beta(x)}{k \cdot \alpha^n (x)} = 1}\),
+  тогда \(k \cdot \alpha^n(x)\) называют главной частью функции \(\beta(x)\).
+
+  \begin{equation*}
+    \beta(x) \sim k \cdot \alpha^n (x)
+    \qquad
+    \beta(x) = k \cdot \alpha^n (x) + \smallo(k \cdot \alpha^n (x))
+  \end{equation*}
+\end{definition}
+
+\begin{remark}
+  Главная часть функции позволяет с некоторой погрешностью заменять сложную
+  (показательную, логарифмическую) функцию на простую (степенную), при этом
+  порядок \(n\) показывает точность вычисления \(\beta(x)\).  
+\end{remark}
+
+\begin{definition}
+  Дифференциалом (первого порядка) функции в точке называется главная (линейная)
+  часть её приращения в этой точке \(\dd y = y '\Delta x\).
+\end{definition}
+
+\begin{remark}
+  Дифференциал аргумента равен приращению \(\dd x = x' \Delta x = \Delta x\),
+  поэтому производную можно обозначить в виде
+
+  \begin{equation*}
+    \dd y = y' \dd x \implies y' = \fullder{y}{x}
+  \end{equation*}
+\end{remark}
+
+\begin{remark}
+  Дифференциал служит простейшим приближением приращения, т.к. обычно его проще
+  вычислить. При этом \(\dd y \neq \Delta y\), но при \(\Delta x \to 0 \given
+  \dd y \to \Delta \to 0\) или \(dd y \approx \Delta y\).
+\end{remark}
+
+\begin{remark}
+  С помощью дифференциала можно вычислять приближенное значение функции.
+
+  \begin{equation*}
+    f(x_0 + \Delta x)
+    = f(x_0) + \dd f(x_0)
+    = f(x_0) + f'(x_0) \Delta x
+  \end{equation*}
+
+  Чем меньше будет \(\Delta x\), тем точнее будут вычисления.
+\end{remark}
+
+\begin{example}
+  Пусть \(f(x) = \sqrt[3]{x}\) и требуется найти \(f(67)\), тогда
+
+  \begin{equation*}
+    f(67)
+    = f(64 + 3)
+    \approx 4 + \frac{1}{\sqrt[3]{64^2}} \cdot 3
+    \approx 4 + \frac{1}{16}
+    \approx 4.0625
+  \end{equation*}
+\end{example}
+
+\begin{theorem}
+  Если функция дифференцируема в точке, то она непрерывна в этой точке.  
+\end{theorem}
+
+\begin{proof}
+  По определению дифференцируемости \(\Delta y = A \Delta x + \smallo(\Delta
+  x)\). Воспользуемся предельным переходом.
+
+  \begin{equation*}
+    \lim_{\Delta x \to 0} \Delta y
+    = \lim_{\Delta x \to 0} (A \Delta x + \smallo(\Delta x))
+    = 0    
+  \end{equation*}
+
+  Получаем, что \(\Delta y \to 0\) при \(\Delta x \to 0\), что является
+  определением непрерывности.
+\end{proof}
+
+\begin{remark}
+  Обратное в общем случае \textbf{неверно}, например: \(f(x) = \abs{x}\) в точке
+  \(x_0 = 0\) непрерывна, но не дифференцируема.
+\end{remark}

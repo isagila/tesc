@@ -1,0 +1,87 @@
+\subsection{%
+  Изоморфизм линейных пространств.%
+}
+
+\begin{definition}
+  Биекция \(F \colon L \to L'\) называется изоморфизмом, если
+  
+  \begin{enumerate}
+  \item
+    \(\forall x \in L (x' \in L') \colon x' = F(x)\)
+    
+  \item
+    \(F(x + y) = x' + y' = F(x) + F(y)\)
+    
+  \item
+    \(F(\lambda x) = \lambda x' = \lambda F(x)\)
+  \end{enumerate}
+\end{definition}
+
+\begin{remark}
+  Последние два свойства определяют линейность отображения (сохранение линейной
+  структуры пространства). Иными словами изоморфизм сохраняет \quote{расстояние}
+  между элементами.
+\end{remark}
+
+\begin{remark}
+  Размерности изоморфных пространств совпадают: \(L\) изоморфно \(L’ \implies
+  \dim L = \dim L'\).
+\end{remark}
+
+\begin{remark}
+  При изоморфизме линейная комбинация переходит в линейную комбинацию (сохраняя
+  тривиальности/нетривиальность), а нулевой вектор в нулевой вектор.
+  
+  \begin{equation*}
+    F(\varnothing)
+    = F(0 \cdot X)
+    = 0 \cdot F(X)
+    = 0 \cdot X'
+    = \emptyset'
+  \end{equation*}
+\end{remark}
+
+\begin{theorem}
+  Если \(\dim L = \dim L'\), то \(L\) изоморфно \(L'\).
+\end{theorem}
+
+\begin{proof}
+  Пусть \(\Basis = \set{\basis_i}_{i = 1}^n\) базис \(L\), а \(\Basis' =
+  \set{\basis_i'}_{i = 1}^n\) базис \(L'\). Разложим произвольный \(x \in L\) по
+  этому базису \(\Basis\).
+
+  \begin{equation*}
+    x = \sum_{i = 1}^n x_i \basis_i
+  \end{equation*}
+  
+  Поставим этому \(x\) в соответствие \(x'\) такой, что \(F(x) = x' = \sum_{i =
+  1}^n x_i \basis'_i\). Причем это соответствие взаимно-однозначно, т.к.
+  \(\Basis\) и \(\Basis'\) базисы. Тогда
+  
+  \begin{equation*}
+    \begin{aligned}
+      \begin{rcases}
+        F(x + y) = \sum_{i = 1}^n (x_i + y_i) \basis'_i
+      \\
+        \sum_{i = 1}^n (x_i + y_i) \basis'_i
+        = \sum_{i = 1}^n x_i \basis'_i + \sum_{i = 1}^n y_i \basis'_i
+        = x' + y'
+        = F(x) + F(y)
+      \end{rcases}
+      & \implies
+      F(x + y) = F(x) + F(y)
+    \\
+      \begin{rcases}
+        F(\lambda x) = \sum_{i = 1}^n \lambda x_i \basis'_i
+      \\
+        \sum_{i = 1}^n \lambda x_i \basis'_i
+        = \lambda \sum_{i = 1}^n x_i \basis'_i
+        = \lambda x' = \lambda F(x)
+      \end{rcases}
+      & \implies
+      F(\lambda x) = \lambda F(x)    
+    \end{aligned}
+  \end{equation*}
+
+  Значит \(L\) изоморфно \(L'\) по определению.
+\end{proof}
