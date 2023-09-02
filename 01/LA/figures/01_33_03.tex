@@ -1,0 +1,15 @@
+\begin{tikzpicture}
+  \begin{axis}[
+      hide axis,
+      colormap/cool,
+      samples = 50,
+      domain = 0 : pi,
+      domain y = -8 : 8,
+  ]
+    \addplot3[surf] (
+      {5 - 3 * sin(deg(x))},
+      {3 * cos(deg(x))},
+      {y}
+    );
+  \end{axis}
+\end{tikzpicture}

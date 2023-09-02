@@ -1,0 +1,12 @@
+\begin{tikzpicture}
+  \begin{axis}[
+      hide axis,
+      colormap/cool,
+      samples = 50,
+      domain = -5 : 5,
+      domain y = -5 : 5,
+  ]
+    \addplot3[surf] {sqrt(x^2 + y^2 + 2)};
+    \addplot3[surf] {-sqrt(x^2 + y^2 + 2)};
+  \end{axis}
+\end{tikzpicture}

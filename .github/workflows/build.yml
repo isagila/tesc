@@ -32,6 +32,7 @@ jobs:
         with:
           working_directory: ./${{ env.SEMESTER }}/${{ env.SUBJECT }}
           root_file: main.tex
+          latexmk_shell_escape: true
 
       - name: Upload pages artifact
         uses: actions/upload-artifact@master

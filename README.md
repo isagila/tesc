@@ -1,5 +1,9 @@
 # tEsc
 
+### I семестр
+
+- [Линейная алгебра](https://isagila.github.io/tesc/01/LA.pdf)
+
 ### II семестр
 
 - [Специальные разделы высшей математики](https://isagila.github.io/tesc/02/LA.pdf)

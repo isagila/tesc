@@ -1,0 +1,11 @@
+\begin{tikzpicture}
+  \begin{axis}[
+      hide axis,
+      colormap/cool,
+      samples = 50,
+      domain = -3 : 3,
+      domain y = -3 : 3,
+  ]
+    \addplot3[surf] {x^2 - y^2};
+  \end{axis}
+\end{tikzpicture}

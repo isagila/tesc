@@ -94,9 +94,11 @@
   \refstepcounter{points}
   \begin{figure}[h]
     \centering
-    \makesubfigure{#1}{a}{#3}{0.31}
-    \makesubfigure{#1}{b}{#4}{0.31}
-    \makesubfigure{#1}{c}{#5}{0.31}
+    \makesubfigure{#1}{a}{#3}{0.3}%
+    \hspace{0.03\textwidth}%
+    \makesubfigure{#1}{b}{#4}{0.3}%
+    \hspace{0.03\textwidth}%
+    \makesubfigure{#1}{c}{#5}{0.3}
     \caption{#2}
     \label{fig:#1}
   \end{figure}
