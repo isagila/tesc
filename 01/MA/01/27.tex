@@ -1,1 +1,158 @@
-\subsection{Теоремы о дифференцируемых функциях. Правило Лопиталя.}
+\subsection{%
+  Теоремы о дифференцируемых функциях. Правило Лопиталя.%
+}
+
+\begin{theorem}
+  При неопределенностях вида \(\display{\left[\frac{0}{0}\right]}\) и
+  \(\left[\frac{\infty}{\infty}\right]\) справедливо равенство
+
+  \begin{equation*}
+    \lim_{x \to a} \frac{f(x)}{g(x)} = \lim_{x \to a} \frac{f'(x)}{g'(x)}
+  \end{equation*}
+
+  при условии, что
+
+  \begin{enumerate}
+  \item
+    \(f(x)\) и \(g(x)\) дифференцируемы в окрестности точки \(a\).
+
+  \item
+    \(g'(x) \neq 0\) в окрестности точки \(a\).
+  
+  \item
+    \(\display{\exists \lim_{x \to a}{\frac{f'(x)}{g'(x)}}}\)
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  \subsubheader{Шаг I}{\(\display{\left[\frac{0}{0}\right]}\)}
+
+  По теореме Коши
+
+  \begin{equation*}
+    \begin{aligned}
+      \exists \xi \in \near{a}{\abs{x - a}} \colon
+      \frac{f(x) - f(a)}{g(x) - g(a)} = \frac{f'(\xi)}{g'(\xi)}
+    \\
+      \begin{cases}
+        f(x) \isdiffd{a}
+        \implies
+        f(x) \iscontd{a}
+        \implies
+        \lim_{x \to a} f(x) = f(a)
+      \\
+        g(x) \isdiffd{a}
+        \implies
+        g(x) \iscontd{a}
+        \implies
+        \lim_{x \to a} g(x) = g(a)
+      \end{cases}
+      \qquad
+      \left[\frac{0}{0}\right] \implies f(a) = g(a) = 0
+    \\
+      \frac{f(x)}{g(x)} = \frac{f'(\xi)}{g'(\xi)}
+    \\
+      \lim_{x \to a} \frac{f(x)}{g(x)} = \lim_{x \to a} \frac{f'(\xi)}{g'(\xi)}
+    \end{aligned}
+  \end{equation*}
+
+  Рассмотрим предел \(\display{\lim_{x \to a}\frac{f'(x)}{g'(x)} = L}\),
+  распишем его по определению
+
+  \begin{equation*}
+    \forall \epsilon > 0 \exists \delta > 0 \given
+    \forall x \colon 0 < \abs{x - a} < \delta \implies
+    \abs{\frac{f'(x)}{g'(x)} - L} < \epsilon
+  \end{equation*}
+
+  Однако \(\display{\forall x \colon 0 < |x - a| < \delta \given \exists \xi}\),
+  такая что
+
+  \begin{equation*}
+    \begin{rcases}
+      \lim_{x \to a} \frac{f(x)}{g(x)}
+      = \lim_{x \to a} \frac{f'(\xi)}{g'(\xi)}
+    \\
+      \xi \in \near{a}{\abs{x - a}}
+    \end{rcases}
+    \implies
+    \forall \epsilon > 0 \exists \delta_{\xi} > 0 \given
+    \forall x \colon 0 < \abs{x - a} < \delta \implies
+    \abs{\frac{f(x)}{g(x)} - L} < \epsilon
+  \end{equation*}
+
+  Это определение предела, значит мы получаем, что
+
+  \begin{equation*}
+    \lim_{x \to a} \frac{f(x)}{g(x)} = L = \lim_{x \to a} \frac{f'(x)}{g'(x)}
+  \end{equation*}
+
+  \subsubheader{Шаг II}{\(\display{\left[\frac{\infty}{\infty}\right]}\)}
+  
+  Так как \(f\), \(g\) б.б функции, то \(\display{\frac{1}{f}}\),
+  \(\display{\frac{1}{g}}\) б.м.
+
+  \begin{equation*}
+    \lim_{x \to a} \frac{f(x)}{g(x)}
+    = \lim_{x \to a} \frac{1}{\frac{1}{f(x)}}
+        \cdot \lim_{x \to a} \frac{1}{g(x)}
+    = \lim_{x \to a} {\frac{\frac{1}{g(x)}}{\frac{1}{f(x)}}}
+  \end{equation*}
+
+  Данный предел имеет неопределённость вида
+  \(\display{\left[\frac{0}{0}\right]}\), как отношение б.м. Применим уже ранее
+  доказанное правило Лопиталя.
+
+  \begin{equation*}
+    \lim_{x \to a} \frac{\frac{1}{g(x)}}{\frac{1}{f(x)}}
+    = \lim_{x \to a} \frac{\prh{\frac{1}{g(x)}}'}{\prh{\frac{1}{f(x)}}'}
+    = \lim_{x \to a} \frac{\frac{g'(x)}{g(x)^2}}{\frac{f'(x)}{f(x)^2}}
+    = \lim_{x \to a} \frac{g'(x)}{f'(x)}
+      \cdot \lim_{x \to a} \frac{f(x)^2}{g(x)^2}
+    = \lim_{x \to a} \frac{g'(x)}{f'(x)}
+      \cdot \lim_{x \to a} \prh{\frac{f(x)}{g(x)}}^2 
+  \end{equation*}
+
+  Итого получаем, что
+
+  \begin{equation*}
+    \begin{aligned}
+      \lim_{x \to a} \frac{f(x)}{g(x)}
+      = \lim_{x \to a} \frac{g'(x)}{f'(x)}
+        \cdot \lim_{x \to a} \prh{\frac{f(x)}{g(x)}}^2
+    \\
+      \frac{1}{\lim_{x \to a} \frac{f(x)}{g(x)}}
+      = \lim_{x \to a} \frac{g'(x)}{f'(x)}
+    \\
+      \lim_{x \to a} \frac{f(x)}{g(x)} = \lim_{x \to a} \frac{f'(x)}{g'(x)}
+    \end{aligned}
+  \end{equation*}
+\end{proof}
+
+\begin{remark}
+  Правило Лопиталя можно применять несколько раз, например
+
+  \begin{equation*}
+    \lim_{x \to \infty} \frac{e^x}{x^3}
+    = \lim_{x \to \infty} \frac{e^x}{3 x^2}
+    = \lim_{x \to \infty} \frac{e^x}{6 x}
+    = \lim_{x \to \infty} \frac{e^x}{6}
+    = \infty
+  \end{equation*}
+\end{remark}
+
+\begin{remark}
+  Если после применения правила Лопиталя, получился несуществующий предел, это
+  не значит, что исходный предел не существует, например
+
+  \begin{equation*}
+    \begin{aligned}
+      \lim_{x \to \infty} \frac{x - \sin x}{x} = 1 - 0 = 1
+    \\
+      \lim_{x \to \infty} \frac{(x - \sin x)'}{x'}
+      = \lim_{x \to \infty} \frac{1 - \cos x}{1} \to \nexists
+    \end{aligned}
+  \end{equation*}
+
+  В данном случае правило Лопиталя неприменимо.
+\end{remark}

@@ -6,113 +6,133 @@
   Вторым замечательным пределом называется предел
 
   \begin{equation*}
-    \lim_{x \to \infty} \prh{1 + \frac{1}{x}^x = e
+    \lim_{x \to \infty} \prh{1 + \frac{1}{x}}^x = e
   \end{equation*}
 \end{theorem}
 
-\todo
-Доказательство этой теоремы делится на два этапа:
+\begin{proof}
+  Доказательство этой теоремы делится на два этапа.
 
-Докажем это для натуральных чисел $\lim_{n \to \infty}{(1 + \frac{1}{n})}^n = e$
-Рассмотрим выражение в пределе, распишем его [по биному Ньютона](https://ru.wikipedia.org/wiki/Бином_Ньютона): $\sum_{k = 0}^{n} \Big( 1^{n - k} \cdot \frac{1}{n^k} \cdot C_{n}^k \Big)$, где $\displaystyle{C_{n}^{k} = \frac{n!}{(n - k)! \cdot k!}}$ количество [сочетаний](https://ru.wikipedia.org/wiki/Сочетание) по $k$ из $n$ элементов
+  \subsubheader{Шаг I}{Для натуральных чисел}
 
-Распишем $\displaystyle{1 + 1 + \frac{1}{n^2} \cdot \frac{n \cdot (n - 1)}{2!} + \frac{1}{n^3} \cdot \frac{n \cdot (n - 1) \cdot (n - 2)}{3!} + \dots }$
+  Рассмотрим выражение в пределе, раскроем его по биному Ньютона. Обозначив
+  \(\display{C_n^k = \frac{n!}{(n - k)! \cdot k!}}\), получим
 
-Упростим $\displaystyle{1 + 1 + \frac{1}{2!} \cdot \frac{n - 1}{n} + \frac{1}{3!} \cdot \frac{n - 1}{n} \cdot \frac{n - 2}{n} + \dots}$
+  \begin{equation*} \label{eq:scd-wond-lim-1} \tag{1}
+    \begin{aligned}
+      \sum_{k = 0}^{n} \prh{1^{n - k} \cdot \frac{1}{n^k} \cdot C_n^k}
+    \\
+      = 1 + 1 + \frac{1}{n^2} \cdot \frac{n \cdot (n - 1)}{2!}
+        + \frac{1}{n^3} \cdot \frac{n \cdot (n - 1) \cdot (n - 2)}{3!} + \dotsc
+    \\
+      = 1 + 1 + \frac{1}{2!} \cdot \frac{n - 1}{n}
+        + \frac{1}{3!} \cdot \frac{n - 1}{n} \cdot \frac{n - 2}{n} + \dotsc
+    \end{aligned}
+  \end{equation*}
 
-(a) Заметим, что эта сумма больше двух
+  Заметим, что эта сумма больше двух. Также заметим, что каждое слагаемое
+  положительно, значит последовательность монотонно возрастает. Для того, чтобы
+  доказать, что она меньше трёх запишем её в таком виде
 
-(b) Также заметим, что каждое слагаемое положительно, значит последовательность монотонно возрастает
+  \begin{equation*} \label{eq:scd-wond-lim-2} \tag{2}
+    1 + 1 + \frac{1}{2!} \prh{1 - \frac{1}{n}} + \frac{1}{3!} \prh{1 -
+      \frac{1}{n}} \prh{1 - \frac{2}{n}} + \dotsc
+  \end{equation*}
 
-Для того, чтобы доказать, что она меньше трёх запишем её в таком виде $\displaystyle{1 + 1 + \frac{1}{2!} (1 - \frac1n) + \frac{1}{3!}(1 - \frac1n)(1 - \frac2n) + \dots}$
+  Каждая из скобок вида \(\display{\prh{1 - \frac{i}{n}}}\) меньше единицы,
+  значит каждое из слагаемых меньше, чем \(\display{\frac{1}{i!}}\). Т.е.
+  например \(\display{\frac{1}{3!} \prh{1 - \frac{1}{n}} \prh{1 - \frac{2}{n}} <
+  \frac{1}{3!}}\). Теперь заметим, что \(\display{\frac{1}{p!} < \frac{1}{2^{p -
+  1}}}\) при \(p > 2\). Из этих двух фактов следует, что сумма
+  \eqref{eq:scd-wond-lim-1} меньше чем сумма
 
-Каждая из скобок вида $\displaystyle{(1 - \frac{i}{n})}$ меньше единицы, значит каждое из слагаемых меньше, чем $\displaystyle{\frac{1}{i!}}$
+  \begin{equation*} \label{eq:scd-wond-lim-3} \tag{3}
+    1 + \prh{\frac{1}{2^0} + \frac{1}{2^1} + \frac{1}{2^2} + \dotsc
+      + \frac{1}{2^{n - 1}}}
+  \end{equation*}
 
-Т.е. например $\displaystyle{\frac{1}{3!}(1 - \frac1n)(1 - \frac2n) < \frac{1}{3!}}$
+  Сумму большой скобки в \eqref{eq:scd-wond-lim-3} можно вычислить с помощью
+  формулы суммы геометрической прогрессии.
 
-Теперь заметим, что $\displaystyle{\frac{1}{p!} < \frac{1}{2^{p - 1}}}$ при $p > 2$
+  \begin{equation*} \label{eq:scd-wond-lim-4} \tag{4}
+    \begin{rcases}
+      \sum = \frac{b_1 (1 - q^p)}{1 - q} \\
+      b_1 = 1, q = 0.5, p = n
+    \end{rcases}
+    \implies
+    \sum = \frac{1 \cdot (1 - 0.5^n)}{0.5} = 2 - 2 \cdot 0.5^n
+  \end{equation*}
+  
+  В итоге сумма всей правой части в \eqref{eq:scd-wond-lim-3} будет равна \(3 -
+  2 \cdot 0.5^n\) (не теряем единичку за большими скобками) Т.к. \(0.5^n \to 0\)
+  при \(n \to \infty\), значит эта сумма меньше трёх. Значит искомая сумма
+  \eqref{eq:scd-wond-lim-2} также меньше трёх.
 
-Из этих двух фактов следует, что сумма$\displaystyle{1 + 1 + \frac{1}{2!} (1 - \frac1n) + \frac{1}{3!}(1 - \frac1n)(1 - \frac2n) + \dots}$
+  Итого сумма \eqref{eq:scd-wond-lim-2} находится в диапазоне
+  \(\interval{2}{3}\). Таким образом последовательность \(\display{\prh{1 +
+  \frac{1}{n}}^n}\) ограничена и монотонно возрастает, значит по теореме
+  Вейерштрасса она сходится. Число, к которому сходится эта последовательность,
+  обозначается \(e\) и примерно равно \(2.718281828\).
 
-меньше чем сумма
+  \subsubheader{Шаг II.a}{Для вещественных чисел \(x \to +\infty\)}
+  
+  Для каждого \(x \in \RR\) найдется такое число \(n \in \NN\), что
 
-$\displaystyle{1 + \bigg(\frac{1}{2^0} + \frac{1}{2^1} + \frac{1}{2^2} + \dots + \frac{1}{2^{n - 1}} \bigg)}$
+  \begin{equation*} \label{eq:scd-wond-lim-5} \tag{5}
+    \begin{aligned}
+      n \le x < n + 1
+    \\
+      \frac{1}{n} \ge \frac{1}{x} > \frac{1}{n + 1}
+    \\
+      \frac{1}{n} + 1 \ge \frac{1}{x} + 1 > \frac{1}{n + 1} + 1
+    \end{aligned}
+  \end{equation*}
 
-Сумму большой скобки в правой части можно легко вычислить с помощью формулы суммы геометрической прогрессии $\displaystyle{\sum = \frac{b_1 (1 - q^p)}{1 - q}}$
+  Запишем исходное неравенство, но в другом порядке: \(n + 1 > x \ge n\).
+  Пусть теперь элементы второго неравенства будут показателями степеней для
+  элементов из \eqref{eq:scd-wond-lim-5}, тогда мы получим
 
-Имеем $b_1 = 1$, $q = 0.5$, $p = n$ (количество элементов прогрессии, т.к. идём от $0$ до $n - 1$)
-Значит сумма в скобках будет равна $\displaystyle{\frac{1 \cdot (1 - 0.5^n)}{0.5} = 2 - 2 \cdot 0.5^n}$
+  \begin{equation*} \label{eq:scd-wond-lim-6} \tag{7}
+    \prh{\frac{1}{n} + 1}^{n + 1} > \prh{\frac{1}{x} + 1}^x
+      > \prh{\frac{1}{n + 1} + 1}^n
+  \end{equation*}
 
-В итоге сумма всей правой части будет равна $3 - 2 \cdot 0.5^n$ (не теряем единичку за большими скобками)
-Т.к. $0.5^n \to 0$ при $n \to \infty$, значит эта сумма меньше трёх
+  причем все знаки стали строгими. Рассмотрим предел самого левого элемента
+  этого неравенства
 
-(с) Значит искомая сумма $\displaystyle{1 + 1 + \frac{1}{2!} (1 - \frac1n) + \frac{1}{3!}(1 - \frac1n)(1 - \frac2n) + \dots}$
-также меньше трёх
+  \begin{equation*} \label{eq:scd-wond-lim-8} \tag{8}
+    \lim_{n \to \infty} \prh{\frac{1}{n} + 1}^{n + 1}
+    = \lim_{n \to \infty} \prh{\frac{1}{n} + 1}^n \cdot \prh{\frac{1}{n} + 1}
+    = \lim_{n \to \infty} \prh{\frac{1}{n} + 1}^n
+      \cdot \lim_{n \to \infty} \prh{\frac{1}{n} + 1}
+  \end{equation*}
 
-Из (a) и (c) получаем, что искомая сумма находится в диапазоне $(2;3)$
+  Первый предел равен \(e\) согласно Iому шагу доказательства, второй предел
+  равен единице, значит предел левой части равен \(e\) Аналогично предел правой
+  части равен \(e\). Значит по теореме о двух жандармах предел выражения в
+  центре также равен \(e\), т.е. \(\display{\lim_{x \to \infty}
+  \prh{\frac{1}{x} + 1}^x = e}\).
 
-Таким образом последовательность $\displaystyle{\Big( 1 + \frac{1}{n} \Big)^n}$ ограничена и монотонно возрастает, значит [по теореме Вейерштрасса](https://www.notion.so/004-b90807f1e19444569121d10616f072d6?pvs=21) она сходится
+  \subsubheader{Шаг II.a}{Для вещественных чисел \(x \to -\infty\)}
 
-Число, к которому сходится эта последовательность, обозначается $e$ и примерно равно $2.718281828$
+  Сделаем замену \(t = -(x + 1)\), получим, что \(x \to -\infty \implies t \to
+  \infty\) и \(x = -(t + 1)\). Подставим это в исследуемый предел.
 
-
-Теперь докажем, что данный предел справедлив и для вещественных чисел
-1. Рассмотрим случай $x \to +\infty$
-
-Для каждого $x \in \mathbb{R}$ найдется такое число $n \in \mathbb{N}$, что
-
-$n \le x \lt n + 1$
-Преобразуем это двойное неравенство
-
-$\displaystyle{\frac{1}{n} \ge \frac{1}{x} \gt \frac{1}{n + 1}}$
-
-Добавим единицу ко всем частям
-
-$\displaystyle{\frac{1}{n} + 1 \ge \frac{1}{x} + 1 \gt \frac{1}{n + 1} + 1}$
-
-Запишем исходное неравенство, но в другом порядке
-$\displaystyle{n + 1 \gt x \ge n}$
-
-Пусть теперь элементы второго неравенства будут показателями степеней для элементов первого, тогда мы получим
-
-$\displaystyle{(\frac{1}{n} + 1)^{n + 1} \gt (\frac{1}{x} + 1)^x \gt (\frac{1}{n + 1} + 1)^n}$
-
-Причем все знаки стали строгими
-
-Рассмотрим предел левой части:
-
-$\displaystyle{\lim_{n \to \infty}{(\frac1n + 1)^{n + 1}} = \lim_{n \to \infty}{\Big((\frac1n + 1)^n \cdot (\frac1n + 1)\Big)}}$
-
-[Предел произведения равен произведению пределов](https://www.notion.so/007-30f2e98a5df34f7a865a1659c1877cc7?pvs=21), значит
-$\displaystyle{\lim_{n \to \infty}{(\frac1n + 1)^n} \cdot \lim_{n \to \infty}{(\frac1n + 1)}}$
-
-Первый предел равен $e$ по первой части доказательства, второй предел равен единице, значит предел левой части равен $e$
-
-Аналогично рассмотрим предел правой части $\displaystyle{\lim_{n \to \infty}{(\frac{1}{n + 1} + 1)^n} = \lim_{n \to \infty}{\frac{(\frac{1}{n + 1} + 1)^{n + 1}}{(\frac{1}{n + 1} + 1)}} = \frac{e}{1} = e}$
-
-Значит [по теореме о двух жандармах](https://www.notion.so/005-0a0ccd2d21d84da39fc0a8116ce2eef7?pvs=21) $\displaystyle{\lim_{x \to \infty}{(\frac{1}{x} + 1)^x} = e}$
-
-2. Рассмотрим случай $x \to -\infty$
-
-Сделаем замену $t = -(x + 1)$, получим, что
-если $x \to -\infty$, то $t \to \infty$
-
-Выразим $x$: $x = -(t + 1)$, подставим его в исследуемый предел $\displaystyle{\lim_{t \to \infty}{\bigg(\Big(1 + \frac{1}{-(t + 1)}\Big)^{-(t + 1)}\bigg)}}$
-
-Преобразуем выражение в пределе, вынесем минус в основании $\displaystyle{\Big(1 - \frac{1}{t + 1}\Big)^{-(t + 1)}}$
-
-Приведем основание к общему знаменателю и вычислим его $\displaystyle{\Big(\frac{t}{t + 1}\Big)^{-(t + 1)}}$
-
-Вынесем минус единицу в степени и перевернём дробь в основании $\displaystyle{\Big(\frac{t + 1}{t}\Big)^{t + 1}}$
-
-Поделим почленно $\displaystyle{\Big(1 + \frac{1}{t}\Big)^{t + 1}}$
-
-Вернёмся к пределу и представим его в таком виде $\displaystyle{\lim_{t \to \infty}{\Big(1 + \frac{1}{t}\Big)^{t + 1}} = \lim_{t \to \infty}{\Big( (1 + \frac{1}{t})^t \cdot (1 + \frac{1}{t}) \Big)}}$
-
-Пользуясь [свойством предела произведения](https://www.notion.so/007-30f2e98a5df34f7a865a1659c1877cc7?pvs=21) и доказанным на первом шаге получаем, что данный предел равен $e \cdot 1 = e$
+  \begin{equation*}
+    \lim_{t \to \infty} \prh{1 + \frac{1}{-(t + 1)}}^{-(t + 1)}
+    = \lim_{t \to \infty} \prh{\frac{t}{t + 1}}^{-(t + 1)}
+    = \lim_{t \to \infty} \prh{\frac{t + 1}{t}}^{t + 1}
+    = \lim_{t \to \infty} \prh{1 + \frac{1}{t}}^{t + 1}
+    = \lim_{t \to \infty} \prh{1 + \frac{1}{t}}^{t} \cdot 
+      \lim_{t \to \infty} \prh{1 + \frac{1}{t}}
+  \end{equation*}
+  
+  Пользуясь свойством предела произведения и доказанным на шаге II.a получаем,
+  что данный предел равен \(e \cdot 1 = e\).
+\end{proof}
 
 \begin{definition}
-  Константа \(e = 2.718281828 \dotsc\) определяется как значение второго
+  Константа \(e = 2.718281828\dotsc\) определяется как значение второго
   замечательного предела.
 \end{definition}
 
@@ -124,27 +144,29 @@ $\displaystyle{\lim_{n \to \infty}{(\frac1n + 1)^n} \cdot \lim_{n \to \infty}{(\
   \end{equation*}
 \end{theorem}
 
-\begin{proof} \todo
-  Рассмотрим предел $\displaystyle{\lim_{x \to 0}{\frac{\log_a (x + 1)}{\frac{x}{\ln a}}}}$
-  Воспользуемся свойством логарифмов: перейдем в основанию $e$:
+\begin{proof}
+  Рассмотрим соответствующий предел и перейдем в основанию \(e\) по свойству
+  логарифмов.
   
-  $\displaystyle{\log_a(x+ 1) = \frac{\ln (x + 1)}{\ln a}}$
-  
-  Подставим это в предел и упростим $\displaystyle{\lim_{x \to 0}{\frac{\frac{\ln (x + 1)}{\ln a}}{\frac{x}{\ln a}}} = \lim_{x \to 0}{\frac{\ln (x + 1)}{x}}}$
-  
-  По свойству логарифма внесём $\displaystyle{\frac{1}{x}}$ в степень числа логарифма
-  
-  $\displaystyle{\lim_{x \to 0}{\bigg(\ln \Big( (x + 1)^{1 / x} \Big) \bigg)}}$
-  
-  Т.к. $\ln(x)$ непрерывная функция, то её можно вынести за знак предела
-  
-  $\displaystyle{\ln \bigg( \lim_{x \to 0}{\Big( (x + 1)^{1 / x} \Big) \bigg)}}$
-  
-  Предел в логарифме является вторым замечательным пределом и
-  равен $e$, значит мы получаем $\displaystyle{\ln (e) = 1}$
-  
-  По определению эквивалентных функций получаем $\displaystyle{\log_a(x+ 1)\sim \frac{x}{\ln a}}$
-  
+  \begin{equation*}
+    \lim_{x \to 0} \frac{\log_a (x + 1)}{\frac{x}{\ln a}}
+    = \lim_{x \to 0} \frac{\frac{\ln (x + 1)}{\ln a}}{\frac{x}{\ln a}}
+    = \lim_{x \to 0} \frac{\ln (x + 1)}{x}
+  \end{equation*}
+
+  По свойству логарифма внесём \(\display{\frac{1}{x}}\) в степень числа
+  логарифма, после чего вынесем \(\ln(x)\) за знак предела, т.к. это непрерывная
+  функция.
+
+  \begin{equation*}
+    \lim_{x \to 0} \frac{\ln (x + 1)}{x}
+    = \lim_{x \to 0} \ln \prh{(x + 1)^{1 / x}}
+    = \ln \lim_{x \to 0} \prh{(x + 1)^{1 / x}}
+  \end{equation*}
+
+  Предел в логарифме является вторым замечательным пределом и равен \(e\),
+  значит исходный предел равен \(\ln e = 1\). Таким образом получаем, что
+  исследуемые функции эквивалентны при \(x \to 0\) по определению.
 \end{proof}
 
 \begin{theorem}
@@ -155,21 +177,20 @@ $\displaystyle{\lim_{n \to \infty}{(\frac1n + 1)^n} \cdot \lim_{n \to \infty}{(\
   \end{equation*}
 \end{theorem}
 
-\begin{proof} \todo
-  Рассмотрим предел $\displaystyle{\lim_{x \to 0}{\frac{a^x - 1}{x \ln a}}}$
+\begin{proof}
+  Рассмотрим соответствующий предел. Сделаем замену \(y = a^x - 1\), тогда \(x =
+  \log_a (y + 1)\), причем \(x \to 0 \implies y \to 0\) (т.к.
+  \(\display{\frac{x}{\ln a} \sim \log_a(x + 1)}\)).
 
-Сделаем замену $y = a^x - 1$, тогда $x = \log_a (y + 1)$
-
-Причем $x \to 0 \implies y \to 0$ (т.к. уже доказано, что $\displaystyle{\frac{x}{\ln a} \sim \log_a(x + 1)}$)
-
-После замены получаем $\displaystyle{\lim_{y \to 0}{\frac{y}{\log_a(y + 1) \ln a}}}$
-
-Воспользуемся свойством логарифмов: перейдем в основанию $e$ и упростим выражение $\displaystyle{\lim_{y \to 0}{\frac{y}{\frac{\ln (y + 1)}{\ln a} \ln a}} = \lim_{y \to 0}{\frac{y}{\ln (y + 1)}}}$
-
-[Заменим логарифм на эквивалент](https://www.notion.so/008-90360c88aa8c48fcb30312932f3329b8?pvs=21) (это частный случай правила$\displaystyle{\log_a(x+ 1)\sim \frac{x}{\ln a}}$ при $a  =e$) и вычислим предел $\displaystyle{\lim_{y \to 0}{\frac{y}{y}} = 1}$
-
-По определению эквивалентных функций получаем  $a^x - 1 \sim x \ln a$
+  \begin{equation*}
+    \lim_{x \to 0} \frac{a^x - 1}{x \ln a}
+    = \lim_{y \to 0} \frac{y}{\log_a(y + 1) \ln a}
+    = \lim_{y \to 0} \frac{y}{\frac{\ln (y + 1)}{\ln a} \ln a}
+    = \lim_{y \to 0} \frac{y}{\ln (y + 1)}
+  \end{equation*}
   
+  Полученный предел равен единице, т.к. \(y \sim \ln(1 + y)\). Таким образом
+  получаем, что исследуемые функции эквивалентны при \(x \to 0\) по определению.  
 \end{proof}
 
 \begin{theorem}
@@ -180,20 +201,17 @@ $\displaystyle{\lim_{n \to \infty}{(\frac1n + 1)^n} \cdot \lim_{n \to \infty}{(\
   \end{equation*}
 \end{theorem}
 
-\begin{proof} \todo
+\begin{proof}
+  Рассмотрим соответствующий предел, заменим весь числитель на эквивалент по
+  правилу \(x \sim \ln(1 + x)\) и упростим
+
+  \begin{equation*}
+    \lim_{x \to 0} \frac{(1 + x)^n - 1}{x n}
+    = \lim_{x \to 0} \frac{\ln(1 + (1 + x)^n - 1)}{x n}
+    = \lim_{x \to 0} \frac{n \ln(1 + x)}{x n}
+    = \lim_{x \to 0}{\frac{\ln(1 + x)}{x}}
+  \end{equation*}
   
-Рассмотрим предел $\displaystyle{\lim_{x \to 0}{\frac{(1 + x)^n - 1}{xn}}}$
-
-Заменим скобку в числителе на эквивалент по правилу $x \sim \ln(1 + x)$,
-
-только вместо $x$ будет выступать весь числитель, получим
-
-$\displaystyle{\lim_{x \to 0}{\frac{\ln(1 + (1 + x)^n - 1)}{xn}}}$
-
-Упростим и воспользуемся свойством логарифма: вынесем степень за логарифм  $\displaystyle{\lim_{x \to 0}{\frac{\ln((1 + x)^n)}{xn}} = \lim_{x \to 0}{\frac{n \ln(1 + x)}{xn}} = \lim_{x \to 0}{\frac{\ln(1 + x)}{x}}}$
-
-[Заменим логарифм на эквивалент](https://www.notion.so/008-90360c88aa8c48fcb30312932f3329b8?pvs=21) (это частный случай правила$\displaystyle{\log_a(x+ 1)\sim \frac{x}{\ln a}}$ при $a  =e$) и вычислим предел $\displaystyle{\lim_{x \to 0}{\frac{x}{x}} = 1}$
-
-По определению эквивалентных функций получаем $(1 + x)^n - 1\sim xn$
-  
+  Полученный предел равен единице, т.к. \(x \sim \ln(1 + x)\). Таким образом
+  получаем, что исследуемые функции эквивалентны при \(x \to 0\) по определению.  
 \end{proof}

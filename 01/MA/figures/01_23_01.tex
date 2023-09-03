@@ -1,0 +1,16 @@
+\begin{tikzpicture}
+  \draw[draw = olive!60, fill = olive!20, very thick]
+    (-1.5, -1.5) rectangle (6, 6);
+
+  \draw[->, thick] (0, -0.5) -- (0, 5)
+    node[right] {\(y\)};
+  \draw[->, thick] (-0.5, 0) -- (5, 0)
+    node[below] {\(x\)};
+
+  \draw[thick] (1, 1) .. controls (2, 5) and (3, 0) .. (4, 4);
+
+  \draw[thick, dashed] (0, 2.68) -- (5, 2.68);
+  \draw[thick, dashed] (1.98, 0) -- (1.98, 2.68);
+  \point{1.98, 2.68};
+
+\end{tikzpicture}

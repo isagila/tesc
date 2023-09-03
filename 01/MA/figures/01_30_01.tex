@@ -1,0 +1,47 @@
+%%
+%% Большая часть взята отсюда:
+%% https://tex.stackexchange.com/questions/25928/how-to-draw-tangent-line-of-an-arbitrary-point-on-a-path-in-tikz
+%%
+
+\begin{tikzpicture}[
+  tangent/.style = {
+    decoration = {
+      markings,
+      mark = at position #1 with {
+        \coordinate (tangent point-\pgfkeysvalueof{/pgf/decoration/mark info/sequence number}) at (0pt, 0pt);
+        \coordinate (tangent unit vector-\pgfkeysvalueof{/pgf/decoration/mark info/sequence number}) at (1, 0pt);
+        \coordinate (tangent orthogonal unit vector-\pgfkeysvalueof{/pgf/decoration/mark info/sequence number}) at (0pt, 1);
+      }
+    },
+    postaction = decorate
+  },
+  use tangent/.style = {
+    shift = (tangent point-#1),
+    x = (tangent unit vector-#1),
+    y = (tangent orthogonal unit vector-#1)
+  }
+]
+  \draw[draw = olive!60, fill = olive!20, very thick]
+    (-2.5, -1.5) rectangle (6, 6);
+
+  \draw[->, thick] (0, -0.5) -- (0, 5)
+    node[right] {\(y\)};
+  \draw[->, thick] (-0.5, 0) -- (5, 0)
+    node[below] {\(x\)};
+
+  \draw[
+    thick,
+    tangent = 0.2,
+    tangent = 0.4,
+    tangent = 0.6,
+    tangent = 0.8,
+  ] (1, 1) .. controls (1.5, 3) and (3, 3) .. (4, 1);
+
+  \foreach \i in {1, ..., 4} {
+    \draw[fill = black, use tangent = \i] (0, 0) circle (1pt);
+    \draw[color = blue!80, use tangent = \i] (-1, 0) -- (1, 0);
+  }
+  \draw[dashed, thick] (2.25, 0) -- (2.25, 2.5)
+    node[pos = 0, below] {\(x_0\)};
+
+\end{tikzpicture}

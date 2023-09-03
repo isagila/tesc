@@ -1,0 +1,31 @@
+\begin{tikzpicture}
+  \draw[draw = olive!60, fill = olive!20, very thick]
+    (-1.5, -1.5) rectangle (6, 6);
+
+  \draw[->, thick] (0, -0.5) -- (0, 5)
+    node[right] {\(s(t)\)};
+  \draw[->, thick] (-0.5, 0) -- (5, 0)
+    node[below] {\(t\)};
+
+  \draw[thick] (1, 1) .. controls (2, 5) and (3, 0) .. (4, 4);
+
+  \draw[dashed, thick] (1, 0) -- (1, 1);
+  \draw[dashed, thick] (4, 0) -- (4, 4);
+
+  \draw[dashed, thick] (0, 1) -- (5, 1)
+    node[pos = 0, left] {\(A\)};
+  \draw[dashed, thick] (0, 4) -- (5, 4)
+    node[pos = 0, left] {\(B\)};
+
+  \draw[very thick, color = blue!80] (1, 1) -- (4, 4);
+  \draw[->, thick] (1.6, 2.48) -- (2.3, 3.18)
+    node[above] {\(\vec{v}_{\text{мгн}}\)};
+
+  \draw[dashed, thick] (1.6, 0) -- (1.6, 2.48)
+    node[pos = 0, below] {\(\xi\)};
+  \point{1.6, 2.48};
+  
+  \draw[thick] (2, 1) arc (0 : 45 : 1)
+    node[midway, right] {\(\phi\)};
+
+\end{tikzpicture}

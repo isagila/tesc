@@ -3,6 +3,7 @@
 ### I семестр
 
 - [Линейная алгебра](https://isagila.github.io/tesc/01/LA.pdf)
+- [Математический анализ](https://isagila.github.io/tesc/01/MA.pdf)
 
 ### II семестр
 
