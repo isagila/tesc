@@ -1,1 +1,70 @@
-\subsection{Теоремы о дифференцируемых функциях. Теорема Лагранжа.}
+\subsection{%
+  Теоремы о дифференцируемых функциях. Теорема Лагранжа.%
+}
+
+\begin{theorem}[Лагранжа]
+  \begin{equation*}
+    f(x) \isdiff{\segment{a}{b}}
+    \implies
+    \exists \xi \in \interval{a}{b} \given
+    \frac{f(b) - f(a)}{b - a} = f'(\xi)
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Рассмотрим вспомогательную функцию
+
+  \begin{equation*}
+    \phi(x) = f(x) (b - a) - x \prh[\Big]{f(b) - f(a)}
+  \end{equation*}
+
+  которая удовлетворяет условиям теоремы Ролля.
+
+  \begin{enumerate}
+    \item
+      \(\phi(x) \isdiff{\segment{a}{b}}\) как линейная комбинация функций
+      дифференцируемых на \(\segment{a}{b}\).
+    
+    \item
+      Она принимает равные значения на концах отрезка \(\segment{a}{b}\).
+  
+      \begin{enumerate}
+      \item
+        \(\phi(a) = f(a) b - f(a) a - f(b) a + f(a) a = f(a) b - f(b) a\)
+      
+      \item
+        \(\phi(b) = f(b) b - f(b) a - f(b) b + f(a) b = f(a) b - f(b) a\)
+      \end{enumerate}
+    \end{enumerate}
+  
+  Таким образом по теореме Ролля
+
+  \begin{equation*}
+    \begin{aligned}
+      \exists \xi \in \interval{a}{b} \given \phi'(\xi) = 0
+    \\
+      \phi'(\xi) = f'(\xi)(b - a) - (f(b) - f(a)) = 0
+    \\
+      f'(\xi) = \frac{f(b) - f(a)}{b - a}
+    \end{aligned}
+  \end{equation*}
+\end{proof}
+
+\begin{remark}
+  Полученная формула \(\display{\frac{f(b) - f(a)}{b - a} = f'(\xi)}\) также
+  называется формулой конечных приращений.
+\end{remark}
+
+Геометрический смысл теоремы Лагранжа заключается в том, что На интервале
+\(\interval{a}{b}\) найдется точка \(\xi\), в которой касательная параллельна
+хорде \(AB\) (\figref{01_25_01}).
+
+Механический смысл теоремы Лагранжа заключается в том, что если тело двигалось с
+переменной скоростью и при этом \(\display{\vec{v}_{\text{сред}} = \tg \phi =
+\frac{B - A}{\Delta t}}\), то найдется точка \(t_0\), в которой
+\(\display{\vec{v}_{\text{сред}} = \vec{v}_{\text{мгн}}}\) (\figref{01_25_02}).
+
+\gallerydouble
+  {01_25_01}{Геометрический смысл теоремы Лагранжа}
+  {01_25_02}{Механический смысл теоремы Лагранжа}
+
