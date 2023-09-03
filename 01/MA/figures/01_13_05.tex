@@ -1,0 +1,34 @@
+\begin{tikzpicture}
+  \draw[draw = olive!60, fill = olive!20, very thick]
+    (-1, -1) rectangle (8, 7);
+
+  \begin{axis}[
+    xmin = -5,
+    xmax = 4,
+    ymin = -5,
+    ymax = 5,
+    axis x line = middle,
+    axis y line = middle,
+    xlabel = \(x\),
+    ylabel = \(y\),
+    axis line style = {->},
+    ticks = none,
+    smooth,
+  ]
+    \addplot[thick, red!80, domain = -5 : 4, samples = 3000]
+      {sin(deg(1 / x))};
+
+    \addplot[
+      mark = *,
+      mark options = {
+        scale = 1.5,
+        fill = white!70!pink,
+        draw = red,
+      },
+    ] coordinates {(0, 0)};
+    
+  \end{axis}
+
+  \draw (1.1, 5) node {\(\display{f(x) = \sin \prh{\frac{1}{x}}}\)};
+
+\end{tikzpicture}
