@@ -1,1 +1,71 @@
-\subsection{Теоремы о дифференцируемых функциях. Теорема Коши.}
+\subsection{%
+  Теоремы о дифференцируемых функциях. Теорема Коши.%
+}
+
+\begin{theorem}
+  \begin{equation*}
+    \begin{rcases}
+      f(x), g(x) \isdiff{\segment{a}{b}} \\
+      \forall x \in \segment{a}{b} \given g'(x) \neq 0
+    \end{rcases}
+    \implies
+    \exists \xi \in \interval{a}{b} \given
+    \frac{f(b) - f(a)}{g(b) - g(a)} = \frac{f'(\xi)}{g'(\xi)}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Рассмотрим вспомогательную функцию
+
+  \begin{equation*}
+    \phi(x) = \prh[\Big]{f(x) - f(a)} \prh[\Big]{g(b) - g(a)}
+      - \prh[\Big]{f(b) - f(a)} \prh[\Big]{g(x) - g(b)}
+  \end{equation*}
+
+  которая удовлетворяет условиям теоремы Ролля.
+
+  \begin{enumerate}
+  \item
+    \(\phi(x) \isdiff{\segment{a}{b}}\) как линейная комбинация функций
+    дифференцируемых на \(\segment{a}{b}\).
+  
+  \item
+    Она принимает равные значения на концах отрезка \(\segment{a}{b}\).
+
+    \begin{enumerate}
+    \item
+      \(\phi(a) = \prh[\Big]{f(a) - f(b)} \prh[\Big]{g(a) - g(b)}\)
+    
+    \item
+      \(
+        \phi(b)
+        = \prh[\Big]{f(b) - f(a)} \prh[\Big]{g(b) - g(a)}
+        = \prh[\Big]{f(a) - f(b)} \prh[\Big]{g(a) - g(b)}
+      \)
+    \end{enumerate}
+  \end{enumerate}
+
+  Таким образом по теореме Ролля
+
+  \begin{equation*}
+    \begin{aligned}
+      \exists \xi \in \interval{a}{b} \given \phi'(\xi) = 0
+    \\
+      \phi'(\xi) = f'(\xi) \prh[\Big]{g(b) - g(a)}
+        - \prh[\Big]{f(b) - f(a)} g'(\xi) = 0
+    \\
+      f'(\xi) \prh[\Big]{g(b) - g(a)} = \prh[\Big]{f(b) - f(a)} g'(\xi)
+    \\
+      \frac{f'(\xi)}{g'(\xi)} = \frac{f(b) - f(a)}{g(b) - g(a)}
+    \end{aligned}
+  \end{equation*}
+\end{proof}
+
+\begin{remark}
+  Если \(g'(x) = 0\), то \(g = const \implies g(b) - g(a) = 0\). При такой
+  ситуации полученная формула не работает.
+\end{remark}
+
+\begin{remark}
+  Данная формула применима и к параметрически заданной функции.
+\end{remark}
