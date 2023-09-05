@@ -14,4 +14,4 @@
 ### III семестр
 
 - [Дополнительные главы высшей математики (лекции)](https://isagila.github.io/tesc/03/MA-lectures.pdf)
-
+- [Теория вероятности (лекции)](https://isagila.github.io/tesc/03/PT-lectures.pdf)
