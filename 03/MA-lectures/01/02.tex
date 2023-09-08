@@ -2,4 +2,377 @@
   Лекция \texttt{23.09.08}.%
 }
 
-\todo
+\begin{remark}
+  Можно доказать, что определенной перестановкой членов ряда в качестве суммы
+  можно получить любое заданное число.
+\end{remark}
+
+\begin{remark}
+  Также возможно перемножение рядов. Произведение сходящихся рядов~---
+  сходящийся ряд. Формулы для произведения можно найти в литературе.
+\end{remark}
+
+\begin{important}
+  Далее для краткости ряды будут записываться в виде \(\display{\sum u_n}\).
+  Нижней границей по умолчанию будем считать единицу. В рядах с другой нижней
+  границей и в местах, где необходимо сделать акцент на границе, будет
+  использоваться запись вида \(\display{\sum_{n = 0} v_n}\).
+\end{important}
+
+Далее рассмотрим некоторые условия сходимости рядов.
+
+\begin{theorem}[Необходимое условие сходимости ряда] \label{thr:ness-ser-conv}
+  \begin{equation*}
+    \sum u_n \converge \implies \lim_{n \to \infty} u_n = 0
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  \begin{equation*}
+    \begin{aligned}
+      \sum u_n \converge \iff \exists \lim_{n \to \infty} S_n = S \in \RR
+    \\
+      u_{n + 1} = S_{n + 1} - S_n
+    \\
+      \lim_{n \to \infty} u_{n + 1}
+      = \lim_{n \to \infty} \prh{S_{n + 1} - S_n}
+      = \lim_{n \to \infty} S_{n + 1} - \lim_{n \to \infty} S_n
+      = S - S
+      = 0
+    \end{aligned}
+  \end{equation*}
+\end{proof}
+
+\begin{remark}
+  Обратное в общем случае неверно. Например
+
+  \begin{equation*}
+    \sum \frac{1}{n} \notconverge, \text{ но }
+    \lim_{n \to \infty} \frac{1}{n} = 0
+  \end{equation*}
+\end{remark}
+
+\begin{remark}
+  Необходимым условием сходимости удобно пользоваться в обратную сторону, т.е. с
+  его помощью проще показать, что ряд расходится.
+\end{remark}
+
+\begin{example}
+  \begin{equation*}
+    \begin{aligned}
+      \sum \under{\prh{2n + 3} \cdot \sin \frac{1}{n}}{u_n}
+    \\
+      \lim_{n \to \infty} u_n
+      = \lim_{n \to \infty} \frac{\sin \frac{1}{n}}{\frac{1}{2n + 3}}
+      = \lim_{n \to \infty} \frac{\frac{1}{n}}{\frac{1}{2n + 3}}
+      = \lim_{n \to \infty} \frac{2n + 3}{n}
+      = 2
+    \\
+      \lim_{n \to \infty} u_n \neq 1 \implies
+      \sum \prh{2n + 3} \cdot \sin \frac{1}{n} \notconverge
+    \end{aligned}
+  \end{equation*}
+\end{example}
+
+\begin{example}
+  \begin{equation*}
+    \sum \frac{1}{2n + 3}
+    \qquad
+    \lim_{n \to \infty} \frac{1}{2n + 3} = 0
+  \end{equation*}
+
+  Рассмотрим вспомогательный ряд \(\display{\sum \frac{1}{3n}}\). Можно
+  убедиться, что начиная с \(n = 4\) члены вспомогательного ряда меньше
+  соответствующих членов исследуемого ряда. Заметим, что
+
+  \begin{equation*}
+    \sum \frac{1}{3n} = \frac{1}{3} \sum \frac{1}{n} \implies \notconverge
+  \end{equation*}
+
+  Значит, исходный ряд также расходится.
+\end{example}
+
+\begin{theorem}[Критерий Коши для сходимости рядов] \label{thr:crt-C}
+  \begin{equation*}
+    \sum u_n \converge \iff \exists \lim_{n \to \infty} S_n = S \in \RR
+    \; \boxed{\iff} \;
+    \forall \epsilon > 0 \given
+      \exists n_0 \in \NN \given
+      n \ge p \ge n_0 \colon
+      \abs{S_n - S_p} < \epsilon
+  \end{equation*}
+
+  Стоит отметить, что \(\display{\abs{S_n - S_p} = \abs{u_p + u_{p + 1} +
+  \dotsc + u_n}}\). Такая форма записи иногда будет полезна в дальнейшем.
+\end{theorem}
+
+\begin{remark}
+  Смысл критерия Коши в том, что у сходящегося ряда при заданном \(\epsilon\)
+  начиная с \(n_0\) весь хвост попадает в \(\epsilon\)-трубу.
+\end{remark}
+
+\begin{remark}
+  Критерий не удобен для исследования на сходимость, поэтому обычно используют
+  признаки сходимости.
+\end{remark}
+
+\subheader{Достаточные условия (признаки) сходимости
+\underline{знакоположительных} рядов}
+
+\begin{remark}
+  Будем рассматривать только ряды, в которых \(u_n > 0\), но описанные далее
+  признаки можно применять для любых рядов, предварительно навесив модуль.
+\end{remark}
+
+\begin{theorem}[Признак сравнения в неравенствах]
+  Пусть \(\display{\sum u_n}\)~--- исследуемый ряд, а \(\display{\sum v_n}\)~---
+  вспомогательный ряд и \(u_n, v_n \ge 0\). Тогда
+
+  \begin{align*}
+    \begin{rcases}
+      \forall n \in \NN \given u_n < v_n \\
+      \sum v_n \converge
+    \end{rcases}
+    \implies
+    \sum u_n \converge
+    \label{thr:cmp-ineq-1} \tag{1}
+  \\
+    \begin{rcases}
+      \forall n \in \NN \given u_n > v_n \\
+      \sum v_n \notconverge
+    \end{rcases}
+    \implies
+    \sum u_n \notconverge
+    \label{thr:cmp-ineq-2} \tag{2}
+  \end{align*}
+\end{theorem}
+
+\begin{proof}
+  Сначала докажем \eqref{thr:cmp-ineq-1}. Пусть \(S_n = u_1 + u_2 + \dotsc\) и
+  \(\sigma_n = v_1 + v_2 + \dotsc\), т.к. \(\forall n \in \NN \given u_n <
+  v_n\), то \(S_n \le \sigma_n\). Причем эти последовательности возрастают, т.к.
+  ряды знакоположительные. Далее
+
+  \begin{equation*}
+    \sum v_n \converge \implies
+    \exists \lim_{n \to \infty} \sigma_n = \sigma \in \RR
+  \end{equation*}
+
+  Таким образом последовательность \(\seq{\sigma_n}\) ограничена числом
+  \(\sigma\). Последовательность \(\seq{S_n}\) возрастает и также ограничена
+  числом \(\sigma\). Значит по т. Вейерштрасса \(\display{\exists \lim_{n \to
+  \infty} S_n = S}\), причем \(S \le \sigma\).
+
+  Теперь от противного докажем \eqref{thr:cmp-ineq-2}. Пусть \(\display{\sum
+  u_n}\) сходится, тогда согласно \eqref{thr:cmp-ineq-1} \(\display{\sum v_n}\)
+  тоже должен сходится. Противоречие.
+\end{proof}
+
+\begin{remark}
+  Для установления расходимости ряда в качестве вспомогательного не следует
+  брать ряды с несуществующей как предел суммой.
+\end{remark}
+
+\begin{example}
+  \begin{equation*}
+    \begin{aligned}
+      \sum \frac{1}{n^2}
+      \qquad
+      u_n = \frac{1}{n^2}
+    \\
+      \sum \frac{1}{n (n + 1)} = 1 \in \RR
+      \qquad
+      v_n = \frac{1}{n (n + 1)}
+    \end{aligned}
+  \end{equation*}
+
+  Неравенство \(\display{\frac{1}{n^2} < \frac{1}{n (n + 1)}}\) неверно, однако
+  заметим, что
+
+  \begin{equation*}
+    \frac{1}{n (n + 1)}
+    = \frac{1}{n^2 + n}
+    > \frac{1}{n^2 + 2 n + 1}
+    = \frac{1}{(n + 1)^2}
+  \end{equation*}
+
+  Таким образом по признаку сравнения ряд \(\display{\sum_{n = 0} \frac{1}{(n +
+  1)^2}}\) сходится. Если перенумеровать, то получим, что и ряд
+  \(\display{\sum_{n = 1} \frac{1}{n^2}}\) сходится.
+\end{example}
+
+\begin{theorem}[Предельный признак]
+  Пусть \(\display{\sum u_n}\)~--- исследуемый ряд, а \(\display{\sum v_n}\)~---
+  вспомогательный ряд и \(u_n, v_n \ge 0\). Тогда, если
+
+  \begin{equation*}
+    \lim_{n \to \infty} \frac{u_n}{v_n} = q \in \RR \setminus \set{0}
+  \end{equation*}
+
+  то ряды имеют одинаковую сходимость.
+\end{theorem}
+
+\begin{proof}
+  Распишем предел по определению, после чего раскроем получившийся модуль
+  (учитывая то, что ряды знакоположительные).
+
+  \begin{equation*} \label{thr:lim-attr-1} \tag{1}
+    \begin{aligned}
+      \lim_{n \to \infty} \frac{u_n}{v_n} = q \iff
+      \forall \epsilon > 0 \given
+        \exists n_0 \in \NN \given
+        \forall n > n_0 \colon
+        \abs{\frac{u_n}{v_n} - q} < \epsilon
+    \\
+      q - \epsilon < \frac{u_n}{v_n} < q + \epsilon
+    \\
+      (q - \epsilon) v_n < u_n < (q + \epsilon) v_n
+    \end{aligned}
+  \end{equation*}
+
+  При достаточно малом \(\epsilon\) ряды \(\display{\sum (q + \epsilon) v_n}\),
+  \(\display{\sum (q - \epsilon) v_n}\) и \(\display{\sum v_n}\) имеют
+  одинаковую сходимость, т.к. домножение на ненулевую константу не влияет на
+  сходимость. Применим признак сравнения.
+
+  \begin{equation*} \label{thr:lim-attr-2} \tag{2}
+    \sum v_n \notconverge \implies \sum u_n \notconverge
+    \qquad
+    \sum v_n \converge \implies \sum u_n \converge
+  \end{equation*}
+
+  В первом случае \(u_n\) расходится, т.к. он больше расходящегося ряда (левая
+  часть неравенства \eqref{thr:lim-attr-1}), во втором случае \(u_n\) сходится,
+  т.к. он меньше сходящего ряда (правая часть неравенства
+  \eqref{thr:lim-attr-1}).
+\end{proof}
+
+\begin{remark}
+  Т.к. \(u_n\) и \(v_n\) являются бесконечно малыми (иначе вопрос о расходимости
+  ряда \(u_n\) решен, т.к. не выполнено необходимое условие сходимости
+  \ref{thr:ness-ser-conv}), то в предельном признаке устанавливается порядок
+  \(u_n\) по отношению к \(v_n\). Ряды имеют одинаковый характер сходимости при
+  одином порядке малости.
+\end{remark}
+
+\begin{lemma}
+  Пусть \(\display{\lim_{n \to \infty} \frac{u_n}{v_n} = 0 \iff u_n =
+  \smallo(v_k)}\). Тогда \(\display{\sum v_n \converge \implies \sum u_n
+  \converge}\).
+\end{lemma}
+
+\begin{proof}
+  Распишем предел по определению.
+
+  \begin{equation*} \label{eq:lim-attr-add-1} \tag{1}
+    \lim_{n \to \infty} \frac{u_n}{v_n} = 0 \iff
+      \forall \epsilon > 0 \given
+      \exists n_0 \in \NN \given
+      \forall n > n_0 \colon
+      \abs{\frac{u_n}{v_n}} < \epsilon
+    \implies
+    u_n < \epsilon v_n
+  \end{equation*}
+
+  Т.к. ряд \(\display{\sum v_n}\) сходится, то выполнен критерий Коши
+  (\ref{thr:crt-C}), имеем
+
+  \begin{equation*} \label{eq:lim-attr-add-2} \tag{2}
+    \forall \epsilon' > 0 \given
+    \exists m_0 \in \NN \given
+    \forall n \ge p \ge m_0 \colon
+    \abs{v_p + \dotsc + v_n} < \epsilon'
+  \end{equation*}
+
+  Домножим последнее неравенство на \(\epsilon\) и объединив его с неравенством
+  в \eqref{eq:lim-attr-add-1} получим, что
+
+  \begin{equation*} \label{eq:lim-attr-add-3} \tag{3}
+    \abs{u_p + \dotsc + u_n}
+    < \epsilon \abs{v_p + \dotsc + v_n}
+    < \under{\epsilon \epsilon'}{\tilde{\epsilon}}
+  \end{equation*}
+
+  Подставим это в \eqref{eq:lim-attr-add-2}, получим
+
+  \begin{equation*}
+    \forall \tilde{\epsilon} > 0 \given
+    \exists m_0 \in \NN \given
+    \forall n \ge p \ge m_0 \colon
+    \abs{u_p + \dotsc + u_n} < \tilde{\epsilon}
+  \end{equation*}
+
+  Значит ряд \(\display{\sum u_n}\) сходится по критерию Коши.
+\end{proof}
+
+\begin{remark}
+  Если в отношении общих членов ряда получилась бесконечность, то лучше
+  использовать другие признаки.
+\end{remark}
+
+\begin{theorem}[Признак Даламбера]
+  \begin{equation*}
+    \lim_{n \to \infty} \frac{u_{n + 1}}{u_n}
+    = D \in \RR
+    = \begin{cases}
+      0 < D < 1 & \implies \converge \\
+      D = 1 & \implies \text{ необходимо дополнительное исследование} \\
+      D > 1 & \implies \notconverge
+    \end{cases}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Распишем предел по определению.
+
+  \begin{equation*} \label{eq:dAlembert-attr-1} \tag{1}
+    \lim_{n \to \infty} \frac{u_{n + 1}}{u_n} = D \iff
+    \forall \epsilon > 0 \given
+    \exists n_0 \in \NN \given
+    \forall n > n_0 \colon
+    \abs{\frac{u_{n + 1}}{u_n} - D} < \epsilon
+    \implies
+    (D + \epsilon) u_n < u_{n + 1} < (D + \epsilon) u_n
+  \end{equation*}
+
+  Рассмотрим правую часть полученного неравенства. Положим \(D + \epsilon = r <
+  1\). Тогда \(u_{n + 1} < r \cdot u_n\) начиная с \(n_0\). Имеем
+
+  \begin{equation*} \label{eq:dAlembert-attr-2} \tag{2}
+    \begin{rcases}
+      u_{n_0 + 1} < r u_{n_0} \\
+      u_{n_0 + 2} < r u_{n_0 + 1} < r^2 u_{n_0} \\
+      \dotsc \\
+      u_{n_0 + k} < r^k u_{n_0}
+    \end{rcases}
+    \implies
+    \begin{cases}
+      \sum u_n = u_1 + u_2 + \dotsc + u_{n_0}
+        + u_{n_0 + 1} + \dotsc + u_{n_0 + k} + \dotsc
+      \\
+      \sum v_n = \under{u_1 + u_2 + \dotsc + u_{n_0}}{\text{отбросим}}
+        + r u_{n_0} + \dotsc + r^k u_{n_0} + \dotsc
+      \\
+      u_n \le v_n
+    \end{cases}
+  \end{equation*}
+
+  Отбросим \quote{голову} полученных рядов до члена \(u_{n_0}\) включительно.
+  Тогда из ряда \(\display{\sum v_n}\) получим ряд
+
+  \begin{equation*} \label{eq:dAlembert-attr-3} \tag{3}
+    \sum v'_n
+    = \sum_{k = 1}^{\infty} r^k \under{u_{n_0}}{const}
+    = u_{n_0} \sum_{k = 1}^{\infty} r^k
+  \end{equation*}
+
+  Получаем эталонный геометрический ряд, т.к. \(r < 1\) то он сходится. Значит
+  по признаку сравнения сходится и ряд \(\sum u'_n\), полученный отбрасыванием
+  \quote{головы} ряда \(\sum u_n\). Отбрасывание конечного числа членов ряда не
+  влияет на его сходимость, а значит ряд \(\sum u_n\) также сходится.
+
+  Аналогично рассмотрим левую часть неравенства \eqref{eq:dAlembert-attr-1} и
+  положим \(D - \epsilon = r > 1\). Оценим члены ряда снизу вспомогательным
+  рядом \(\display{\sum v'_{n_0 + k} = r^k u_{n_0}}\). При \(r > 1\) исходный
+  ряд почленно больше расходящегося, значит тоже расходится.
+\end{proof}
