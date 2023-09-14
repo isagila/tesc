@@ -89,7 +89,7 @@
   \begin{equation*}
     A, B \in \euF \implies[\(2^{\circ}\)]
     \bar{B} \in \euF \implies[\(3^{\circ}\)]
-    A \setminus B = A \cdot \bar{B} \in \euF
+    A \setminus B = A \bar{B} \in \euF
   \end{equation*}
 \end{proof}
 
@@ -208,7 +208,7 @@
   \(A_n\) согласно полученному рисунку.
 
   \begin{equation*} \label{eq:axi-cont-1} \tag{1}
-    A_n = \under{\sum_{i = n}^{\infty} A_i \cdot \bar{A_{i + 1}}}{\text{кольца}}
+    A_n = \under{\sum_{i = n}^{\infty} A_i \bar{A_{i + 1}}}{\text{кольца}}
       + \under{\bigcap_{i = n}^{\infty} A_i}{\text{\quote{сердцевина}}}
   \end{equation*}
 
@@ -226,12 +226,12 @@
 
   \begin{equation*} \label{eq:axi-cont-3} \tag{3}
     \begin{aligned}
-      A_n = \sum_{i = n}^{\infty} A_i \cdot \bar{A_{i + 1}}
+      A_n = \sum_{i = n}^{\infty} A_i \bar{A_{i + 1}}
     \\
       A_1
-      = \sum_{i = 1}^{\infty} A_i \cdot \bar{A_{i + 1}}
-      = \sum_{i = 1}^{n} A_i \cdot \bar{A_{i + 1}}
-        + \under{\sum_{i = n}^{\infty} A_i \cdot \bar{A_{i + 1}}}{A_n}
+      = \sum_{i = 1}^{\infty} A_i \bar{A_{i + 1}}
+      = \sum_{i = 1}^{n} A_i \bar{A_{i + 1}}
+        + \under{\sum_{i = n}^{\infty} A_i \bar{A_{i + 1}}}{A_n}
     \end{aligned}
   \end{equation*}
 
@@ -239,8 +239,8 @@
 
   \begin{equation*} \label{eq:axi-cont-4} \tag{4}
     \prob{A_1}
-      = \sum_{i = 1}^{n} \prob{A_i \cdot \bar{A_{i + 1}}} + \prob{A_n}
-      = \under{\sum_{i = 1}^{\infty} \prob{A_i \cdot \bar{A_{i + 1}}}}{S}
+      = \sum_{i = 1}^{n} \prob{A_i \bar{A_{i + 1}}} + \prob{A_n}
+      = \under{\sum_{i = 1}^{\infty} \prob{A_i \bar{A_{i + 1}}}}{S}
   \end{equation*}
 
   Получаем числовой ряд \(S\), который будет сходиться, т.е. его сумма равна
@@ -257,7 +257,7 @@
 
 \subheader{Свойства операций сложения и умножения}
 
-Свойство дистрибутивности \(A \cdot (B + C) = A \cdot B + A \cdot C\). Также
+Свойство дистрибутивности \(A (B + C) = A B + A C\). Также
 если события \(A\) и \(B\) несовместны, то \(\prob{A + B} = \prob{A} +
 \prob{B}\) (это частный случай аксиомы \(2^{\circ}\)).
 
@@ -268,24 +268,24 @@
   известно) имеем формулу
 
   \begin{equation*}
-    \prob{A + B} = \prob{A} + \prob{B} - \prob{A \cdot B}
+    \prob{A + B} = \prob{A} + \prob{B} - \prob{A B}
   \end{equation*}
 \end{lemma}
 
 \begin{proof}
-  Т.к. \(A + B = A \cdot \bar{B} + A \cdot B + \bar{A} \cdot B\)
-  (\figref{01_02_02}), то по второй аксиоме
+  Т.к. \(A + B = A \bar{B} + A B + \bar{A} B\) (\figref{01_02_02}), то по второй
+  аксиоме
 
   \begin{equation*}
     \begin{aligned}
       \prob{A + B}
-      & = \prob{A \cdot \bar{B}} + \prob{A \cdot B} + \prob{\bar{A} \cdot B}
+      & = \prob{A \bar{B}} + \prob{A B} + \prob{\bar{A} B}
     \\
-      & = \under{\prh{\prob{A \cdot \bar{B}} + \prob{A \cdot B}}}{\prob{A}}
-        + \under{\prh{\prob{\bar{A} \cdot B} + \prob{A \cdot B}}}{\prob{B}}
-        - \prob{A \cdot B}
+      & = \under{\prh{\prob{A \bar{B}} + \prob{A B}}}{\prob{A}}
+        + \under{\prh{\prob{\bar{A} B} + \prob{A B}}}{\prob{B}}
+        - \prob{A B}
     \\
-      & = \prob{A} + \prob{B} - \prob{A \cdot B}
+      & = \prob{A} + \prob{B} - \prob{A B}
     \end{aligned}
   \end{equation*}
 \end{proof}
@@ -299,7 +299,7 @@
 
   \begin{equation*}
     \prob{A}
-    = \prob{D} + \prob{S} - \prob{D \cdot S}
+    = \prob{D} + \prob{S} - \prob{D S}
     = \frac{4}{36} + \frac{9}{36} - \frac{1}{36}
     = \frac{12}{36}
     = \frac{1}{3}
@@ -311,8 +311,8 @@
 \begin{equation*}
   \prob{A_1 + A_2 + A_3}
   = \prob{A_1} + \prob{A_2} + \prob{A_3}
-    - \prob{A_1 \cdot A_2} - \prob{A_1 \cdot A_3} - \prob{A_2 \cdot A_3}
-    + \prob{A_1 \cdot A_2 \cdot A_3}
+    - \prob{A_1 A_2} - \prob{A_1 A_3} - \prob{A_2 A_3}
+    + \prob{A_1 A_2 A_3}
 \end{equation*}
 
 В общем же случае получаем следующую формулу
@@ -320,10 +320,10 @@
 \begin{equation*}
   \prob{A_1 + A_2 + \dotsc + A_n}
   = \sum_{i = 1}^{n} \prob{A_i}
-    - \sum_{i < j} \prob{A_i \cdot A_j}
-    + \sum_{i < j < k} \prob{A_i \cdot A_j \cdot A_k}
+    - \sum_{i < j} \prob{A_i A_j}
+    + \sum_{i < j < k} \prob{A_i A_j A_k}
     - \dotsc
-    + (-1)^{n - 1} \prob{A_1 \cdot A_2 \cdot \dotsc \cdot A_n}
+    + (-1)^{n - 1} \prob{A_1 \dotsc A_n}
 \end{equation*}
 
 \begin{example}
@@ -339,11 +339,11 @@
   \begin{equation*}
     \prob{A_i} = \frac{1}{n}
     \qquad
-    \prob{A_i \cdot A_j} = \frac{1}{\place{n}{2}}
+    \prob{A_i A_j} = \frac{1}{\place{n}{2}}
     \qquad
-    \prob{A_i \cdot A_j \cdot A_k} = \frac{1}{\place{n}{3}}
+    \prob{A_i A_j A_k} = \frac{1}{\place{n}{3}}
     \qquad
-    \prob{A_1 \cdot \dotsc \cdot A_n} = \frac{1}{\place{n}{n}} = \frac{1}{n!}
+    \prob{A_1 \dotsc A_n} = \frac{1}{\place{n}{n}} = \frac{1}{n!}
   \end{equation*}
 
   Далее вычислим число пар, троек и т.д.
@@ -351,9 +351,9 @@
   \begin{equation*}
     \prob{A_i} \to n = \comb{n}{1}
     \qquad
-    \prob{A_i \cdot A_j} \to \comb{n}{2}
+    \prob{A_i A_j} \to \comb{n}{2}
     \qquad
-    \prob{A_i \cdot A_j \cdot A_k} \to \comb{n}{3}
+    \prob{A_i A_j A_k} \to \comb{n}{3}
   \end{equation*}
 
   Подставим это в формулу.
@@ -382,18 +382,18 @@
 пространство элементарных исходов, и два события \(\abs{A} = m_1\) и \(\abs{B} =
 m_2\). Проведем пару независимых испытаний, тогда получим пространство
 элементарных исходов \(\Omega \times \Omega\), \(\abs{\Omega \times \Omega} =
-n^2\) и \(\abs{A \cdot B} = m_1 \cdot m_2\). Значит
+n^2\) и \(\abs{A B} = m_1 m_2\). Значит
 
 \begin{equation*}
-  \prob{A \cdot B}
-  = \frac{m_1 \cdot m_2}{n^2}
+  \prob{A B}
+  = \frac{m_1 m_2}{n^2}
   = \frac{m_1}{n} \cdot \frac{m_2}{n}
-  = \prob{A} \cdot \prob{B}  
+  = \prob{A} \prob{B}  
 \end{equation*}
 
 \begin{definition}
-  События \(A\) и \(B\) называются независимыми, если \(\prob{A \cdot B} =
-  \prob{A} \cdot \prob{B}\).
+  События \(A\) и \(B\) называются независимыми, если \(\prob{A B} = \prob{A}
+  \prob{B}\).
 \end{definition}
 
 \begin{lemma}
@@ -402,20 +402,20 @@ n^2\) и \(\abs{A \cdot B} = m_1 \cdot m_2\). Значит
 \end{lemma}
 
 \begin{proof}
-  Т.к. \(A = A \cdot (B + \bar{B}) = A \cdot B + A \cdot \bar{B}\), то
+  Т.к. \(A = A (B + \bar{B}) = A B + A \bar{B}\), то
 
   \begin{equation*}
     \begin{aligned}
-      \prob{A} = \prob{A \cdot B} + \prob{A \cdot \bar{B}} \implies &
+      \prob{A} = \prob{A B} + \prob{A \bar{B}} \implies &
     \\
-      & \prob{A \cdot \bar{B}}
-      = \prob{A} - \prob{A \cdot B}
+      & \prob{A \bar{B}}
+      = \prob{A} - \prob{A B}
     \\
-      & = \prob{A} - \prob{A} \cdot \prob{B}
+      & = \prob{A} - \prob{A} \prob{B}
     \\
       & = \prob{A} (1 - \prob{B})
     \\
-      & = \prob{A} \cdot \prob{\bar{B}}
+      & = \prob{A} \prob{\bar{B}}
     \end{aligned}
   \end{equation*}
 
@@ -445,18 +445,18 @@ n^2\) и \(\abs{A \cdot B} = m_1 \cdot m_2\). Значит
     \begin{aligned}
       \prob{A} = \prob{B} = \prob{C} = \frac{2}{4} = \frac{1}{2}
     \\
-      \prob{A \cdot B} = \prob{A \cdot C} = \prob{B \cdot C} = \frac{1}{4}
+      \prob{A B} = \prob{A C} = \prob{B C} = \frac{1}{4}
     \end{aligned}
   \end{equation*}
 
-  Т.к. \(\prob{A \cdot B} = \prob{A} \cdot \prob{B}\), то \(A\) и \(B\)
+  Т.к. \(\prob{A B} = \prob{A} \prob{B}\), то \(A\) и \(B\)
   независимы. Аналогично попарно независимы \(A\) и \(C\), \(B\) и \(C\), т.е.
   все события попарно независимы.
 
   \begin{equation*}
-    \prob{A \cdot B \cdot C} = \frac{1}{4}
+    \prob{A B C} = \frac{1}{4}
     \neq
-    \prob{A} \cdot \prob{B} \cdot \prob{C} = \frac{1}{8}
+    \prob{A} \prob{B} \prob{C} = \frac{1}{8}
   \end{equation*}
 
   Т.е. события \(A\), \(B\) и \(C\) не являются независимыми в совокупности.
@@ -480,8 +480,7 @@ n^2\) и \(\abs{A \cdot B} = m_1 \cdot m_2\). Значит
 
   \begin{equation*}
     \prob{\bar{B}}
-    = \prob{\bar{A_1}} \cdot \prob{\bar{A_2}} \cdot \prob{\bar{A_3}}
-      \cdot \prob{\bar{A_4}}
+    = \prob{\bar{A_1}} \prob{\bar{A_2}} \prob{\bar{A_3}} \prob{\bar{A_4}}
     = \prh{\frac{5}{6}}^4 \approx 0.48
   \end{equation*}
 
