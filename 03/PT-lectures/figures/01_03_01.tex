@@ -1,0 +1,17 @@
+\begin{tikzpicture}
+  \draw[thick] (0, 0) rectangle (6, 4);
+  \draw[fill = green!60]
+    (4, 2) -- (4, 4) -- (6, 4) -- (6, 2) -- cycle;
+
+  \draw[thick] (0, 2) -- (6, 2);
+  \draw[thick] (4, 0) -- (4, 4);
+
+  \draw[very thick, color = blue!70]
+    (5, 2) ellipse (1.5 and 3);
+
+  \draw (0, 0) node[left] {\(\Omega\)};
+  \draw (3, 3) node {\(A\)};
+  \draw (5, 1) node {\(B\)};
+  \draw (5, 3) node {\(A B\)};
+
+\end{tikzpicture}
