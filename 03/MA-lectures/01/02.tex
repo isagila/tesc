@@ -47,7 +47,7 @@
   Обратное в общем случае неверно. Например
 
   \begin{equation*}
-    \sum \frac{1}{n} \notconverge, \text{ но }
+    \sum \frac{1}{n} \diverge, \text{ но }
     \lim_{n \to \infty} \frac{1}{n} = 0
   \end{equation*}
 \end{remark}
@@ -69,7 +69,7 @@
       = 2
     \\
       \lim_{n \to \infty} u_n \neq 1 \implies
-      \sum \prh{2n + 3} \cdot \sin \frac{1}{n} \notconverge
+      \sum \prh{2n + 3} \cdot \sin \frac{1}{n} \diverge
     \end{aligned}
   \end{equation*}
 \end{example}
@@ -86,7 +86,7 @@
   соответствующих членов исследуемого ряда. Заметим, что
 
   \begin{equation*}
-    \sum \frac{1}{3n} = \frac{1}{3} \sum \frac{1}{n} \implies \notconverge
+    \sum \frac{1}{3n} = \frac{1}{3} \sum \frac{1}{n} \implies \diverge
   \end{equation*}
 
   Значит, исходный ряд также расходится.
@@ -139,10 +139,10 @@
   \\
     \begin{rcases}
       \forall n \in \NN \given u_n > v_n \\
-      \sum v_n \notconverge
+      \sum v_n \diverge
     \end{rcases}
     \implies
-    \sum u_n \notconverge
+    \sum u_n \diverge
     \label{thr:cmp-ineq-2} \tag{2}
   \end{align*}
 \end{theorem}
@@ -236,7 +236,7 @@
   сходимость. Применим признак сравнения.
 
   \begin{equation*} \label{thr:lim-attr-2} \tag{2}
-    \sum v_n \notconverge \implies \sum u_n \notconverge
+    \sum v_n \diverge \implies \sum u_n \diverge
     \qquad
     \sum v_n \converge \implies \sum u_n \converge
   \end{equation*}
@@ -317,7 +317,7 @@
     = \begin{cases}
       0 \le D < 1 & \implies \converge \\
       D = 1 & \implies \text{ необходимо дополнительное исследование} \\
-      D > 1 & \implies \notconverge
+      D > 1 & \implies \diverge
     \end{cases}
   \end{equation*}
 \end{theorem}
