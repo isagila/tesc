@@ -9,7 +9,11 @@
 \let\abs\relax
 \newcommand{\pair}[1]{\left\langle #1 \right\rangle}
 \newcommand{\set}[1]{\left\{ #1 \right\}}
-\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\NewDocumentCommand{\abs}{o m}{%
+  \IfNoValueTF{#1}%
+  { \left\lvert #2 \right\rvert }%
+  { #1\lvert #2 #1\rvert }%
+}
 \NewDocumentCommand{\prh}{o m}{%
   \IfNoValueTF{#1}%
   { \left( #2 \right) }%

@@ -1,0 +1,328 @@
+\subsection{%
+  Лекция \texttt{23.09.15}.%
+}
+
+\begin{theorem}[Радикальный признак Коши]
+  \begin{equation*}
+    \lim_{n \to \infty} \sqrt[n]{u_n}
+    = K \in \RR
+    = \begin{cases}
+      0 \le K < 1 & \implies \converge \\
+      K = 1 & \implies \text{ необходимо дополнительное исследование} \\
+      K > 1 & \implies \diverge
+    \end{cases}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Распишем предел по определению.
+
+  \begin{equation*}
+    \lim_{n \to \infty} \sqrt[n]{u_n} = K \iff
+    \forall \epsilon > 0 \given
+    \exists n_0 \in \NN \given
+    \forall n > n_0 \colon
+    \abs{\sqrt[n]{u_n} - K} < \epsilon
+    \implies
+    K - \epsilon< \sqrt[n]{u_n} < K + \epsilon
+  \end{equation*}
+
+  Рассмотрим случай \(0 \le K < 1\). Тогда из правой части неравенства получаем
+
+  \begin{equation*}
+    \exists r \given K < r < 1 \; (\epsilon = r - K)
+    \implies \sqrt[n]{u_n} < r
+    \implies u_n < r^n
+  \end{equation*}
+
+  Таким образом ряд \(\sum u_n\) почленно меньше ряда \(\sum r^n (0 < r < 1)\),
+  который сходится. Значит по признаку сравнения он тоже сходится. Аналогично
+  рассмотрим случай \(K > 1\). Тогда из левой части неравенства получаем
+
+  \begin{equation*}
+    \exists r \given K > r > 1 \; (\epsilon = K - r)
+    \implies r < \sqrt[n]{u_n}
+    \implies u_n > r^n
+  \end{equation*}
+
+  Таким образом ряд \(\sum u_n\) почленно больше расходящегося ряда \(\sum r^n
+  \; (r > 1)\), значит он тоже расходится.
+\end{proof}
+
+\gallerytwo{01_03_01}{Иллюстрация к \ref{thr:С-attr}}
+  {Нижние столбцы}
+  {Верхние столбцы}
+
+\begin{theorem}[Интегральный признак Коши] \label{thr:С-attr}
+  Пусть есть ряд \(\sum_{n = a}^{\infty} u_n\) и интеграл \(\int_a^{\infty} f(x)
+  \dd x\). Тогда если \(f(x) \ge 0\), \(f(x)\) монотонно убывает и \(\forall n
+  \in \NN \given f(n) = u_n\), то ряд и интеграл имеют одинаковую сходимость.
+\end{theorem}
+
+\begin{proof}
+  Пользуясь иллюстрацией \figref{01_03_01} составим неравенство и воспользуемся
+  предельным переходом.
+
+  \begin{equation*}
+    \begin{aligned}
+      \under{\sum_{k = 2}^{n} u_k}{\text{Нижние столбцы}}
+      \le \int_1^n f(x) \dd x
+      \le \under{\sum_{k = 1}^{n - 1} u_k}{\text{Верхние столбцы}}
+    \\
+      S_n - u_1 \le \int_1^n f(x) \dd x \le S_{n - 1}
+    \\
+      \lim_{n \to \infty} \prh{S_n - u_1}
+      \le \int_1^{\infty} f(x) \dd x
+      \le \lim_{n \to \infty} \prh{S_{n - 1}}
+    \end{aligned}
+  \end{equation*}
+
+  \subsubheader{1.}{\(\sum u_n = S \in \RR\)}
+
+  Интеграл сходится, т.к. ограничен снизу и сверху числами \(S - u_1\) и \(S\)
+  соответственно.
+
+  \subsubheader{2.}{\(\sum u_n \diverge\)}
+
+  Интеграл расходится, т.к. он не менее бесконечности (левая часть неравенства).
+
+  \subsubheader{3.}{\(\int \converge, \int = I\)}
+
+  \(
+    \lim_{n \to \infty} \prh{S_n - u_1} < I \in \RR
+    \implies \sum u_n \converge
+  \)
+
+  \subsubheader{4.}{\(\int \diverge\)}
+
+  Ряд расходится, т.к. предел его частичных сумм не менее бесконечности (правая
+  часть неравенства).
+\end{proof}
+
+\begin{example}
+  Рассмотрим обобщенный гармонический ряд \(\display{\sum \frac{1}{n^p}}\) и
+  исследуем его сходимость с помощью интегрального признака Коши. Введем функцию
+  \(\display{f(x) = \frac{1}{x^p}}\), \(f(x) \colon [1; + \infty] \to R^+\).
+  Если \(p = 1\), то получаем
+
+  \begin{equation*}
+    \int_1^{\infty} \frac{\dd x}{x}
+    = \ln x \Big \vert_1^{\infty}
+    = \infty
+  \end{equation*}
+
+  Если \(p \neq 1\), то
+
+  \begin{equation*}
+    \int_1^{\infty} \frac{\dd x}{x^p}
+    = \frac{x^{-p + 1}}{-p + 1} \bigg \vert_1^{\infty}
+    = \frac{1}{1 - p} \cdot \lim_{x \to \infty} \prh{x^{-p + 1} - 1}
+  \end{equation*}
+
+  Значит, если \(-p + 1 < 0\), т.е. \(p > 1\), то интеграл (а значит и ряд)
+  сходится. Если же \(p < 1\), то ряд расходится. В итоге
+
+  \begin{equation*}
+    \sum \frac{1}{n^p}
+    \qquad
+    \begin{cases}
+      p > 1 \implies \converge \\
+      p \le 1 \implies \diverge \\
+    \end{cases}
+  \end{equation*}
+\end{example}
+
+\subheader{Знако\textit{чередующиеся} ряды}
+
+\begin{definition}
+  Ряд вида
+
+  \begin{equation*}
+    \sum_{n = 1}^{\infty} (-1)^{n - 1} u_n
+    = u_1 - u_2 + u_3 - \dotsc \pm u_n \mp
+  \end{equation*}
+
+  где \(u_n > 0\) называют знакочередующимся рядом.
+\end{definition}
+
+\begin{remark}
+  Следует различать знакочередующиеся и знакопеременные ряды. В
+  знакочередующихся рядах знак чередуется с каждым следующим членом ряда. В
+  знакопеременных знак члена ряда не обязательно чередуется~--- он может
+  меняться и по более сложным правилам. Примером знакопеременного ряда может
+  быть
+
+  \begin{equation*}
+    \sum u_n = 1 + \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \frac{1}{5}
+      + \frac{1}{6} - \frac{1}{7} + \dotsc
+  \end{equation*}
+\end{remark}
+
+\begin{theorem}[Признак Лейбница о сходимости ряда] \label{thr:L-cond-conv}
+  Пусть дан знакочередующийся ряд \(\sum (-1)^{n - 1} u_n\). Тогда если \(u_i\)
+  монотонно убывают и \(\lim_{n \to \infty} u_n = 0\), то данный ряд сходится.
+\end{theorem}
+
+\begin{proof}
+  Рассмотрим частичную сумму ряда \(S_{2 n}\)
+
+  \begin{equation*}
+    S_{2 n}
+    = u_1 - u_2 + u_3 - u_4 + \dotsc + u_{2 n - 1} - u_{2 n}
+    = (u_1 - u_2) + (u_3 - u_4) + \dotsc + (u_{2 n - 1} - u_{2 n})
+  \end{equation*}
+
+  Т.к. \(\seq{u_i}\) монотонно убывает, то \(u_i > u_{i + 1}\), значит все
+  полученные скобки положительные, причем при увеличении \(n\) сумма \(S_{2 n}\)
+  накапливается. Таким образом последовательность \(\seq{S_{2 n}}\) возрастает.
+  Сгруппируем члены ряда в частичной суммой по другому.
+
+  \begin{equation*}
+    S_{2 n}
+    = u_1 - u_2 + u_3 - u_4 + \dotsc + u_{2 n - 1} - u_{2 n}
+    = u_1 - (u_2 - u_3) - (u_4 - u_5) - \dotsc - (u_{2 n - 2} - u_{2 n - 1})
+      - u_{2 n}
+  \end{equation*}
+
+  Опять же, в силу монотонности \(\seq{u_i}\) все полученные скобки
+  положительные, а \(u_{2 n}\) положителен по условию. Значит \(S_{2 n} < u_1\).
+  Итого последовательность \(\seq{S_{2 n}}\) ограничена сверху и монотонно
+  возрастает, значит
+
+  \begin{equation*}
+    \exists \lim_{n \to \infty} S_{2 n} = S \in \RR
+  \end{equation*}
+
+  \(S_{2 n + 1}\) отличается от \(S_{2 n}\) одним слагаемым \(u_{2 n + 1}\),
+  которое не влияет на сходимость.
+
+  \begin{equation*}
+    \lim_{n \to \infty} S_{2 n + 1}
+    = \under{\lim_{n \to \infty} S_{2 n}}{S}
+      + \under{\lim_{n \to \infty} u_{2 n + 1}}{0}
+    = S
+  \end{equation*}
+\end{proof}
+
+\begin{remark}[Об оценке остатка ряда] \label{rem:rem-est}
+  В доказательстве теоремы \ref{thr:L-cond-conv} установили, что \(S_{2 n} <
+  u_1\) (для \(S_{2 n + 1}\) это также верно). Рассмотрим следующий ряд
+
+  \begin{equation*}
+    \begin{aligned}
+      \sum_{n = 1}^{\infty} (-1)^{n - 1} u_n = u_1 - u_2 + u_3 - u_4 + \dotsc
+        \under{\pm u_{k + 1} \mp u_{k + 2} \pm \dotsc}{R_{k + 1}}
+    \\
+      R_{k + 1}
+      = \sum_{n = k + 1}^{\infty} (-1)^{n - 1} u_n
+      = \pm \sum_{m = 1}^{\infty} (-1)^{m - 1} u_n
+    \end{aligned}
+  \end{equation*}
+
+  Если исходный ряд сходится, то и его остаток \(R_{k + 1}\) также сходится. При
+  этом остаток можно оценить (по модулю) старшим членом, т.е. \(\abs{R_{k + 1}}
+  < \abs{u_{k + 1}}\). Это позволяет определить, какая погрешность получится,
+  если в приближенных вычислениях использовать частичную сумму ряда.
+\end{remark}
+
+\begin{example}
+  Пусть дан ряд
+
+  \begin{equation*}
+    1 - \frac{1}{2} + \frac{1}{4} - \frac{1}{8} + \dotsc
+    = \sum_{n = 0}^{\infty} (-1)^n \frac{1}{2^n}
+  \end{equation*}
+
+  Вычислим его остаток \(R_4\).
+
+  \begin{equation*}
+    R_4
+    = \prh{\frac{1}{16} - \frac{1}{32}}
+      + \prh{\frac{1}{64} - \frac{1}{128}}
+      + \dotsc
+    = \frac{1}{32} + \frac{1}{128} + \frac{1}{512} + \dotsc
+    = \sum_{k = 2}^{\infty} \frac{1}{2^{2 k + 1}}
+  \end{equation*}
+
+  Преобразуем полученное выражение перенумеровав ряд.
+
+  \begin{equation*}
+    R_5
+    = \frac{1}{2} \sum_{k = 2}^{\infty} \frac{1}{2^{2 k}}
+    = \frac{1}{2} \sum_{k = 2}^{\infty} \frac{1}{4^k}
+    = \frac{1}{2} \sum_{k = 0}^{\infty} \frac{1}{4^{k + 2}}
+    = \frac{1}{32} \sum_{k = 0}^{\infty} \frac{1}{4^k}
+    = \frac{1}{32} \cdot \frac{1}{1 - \frac{1}{4}}
+    = \frac{1}{24} < \frac{1}{16} = u_4
+  \end{equation*}
+\end{example}
+
+\begin{remark}
+  Заметим, что оценка \ref{rem:rem-est} не работает для знакоположительных
+  рядов. Приведем пример.
+
+  \begin{equation*}
+    \begin{aligned}
+      1 + \frac{1}{2} + \frac{1}{4} + \frac{1}{8}
+        + \under{\frac{1}{16} + \dotsc}{R_4}
+    \\
+      R_4
+        = \frac{1}{16} + \frac{1}{32} + \dotsc
+        = \frac{1}{16} \prh{1 + \frac{1}{2} + \dotsc}
+        = \frac{1}{8} > \frac{1}{16} = u_4
+    \end{aligned}
+  \end{equation*}
+\end{remark}
+
+\begin{theorem}[Абсолютная сходимость]
+  \begin{equation*}
+    \sum \abs{u_n} \converge \implies \sum u_n \converge
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Применим критерий Коши для ряда \(\display{\sum \abs{u_n}}\).
+
+  \begin{equation*} \label{thr:abs-conv-1} \tag{1}
+    \sum \abs{u_n} \converge \iff
+    \forall \epsilon > 0 \given
+    \exists n_0 \in \NN \given
+    \forall n > p > n_0 \colon
+    \abs{S_n - S_p} < \epsilon
+  \end{equation*}
+
+  Раскроем и преобразуем последнее неравенство. Воспользуемся тем, что модуль
+  суммы не превышает суммы модулей.
+
+  \begin{equation*} \label{thr:abs-conv-2} \tag{2}
+    \begin{aligned}
+      \abs{S_n - S_p} = \abs[\Big]{\abs{u_p} + \dotsc + \abs{u_n}} < \epsilon
+    \\
+      \abs{u_p + \dotsc + u_n} \le \abs{u_p} + \dotsc + \abs{u_n} < \epsilon
+    \\
+      \abs{u_p + \dotsc + u_n} < \epsilon
+    \end{aligned}
+  \end{equation*}
+
+  Если вернуться к \ref{thr:abs-conv-1} и подставить полученное неравенство, то
+  получим критерий Коши для ряда \(\sum u_n\).
+\end{proof}
+
+\begin{definition}
+  Ряд называется абсолютно сходящимся, если ряд из модулей сходится. Ряд
+  называется условно сходящимся, если он сходится, но ряд из модулей расходится.
+\end{definition}
+
+\begin{example}
+  Примером условно сходящегося ряда может быть ряд \(\display{\sum (-1)^{n - 1}
+  \frac{1}{n}}\).
+\end{example}
+
+\begin{remark}
+  Перестановка членов абсолютно сходящегося ряда не меняет его суммы.
+\end{remark}
+
+\begin{remark}
+  Ряд из модулей знакоположителен, значит для него можно применять все признаки
+  для знакоположительных рядов рассмотренные ранее.
+\end{remark}
