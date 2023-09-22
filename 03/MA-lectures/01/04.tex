@@ -1,0 +1,297 @@
+\subsection{%
+  Лекция \texttt{23.09.22}.%
+}
+
+\subheader{Функциональные ряды}
+
+\begin{definition}
+  Ряд \(\sum u_n (x)\), где \(u_n (x)\) вещественно-значные,
+  называется функциональным.
+\end{definition}
+
+\begin{remark}
+  Функциональный ряд при фиксированном \(x\) становится числовым. Например
+
+  \begin{equation*}
+    \sum x_n
+    \qquad
+    \begin{array}{ll}
+      x = 2 & \sum 2^n \diverge \\
+      x = \frac{1}{2} & \sum \frac{1}{2^n} \converge
+    \end{array}
+  \end{equation*}
+\end{remark}
+
+\begin{remark}
+  Определение общего члена, частичной суммы и суммы ряда сохраняются, но теперь
+  это функции.
+\end{remark}
+
+\begin{definition}
+  Если при фиксированном \(x_0\) числовой ряд \(\sum u_n (x_0) \converge\), то
+  говорят, что этот ряд сходится в точке \(x = x_0\). При этом множество \(x\),
+  в которых ряд \(\converge\) называется областью сходимости ряда.
+\end{definition}
+
+\begin{remark}
+  Заметим, что если ряд \(\sum u_n (x)\) сходится к сумме \(S(x)\) и
+  \(S_n (x)\), \(r_{n + 1}(x)\)~--- частичная сумма и остаток ряда (т.е. \(S(x)
+  = S_n (x) + r_{n + 1}(x)\)), то
+
+  \begin{equation*}
+    \lim_{n \to \infty} r_{n + 1}(x)
+    = \lim_{n \to \infty} \prh{S(x) - S_n (x)}
+    = S(x) - \under{\lim_{n \to \infty} S_n (x)}{S(x)}
+    = 0
+  \end{equation*}
+
+  Таким образом, у сходящегося ряда остаток стремится к нулю.
+\end{remark}
+
+\begin{remark}[О критерии Коши для функциональных рядов]
+  \begin{equation*}
+    \sum u_n (x) \converge \text{ в области } D
+    \iff
+    \forall \epsilon > 0 \given
+    \exists n_0 = n_0(\epsilon, x) \in \NN \given
+    \forall n > m > n_0 \colon
+    \abs{S_n - S_m} < \epsilon
+  \end{equation*}
+
+  Критерий неудобен, т.к. \(n_0\) различны для разных \(x\). Можно определить
+  сходимость так, чтобы избавиться от зависимости \(x\).
+\end{remark}
+
+\begin{definition}
+  Ряд \(\sum u_n (x)\) называется сходящимся равномерно в области \(D\), если
+
+  \begin{equation*}
+    \forall \epsilon > 0 \given
+    \exists n_0 = n_0(\epsilon) \in \NN \given
+    \forall n > n_0 \colon
+    \abs{r_{n + 1}(x)} < \epsilon
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  Пусть дан функциональный ряд \(\sum u_n (x)\) и сходящийся числовой ряд \(\sum
+  a_n\) такой, что \(\forall n \in \NN \given u_n (x) \le a_n\) в области \(D\).
+  Тогда ряд \(\sum u_n (x)\) называется мажорируемым числовым рядом \(\sum
+  a_n\).
+\end{definition}
+
+\begin{theorem}[Признак Вейерштрасса]
+  Если ряд \(\sum u_n (x)\) мажорируемый, то он равномерно сходится.
+\end{theorem}
+
+\begin{proof} 
+  Пусть исходный ряд мажорируем рядом \(\sum a_n\). Обозначим остаток этого ряда
+  \(\bar{r_{n + 1}} = a_{n + 1} + \dotsc\), тогда
+
+  \begin{equation*} \label{eq:W-conv-attr-1} \tag{1}
+    \sum a_n \converge \iff
+    \forall \epsilon > 0 \exists n_0 = n_0 (\epsilon) \in \NN \given
+    \forall n > n_0 \colon
+    \abs{\bar{r_{n + 1}}} < \epsilon
+  \end{equation*}
+
+  Рассмотрим модуль остатка исходного ряда.
+
+  \begin{equation*} \label{eq:W-conv-attr-2} \tag{2}
+    \abs{r_{n + 1}}
+    = \abs{u_{n + 1}(x) + u_{n + 2}(x) + \dotsc}
+    < \under{\abs{u_{n + 1}(x)}}{< a_{n + 1}}
+      + \under{\abs{u_{n + 2}(x)}}{< a_{n + 2}}
+      + \dotsc
+    < \epsilon
+  \end{equation*}
+
+  Подставим \eqref{eq:W-conv-attr-2} в \eqref{eq:W-conv-attr-1}.
+
+  \begin{equation*} \label{eq:W-conv-attr-3} \tag{3}
+    \sum a_n \converge \iff
+    \forall \epsilon > 0 \exists n_0 = n_0 (\epsilon) \in \NN \given
+    \forall n > n_0 \colon
+    \abs{r_{n + 1}} < \epsilon
+  \end{equation*}
+\end{proof}
+
+\begin{remark}
+  Для мажорируемых рядов работают признаки сходимости Даламбера, Коши и т.д. Они
+  позволяют оценить область сходимости.
+\end{remark}
+
+\begin{example}
+  Пусть дан функциональный ряд \(\display{\sum \prh{\frac{x + n}{2 n x}}^2}\).
+  Применим признак радикальный Коши и получим
+
+  \begin{equation*}
+    K
+    = \lim_{n \to \infty} \abs{\frac{x + n}{2 n x}}
+    = \frac{1}{2 \abs{x}} \lim_{n \to \infty} \abs{\frac{x}{n} + 1}
+    = \frac{1}{2 \abs{x}}
+  \end{equation*}
+
+  Теперь, если \(K < 1\), т.е. \(\abs{x} > \frac{1}{2}\), то ряд сходится. Далее
+  нужно проверить случай \(K = 1\), ведь радикальный признак Коши ничего не
+  утверждает о сходимости в этом случае. Для начала рассмотрим \(x =
+  \frac{1}{2}\).
+
+  \begin{equation*}
+    \begin{aligned}
+      \sum \prh{\frac{\frac{1}{2} + n}{n}}^n
+      = \sum \prh{1 + \frac{1}{2 n}}^n
+    \\
+      \lim_{n \to \infty} \prh{1 + \frac{1}{2 n}}^{2 n \cdot \frac{1}{2}}
+      = e^{\frac{1}{2}}
+      \neq 0
+    \end{aligned}
+  \end{equation*}
+
+  Таким образом полученный ряд расходится, т.к. нарушено необходимое условие
+  сходимости ряда. Аналогично рассмотрим случай \(x = -\frac{1}{2}\).
+
+  \begin{equation*}
+    \begin{aligned}
+      \sum \prh{\frac{-\frac{1}{2} + n}{-n}}^n
+      = \sum \prh{-1 + \frac{1}{2 n}}^n
+      = \sum (-1)^n \cdot \prh{1 - \frac{1}{2 n}}^n
+    \end{aligned}
+  \end{equation*}
+
+  Здесь мы также видим, что нарушено необходимое условие сходимости. Итого,
+  область сходимости имеет вид \(D = \interval{-\infty}{-\frac{1}{2}} \cup
+  \interval{\frac{1}{2}}{\infty}\).
+\end{example}
+
+\subheader{Непрерывность суммы ряда}
+
+\begin{remark}
+  \begin{equation*}
+    \begin{rcases}
+      f_1 (x) + \dotsc + f_n (x) = f(x) \\
+      f_i \iscont{\segment{a}{b}}
+    \end{rcases}
+    \implies
+    f(x) \iscont{\segment{a}{b}}
+  \end{equation*}
+
+  Однако для бесконечных сумм это в общем случае неверно. Покажем это на
+  следующем примере
+
+  \begin{equation*}
+    \begin{aligned}
+      \sum \prh{x^{\frac{1}{2 n + 1}} - x^{\frac{1}{2 n - 1}}} 
+    \\
+      S_n (x) = x^{\frac{1}{2 n + 1}} - x
+    \\
+      S(x) = \lim_{n \to \infty} S_n (x)
+    \end{aligned}
+  \end{equation*}
+
+  Требуется узнать, непрерывна ли функция \(S(x)\). Рассмотрим три случая.
+
+  \begin{equation*}
+    \begin{aligned}
+      x > 0 & \implies
+        \lim_{n \to \infty} \prh{x^{\frac{1}{2 n + 1}} - x}
+        = & 1 -x
+    \\
+      x = 0 & \implies
+        \lim_{n \to \infty} \prh{x^{\frac{1}{2 n + 1}} - x}
+        = & 0
+    \\
+      x < 0 & \implies
+        \lim_{n \to \infty} \prh{x^{\frac{1}{2 n + 1}} - x}
+        = & -1 - x
+    \\
+      S(x) & = \begin{cases}
+        1 - x  & x > 0 \\
+        0      & x = 0 \\
+        -1 - x & x < 0
+      \end{cases}
+    \end{aligned}
+  \end{equation*}
+
+  Итого мы видим, что непрерывность нарушена.
+\end{remark}
+
+\begin{theorem}
+  \begin{equation*}
+    \begin{rcases}
+      S(x) = \sum u_n (x) \\
+      u_n (x) \iscont{\segment{a}{b}} \\
+      \sum u_n (x) \text{ мажорируем на } \segment{a}{b}
+    \end{rcases}
+    \implies
+    S(x) \iscont{\segment{a}{b}}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Мы хотим доказать, что
+
+  \begin{equation*} \label{eq:cont-maj-1} \tag{1}
+    \forall \epsilon > 0 \given
+    \exists \delta > 0 \colon
+    \abs{\Delta x} < \delta \implies \abs{\Delta S} < \epsilon
+  \end{equation*}
+
+  Введем следующие обозначения
+
+  \begin{equation*} \label{eq:cont-maj-2} \tag{2}
+    \begin{aligned}
+      \Delta S = S(x + \Delta x) - S(x) \\
+      S(x) = S_n (x) + r_{n + 1}(x) \\
+      \Delta S_n = S_n(x + \Delta x) - S_n (x)
+    \end{aligned}
+  \end{equation*}
+
+  Тогда получаем, что
+
+  \begin{equation*} \label{eq:cont-maj-3} \tag{3}
+    \begin{aligned}
+      \Delta S
+      = \Delta S_n (x + \Delta x) + r_{n + 1}(x + \Delta x)
+        - S_n (x) - r_{n + 1}(x)
+    \\
+      \Delta S_n + r_{n + 1}(x + \Delta x) - r_{n + 1}(x)
+    \end{aligned}
+  \end{equation*}
+
+  \(\Delta S_n\) это конечная сумма, значит
+
+  \begin{equation*} \label{eq:cont-maj-4} \tag{4}
+    \forall \epsilon > 0 \given
+    \exists \delta > 0 \colon
+    \abs{\Delta x} < \delta \implies \abs{\Delta S_n} < \frac{\epsilon}{3}
+  \end{equation*}
+
+  Далее рассмотрим \(r_{n + 1}(x)\). Применим условие мажорируемости (т.е.
+  равномерной сходимости).
+
+  \begin{equation*} \label{eq:cont-maj-5} \tag{5}
+    \forall \epsilon > 0 \given
+    \exists n_0 = n_0(\epsilon) \in \NN \given
+    \forall n > n_0 \colon
+    \abs{r_{n + 1}(x)} < \frac{\epsilon}{3}
+    \qquad
+    \prh{\forall x \in \segment{a}{b}}
+  \end{equation*}
+
+  Аналогично можно рассмотреть \(r_{n + 1}(x + \Delta x)\). Итого из
+  \eqref{eq:cont-maj-4} и \eqref{eq:cont-maj-5} получаем, что
+
+  \begin{equation*} \label{eq:cont-maj-6} \tag{6}
+    \abs{\Delta S}
+    = \abs{\Delta S_n + r_{n + 1}(x + \Delta x) - r_{n + 1}(x)}
+    \le \abs{S_n} + \abs{r_{n + 1}(x + \Delta x)} + \abs{r_{n + 1}(x)}
+    < \frac{\epsilon}{3} + \frac{\epsilon}{3} + \frac{\epsilon}{3}
+    = \epsilon
+  \end{equation*}
+\end{proof}
+
+\begin{remark}
+  Непрерывность суммы мажоритируемого ряда позволяет такие ряды почленно
+  интегрировать и дифференцировать.
+\end{remark}
