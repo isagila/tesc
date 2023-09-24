@@ -37,7 +37,7 @@
   будет равна
 
   \begin{equation*}
-    p_n(k) = \comb{k}{n} p^k q^{n - k}
+    p_n(k) = \comb{n}{k} p^k q^{n - k}
   \end{equation*}
 \end{theorem}
 
@@ -59,7 +59,7 @@
 
   Остальные элементарные исходы (благоприятствующие \(A\)) отличаются от данного
   лишь расстановкой \(k\) успехов по \(n\) испытаниям, а вероятности их те же
-  самые. Всего таких способов расставить будет \(\display{\comb{k}{n}}\). В
+  самые. Всего таких способов расставить будет \(\display{\comb{n}{k}}\). В
   результате получаем искомую формулу.
 \end{proof}
 
@@ -71,7 +71,7 @@
   Подставим это в формулу и получим
 
   \begin{equation*}
-    \probP_5 (3) = \comb{3}{5} \cdot 0.8^3 \cdot 0.2^2 = 0.2048
+    \probP_5 (3) = \comb{5}{3} \cdot 0.8^3 \cdot 0.2^2 = 0.2048
   \end{equation*}
 \end{example}
 
@@ -84,9 +84,9 @@
   \begin{aligned}
     \probP_n (k - 1) \le \probP_n (k)
   \\
-    \comb{k - 1}{n} \cdot p^{k - 1} \cdot q^{n - k + 1}
+    \comb{n}{k - 1} \cdot p^{k - 1} \cdot q^{n - k + 1}
     \le
-    \comb{k}{n} \cdot p^{k} \cdot q^{n}
+    \comb{n}{k} \cdot p^{k} \cdot q^{n}
   \\
     \frac{n!}{(k - 1)! (n - k + 1)!} \cdot q
     \le
