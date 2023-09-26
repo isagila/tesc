@@ -1,5 +1,5 @@
 \subsection{%
-  \textcolor{red}{!pre} Лекция \texttt{23.09.26}.%
+  Лекция \texttt{23.09.26}.%
 }
 
 \subheader{Последовательности независимых испытаний}
@@ -187,12 +187,14 @@
 \end{remark}
 
 \begin{remark}
-  В различных источниках под функцией Лапласа подразумевает несколько различные
-  функции, чаще всего функцию
+  В различных источниках под функцией Лапласа подразумевают несколько
+  иные функции, чаще всего функцию
 
   \begin{equation*}
     F_0 (x) = \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^x e^{-z^2 / 2} \dd z
   \end{equation*}
+
+  Это функция стандартного нормального распределения.
 \end{remark}
 
 \begin{remark}
@@ -362,4 +364,28 @@
   делается оценка \(p^* = \frac{n_k}{n}\). Какой должен быть объем \(n\), чтобы
   с вероятностью \(\gamma = 0.95\) данная оценка отличалась от истинного
   значения не более чем на \(\epsilon = 0.01\).
+
+  \solution{} используем формулу отклонения относительной частоты от
+  вероятности
+
+  \begin{equation*}
+    \begin{aligned}
+      \prob{\abs{p^* - p} \le \epsilon}
+      \approx 2 \Phi \prh{\frac{\sqrt{n} \epsilon}{\sqrt{p q}}}
+      \ge 0.95
+    \\
+      \Phi \prh{\frac{\sqrt{n} \epsilon}{\sqrt{p q}}} \ge 0.475
+    \\
+      \frac{\sqrt{n} \epsilon}{\sqrt{p q}} \ge 1.96
+    \\
+      \sqrt{n} \ge \frac{1.96 \cdot \sqrt{p q}}{\epsilon}
+    \\
+      n \ge \frac{1.96^2 \cdot p q}{0.01^2}
+    \\
+      n \ge 196^2 \cdot p (1 - p)
+    \end{aligned}
+  \end{equation*}
+
+  Функция \(p (1 - p)\) достигает наибольшего значения при \(p = 0.5\), значит
+  получаем \(n \ge 9604\).
 \end{example}
