@@ -1,0 +1,228 @@
+\subsection{%
+  Лекция \texttt{23.09.29}.%
+}
+
+\begin{theorem}[Интегрирование рядов]
+  Пусть \(\sum u_n (x) = S(x)\)~--- мажорируем на \(\segment{a}{b}\). Тогда
+  имеет смысл \(\int_a^x S(t) \dd t\) (\(\forall x \in \segment{a}{b}\)), а
+  также
+
+  \begin{equation*} \label{eq:ser-int-0} \tag{0}
+    \int_a^x \prh[\Big]{\sum_{n = 1}^{\infty} u_n (t) \dd t}
+    = \sum_{n = 1}^{\infty} \int_a^x u_n (t) \dd t
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Если ряд мажорируем, то \(S(x)\) непрерывна и определен интеграл \(\int_a^x
+  S(t) \dd t = A \in \RR\). Докажем равенство \eqref{eq:ser-int-0}. Пользуясь
+  линейностью интеграла получаем
+
+  \begin{equation*} \label{eq:ser-int-1} \tag{1}
+    \begin{aligned}
+      S(x) = \sum_{k = 1}^{n} u_k (x) + r_{n + 1} (x)
+    \\
+      \int_a^x S(t) \dd t
+      = \int_a^x \prh[\Big]{u_1 (t) + \dotsc + u_n (t)} \dd t
+        + \int_a^x r_{n + 1} (t) \dd t
+      = \sum_{k = 1}^{n} \prh{\int_a^x u_k (t) \dd t}
+        + \int_a^x r_{n + 1} (t) \dd t
+    \end{aligned}
+  \end{equation*}
+
+  Далее поработаем с остатком ряда. Имеем \(\abs{r_{n + 1}} = \abs{u_{n + 1} (t)
+  + u_{n + 2} (t) + \dotsc}\). Т.к. ряд мажорируем, то \(\forall i \colon
+  \abs{u_i} \le a_i\), где \(\sum_{i = n + 1}^{\infty} a_i\) это остаток
+  мажорирующего ряда.
+
+  Т.к. мажорирующий ряд сходится, то его остаток \(\sum_{i = n + 1}^{\infty}
+  a_i = \epsilon_i \Rarr{n \to \infty} 0\). Тогда \(\abs{r_{n + 1} (t)} <
+  \epsilon_n \Rarr{n \to \infty} 0\). Получаем
+
+  \begin{equation*} \label{eq:ser-int-2} \tag{2}
+    \abs{\int_a^x r_{n + 1} (t) \dd t}
+    \le \int_a^x \abs{r_{n + 1} (t)} \dd t
+    < \int_a^x \epsilon_n \dd t
+    = \epsilon_n (x - a)
+    \Rarr{n \to \infty} 0
+  \end{equation*}
+
+  Таким образом \(\int_a^x r_{n + 1} (t) \dd t\) абсолютно сходится к нулю.
+  Используя это и \eqref{eq:ser-int-1}, получаем
+
+  \begin{equation*} \label{eq:ser-int-3} \tag{3}
+    \begin{aligned}
+      \lim_{n \to \infty} \int_a^x S(t) \dd t
+      = \lim_{n \to \infty} \sum_{k = 1}^{n} \prh{\int_a^x u_k (t) \dd t}
+        + \under{\lim_{n \to \infty} \int_a^x r_{n + 1} (t) \dd t}{= 0}
+    \\
+      \int_a^x S(t) \dd t
+      = \sum_{k = 1}^{\infty} \prh{\int_a^x u_k (t) \dd t}
+    \end{aligned}
+  \end{equation*}
+
+  Полученная формула разрешает почленно интегрировать мажорируемые ряды.
+\end{proof}
+
+\begin{theorem}
+  \begin{equation*}
+    \begin{rcases}
+      \sum u_n (x) = S(x) \\
+      \forall n \colon u_n \isdiff{\segment{a}{b}} \\
+      \forall n \colon u'_n \iscont{\segment{a}{b}} \\
+      \sum u'_n (x) \text{ мажорируем на } \segment{a}{b}
+    \end{rcases}
+    \implies
+    \sum u'_n (x) = D(x) = S'(x)
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  \(D(x)\) непрерывна, т.к. ряд производных мажорируем. Тогда имеет смысл
+  \(\int_a^x D(t) \dd t\) (\(\forall x \in \segment{a}{b}\)). Используя
+  линейность интеграла получаем
+
+  \begin{equation*}
+    \begin{aligned}
+      \int_a^x D(t) \dd t
+      = \int_a^x u'_1 (t) \dd t + \int_a^x u'_2 (t) \dd t + \dotsc
+      = \sum_{n = 1}^{\infty} u_n (t) \Big\rvert_a^x
+      = \sum_{n = 1}^{\infty} \prh[\Big]{u_n (x) - u_n (a)}
+      \eqby{\todo почему?} S(x) - \under{S(a)}{= const}
+    \\
+      D(x)
+      = \prh{\int_a^x D(t) \dd t}'
+      = S'(x) - \under{S'(a)}{= 0}
+      = S'(x)
+    \end{aligned}
+  \end{equation*}
+\end{proof}
+
+\begin{remark}
+  не мажорируемые ряда формально дифференцируются и интегрируются почленно, но
+  равенство сумм не выполняется (интеграл суммы не равен сумме интегралов).
+\end{remark}
+
+\begin{example}
+  Рассмотрим следующий ряд
+
+  \begin{equation*}
+    \sum \frac{\sin n^4 x}{n^2}
+    \qquad
+    \abs{\frac{\sin n^4 x}{n^2}}
+    \le \frac{1}{n^2}
+    \implies
+    \sum \frac{1}{n^2} \text{ мажорирующий}
+  \end{equation*}
+
+  Допустим, мы не проверили, что \(\sum u'_n (x)\) мажорируем и
+  продифференцировали исходный ряд \quote{не глядя}.
+
+  \begin{equation*}
+    \begin{aligned}
+      \sum u'_n (x)
+      = \sum \frac{1}{n^2} \prh{\cos (n^4 x) \cdot n^4}
+      = \sum n^2 \cos n^4 x
+    \\
+      u'_n = n^2 \under{\cos n^4 x}{\text{ограничена}}
+      \Rarr{n \to \infty} \infty
+    \end{aligned}
+  \end{equation*}
+
+  Мы видим, что не выполнятся необходимое условие сходимости.
+\end{example}
+
+\subheader{Степенные ряды}
+
+\begin{definition}
+  Ряд \(\sum_{n = 0}^{\infty} c_n x^n\) называется степенным рядом или рядом по
+  степени \(x\).
+\end{definition}
+
+\begin{important}
+  В степенных рядах обозначение \(\sum c_n x^n\) будет подразумевать, что нижняя
+  граница равна нулю, а не единице, как это было ранее.
+\end{important}
+
+\begin{remark}
+  Можно рассматривать степенные ряды со сдвигом в точку \(a\).
+
+  \begin{equation*}
+    \sum c_n (x - a)^n \eqby{\(x - a = t\)} \sum c_n t^n
+  \end{equation*}
+\end{remark}
+
+\begin{theorem}[Абеля. Признак сходимости степенного ряда]
+  Если \(\sum c_n x^n\) сходится в \(x_0 \neq 0\), тогда \(\forall x \colon
+  \abs{x} < \abs{x_0}\) ряд сходится абсолютно и равномерно. Если \(\sum a_n
+  x^n\) расходится в \(x_1\), тогда \(\forall x \colon \abs{x} > \abs{x_1}\) ряд
+  расходится.
+\end{theorem}
+
+\begin{proof}
+  Сначала докажем первую часть теоремы. Ряд \(\sum c_n x^n\) сходится в \(x_0
+  \implies\) выполнено необходимое условие сходимости \(c_n x^n \Rarr{n \to
+  \infty} 0\). Значит последовательность \(\seq{u_n}\) ограничена, т.е.
+  \(\exists M > 0 \colon \abs{c_n x_0^n} \le M\). Рассмотрим ряд из модулей
+  элементов исходного ряда
+
+  \begin{equation*}
+    \sum \abs{c_n x^n}
+    = \abs{c_0} + \abs{c_1 x} + \abs{c_2 x^2} + \dotsc + \abs{c_n x^n} + \dotsc
+    = \under{\abs{c_0}}{\le M}
+      + \under{\abs{c_1 x_0}}{\le M} \cdot \abs{\frac{x}{x_0}}
+      + \under{\abs{c_2 x_0^2}}{\le M} \cdot \abs{\frac{x^2}{x_0^2}}
+      + \dotsc
+    = \sum \abs{c_n x_0^n} \abs{\frac{x}{x_0}}^n
+    \le \sum M \cdot \abs{\frac{x}{x_0}}^n
+  \end{equation*}
+
+  Т.к. \(\abs{x} < \abs{x_0}\), то этот ряд сходится \(\implies\) исходный ряд
+  сходится абсолютно. Если \(\abs{x} < \abs{x_0}\), то \(\exists r > 0 \colon
+  \abs{x} < r < \abs{x_0}\). Таким образом
+
+  \begin{equation*}
+    \abs{c_n x^n}
+    \le M \cdot \abs{\frac{x}{x_0}}^n
+    \le M \cdot \abs{\frac{r}{x_0}}^n
+  \end{equation*}
+
+  и \(M \abs{\frac{r}{x_0}}^n\)~--- члены мажорирующего ряда.
+
+  Вторую часть теоремы докажем от противного. Пусть \(\exists \colon \abs{x} >
+  \abs{x_1}\) и \(\sum c_n x^n\) сходится. Тогда согласно первой части теоремы в
+  точке \(x_1\) ряд должен сходится. Противоречие.
+\end{proof}
+
+\begin{remark}
+  Между интервалами сходимости и расходимости степенного ряда найдется точка
+  \(\pm R\) называемая радиусом сходимости ряда. Интервал \(\interval{-R}{R}\)
+  называется кругом сходимости.
+\end{remark}
+
+\begin{remark}
+  В круге сходимости ряд мажорируем \(\implies\) интегрируем. Исследуем
+  возможность дифференцирования. Нужно показать, что \(\sum u'_n (x) = \sum c_n
+  \cdot n \cdot x^{n - 1}\) мажорируем. Рассмотрим интервал \(\interval{-r}{r}
+  \in \interval{-R}{R}\). В этом интервале исходный ряд сходится, значит
+
+  \begin{equation*}
+    \begin{aligned}
+      \forall \xi \in \interval{-r}{r} \colon \abs{c_n \xi^n} \le M \in \RR^+
+    \\
+      \forall x \in \interval{-r}{r} \colon
+      \abs{u'_n (x)}
+      = \abs{c_n \cdot n \cdot x^{n - 1}}
+      \le \abs{c_n \cdot n \cdot r^{n - 1}}
+      = \abs{\frac{c_n \xi^n}{\xi}}
+        \cdot \abs{n \cdot \prh{\frac{r}{\xi}}^{n - 1}}
+      \le \abs{\frac{M}{\xi}} \cdot \text{ (что-то) }
+    \end{aligned}
+  \end{equation*}
+
+  \todo полученный ряд \(\abs{n \cdot \prh{\frac{r}{\xi}}^{n - 1}}\)~---
+  \quote{плохой}, нужно подумать про \quote{хороший}
+
+  Если ряд из производных мажорируем, то ряд из вторых производных также
+  мажорируем и т.д.
+\end{remark}
