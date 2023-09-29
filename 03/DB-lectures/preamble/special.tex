@@ -1,1 +1,35 @@
 \newcommand{\LeC}{\hbox{L\kern-.125em\lower.5ex\hbox{E}\kern-.075em C}}
+
+\newcommand{\leftouterjoin}{\mathrel{\supset\kern-.475em\lhd}}
+
+%% https://gist.github.com/vivngo/e37e1c7b79bf7e8b910c6566c59c46be
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstdefinestyle{sqlstyle}{
+  language = SQL,
+  basicstyle = { \small\ttfamily },
+  belowskip = 3mm,
+  breakatwhitespace = true,
+  breaklines = true,
+  classoffset = 0,
+  columns = flexible,
+  commentstyle = \color{dkgreen},
+  framexleftmargin = 0.25em,
+  frameshape = {}{yy}{}{},
+  keywordstyle = \color{blue},
+  numbers = none,
+  numberstyle = \tiny\color{gray},
+  showstringspaces = false,
+  stringstyle = \color{mauve},
+  tabsize = 3,
+  xleftmargin = 1em
+}
+
+\lstnewenvironment{sqlcode}{\lstset{style = sqlstyle}}{}
+
+\newcommand{\sqlinline}[1]{%
+  \lstinline[style = sqlstyle]{#1}%
+}
+
