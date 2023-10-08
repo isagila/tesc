@@ -88,7 +88,7 @@
       = \int_a^x u'_1 (t) \dd t + \int_a^x u'_2 (t) \dd t + \dotsc
       = \sum_{n = 1}^{\infty} u_n (t) \Big\rvert_a^x
       = \sum_{n = 1}^{\infty} \prh[\Big]{u_n (x) - u_n (a)}
-      \eqby{\todo почему?} S(x) - \under{S(a)}{= const}
+      \eqby{\(\sum u_n(x) = S(x)\)} S(x) - \under{S(a)}{= const}
     \\
       D(x)
       = \prh{\int_a^x D(t) \dd t}'
@@ -99,7 +99,7 @@
 \end{proof}
 
 \begin{remark}
-  не мажорируемые ряда формально дифференцируются и интегрируются почленно, но
+  Не мажорируемые ряды формально дифференцируются и интегрируются почленно, но
   равенство сумм не выполняется (интеграл суммы не равен сумме интегралов).
 \end{remark}
 
@@ -208,7 +208,12 @@
 
   \begin{equation*}
     \begin{aligned}
-      \forall \xi \in \interval{-r}{r} \colon \abs{c_n \xi^n} \le M \in \RR^+
+      \forall \xi \in \interval{-R}{R} \setminus \interval{-r}{r}
+      \implies
+      \begin{cases}
+        \abs{c_n \xi^n} \le M \in \RR^+ \\
+        \frac{r}{\xi} < 1
+      \end{cases}
     \\
       \forall x \in \interval{-r}{r} \colon
       \abs{u'_n (x)}
@@ -216,12 +221,10 @@
       \le \abs{c_n \cdot n \cdot r^{n - 1}}
       = \abs{\frac{c_n \xi^n}{\xi}}
         \cdot \abs{n \cdot \prh{\frac{r}{\xi}}^{n - 1}}
-      \le \abs{\frac{M}{\xi}} \cdot \text{ (что-то) }
+      \le \abs{\frac{M}{\xi}}
+        \cdot \abs{n \cdot \prh{\frac{r}{\xi}}^{n - 1}}
     \end{aligned}
   \end{equation*}
-
-  \todo полученный ряд \(\abs{n \cdot \prh{\frac{r}{\xi}}^{n - 1}}\)~---
-  \quote{плохой}, нужно подумать про \quote{хороший}
 
   Если ряд из производных мажорируем, то ряд из вторых производных также
   мажорируем и т.д.
