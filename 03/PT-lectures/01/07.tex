@@ -1,0 +1,616 @@
+\subsection{%
+  Лекция \texttt{23.10.17}.%
+}
+
+\subheader{Стандартное дискретное распределение}
+
+\subsubheader{I.}{Распределение Бернулли \(B_p\) (с параметром \(0 < p < 1\))}
+
+Пусть случайная величина \(\xi\)~--- число успехов при одном испытании, где
+\(p\)~--- вероятность успеха. Закон распределения имеет вид:
+
+\begin{ttable}{0.4 \linewidth}{X|X|X}
+  \(\xi\) & \(0\)         & \(1\)
+  \\ \hline
+  \(p\)   & \(q = 1 - p\) & \(p\)
+\end{ttable}
+
+Вычислим его числовые характеристики.
+
+\begin{equation*}
+  \begin{aligned}
+    \expected{\xi}
+    = 0 \cdot (1 - p) + 1 \cdot p
+    = p
+  \\
+    \variance{\xi}
+    = 0^2 \cdot (1 - p) + 1^2 \cdot p - p^2
+    = p - p^2
+    = p (1 - p)
+    = p q
+  \end{aligned}
+\end{equation*}
+
+Индикатор случайной величины имеет распределение Бернулли.
+
+\subsubheader{II.}{Биномиальное распределение \(\bindst{n}{p}\)}
+
+Пусть случайная величина \(\xi\) это число успехов в серии из \(n\) независимых
+испытаний, где \(p\) это вероятность успеха при одном испытании.
+
+\begin{equation*}
+  \xi \in \bindst{n}{p}
+  \iff
+  \forall 0 \le k \le n, k \in \ZZ \given
+  \prob{\xi = k} = \comb{n}{k} p^k q^{n - k}
+\end{equation*}
+
+Закон распределения имеет вид:
+
+\begin{ttable}{0.6 \linewidth}{X|X|X|X|X|X|X}
+  \(\xi\) & \(0\)   & \(1\)                       & \(\dotsc\)
+    & \(k\)           & \(\dotsc\) & \(n\)
+  \\ \hline
+  \(p\)   & \(q^n\) & \(\comb{n}{1} p q^{n - 1}\) & \(\dotsc\)
+    & \(\comb{n}{k}\) & \(\dotsc\) & \(p^n\)
+\end{ttable}
+
+Заметим, что \(\xi\) складывается из числа успехов в каждом испытании, поэтому
+\(\xi = \xi_1 + \dotsc + \xi_n\), где \(\xi_i \in B_p\)~--- число успехов при
+\(i\)-ом испытании. Получаем
+
+\begin{equation*}
+  \begin{aligned}
+    \expected{\xi}
+    = \expected{\xi_1} + \dotsc + \expected{\xi_2}
+    = n p
+  \\
+    \variance{\xi}
+    = \variance{\xi_1} + \dotsc + \variance{\xi_2}
+    = n p q
+  \\
+    \stder{\xi}
+    = \sqrt{n p q}
+  \end{aligned}
+\end{equation*}
+
+\subsubheader{III.}{Геометрическое распределение \(\geodst{p}\) (\(0 < p < 1\))}
+
+Пусть случайная величина \(\xi\) это номер первого успешного испытания, где
+\(p\)~--- вероятность успеха при одном испытании.
+
+\begin{equation*}
+  \xi \in \geodst{p}
+  \iff
+  \forall k \in \NN \given \prob{\xi = k} = q^{k - 1} p
+\end{equation*}
+
+Закон распределения будет иметь вид:
+
+\begin{ttable}{0.6 \linewidth}{X|X|X|X|X|X}
+  \(\xi\) & \(1\) & \(2\)   & \(\dotsc\) & \(k\)           & \(\dotsc\)
+  \\ \hline
+  \(p\)   & \(p\) & \(p q\) & \(\dotsc\) & \(q^{k - 1} p\) & \(\dotsc\)
+\end{ttable}
+
+Найдем числовые характеристики.
+
+\begin{equation*}
+  \begin{aligned}
+    \expected{\xi}
+    = \sum_{k = 1}^{\infty} k \cdot q^{k - 1} p
+    = p \sum_{k = 1}^{\infty} \prh{q^k}'
+    = p \prh{\sum_{k = 1}^{\infty} q^k}'
+    = p \prh{\frac{1}{1 - q}}'
+    = p \cdot \frac{1}{(1 - q)^2}
+    = \frac{p}{p^2}
+    = \frac{1}{p}
+  \\
+    \expected{\xi^2}
+    = \sum_{k = 1}^{\infty} k^2 \cdot q^{k - 1} p
+    = \sum_{k = 1}^{\infty} \prh{k (k - 1) + k} \cdot q^{k - 1} p
+    = \under{\sum_{k = 1}^{\infty} k (k - 1) \cdot q^{k - 1} p}{\text{ниже}}
+      + \under{\sum_{k = 1}^{\infty} k \cdot q^{k - 1} p}{\expected{\xi}}
+  \\
+    \sum_{k = 1}^{\infty} k (k - 1) \cdot q^{k - 1} p
+    = p q \sum_{k = 1}^{\infty} \prh{q^k}''
+    = p q \prh{\sum_{k = 1}^{\infty} q^k}''
+    = p q \prh{\frac{1}{1 - q}}''
+    = p q \cdot \frac{2}{(1 - q)^3}
+    = \frac{2 q}{p^2}
+  \\
+    \expected{\xi^2}
+    = \frac{2 q}{p^2} + \frac{1}{p}
+    = \frac{2 q + p}{p^2}
+    = \frac{q + 1}{p^2}
+  \\
+    \variance{\xi}
+    = \expected{\xi^2} - \prh{\expected{\xi}}^2
+    = \frac{q + 1}{p^2} - \prh{\frac{1}{p}}^2
+    = \frac{q}{p^2}
+  \end{aligned}
+\end{equation*}
+
+\subsubheader{IV.}{Распределение Пуассона \(\Pi_{\lambda}\) (c параметром
+\(\lambda > 0\))}
+
+\begin{definition}
+  Случайная величина \(\xi\) имеет распределение Пуассона \(\Pi_{\lambda}\) с
+  параметром \(\lambda > 0\), если
+
+  \begin{equation*}
+    \forall k \ge 0, k \in \ZZ \given
+    \prob{\xi = k} = \frac{\lambda^k}{k!} e^{-\lambda}
+  \end{equation*}
+\end{definition}
+
+\begin{ttable}{0.6 \linewidth}{X|X|X|X|X|X}
+  \(\xi\) & \(0\)            & \(1\)                    & \(\dotsc\)
+    & \(k\)                                 & \(\dotsc\)
+  \\ \hline
+  \(p\)   & \(e^{-\lambda}\) & \(\lambda e^{-\lambda}\) & \(\dotsc\)
+    & \(\frac{\lambda^k}{k!} e^{-\lambda}\) & \(\dotsc\)
+\end{ttable}
+
+Вычислим числовые характеристики.
+
+\begin{equation*}
+  \begin{aligned}
+    \expected{\xi}
+    = \sum_{k = 0}^{\infty} k \frac{\lambda^k}{k!} e^{-\lambda}
+    = \lambda e^{-\lambda}
+      \sum_{k = 1}^{\infty} \frac{\lambda^{k - 1}}{(k - 1)!} 
+    = \lambda e^{-\lambda} \sum_{n = 0}^{\infty} \frac{\lambda^n}{n!}
+    = \lambda e^{-\lambda} \cdot e^{\lambda}
+    = \lambda
+  \\
+    \expected{\xi^2}
+    = \sum_{k = 0}^{\infty} k^2 \frac{\lambda^k}{k!} e^{-\lambda}
+    = \sum_{k = 0}^{\infty}
+      \frac{k (k - 1) + k}{k!} \cdot \lambda^k e^{-\lambda}
+    = \lambda^2 e^{-\lambda}
+        \sum_{k = 2}^{\infty} \frac{\lambda^{k - 2}}{(k - 2)!}
+      + \under{
+        \sum_{k = 0}^{\infty} \frac{k}{k!} \cdot \lambda^k e^{-\lambda}
+      }{\expected{\xi}}
+    = \lambda^2 e^{-\lambda} e^{\lambda} + \lambda
+    = \lambda^2 + \lambda
+  \\
+    \variance{\xi}
+    = \expected{\xi^2} - \prh{\expected{\xi}}^2
+    = \lambda^2 + \lambda - \lambda^2
+    = \lambda
+  \end{aligned}
+\end{equation*}
+
+\subheader{Функция распределения}
+
+\begin{definition}
+  Функцией распределения (\figref{01_07_01}) \(F_{\xi} (x)\) случайной величины
+  \(\xi\) называется функция
+
+  \begin{equation*}
+    F_{\xi} (x) = \prob{\xi < x}, x \in \RR
+  \end{equation*}
+\end{definition}
+
+\gallerydouble
+  {01_07_01}{Функция распределения}
+  {01_07_02}{Функция распределения Бернулли}
+
+\begin{example}
+  Функция распределения Бернулли \(B_p\) (\figref{01_07_02}).
+
+  \begin{equation*}
+    F(x) = \begin{cases}
+      0,     & x \le 0     \\
+      1 - p, & 0 < x \le 1 \\
+      1,     & x > 1       \\
+    \end{cases}
+  \end{equation*}
+\end{example}
+
+\subheader{Свойства функции распределения}
+
+\begin{lemma} \label{lem:dist-func-lim}
+  \(F(x)\)~--- ограниченная функция. \(0 \le F(x) \le 1\)
+\end{lemma}
+
+\begin{proof}
+  \(F(x)\) это вероятность \(\implies\) по определению вероятности она лежит в
+  отрезке \(\segment{0}{1}\).
+\end{proof}
+
+\begin{lemma} \label{lem:dist-func-nondecr}
+  \(F(x)\)~--- неубывающая функция. \(x_1 < x_2 \implies F(x_1) \le F(x_2)\)
+\end{lemma}
+
+\begin{proof}
+  \begin{equation*}
+    x_1 < x_2 \implies
+    \set{\xi \in X_1} \subset \set{\xi \in X_2} \implies
+    F(x_1) = \prob{\xi < x_1} \le \prob{\xi < x_2} = F(x_2)
+  \end{equation*}
+\end{proof}
+
+\begin{lemma} \label{lem:dist-func-interval}
+  \begin{equation*}
+    \prob{\alpha \le \xi < \beta} = F(\beta) - F(\alpha)
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  Воспользуемся свойством аддитивности.
+
+  \begin{equation*}
+    \begin{aligned}
+      \prob{\xi < \beta}
+      = \prob{\xi < \alpha} + \prob{\alpha \le \xi < \beta} 
+    \\
+      F(\beta) = F(\alpha) + \prob{\alpha \le \xi < \beta} 
+      \implies
+      \prob{\alpha \le \xi < \beta} = F(\beta) - F(\alpha)
+    \end{aligned}
+  \end{equation*}
+\end{proof}
+
+\begin{remark}
+  Т.к. борелевская \(\sigma\)-алгебра порождается интервалами
+  \(\interval{-\infty}{x}\), то зная функцию распределения, можем найти
+  вероятности попадания случайной величины в любое борелевское множество.
+  Следовательно, функция распределения полностью задает распределение.
+\end{remark}
+
+\begin{lemma}
+  \begin{equation*}
+    \lim_{n \to -\infty} F(x) = 0
+    \qquad
+    \lim_{n \to +\infty} F(x) = 1
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  Т.к. функция распределения монотонна (\ref{lem:dist-func-nondecr}) и
+  ограничена (\ref{lem:dist-func-lim}), то данные пределы существуют и конечны.
+  Значит, достаточно найти эти пределы для последовательности \(\seq{x_n} \to
+  \pm \infty\). Рассмотрим \(A_n = \set{n - 1 \le \xi_n < n}, n \in \ZZ\)~---
+  несовместные события при разных \(n\). По свойству счетной аддитивности
+  получаем
+
+  \begin{equation*}
+    1
+    = \prob{\Omega}
+    = \prob{\sum_{n = -\infty}^{\infty} A_n}
+    = \sum_{n = -\infty}^{\infty} \prob{A_n}
+    \eqby{\ref{lem:dist-func-interval}}
+    \sum_{n = -\infty}^{\infty} \prh{F(n) - F(n - 1)}
+    = \lim_{N \to \infty} \sum_{n = -N}^{N} \prh{F(n) - F(n - 1)}
+  \end{equation*}
+
+  Заметим, что в сумме все слагаемые кроме первого и последнего сокращаются,
+  поэтому получаем
+
+  \begin{equation*}
+    1
+    = \lim_{N \to \infty} \prh{F(N) - F(-N - 1)}
+    = \lim_{N \to \infty} F(N) - \lim_{N \to \infty} F(-N - 1)
+    \implies
+    \lim_{N \to \infty} F(N) = 1 + \lim_{N \to \infty} F(-N - 1)
+  \end{equation*}
+
+  Левый предел не превосходит единицы, а правый предел не меньше нуля, значит
+  получаем, что левый предел в точности равен единице, а правый предел в
+  точности равен нулю.
+\end{proof}
+
+\begin{lemma}
+  \(F(x)\) непрерывная слева, т.е.
+
+  \begin{equation*}
+    \forall x_0 \in \RR \given F(x_0 - 0) = F(x_0)
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  Т.к. \(F(x)\) монотонна (\ref{lem:dist-func-nondecr}) и ограничена сверху
+  \(F(x_0)\), то данный предел существует. Пусть \(B_n = \set{x_0 - \frac{1}{n}
+  \le \xi < x_0}\)~--- убывающая цепочка событий, т.е. \(B_1 \supset B_2 \supset
+  \dotsc \supset B_n \supset \dotsc\) и \(\bigcup_{n = 1}^{\infty} B_n =
+  \varnothing\). Значит по аксиоме непрерывности \(\prob{B_n} \Rarr{n \to
+  \infty} 0\), получаем
+
+  \begin{equation*}
+    \begin{aligned}
+      0
+      = \lim_{n \to \infty} \prob{B_n}
+      = \lim_{n \to \infty} \prob{x_0 - \frac{1}{n} \le \xi < x_0}
+      = \lim_{n \to \infty} \prh{F(x_0) - F \prh{x_0 - \frac{1}{n}}}
+      = F(x_0) - \lim_{n \to \infty} F \prh{x_0 - \frac{1}{n}}
+      = 0
+    \\
+      F(x_0) = \lim_{n \to \infty} F \prh{x_0 - \frac{1}{n}}
+    \end{aligned}
+  \end{equation*}
+\end{proof}
+
+\begin{lemma} \label{lem:jump-dot}
+  Скачок в точке \(x_0\) равен вероятности случайной величины попасть в данную
+  точку.
+
+  \begin{equation*}
+    F(x_0 + 0)
+    = F(x_0) + \prob{\xi = x_0} 
+    = \prob{\xi \le x_0} 
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  Т.к. \(F(x)\) монотонна (\ref{lem:dist-func-nondecr}) и ограничена снизу, то
+  данный предел существует. Пусть \(C_n = \set{x_0 < \xi < x_0 +
+  \frac{1}{n}}\)~--- убывающая цепочка событий,  т.е. \(C_1 \supset C_2 \supset
+  \dotsc \supset C_n \supset \dotsc\) и \(\bigcup_{n = 1}^{\infty} C_n =
+  \varnothing\). Значит по аксиоме непрерывности \(\prob{C_n} \Rarr{n \to
+  \infty} 0\), получаем
+
+  \begin{equation*}
+    \begin{aligned}
+      \prob{x_0 < \xi < x_0 + \frac{1}{n}} + \prob{\xi = x_0}
+      & \Rarr{n \to \infty} &
+      0 + \prob{\xi = x_0}
+    \\
+      \prob{x_0 \le \xi < x_0 + \frac{1}{n}}
+      & \Rarr{n \to \infty} &
+      \prob{\xi = x_0}
+    \\
+      F \prh{x_0 + \frac{1}{n}} - F(x_0)
+      & \Rarr{n \to \infty} &
+      \prob{\xi = x_0}
+    \end{aligned}
+  \end{equation*}
+\end{proof}
+
+\begin{lemma}
+  Если \(F(x)\)~--- непрерывна в точке \(x = x_0\), то \(\prob{\xi = x_0} = 0\).
+\end{lemma}
+
+\begin{lemma}
+  Если \(F(x)\)~--- непрерывна, то
+
+  \begin{equation*}
+    \prob{\alpha \le \xi < \beta}
+    = \prob{\alpha < \xi < \beta}
+    = \prob{\alpha \le \xi \le \beta}
+    F(\beta) - F(\alpha)
+  \end{equation*}
+\end{lemma}
+
+\begin{theorem}
+  Случайная величина \(\xi\) имеет дискретное распределение \(\iff\) ее функция
+  распределения имеет ступенчатый вид.
+\end{theorem}
+
+\subheader{Абсолютно непрерывные случайные величины}
+
+\begin{definition}
+  Случайная величина \(\xi\) имеем абсолютно непрерывное распределение, если
+  существует \(f_{\xi} (x)\) такая, что
+
+  \begin{equation*}
+    \forall B \in \mathcal{B} (\RR) \given
+    \prob{\xi \in B} = \int_{B} f_{\xi} (x) \dd x
+  \end{equation*}
+
+  Функция \(f_{\xi} (x)\) называется плотностью распределения.
+\end{definition}
+
+\subheader{Свойства плотности и функции распределения абсолютно непрерывного
+распределения}
+
+\begin{equation*}
+  B = \segment{\alpha}{\beta}
+  \implies
+  \prob{\alpha \le \xi \le \beta} = \int_{\alpha}^{\beta} f_{\xi} (x) \dd x
+\end{equation*}
+
+Используя геометрический смысл определенного интеграла, получаем, что
+\(\prob{\alpha \le \xi \le \beta}\) это площадь под графиком \(f_{\xi} (x)\) на
+отрезке \(\segment{\alpha}{\beta}\).
+
+\begin{lemma}
+  Условие нормировки: площадь всей фигуры под графиком \(f_{\xi} (x)\) должна
+  равняться единице, т.е.
+
+  \begin{equation*}
+    \int_{-\infty}^{\infty} f_{\xi} (x) \dd x = 1
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  Искомое равенство получается из определения при \(B = \RR\)
+
+  \begin{equation*}
+    \prob{\xi \in \RR}
+    = \int_{-\infty}^{\infty} f_{\xi} (x) \dd x
+    = 1
+  \end{equation*}
+\end{proof}
+
+\begin{lemma}
+  \begin{equation*}
+    F_{\xi} (x) = \int_{-\infty}^{x} f_{\xi} (x) \dd x
+  \end{equation*}
+\end{lemma}
+
+\begin{proof} \label{}
+  Искомое равенство получается из определения при \(B = \interval{-\infty}{x}\).
+
+  \begin{equation*}
+    F_{\xi} (x)
+    = \prob{\xi < x} 
+    = \int_{-\infty}^{x} f_{\xi} (x) \dd x
+  \end{equation*}
+\end{proof}
+
+\begin{lemma}
+  \(F_{\xi} (x)\)~--- абсолютно непрерывная функция.
+\end{lemma}
+
+\begin{proof}
+  Это свойство непрерывности интеграла с переменным верхним пределом.
+\end{proof}
+
+\begin{lemma}
+  \(F_{\xi} (x)\)~--- дифференцируема почти всюду и \(F'_{\xi} (x) = f_{\xi}
+  (x)\) для почти всех \(x\).
+\end{lemma}
+
+\begin{proof}
+  Это следует из теоремы Барроу.
+\end{proof}
+
+\begin{lemma}
+  \(f_{\xi} (x) \ge 0\)
+\end{lemma}
+
+\begin{proof}
+  Это справедливо, т.к. функция распределения неубывающая функция.
+\end{proof}
+
+\begin{lemma} \label{lem:cont-prob-dot}
+  \begin{equation*}
+    \forall x_0 \in \RR \given
+    \prob{\xi = x_0} = 0
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  Т.к. \(F_{\xi} (x)\)~--- непрерывная функция, т.е. скачка в данной точке нет,
+  то по \ref{lem:jump-dot} вероятность попадания в точку равна величине скачка,
+  т.е. нулю.
+\end{proof}
+
+\begin{lemma}
+  \begin{equation*}
+    \prob{\alpha \le \xi < \beta}
+    = \prob{\alpha \le \xi \le \beta}
+    = \prob{\alpha < \xi < \beta}
+    = \prob{\alpha < \xi \le \beta}
+    F(\beta) - F(\alpha)
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  Это следствие из \ref{lem:cont-prob-dot}.
+\end{proof}
+
+\begin{theorem}
+  \begin{equation*}
+    \begin{rcases}
+      \forall x \in \RR \given f(x) \ge 0 \\
+      \int_{-\infty}^{\infty} f(x) \dd x = 1
+    \end{rcases}
+    \implies
+    f(x) \text{ это плотность некоторого распределения}
+  \end{equation*}
+\end{theorem}
+
+\subheader{Числовые характеристики абсолютно непрерывного распределения}
+
+\subsubheader{I.}{Математическое ожидание}
+
+\begin{definition}
+  Математическим ожиданием абсолютно непрерывной случайной величины \(\xi\)
+  называется число
+
+  \begin{equation*}
+    \expected{\xi} = \int_{-\infty}^{\infty} x f_{\xi} (x) \dd x
+  \end{equation*}
+
+  при условии, что данный интеграл сходится абсолютно.
+\end{definition}
+
+\begin{remark}
+  \begin{equation*}
+    \int_{-\infty}^{\infty} \abs{x} f_{\xi} (x) \dd x
+    \implies
+    \text{математическое ожидание не существует}
+  \end{equation*}
+\end{remark}
+
+\subsubheader{II.}{Дисперсия}
+
+\begin{definition}
+  Дисперсией абсолютно непрерывной случайной величины \(\xi\) называется число
+
+  \begin{equation*}
+    \variance{\xi}
+    = \expected{\prh{\xi - \expected{\xi}}^2}
+    = \int_{-\infty}^{\infty} \prh{x - \expected{\xi}}^2 f_{\xi} (x) \dd x
+  \end{equation*}
+
+  при условии, что данный интеграл сходится.
+\end{definition}
+
+\begin{remark}
+  Для вычисления дисперсии удобнее формула 
+
+  \begin{equation*}
+    \variance{\xi}
+    = \expected{\xi^2} - \prh{\expected{\xi}}^2
+    = \int_{-\infty}^{\infty} x^2 f_{\xi} (x) \dd x - \prh{\expected{\xi}}^2
+  \end{equation*}
+\end{remark}
+
+\subsubheader{III.}{Среднее квадратичное отклонение}
+
+\begin{definition}
+  \begin{equation*}
+    \stder{\xi} = \sqrt{\variance{\xi}}
+  \end{equation*}
+\end{definition}
+
+\begin{remark}
+  Смысл и свойства этих числовых характеристик полностью идентичны случаю
+  дискретной случайной величины.
+\end{remark}
+
+\subheader{Другие числовые характеристики}
+
+\subsubheader{IV}{Моменты старших порядков}
+
+\begin{definition}
+  Момент \(k\)-ого порядка это
+
+  \begin{equation*}
+    m_k
+    = \expected{\xi^k}
+    = \int_{-\infty}^{\infty} x^k f_{\xi} (x) \dd x
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  Центральный момент \(k\)-ого порядка это
+
+  \begin{equation*}
+    \mu_k
+    = \expected{\prh{\xi - \expected{\xi}}^k} 
+    = \int_{-\infty}^{\infty} \prh{x - \expected{\xi}}^k f_{\xi} (x) \dd x
+  \end{equation*}
+\end{definition}
+
+\subsubheader{V}{Медиана}
+
+\begin{definition}
+  Медианой \(\Me\) называется значение случайной величины \(\xi\) такое, что
+
+  \begin{equation*}
+    \prob{\xi < \Me} = \prob{\xi > \Me} 
+  \end{equation*}
+\end{definition}
+
+\subsubheader{VI}{Мода}
+
+\begin{definition}
+  Модой \(\Mo\) абсолютно непрерывного распределения называется точка локального
+  максимума плотности.
+\end{definition}

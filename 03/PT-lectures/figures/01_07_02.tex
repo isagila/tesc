@@ -1,0 +1,18 @@
+\begin{tikzpicture}
+
+  \draw[->, thick] (0, 0) -- (6, 0)
+    node[below] {\(x\)};
+  \draw[->, thick] (2, 0) -- (2, 3)
+    node[left] {\(F(x)\)};
+
+  \draw[very thick] (0, 0) -- (2, 0);
+  \draw[color = black, fill = white] (2, 0) circle (2pt);
+
+  \draw[<-, very thick] (2, 1) -- (4, 1)
+    node[pos = 0, left] {\(1 - p\)};
+  \draw[color = black, fill = white] (4, 1) circle (2pt);
+
+  \draw[<-, very thick] (4, 2) -- (6, 2);
+  \draw (0, 2) node[left] {\(1\)};
+
+\end{tikzpicture}
