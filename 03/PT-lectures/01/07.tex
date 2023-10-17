@@ -52,7 +52,7 @@
     & \(k\)           & \(\dotsc\) & \(n\)
   \\ \hline
   \(p\)   & \(q^n\) & \(\comb{n}{1} p q^{n - 1}\) & \(\dotsc\)
-    & \(\comb{n}{k}\) & \(\dotsc\) & \(p^n\)
+	& \(\comb{n}{k} p^k q^{n - k} \) & \(\dotsc\) & \(p^n\)
 \end{ttable}
 
 Заметим, что \(\xi\) складывается из числа успехов в каждом испытании, поэтому
@@ -62,11 +62,11 @@
 \begin{equation*}
   \begin{aligned}
     \expected{\xi}
-    = \expected{\xi_1} + \dotsc + \expected{\xi_2}
+    = \expected{\xi_1} + \dotsc + \expected{\xi_n}
     = n p
   \\
     \variance{\xi}
-    = \variance{\xi_1} + \dotsc + \variance{\xi_2}
+    = \variance{\xi_1} + \dotsc + \variance{\xi_n}
     = n p q
   \\
     \stder{\xi}
