@@ -1,0 +1,254 @@
+\subsection{%
+  Лекция \texttt{23.10.20}.%
+}
+
+Множество функций, непрерывных на отрезке \(\segment{a}{b}\), образуют
+линейное пространство. Определим скалярное произведение и норму
+
+\begin{equation*}
+  \dotpdt{f}{g} = \int_a^b f(x) g(x) \dd x
+  \qquad
+  \norm{f} = \sqrt{\dotpdt{f}{f}} = \sqrt{\int_a^b f^2 (x) \dd x}
+\end{equation*}
+
+и получим Евклидово пространство. Рассмотрим следующую ортонормированную систему
+
+\begin{equation*}
+  \set{
+    \frac{1}{\sqrt{2 \pi}},
+    \frac{1}{\sqrt{\pi}} \sin x,
+    \frac{1}{\sqrt{\pi}} \cos x,
+    \dotsc
+    \frac{1}{\sqrt{\pi}} \sin n x,
+    \frac{1}{\sqrt{\pi}} \cos n x
+  }
+\end{equation*}
+
+Натянем на нее линейную оболочку.
+
+\begin{equation*}
+  P_n (x)
+  = \frac{a_0}{2} + \sum_{k = 1}^{\infty} \prh{a_k \cos k x + b_k \sin k x}
+\end{equation*}
+
+Получим подпространство. Ортогональная проекция \(f_{\perp}\) это минимально
+отстоящий от \(f\) многочлен \(P_n (x)\). Его коэффициенты называются
+коэффициентами Фурье и имеют вид
+
+\begin{equation*}
+  a_n = \frac{1}{\pi} \int_{-\pi}^{\pi} f(x) \cos n x \dd x
+  \qquad
+  b_n = \frac{1}{\pi} \int_{-\pi}^{\pi} f(x) \sin n x \dd x
+\end{equation*}
+
+В таком случае многочлен \(P_n (x)\) называется многочленом Фурье. Определим
+расстояние от \(f(x)\) до \(P_n (x)\) как среднеквадратическое отклонение (СКО):
+
+\begin{equation*}
+  \delta^2 = \frac{1}{\pi} \int_{-\pi}^{\pi} \prh{
+    f(x) - \frac{\alpha_0}{2}
+      - \sum_{k = 1}^{n} \prh{\alpha_k \cos k x + \beta_k \sin k x}
+  }^2 \dd x
+\end{equation*}
+
+Далее будет показано, что именно многочлен Фурье является минимально отстоящим,
+т.е. \(\delta^2\)~--- наименьшее при \(\alpha_k = a_k\) и \(\beta_k = b_k\).
+Более того, \(\delta \to 0\) при \(n \to \infty\). Сейчас определим ряд Фурье и
+изучим его свойства.
+
+\begin{definition}[Тригонометрический ряд Фурье]
+  Дана \(f(x)\)~--- периодическая, \(T = 2 \pi\). Тогда
+
+  \begin{equation*}
+    \begin{aligned}
+      f(x) = \frac{a_0}{2}
+        + \sum_{k = 1}^{\infty} \prh{a_k \cos k x + b_k \sin k x}
+    \\
+      a_k = \frac{1}{\pi} \int_{-\pi}^{\pi} f(x) \cos k x \dd x
+      \qquad
+      b_k = \frac{1}{\pi} \int_{-\pi}^{\pi} f(x) \sin k x \dd x
+    \end{aligned}
+  \end{equation*}
+
+  называется представлением функции \(f(x)\) тригонометрическим рядом Фурье.
+\end{definition}
+
+\begin{theorem}[Критерий сходимости ряда Фурье к значению функции. Условие
+Дирихле]
+  \(f(x) \colon \segment{-\pi}{\pi} \to \RR\)~--- кусочно--непрерывна,
+  кусочно--монотонна, ограничена. Тогда если \(S(x)\) это сумма ряда Фурье, то
+  во всех внутренних точках \(S(x) = f(x)\), а точках конечных разрывов \(x_0\):
+  \(S(x) = \frac{1}{2} \prh{f(x_0 - 0) + f(x_0 + 0)}\). При этом \(f(-\pi) =
+  f(\pi) = \frac{1}{2} \prh{f(-\pi + 0) + f(\pi - 0)}\).
+\end{theorem}
+
+\begin{remark}
+  Значения функции в точках разрыва не влияют на ее ряд Фурье, поэтому две
+  функции равные везде, кроме точек разрыва, имеют один и тот же ряд.
+\end{remark}
+
+\begin{remark}
+  За пределами отрезка \(\segment{\-\pi}{\pi}\) функция будет представлена тем
+  же рядом, если она периодична с периодом \(2\pi\). Т.к.  \(\cos k x\) и \(\sin
+  k x\) периодичны с \(T = 2 \pi\), то
+
+  \begin{equation*}
+    S_n (x + T) = S_n (x)
+    \qquad
+    S (x + T) = \lim_{n \to \infty} S_n (x + T) = S(x)
+  \end{equation*}
+\end{remark}
+
+\begin{example}
+  Пусть \(f(x) = x\) на отрезке \(\segment{-\pi}{\pi}\). Условие Дирихле
+  выполнено, найдем коэффициенты Фурье.
+
+  \begin{equation*}
+    \begin{aligned}
+      a_0
+      & = \frac{1}{\pi} \int_{-\pi}^{\pi} f(x) \cos 0 x \dd x
+      = \frac{1}{2} \int_{-\pi}^{\pi} x \dd x
+      = 0
+    \\
+      a_k
+      & = \frac{1}{\pi} \int_{-\pi}^{\pi} f(x) \cos k x \dd x
+      = \frac{1}{\pi k} \int_{-\pi}^{\pi} x \dd \sin x
+      = \frac{1}{\pi k} \prh{
+        (x \sin k x) \Big\vert_{-\pi}^{\pi}
+        - \int_{-\pi}^{\pi} \sin k x \dd x
+      }
+      = \frac{1}{\pi k^2} \cos k x \Big\vert_{-\pi}^{\pi}
+      = 0
+    \\
+      b_k
+      & = \frac{1}{\pi} \int_{-\pi}^{\pi} f(x) \sin k x \dd x
+      = -\frac{1}{\pi k} \int_{-\pi}^{\pi} x \dd \cos x
+      = -\frac{1}{\pi k} \prh{
+        (x \cos k x) \Big\vert_{-\pi}^{\pi}
+        - \int_{-\pi}^{\pi} \cos k x \dd x
+      }
+      = \frac{1}{\pi k} \prh{\pi \cos \pi k + \pi \cos \pi k}
+      = \frac{2}{k} (-1)^{k + 1}
+    \end{aligned}
+  \end{equation*}
+
+  Тогда получаем, что
+
+  \begin{equation*}
+    \begin{aligned}
+      x = \sum_{k = 1}^{\infty} \frac{2}{k} (-1)^{k + 1} \sin k x
+    \\
+      S(-\pi) = S(\pi) = \frac{1}{2} \prh{f(-\pi + 0) + f(\pi - 0)} = 0
+    \end{aligned}
+  \end{equation*}
+\end{example}
+
+\begin{remark}
+  В примере пользовались свойствами интегралов от четных и нечетных функций.
+  Заметим, что если \(f(x)\)~--- четная, то
+
+  \begin{equation*}
+    a_k = \frac{2}{\pi} \int_0^{\pi} f(x) \cos k x \dd x
+    \qquad
+    b_k = 0
+  \end{equation*}
+
+  А если \(f(x)\)~--- нечетная, то
+
+  \begin{equation*}
+    a_k = 0
+    \qquad
+    b_k = \frac{2}{\pi} \int_0^{\pi} f(x) \sin k x \dd x
+  \end{equation*}
+\end{remark}
+
+Как изменится ряд Фурье, если \(f(x) \colon \segment{a}{b} \to \RR\), но
+\(\segment{a}{b} \ne \segment{-\pi}{\pi}\)? Рассмотрим сдвиг и растяжение
+отрезка.
+
+\subheader{Сдвиг}
+
+Пусть \(f(x) \colon \segment{a}{b} \to \RR\), \(b - a = 2 \pi\). Тогда ряд Фурье
+для \(f(x)\) не изменится. Заметим, что если \(\phi(x)\) периодична с периодом
+\(T = 2 \pi\), то
+
+\begin{equation*}
+  \int_c^{c + 2 \pi} \phi(x) \dd x = \int_{-\pi}^{\pi} \phi(x) \dd x
+\end{equation*}
+
+По геометрическому смыслу получаем
+
+\begin{equation*}
+  \int_{-\pi}^{c}
+  = \int_{\pi}^{c + 2 \pi}
+  \implies
+  \int_{c}^{c + 2 \pi}
+  = \int_{c}^{\pi} + \int_{\pi}^{c + 2 \pi}
+  = \int_{c}^{\pi} + \int_{-\pi}^{c}
+  = \int_{-\pi}^{\pi}
+\end{equation*}
+
+При этом
+
+\begin{equation*}
+  \int_a^b \phi(x + T) \dd (x + T)
+  = \int_a^b \phi(x) \dd x
+\end{equation*}
+
+Тогда разложение в ряд Фурье будет иметь вид
+
+\begin{equation*}
+  \begin{aligned}
+    f(x) = \frac{a_0}{2}
+      + \sum_{k = 1}^{\infty} \prh{a_k \cos k x + b_k \sin k x}
+  \\
+    a_k
+    = \frac{1}{\pi} \int_{a}^{b} f(x) \cos k x \dd x
+    = \frac{1}{\pi} \int_{-\pi}^{\pi} \under{f(x)}{f(x - m T)} \cos k x \dd x
+    \qquad
+    = \frac{1}{\pi} \int_{a}^{b} f(x) \sin k x \dd x
+    = \frac{1}{\pi} \int_{-\pi}^{\pi} f(x) \sin k x \dd x
+  \end{aligned}
+\end{equation*}
+
+\subheader{Растяжение}
+
+Пусть \(f(x) \colon \segment{-l}{l} \to \RR\), \(f(x)\) периодична с периодом
+\(T = 2 l\). Введем замену
+
+\begin{equation*}
+  \begin{aligned}
+    x = \frac{l t}{\pi} & \qquad & t = \frac{\pi x}{l}
+  \\
+    x \in \segment{-l}{l} & \Rarr{} & t \in \segment{-\pi}{\pi}
+  \end{aligned}
+\end{equation*}
+
+Тогда получим следующие коэффициенты.
+
+\begin{equation*}
+  a_k
+  = \frac{1}{\pi} \int_{-\pi}^{\pi} f \prh{\frac{l t}{\pi}} \cos k t \dd t
+  = \frac{1}{l} \int_{-\pi}^{\pi} f \prh{\frac{l t}{\pi}} \cos k t
+    \dd \frac{l t}{\pi}
+  = \frac{1}{l} \int_{-l}^{l} f \under{\prh{\frac{l t}{\pi}}}{x}
+    \cos \frac{\pi k}{l} x \dd x
+  = \frac{1}{l} \int_{-l}^{l} f (x) \cos \frac{\pi k}{l} x \dd x
+\end{equation*}
+
+И аналогично
+
+\begin{equation*}
+  b_k = \frac{1}{l} \int_{-l}^{l} f(x) \sin \frac{\pi k}{l} x \dd x
+\end{equation*}
+
+\begin{remark}
+  Таким образом функции, определенные на произвольном отрезке \(\segment{a}{b}\)
+  можно разложить в ряд Фурье используя сдвиг и растяжение.
+\end{remark}
+
+\begin{remark}
+  Если функция определена на \(\segment{0}{l}\), то получить ее разложение можно
+  дополнив четным или нечетным образом до функции на отрезке
+  \(\segment{-l}{l}\).
+\end{remark}
