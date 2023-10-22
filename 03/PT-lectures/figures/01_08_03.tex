@@ -1,0 +1,16 @@
+\begin{tikzpicture}
+
+  \draw[->, thick] (-1, 0) -- (6, 0)
+    node[below] {\(x\)};
+  \draw[->, thick] (0, -1) -- (0, 4)
+    node[left] {\(f_{\xi} (x)\)};
+
+  \draw[very thick] (-1, 0) -- (0, 0);
+  \draw[fill = white] (0, 0) circle (2pt);
+
+  \draw[very thick]
+    (0, 3) .. controls (1, 0.6) and (3, 0.3) .. (5, 0.1);
+
+  \draw (0, 3) node[left] {\(\alpha\)};
+
+\end{tikzpicture}

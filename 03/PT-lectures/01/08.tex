@@ -1,0 +1,577 @@
+\subsection{%
+  Лекция \texttt{23.10.24}.%
+}
+
+\subheader{Стандартное абсолютно непрерывное распределение}
+
+\subsubheader{I}{Равномерное распределение}
+
+\begin{definition}
+  Случайная величина \(\xi\) равномерно распределена на отрезке
+  \(\segment{a}{b}\) (обозначается \(\xi \in \evenly{a}{b}\)), если ее плотность
+  на данном отрезке постоянна.
+\end{definition}
+
+\gallerydouble
+  {01_08_01}{Плотность равномерного распределения}
+  {01_08_02}{Функция распределения}
+
+Учитывая условие нормировки (\figref{01_08_01}) получаем, что плотность \(\xi\)
+будет иметь вид
+
+\begin{equation*}
+  f_{\xi} (x) = \begin{cases}
+    0,               & x < a \\
+    \frac{1}{b - a}, & a \le x \le b \\
+    0,               & x > b \\
+  \end{cases}
+\end{equation*}
+
+Найдем функцию распределения (\figref{01_08_02}).
+
+\begin{equation*}
+  \begin{aligned}
+    F_{\xi} (x) & = \int_{-\infty}^{\infty} f_{\xi} (x) \dd x
+  \\
+    x < a & \implies
+    F_{\xi} (x) = 0
+  \\
+    a \le x \le b & \implies
+    F_{\xi} (x)
+    = \int_a^x \frac{\dd x}{b - a}
+    = \frac{x - a}{b - a}
+  \\
+    x > b & \implies
+    F_{\xi} (x) = 1
+  \\
+    F_{\xi} (x) & = \begin{cases}
+      0,                   & x < a \\
+      \frac{x - a}{b - a}, & a \le x \le b \\
+      1,                   & x > b
+    \end{cases}
+  \end{aligned}
+\end{equation*}
+
+Вычислим числовые характеристики.
+
+\begin{equation*}
+  \begin{aligned}
+    \expected{\xi}
+    = \int_{-\infty}^{\infty} x f(x) \dd x
+    = \int_a^b \frac{x \dd x}{b - a}
+    = \frac{1}{b - a} \cdot \frac{x^2}{2} \Big\vert_a^b
+    = \frac{a + b}{2}
+  \\
+    \expected{\xi^2}
+    = \int_{-\infty}^{\infty} x^2 f(x) \dd x
+    = \int_a^b \frac{x^2 \dd x}{b - a}
+    = \frac{1}{b - a} \cdot \frac{x^3}{3} \Big\vert_a^b
+    = \frac{a^2 + a b + b^2}{3}
+  \\
+    \variance{\xi}
+    = \expected{\xi^2} - \prh{\expected{\xi}}^2
+    = \frac{a^2 + a b + b^2}{3} - \frac{a^2 + 2 a b + b^2}{4}
+    = \frac{(b - a)^2}{12}
+  \\
+    \stder{\xi}
+    = \sqrt{\variance{\xi}}
+    = \frac{b - a}{2 \sqrt{3}}
+  \end{aligned}
+\end{equation*}
+
+Вычислим вероятность попадания в интервал.
+
+\begin{equation*}
+  \prob{\alpha < \xi < \beta} = \frac{\beta - \alpha}{b - a}
+  \qquad
+  \alpha, \beta \in \segment{a}{b}
+\end{equation*}
+
+Равномерное распределение возникают в задачах, связанных со временем, а также в
+задачах, связанных с генерацией псевдослучайных чисел
+(\(\xi \in \evenly{0}{1}\)).
+
+\subsubheader{II}{Показательное (экспоненциальное) распределение}
+
+\begin{definition}
+  Случайная величина \(\xi\) имеет показательное распределение с параметром
+  \(\alpha > 0\) (обозначается \(\xi \in E_{\alpha}\)), если ее плотность имеет
+  вид (\figref{01_08_03}):
+
+  \begin{equation*}
+    f_{\xi} (x) = \begin{cases}
+      0,                    & x < 0 \\ 
+      \alpha e^{-\alpha x}, & x \ge 0
+    \end{cases}
+  \end{equation*}
+\end{definition}
+
+\gallerydouble
+  {01_08_03}{Плотность показательного распределения}
+  {01_08_04}{Функция распределения}
+
+Найдем функцию распределения (\figref{01_08_04}).
+
+\begin{equation*}
+  \begin{aligned}
+    F_{\xi} (x) & = \int_{-\infty}^{\infty} f_{\xi} (x) \dd x
+  \\
+    x < 0 & \implies
+    F_{\xi} (x) = 0
+  \\
+    x \ge 0 & \implies
+    F_{\xi} (x)
+    = \int_0^x \alpha e^{-\alpha x}
+    = -e^{-\alpha x} \Big\vert_0^x
+    = 1 - e^{-\alpha x}
+  \\i
+    F_{\xi} (x) & = \begin{cases}
+      0,                   & x < 0  \\
+      1 - e^{-\alpha x},   & x \ge 0
+    \end{cases}
+  \end{aligned}
+\end{equation*}
+
+Вычислим числовые характеристики.
+
+\begin{equation*}
+  \begin{aligned}
+    \expected{\xi}
+    = \int_{-\infty}^{\infty} x f(x) \dd x
+    = \int_0^{\infty} x \alpha e^{-\alpha x} \dd x
+    = \mtxb{
+      u = x & \dd u = \dd x \\
+      \dd v = \alpha e^{-\alpha x} \dd x & v = -e^{-\alpha x}
+    }
+  \\
+    = -x e^{-\alpha x} \Big\vert_0^{\infty}
+      + \int_0^{\infty} e^{-\alpha x} \dd x
+    = -\lim_{x \to \infty} \frac{x}{e^{\alpha x}}
+      - \frac{1}{\alpha} e^{-\alpha x} \Big\vert_0^{\infty}
+    = -\frac{1}{\alpha} \prh{\lim_{x \to \infty} e^{-\alpha x} - e^{0}}
+    = \frac{1}{\alpha}
+  \\ \\
+    \expected{\xi^2}
+    = \int_{-\infty}^{\infty} x^2 f(x) \dd x
+    = \int_0^{\infty} x^2 \alpha e^{-\alpha x} \dd x
+    = \mtxb{
+      u = x^2 & \dd u = 2 x \dd x \\
+      \dd v = \alpha e^{-\alpha x} \dd x & v = -e^{-\alpha x}
+    }
+  \\
+    = -x^2 e^{-\alpha x} \Big\vert_0^{\infty}
+      + 2 \int_0^{\infty} e^{-\alpha x} \dd x
+    = \frac{2}{\alpha} \int_0^{\infty} x \alpha e^{-\alpha x} \dd x
+    = \frac{2}{\alpha} \expected{\xi}
+    = \frac{2}{\alpha^2}
+  \\ \\
+    \variance{\xi}
+    = \expected{\xi^2} - \prh{\expected{\xi}}^2
+    = \frac{2}{\alpha^2} - \prh{\frac{1}{\alpha}}^2
+    = \frac{1}{\alpha^2}
+  \\
+    \stder{\xi}
+    = \sqrt{\variance{\xi}}
+    = \frac{1}{\alpha}
+  \end{aligned}
+\end{equation*}
+
+Используя функцию распределения, вычислим вероятность попадания в интервал.
+
+\begin{equation*}
+  \prob{\alpha < \xi < \beta} = e^{-a \alpha} - e^{-b \alpha}
+\end{equation*}
+
+Из непрерывных распределений только показательное обладает свойством нестарения.
+
+\begin{theorem}
+  \begin{equation*}
+    \prob{\xi > x + y \given \xi > x} = \prob{\xi > y}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  \begin{equation*}
+    \begin{aligned}
+      \prob{\xi > x + y \given \xi > x}
+    = \frac{\prob{\xi > x + y, \xi > x}}{\prob{\xi > x}}
+    = \frac{1 - \prob{\xi < x + y}}{1 - \prob{\xi < x}}
+    = \frac{1 - F(x + y)}{1 - F(x)}
+    = \frac{1 - 1 + e^{-\alpha (x + y)}}{1 - 1 + e^{-\alpha x}}
+  \\
+    = e^{-\alpha y}
+    = 1 - (1 - e^{-\alpha y})
+    = 1 - F(y)
+    = \prob{\xi > y}
+    \end{aligned}
+  \end{equation*}  
+\end{proof}
+
+Показательное распределение возникает, (например) если нужно рассчитать время
+работы надежного прибора до поломки. Также показательное распределение можно
+трактовать как время между появлениями двух соседних редких событий. Возникает в
+системах массового обслуживания, теории надежности, теории катастроф и ряде
+областей физики.
+
+\subsubheader{III}{Нормальное (Гауссовское) распределение}
+
+\begin{definition}
+  Случайное величина \(\xi\) имеет нормальное распределение с параметрами \(a\)
+  и \(\sigma^2 > 0\) (обозначается \(\xi \in N(a; \sigma^2)\)), если ее
+  плотность имеет вид
+
+  \begin{equation*}
+    f(x) = \frac{1}{\sigma \sqrt{2 \pi}} e^{-\frac{(x - a)^2}{2 \sigma^2}}
+    \qquad
+    x \in \interval{-\infty}{\infty}
+  \end{equation*}
+\end{definition}
+
+\gallerydouble
+  {01_08_05}{Нормальное распределение}
+  {01_08_06}{Функция распределения}
+
+Смысл параметров распределения.
+
+\begin{equation*}
+  \expected{\xi} = a
+  \qquad
+  \variance{\xi} = \sigma^2
+  \qquad
+  \stder{\xi} = \sigma
+\end{equation*}
+
+Функция распределения будет иметь вид
+
+\begin{equation*}
+  F_{\xi} (x) = \int_{-\infty}^{x} f_{\xi} (t) \dd t
+\end{equation*}
+
+\subheader{Стандартное нормальное распределение}
+
+\begin{definition}
+  Стандартным нормальным распределением называется нормальное распределение с
+  параметрами \(a = 0\), \(\sigma^2 = 1\).
+\end{definition}
+
+Получаем функцию плотности (функцию Гаусса, \figref{01_08_07}):
+
+\begin{equation*}
+  \phi(x) = \frac{1}{\sqrt{2 \pi}} e^{\frac{-x^2}{2}}
+\end{equation*}
+
+\galleryone{01_08_07}{Функция Гаусса}
+
+Функция распределения \(F_0 (x)\) будет иметь вид
+
+\begin{equation*}
+  F_0 (x) = \frac{1}{2 \pi} \int_{-\infty}^{x} e^{-z^2 / 2} \dd z
+\end{equation*}
+
+\begin{remark}
+  По формуле Пуассона
+
+  \begin{equation*}
+    \int_{-\infty}^{\infty} e^{-z^2 / 2} \dd z = \sqrt{2 \pi}
+  \end{equation*}
+
+  Значит условие нормировки выполнено \(\implies \phi(x)\) это действительно
+  плотность некоторого распределения.
+\end{remark}
+
+\begin{remark}
+  \begin{equation*}
+    \begin{aligned}
+      F_0 (x)
+      = \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^0 e^{-z^2 / 2} \dd z
+        + \frac{1}{\sqrt{2 \pi}} \int_0^x e^{-z^2 / 2} \dd z
+      = \frac{1}{2} + \Phi(x)
+    \\
+      \Phi(x) = \frac{1}{\sqrt{2 \pi}} \int_0^x e^{-z^2 / 2} \dd z
+    \end{aligned}
+  \end{equation*}
+
+  где \(\Phi(x)\) это функция Лапласа.
+\end{remark}
+
+Вычислим характеристики.
+
+\begin{equation*}
+  \begin{aligned}
+    \expected{\xi}
+    = \int_{-\infty}^{\infty} x \phi(x) \dd x
+    = \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} x e^{-x^2 / 2} \dd x
+    = \frac{1}{\sqrt{2 \pi}}
+      \int_{-\infty}^{\infty} e^{-x^2 / 2} \dd \prh{\frac{x^2}{2}}
+  \\
+    = -\frac{1}{\sqrt{2 \pi}} e^{-x^2 / 2} \Big\vert_{-\infty}^{\infty}
+    = -\frac{1}{\sqrt{2 \pi}} \prh{
+      \lim_{x \to \infty} e^{-x^2 / 2} - \lim_{x \to -\infty} e^{-x^2 / 2}
+    }
+    = 0
+  \\ \\
+    \variance{\xi}
+    = \int_{-\infty}^{\infty} x^2 \phi(x) \dd x
+      - \under{\prh{\expected{\xi}}^2}{0}
+    = \frac{1}{\sqrt{2 pi}} \int_{-\infty}^{\infty} x^2 e^{-x^2 / 2} \dd x
+    = \mtxb{
+      u = x & \dd u = \dd x \\
+      \dd v = x e^{-x^2 / 2} \dd x & v = -e^{-x^2 / 2}
+    }
+  \\
+    = \frac{1}{\sqrt{2 \pi}} \prh{
+      \under{-x e^{-x^2 / 2} \Big\vert_{-\infty}^{\infty}}{0}
+      + \int_{-\infty}^{\infty} e^{-x^2 / 2} \dd x
+    }
+    = \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} e^{-x^2 / 2} \dd x
+    = 1
+  \end{aligned}
+\end{equation*}
+
+\subheader{Связь между нормальным и стандартным нормальным распределением}
+
+\begin{lemma}
+  \begin{equation*}
+    \xi \in N(a; \sigma^2)
+    \implies
+    F_{\xi} (x) = F_0 (\frac{x - a}{\sigma})
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  \begin{equation*}
+    \begin{aligned}
+      F_{\xi} (x)
+      = \frac{1}{\sigma \sqrt{2 pi}}
+      = \int_{-\infty}^{x} e^{-\frac{(t - a)^2}{2 \sigma^2}}\dd t
+      = \mtxb{
+        z = \frac{t - a}{\sigma} & t = \sigma z + a & \dd t = \sigma \dd z \\
+        z(-\infty) = -\infty & z(x) = \frac{x - a}{\sigma}
+      }
+    \\
+      = \frac{1}{\sigma \sqrt{2 \pi}}
+        \int_{-\infty}^{\frac{x - a}{\sigma}} e^{-z^2 / 2} \sigma \dd z
+      = \frac{1}{\sqrt{2 \pi}}
+        \int_{-\infty}^{\frac{x - a}{\sigma}} e^{-z^2 / 2} \dd z
+      = F_0 \prh{\frac{x - a}{\sigma}}
+    \end{aligned}
+  \end{equation*}
+\end{proof}
+
+\begin{lemma}
+  \begin{equation*}
+    \xi \in N (a; \sigma^2)
+    \implies
+    \eta = \frac{\xi - a}{\sigma} \in N(0; 1)
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  \begin{equation*}
+    F_{\eta} (x)
+    = \prob{\eta < x}
+    = \prob{\frac{\xi - a}{\sigma} < x}
+    = \prob{\xi < \sigma x + a}
+    = F_{\xi} (\sigma x + a)
+    = F_0 \prh{\frac{\sigma x + a - a}{\sigma}}
+    = F_0 (x)
+    \implies
+    \eta \in N(0; 1)
+  \end{equation*}
+\end{proof}
+
+\begin{lemma}
+  \begin{equation*}
+    \xi \in N(a; \sigma^2)
+    \implies
+    \begin{cases}
+      \expected{\xi} = a \\
+      \variance{\xi} = \sigma^2
+    \end{cases}
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  \begin{equation*}
+    \begin{aligned}
+      \eta = \frac{\xi - a}{\sigma} \in N(0; 1)
+      \implies
+      \begin{cases}
+        \expected{\eta} = 0 \\
+        \variance{\eta} = 1
+      \end{cases}
+    \\
+      \xi = \sigma \eta + a
+      \implies
+      \begin{cases}
+        \expected{\xi} = \sigma \under{\expected{\eta}}{0} + a = a \\
+        \variance{\xi} = \sigma^2 \under{\variance{\eta}}{1} = \sigma^2
+      \end{cases}
+    \end{aligned}
+  \end{equation*}
+\end{proof}
+
+\begin{lemma}
+  \begin{equation*}
+    \prob{\alpha < \xi < \beta}
+    = \Phi \prh{\frac{\beta - a}{\sigma}}
+      - \Phi \prh{\frac{\alpha - a}{\sigma}}
+  \end{equation*}
+\end{lemma}
+
+\begin{lemma}
+  \begin{equation*}
+    \prob{\alpha < \xi < \beta}
+    = F_{\xi} (\beta) - F_{\xi} (\alpha)
+    = F_0 \prh{\frac{\beta - a}{\sigma}}
+      - F_0 \prh{\frac{\alpha - a}{\sigma}}
+    = \Phi \prh{\frac{\beta - a}{\sigma}}
+      - \Phi \prh{\frac{\alpha - a}{\sigma}}
+  \end{equation*}
+\end{lemma}
+
+\begin{lemma} \label{lem:diff-from-expected}
+  Вероятность отклонения нормальной случайной величины от ее среднего значения
+  (или попадания в симметричный интервал относительно среднего) равна
+
+  \begin{equation*}
+    \prob{\abs{\xi - a} < t} = 2 \Phi \prh{\frac{t}{\sigma}}
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  \begin{equation*}
+    \prob{\abs{\xi - a} < t}
+    = \prob{a - t < \xi < a + t}
+    = \Phi \prh{\frac{a + t - a}{\sigma}} - \Phi \prh{\frac{a - t - a}{\sigma}}
+    = 2 \Phi \prh{\frac{t}{\sigma}}
+  \end{equation*}
+\end{proof}
+
+\begin{remark}
+  Если \(\Phi(x)\) заменить на \(F_0 (x)\), то формула
+  \ref{lem:diff-from-expected} приобретет вид
+
+  \begin{equation*}
+    \prob{\abs{\xi - a} < t} = 2 F_0 \prh{\frac{t}{\sigma}} - 1
+  \end{equation*}
+\end{remark}
+
+\begin{lemma}[Правило \quote{трех сигм}]
+  \begin{equation*}
+    \prob{\abs{\xi - a} < 3 \sigma} \approx 0.9973
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  \begin{equation*}
+    \prob{\abs{\xi - a} < 3 \sigma}
+    = 2 \Phi \prh{\frac{3 \sigma}{\sigma}}
+    = 2 \Phi (3)
+    \approx 0.9973
+  \end{equation*}
+\end{proof}
+
+\begin{remark}
+  Как правило, при нормальном распределении случайной величины, мы почти
+  гарантированно попадаем в интервал \(\segment{a - 3 \sigma}{a + 3 \sigma}\).
+\end{remark}
+
+\begin{lemma}[Линейность]
+  \begin{equation*}
+    \xi \in N(a; \sigma^2)
+    \implies
+    \eta = \gamma \xi + b \in N(\gamma a + b; \gamma^2 \sigma^2)
+  \end{equation*}
+\end{lemma}
+
+\begin{lemma}[Устойчивость относительно суммирования]
+  Если \(\xi_1\) и \(\xi_2\) независимые случайные величины, то
+
+  \begin{equation*}
+    \begin{rcases}
+      \xi_1 \in N(a_1; \sigma_1^2) \\
+      \xi_2 \in N(a_2; \sigma_2^2)
+    \end{rcases}
+    \implies
+    \xi_1 + \xi_2 \in N(a_1 + a_2; \sigma_1^2 + \sigma_2^2)
+  \end{equation*}
+\end{lemma}
+
+\subheader{Коэффициенты асимметрии и эксцесса}
+
+\begin{definition}
+  Асимметрией распределения называется число
+
+  \begin{equation*}
+    A_S
+    = \expected{\prh{\frac{\xi - a}{\sigma}}^3}
+    = \frac{\mu_3}{\sigma^3}
+  \end{equation*}
+\end{definition}
+
+\begin{remark}
+  Если распределение симметрично относительно точки \(a\), то \(A_S = 0\). Если
+  \(A_S > 0\), то график плотности имеет более крутой спуск слева и наоборот.
+\end{remark}
+
+\begin{definition}
+  Эксцессом распределения называется число
+
+  \begin{equation*}
+    E_k
+    = \expected{\prh{\frac{\xi - a}{\sigma}}^4} - 3
+    = \frac{\mu^4}{\sigma^4} - 3
+  \end{equation*}
+\end{definition}
+
+\begin{remark}
+  Если случайная величина имеет нормальное распределение \(E_k = 0\). При \(E_k
+  > 0\) имеет более \quote{острую} вершину, чем у нормального распределения, а
+  при \(E_k < 0\)~--- более \quote{тупую}.
+\end{remark}
+
+\subheader{Стандартизация случайной величины}
+
+\begin{definition}
+  Пусть имеется случайная величина \(\xi\). Соответствующей ей стандартной
+  случайной величиной называется случайная величина
+
+  \begin{equation*}
+    \eta = \frac{\xi - \expected{\xi}}{\sigma_{\xi}}
+  \end{equation*}
+\end{definition}
+
+\begin{lemma}
+  \begin{equation*}
+    \expected{\eta} = 0
+    \qquad
+    \variance{\eta} = 1
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  \begin{equation*}
+    \begin{aligned}
+      \expected{\eta}
+      = \expected{\frac{\xi - \expected{\xi}}{\xi}}
+      = \frac{1}{\sigma_{\xi}} \prh{\expected{\xi} - \expected{\xi}}
+      = 0
+    \\
+      \variance{\eta}
+      = \variance{\frac{\xi - \expected{\xi}}{\sigma_{\xi}}}
+      = \frac{1}{\sigma_{\xi}^2} \variance{\xi - \expected{\xi}}
+      = \frac{1}{\sigma_{\xi}^2} \variance{\xi}
+      = \frac{1}{\sigma_{\xi}^2} \sigma_{\xi}^2
+      = 1
+    \end{aligned}
+  \end{equation*}
+\end{proof}
+
+\begin{remark}
+  Стандартизованная случайная величина не зависит от единиц измерения.
+\end{remark}
+
+\begin{remark}
+  При операции стандартизации в общем случае тип распределения может поменяться.
+\end{remark}
