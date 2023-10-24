@@ -514,6 +514,37 @@
   \end{equation*}
 \end{theorem}
 
+\subheader{Независимость случайных величин}
+
+\begin{definition}
+  Случайные величины \(\xi\) и \(\eta\) называются независимыми, если
+
+  \begin{equation*}
+    \forall B_1, B_2 \in \mathcal{B} (\RR) \given
+    \prob{\xi \in B_1, \eta \in B_2} = \prob{\xi \in B_1} \prob{\eta \in B_2}
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  Случайные величины \(\xi_1, \dotsc \xi_n\) называются независимыми, если
+
+  \begin{equation*}
+    \forall B_1, \dotsc, B_n \in \mathcal{B} (\RR) \given
+    \prob{\xi_1 \in B_1, \dotsc, \xi_n \in B_n}
+    = \prob{\xi_1 \in B_1} \dotsc \prob{\xi_n \in B_n}
+  \end{equation*}
+\end{definition}
+
+\begin{remark}
+  Из независимости в совокупности следует попарная независимость. Обратное в
+  общем случае неверно.
+\end{remark}
+
+\begin{remark}
+  В дальнейшем под независимыми случайными величинами понимает независимые в
+  совокупности случайные величины.
+\end{remark}
+
 \subheader{Числовые характеристики абсолютно непрерывного распределения}
 
 \subsubheader{I.}{Математическое ожидание}
