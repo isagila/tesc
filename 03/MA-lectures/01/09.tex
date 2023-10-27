@@ -1,0 +1,252 @@
+\subsection{%
+  Лекция \texttt{23.10.27}.%
+}
+
+\subheader{Свойства коэффициентов}
+
+Дана \(f(x)\) на \(\segment{-\pi}{\pi}\). Многочлены вида
+
+\begin{equation*}
+  \phi(x) = \frac{\alpha_0}{2} + \sum_{k = 1}^{\infty} \prh{
+    \alpha_k \cos k x + \beta_k \sin k x
+  }
+\end{equation*}
+
+приближают \(f(x)\). Среднеквадратичное отклонение примем за
+
+\begin{equation*}
+  \sigma^2 = \frac{1}{2 \pi} \int_{-\pi}^{\pi} \prh{f(x) - \phi(x)}^2 \dd x
+\end{equation*}
+
+Найдем коэффициенты \(\alpha_k\), \(\beta_k\) для \quote{хорошего} приближения
+(\(\sigma^2\) минимально).
+
+\begin{equation*}
+  \sigma^2
+  = \frac{1}{2 \pi} \int_{-\pi}^{\pi}
+    \prh[\Big]{f^2 (x) - 2 f(x) \phi(x) + \phi^2 (x)}^2 \dd x
+\end{equation*}
+
+Это можно привести к виду
+
+\begin{equation*}
+  \sigma^2
+  = \frac{1}{2 \pi} \int_{-\pi}^{\pi} f^2 (x) \dd x
+    - \frac{a_0}{4} - \frac{1}{2} \sum_{k = 1}^n \prh{a_k^2 + b_k^2}
+    + \frac{(a_0 - \alpha_0)^2}{4} + \sum_{k = 1}^{\infty}
+      \prh{(a_k - \alpha_k)^2 + (b_k - \beta_k)^2}
+\end{equation*}
+
+Где \(a_k\), \(b_k\) это коэффициенты ряда Фурье для функции \(f(x)\). Таким
+образом
+
+\begin{equation*}
+  \sigma^2_{\min}
+  = \frac{1}{2 \pi} \int_{-\pi}^{\pi} f^2 (x) \dd x - \frac{1}{2} \prh{
+    \frac{a_0}{2} + \sum_{k = 1}^n \prh{a_k^2 + b_k^2}
+  }
+\end{equation*}
+
+при \(\alpha_k = a_k\) и \(\beta_k = b_k\). Отсюда, т.к. \(\sigma^2_{\min} \ge
+0\) получаем неравенство, которое называется неравенством Бесселя
+
+\begin{equation} \label{eq:bessel-inequality}
+  \frac{1}{2 \pi} \int_{-\pi}^{\pi} f^2 (x) \dd x
+  \ge
+  \frac{a_0}{2} + \sum_{k = 1}^{\infty} \prh{a_k^2 + b_k^2}
+\end{equation}
+
+Мы может заменить \(n\) на \(\infty\), т.к. рассуждения выше справедливы для
+любого \(n\). Таким образом, если \(f^2 (x)\) интегрируема и интеграл в левой
+части неравенства существует и конечен, то ряд в правой части сходится (он
+меньше конечного числа).
+
+Если \(f(x)\) удовлетворяет условиям Дирихле и раскладывается по системе
+\(\display{\set{\frac{1}{\sqrt{2 \pi}}, \frac{\cos x}{\sqrt{\pi}},
+\frac{\sin x}{\sqrt{\pi}}, \dotsc}}\), то неравенство превращается в равенство,
+которое называется равенством Парсенваля и при этом \(\sigma^2 \to 0\) при \(n
+\to \infty\).
+
+\begin{equation} \label{eq:parseval-identity}
+  \frac{1}{2 \pi} \int_{-\pi}^{\pi} f^2 (x) \dd x
+  =
+  \frac{a_0}{2} + \sum_{k = 1}^{\infty} \prh{a_k^2 + b_k^2}
+\end{equation}
+
+\subheader{Комплексная форма ряда Фурье}
+
+Известно, что
+
+\begin{equation*}
+  e^{i \phi} = \cos \phi + i \sin \phi
+  \qquad
+  e^{-i \phi} = \cos \phi - i \sin \phi
+\end{equation*}
+
+Используя эти равенства получаем
+
+\begin{equation*}
+  \cos n x = \frac{e^{i n x} + e^{-i n x}}{2}
+  \qquad
+  \sin n x = \frac{e^{i n x} - e^{-i n x}}{2}
+\end{equation*}
+
+Подставим это в общий вид ряда Фурье.
+
+\begin{equation*}
+  \begin{aligned}
+    f(x) = \frac{a_0}{2} + \sum_{k = 1}^{\infty} \prh{
+      a_n \cos n x + b_n \sin n x
+    }
+  \\
+    f(x) = \frac{a_0}{2} + \sum_{k = 1}^{\infty} \prh{
+      a_n \cdot \frac{e^{i n x} + e^{-i n x}}{2}
+      + b_n \cdot \frac{e^{i n x} - e^{-i n x}}{2 i}
+    }
+  \\
+    f(x) = \frac{a_0}{2} + \sum_{k = 1}^{\infty} \prh{
+      e^{i n x} \prh{\frac{a_n}{2} + \frac{b_n}{2 i}}
+      + e^{-i n x} \prh{\frac{a_n}{2} - \frac{b_n}{2 i}}
+    }
+  \\
+    f(x) = \frac{a_0}{2} + \sum_{k = 1}^{\infty} \prh{
+      e^{i n x} \cdot \frac{a_n - i b_n}{2}
+      + e^{-i n x} \cdot \frac{a_n + i b_n}{2}
+    }
+  \end{aligned}
+\end{equation*}
+
+Введем новые обозначения
+
+\begin{equation*}
+  c_0 = \frac{a_0}{2}
+  \qquad
+  c_n = \frac{a_n - i b_n}{2}
+  \qquad
+  c_{-n} = \frac{a_n + i b_n}{2}
+  \qquad
+  (n > 0)
+\end{equation*}
+
+Поработаем с \(c_n\) и \(c_{-n}\).
+
+\begin{equation*}
+  \begin{aligned}
+    c_n
+    = \frac{1}{2} \prh{
+      \frac{1}{\pi} \int_{-\pi}^{\pi} f(x) \cos n x \dd x
+      - \frac{i}{\pi} \int_{-\pi}^{\pi} f(x) \cos n x \dd x
+    }
+    = \frac{1}{2 \pi} \int_{-\pi}^{\pi} f(x)
+      \prh[\Big]{\cos n x - i \sin n x} \dd x
+    = \frac{1}{2 \pi} \int_{-\pi}^{\pi} f(x) e^{-i n x} \dd x
+  \\
+    c_{-n}
+    = \dotsc
+    = \frac{1}{2 \pi} \int_{-\pi}^{\pi} f(x) e^{i n x} \dd x
+  \\
+    \implies
+    c_n = \frac{1}{2 \pi} \int_{-\pi}^{\pi} f(x) e^{-i n x} \dd x
+    \qquad
+    (n \in \ZZ)
+  \end{aligned}
+\end{equation*}
+
+Итого получаем следующий общий вид ряда Фурье в комплексной форме.
+
+\begin{equation*}
+  f(x) = \sum_{n \in \ZZ} c_n e^{-i n x}
+\end{equation*}
+
+\begin{remark}
+  Если \(f(x)\) имеет период \(T = 2 l\), тогда
+
+  \begin{equation*}
+    f(x) = \sum_{n \in \ZZ} c_n e^{-i \frac{\pi n}{l} x}
+    \qquad
+    c_n = \frac{1}{2 l} \int_{-l}^l f(x) e^{-i \frac{\pi n}{l} x} \dd x
+  \end{equation*}
+\end{remark}
+
+\begin{remark}
+  \(\alpha_n = \frac{\pi n}{l}\) это волновые числа, а последовательность
+  \(\seq{\alpha_n}\) это дискретный спектр. Получаем гармонику:
+
+  \begin{equation*}
+    e^{- i \frac{\pi n}{l} x}
+    = \cos \frac{\pi n}{l} x - i \sin \frac{\pi n}{l} x
+  \end{equation*}
+\end{remark}
+
+\subheader{Преобразование Фурье}
+
+Рассмотрим функцию \(f \colon \RR \to \RR\), для которой
+\(\display{\int_{-\infty}^{\infty} \abs{f(x)} \dd x \in \RR}\). Имеем
+
+\begin{equation*}
+  \begin{aligned}
+    f(x)
+    = \frac{1}{2 l} \int_{-l}^l f(t) \dd t
+      + \frac{1}{l} \sum_{n = 1}^{\infty} \prh[\Bigg]{
+        \cos n x \cdot \prh{\int_{-l}^l f(t) \cos \frac{\pi n}{l} t \dd t}
+        + \sin  n x \cdot \prh{\int_{-l}^l f(t) \sin \frac{\pi n}{l} t \dd t}
+      }
+  \\
+    f(x)
+    = \frac{1}{2 l} \int_{-l}^l f(t) \dd t + \frac{1}{l} \sum_{n = 1}^{\infty}
+      \int_{-l}^l f(t) \cos \prh{\frac{\pi n}{l} (t - x)} \dd t
+  \\
+    \begin{rcases}
+      \dd \alpha = \frac{\pi}{l} \\
+      \alpha_k = \frac{\pi k}{l} \\ 
+      \dd \alpha
+        = \Delta_k \alpha
+        = \alpha_{k + 1} - \alpha_k
+        = \frac{\pi}{l}
+    \end{rcases}
+    \Rarr{l \to \infty}
+    \Delta_k \alpha = \dd a \to 0
+  \\
+    f(x)
+    = \frac{1}{2 l} \int_{-l}^l f(t) \dd t + \frac{1}{\pi} \int_1^{\infty} \prh{
+      \int_{-\infty}^{\infty} f(t) \cos (\alpha (t - x)) \dd t
+    } \dd \alpha
+  \\
+    f(x)
+    = \frac{1}{\pi} \int_0^{\infty} \int_{-\infty}^{\infty}
+      f(t) \cos (\alpha (t - x)) \dd t \dd \alpha
+  \end{aligned}
+\end{equation*}
+
+Последний полученный интеграл называется интегралом Фурье.
+
+\begin{remark}
+  Для интеграла Фурье выполнены свойства ряда Фурье (значения в точках разрыва
+  функции, свойство четности и нечетности).
+\end{remark}
+
+Полученный интеграл можно разбить на части, тогда
+
+\begin{equation*}
+  \begin{aligned}
+    f(x)
+    = \frac{1}{\pi} \int_0^{\infty} \under{\prh{
+      \int_{-\infty}^{\infty} f(t) \cos \alpha t \dd t
+    }}{A(\alpha)} \cos \alpha x \dd x
+    +
+    \frac{1}{\pi} \int_0^{\infty} \under{\prh{
+      \int_{-\infty}^{\infty} f(t) \sin \alpha t \dd t
+    }}{B(\alpha)} \sin \alpha x \dd x
+  \\
+    f(x) = \int_0^{\infty} \prh[\Big]{
+      A (\alpha) \cos \alpha x + B(\alpha) \sin \alpha x
+    } \dd x
+  \\
+    f(x) = \frac{1}{2 \pi}
+      \int_{-\infty}^{\infty} \dd \alpha
+      \int_{-\infty}^{\infty} f(t) e^{-i \alpha (t - x)} \dd t
+  \end{aligned}
+\end{equation*}
+
+Последний переход выполнен по формуле Эйлера. Выражение, получившееся в итоге,
+называется преобразованием Фурье.
