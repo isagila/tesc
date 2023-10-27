@@ -45,15 +45,15 @@
 расстояние от \(f(x)\) до \(P_n (x)\) как среднеквадратическое отклонение (СКО):
 
 \begin{equation*}
-  \delta^2 = \frac{1}{\pi} \int_{-\pi}^{\pi} \prh{
+  \sigma^2 = \frac{1}{2 \pi} \int_{-\pi}^{\pi} \prh{
     f(x) - \frac{\alpha_0}{2}
       - \sum_{k = 1}^{n} \prh{\alpha_k \cos k x + \beta_k \sin k x}
   }^2 \dd x
 \end{equation*}
 
 Далее будет показано, что именно многочлен Фурье является минимально отстоящим,
-т.е. \(\delta^2\)~--- наименьшее при \(\alpha_k = a_k\) и \(\beta_k = b_k\).
-Более того, \(\delta \to 0\) при \(n \to \infty\). Сейчас определим ряд Фурье и
+т.е. \(\sigma^2\)~--- наименьшее при \(\alpha_k = a_k\) и \(\beta_k = b_k\).
+Более того, \(\sigma \to 0\) при \(n \to \infty\). Сейчас определим ряд Фурье и
 изучим его свойства.
 
 \begin{definition}[Тригонометрический ряд Фурье]
@@ -240,6 +240,14 @@
 
 \begin{equation*}
   b_k = \frac{1}{l} \int_{-l}^{l} f(x) \sin \frac{\pi k}{l} x \dd x
+\end{equation*}
+
+В итоге имеем
+
+\begin{equation*}
+  f(x) = \frac{a_0}{2} + \sum_{n = 1}^{\infty} \prh{
+    a_n \cos \frac{\pi n}{l} x + b_n \sin \frac{\pi n}{l} x
+  }
 \end{equation*}
 
 \begin{remark}
