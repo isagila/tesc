@@ -45,3 +45,432 @@
 
 Таким образом существуют только дискретные, абсолютно непрерывные, сингулярные
 распределения и их смеси.
+
+\subheader{Преобразование случайных величин}
+
+Пусть \(\xi\) это случайная величина на вероятностном пространстве
+\(\tuple{\Omega, \euF, \probP}\). Рассмотрим функцию \(g(\xi) \colon \Omega \to
+\RR\), где \(g(x) \colon \RR \to \RR\). Вопрос: когда \(g(\xi)\) также является
+случайной величиной?
+
+\begin{definition}
+  Функция \(g(x)\) называется борелевской, если \(\forall B \in \mathcal{B}
+  \given g^{-1} (B) \in \mathcal{B}\), т.е. прообраз любого борелевского
+  множества является борелевским множеством.
+\end{definition}
+
+\begin{theorem}
+  Если функция \(g(x)\)~--- борелевская, \(\xi\)~--- случайная величина на
+  вероятностном пространстве \(\tuple{\Omega, \euF, \probP}\), то \(g(\xi)\)
+  также будет случайной величиной на том же вероятностном пространстве
+  \(\tuple{\Omega, \euF, \probP}\).
+\end{theorem}
+
+\begin{proof}
+  \(\forall B \in \mathcal{B}\) прообраз \(g^{-1} (B) = \xi^{-1} (B') \in
+  \euF \implies g(\xi)\) измеримая функция и является случайной величиной.
+\end{proof}
+
+\begin{remark}
+  На практике почти все функции борелевские.
+\end{remark}
+
+\begin{remark}
+  Возможная ситуация, когда \(\xi\)~--- абсолютно непрерывная случайная
+  величина, \(g(x)\)~--- непрерывная функция, однако \(g(\xi)\) имеет дискретное
+  распределение.
+\end{remark}
+
+\begin{theorem} \label{thr:monotonic-density}
+  Пусть \(f_{\xi} (x)\)~--- плотность случайной величины \(\xi\) и функция
+  \(g(x)\) строго монотонная. Тогда случайная величина \(\eta = g(\xi)\) имеет
+  плотность
+
+  \begin{equation*}
+    f_{\eta} (x) = \abs{h' (x)} f_{\xi} (h(x))
+    \qquad
+    h(x) = g^{-1} (x)
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Пусть \(g(x)\)~--- возрастающая функция, тогда \(h(x)\) также возрастающая и
+  случайная величина \(g(\xi)\) распределена на
+  \(\interval{g(-\infty)}{g(+\infty)}\). Ее функция распределения
+
+  \begin{equation*}
+    \begin{aligned}
+      F_{\eta} (x)
+      = \prob{\eta < x}
+      = \prob{g(\xi) < x}
+      = \prob{\xi < h(x)}
+      = \int_{-\infty}^{h(x)} f_{\xi} (t) \dd t
+    \\
+      \mtxb{
+        t = h(y) & \dd t = h' (y) \dd y & y = g(t) \\
+        y(-\infty) = g(-\infty) & y(h(x)) = g(h(x)) = x
+      }
+    \\
+      F_{\eta} (x)
+      = \int_{g(-\infty)}^{x} f_{\xi} (h(y)) h'(y) \dd y
+      \implies f_{\eta} (x) = \abs{h'(x)} f_{\xi} (h(x))
+    \end{aligned}
+  \end{equation*}
+
+  Пусть \(g(x)\)~--- убывающая функция, тогда \(h(x)\) также убывающая и
+  случайная величина \(g(\xi)\) распределена на
+  \(\interval{g(+\infty)}{g(-\infty)}\). Ее функция распределения
+
+  \begin{equation*}
+    \begin{aligned}
+      F_{\eta} (x)
+      = \prob{\eta < x}
+      = \prob{g(\xi) < x}
+      = \prob{\xi > h(x)}
+      = \int_{h(x)}^{+\infty} f_{\xi} (t) \dd t
+    \\
+      \mtxb{
+        t = h(y) & \dd t = h' (y) \dd y & y = g(t) \\
+        y(h(x)) = g(h(x)) = x & y(+\infty) = g(+\infty)
+      }
+    \\
+      F_{\eta} (x)
+      = \int_{x}^{g(+\infty)} f_{\xi} (h(y)) h'(y) \dd y
+      = \int_{g(+\infty)}^{x} -h'(y) f_{\xi} (h(y)) \dd y
+      \implies f_{\eta} (x) = \abs{h'(x)} f_{\xi} (h(x))
+    \end{aligned}
+  \end{equation*}
+\end{proof}
+
+\begin{theorem}[О линейном преобразовании]
+  Пусть случайная величина \(\xi\) имеет плотность \(f_{\xi} (x)\). Тогда
+  случайная величина \(\eta = a \xi + b\) имеет плотность
+
+  \begin{equation*}
+    f_{\eta} (x) = \frac{1}{\abs{a}} f_{\xi} \prh{\frac{x - b}{a}}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Линейное преобразование монотонно, имеем
+
+  \begin{equation*}
+    g(x) = a x + b
+    \qquad
+    h(x) = \frac{x - b}{a}
+    \qquad
+    h'(x) = \frac{1}{a}
+  \end{equation*}
+
+  Подставляя все это в \ref{thr:monotonic-density}, получаем
+
+  \begin{equation*}
+    f_{\eta} (x) = \frac{1}{\abs{a}} f_{\xi} \prh{\frac{x - b}{a}}
+  \end{equation*}
+\end{proof}
+
+\begin{lemma}
+  \begin{equation*}
+    \xi \in N(a; \sigma^2)
+    \implies
+    \eta = \gamma \xi + b \in N(\gamma a + b; \gamma^2 \sigma^2)
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  \begin{equation*}
+    \begin{aligned}
+      f_{\xi} (x)
+      = \frac{1}{\sigma \sqrt{2 \pi}} e^{\frac{(x - a)^2}{2 \sigma^2}}
+      \qquad
+      x \in \interval{-\infty}{+\infty}
+    \\
+      \eta = \gamma \xi + b \in \interval{-\infty}{+\infty}
+    \\
+      f_{\eta} (x)
+      = \frac{1}{\abs{\gamma}} \frac{1}{\sigma \sqrt{2 \pi}} \exp \prh{
+        -\frac{\prh{\frac{x - b}{\gamma} - a}^2}{2 \sigma^2}
+      }
+      = \frac{1}{\sigma \abs{\gamma} \sqrt{2 \pi}} \exp \prh{
+        -\frac{(x - b - \gamma a)^2}{2 (\sigma \gamma)^2}
+      }
+    \end{aligned}
+  \end{equation*}
+
+  Получили плотность нормального распределения с параметрами \(\tilde{a} = b +
+  \gamma a\) и \(\tilde{\sigma}^2 = (\gamma \sigma)^2\)
+\end{proof}
+
+\begin{lemma}
+  Если \(\eta \in N(0; 1)\), то \(\xi = \sigma \eta + a \in N(a; \sigma^2)\)
+\end{lemma}
+
+\begin{proof}
+  Это следствие из предыдущей леммы.
+\end{proof}
+
+\begin{lemma}
+  Если \(\eta \in \evenly{0}{1}\), то \(\xi = a \eta + b \in \evenly{b}{b +
+  a}\).
+\end{lemma}
+
+\begin{proof}
+  \todo на практике
+\end{proof}
+
+\begin{lemma}
+  Если \(\xi \in E_{\alpha}\), то \(\eta = \beta \xi \in
+  E_{\frac{\alpha}{\beta}}\).
+\end{lemma}
+
+\begin{proof}
+  \todo на практике
+\end{proof}
+
+\subheader{Квантильное преобразование}
+
+\begin{theorem}
+  Пусть функция распределения \(F_{\xi} (x)\) случайной величины \(\xi\)
+  непрерывна. Тогда случайная величина \(\eta = F(\xi) \in \evenly{0}{1}\).
+\end{theorem}
+
+\begin{proof}
+  Ясно, что новая случайная величина \(\eta \in \segment{0}{1}\), т.к. \(0 \le
+  F(x) \le 1\). Рассмотрим два случая.
+
+  \subsubheader{Случай I.}{\(F(x)\)~--- строго возрастающая функция}
+
+  В этом случае \(F(x)\) имеет обратную функцию \(F^{-1} (x)\) и 
+
+  \begin{equation*}
+    F_{\eta} (x)
+    = \prob{\eta < x}
+    = \prob{F(\xi) < x}
+    = \prob{\xi < F^{-1} (x)}
+    = \begin{cases}
+      0,                 & x < 0 \\
+      F(F^{-1} (x)) = x, & 0 \le x < 1 \\
+      1,                 & x \ge 1
+    \end{cases}
+  \end{equation*}
+
+  Получили функцию распределения \(\in \evenly{0}{1}\).
+
+  \subsubheader{Случай II.}{\(F(x)\)~--- не является строго возрастающей
+  функцией, т.е. есть интервалы постоянства}
+
+  В этом случае обозначим через \(F^{-1} (x)\) самую левую точку такого
+  интервала:
+
+  \begin{equation*}
+    F^{-1}(x) = \min_t \set{t \given F(t) = x}
+  \end{equation*}
+
+  Тогда при \(0 < x < 1\)
+
+  \begin{equation*}
+    F_{\eta} (x)
+    = \prob{F(\xi) < x}
+    = \prob{\xi < F^{-1} (x)}
+    = F(F^{-1} (x)) = x
+  \end{equation*}
+\end{proof}
+
+Сформулируем обратную теорему. Пусть \(F(x)\)~--- функция распределения
+случайной величины \(\xi\), причем не обязательно непрерывная. Обозначим:
+
+\begin{equation*}
+  F^{-1} (x) = \inf_t \set{t \given F(t) \ge x}
+\end{equation*}
+
+\begin{theorem}
+  Пусть случайная величина \(\eta \in \evenly{0}{1}\), а \(F(x)\)~---
+  произвольная функция распределения. Тогда случайная величина \(\xi = F^{-1}
+  (\eta)\) имеет функцию распределения \(F(x)\).
+\end{theorem}
+
+\begin{proof}
+  \begin{equation*}
+    F_{\xi} (x)
+    = \prob{\xi < x}
+    = \prob{F^{-1} (\eta) < x}
+    = \prob{\eta < F(x)}
+    = \frac{F(x) - 0}{1 - 0}
+    = F(x)
+  \end{equation*}  
+\end{proof}
+
+\begin{remark}
+  Датчики случайных чисел имеют распределение \(\evenly{0}{1}\). С помощью
+  квантильного преобразования мы можем смоделировать любое другое распределение.
+\end{remark}
+
+\begin{example}
+  Смоделируем показательное распределение \(E_{\alpha}\).
+
+  \begin{equation*}
+    \begin{aligned}
+      F(x) = \begin{cases}
+        0, & x < 0 \\
+        1 - e^{-\alpha x}, & x \ge 0
+      \end{cases}
+    \\
+      \eta = 1 - e^{-\alpha x}
+      \implies
+      x = -\frac{1}{\alpha} \ln (1 - \eta) = F^{-1} (x)
+    \end{aligned}
+  \end{equation*}
+
+  Таким образом, если \(\eta \in \evenly{0}{1}\), то
+  \(\display{-\frac{1}{\alpha} \ln (1 - \eta) \in E_{\alpha}}\).
+\end{example}
+
+\begin{example}
+  Смоделируем стандартное нормальное распределение \(N(0; 1)\).
+
+  \begin{equation*}
+    F_0 (x) = \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{x} e^{-z^2 / 2} \dd z
+  \end{equation*}
+
+  Пусть \(F_0^{-1} (x)\)~--- обратная функция. Таким образом, если \(\eta \in
+  \evenly{0}{1}\), то \(F_0^{-1} (\eta) \in N(0; 1)\).
+\end{example}
+
+\subheader{Математическое ожидание преобразованной случайной величины}
+
+\begin{theorem}
+  Для произвольной борелевской функции \(g(x)\) справедливо:
+
+  \begin{enumerate}
+  \item
+    Если \(\xi\) это дискретная случайная величина, то
+
+    \begin{equation*}
+      \expected{g(\xi)} = \sum_{i = 1}^{\infty} g(x_i) \prob{\xi = x_i}
+    \end{equation*}
+
+    при условии, что данный ряд сходится абсолютно.
+
+  \item
+    Если \(\xi\) это абсолютно непрерывная случайная величина, то
+
+    \begin{equation*}
+      \expected{g(\xi)} = \int_{-\infty}^{\infty} g(x) f_{\xi} (x) \dd x
+    \end{equation*}
+
+    при условии, что данный интеграл сходится абсолютно.
+  \end{enumerate}
+\end{theorem}
+
+\subheader{Свойства моментов}
+
+\begin{lemma}
+  \begin{equation*}
+    \xi \ge 0
+    \implies
+    \expected{\xi} \ge 0
+  \end{equation*}
+\end{lemma}
+
+\begin{lemma} \label{lm:expected-compare}
+  \begin{equation*}
+    \xi \ge \eta
+    \implies
+    \expected{\xi} \ge \expected{\eta}
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  \begin{equation*}
+    \xi \ge \eta
+    \implies \xi - \eta \ge 0
+    \implies \expected{\xi - \eta} = \expected{\xi} - \expected{\eta} \ge 0
+    \implies \expected{\xi} \ge \expected{\eta}
+  \end{equation*}
+\end{proof}
+
+\begin{lemma}
+  \begin{equation*}
+    \abs{\xi} \ge \abs{\eta}
+    \implies
+    \expected{\abs{\xi}^k} \ge \expected{\abs{\eta}^k}
+  \end{equation*}
+\end{lemma}
+
+\begin{lemma}
+  Если существует момент \(m_t\) случайной величины \(\xi\), то существуют ее
+  моменты меньшего порядка \(m_s (s < t)\).
+\end{lemma}
+
+\begin{proof}
+  Заметим, что
+
+  \begin{equation*}
+    \begin{rcases}
+      x \ge 1 \colon & \abs{x}^s \le \abs{x}^t \\
+      x < 1   \colon & \abs{x}^s \le 1
+    \end{rcases}
+    \implies
+    \abs{x}^s \le \max \prh{\abs{x}^t, 1} \le \abs{x}^t + 1
+    \implies
+    \expected{\abs{\xi}^s} < \expected{\abs{\eta}^t} + 1
+  \end{equation*}
+
+  Если \(\expected{\abs{\eta}^t} < \infty\), то и \(\expected{\abs{\eta}^s} <
+  \infty\).
+\end{proof}
+
+\begin{theorem}[Неравенство Йенсена] \label{thr:jensen-inequality}
+  Пусть функция \(g(x)\) выпукла вниз. Тогда для любой случайной величины
+  \(\xi\) верно неравенство
+
+  \begin{equation*}
+    \expected{\xi} \ge g \prh{\expected{\xi}}
+  \end{equation*}
+
+  Если функция выпукла вверх, то знак неравенства поменяется на противоположный.
+\end{theorem}
+
+\begin{proof}
+  Если функция \(g(x)\) выпукла вниз, то в любой точке ее графика можно провести
+  прямую, лежащую ниже графика, т.е.
+
+  \begin{equation*}
+    \forall x_0
+    \given \exists k(x_0)
+    \given g(x) \ge g(x_0) + k(x_0) (x - x_0)
+  \end{equation*}
+
+  Положим \(x_0 = \expected{\xi}\) и \(x = \xi\), тогда
+
+  \begin{equation*}
+    g(\xi) \ge g \prh{\expected{\xi}}
+      + k \prh{\expected{\xi}} \prh{\xi - \expected{\xi}}
+  \end{equation*}
+
+  По \ref{lm:expected-compare} получаем, что
+
+  \begin{equation*}
+    \begin{aligned}
+      \expected{g(\xi)} \ge \expected{g \prh{\expected{\xi}}}
+        + k \prh{\expected{\xi}} \under{\expected{\xi - \expected{\xi}}}{0}
+    \\
+      \expected{g(\xi)} \ge g \prh{\expected{\xi}}
+    \end{aligned}
+  \end{equation*}
+\end{proof}
+
+\begin{example}
+  С помощью \ref{thr:jensen-inequality} можно, например, получить следующие
+  неравенства:
+
+  \begin{equation*}
+    \begin{aligned}
+      \expected{e^{\xi}} \ge e^{\expected{\xi}} &
+    \\
+      \expected{\xi^n} \ge \prh{\expected{\xi}}^n \qquad (n > 1)
+    \\
+      \expected{\ln \xi} \le \ln \prh{\expected{\xi}} &
+    \end{aligned}
+  \end{equation*}
+\end{example}
