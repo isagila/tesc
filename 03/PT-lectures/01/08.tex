@@ -263,9 +263,8 @@
 \galleryone{01_08_07}{Функция Гаусса}
 
 Функция распределения \(F_0 (x)\) будет иметь вид
-
 \begin{equation*}
-  F_0 (x) = \frac{1}{2 \pi} \int_{-\infty}^{x} e^{-z^2 / 2} \dd z
+  F_0 (x) = \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{x} e^{-z^2 / 2} \dd z
 \end{equation*}
 
 \begin{remark}
@@ -313,7 +312,7 @@
     \variance{\xi}
     = \int_{-\infty}^{\infty} x^2 \phi(x) \dd x
       - \under{\prh{\expected{\xi}}^2}{0}
-    = \frac{1}{\sqrt{2 pi}} \int_{-\infty}^{\infty} x^2 e^{-x^2 / 2} \dd x
+    = \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty} x^2 e^{-x^2 / 2} \dd x
     = \mtxb{
       u = x & \dd u = \dd x \\
       \dd v = x e^{-x^2 / 2} \dd x & v = -e^{-x^2 / 2}
@@ -342,8 +341,8 @@
   \begin{equation*}
     \begin{aligned}
       F_{\xi} (x)
-      = \frac{1}{\sigma \sqrt{2 pi}}
-      = \int_{-\infty}^{x} e^{-\frac{(t - a)^2}{2 \sigma^2}}\dd t
+      = \frac{1}{\sigma \sqrt{2 \pi}}
+          \int_{-\infty}^{x} e^{-\frac{(t - a)^2}{2 \sigma^2}}\dd t
       = \mtxb{
         z = \frac{t - a}{\sigma} & t = \sigma z + a & \dd t = \sigma \dd z \\
         z(-\infty) = -\infty & z(x) = \frac{x - a}{\sigma}
