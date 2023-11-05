@@ -1,0 +1,453 @@
+\subsection{%
+  Лекция \texttt{23.11.07}.%
+}
+
+\subheader{Сходимость случайных величин}
+
+\subsubheader{I.}{Сходимость \quote{почти наверное}}
+
+\begin{definition}
+  Случайная величина \(\xi\) имеет свойство \(Cnd\) \quote{почти наверное}, если
+  \(\prob{\xi \text{ имеет свойство } Cnd} = 1\). Иными словами \(\prob{\omega
+  \in \Omega \given \xi(\omega) \text{ не имеет свойства } Cnd} = 0\).
+\end{definition}
+
+\begin{definition}
+  Последовательность случайных величин \(\seq{\xi_n}\) \quote{почти наверное}
+  сходится к случайной величине \(\xi\), если
+
+  \begin{equation*}
+    \prob{\omega \in \Omega \given \xi_n (\omega) \to \xi(\omega)} = 1
+  \end{equation*}
+
+  Обозначается \(\xi_n \Rarr{\text{п.н.}} \xi\).
+\end{definition}
+
+\subsubheader{II.}{Сходимость по вероятности}
+
+\begin{definition}
+  Последовательность случайных величин \(\seq{\xi_n}\) сходится по вероятности к
+  случайной величине \(\xi\), если
+
+  \begin{equation*}
+    \forall \epsilon > 0 \given
+    \prob{\abs{\xi_n - \xi} < \epsilon} \to 1
+    \qquad (n \to \infty)
+  \end{equation*}
+
+  Обозначается \(\xi_n \Rarr{\probP} \xi\).
+\end{definition}
+
+\begin{remark}
+  Это аналог сходимости по мере, только по вероятностной мере. Можно понимать
+  как ослабленную равномерную сходимость.
+
+  \begin{equation*}
+    \prob{
+      \omega \in \Omega
+      \given \xi_n (\omega) \text{ не укладывается в } \epsilon\text{-полосу}
+    } \to 0
+  \end{equation*}
+\end{remark}
+
+\begin{remark}
+  В общем случае
+
+  \begin{equation*}
+    \xi_n \Rarr{\probP} \xi
+    \not\implies
+    \expected{\xi_n} \Rarr{n \to \infty} \expected{\xi}
+  \end{equation*}
+\end{remark}
+
+\begin{theorem}
+  Пусть \(\forall n \colon \abs{\xi_n} \le C = const\), тогда
+
+  \begin{equation*}
+    \xi_n \Rarr{\probP} \xi
+    \implies
+    \expected{\xi_n} \Rarr{n \to \infty} \expected{\xi}
+  \end{equation*}
+\end{theorem}
+
+\subsubheader{III}{Слабая сходимость (сходимость по функции распределения)}
+
+\begin{definition}
+  Последовательность случайных величин \(\xi_n\) слабо сходится к случайной
+  величине \(\xi\), если
+
+  \begin{equation*}
+    F_{\xi_n} (x) \Rarr{n \to \infty} F_{\xi}
+    \qquad \forall x \given F_{\xi} (x) \text{ непрерывна в точке } x
+  \end{equation*}
+
+  Таким образом, слабая сходимость это сходимость функций распределений во всех
+  точках непрерывности. Обозначается \(\xi_n \rightrightarrows \xi\).
+\end{definition}
+
+\subheader{Связь между видами сходимости}
+
+\begin{theorem}
+  \begin{equation*}
+    \xi_n \Rarr{\text{п.н.}} \xi
+    \implies
+    \xi_n \Rarr{\probP} \xi
+    \implies
+    \xi_n \rightrightarrows \xi
+  \end{equation*}
+\end{theorem}
+
+\begin{theorem}
+  Если \(\xi_n \rightrightarrows C = const\), то \(\xi_n \Rarr{\probP} C\).
+\end{theorem}
+
+\begin{proof}
+  \begin{equation*}
+    \begin{aligned}
+      \xi_n \rightrightarrows C = const
+      \implies
+      F_{\xi_n} (x) \to F_C (x) = \begin{cases}
+        0, & x < C \\
+        1, & x \ge C
+      \end{cases}
+      \text{ за исключением точки разрыва } x = C
+    \\
+      \prob{\abs{\xi_n - C} < \epsilon}
+      = \prob{C - \epsilon < \xi_n < C + \epsilon}
+      \ge \prob{C - \frac{\epsilon}{2} \le \xi_n < C + \epsilon}
+      = F_{\xi_n} (C + \epsilon) - F_{\xi_n} \prh{C - \frac{\epsilon}{2}}
+    \\
+      F_{\xi_n} (C + \epsilon) - F_{\xi_n} \prh{C - \frac{\epsilon}{2}}
+      \Rarr{n \to \infty}
+      F_C (C + \epsilon) - F_C \prh{C - \frac{\epsilon}{2}}
+      = 1 - 0
+      = 1
+    \end{aligned}
+  \end{equation*}
+
+  Т.к. \(\prob{\abs{\xi_n - C} < \epsilon} \le 1\), то по теореме о двух
+  милиционерах \(\prob{\abs{\xi_n - C} < \epsilon} \Rarr{n \to \infty} 1\).
+\end{proof}
+
+\begin{remark}
+  В общем случае из слабой сходимость не только не следует сходимость по
+  вероятность, но даже бессмысленно говорить от этом, т.к. слабая сходимость это
+  по существу не сходимость случайных величин, а сходимость их распределений.
+\end{remark}
+
+\begin{example}
+  Пусть \(\xi \in N(0; 1)\), тогда \(\eta = -\xi \in N(0; 1)\). Получаем, что
+  \(F_{\xi} (x) = F_{\eta} (x)\). Ясно, что
+
+  \begin{equation*}
+    \xi_n \rightrightarrows \xi
+    \not\implies
+    \xi_n \Rarr{\probP} \xi
+  \end{equation*}
+
+  Т.к. в противном случае \(\xi_n \Rarr{\probP} \eta = -\xi\).
+\end{example}
+
+\subheader{Ключевые неравенства}
+
+\subsubheader{I.}{Неравенство Маркова}
+
+\begin{theorem} \label{thr:markov-inequality}
+  \begin{equation*}
+    \forall \epsilon > 0 \given
+    \prob{\abs{\xi} \ge \epsilon} \le \frac{\expected{\abs{\xi}}}{\epsilon}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  \begin{equation*}
+    I_A (\omega) = \begin{cases}
+      0, \omega \notin A \text{ событие } A \text{ не происходит} \\
+      1, \omega \in A \text{ событие } A \text{ происходит}
+    \end{cases}
+  \end{equation*}
+
+  \(I_A (\omega)\) имеет распределение Бернулли с параметром \(p\), где \(p =
+  \prob{A} \) и \(\expected{I_A (\omega)} = p = \prob{A}\).
+
+  \begin{equation*}
+    \abs{\xi}
+    \ge \abs{\xi} \cdot I \prh{\abs{\xi} \ge \epsilon}
+    \ge \epsilon \cdot I \prh{\abs{\xi} \ge \epsilon}
+  \end{equation*}
+
+  Применим математическое ожидание к обеим частям неравенства.
+
+  \begin{equation*}
+    \expected{\abs{\xi}}
+    \ge \expected{\epsilon \cdot I \prh{\abs{\xi} \ge \epsilon}}
+    = \epsilon \cdot \expected{I \prh{\abs{\xi} \ge \epsilon}}
+    = \epsilon \cdot \prob{\abs{\xi} \ge \epsilon}
+    \implies
+    \prob{\abs{\xi} \ge \epsilon}
+    \le \frac{\expected{\abs{\xi}}}{\epsilon}
+  \end{equation*}
+\end{proof}
+
+\subsubheader{II.}{Неравенство Чебышева}
+
+\begin{theorem} \label{thr:chebyshev-inequality}
+  \begin{equation*}
+    \prob{\abs{\xi - \expected{\xi}} \ge \epsilon}
+    \le
+    \frac{\variance{\xi}}{\epsilon^2}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  По \ref{thr:markov-inequality} имеем
+
+  \begin{equation*}
+    \prob{\abs{\xi - \expected{\xi}} \ge \epsilon}
+    = \prob{\abs{\xi - \expected{\xi}}^2 \ge \epsilon^2}
+    \le \frac{\expected{\prh{\xi - \expected{\xi}}^2}}{\epsilon^2}
+    = \frac{\variance{\xi}}{\epsilon^2}
+  \end{equation*}
+\end{proof}
+
+\begin{lemma}{Оценка для стандартизованной случайной величины}
+  Пусть \(\eta = \frac{\xi - \expected{\xi}}{\stder{\xi}}\), тогда
+
+  \begin{equation*}
+    \prob{\abs{\eta} \ge \epsilon} \le \frac{1}{\epsilon^2}
+  \end{equation*}
+\end{lemma}
+
+\subsubheader{III.}{Правило трех сигм}
+
+\begin{theorem}
+  \begin{equation*}
+    \prob{\abs{\xi - \expected{\xi}} \ge 3 \stder{\xi}} \le \frac{1}{9}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  По \ref{thr:chebyshev-inequality} имеем
+
+  \begin{equation*}
+    \prob{\abs{\xi - \expected{\xi}} \ge 3 \stder{\xi}}
+    \le \frac{\variance{\xi}}{(3 \stder{\xi})^2}
+    = \frac{\variance{\xi}}{9 \stder{\xi}^2}
+    = \frac{1}{9}
+  \end{equation*}
+\end{proof}
+
+\subheader{Среднее арифметическое случайных величин}
+
+Пусть \(\xi_1, \dotsc, \xi_n\)~--- независимая, одинаково распределенная
+случайная величина с конечным вторым моментом. Обозначим \(a =
+\expected{\xi_i}\), \(d = \variance{\xi_i}\), \(\sigma = \stder{\xi_i}\), \(S_n
+= \xi_1 + \dotsc + \xi_n\). Тогда
+
+\begin{equation*}
+  \expected{\frac{S_n}{n}}
+  = \expected{\frac{\xi_1 + \dotsc + \xi_n}{n}}
+  = \frac{1}{n} \prh{\expected{\xi_1} + \dotsc + \expected{\xi_n}}
+  = \frac{1}{n} \cdot a n
+  = a
+\end{equation*}
+
+Математическое ожидание осталось прежним.
+
+\begin{equation*}
+  \variance{\frac{S_n}{n}}
+  = \variance{\frac{\xi_1 + \dotsc + \xi_n}{n}}
+  = \frac{1}{n^2} \prh{\variance{\xi_1} + \dotsc + \variance{\xi_n}}
+  = \frac{1}{n^2} \cdot d n
+  = \frac{d}{n}
+\end{equation*}
+
+Дисперсия уменьшилась в \(n\) раз.
+
+\begin{equation*}
+  \stder{\frac{S_n}{n}}
+  = \frac{\sigma}{\sqrt{n}}
+\end{equation*}
+
+Среднеквадратическое отклонение уменьшилось в \(\sqrt{n}\) раз.
+
+\subheader{Законы больших чисел}
+
+\subsubheader{I.}{Закон больших чисел Чебышева}
+
+\begin{theorem} \label{thr:chebyshev-big-num-law}
+  Пусть \(\xi_1, \dotsc, \xi_n, \dotsc\)~--- последовательность независимых
+  одинаково распределенных случайных величин с конечным вторым моментом, тогда
+
+  \begin{equation*}
+    \frac{\xi_1 + \dotsc + \xi_n}{n} \Rarr{\probP} \expected{\xi_1}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Обозначим \(a = \expected{\xi_i}\), \(d = \variance{\xi_i} < \infty\), \(S_n =
+  \sum_{i = 1}^{n} \xi_i\). Тогда по \ref{thr:chebyshev-inequality} имеем
+
+  \begin{equation*}
+    \prob{\abs{\frac{S_n}{n} - a} \ge \epsilon}
+    = \prob{\abs{\frac{S_n}{n} - \expected{\frac{S_n}{n}}} \ge \epsilon}
+    \le \frac{\variance{\frac{S_n}{n}}}{\epsilon^2}
+    = \under{\frac{d}{\epsilon^2}}{= const} \cdot \under{\frac{1}{n}}{\to 0}
+    \Rarr{n \to \infty} 0
+    \implies \prob{\abs{\frac{S_n}{n} - a} \le \epsilon}
+    \Rarr{n \to \infty} 1
+  \end{equation*}
+
+  что и означает сходимость по вероятности.
+\end{proof}
+
+Среднее арифметическое большого числа независимых одинаковых случайных величин
+\quote{стабилизируется} около математического ожидания. Или при больших \(n\)
+случайность переходит в почти закономерность.
+
+Статистический смысл: при большом объеме \(n\) экспериментальных данных их
+среднее арифметическое даст достаточно точную оценку неизвестного
+математического ожидания.
+
+\begin{remark}
+  Попутно получили удобную, но грубую оценку:
+
+  \begin{equation*}
+    \prob{\abs{\frac{S_n}{n} - a} \ge \epsilon}
+    \le \frac{\variance{\xi_1}}{n \epsilon^2}
+  \end{equation*}
+\end{remark}
+
+\subsubheader{II.}{Закон больших чисел Бернулли}
+
+\begin{theorem}
+  Пусть \(v_n\)~--- число появления события \(A\) в серии из \(n\) независимых
+  испытаний, \(p_n = \prob{A}\)~--- вероятность появления \(A\) при одном
+  испытании. Тогда
+
+  \begin{equation*}
+    \frac{v_n}{n} \Rarr{\probP} \prob{A}
+    \qquad
+    \prob{\abs{\frac{v_n}{n} - p} \ge \epsilon}
+    \le \frac{p (1 - p)}{n \epsilon^2}
+    \qquad
+    (\forall \epsilon > 0)
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  \(v_n = \xi_1 + \dotsc + \xi_n\), где \(\xi_i\)~--- число появления события
+  \(A\) при \(i\)-том испытании, причем \(\xi_i\) независимые и имеют одинаковое
+  распределение \(B_p\). Т.к. \(\expected{\xi_i} = p\), \(\variance{\xi_i} = p
+  q\), то по \ref{thr:chebyshev-big-num-law}
+
+  \begin{equation*}
+    \begin{aligned}
+      \frac{v_n}{n} = \frac{S_n}{n}
+      \Rarr{\probP}
+      \expected{\xi_1} = \prob{A}
+    \\
+      \prob{\abs{\frac{v_n}{n} - p} \ge \epsilon}
+      \le \frac{p q}{n \epsilon^2}
+    \end{aligned}
+  \end{equation*}
+\end{proof}
+
+\subsubheader{III.}{Закон больших чисел Хинчина}
+
+\begin{theorem} \label{thr:khinchin-big-num-law}
+  Пусть \(\xi_1, \dotsc, \xi_n, \dotsc\) последовательность независимых
+  одинаково распределенных случайных величин с конечным первым моментом
+  \(\expected{\xi_1} < \infty\), тогда
+
+  \begin{equation*}
+    \frac{\xi_1 + \dotsc + \xi_n}{n}
+    \Rarr{\probP}
+    \expected{\xi_1}
+  \end{equation*}
+\end{theorem}
+
+\subsubheader{IV.}{Усиленный закон больших чисел Колмогорова}
+
+\begin{theorem}
+  В условиях теоремы \ref{thr:khinchin-big-num-law}
+
+  \begin{equation*}
+    \frac{\xi_1 + \dotsc + \xi_n}{n}
+    \Rarr{\text{п.н.}}
+    \expected{\xi_1}
+  \end{equation*}
+\end{theorem}
+
+\subsubheader{V.}{Закон больших чисел Маркова}
+
+\begin{theorem}
+  Пусть имеется последовательность случайных величин \(\xi_1, \dotsc, \xi_n,
+  \dotsc\) таких, что \(\variance{S_n} = \smallo(n^2)\), и их вторые моменты
+  конечны. Тогда
+
+  \begin{equation*}
+    \frac{S_n}{n}
+    \Rarr{\probP}
+    \frac{\expected{\xi_1} + \dotsc + \expected{\xi_n}}{n}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  \begin{equation*}
+    \expected{\frac{S_n}{n}}
+    = \frac{\expected{\xi_1} + \dotsc + \expected{\xi_n}}{n}
+  \end{equation*}
+
+  И по \ref{thr:chebyshev-inequality} получаем
+
+  \begin{equation*}
+    \prob{\abs{\frac{S_n}{n} - \expected{\frac{S_n}{n}}} \ge \epsilon}
+    \le \frac{\variance{\frac{S_n}{n}}}{\epsilon^2}
+    = \frac{\variance{S_n}}{n^2 \epsilon^2}
+    = \frac{\smallo(n^2)}{n^2 \epsilon^2}
+    = \under{\frac{\smallo(n^2)}{n^2}}{\to 0}
+      \cdot \under{\frac{1}{\epsilon^2}}{= const}
+    \Rarr{n \to \infty} 0
+  \end{equation*}
+\end{proof}
+
+\subheader{Центральная предельная теорема}
+
+\begin{theorem}[Центральная предельная теорема Ляпунова]
+  Пусть \(\xi_1, \dotsc, \xi_n\)~--- последовательность независимых одинаково
+  распределенных случайных величин с конечным вторым моментом \(\variance{\xi_1}
+  < \infty\) и \(S_n = \sum_{i = 1}^{n} \xi_i\). Тогда имеет место слабая
+  сходимость
+
+  \begin{equation*}
+    \frac{S_n - n \expected{\xi_1}}{\sqrt{n \variance{\xi_1}}}
+    \rightrightarrows N(0; 1)
+  \end{equation*}
+
+  Т.е. стандартизованная сумма в пределе имеет стандартное нормальное
+  распределение.
+\end{theorem}
+
+\begin{remark}
+  Теорему можно сформулировать по-другому. Пусть \(a = \expected{\xi_1}\),
+  \(\sigma = \stder{\xi_1}\). Тогда, как уже было показано
+  \(\expected{\frac{S_n}{n}} = a\) и \(\variance{\frac{S_n}{n}} =
+  \frac{\sigma}{\sqrt{n}}\), при этом
+
+  \begin{equation*}
+    \frac{\frac{S_n}{n} - \expected{\frac{S_n}{n}}}{\stder{\frac{S_n}{n}}}
+    \rightrightarrows N(0; 1)
+  \end{equation*}
+
+  Т.е. стандартизованное среднее арифметическое в пределе имеет стандартное
+  нормальное распределение.
+\end{remark}
+
+\begin{remark}
+  В грубой формулировке теорема будет иметь вид
+
+  \begin{equation*}
+    \frac{S_n}{n} \rightrightarrows N \prh{a; \frac{\sigma^2}{n}}
+  \end{equation*}
+\end{remark}
