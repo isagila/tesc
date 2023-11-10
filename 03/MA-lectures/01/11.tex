@@ -1,0 +1,369 @@
+\subsection{%
+  Лекция \texttt{23.11.10}.%
+}
+
+\begin{theorem}[Необходимое и достаточное условие существование предела]
+  Пусть \(z_n = x_n + i y_n\), тогда
+
+  \begin{equation*}
+    \exists \lim_{n \to \infty} z_n = L \in \CC
+    \iff
+    \begin{cases}
+      \exists \lim_{n \to \infty} x_n = X \in \RR \\
+      \exists \lim_{n \to \infty} y_n = Y \in \RR
+    \end{cases}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  \ness{}
+  \begin{equation*}
+    \begin{aligned}
+      \exists \lim_{n \to \infty} x_n = X
+      \iff
+      \forall \epsilon_1 > 0 \given
+      \exists N(\epsilon_1) \in \NN \given
+      \forall n > N \colon
+      \abs{x_n - X} < \epsilon_1
+      \qquad \epsilon_1 = \frac{\epsilon}{\sqrt{2}}
+    \\
+      \exists \lim_{n \to \infty} y_n = Y
+      \iff
+      \forall \epsilon_2 > 0 \given
+      \exists N(\epsilon_2) \in \NN \given
+      \forall n > N \colon
+      \abs{y_n - Y} < \epsilon_2
+      \qquad \epsilon_2 = \frac{\epsilon}{\sqrt{2}}
+    \\
+      \sqrt{(x_n - X)^2 + (y_n - Y)^2}
+      < \sqrt{\epsilon_1^2 + \epsilon_2^2}
+      = \epsilon
+    \\
+      \forall \epsilon > 0 \given
+      \exists N(\epsilon) \in \NN \given
+      \forall n > N \colon
+      \abs{z_n - \under{X + i Y }{z}} < \epsilon
+      \iff
+      z_n \Rarr{n \to \infty} z \in \CC
+    \end{aligned}
+  \end{equation*}
+
+  \suff{}
+  \begin{equation*}
+    \begin{aligned}
+      \lim_{n \to \infty} L \in \CC
+      \bydef
+      \forall \epsilon > 0 \given
+      \exists N(\epsilon) \in NN \given
+      \forall n > N \colon
+      \abs{z_n - L} < \epsilon
+      \qquad (L = L_x + i L_y)
+    \\
+      \abs{z_n - L}
+      = \sqrt{(x_n - L_x)^2 + (y_n - L_y)^2} < \epsilon
+      \implies
+      \begin{cases}
+        \abs{x_n - L_x} < \epsilon_x \\
+        \abs{y_n - L_y} < \epsilon_y
+      \end{cases}
+      \iff
+      \begin{cases}
+        \lim_{n \to \infty} x_n = L_x \in \RR \\
+        \lim_{n \to \infty} y_n = L_y \in \RR
+      \end{cases}
+    \end{aligned}
+  \end{equation*}
+\end{proof}
+
+\subsubheader{4}{Функия комплексного переменного (ФКП)}
+
+\begin{definition}
+  Функция комплексного переменного это отображение \(f \colon D \to \CC\) такое,
+  что
+
+  \begin{equation*}
+    \forall z \in D \subset \CC \given
+    \exists \omega \in G \subset \CC \given
+    \omega = f(z)
+  \end{equation*}
+\end{definition}
+
+\begin{remark}
+  Заметим, что не накладывается условие единственности значения функции, поэтому
+  функции делятся на однозначные и многозначные.
+\end{remark}
+
+\begin{definition}
+  Пусть \(\omega = f(z)\)~--- функция комплексного переменного. Если \(\forall
+  z_1 \neq z_2\) выполняется \(f(z_1) \neq f(z_2)\), то функция \(f(z)\)
+  называется однолистной. В противном случае она называется многолистной.
+\end{definition}
+
+\begin{remark}
+  Функция взаимнооднозначна, если она однозначна и однолистна. В этом случае
+  определена обратная функция \(z = f^{-1} (\omega)\).
+\end{remark}
+
+\begin{remark}
+  Определение суперпозиции (сложной функции) аналогично определению вещественной
+  суперпозиции.
+\end{remark}
+
+\begin{definition}{Предел функции в точке}
+  Пусть \(f \colon D \to \CC\), тогда пределом функции \(f(z)\) в точке \(z_0\)
+  называется
+
+  \begin{equation*}
+    L \in \CC = \lim_{z \to z_0} f(z)
+    \bydef
+    \forall \epsilon > 0 \given
+    \delta > 0 \given
+    \forall z \in \near{z_0}{\delta} \cap D \colon
+    \abs{f(x) - L} < \epsilon
+  \end{equation*}
+\end{definition}
+
+\begin{remark}
+  Что означает \(z \to z_0\)? \(z\) стремится к \(z_0\) вдоль какого-либо пути
+  \(l\) (\(z = \phi(t) + i \psi(t)\)). В определении предел существует при
+  стремлении \(z \to z_0\) по любому пути.
+\end{remark}
+
+\begin{example}
+  \begin{equation*}
+    f(z) = \frac{1}{2 i} \prh{\frac{z}{\bar{z}} - \frac{\bar{z}}{z}}
+  \end{equation*}
+
+  Будем приближать \(z\) к \(z_0 = 0\) по путям \(\phi = const\).
+
+  \begin{equation*}
+    f(z)
+    = \frac{1}{2 i} \prh{
+      \frac{\rho e^{i \phi}}{\rho e^{-i \phi}}
+      - \frac{\rho e^{-i \phi}}{\rho e^{i \phi}}
+    }
+    = \frac{1}{2 i} \prh{e^{2 i \phi} - e^{-2 i \phi}}
+    = \sin 2 \phi
+  \end{equation*}
+
+  Таким образом, при фиксированном \(\phi\) получаем фиксированное число, при
+  этом
+
+  \begin{equation*}
+    \lim_{z \to 0} f(z)
+    = \lim_{z \to 0} \sin 2 \phi
+  \end{equation*}
+
+  заполняют весь отрезок \(\segment{-1}{1}\), поэтому нельзя говорить о
+  существовании предела в общем смысле.
+\end{example}
+
+\begin{remark}
+  Предел вдоль выбранного пути аналогичен одностороннему пределу вещественной
+  функции. Для существования предела в общем смысле необходимо существование,
+  конечность и равенство пределов по любому пути.
+\end{remark}
+
+\begin{definition}
+  \begin{equation*}
+    L \in \CC = \lim_{z \to \infty} f(z)
+    \bydef
+    \forall \epsilon > 0 \given
+    \delta > 0 \given
+    \forall z \in D, \abs{z} > 0 \colon
+    \abs{f(x) - L} < \epsilon
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  \begin{equation*}
+    L = \lim_{z \to z_0} f(z) = \infty
+    \bydef
+    \forall \epsilon > 0 \given
+    \delta > 0 \given
+    \forall z \in \near{z_0}{\delta} \cap D \colon
+    \abs{f(x)} > \epsilon
+  \end{equation*}
+\end{definition}
+
+\begin{definition}{Непрерывность функции в точке} 
+  \begin{equation*}
+    f(z) \iscontd{z_0 \in D}
+    \bydef
+    \exists \lim_{z \to z_0} f(z) = f(z_0)
+  \end{equation*}
+\end{definition}
+
+\begin{remark}
+  Существует равносильное определение непрерывности функции в точке
+
+  \begin{equation*}
+    f(z) \iscontd{z_0 \in D}
+    \bydef
+    \Delta f(z) \Rarr{\Delta z \to 0} 0
+    \qquad
+    \begin{cases}
+      \Delta z = z - z_0 \\
+      \abs{\Delta z} = \sqrt{(x - x_0)^2 + (y - y_0)^2} \\
+      \Delta f(z) = f(z_0 + \Delta z) - f(z_0)
+    \end{cases}
+  \end{equation*}
+\end{remark}
+
+\begin{remark}
+  Непрерывность \(f(z)\) в точке \(z_0 = x_0 + i y_0\) равносильна непрерывности
+  \(u(x, y) = \Re f(z)\) и \(v(x, y) = \Im f(z)\) в точках \(x_0\) и \(y_0\).
+\end{remark}
+
+Элементарные функции:
+
+\begin{enumerate}
+\item
+  Линейная \(f(z) = a z + b\).
+
+\item
+  Степенная \(f(z) = z^n\) (\(n \in \NN\)).
+
+\item
+  Рациональная \(\display{f(z) = \frac{P_n (z)}{Q_m (z)}}\), где \(P_n (z)\),
+  \(Q_m (z)\)~--- полиномы.
+
+\item 
+  Показательная \(f(z) = e^z = e^{x + i y} = e^{\rho (\cos \phi + i \sin
+  \phi)}\).
+
+\item
+  Логарифм \(f(z) = \Ln z\). (определение ниже)
+
+\item
+  Тригонометрические, гиперболические.
+
+  \begin{equation*}
+    \begin{aligned}
+      \sin z = \frac{e^{i z} + e^{-i z}}{2 i}
+      & \qquad &
+      \cos z = \frac{e^{i z} + e^{-i z}}{2}
+    \\
+      \sinh z = \frac{e^z - e^{-z}}{2} = -i \sin (i z)
+      & \qquad &
+      \cosh z = \frac{e^z - e^{-z}}{2} = \cos (i z)
+    \end{aligned}
+  \end{equation*}
+\end{enumerate}
+
+\begin{remark}
+  \begin{equation*}
+    e^{z + 2 i \pi k}
+    = e^z e^{2 i \pi k}
+    = e^z (\cos 2 \pi k + i \sin 2 \pi k)
+    = e^z
+  \end{equation*}
+
+  Таким образом это многолистная, однозначная функция.
+\end{remark}
+
+\begin{remark}
+  Логарифм \(\Ln z\) определим как обратную операцию для \(e^{\omega} = z\).
+
+  \begin{equation*}
+    \begin{aligned}
+      \omega = u + i v
+      \implies e^{u + i v} = z = \rho e^{i (\phi + 2 \pi k)}
+      \qquad \phi = \arg z, \Arg z = \phi + 2 \pi k
+    \\
+      e^{u + i v} = \rho e^{i (\phi + 2 \pi k)}
+      \implies \begin{cases}
+        e^u = \rho \\
+        v = \phi + 2 \pi k
+      \end{cases}
+      \implies \begin{cases}
+        u = \ln \rho \\
+        v = \arg z + 2 \pi k
+      \end{cases}
+    \\
+      \Ln z = \omega = \ln q + i (\arg z + 2 \pi k)
+    \end{aligned}
+  \end{equation*}
+
+  Получили однолистную, но многозначную функцию. Причем \(\ln z = \ln \abs{z} +
+  i \arg z\) это главное значение логарифма.
+\end{remark}
+
+\begin{remark}
+  Геометрический смыслы функций \(f(z) = a z + b\), \(f(z) = \frac{1}{z}\) и
+  \(f(z) = z^2\) рассмотрим позже.
+\end{remark}
+
+\subsubheader{5}{Дифференцирование функции комплесконого переменного}
+
+\begin{definition}
+  Пусть \(f \colon D \to \CC\). Производной \(f(z)\) в точке \(z_0 \in D\)
+  называется
+
+  \begin{equation*}
+    f'(z_0) 
+    \bydef
+    \lim_{z \to z_0} \frac{\Delta f}{\Delta z}
+    = \lim_{\Delta z \to 0}  \frac{f(z_0 + \Delta z) - f(z_0)}{z - z_0} \in \CC
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  Дифференцируемость в точке \(z_0\) равносильна существованию конечной
+  производной \(f'(z_0)\). По определению дифференцируемость это представление
+
+  \begin{equation*}
+    \Delta f = f'(z_0) \Delta z + \smallo (\Delta z)
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  Если функция в точке имеет непрерывную производную, то она называется
+  аналитической.
+\end{definition}
+
+\begin{theorem}[Условия Коши-Римана (условия аналитичности функции)]
+\label{thr:C-R-cond}
+  \(f(z) \colon D \to \CC\) аналитическая в \(z_0 \in D\) тогда и только тогда,
+  когда функции \(u(x, y) = \Re f(z)\) и \(v(x, y) = \Im f(z)\) дифференцируемы,
+  имеют непрерывные производные в точках \(x_0 = \Re z_0\) и \(y_0 = \Im z_0\) и
+  выполнены условия:
+
+  \begin{equation*}
+    \partder{u}{x} = \partder{v}{y}
+    \qquad
+    \partder{u}{y} = -\partder{v}{x}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  \suff{}
+  \begin{equation*}
+    \begin{aligned}
+      \exists f'(z_0) \in \CC
+    \\
+      \lim_{\Delta z \to 0} \frac{\Delta f}{\Delta z}
+      = \lim_{\Delta z \to 0} \frac{f(z_0 + \Delta z) - f(z_0)}{\Delta z}
+    \\
+      = \lim_{\Delta z \to 0} \frac{
+          \prh[\Big]{u(x_0 + \Delta x, y_0 + \Delta y)
+            + i v(x_0 + \Delta x, y_0 + \Delta y)}
+          -
+          \prh[\Big]{u(x_0, y_0) + i v(x_0, y_0)}
+        }{(x + i y) - (x_0 + i y_0)}
+      = \dotsc
+    \end{aligned}
+  \end{equation*}
+
+  \todo продолжим доказательство на следующей паре
+\end{proof}
+
+\begin{remark}
+  В условиях теоремы \ref{thr:C-R-cond} \(f'(z_0)\) представима в виде
+
+  \begin{equation*}
+    f'(z_0) = \partder{u}{x} (x_0, y_0) + i \partder{v}{x} (x_0, y_0)
+  \end{equation*}
+
+  \todo перепроверить
+\end{remark}
