@@ -1,0 +1,371 @@
+\subsection{%
+  Лекция \texttt{23.11.14}.%
+}
+
+\subheader{Совместное распределение случайных величин}
+
+\begin{definition}
+  Случайным векторов \(\tuple{\xi_1, \dotsc, \xi_n}\) называется упорядоченный
+  набор случайных величин, заданных на одном вероятностном пространстве
+  \(\tuple{\Omega, \euF, \probP}\).
+\end{definition}
+
+Случайный вектор задает отображение \(\tuple{\xi_1, \dotsc, \xi_n} (\omega)
+\colon \Omega \to \RR^n\), поэтому его еще называют многомерной случайной
+величиной, а соответствующее распределение называют многомерным распределением.
+
+\begin{equation*}
+  \prob{B}
+  = \prob{\omega \in \Omega \given \tuple{\xi_1, \dotsc, \xi_n} (\omega) \in B}
+  \qquad
+  B \in \mathcal{B} \prh{\RR^n}
+\end{equation*}
+
+Таким образом мы получаем новое вероятностное пространство \(\tuple{\RR^n,
+\mathcal{B}, \prob{B}}\).
+
+\subheader{Функция распределения}
+
+\begin{definition}
+  Функцией совместного распределения случайных величин \(\xi_1, \dotsc, \xi_n\)
+  (или случайного вектора) называется функция
+
+  \begin{equation*}
+    F_{\xi_1, \dotsc, \xi_n} (x_1, \dotsc, x_n)
+    = \prob{\xi_1 < x_1, \dotsc, \xi_n < x_n} 
+  \end{equation*}
+\end{definition}
+
+\begin{remark}
+  Зная функцию распределения можно найти вероятность попадания случайного
+  вектора в любое борелевское множество, а значит функция распределения
+  полностью задает распределение.
+\end{remark}
+
+\begin{remark}
+  Далее рассматриваем только системы из двух случайных величин.
+
+  \begin{equation*}
+     F_{\xi, \eta} (x, y) = \prob{\xi < x, \eta < y}
+  \end{equation*}
+
+  \todo можно картинку нарисовать, но мне лень
+  \href{https://youtu.be/5aaVHlyipxw?list=PLd7QXkfmSY7ZOTP3bhPT3jGoIlXql8kkX&t=664}{11:04}
+\end{remark}
+
+\subheader{Свойства функции распределения}
+
+\begin{equation*}
+  \begin{aligned}
+    0 \le F_{\xi, \eta} (x, y) \le 1
+  \\
+    F_{\xi, \eta} (x, y) \text{ неубывающая по каждому аргументу}
+  \\
+    \lim_{x \to -\infty} F_{\xi, \eta} (x, y) = 0
+  \\
+    \lim_{y \to -\infty} F_{\xi, \eta} (x, y) = 0
+  \\
+    \lim_{\substack{x \to \infty \\ y \to \infty}} F_{\xi, \eta} (x, y) = 1
+  \\
+    F_{\xi, \eta} (x, y) \text{ непрерывна слева по каждому аргументу}
+  \\
+    \lim_{y \to +\infty} F_{\xi, \eta} (x, y) = F_{\xi} (x)
+  \\
+    \lim_{x \to +\infty} F_{\xi, \eta} (x, y) = F_{\eta} (y)
+  \\
+    \prob{x_1 \le \xi < x_2, y_1 \le \eta < y_2} =
+      F(x_2, y_2) - F(x_1, y_2) - F(x_2, y_1) + F(x_1, y_1)
+  \end{aligned}
+\end{equation*}
+
+\subheader{Независимость случайных величин}
+
+\begin{definition}
+  Случайные величины \(\xi_1, \dotsc, \xi_n\) независимы в совокупности, если
+
+  \begin{equation*}
+    \prob{\xi_1 \in B_1, \dotsc, \xi_n \in B_n}
+    = \prob{\xi_1 \in B_1} \dotsc \prob{\xi_n \in B_n}
+    \qquad
+    \forall B_1, \dotsc, B_n \in \mathcal{B} \prh{\RR^n}
+  \end{equation*}
+
+  Т.е. случайные величины принимают значения независимо друг от друга.
+\end{definition}
+
+\begin{definition}
+  Случайные величины \(\xi_1, \dotsc, \xi_n\) попарно независимы, если
+  независимы любые две из них.
+\end{definition}
+
+\begin{remark}
+  Из независимости в совокупности следует попарная независимость. Пусть \(\xi_1,
+  \dotsc, \xi_n\) независимы в совокупности, тогда \(\forall i, j\) возьмем
+  \(B_k = \RR\), \(k \neq i, k \neq j\). Получим
+
+  \begin{equation*}
+    \prob{\xi_i \in B_i, \xi_j \in B_j}
+    = 1 \cdot \dotsc \cdot
+      \prob{\xi_i \in B_i} \cdot \dotsc \cdot
+      \prob{\xi_j \in B_j} \cdot \dotsc \cdot
+      1
+    = \prob{\xi_i \in B_i} \prob{\xi_j \in B_j}
+  \end{equation*}
+
+  Обратное в общем случае неверно
+\end{remark}
+
+Т.к. вероятности \(\prob{\xi_1 \in B_1, \dotsc, \xi_n \in B_n}\) полностью
+определяются функцией совместного распределения, то получаем эквивалентное
+определение:
+
+\begin{definition}
+  \(\xi_1, \dotsc, \xi_n\) независимы в совокупности, если
+
+  \begin{equation*}
+    F_{\xi_1, \dotsc, \xi_n} (x_1, \dotsc, \xi_n) =
+    F_{\xi_1} (x) \dotsc F_{\xi_n} (x)
+  \end{equation*}
+\end{definition}
+
+\begin{remark}
+  В дальнейшем под \quote{независимостью} будем понимать независимость в
+  совокупности.
+\end{remark}
+
+\subheader{Дискретная система двух случайных величин}
+
+\begin{definition}
+  Случайные величины \(\xi\) и \(\eta\) имеют дискретное совместное
+  распределение, если случайный вектор \(\tuple{\xi, \eta}\) принимает не более
+  чем счетное число значений. Т.е. существует конечный или счетный набор точек
+  \(x_i, y_j\) таких, что
+
+  \begin{equation*}
+    \forall i, j \given \prob{\xi = x_i, \eta = y_j} > 0
+    \qquad
+    \sum_{i, j} \prob{\xi = x_i, \eta = y_j} = 1
+  \end{equation*}
+\end{definition}
+
+Таким образом двумерная дискретная случайная величина задается законом
+распределения~--- таблицей вероятностей \(\probP_{i, j} = \prob{\xi = x_i, \eta
+= y_j}\).
+
+\begin{table}[h]
+  \centering
+
+  \begin{tabular}{c|c|c|c|c}
+    \diagbox{\(\xi\)}{\(\eta\)}
+               & \(y_1\)     & \(y_2\)     & \(\dotsc\) & \(y_m\)     \\ \hline
+    \(x_1\)    & \(p_{1,1}\) & \(p_{1,2}\) & \(\dotsc\) & \(p_{1,m}\) \\ \hline
+    \(x_2\)    & \(p_{2,1}\) & \(p_{2,2}\) & \(\dotsc\) & \(p_{2,m}\) \\ \hline
+    \(\vdots\) & \(\vdots\)  & \(\vdots\)  & \(\ddots\) & \(\vdots\)  \\ \hline
+    \(x_n\)    & \(p_{n,1}\) & \(p_{n,2}\) & \(\dotsc\) & \(p_{n,m}\)
+  \end{tabular}
+\end{table}
+
+\(x_i\)~--- значения случайной величины \(\xi\), \(y_j\)~--- значения случайной
+величины \(\eta\), \(p_{i,j}\)~--- вероятность появления точки \((x_i, y_j)\).
+По условию нормировки \(\sum_{i, j} p_{i, j} = 1\).
+
+Зная общий закон распределения можно найти частные законы распределения \(\xi\)
+и \(\eta\) по формулам
+
+\begin{equation*}
+  p_i = \prob{\xi = x_i} = \sum_{j = 1}^m p_{i, j} 
+  \qquad
+  p_j = \prob{\eta = y_j} = \sum_{i = 1}^n p_{i, j} 
+\end{equation*}
+
+\begin{definition}
+  Дискретные случайные величины \(\xi_1, \dotsc, \xi_n\) независимы, если
+
+  \begin{equation*}
+    \prob{\xi_1 = x_1, \dotsc \xi_n = x_n} =
+    \prob{\xi_1 = x_1} \dotsc \prob{\xi_n = x_n}
+    \qquad
+    \forall x_i \in \RR
+  \end{equation*}
+\end{definition}
+
+\begin{remark}
+  Т.е. в случае двух случайных величин \(\xi\) и \(\eta\) независимы, если
+  \(\forall i, j \given p_{i, j} = p_i q_j\).
+\end{remark}
+
+\subheader{Абсолютно непрерывная система двух случайных величин}
+
+\begin{definition}
+  Случайные величины \(\xi\) и \(\eta\) имеют абсолютно непрерывное совместное
+  распределение, если
+
+  \begin{equation*}
+    \exists f_{\xi, \eta} (x, y) \given
+    \prob{\tuple{\xi, \eta} \in B}
+    = \iint_{B} f_{\xi, \eta} (x, y) \dd x \dd y
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  Функция \(f_{\xi, \eta} (x, y)\) называется плотностью совместного
+  распределения случайных величин \(\xi\) и \(\eta\).
+\end{definition}
+
+\begin{remark}
+  В \(n\)-мерном случае определение плотности аналогично:
+
+  \begin{equation*}
+    \prob{\tuple{\xi_1, \dotsc, \xi_n} \in B}
+    = \idotsint_{\RR^n} f_{\xi_1, \dotsc, \xi_n} (x_1, \dotsc, x_n)
+      \dd x_1 \dotsc \dd x_n
+  \end{equation*}
+\end{remark}
+
+\subheader{Свойства плотности}
+
+\begin{equation*}
+  \begin{aligned}
+    f_{\xi, \eta} (x, y) \ge 0
+  \\
+    \text{Условие нормировки }
+    \iint_{\RR^2} f_{\xi, \eta} (x, y) \dd x \dd y = 1
+  \\
+    F_{\xi, \eta} (x, y)
+    = \int_{-\infty}^{x} \int_{-\infty}^{y} f_{\xi, \eta} (x, y) \dd x \dd y
+  \\
+    f_{\xi, \eta} (x, y)
+    = \frac{\partial F_{\xi, \eta} (x, y)}{\partial x \partial y}
+  \end{aligned}
+\end{equation*}
+
+\begin{lemma}
+  Если случайные величины \(\xi\) и \(\eta\) имеют абсолютные непрерывные
+  совместные распределения с плотностью \(f_{\xi, \eta} (x, y)\), то
+  маргинальные распределения случайных величин \(\xi\) и \(\eta\) также
+  абсолютно непрерывны с плотностями
+
+  \begin{equation*}
+    f_{\xi} (x) = \int_{-\infty}^{\infty} f_{\xi, \eta} (x, y) \dd y
+    \qquad
+    f_{\eta} (y) = \int_{-\infty}^{\infty} f_{\xi, \eta} (x, y) \dd x
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  \begin{equation*}
+    \begin{rcases}
+      \displaystyle F_{\xi} (x)
+      = \lim_{y \to \infty} F_{\xi, \eta} (x, y)
+      = \int_{-\infty}^{x}
+        \prh{\int_{-\infty}^{\infty} f_{\xi, \eta} (x, y) \dd y} \dd x
+      \\
+      \displaystyle F_{\xi} (x)
+      = \int_{-\infty}^{x} f_{\xi} (x) \dd x
+    \end{rcases}
+    \implies
+    f_{\xi} (x) = \int_{-\infty}^{\infty} f_{\xi, \eta} (x, y) \dd y
+  \end{equation*}
+
+  Доказательство для \(F_{\eta} (y)\) аналогично.
+\end{proof}
+
+\begin{theorem}
+  Абсолютно непрерывные случайные величины \(\xi_1, \dotsc, \xi_n\) независимы в
+  совокупности тогда и только тогда, когда
+
+  \begin{equation*}
+    f_{\xi_1, \dotsc, \xi_n} (x_1, \dotsc, x_n)
+    = f_{\xi_1} (x) \dotsc f_{\xi_n} (x)
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  \textit{(только при \(n = 2\))}
+
+  Пусть случайные величины \(\xi\) и \(\eta\) независимы, тогда
+
+  \begin{equation*}
+    \begin{rcases}
+      \displaystyle F_{\xi, \eta} (x, y)
+      = F_{\xi} (x) F_{\eta} (y)
+      = \int_{-\infty}^{x} f_{\xi} (x) \dd x
+        \int_{-\infty}^{y} f_{\eta} (y) \dd y
+      = \int_{-\infty}^{x} \int_{-\infty}^{y}
+        f_{\xi} (x) f_{\eta} (y) \dd x \dd y 
+    \\
+      \displaystyle F_{\xi, \eta} (x, y)
+      = \int_{-\infty}^{x} \int_{-\infty}^{y}
+        f_{\xi, \eta} (x, y) \dd x \dd y 
+    \end{rcases}
+    \implies
+    f_{\xi} (x) f_{\eta} (y) = f_{\xi, \eta} (x, y)
+  \end{equation*}
+\end{proof}
+
+\begin{remark}
+  Совместное распределение абсолютно непрерывных случайных величин не обязано
+  быть абсолютно непрерывным. Оно может быть сингулярным.
+\end{remark}
+
+\begin{example}
+  Бросаем наугад точку на отрезок прямой \(y = 2 x\), \(0 \le x \le 1\). Пусть
+  случайная величина \(\xi \in \evenly{0}{1}\) это первая координата точки, а
+  \(\eta \in \evenly{0}{2}\)~--- вторая. Обе случайные величины имеют абсолютно
+  непрерывное равномерное распределение, однако случайный вектор \(\tuple{\xi,
+  \eta}\) не имеет абсолютно непрерывного распределения, т.к. мера Лебега
+  отрезка равна нулю и случайный вектор распределен на несчетном множестве
+  нулевой меры. Таким образом имеем сингулярное распределение.
+\end{example}
+
+\begin{example}
+  Случайному вектору \(\tuple{\xi, \eta}\) сопоставляем его направление.
+  Направление задается углом, т.е. значение случайного вектора~--- точки на
+  единичной окружности, которая имеет меру ноль.
+\end{example}
+
+\subheader{Многомерное равномерное распределение}
+
+\begin{definition}
+  Пусть область \(D \subset \RR^n\) это борелевское множество с конечной
+  лебеговой мерой \(\lambda (D) > 0\). Случайный вектор \(\tuple{\xi_1, \dotsc,
+  \xi_n}\) имеет равномерное распределение в области \(D\), если плотность
+  совместного распределения постоянна в области \(D\) и равна нулю вне этой
+  области.
+
+  \begin{equation*}
+    f_{\xi_1, \dotsc, \xi_n} (x_1, \dotsc, x_n)
+    = \begin{cases}
+      0, & (x_1, \dotsc, x_n) \notin D \\
+      \frac{1}{\lambda (D)}, & (x_1, \dotsc, x_n) \in D
+    \end{cases}
+  \end{equation*}
+\end{definition}
+
+Смысл: случайный вектор \(\tuple{\xi_1, \dotsc, \xi_n}\) это координаты наугад
+брошенной точки в области \(D\). В этом и только в этом случае применима формула
+геометрической вероятности.
+
+\subheader{Многомерное нормальное распределение (кратко)}
+
+\begin{definition}
+  Случайный вектор \(\tuple{\xi_1, \dotsc, \xi_n}\) имеет многомерное нормальное
+  распределение, если каждая его координата имеет нормальное распределение (но
+  их параметры могут отличаться) и существует плотность совместного
+  распределения.
+\end{definition}
+
+Многомерное нормальное распределение задается через вектор математических
+ожиданий и матрицу ковариаций.
+
+\begin{equation*}
+  \expected{\tuple{\xi_1, \dotsc, \xi_n}}
+  = \mtxp{\expected{\xi_1} \\ \vdots \\ \expected{\xi_n}}
+  \qquad
+  \cov{\xi_i}{\xi_j} = \mtxp{
+    \variance{\xi_1}   & \cov{\xi_1}{\xi_2} & \dots  & \cov{\xi_1}{\xi_n} \\
+    \cov{\xi_1}{\xi_2} & \variance{\xi_2}   & \dots  & \cov{\xi_2}{\xi_n} \\
+    \vdots             & \vdots             & \ddots & \vdots             \\
+    \cov{\xi_1}{\xi_n} & \cov{\xi_2}{\xi_n} & \dots  & \variance{\xi_n}
+  }
+\end{equation*}
