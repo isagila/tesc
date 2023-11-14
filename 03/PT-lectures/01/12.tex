@@ -1,0 +1,109 @@
+\subsection{%
+  Лекция \texttt{23.11.21}.%
+}
+
+\subheader{Функции от двух случайных величин}
+
+Если известно совместное распределение двух или нескольких случайных величин, то
+можно найти распределение их суммы, произведения и иных функций от этих
+случайных величин.
+
+Пусть \(\xi_1\) и \(\xi_2\)~--- случайные величины с плотностью совместного
+распределения \(f_{\xi_1, \xi_2} (x, y)\). Дана \(g(x, y) \colon \RR^2 \to
+\RR\)~--- борелевская функция. Требуется найти функцию распределения случайной
+величины \(\eta = g(\xi_1, \xi_2)\).
+
+\begin{theorem} \label{thr:dst-func-joint-dst}
+  Функция распределения случайной величины \(\eta\)
+
+  \begin{equation*}
+    F_{\eta} (z) = \iint_{D_z} f_{\xi_1, \xi_2} (x, y) \dd x \dd y
+    \qquad
+    D_z = \set{\pair{x, y} \given g(x, y) < z}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  \begin{equation*}
+    F_{\eta} (z)
+    = \prob{\eta < z}
+    = \prob{g(\xi_1, \xi_2) < z}
+    = \prob{(x, y) \in D_z}
+    = \iint_{D_z} f_{\xi_1, \xi_2} (x, y) \dd x \dd y
+  \end{equation*}  
+\end{proof}
+
+\begin{example}
+  Двое договариваются встретиться между \texttt{12:00} и \texttt{13:00}.
+  Случайная величина \(\eta\)~--- время ожидания. Найти ее функцию
+  распределения.
+
+  \solution{} Пусть случайные величины \(\xi_1, \xi_2\)~--- это время прихода
+  первого и второго человека соответственно. Тогда \(\eta = \abs{\xi_1 -
+  \xi_2}\). Имеем
+
+  \begin{equation*}
+    \xi_1, \xi_2 \in \evenly{0}{1}
+    \implies
+    \begin{cases}
+      \displaystyle f_{\xi_1} (x) =
+      \begin{cases}
+        1, & x \in \segment{0}{1} \\
+        0, & x \notin \segment{0}{1}
+      \end{cases}
+    \\
+      \displaystyle f_{\xi_2} (y) =
+      \begin{cases}
+        1, & y \in \segment{0}{1} \\
+        0, & y \notin \segment{0}{1}
+      \end{cases}
+    \end{cases}
+  \end{equation*}
+
+  Т.к. \(\xi_1\) и \(\xi_2\) независимы, то
+
+  \begin{equation*}
+    f_{\xi_1, \xi_2} (x, y)
+    = f_{\xi_1} (x) f_{\xi_2} (y)
+    = 1
+    \qquad 0 \le x \le 1, 0 \le y \le 1
+  \end{equation*}
+
+  Далее применяем теорему \ref{thr:dst-func-joint-dst} и получаем, что
+
+  \begin{equation*}
+    \begin{aligned}
+      F_{\eta} (z)
+      = \iint_{D_z} f_{\xi_1, \xi_2} (x, y) \dd x \dd y
+      \qquad
+      D_z = \set{\pair{x, y} \given \abs{x - y} < z}
+    \\
+      F_{\eta} (z)
+      = \iint_{D_z} \dd x \dd y
+      = S_{D_z}
+      \eqby{\figref{01_12_01}}
+      1 - 2 \cdot \frac{1}{2} (1 - z)^2
+      = 2 z - z^2
+      \qquad
+      z \in \segment{0}{1}
+    \end{aligned}
+  \end{equation*}
+\end{example}
+
+\galleryone{01_12_01}{Иллюстрация к задаче о встрече}
+
+\subheader{Формула свертки}
+
+\begin{theorem}
+  Пусть \(\xi_1\) и \(\xi_2\) независимые абсолютно непрерывные случайные
+  величины с плотностями \(f_{\xi_1} (x)\) и \(f_{\xi_2} (y)\) тогда плотность
+  суммы \(\xi_1 + \xi_2\) существует и равна свертке плотностей \(f_{\xi_1}
+  (x)\) и \(f_{\xi_2} (y)\):
+
+  \begin{equation*}
+    f_{\xi_1 + \xi_2} (t)
+    = \int_{-\infty}^{\infty} f_{\xi_1} (x) f_{\xi_2} (t - x) \dd x
+  \end{equation*}
+\end{theorem}
+
+\todo \href{https://www.youtube.com/watch?v=hUjvwyM2HUg&list=PLd7QXkfmSY7ZOTP3bhPT3jGoIlXql8kkX&index=12}{Таймкод}
