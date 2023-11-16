@@ -1,0 +1,27 @@
+\begin{tikzpicture}
+  \draw[->, thick] (-3, 0) -- (3, 0)
+    node[below] {\(x\)};
+  \draw[->, thick] (0, -3) -- (0, 3)
+    node[left] {\(y\)};
+
+  \fill[
+    pattern = {
+      Lines[
+        distance = 3mm,
+        angle = 45,
+        line width = 0.7mm
+      ]
+    },
+    pattern color = green!60
+  ] (-3, -3) -- (-3, 3) -- (-1.5, 3) -- (3, -1.5) -- (3, -3) -- cycle;
+
+  \draw (-1, -1) node {\Large \(D_z\)};
+  \draw (0, 1.5) node[above right] {\(z\)};
+  \draw (1.5, 0) node[above right] {\(z\)};
+  \draw[fill = black] (0, 1.5) circle (2pt);
+  \draw[fill = black] (1.5, 0) circle (2pt);
+ 
+  \draw[thick] (-1.5, 3) -- (3, -1.5)
+    node[midway, above, sloped] {\small \(y = z - x\)};
+
+\end{tikzpicture}
