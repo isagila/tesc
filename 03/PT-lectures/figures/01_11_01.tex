@@ -1,0 +1,26 @@
+\begin{tikzpicture}
+  \draw[->, thick] (-3, 0) -- (3, 0)
+    node[below] {\(x\)};
+  \draw[->, thick] (0, -3) -- (0, 3)
+    node[left] {\(y\)};
+
+  \fill[
+    pattern = {
+      Lines[
+        distance = 3mm,
+        angle = 45,
+        line width = 0.7mm
+      ]
+    },
+    pattern color = green!60
+  ] (-3, 1.5) rectangle (1.5, -3);
+
+  \draw[dashed, thick] (-3, 1.5) -- (1.5, 1.5) -- (1.5, -3);
+  \draw[thick, fill = white] (1.5, 1.5) circle (2pt);
+  \draw (1.5, 1.5) node[above right] {\(\pair{x, y}\)};
+
+  \draw (4, -1.5) node[below, text width = 4cm]
+    {\(F(x, y)\)~--- вероятность попадания в данный прямоугольник};
+
+  \draw[thick] (3, -1.5) edge[->, bend right = 30] (0.5, -0.7);
+\end{tikzpicture}
