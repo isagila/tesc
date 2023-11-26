@@ -1,0 +1,290 @@
+\subsection{%
+  Лекция \texttt{23.11.24}.%
+}
+
+\begin{remark}[Геометрический смысл производной]
+  Модуль производной в точке отвечает за коэффициент растяжения в этой точке.
+  Главное значения аргумента производной отвечает за угол поворота в данной
+  точке.
+\end{remark}
+
+\begin{remark}
+  Если \(f(z)\) определяющая отображение \(\omega \colon D \to D'\) аналитична и
+  однолистна в области \(D\) и \(\forall z \in D \given f'(z) \neq 0\), то
+  отображение \(\omega\) конформно.
+\end{remark}
+
+\begin{example}
+  Рассмотрим линейную функцию \(\omega = a z + b\), где \(a, b \in \CC\), \(a
+  \neq 0\). Эта функция однозначна. Найдем обратную функцию
+
+  \begin{equation*}
+    g(\omega) = f^{-1} (\omega) = \frac{\omega}{a} - \frac{\omega}{b} = z
+  \end{equation*}
+
+  Т.к. обратная функция однозначна, то исходная функция однолистна. Таким
+  образом \(f(z)\) это взаимооднозначная функция.
+
+  Для того, чтобы понять геометрический смысл, рассмотрим вспомогательную
+  функцию
+
+  \begin{equation*}
+    \zeta
+    = a z
+    = \abs{a} \abs{z} \prh{\cos (\arg a + \arg z) + i \sin (\arg a + \arg z)}
+  \end{equation*}
+
+  Она определяет растяжение вектора, соответствующего \(z\), в \(\abs{a}\) раз
+  и поворот на \(\arg a\). Тогда \(\omega = \zeta + b\) геометрически задает
+  растяжение плоскости \(\CC\) в \(\abs{a}\) арз, поворот на \(\arg a\) и сдвиг
+  на вектор \(\vec{b}\), соответствующий числу \(b = b_x + i b_y\).
+\end{example}
+
+\begin{remark}
+  Убедимся в аналитичности \(\omega = f(z) = u(x, y) + i v(x, y)\).
+
+  \begin{equation*}
+    f(z)
+    = a z + b
+    = (a_x + i a_y) (x + i y) + (b_x + i b_y)
+    = \under{(a_x x - a_y y + b x)}{u(x, y)}
+      + i \under{(a_y x + a_x y + by)}{v(x, y)}
+  \end{equation*}
+
+  \(u(x, y)\) и \(v(x, y)\) непрерывны, дифференцируемы.
+
+  \begin{equation*}
+    \begin{cases}
+      \partder{u}{x} = \partder{v}{y} = a_x \\
+      \partder{u}{y} = -\partder{v}{x} = a_y
+    \end{cases}
+    \implies
+    \text{Выполнены условия Коши-Римана}
+  \end{equation*}
+
+  Также \(f'(z) = a\), а значит модуль и аргумент производной постоянны, значит
+  отображение \(\omega\) конформно.
+\end{remark}
+
+\begin{remark}
+  Инверсия плоскости относительно окружности радиуса \(R\) с центром \(O\) это
+  преобразование плоскости в себя такое, что
+
+  \begin{equation*}
+    \begin{cases}
+      \Im M = M' \\
+      M' \in OM \\
+      R^2 = OM \cdot OM'
+    \end{cases}
+  \end{equation*}
+
+  Инверсия делает внутренность круга \((O, R)\) его внешностью и наоборот,
+  причем
+
+  \begin{equation*}
+    \begin{aligned}
+      \text{окружность } \not\ni O & \Rarr{Inv} \text{окружность} \not\ni O
+    \\
+      \text{окружность } \ni O & \Rarr{Inv} \text{прямая} \not\ni O
+    \\
+      \text{прямая } \not\ni O & \Rarr{Inv} \text{окружность} \ni O
+    \\
+      \text{прямая } \ni O & \Rarr{Inv} \text{в себя}
+    \end{aligned}
+  \end{equation*}
+\end{remark}
+
+\begin{example}
+  Рассмотрим отображение \(\omega = f(z) = \frac{1}{z}\). Заметим, что \(f(z)\)
+  непрерывна на \(\CC \setminus \set{0}\). Также \(f(z)\) однозначна и
+  однолистна, т.к. обратная однозначна. Выясним геометрический смысл.
+
+  \begin{equation*}
+    \begin{aligned}
+      \omega = r e^{i \psi}
+      \eqby{\(z = \rho e^{i \phi}\)}
+      \frac{1}{\rho e^{i \phi}}
+      = \frac{1}{\rho} e^{-i \phi}
+    \\
+      \abs{\omega} = \frac{1}{\abs{z}}
+      \qquad
+      \arg \omega = -\arg z
+    \end{aligned}
+  \end{equation*}
+
+  Таким образом функция \(\omega = \frac{1}{z}\) это инверсия относительно
+  единичной окружности с центром \(O\) и симметрия относительно \(\Re z\).
+
+  Проверим условия Коши-Римана, для этого перейдем в полярные координаты.
+
+  \begin{equation*}
+    \begin{aligned}
+      f(z)
+      = \frac{1}{z}
+      = \frac{1}{\rho} e^{-i \phi}
+      = \under{\frac{1}{\rho} \cos \phi}{u}
+        - \under{\frac{1}{\rho} \sin \phi}{v}
+    \\
+      \partder{u}{\rho} = -\frac{1}{\rho^2} \cos \phi
+      \qquad
+      \frac{1}{\rho} \partder{v}{\phi} = -\frac{1}{\rho^2} \cos \phi
+    \\
+      \partder{v}{\rho} = -\frac{1}{\rho^2} \sin \phi
+      \qquad
+      -\frac{1}{\rho} \partder{u}{\phi} = -\frac{1}{\rho^2} \sin \phi
+    \end{aligned}
+  \end{equation*}
+\end{example}
+
+\begin{example}
+  Рассмотрим отображение \(\omega = z^2 = \abs{z}^2 \prh{\cos 2 \phi + i \sin 2
+  \phi}\). \(f(z)\) однозначна, но не однолистна, т.к. \(z_1^2 = z_2^2\), если
+  \(\arg z_1 = \arg z_2 + 2 \pi k\), \(k \in \ZZ\).
+
+  \todo img
+
+  Выделим область однолистности: \(0 \le \phi \le \pi\). Заметим, что \(2 \phi =
+  0\), если \(\phi - 0\) и \(2 \phi = 0\), если \(\phi = \pi\). Сделаем границы
+  взаимнооднозначными, для этого нужен разрез \(\Re z \ge 0, \Im z = 0\). Пусть
+  \(\delta > 0\) сколь угодно мало, тогда
+
+  \begin{itemize}
+  \item
+    Рассмотрим \(\phi_1 = 0 + \delta \implies 2 \phi_1 = 0 + 2 \delta\)~---
+    верхний берег разреза.
+
+  \item
+    Рассмотрим \(\phi_2 = \pi - \delta \implies 2 \phi_2 = 2 \pi - 2
+    \delta\)~--- нижний берег разреза.
+  \end{itemize}
+\end{example}
+
+\begin{remark}
+  Аналогично нижняя полуплоскость \(\pi \le \phi \le 2 \pi\) это область
+  однолистности и область значений~--- плоскость с тем же разрезом.
+\end{remark}
+
+\begin{lemma}
+  Если \(f(z)\) аналитична в области \(D\) и \(\forall z \in D \given f'(z) \neq
+  0\), то \(\exists g(\omega) = f^{-1}(\omega)\)~--- аналитическая функция на
+  множестве значений \(f(z)\), причем
+
+  \begin{equation*}
+    g'_{\omega} (\omega_0) = \frac{1}{f'_z (z_0)}
+    \qquad
+    \omega_0 = f(z_0)
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  Рассмотрим Якобиан.
+
+  \begin{equation*}
+    J = \mtxv{
+      \partder{u}{x} & \partder{u}{y} \\
+      \partder{v}{x} & \partder{v}{y} \\
+    }
+    = \partder{u}{x} \cdot \partder{v}{y} - \partder{u}{y} \cdot \partder{v}{x}
+    \eqby{\ref{thr:C-R-cond}}
+    \prh{\partder{u}{x}}^2 + \prh{\partder{v}{x}}^2
+    = \abs{f'(z)}^2
+  \end{equation*}
+
+  Таким образом условие \(f'(z) \neq 0\) (а значит и \(\abs{f'(z)} \neq 0\))
+  гарантирует то, что \(J \neq 0\).
+
+  \todo img
+
+  Якобиан это отношение площадей элементарных прямоугольников. \(J \neq 0\)
+  означает, что прямоугольник не вырожден, т.е. не склейки/разрыва линий \(u, v
+  = const\). Значит преобразование \((x, y) \rarr{f} (u, v)\) обратимо. Это
+  гарантирует то, что система
+
+  \begin{equation*}
+    \begin{cases}
+      u = u(x, y) \\
+      v = v(x, y)
+    \end{cases}
+  \end{equation*}
+
+  имеет единственное решение \(x = x(u, v)\), \(y = y(u, v)\) и определена
+  обратная функция \(g(\omega) = x(u, v) + i y(u, v)\).
+
+  Покажем аналитичность \(g(\omega)\). В точке \(z_0\) определена \(f'(z_0) \neq
+  0\) и \(\Delta z \to 0 \implies \Delta \omega = \Delta f(z) \to 0\). Составим
+  отношение
+
+  \begin{equation*}
+    \frac{\Delta z}{\Delta \omega}
+    = \frac{1}{\frac{\Delta \omega}{\Delta z}}
+    \Rarr{\Delta z, \Delta \omega \to 0}
+    \frac{1}{f'_z (z_0)}
+    = g'_{\omega} (\omega_0)
+  \end{equation*}
+\end{proof}
+
+\begin{definition}
+  Гармоническая функция \(h(x, y)\) это функция, у которой \(\nabla^2 h = 0\).
+\end{definition}
+
+\begin{remark}
+  Если функция \(f(z) = u(x, y) + i v(x, y)\) аналитична в области \(D\), тогда
+  \(u(x, y)\) и \(v(x, y)\) это гармонические функции.
+\end{remark}
+
+\begin{lemma}
+  Если задана одна из функций \(u(x, y)\) или \(v(x, y)\), то считая ее
+  действительной/мнимой частью можно найти аналитическую функцию \(f(z) = u(x,
+  y) + i v(x, y)\) с точностью до произвольной постоянной.
+\end{lemma}
+
+\begin{proof}
+  Пусть \(u(x, y) = \Re f(z)\). Найдем функцию \(v(x, y) = \Im f(z)\) по ее
+  полному дифференциалу \(\dd v(x, y) = v_x \dd x + v_y \dd y\). При этом, т.к.
+  \(f(z)\) аналитическая функция, то выполнены условия Коши-Римана
+
+  \begin{equation*}
+    v
+    = \int_{(x_0, y_0)}^{(x, y)} \dd v
+    = \int_{(x_0, y_0)}^{(x, y)} v_x \dd x + v_y \dd y
+    = \int_{(x_0, y_0)}^{(x, y)} -u_y \dd x + u_x \dd y
+  \end{equation*}
+
+  где \((x_0, y_0)\)~--- произвольная точка в области \(D\), т.е. интеграл
+  найдется с точностью до \(C = C(x_0, y_0)\).
+\end{proof}
+
+\subheader{Интеграл по комплексной переменной}
+
+\begin{remark}
+  Интеграл \(\int_{z_1}^{z_2} f(z) \dd z\)~--- интеграл от точки \(z_1\) до
+  точки \(z_2\) определяется аналогично криволинейному.
+\end{remark}
+
+Возьмем на на комплексной плоскости кусочно-гладкую кривую \(l\), заданную
+параметрически
+
+\begin{equation*}
+  \begin{cases}
+    x = \phi(t) \\
+    y = \psi(t)
+  \end{cases}
+  \qquad
+  \prh{\phi'(t)}^2 + \prh{\psi'(t)}^2 \neq 0
+\end{equation*}
+
+где \(\alpha \le t \le \beta\) и \(\alpha, \beta \in \bar{\RR}\). Дробление
+кривой на частичные дуги с выбором средней точки позволяет построить
+интегральную сумму
+
+\begin{equation*}
+  \sigma_n = \sum_{k = 1}^{n} f(\zeta_k) \Delta z_k
+\end{equation*}
+
+где \(\omega = f(z)\)~--- функция действующая вдоль \(l\), \(\Delta z_k = z_k -
+z_{k - 1}\)~--- длина хорд, стягивающих элементарные дуги, а \(\zeta_k \in
+\segment{z_{k - 1}}{z_k}\)~--- средняя точка на дуге.
+
+Если предел интегральных сумм существует, конечен, не зависит от типа/ранга
+дробления и выбора средней точки, то он называется интегралом от функции
+\(f(z)\) по контуру \(l\).
