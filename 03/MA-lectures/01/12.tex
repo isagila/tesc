@@ -205,13 +205,91 @@
   \end{equation*}
 \end{proof}
 
-Получим выражения для производной в полярных координатах.
+\begin{lemma}
+  \begin{equation*}
+    f'(z) = \prh{\partder{u}{r} + i \partder{v}{r}} \cdot \frac{r}{z}
+  \end{equation*}
+\end{lemma}
 
-\todo Конспект F в этом моменте. Тут должно быть многобукв доказательства.
+\begin{proof}
+  \begin{equation*} \label{eq:complex-derivate-polar-1} \tag{1}
+    f'(z)
+    = \partder{u}{x} + i \partder{v}{x}
+    = \prh{
+        \partder{u}{r} \cdot \partder{r}{x}
+        + \partder{u}{\phi} \cdot \partder{\phi}{x}
+      }
+      + i \prh{
+        \partder{v}{r} \cdot \partder{r}{x}
+        + \partder{v}{\phi} \cdot \partder{\phi}{x}
+      }
+    = \prh{\partder{u}{r} + i \partder{v}{r}} \cdot \partder{r}{x}
+      + \prh{\partder{u}{\phi} + i \partder{v}{\phi}} \cdot \partder{\phi}{x}
+  \end{equation*}
 
-\begin{equation*}
-  f'(z) = \prh{\partder{u}{r} + i \partder{v}{\phi}} \cdot \frac{r}{z}
-\end{equation*}
+  Теперь заметим, что
+
+  \begin{equation*} \label{eq:complex-derivate-polar-2} \tag{2}
+    \begin{aligned}
+      \partder{r}{x}
+      = \partder{\sqrt{x^2 + y^2}}{x}
+      = \frac{x}{\sqrt{x^2 + y^2}}
+      = \frac{x}{r}
+    \\
+      \partder{\phi}{x}
+      = \partder{\arctan{\frac{y}{x}}}{x}
+      = \frac{1}{1 + \frac{y^2}{x^2}} \cdot \prh{-\frac{y}{x^2}}
+      = -\frac{y}{x^2 + y^2}
+      = -\frac{y}{r^2}
+    \end{aligned}
+  \end{equation*}
+
+  Подставим \eqref{eq:complex-derivate-polar-2} в
+  \eqref{eq:complex-derivate-polar-1} и получим
+
+  \begin{equation*} \label{eq:complex-derivate-polar-3} \tag{3}
+    f'(z) = \prh{\partder{u}{r} + i \partder{v}{r}} \cdot \frac{x}{r}
+      + \prh{\partder{u}{\phi} + i \partder{v}{\phi}} \cdot \prh{-\frac{y}{r^2}}
+  \end{equation*}
+  
+  Для второй скобки применим условия Коши-Римана в полярных координатах.
+
+  \begin{equation*} \label{eq:complex-derivate-polar-4} \tag{4}
+    \begin{aligned}
+      f'(z)
+      & = \prh{\partder{u}{r} + i \partder{v}{r}} \cdot \frac{x}{r}
+      + \prh{-r \partder{v}{r} + i r \partder{u}{r}} \cdot \prh{-\frac{y}{r^2}}
+    \\
+      & = \prh{\partder{u}{r} + i \partder{v}{r}} \cdot \frac{x}{r}
+      + \prh{\partder{v}{r} - i \partder{u}{r}} \cdot \frac{y}{r}
+    \\
+      & = \prh{\partder{u}{r} + i \partder{v}{r}} \cdot \frac{x}{r}
+        - i \prh{\partder{u}{r} + i \partder{v}{r}} \cdot \frac{y}{r}
+    \\
+      & = \prh{\partder{u}{r} + i \partder{v}{r}}
+        \cdot \prh{\frac{x}{r} - i \frac{y}{r}}
+    \\
+      & = \prh{\partder{u}{r} + i \partder{v}{r}} \cdot \frac{\bar{z}}{r}
+    \\
+      & = \prh{\partder{u}{r} + i \partder{v}{r}}
+        \cdot \frac{\bar{z}}{r} \cdot \frac{z}{z}
+    \\
+      & = \prh{\partder{u}{r} + i \partder{v}{r}}
+        \cdot \frac{r^2}{r z}
+    \\
+      & = \prh{\partder{u}{r} + i \partder{v}{r}}
+        \cdot \frac{r}{z}
+    \end{aligned}
+  \end{equation*}
+\end{proof}
+
+\begin{remark}
+  Аналогично доказательству выше можно показать, что
+
+  \begin{equation*}
+    f'(z) = \frac{1}{z} \prh{\partder{v}{\phi} - i \partder{u}{\phi}}
+  \end{equation*}
+\end{remark}
 
 \begin{remark}
   Свойства дифференцируемых функций комплексного переменного полностью
