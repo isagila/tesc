@@ -1,0 +1,17 @@
+\begin{tikzpicture}
+  \draw[->, thick] (-3, 0) -- (3, 0);
+  \draw[->, thick] (0, -0.5) -- (0, 4);
+
+  \draw[thick] (0, 0) -- (3, 1.5)
+    node[right] {\(\phi\)};
+  \draw (1, 3.5) node[circle, draw = black] {\(z\)};
+
+  \draw (1.74, 0.9) node[below] {\(z\)};
+  \draw[fill = black] (1.78, 0.9) circle (2pt);
+
+  \draw[thick] (2, 0) arc (0 : 180 : 2);
+  \draw[thick] (0, 0) -- (2.5, 0.4)
+    node[right] {\(0 + \sigma\)};
+  \draw[thick] (0, 0) -- (-2.5, 0.4)
+    node[left] {\(\pi - \sigma\)};
+\end{tikzpicture}
