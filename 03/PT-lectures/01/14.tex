@@ -1,0 +1,636 @@
+\subsection{%
+  Лекция \texttt{23.12.05}.%
+}
+
+\subheader{Характеристические функции}
+
+Пусть \(\xi + i \eta\)~--- комплексная случайная величина, причем \(\xi\) и
+\(\eta\) это обычные случайные величины с конечным первым моментом.
+
+\begin{definition}
+  Математическое ожидание комплекснозначной случайной величины определим как
+
+  \begin{equation*}
+    \expected{\xi + i \eta} = \expected{\xi} + i \expected{\eta}
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  Характеристической функцией случайной величины \(\xi\) называется функция
+
+  \begin{equation*}
+    \phi_{\xi} (t) = \expected{e^{i \xi t}}
+    \qquad
+    t \in \RR
+  \end{equation*}
+\end{definition}
+
+\begin{lemma}
+  Характеристическая функция существует для любой случайной величины \(\xi\),
+  причем \(\abs{\phi_{\xi} (t)} \le 1\).  
+\end{lemma}
+
+\begin{proof}
+  Заметим, что
+
+  \begin{equation*} \label{eq:char-func-lim-1} \tag{1}
+    \variance{\xi} = \expected{\xi^2} - \prh{\expected{\xi}}^2 \ge 0
+    \implies
+    \prh{\expected{\xi}}^2 \le \expected{\xi^2}
+  \end{equation*}
+
+  Оценим модуль характеристической функции.
+
+  \begin{equation*} \label{eq:char-func-lim-2} \tag{2}
+    \begin{aligned}
+      \abs{\phi_{\xi} (t)}^2
+      & = \abs{\expected{e^{i \xi t}}}^2
+    \\
+      & = \abs{\expected{\cos (\xi t) + i \sin (\xi t)}}^2
+    \\
+      & = \abs{\expected{\cos (\xi t)} + i \expected{\sin (\xi t)}}^2
+    \\
+      & = \abs{\expected{\cos (\xi t)}}^2 + \abs{\expected{\sin (\xi t)}}^2
+    \end{aligned}
+  \end{equation*}
+
+  Применим к полученному в \eqref{eq:char-func-lim-2} неравенство из
+  \eqref{eq:char-func-lim-1}, получим
+
+  \begin{equation*}
+    \abs{\phi_{\xi} (t)}^2
+    \le \expected{\cos^2 (\xi t)} + \expected{\sin^2 (\xi t)}
+    = \expected{\cos^2 (\xi t) + \sin^2 (\xi t)}
+    = \expected{1}
+    = 1
+  \end{equation*}
+\end{proof}
+
+\begin{lemma} \label{lem:char-func-lin-transform}
+  Пусть \(\phi_{\xi} (t)\) это характеристическая функция случайной величины
+  \(\xi\). Тогда характеристическая функция случайной величины \(\eta = a + b
+  \xi\) будет иметь вид
+
+  \begin{equation*}
+    \phi_{a + b \xi} (t) = e^{i t a} \cdot \phi_{\xi} (b t)
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  \begin{equation*}
+    \phi_{a + b \xi} (t)
+    = \expected{e^{i (a + b \xi) t}}
+    = \expected{e^{i a t} \cdot e^{i b \xi t}}
+    = e^{i a t} \expected{e^{i (b t) \xi}}
+    = e^{i t a} \cdot \phi_{\xi} (b t)
+  \end{equation*}  
+\end{proof}
+
+\begin{lemma} \label{lem:char-func-sum-ind}
+  Характеристическая функция суммы независимых случайных величин равна
+  произведению их характеристических функций.
+\end{lemma}
+
+\begin{proof}
+  Пусть случайные величины \(\xi\) и \(\eta\) независимы, тогда
+
+  \begin{equation*}
+    \phi_{\xi + \eta} (t)
+    = \expected{e^{i (\xi + \eta) t}}
+    = \expected{e^{i \xi t} \cdot e^{i \eta t}}
+    = \expected{e^{i \xi t}} \cdot \expected{e^{i \eta t}}
+    = \phi_{\xi} (t) \phi_{\eta} (t)
+  \end{equation*}
+\end{proof}
+
+\begin{lemma} \label{lem:char-func-series}
+  Пусть \(\expected{\xi^k} < \infty\). Тогда
+
+  \begin{equation*}
+    \phi_{\xi} (t)
+    = 1 + i t \cdot \expected{\xi} - \frac{t^2}{2} \expected{\xi^2}
+      + \dotsc + \frac{i^k \expected{\xi^k}}{k!} t^k
+      + \smallo \prh{\abs{t}^k}
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  Разложим экспоненту в ряд Маклорена и воспользуемся свойствами математического
+  ожидания.
+
+  \begin{equation*}
+    \phi_{\xi} (t)
+    = \expected{e^{i \xi t}}
+    = \expected{
+      1 + i \xi t + \frac{(i \xi t)^2}{2!}
+      + \dotsc + \frac{(i \xi t)^k}{k!}
+      + \smallo \prh{\abs{t}^k}
+    }
+    = 1 + i t \cdot \expected{\xi} - \frac{t^2}{2} \expected{\xi^2}
+      + \dotsc + \frac{i^k \expected{\xi^k}}{k!} t^k
+      + \smallo \prh{\abs{t}^k}
+  \end{equation*}
+\end{proof}
+
+\begin{lemma}
+  Пусть \(\expected{\xi^k} < \infty\). Тогда характеристическая функция
+  непрерывно дифференцируема \(k\) раз, причем
+
+  \begin{equation*}
+    \phi_{\xi}^{(k)} (0) = i^k \expected{\xi^k}
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  Это следует из существования \(k\)-ого члена разложения характеристической
+  функции в ряд Маклорена и равенства коэффициентов разложения:
+
+  \begin{equation*}
+    \frac{\phi_{\xi}^{(k)} (0)}{k!}
+    = \frac{i^k \expected{\xi^k}}{k!}
+    \implies
+    \phi_{\xi}^{(k)} (0) = i^k \expected{\xi^k}
+  \end{equation*}
+\end{proof}
+
+\begin{remark}
+  Существует взаимнооднозначное соответствие между распределениями и
+  характеристическими функциями. По характеристической функции можно
+  восстановить распределение. В частности, если \(\xi\) абсолютно непрерывная
+  случайная величина, то плотность можно найти по формуле
+
+  \begin{equation*}
+    f_{\xi} (x) = \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty}
+      e^{-i t \xi} \phi_{\xi} (t) \dd t
+  \end{equation*}
+
+  Это обратное преобразование Фурье.
+\end{remark}
+
+\begin{theorem}[О непрерывном соответствии] \label{thr:cont-match}
+  Последовательность случайных величин \(\xi_n\) слабо сходится к случайной
+  величине \(\xi\) тогда и только тогда, когда соответствующая
+  последовательность характеристических функций поточечно сходится к
+  характеристической функции случайной величины \(\xi\).
+
+  \begin{equation*}
+    \xi_n \rightrightarrows \xi
+    \iff
+    \phi_{\xi_n} (t) \to \phi_{\xi} (t)
+    \qquad
+    \forall t \in \RR
+  \end{equation*}
+\end{theorem}
+
+\subheader{Характеристические функции стандартных распределений}
+
+\subsubheader{I.}{Распределение Бернулли}
+
+Пусть \(\xi \in B_p\), тогда
+
+\begin{equation*}
+  \phi_{\xi} (t)
+  = \expected{e^{i \xi t}}
+  = (1 - p) \expected{e^{i t \cdot 0}}
+    + p \expected{e^{i t \cdot 1}}
+  = 1 - p + p e^{i t}
+\end{equation*}
+
+\subsubheader{II.}{Биномиальное распределение}
+
+Пусть \(\xi \in B_{n, p}\). Напомним, что
+
+\begin{equation*}
+  \prob{\xi = k} = \comb{n}{k} p^k q^{n - k}
+  \qquad
+  k = 0, 1, \dotsc, n
+\end{equation*}
+
+Тогда воспользуемся \ref{lem:char-func-sum-ind} и получим
+
+\begin{equation*}
+  \begin{aligned}
+    \xi = \xi_1 + \dotsc + \xi_n
+    \qquad
+    \xi_i \in B_p
+  \\
+    \phi_{\xi} (t)
+    = \prh{\phi_{\xi_1} (t)}^n
+    = \prh{1 - p + p e^{i t}}^n
+  \end{aligned}
+\end{equation*}
+
+\subsubheader{III.}{Распределение Пуассона}
+
+Пусть \(\xi \in \Pi_{\lambda}\). Напомним, что
+
+\begin{equation*}
+  \prob{\xi = k} = \frac{\lambda^k}{k!} e^{-\lambda}
+  \qquad
+  k = 0, 1, \dotsc
+\end{equation*}
+
+Тогда получим
+
+\begin{equation*}
+  \phi_{\xi} (t)
+  = \expected{e^{i \xi t}}
+  = \sum_{k = 0}^{\infty} e^{i t k} \frac{\lambda^k}{k!} e^{-\lambda}
+  = e^{-\lambda} \sum_{k = 0}^{\infty} \frac{\prh{\lambda e^{i t}}^k}{k!}
+  = e^{-\lambda} \cdot e^{\lambda e^{i t}}
+  = \exp \prh{\lambda \prh{e^{i t} - 1}}
+\end{equation*}
+
+\begin{lemma}
+  Распределение Пуассона устойчиво относительно суммирования.
+\end{lemma}
+
+\begin{proof}
+  Пусть даны независимые случайные величины \(\xi \in \Pi_{\lambda}\) и \(\eta
+  \in \Pi_{\mu}\). Тогда по \ref{lem:char-func-sum-ind}
+
+  \begin{equation*}
+    \phi_{\xi + \eta} (t)
+    = \phi_{\xi} (t) \phi_{\eta} (t)
+    = \exp \prh{\lambda \prh{e^{i t} - 1}}
+      \exp \prh{\mu \prh{e^{i t} - 1}}
+    = \exp \prh{(\lambda + \mu) \prh{e^{i t} - 1}}
+  \end{equation*}
+
+  Получили характеристическую функцию распределения \(\Pi_{\xi + \eta}\).
+\end{proof}
+
+\subsubheader{IV.}{Показательное распределение}
+
+Пусть \(\xi \in E_{\alpha}\). Напомним, что
+
+\begin{equation*}
+  f(x) = \begin{cases}
+    0, & x < 0 \\
+    \alpha e^{-\alpha x}, & x \ge 0
+  \end{cases}
+\end{equation*}
+
+Тогда получим
+
+\begin{equation*}
+  \phi_{\xi} (t)
+  = \expected{e^{i \xi t}}
+  = \int_0^{+\infty} e^{i x t} \alpha e^{-\alpha x} \dd x
+  = \alpha \int_0^{+\infty} e^{(i t - \alpha) x} \dd x
+  = \frac{\alpha}{i t - \alpha} e^{(i t - \alpha) x} \Big\vert_0^{+\infty}
+  = \frac{\alpha}{i t - \alpha} (0 - 1)
+  = \frac{\alpha}{\alpha - i t}
+\end{equation*}
+
+\subsubheader{V.}{Стандартное нормальное распределение}
+
+Пусть \(\xi \in N(0; 1)\). Напомним, что
+
+\begin{equation*}
+  f_{\xi} (x) = \frac{1}{\sqrt{2 \pi}} \exp \prh{-\frac{x^2}{2}}
+  \qquad
+  x \in \RR
+\end{equation*}
+
+Тогда получим
+
+\begin{equation*}
+  \begin{aligned}
+    \phi_{\xi} (t)
+    & = \expected{e^{i \xi t}}
+  \\
+    & = \int_{-\infty}^{\infty} e^{i t x}
+      \frac{1}{\sqrt{2 \pi}} \exp \prh{-\frac{x^2}{2}} \dd x
+  \\
+    & = \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty}
+      \exp \prh{-\frac{1}{2} (x^2 - 2 i t x)} \dd x
+  \\
+    & = \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{\infty}
+      \exp \prh{-\frac{1}{2} (x^2 - 2 i t x - t^2)}
+      \exp \prh{-\frac{t^2}{2}} \dd x
+  \\
+    & = \frac{1}{\sqrt{2 \pi}} \exp \prh{-\frac{t^2}{2}}
+      \under{
+        \int_{-\infty}^{\infty} \exp \prh{-\frac{1}{2} (x - i t)^2}
+        \dd (x - i t)
+      }{\text{Интеграл Пуассона}}
+  \\
+    & = \frac{1}{\sqrt{2 \pi}} \exp \prh{-\frac{t^2}{2}} \sqrt{2 \pi}
+  \\
+    & = \exp \prh{-\frac{t^2}{2}}
+  \end{aligned}
+\end{equation*}
+  
+\subsubheader{VI.}{Нормальное распределение}
+
+Пусть \(\xi \in N(a; \sigma^2)\). Нормируем ее и обозначим \(\eta = \frac{\xi -
+a}{\sigma} \in N(0; 1)\). Характеристическая функция для нее уже найдена ранее:
+
+\begin{equation*}
+  \phi_{\eta} (t) = \exp \prh{-\frac{t^2}{2}}
+\end{equation*}
+
+Т.к. \(\xi = a + \eta \sigma\), то по \ref{lem:char-func-lin-transform}
+получаем, что
+
+\begin{equation*}
+  \phi_{\xi} (t)
+  = e^{i a t} \exp \prh{-\frac{(\sigma t)^2}{2}}
+  = e^{i a t} \exp \prh{-\frac{1}{2} t^2 \sigma^2}
+\end{equation*}
+
+\begin{lemma}
+  \begin{equation*}
+    \begin{rcases}
+      \xi \in N(a_1, \sigma_1^2) \\
+      \eta \in N(a_2, \sigma_2^2) \\
+      \xi \text{ и } \eta \text{ независимы}
+    \end{rcases}
+    \implies
+    \xi + \eta \in N(a_1 + a_2, \sigma_1^2 + \sigma_2^2)
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  \begin{equation*}
+    \phi_{\xi + \eta} (t)
+    = \phi_{\xi} (t) \phi_{\eta} (t)
+    = e^{i a_1 t} \exp \prh{-\frac{1}{2} t^2 \sigma_1^2}
+      \cdot e^{i a_2 t} \exp \prh{-\frac{1}{2} t^2 \sigma_2^2}
+    = e^{i (a_1 + a_2) t} \exp \prh{-\frac{1}{2} t^2 (\sigma_1^2 + \sigma_2^2)}
+  \end{equation*}
+
+  Получили характеристическую функцию нормального распределения с параметрами
+  \(a = a_1 + a_2\) и \(\sigma^2 = \sigma_1^2 + \sigma_2^2\).
+\end{proof}
+
+\begin{lemma} \label{lem:second-wond-limit}
+  \begin{equation*}
+    \prh{1 + \frac{x}{n} + \smallo \prh{\frac{1}{n}}}^n
+    \Rarr{n \to \infty}
+    e^x
+  \end{equation*}  
+\end{lemma}
+
+\begin{proof}
+  \begin{equation*}
+    \begin{aligned}
+      \prh{1 + \frac{x}{n} + \smallo \prh{\frac{1}{n}}}^n
+      & = \exp \prh{n \ln \prh{1 + \frac{x}{n} + \smallo \prh{\frac{1}{n}}}}
+    \\
+      & = \exp \prh{
+        n \prh{
+          \frac{x}{n}
+          + \smallo \prh{\frac{1}{n}}
+          + \smallo \prh{\frac{x}{n} + \smallo \prh{\frac{1}{n}}}
+        }
+      }
+    \\
+      & = \exp \prh{n \prh{\frac{x}{n} + \smallo \prh{\frac{1}{n}}}}
+    \\
+      & = \exp \prh{x + n \cdot \smallo \prh{\frac{1}{n}}}
+      \Rarr{n \to \infty} e^x
+    \end{aligned}
+  \end{equation*}
+\end{proof}
+
+\begin{theorem}[Закон больших чисел Хинчина]
+  Пусть \(\xi_1, \dotsc, \xi_n\) независимые одинаково распределенные случайные
+  величины с конечным первым моментом \(\expected{\xi} = a < \infty\). Тогда
+
+  \begin{equation*}
+    \frac{S_n}{n} = \frac{\xi_1 + \dotsc + \xi_n}{n} \Rarr{\probP} a
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Сходимость по вероятности к константе эквивалентна слабой сходимости
+  (\ref{thr:weak-conv-to-const}), поэтому достаточно доказать, что
+  \(\frac{S_n}{n} \rightrightarrows a\). По \ref{thr:cont-match} эта сходимость
+  имеет место, если
+
+  \begin{equation*}
+    \phi_{\frac{S_n}{n}} (t)
+    \to
+    \phi_a (t)
+    = \expected{e^{i t a}}
+    = e^{i t a}
+    \qquad \forall t \in \RR
+  \end{equation*}
+
+  По \ref{lem:char-func-lin-transform} и \ref{lem:char-func-sum-ind} имеем
+
+  \begin{equation*}
+    \phi_{\frac{S_n}{n}} (t)
+    = \phi_{S_n} \prh{\frac{t}{n}}
+    = \prh{\phi_{\xi_1} \prh{\frac{t}{n}}}^n
+  \end{equation*}
+
+  Т.к. первый момент существует, то по \ref{lem:char-func-series} получаем
+
+  \begin{equation*}
+    \phi_{\xi_1}
+    = 1 + i t \expected{\xi_1} + \smallo (t)
+    = 1 + i t a + \smallo (t)
+  \end{equation*}
+
+  Собираем все полученные формулы и применяем \ref{lem:second-wond-limit}.
+
+  \begin{equation*}
+    \phi_{\frac{S_n}{n}} (t)
+    = \prh{1 + i \frac{t}{n} a + \smallo \prh{\frac{t}{n}}}^n
+    = \prh{1 + \frac{i t a}{n} + \smallo \prh{\frac{1}{n}}}^n
+    \Rarr{n \to \infty}
+    e^{i t a}
+  \end{equation*}
+
+  Получили характеристическую функцию случайной величины \(a\).
+\end{proof}
+
+\begin{theorem}[Центральная предельная теорема]
+  \label{thr:central-limit-theorem}
+  Пусть \(\xi_1, \dotsc, \xi_n\) последовательность независимых одинаково
+  распределенных случайных величин с конечным вторым моментом. Обозначим
+  \(\expected{\xi_i} = a\) и \(\variance{\xi_i} = \sigma^2\). Тогда
+
+  \begin{equation*}
+    \frac{S_n - n a}{\sigma \sqrt{n}}
+    \rightrightarrows
+    N(0; 1)
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Пусть \(\eta_i = \frac{\xi_i - a}{\sigma}\)~--- последовательность
+  соответствующих стандартизованных случайных величин, причем
+  \(\expected{\eta_i} = 0\) и \(\variance{\eta_i} = 1\). Тогда
+
+  \begin{equation*}
+    z_n
+    = \eta_1 + \dotsc + \eta_n
+    = \frac{\sum \xi_i - n a}{\sigma}
+    = \frac{S_n - n a}{\sigma}
+  \end{equation*}
+
+  Теперь надо доказать, что
+
+  \begin{equation*}
+    \frac{z_n}{\sqrt{n}}
+    = \frac{S_n - n a}{\sigma \sqrt{n}}
+    \rightrightarrows
+    N(0; 1)
+  \end{equation*}
+
+  По \ref{lem:char-func-lin-transform} и \ref{lem:char-func-sum-ind} имеем
+
+  \begin{equation*}
+    \phi_{\frac{z_n}{\sqrt{n}}} (t)
+    = \phi_{z_n} \prh{\frac{t}{\sqrt{n}}}
+    = \prh{\phi_{\eta_1} \prh{\frac{t}{\sqrt{n}}}}^n
+  \end{equation*}
+
+  Т.к. второй момент существует, то по \ref{lem:char-func-series} получаем
+
+  \begin{equation*}
+    \phi_{\eta_1}
+    = 1 + i t \under{\expected{\eta_1}}{= 0}
+      - \frac{t^2}{2} \under{\expected{\eta_1^2}}{= 1}
+      + \smallo \prh{t^2}
+    = 1 - \frac{t^2}{2} + \smallo \prh{t^2}
+  \end{equation*}
+
+  Подставим это в предыдущую формулу
+
+  \begin{equation*}
+    \phi_{\frac{z_n}{\sqrt{n}}} (t)
+    = \prh{1 - \frac{t^2}{2 n} + \smallo \prh{\frac{t^2}{n}}}^n
+    = \prh{1 - \frac{t^2}{2 n} + \smallo \prh{\frac{1}{n}}}^n
+  \end{equation*}
+
+  Применяем \ref{lem:second-wond-limit}.
+
+  \begin{equation*}
+    \phi_{\frac{z_n}{\sqrt{n}}} (t)
+    \Rarr{n \to \infty}
+    \exp \prh{-\frac{t^2}{2}}
+  \end{equation*}
+
+  Получили характеристическую функцию стандартного нормального распределения и
+  по \ref{thr:cont-match} имеем
+
+  \begin{equation*}
+    \frac{z_n}{\sqrt{n}}
+    = \frac{S_n - n a}{\sigma \sqrt{n}}
+    \rightrightarrows
+    N(0; 1)
+  \end{equation*}
+\end{proof}
+
+\begin{theorem}[Предельная теорема Муавра---Лапласа] \label{thr:lim-M-L}
+  Пусть \(v_n (A)\)~--- число появления события \(A\) при \(n\) независимых
+  испытаниях, \(p\)~--- вероятность успеха при одном испытании, а \(q = 1 - p\).
+  Тогда
+
+  \begin{equation*}
+    \frac{v_n (A) - n p}{\sqrt{n p q}}
+    \rightrightarrows
+    N(0; 1)
+    \qquad
+    (n \to \infty)
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  \begin{equation*}
+    \begin{aligned}
+      v_n (A) = \xi_1 + \dotsc + \xi_n
+      \qquad
+      \xi_i \in B_p \text{ это число успехов при \(i\)-ом испытании}
+    \\
+      \expected{\xi_1} = p
+      \qquad
+      \variance{\xi_1} = p q
+      \qquad
+      \stder{\xi_1} = \sqrt{p q}
+    \end{aligned}
+  \end{equation*}
+
+  По \ref{thr:central-limit-theorem} имеем
+
+  \begin{equation*}
+    \frac{v_n (A) - n p}{\sqrt{p q} \sqrt{n}}
+    = \frac{v_n (A) - n p}{\sqrt{n p q}}
+    \rightrightarrows
+    N(0; 1)
+  \end{equation*}
+\end{proof}
+
+\begin{theorem}[Интегральная формула Муавра---Лапласа]
+  \begin{equation*}
+    \probP (k_1 \le v_n (A) \le k_2) \approx \Phi(x_2) - \Phi(x_1)
+  \end{equation*}  
+\end{theorem}
+
+\begin{proof}
+  \begin{equation*}
+    \probP (k_1 \le v_n (A) \le k_2)
+    = \probP \prh{
+      \frac{k_1 - n p}{\sqrt{n p q}}
+      \le \frac{v_n (A) - n p}{\sqrt{n p q}}
+      \le \frac{k_2 - n p}{\sqrt{n p q}}
+    }
+    = F_{\eta} \prh{\frac{k_2 - n p}{\sqrt{n p q}}}
+      - F_{\eta} \prh{\frac{k_1 - n p}{\sqrt{n p q}}}
+    \qquad
+    \eta = \frac{v_n (A) - n p}{\sqrt{n p q}}
+  \end{equation*}
+
+  По \ref{thr:lim-M-L} получаем, что
+
+  \begin{equation*}
+    F_{\eta} \prh{\frac{k_2 - n p}{\sqrt{n p q}}}
+      - F_{\eta} \prh{\frac{k_1 - n p}{\sqrt{n p q}}}
+    \rightrightarrows
+    F_0 \prh{\frac{k_2 - n p}{\sqrt{n p q}}}
+      - F_0 \prh{\frac{k_1 - n p}{\sqrt{n p q}}}
+  \end{equation*}
+
+  где
+
+  \begin{equation*}
+    F_0 = \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^{x}
+      \exp \prh{-\frac{t^2}{2}} \dd t
+  \end{equation*}
+
+  это функция стандартного нормального распределения.
+\end{proof}
+
+\begin{remark}
+  Аналогичным образом Центральную Предельную Теорему применяют для приближенного
+  вычисления вероятностей связанных с суммами большого числа независимых
+  одинаково распределенных случайных величин, заменяя стандартизованную сумму на
+  стандартное нормальное распределение. Но какова ошибка этого приближения? Для
+  этого используют следующую теорему.
+\end{remark}
+
+\begin{theorem}[Неравенство Берри---Эссеена]
+  В условиях Центральной Предельной Теоремы для случайных величин с конечным
+  третьим моментом справедливо
+
+  \begin{equation*}
+    \abs{
+      \probP \prh{
+        \frac{S_n - n \expected{\xi_1}}
+        {\sqrt{n \variance{\xi_1}}} < x
+      } - F_0 (x)
+    } \le C \frac{\expected{\abs{\xi_1 - \expected{\xi_1}}^3}}
+      {\sqrt{n} \prh{\sqrt{\variance{\xi_1}}}^3}
+    \qquad
+    \forall x \in \RR
+  \end{equation*}
+\end{theorem}
+
+\begin{remark}
+  По теории \(C < 0.9\), однако на практике обычно можно брать \(0.4\).
+\end{remark}
