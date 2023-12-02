@@ -1,0 +1,309 @@
+\subsection{%
+  Лекция \texttt{23.12.01}.%
+}
+
+\begin{equation*}
+  \int_C f(z) \dd z
+  \bydef
+  \lim_{\substack{n \to \infty \\ \tau \to 0}} \sigma_n
+  = \lim_{\substack{n \to \infty \\ \tau \to 0}}
+    \sum_{k = 1}^n f \prh{\zeta_k} \Delta z_k
+\end{equation*}
+
+Обозначим \(f(z) = u(x, y) + i v(x, y)\),  \(z = x + i y\) и \(\zeta_k = \xi_k +
+i \eta_k\). Тогда
+
+\begin{equation*}
+  \sigma_n = \sum_{k = 1}^n \prh{
+    u \prh{\xi_k, \eta_k} + i v \prh{\xi_k, \eta_k}
+  } \cdot \prh{
+    \Delta x_k + i \Delta y_k
+  }
+  = \sum_{k = 1}^n \prh{
+    u \prh{\xi_k, \eta_k} \Delta x_k - v \prh{\xi_k, \eta_k} \Delta y_k
+  } + i \prh{
+    u \prh{\xi_k, \eta_k} \Delta y_k + v \prh{\xi_k, \eta_k} \Delta x_k
+  }
+\end{equation*}
+
+Таким образом
+
+\begin{equation*}
+  \int_C f(z) \dd z
+  = \int_C u \dd x - v \dd y + i \int_C u \dd y + v \dd x
+\end{equation*}
+
+\begin{remark}
+  Свели исходный интеграл к двум криволинейным интегралам второго рода от
+  вещественной функции, значит справедливы свойства:
+
+  \begin{enumerate}
+  \item
+    \(\display{
+      \int_{С^+} f(z) \dd z = -\int_{С^-} f(z) \dd z
+    }\)
+  
+  \item
+    Аддитивность
+  
+  \item
+    Линейность
+  
+  \item
+    Оценка \(\display{
+      \abs{\int_C f(z) \dd z} \le \int_C \abs{f(z)} \dd z
+    }\)
+
+  \item
+    Замена переменной \(\display{
+      \int_C f(z) \dd z = \int_{\gamma} f(g(\omega)) g'(\omega) \dd \omega
+    }\) при условии, что \(z = g(\omega)\) аналитичная взаимнооднозначная
+    функция. Если \(z = g(t)\), где \(t \in \RR\), то замена также справедлива.
+  \end{enumerate}
+\end{remark}
+
+\begin{example}
+  Пусть \(\display{I = \int_C \frac{\dd z}{z - z_0}}\), где \(C\) это окружность
+  с центром \(z_0\) и радиусом \(\rho\). Тогда используя показательную форму
+  комплексного числа получаем
+
+  \begin{equation*}
+    I
+    = \int_C \frac{\dd \prh{z_0 + \rho e^{i \phi}}}{\rho e^{i \phi}}
+    = \int_0^{2 \pi} \frac{i \rho e^{i \phi}}{\rho e^{i \phi}} \dd \phi
+    = \int_0^{2 \pi} i \dd \phi
+    = 2 \pi i
+  \end{equation*}
+
+  Заметим, что \(\display{f(z) = \frac{1}{z - z_0}}\) аналитична в \(D \setminus
+  \set{0}\). Интеграл \(I\) не зависит от выбора окружности и ее центра \(z_0\).
+\end{example}
+
+\begin{theorem}[Коши] \label{thr:C-loop-int}
+  Пусть \(f(z)\) аналитична и однозначна в односвязной области \(D\), а
+  замкнутый контур \(C\) полностью содержится в области \(D\). Тогда
+  \(\display{\int_C f(z) \dd z = 0}\).
+\end{theorem}
+
+\begin{proof}
+  \begin{equation*}
+    \int_C f(z) \dd z
+    = \under{\int_C u \dd x - v \dd y}{I_1}
+      + i \under{\int_C u \dd y + v \dd x}{I_2}
+  \end{equation*}
+
+  Рассмотрим интеграл \(I_1\). Т.к. \(f(z)\) аналитична в области \(D\), то
+  существуют непрерывные частные производные функций \(u(x, y)\) и \(v(x, y)\).
+  Тогда для них справедлива формула Грина
+
+  \begin{equation*}
+    I_1
+    = \int_C u \dd x - v \dd y
+    = \iint_{D_C} \prh{-\partder{v}{x} - \partder{u}{y}} \dd x \dd y
+    \eqby{\ref{thr:C-R-cond}}
+    \iint_{D_C} \prh{\partder{u}{y} - \partder{u}{y}} \dd x \dd y
+    = 0
+  \end{equation*}
+
+  Аналогично \(I_2 = 0\), таким образом исходный интеграл также равен нулю.
+\end{proof}
+
+\begin{remark}
+  Теорему \ref{thr:C-loop-int} можно усилить. Если \(f(z)\) непрерывна на
+  \(\Gamma_D\), то \(\display{\int_{\Gamma_D} f(z) \dd z = 0}\). Формула Грина
+  также верна, в качестве \(C\) берем \(\Gamma_D\).
+\end{remark}
+
+Обобщим теорему \ref{thr:C-loop-int} на случай многосвязной области.
+
+\begin{remark}
+  Положительным обходом области будем считать такой обход, что область остается
+  слева.
+\end{remark}
+
+\gallerydouble
+  {01_14_01}{Многосвязная область \(D\)}
+  {01_14_02}{Односвязная область \(D'\)}
+
+\begin{theorem}
+  Пусть \(f(z)\) аналитична и однозначна в многосвязной области \(D\)
+  (\figref{01_14_01}) и непрерывна на \(\Gamma_D\). Тогда
+  \(\display{\int_{\Gamma_D^+} f(z) \dd z = 0}\).
+\end{theorem}
+
+\begin{proof}
+  Соединим внутренние контуры с внешним при помощи гладких кривых \(\gamma_1,
+  \dotsc, \gamma_n\) (\figref{01_14_02}). Обход границы \(\Gamma_D'\) будет
+  складываться из обходов \(C_0^+\), \(C_1^-, \dotsc C_n^-\) и дважды пройденных
+  \(\gamma_1, \dotsc, \gamma_n\). Область с добавленными \(\gamma_1, \dotsc,
+  \gamma_n\) стала односвязной, поэтому к ней применима \ref{thr:C-loop-int}.
+
+  \begin{equation*}
+    \int_{\Gamma_{D'}^+} f(z) \dd z
+    = \under{
+        \int_{C_0^+} f(z) \dd z
+        + \int_{C_1^-} f(z) \dd z
+        + \dotsc
+      }{S_1}
+      + \under{
+        \int_{\gamma_1^+} f(z) \dd z
+        + \int_{\gamma_1^-} f(z) \dd z
+        + \dotsc
+      }{S_2}
+  \end{equation*}
+
+  По \ref{thr:C-loop-int} \(S_1 = 0\), также по свойству интегралов \(S_2\)
+  также равна нулю. Значит исходный интеграл равен нулю.
+\end{proof}
+
+\begin{remark}
+  Из теоремы следует, что интеграл по внешнему контуру равен сумме интегралов по
+  внутренним контурам в том же направлении обхода.
+\end{remark}
+
+\subheader{Первообразная \(\CC\)-функции}
+
+Из теоремы \ref{thr:C-loop-int} следует, что если \(z\) и \(z_0\) лежат в
+области аналитичности функции \(f(z)\), то интеграл
+
+\begin{equation*}
+  \Phi (z, z_0) = \int_{z_0}^z f(\zeta) \dd \zeta
+\end{equation*}
+
+является интегралом не зависящим от пути. Если зафиксировать \(z_0\), то получим
+функцию переменной \(z\)
+
+\begin{equation*}
+  \Phi(z) = \int_{z_0}^z f(\zeta) \dd \zeta
+\end{equation*}
+
+\begin{theorem}
+  Пусть \(f(z)\) непрерывна в односвязной области \(D\), для всякого контура
+  \(\gamma \subset D\) выполнено \(\display{\int_{\gamma} f(z) \dd z = 0}\).
+  Тогда при фиксированном \(z_0 \in D\)
+
+  \begin{equation*}
+    \Phi(z) = \int_{z_0}^z f(\zeta) \dd \zeta
+  \end{equation*}
+
+  аналитична в области \(D\) и \(\Phi'(z) = f(z)\), т.е. \(\Phi(z)\) это
+  первообразная функции \(f(z)\).
+\end{theorem}
+
+\begin{proof}
+  По определению производной имеем
+
+  \begin{equation*}
+    \Phi'(z)
+    = \lim_{\Delta z \to 0} \frac{\Phi(z + \Delta z) - \Phi(z)}{\Delta z}
+    = \lim_{\Delta z \to 0}
+      \frac{\int_z^{z + \Delta z} f(\zeta) \dd \zeta}{\Delta z}
+  \end{equation*}
+
+  Т.к. \(\int_C f(z) \dd z = 0\), то интеграл, получившийся в числителе,
+  не зависит от пути. Выберем в качестве пути отрезок \(\segment{z}{z +
+  \Delta z} \in D\). Рассмотрим
+
+  \begin{equation*}
+    \begin{aligned}
+      \abs{\frac{\Phi(z + \Delta z) - \Phi(z)}{\Delta z} - f(z)}
+      & = \abs{\frac{\int_z^{z + \Delta z} f(\zeta) \dd \zeta}{\Delta z} - f(z)}  
+    \\
+      & = \frac{1}{\abs{\Delta z}}
+        \abs{\int_z^{z + \Delta z} f(\zeta) - f(z) \dd \zeta}
+    \\
+      & \le \frac{1}{\abs{\Delta z}}
+        \int_z^{z + \Delta z} \abs{f(\zeta) - f(z)} \dd \zeta
+    \\
+      & \le \frac{1}{\abs{\Delta z}}
+      \max \abs{f(\zeta) - f(z)} \cdot \abs{\Delta z}
+    \\
+      & = \max \abs{f(\zeta) - f(z)}
+    \end{aligned}
+  \end{equation*}
+
+  Т.к. \(f(z)\) непрерывна, то
+
+  \begin{equation*}
+    \forall \epsilon > 0 \given
+    \exists \delta > 0 \given
+    \forall \Delta z < \delta \given
+    \max \abs{f(\zeta) - f(z)} < \epsilon
+  \end{equation*}
+
+  Это значит, что
+
+  \begin{equation*}
+    \forall \epsilon > 0 \given
+    \exists \delta > 0 \colon
+    \abs{\frac{\Phi(z + \Delta z) - \Phi(z)}{\Delta z} - f(z)} < \epsilon
+    \qquad
+    \abs{\Delta z} < \delta
+  \end{equation*}
+
+  Другими словами
+
+  \begin{equation*}
+    f(z)
+    = \lim_{\Delta z \to 0}  \frac{\Phi(z + \Delta z) - \Phi(z)}{\Delta z}
+    = \Phi'(z)
+  \end{equation*}
+
+  \(f(z)\) непрерывна и \(\forall z \in D \given \exists \Phi'(z) \implies
+  \Phi(z)\) аналитична в области \(D\).
+\end{proof}
+
+\begin{remark}
+  Формула Ньютона-Лейбница доказывается аналогично вещественному случаю, т.е.
+
+  \begin{equation*}
+    \int_{z_1}^{z_2} f(\zeta) \dd \zeta
+    = F(z_2) - F(z_1)
+  \end{equation*}
+
+  где \(F(z)\) это какая-либо первообразная функции \(f(z)\).
+\end{remark}
+
+\galleryone{01_14_03}{Связь между значениями функции внутри области и на ее
+границе}
+
+Установим связь между значениями функции внутри области и на ее границе.
+Рассмотрим функцию \(f(z)\), которая аналитична в односвязной области \(D\).
+Выберем \(z_0 \in D\), внутри области окружим эту точку контуром \(\Gamma\) и
+контуром \(\gamma\) внутри \(\Gamma\).
+
+Введем функцию \(\display{\phi(z) = \frac{f(z)}{z - z_0}}\), которая будет
+аналитична в \quote{кольце} между \(\gamma\) и \(\Gamma\). Тогда по
+\ref{thr:C-loop-int} имеем
+
+\begin{equation*}
+  \int_{\Gamma^+} \phi(\zeta) \dd \zeta
+    + \int_{\gamma^-} \phi(\zeta) \dd \zeta
+  = 0
+  \implies
+  \int_{\Gamma^+} \phi(\zeta) \dd \zeta
+  = \int_{\gamma^+} \phi(\zeta) \dd \zeta
+\end{equation*}
+
+Пусть \(\gamma\) это окружность с центром \(z_0\) и радиусом \(\rho\), т.е.
+\(\zeta = z_0 + \rho e^{i \phi}\). Тогда
+
+\begin{equation*}
+  \int_{\gamma^+} f(\zeta) \dd \zeta
+  = \int_{\gamma^+} \frac{f(\zeta)}{\zeta - z_0} \dd \zeta
+  = i \int_0^{2 \pi} f(\zeta) \dd \phi
+  = i \int_0^{2 \pi} \prh{f(\zeta) - f(z_0)} \dd \phi
+    + i \under{\int_0^{2 \pi} f(z_0) \dd \phi}{2 \pi f(z_0)}
+\end{equation*}
+
+При \(\rho \to 0\) справедливо \(f(\zeta) - f(z_0) \to 0\), т.к. функция
+\(f(z)\) аналитическая и непрерывная. Значит
+
+\begin{equation*}
+  \int_{\gamma^+} \phi(\zeta) \dd \zeta
+  = \int_{\gamma^+} \frac{f(\zeta)}{\zeta - z_0} \dd \zeta
+  = 2 \pi i f(z_0)
+  \implies
+  f(z_0)
+  = \frac{1}{2 \pi i} \int_{\gamma^+} \frac{f(\zeta)}{\zeta - z_0} \dd \zeta
+\end{equation*}
