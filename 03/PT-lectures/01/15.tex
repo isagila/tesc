@@ -1,0 +1,404 @@
+\subsection{%
+  Лекция \texttt{23.12.12}.%
+}
+
+\subheader{Производящая функция моментов}
+
+\begin{definition}
+  Производящей функцией моментов случайной величины \(\xi\) называется функция
+
+  \begin{equation*}
+    M_{\xi} (t) = \expected{e^{\xi t}}
+  \end{equation*}
+\end{definition}
+
+\begin{remark}
+  Если \(\expected{\xi^k} < \infty\), то
+
+  \begin{equation*}
+    M_{\xi} (t)
+    = \expected{e^{\xi t}}
+    = \expected{1 + \xi t + \frac{\xi^2 t^2}{2} + \dotsc + \frac{\xi^k t^k}{k!}
+      + \smallo \prh{t^k}}
+    = 1 + t \expected{\xi} + \frac{t^2}{2} \expected{\xi^2} + \dotsc
+      + \frac{t^k}{k!} \expected{\xi^k} + \smallo \prh{t^k}
+  \end{equation*}
+
+  Причем
+
+  \begin{equation*}
+    \expected{\xi^k} = M_{\xi}^{(k)} (0)
+  \end{equation*}  
+\end{remark}
+
+\begin{lemma}
+  Если случайные величины \(\xi\) и \(\eta\) независимы, то
+
+  \begin{equation*}
+    M_{\xi + \eta} (t) = M_{\xi} (t) \cdot M_{\eta} (t)
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  \begin{equation*}
+    M_{\xi + \eta} (t)
+    = \expected{e^{(\xi + \eta) t}}
+    = \expected{e^{\xi t} e^{\eta + t}}
+    = \expected{e^{\xi t}} \expected{e^{\eta t}}
+    = M_{\xi} (t) M_{\eta} (t)
+  \end{equation*}  
+\end{proof}
+
+\begin{remark}
+  Если \(M_{\xi} (t) = M_{\eta} (t)\), то случайные величины \(\xi\) и \(\eta\)
+  имеют одинаковое распределение.
+\end{remark}
+
+\begin{lemma}[Об ограниченности] \label{lem:about-limit}
+  Пусть \(\xi \in B_p\), тогда
+
+  \begin{equation*}
+    M_{\xi t} \le \exp \prh{p \prh{e^t - 1}}
+    \qquad
+    \forall t \in \RR
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  \begin{equation*}
+    M_{\xi} (t)
+    = (1 - p) e^{0 \cdot t} + p e^{1 \cdot t}
+    = 1 - p + p e^t
+    = 1 + p \prh{e^t - 1}
+    \le \exp \prh{p \prh{e^t - 1}}
+    \qquad
+    \prh{e^x \ge x + 1}
+  \end{equation*}
+\end{proof}
+
+\subheader{Оценка хвостов биномиального распределения. Граница Чернова
+(неравенство Хевдинга)}
+
+Хотим дать оценки отклонения случайной величины с биномиальным распределением от
+ее среднего значения.
+
+\begin{remark}
+  Можно дать наивную оценку по формуле Бернулли.
+
+  \begin{equation*}
+    \prob{\xi \ge m} \sum_{k = m}^n \comb{k}{n} p^k q^{n - k}
+  \end{equation*}
+
+  Однако это неудобно и неинформативно, хочется получить аналитическую оценку.
+\end{remark}
+
+\begin{remark}
+  Эту оценку также можно дать по неравенству Чебышева.
+
+  \begin{equation*}
+    \probP \prh{\abs{\frac{v_n}{n} - p} \ge \epsilon}
+    \le \frac{p q}{n \epsilon^2}
+  \end{equation*}
+
+  Однако это слишком грубая оценка.
+\end{remark}
+
+\begin{remark}
+  Если \(n\) велико, а вероятность \(p\) при этом не слишком мала, то можно дать
+  оценку при помощи Центральной Предельной Теоремы (формула Муавра---Лапласа) и
+  неравенства Берри---Эссеена. Однако это плохо работает при недостаточно
+  больших \(n\), и поправка Берри---Эссеена ведет себя примерно как
+  \(\frac{1}{\sqrt{n}}\), что также не достаточно.
+\end{remark}
+
+\subheader{Общий случай}
+
+Используем неравенство Маркова (\ref{thr:markov-inequality})
+
+\begin{equation*}
+  \prob{\xi \ge a}
+  = \prob{e^{\xi t} \ge e^{a t}} 
+  \le \frac{\expected{e^{\xi t}}}{e^{a t}}
+  \qquad
+  \forall t > 0
+\end{equation*}
+
+Пусть \(\xi = \xi_1 + \dotsc + \xi_n\)~--- сумма независимых случайных величин.
+Тогда
+
+\begin{equation*} \label{eq:bin-tail-general} \tag{BTG}
+  \begin{aligned}
+    \prob{\xi \ge a}
+    \le e^{-a t} \cdot \Pi_{i = 1}^n \expected{e^{t \xi_i}}
+    & \qquad
+    \forall t > 0
+  \\
+    \prob{\xi \ge a}
+    \le \min_{t > 0} e^{-a t} \cdot \Pi_{i = 1}^n \expected{e^{t \xi_i}}
+  \end{aligned}
+\end{equation*}
+
+Аналогично \(\forall t > 0\) справедливо
+
+\begin{equation*}
+  \prob{\xi \le a}
+  = \prob{e^{-t \xi} \ge e^{-a t}}
+  \le \min_{t > 0} e^{a t} \cdot \Pi_{i = 1}^n \expected{e^{-t \xi_i}}
+\end{equation*}
+
+\begin{remark}
+  Идея состоит в том, чтобы для данного типа распределения случайных величин
+  \(\xi_i\) подобрать значение переменной \(t\) при которых, эти минимумы
+  достигаются.
+\end{remark}
+
+\subheader{Основной случай}
+
+Пусть \(S_n = \xi_1 + \dotsc + \xi_n, S_n \in B_{n, p}\) и \(\xi_i \in B_p\).
+Тогда \(\expected{\xi_i} = p, \variance{\xi_i} = p q, M_{\xi_i} (t) = 1 - p + p
+e^t\).
+
+\subsubheader{I.}{Мультипликативная форма}
+
+\begin{theorem}[Граница Чернова] \label{thr:chernov-border}
+  \begin{equation*}
+    \begin{aligned}
+      \prob{S_n \ge (1 + \delta) n p}
+      \le \exp \prh[\Big]{n p (\delta - (1 + \delta) \ln (1 + \delta))}
+      \le \exp \prh[\Big]{-\frac{\delta^2}{2 + \delta} \cdot n p}
+      & \qquad
+      \delta > 0
+    \\
+      \prob{S_n \le (1 - \delta) n p}
+      \le \exp \prh[\Big]{n p (- \delta - (1 - \delta) \ln (1 - \delta))}
+      \le \exp \prh[\Big]{-\frac{\delta^2}{2} \cdot n p}
+      & \qquad
+      0 < \delta < 1
+    \end{aligned}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Согласно \ref{eq:bin-tail-general} имеем
+
+  \begin{equation*} \label{eq:chernov-border-1} \tag{1}
+    \prob{S_n \ge (1 + \delta) n p}
+    \le e^{-t (1 + \delta) n p} \cdot \Pi_{i = 1}^n (1 - p + p e^t)
+  \end{equation*}
+
+  Применим оценку \ref{lem:about-limit} для производящей функции моментов.
+
+  \begin{equation*} \label{eq:chernov-border-2} \tag{2}
+    \begin{aligned}
+      \prob{S_n \ge (1 + \delta) n p}
+      & \le e^{-t (1 + \delta) n p} \cdot \Pi_{i = 1}^n \exp \prh{p (e^t - 1)}
+    \\
+      & = e^{-t (1 + \delta) n p} \cdot \exp \prh{n p (e^t - 1)}
+    \\
+      & = \exp \prh{n p \prh{e^t - 1 - t - t \delta}}
+    \end{aligned}
+  \end{equation*}
+
+  Обозначим эту функцию \(f(t), t \ge 0\) и найдем ее минимум.
+
+  \begin{equation*} \label{eq:chernov-border-3} \tag{3}
+    \begin{aligned}
+      \prh{\ln f(t)}'
+      = n p \prh{e^t - 1 - \delta}
+      = 0
+    \\
+      e^t = 1 + \delta
+    \\
+      t = \ln (1 + \delta)
+    \end{aligned}
+  \end{equation*}
+
+  Подставим найденное \(t_{\min}\) в \eqref{eq:chernov-border-2}.
+
+  \begin{equation*}
+    \prob{S_n \ge (1 + \delta) n p}
+    \le \exp \prh{n p \prh{
+      e^{\ln (1 + \delta)}
+      - 1
+      - \ln (1 + \delta)
+      - \ln (1 + \delta) \delta
+    }}
+    = \exp \prh[\Big]{n p \prh{\delta - (1 + \delta) \ln (1 + \delta)}}
+  \end{equation*}
+
+  Более простую оценку получаем, используя известное из курса матанализа
+  неравенство \(\display{\ln (1 + \delta) \ge \frac{2 \delta}{2 + \delta}}\).
+
+  Второе неравенство доказываем аналогично.
+\end{proof}
+
+\subsubheader{II.}{Аддитивная форма}
+
+\begin{theorem}[Чернова---Хевдинга]
+  \begin{equation*}
+    \begin{aligned}
+      \prob{\frac{S_n}{n} \ge p + \epsilon}
+      \le \prh{
+        \prh{\frac{p}{p + \epsilon}}^{p + \epsilon}
+        \cdot
+        \prh{\frac{1 - p}{1 - p - \epsilon}}^{1 - p - \epsilon}
+      }^n
+      \qquad
+      \forall \epsilon > 0
+    \\
+      \prob{\frac{S_n}{n} \le p - \epsilon}
+      \le \prh{
+        \prh{\frac{p}{p - \epsilon}}^{p - \epsilon}
+        \cdot
+        \prh{\frac{1 - p}{1 - p + \epsilon}}^{1 - p + \epsilon}
+      }^n
+      \qquad
+      \forall \epsilon > 0
+    \end{aligned}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Доказательство аналогично \ref{thr:chernov-border}, но чуть более громоздкое
+  в плане вычислений, поэтому мы его опустим.
+\end{proof}
+
+\begin{remark}
+  Эту оценку можно сделать грубее.
+
+  \begin{equation*}
+    \prob{\abs{\frac{S_n}{n} - p} \ge \epsilon}
+    \le 2 \exp \prh{-\frac{n \epsilon^2}{2 p q}}
+  \end{equation*}
+
+  Или т.к. \(p q < \frac{1}{4}\), можно получить еще более грубую оценку
+
+  \begin{equation*}
+    \prob{\abs{\frac{S_n}{n} - p} \ge \epsilon}
+    \le 2 \exp \prh{-2 n \epsilon^2}
+  \end{equation*}
+\end{remark}
+
+\subheader{Элементы теории принятия решений}
+
+\todo Дублирование с 07ой лекцией (конец)
+
+Пусть требуется выбрать оптимальное решение из \(A_1, \dotsc, A_m\). Результат
+решения зависит от возможной при этом ситуации \(B_1, \dotsc, B_n\). Эти
+результаты известны. Обозначим \(a_{ij}\)~--- результат при принятии \(i\)-ого
+решения и при случившийся при этом \(j\)-той ситуации. Матрица, составленная из
+этих результатов, называется платежной матрицей.
+
+Если вероятности данных ситуаций \(B_i\) неизвестны, то говорят, что решение
+принимается в условиях полной неопределенности. Если эти вероятности известны,
+то говорят, что решение принимается в условиях риска.
+
+\subsubheader{I.}{Принятие решения в условиях полной неопределенности}
+
+\begin{example}
+  На пляже есть ларек, и мы выбираем, что продавать: \(A_1\)~--- полотенца,
+  \(A_2\)~--- солнечные очки, \(A_3\)~--- дождевики и \(A_4\)~--- надувные
+  матрасы. Продажи зависят от четырех состояний погоды. Имеем платежную матрицу.
+
+  \begin{equation*}
+    \begin{array}{c|cccc}
+          & B_1 & B_2 & B_3 & B_4 \\ \hline
+      A_1 & 1   & 4   & 5   & 9   \\
+      A_2 & 3   & 8   & 5   & 2   \\
+      A_3 & 4   & 6   & 6   & 2   \\
+      A_4 & 2   & 5   & 5   & 2   \\
+    \end{array}
+  \end{equation*}
+
+  Решение \(A_4\) сразу исключаем, т.к. оно доминируется решением \(A_3\) (во
+  всех ситуациях решение \(A_3\) не хуже). Далее исследуем ситуацию по критериям
+
+  \begin{enumerate}
+  \item
+    Критерий максимакса (критерий крайнего оптимизма)
+
+    Обозначим \(M = \max_i \max_j a_{i j}\). Выбираем решение, содержащее \(M\).
+    В нашем случае \(M = 9 \implies\) выбираем решение \(A_1\).
+
+  \item
+    Критерий максимина (критерий крайнего пессимизма)
+
+    Обозначим \(W = \max_i \min_j a_{i j}\). Выбираем решение, содержащее \(W\).
+    В нашем случае \(W = 2 \implies\) выбираем решение \(A_2\) или \(A_3\).
+    
+  \item
+    Критерий Лапласа
+
+    Считаем вероятности всех ситуаций одинаковыми, равными \(\frac{1}{n}\), и
+    принимаем то решение, где ожидаемая прибыль больше. Обозначим \(L = \max_i
+    \bar{a_i}\). В нашем случае \(L = \frac{19}{4} \implies\) выбираем решение
+    \(A_1\).
+  \end{enumerate}
+\end{example}
+
+\subsubheader{II.}{Принятие решения в условиях риска}
+
+Пусть известны вероятности \(p_j\) ситуаций \(B_j\). Тогда рассматриваем
+следующие критерии
+
+\begin{enumerate}
+\item
+  Критерий Байеса (максимизация выигрыша)
+
+  В качестве оптимального выбираем то решение, где средний ожидаемый выигрыш
+  больше. На этот критерий лучше всего ориентироваться в первую очередь. В
+  примере ниже выбираем решение \(A_1\) или \(A_2\).
+
+  \begin{equation*}
+    \begin{array}{c|cccc|c}
+          & 0.1 & 0.4 & 0.3 & 0.2 & \bar{a_i} \\ \hline
+      A_1 & -5  & 2   & 4   & 10  & 3.5       \\
+      A_2 & -10 & 0   & 5   & 15  & 3.5       \\
+      A_3 & 1   & -2  & 3   & 5   & 1.2       \\
+    \end{array}
+  \end{equation*}
+
+\item
+  Принцип минимизации риска
+
+  В качестве оптимального выбираем то решение, где дисперсия меньше. В примере
+  ниже выбираем решение \(A_1\), т.к. у него дисперсия меньше. Дисперсию решения
+  \(A_3\) не рассматриваем, т.к. выше показали, что у него меньше математическое
+  ожидание.
+
+  \begin{equation*}
+    \begin{array}{c|cccc|c}
+          & 0.1 & 0.4 & 0.3 & 0.2 & \variance{a_i} \\ \hline
+      A_1 & -5  & 2   & 4   & 10  & 16.65          \\
+      A_2 & -10 & 0   & 5   & 15  & 50.25          \\
+      A_3 & 1   & -2  & 3   & 5   & -              \\
+    \end{array}
+  \end{equation*}
+
+\item
+  Обобщенный принцип
+
+  Обозначим \(K_i = \bar{a_i} - \lambda \sigma_i, 0 < \lambda < 3\). Выбираем
+  решение с наибольшим \(K_i\), константу \(\lambda\) нужно выбрать самим исходя
+  из условий конкретной задачи.
+
+\item
+  Выбираем такое решение, чтобы прибыль была не меньше приемлемого уровня, а
+  риск при этом был наименьшим.
+\end{enumerate}
+
+\begin{example}
+  \begin{equation*}
+    \begin{array}{c|c|c c@{\hspace{1em}} l}
+      \setlength{\tabcolsep}{10pt}
+      \renewcommand{\arraystretch}{2}
+                       & \text{Бог есть} & \text{Бога нет} & &
+    \\ \cline{1-3}
+      p_i              & 0.01   & 0.99  & &
+    \\ \cline{1-3}
+      \text{верить}    & \infty & -10^3 & & \bar{a_1} = \infty
+    \\ \cline{1-3}
+      \text{не верить} & 0      & 10^6  & & \bar{a_2} = const
+    \end{array}
+  \end{equation*}
+\end{example}
