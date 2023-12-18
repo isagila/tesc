@@ -1,0 +1,343 @@
+\subsection{%
+  Лекция \texttt{23.12.15}.%
+}
+
+Итак, доказали, что регулярная в области \(D\) функция аналитична и сколько
+угодно раз дифференцируема , при этом представима рядом Тейлора. Теперь докажем
+обратное: аналитическая в области \(D\) функция \(f(z)\) регулярна в \(D\).
+
+\begin{theorem}
+  \(f(z)\) аналитична в \(D \implies f(z)\) регулярна в \(D\).
+\end{theorem}
+
+\begin{proof}
+  Пусть \(K \subset D\) это круг с центром \(a\) радиуса \(\rho\). Обозначим его
+  границу \(\gamma_{\rho}\). Рассмотрим \(z \in K\), по интегральной формуле
+  Коши \(\forall z \in K\) имеем
+
+  \begin{equation*}
+    f(z) = \frac{1}{2 \pi i} \int_{\gamma_{\rho}}
+      \frac{f(\zeta)}{\zeta - z} \dd \zeta
+  \end{equation*}
+
+  Разложим в ряд по степеням \((z - a)^n\).
+
+  \begin{equation*}
+    \frac{1}{\zeta - z}
+    = \frac{1}{\zeta - a - (z - a)}
+    = \frac{1}{\prh{\zeta - a} \prh{1 - \frac{z - a}{\zeta - a}}}
+  \end{equation*}
+
+  Далее учитываем, что \(\zeta - a = \rho\) и \(\display{\abs{\frac{z - a}{\zeta
+  - a}}} = \frac{\abs{z - a}}{\rho} < 1\), значит
+
+  \begin{equation*}
+    \frac{1}{\zeta - z}
+    = \sum_{n = 0}^{\infty} \frac{(z - a)^n}{\prh{\zeta - a}^{n + 1}}
+    \implies
+    \frac{f(\zeta)}{\zeta - z}
+    = \sum_{n = 0}^{\infty} \frac{f(\zeta)}{\prh{\zeta - a}^{n + 1}} (z - a)^n
+  \end{equation*}
+
+  Причем полученный ряд сходится равномерно. Подставим его в интегральную
+  формулу Коши.
+
+  \begin{equation*}
+    \begin{aligned}
+      f(z)
+      & = \frac{1}{2 \pi i} \int_{\gamma_{\rho}}
+        \frac{f(\zeta)}{\zeta - z} \dd \zeta
+    \\
+      & = \sum_{n = 0}^{\infty} \prh{
+          \frac{1}{2 \pi i}
+          \int_{\gamma_{\rho}} \frac{f(\zeta)}{(\zeta - a)^{n + 1}} \dd \zeta
+        } (z - a)^n
+    \\
+      & = \sum_{n = 0}^{\infty} c_n (z - a)^n
+      \qquad
+      c_n
+      = \frac{1}{2 \pi i}
+        \int_{\gamma_{\rho}} \frac{f(\zeta)}{(\zeta - a)^{n + 1}} \dd \zeta
+    \end{aligned}
+  \end{equation*}
+
+  Т.к. точка \(a \in D\)~--- произвольная, то \(f(z)\) представима степенным
+  рядом в \(D \implies\) она регулярна.
+\end{proof}
+
+\begin{remark}
+  Таким образом аналитичная области и регулярная в той же области функция это
+  тождественные понятия.
+\end{remark}
+
+\begin{theorem}[Бесконечная дифференцируемость аналитической функции. Формула
+  \(n\)-ой производной]
+  Если \(f(z)\) аналитична в области \(D\), то \(f(z)\) бесконечно
+  дифференцируема в этой области и
+
+  \begin{equation*}
+    f^{(n)} (z) = \frac{n!}{2 \pi i} \int_{\gamma}
+      \frac{f(\zeta)}{(\zeta - z)^{n + 1}} \dd \zeta
+    \qquad
+    \gamma \in D
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Т.к. \(f(z)\) аналитична в области \(D\), то она регулярна в этой области, а
+  значит представима в виде
+
+  \begin{equation*}
+    f(z) = \sum_{n = 0}^{\infty} b_n (z - a)^n
+    \qquad
+    b_n = \frac{f^{(n)} (a)}{n!}
+  \end{equation*}
+
+  Возьмем представление из предыдущей теоремы
+
+  \begin{equation*}
+    f(z) = \sum_{n = 0}^{\infty} c_n (z - a)^n
+    \qquad
+    c_n = \frac{1}{2 \pi i} \int_{\gamma}
+      \frac{f(\zeta)}{(\zeta - a)^{n + 1}} \dd \zeta
+  \end{equation*}
+
+  Т.к. разложение единственно, то \(b_n = c_n\), значит
+
+  \begin{equation*}
+    f^{(n)} (a) = \frac{n!}{2 \pi i} \int_{\gamma}
+      \frac{f(\zeta)}{(\zeta - a)^{n + 1}} \dd \zeta
+  \end{equation*}
+\end{proof}
+
+\begin{remark}
+  Итак, всякая аналитическая функция бесконечно раз дифференцируема и
+  представима единственным рядом Тейлора, который всегда сходится к значению
+  функции (в области аналитичности).
+\end{remark}
+
+\begin{theorem}[Морера]
+  \begin{equation*}
+    \begin{rcases}
+      f(z) \text{ непрерывна в } D \\
+      \forall \gamma \in D \given \oint_{\gamma} f(\zeta) \dd \zeta = 0
+    \end{rcases}
+    \implies
+    f(z) \text{ аналитична в } D
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Т.к. \(f(z)\) непрерывна и интеграл \(\display{\oint_{\gamma} f(\zeta) \dd
+  \zeta}\) не зависит от пути, то по теореме о первообразной \(\display{\exists
+  \Phi (z) = \int_{z_0}^z f(\zeta) \dd \zeta}\)~--- аналитическая в области
+  \(D\). Это значит, что \(\Phi(z)\) сколько угодно раз дифференцируема и
+  \(\Phi^{(n)} (z)\) (в том числе \(\Phi'(z) = f(z)\)) аналитическая в \(D\).
+\end{proof}
+
+\begin{theorem}[Лиувилля]
+  Если \(f(z)\) аналитическая и ограниченная на \(\CC\), то \(f(z) = const\).
+\end{theorem}
+
+\begin{proof}
+  \begin{equation*}
+    \begin{aligned}
+      \abs{f'(z)}
+      & = \abs{\frac{1}{2 \pi i} \int_{\gamma}
+        \frac{f(\zeta)}{(\zeta - z)^2 \dd \zeta}}
+    \\
+      & = \mtxb{
+        \gamma = \set{\zeta \given \zeta = z + e^{i \phi}} \\
+        \phi \in [0; 2 \pi)
+      }
+    \\
+      & = \frac{1}{2 \pi} \abs{\int_0^{2 \pi}
+        \frac{f(\zeta) \rho i e^{i \phi}}{i \rho^2 e^{i 2 \phi}} \dd \phi}
+    \\
+      & = \frac{1}{2 \pi} \abs{\int_0^{2 \pi}
+        \frac{f(\zeta)}{\rho e^{i \phi}} \dd \phi}
+    \\
+      & \le \frac{1}{2 \pi} \int_0^{2 \pi}
+        \abs{\frac{f(\zeta)}{\rho e^{i \phi}}} \dd \phi
+    \\
+      & = \frac{1}{2 \pi} \int_0^{2 \pi}
+      \frac{\abs{f(z + e^{i \phi})}}{\rho} \dd \phi
+    \\
+      & \le \mtxb{
+        f(\zeta) \text{ ограниченная} \\
+        \forall \zeta \in \CC \given f(\zeta) \le M \in \RR^+
+      }
+    \\
+      & = \frac{1}{2 \pi} \int_0^{2 \pi} \frac{M}{\rho} \dd \phi
+    \\
+      & = \frac{M}{\rho}
+    \end{aligned}
+  \end{equation*}
+
+  Т.к. \(f'(z)\) не зависит от \(\rho\) и по модулю меньше любого \(\RR^+\)
+  числа (\(\rho\)~--- произвольное), то \(f'(z) = 0 \implies f(z) = const\).
+\end{proof}
+
+\begin{remark}
+  Отсюда следует, что функции \(\sin z\) и \(\cos z\), не являясь постоянными,
+  не могут быть ограниченными, т.е. \(\exists z \given \sin z > 1\).
+\end{remark}
+
+\subheader{4. Ряды Лорана. Вычеты}
+
+\subsubheader{4.1}{Ряд Лорана}
+
+\begin{definition}
+  Рядом Лорана для функции \(f(z)\) называется ряд вида
+  \(\display{\sum_{n = -\infty}^{\infty} c_n (z - a)^n}\), где
+
+  \begin{equation*}
+    \begin{aligned}
+      f_1 (z) = \sum_{n = 0}^{\infty} c_n (z - a)^n
+    \\
+      f_2 (z)
+      = \sum_{n = -1}^{-\infty} c_n (z - a)^n
+      = \sum_{n = 1}^{\infty} \frac{c_{-n}}{(z - a)^n}
+    \end{aligned}
+  \end{equation*}
+
+  и ряд сходится к \(f(z)\), если \(f_1 (z)\) и \(f_2 (z)\) сходятся и \(f(z) =
+  f_1 (z) + f_2 (z)\).
+\end{definition}
+
+\begin{remark}[Об области сходимости]
+  Заметим, что \(\display{f_1 (z) = \sum_{n = 0}^{\infty} c_n (z - a)^n}\)~---
+  обычный степенной ряд, который сходится в круге радиуса \(R_1\). Ряд
+  \(\display{f_2 (z) = \sum_{n = 1}^{\infty} \frac{c_{-n}}{(z - a)^n}} =
+  \sum_{n = 1}^{\infty} c_{-n} t^n\) сходится в круге радиуса \(R'\). Таким
+  образом \(\abs{t} < R' = \frac{1}{R_2}\), значит \(\abs{z - a} > R_2\). Итак,
+  ряд Лорана сходится в кольце \(K (a, R_2, R_1)\).
+\end{remark}
+
+\begin{lemma}
+  Ряд Лорана сходится к аналитической функции абсолютно и равномерно.
+\end{lemma}
+
+\begin{proof}
+  Ряды \(\sum_{n = 1}^{\infty} c_n t^n\) и \(\sum_{n = 0}^{\infty} c_n (z -
+  a)^n\)~--- степенные, сходятся абсолютно и непрерывно к непрерывным функциям
+  \(f_2 (z)\) и \(f_1 (z)\) (по теореме Абеля). Члены этих рядов также
+  аналитические функции. В кольце \(K (z_0, R_2, R_1)\) по теореме Коши все
+  \(\display{\oint_{\gamma} c_n (\zeta - z_0)^k \dd \zeta = 0}\), т.к. функции
+  аналитичны в \(z_0 \in K\). Итого
+
+  \begin{equation*}
+    \oint_{\gamma} f(\zeta) \dd \zeta
+    = \sum \oint_{\gamma} c_n (z - z_0)^k = 0
+  \end{equation*}
+
+  Тогда по теореме Морера \(f(z)\) аналитическая.
+\end{proof}
+
+Обратное: всякая ли аналитическая функция разложима в ряд Лорана?
+
+\galleryone{01_16_01}{Разложение в ряд Лорана}
+
+\begin{theorem}[Разложение в ряд Лорана]
+  Если \(f(z)\) аналитична в кольце \(K(a, R_2, R_1)\) тогда \(f(z)\)
+  единственным образом разложима в ряд Лорана в кольце \(K\).
+\end{theorem}
+
+\begin{proof}
+  В кольце \(K\) выделим два контура (окружности) \(r_1\) и \(r_2\)
+  (\figref{01_16_01}). Между ними получим кольцо \(D' = (a, r_2, r_1)\), в
+  котором \(f'(z)\) аналитична. По формуле Коши
+
+  \begin{equation*}
+    f(z)
+    = \frac{1}{2 \pi i} \int_{\Gamma} \frac{f(\zeta)}{\zeta - z} \dd \zeta
+    = \under{
+        \frac{1}{2 \pi i} \int_{\Gamma_1^+} \frac{f(\zeta)}{\zeta - z} \dd \zeta
+      }{I_1}
+      - \under{
+        \frac{1}{2 \pi i}\int_{\Gamma_2^+} \frac{f(\zeta)}{\zeta - z} \dd \zeta
+      }{I_2}
+  \end{equation*}
+
+  По теореме о бесконечной дифференцируемости для \(I_1\) имеем
+
+  \begin{equation*}
+    f(z)
+    = \frac{1}{2 \pi i} \int_{r_1} \frac{f(\zeta)}{\zeta - z} \dd \zeta
+    = \sum_{n = 0}^{\infty} c_n (z - a)^n
+  \end{equation*}
+
+  Аналогично можно рассмотреть \(I_2\), но
+
+  \begin{equation*}
+    -\frac{1}{\zeta - a}
+    = \dotsc
+    = \sum_{k = 0}^{\infty} c_k \frac{(\zeta - a)^k}{(z - a)^{k + 1}}
+    \qquad
+    \mtxb{
+      \abs{\frac{\zeta - a}{z - a}} < 1 \\
+      \abs{\zeta - a} = \rho \text{ (радиус \(r_2\))} \\
+      \abs{z - a} > \rho
+    }
+  \end{equation*}
+
+  Окончательно имеем
+
+  \begin{equation*}
+    f(z) = \sum_{n = 0}^{\infty} c_n (z - a)^n
+      + \sum_{n = 1}^{\infty} \frac{c_{-n}}{(z - a)^n}
+    \qquad
+    c_n = \frac{1}{2 \pi i} \int_{r_i}
+      \frac{f(\zeta)}{(\zeta - a)^{n + 1}} \dd \zeta
+  \end{equation*}
+\end{proof}
+
+\begin{remark}
+  Единственность разложения доказывается аналогично ряду Тейлора.
+\end{remark}
+
+\begin{remark}
+  Видим, что \(f_1 (z)\) (половина ряда) это ряд Тейлора и стремление \(z\) к
+  \(a\) его не портит, в то время как \(f_2 (z)\) при \(z \to a\) содержит
+  бесконечности.
+\end{remark}
+
+\subsubheader{4.2}{Изолированные особые точки}
+
+\begin{remark}
+  Возможны три ситуации для аналитичной функции \(f(z)\) в кольце \(0 < \abs{z -
+  a} < r\) (\(a \in \CC\)) или \(\abs{z} > R\) (\(a = \infty\)) и
+  неопределенной в точке \(a \in \bar{\CC}\).
+
+  \begin{enumerate}
+  \item
+    \(\display{\lim_{z \to a} f(z) \in C} \implies\) точка называется устранимой
+    особой точкой
+
+  \item
+    \(\display{\lim_{z \to a} f(z) = \infty \implies}\) точка \(a\) называется
+    полюсом.
+
+  \item
+    \(\display{\not\exists \lim_{z \to a} f(z) \implies}\) точка \(a\)
+    называется существенно особой точкой.
+  \end{enumerate}
+\end{remark}
+
+Критерии особых точек
+
+\begin{enumerate}
+\item
+  \(\forall c_{-n} = 0\)
+
+\item
+  \(\exists c_{-n} \neq 0\)
+
+\item
+  \(\forall c_{-n} \neq 0\)
+\end{enumerate}
+
+\begin{definition}
+  \(c_{-1}\) в ряде Лорана в особой точке называется вычетом \(f(z)\) в этой
+  точке.
+\end{definition}
