@@ -1,0 +1,367 @@
+\subsection{%
+  Лекция \texttt{23.09.19}.%
+}
+
+Если два события не являются независимыми и известно, что одно из них произошло,
+то на основе этой информации мы можем уточнить вероятность наступления другого.
+Вероятность данного в таком случае называется условной.
+
+Условная вероятность \(\condprob{A}{B}\) это вероятность события \(A\)
+вычисленная в предположении, что событие \(B\) уже произошло.
+
+\begin{remark}
+  Существует другой обозначение \(\probP_B (A)\), но мы не будем его
+  использовать.
+\end{remark}
+
+\begin{example}
+  Подбросили кубик. Известно, что выпало больше трех очков. Какова вероятность
+  того, что выпало четное число очков?
+
+  \solution{} пусть \(A\)~--- \quote{выпало четное число очков}, а \(B\)~---
+  \quote{выпало более трех очков}. Тогда
+
+  \begin{equation*}
+    \prob{A} = \frac{3}{6} = \frac{1}{2}
+    \qquad
+    \prob{B} = \frac{3}{6} = \frac{1}{2}
+  \end{equation*}
+
+  Тогда получаем, что
+
+  \begin{equation*}
+    \condprob{A}{B}
+    = \frac{2}{3}
+    = \frac{\frac{2}{6}}{\frac{3}{6}}
+    = \frac{\prob{A B}}{\prob{B}}
+  \end{equation*}
+
+  Такое же соотношение можно получить с помощью геометрической вероятности
+  (\figref{01_03_01}).
+
+  \begin{equation*}
+    \condprob{A}{B}
+    = \frac{S_{AB}}{S_B}
+    = \frac{\frac{S_{AB}}{S_{\Omega}}}{\frac{S_B}{S_{\Omega}}}
+    = \frac{\prob{A B}}{\prob{B}}
+  \end{equation*}
+\end{example}
+
+\galleryone{01_03_01}{Геометрический подход к условной вероятности}
+
+\begin{remark}
+  Вывести эту формулу из аксиом вероятности нельзя, поэтому она берется в
+  качестве определения.
+\end{remark}
+
+\begin{definition} \label{def:cond-prob}
+  Условной вероятностью события \(A\) при условии, что имело место событие \(B\)
+  называется величина
+
+  \begin{equation*}
+    \condprob{A}{B} = \frac{\prob{A B}}{\prob{B}}
+  \end{equation*}
+\end{definition}
+
+\subheader{Формула произведения вероятностей}
+
+Из определения условной вероятности (\ref{def:cond-prob}) следует, что
+
+\begin{equation*}
+  \prob{A B}
+  = \prob{B} \condprob{A}{B}
+  = \prob{A} \condprob{B}{A}
+\end{equation*}
+
+Или, в общем случае, имеем
+
+\begin{theorem}[Формула произведения вероятностей] \label{thr:prob-mult}
+  \begin{equation*}
+    \prob{A_1 \dotsc A_n}
+    = \prob{A_1}
+      \condprob{A_2}{A_1}
+      \condprob{A_3}{A_1 A_2}
+      \dotsc
+      \condprob{A_n}{A_1 \dotsc A_{n - 1}}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Мат. индукция.
+
+  \textbf{База:} \(n = 2\).
+  
+  Этот случай уже рассмотрен ранее, он следует из определения условной
+  вероятности.
+
+  \textbf{Переход:} \(n - 1 \to n\)
+
+  \begin{equation*}
+    \begin{aligned}
+      \prob{\under{A_1 \dotsc A_{n - 1}}{} A_n}
+      & = \prob{A_1 \dotsc A_{n - 1}}
+        \condprob{A_n}{A_1 \dotsc A_{n - 1}}
+    \\
+      & = \under{
+          \prob{A_1}
+          \condprob{A_2}{A_1}
+          \condprob{A_3}{A_1 A_2}
+          \dotsc
+          \condprob{A_{n - 1}}{A_1 \dotsc A_{n - 2}}
+        }{
+          \prob{A_1 \dotsc A_{n - 1}}
+        }
+        \condprob{A_n}{A_1 \dotsc A_{n - 1}}
+    \end{aligned}
+  \end{equation*}
+\end{proof}
+
+\begin{remark}
+  Условная вероятность определена при \(\prob{B} \neq 0\), поэтому формула
+  умножения (\ref{thr:prob-mult}) верна при \(\prob{A_1 \dotsc A_{n - 1}} \neq
+  0\).
+\end{remark}
+
+\begin{lemma}
+  Покажем, что равносильны два определения независимости: \(\prob{A B} =
+  \prob{A} \prob{B}\) и \(\condprob{A}{B} = \prob{A}\)
+\end{lemma}
+
+\begin{proof}
+  \begin{equation*}
+    \condprob{A}{B}
+    = \frac{\prob{A B}}{\prob{B}}
+    =  \prob{A}
+    \iff
+    \prob{A B} = \prob{A} \prob{B}
+  \end{equation*}
+\end{proof}
+
+\begin{example}
+  В коробке \(3\) красных карандаша и \(2\) синих. Вынули три карандаша. Найти
+  вероятность того, что первые два красные, а третий~--- синий.
+
+  \solution{} пусть \(A_1\)~--- \quote{первый красный}, \(A_2\)~---
+  \quote{второй красный} и \(A_3\)~--- \quote{третий синий}.
+
+  \begin{equation*}
+    \prob{A_1 A_2 A_3}
+    = \prob{A_1} \condprob{A_2}{A_1} \condprob{A_3}{A_1 A_2}
+    = \frac{3}{5} \cdot \frac{2}{4} \cdot \frac{2}{3}
+    = \frac{1}{5}
+  \end{equation*}
+\end{example}
+
+\subheader{Полная группа событий}
+
+\galleryone{01_03_02}{Иллюстрация полной группы событий}
+
+\begin{definition}
+  События \(H_1, \dotsc, H_n\) образуют полную группу событий, если они попарно
+  несовместны и содержат все элементарные исходы.
+
+  \begin{equation*}
+    \begin{cases}
+      \forall i \neq j \given H_i H_j = \varnothing \\
+      H_1 + \dotsc + H_n = \Omega
+    \end{cases}
+  \end{equation*}
+\end{definition}
+
+\begin{corollary}
+  \begin{equation*}
+    \prob{H_1} + \dotsc + \prob{H_n} = 1
+  \end{equation*}
+\end{corollary}
+
+\begin{proof}
+  Т.к. события \(H_1, \dotsc, H_n\) несовместны, то вероятность их суммы равна
+  сумме их вероятностей, и при этом она равна единице, т.к. эти события содержат
+  все элементарные исходы.
+\end{proof}
+
+\begin{remark}
+  События \(H_i\) еще называются гипотезами.
+\end{remark}
+
+\subheader{Формула полной вероятности}
+
+\begin{theorem}
+  Пусть \(H_1, \dotsc, H_n, \dotsc\)~--- полная группа событий. Тогда
+
+  \begin{equation*}
+    \prob{A} = \sum_{i = 1}^{\infty} \prob{H_i} \condprob{A}{H_i}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  \begin{equation*}
+    \prob{A}
+    = \prob{\Omega A}
+    = \prob{\prh{H_1 + \dotsc + H_n + \dotsc} A}
+    = \prob{H_1 A + \dotsc + H_n A + \dotsc}
+  \end{equation*}
+
+  Заметим, что т.к. события \(H_i\) из полной группы, то они несовместны, значит
+  и полученные произведения \(H_i A\) также несовместны. Применяя формулу
+  произведения вероятностей имеем
+
+  \begin{equation*}
+    \prob{A}
+    = \sum_{i = 1}^{\infty} \prob{H_i A}
+    = \sum_{i = 1}^{\infty} \prob{H_i} \condprob{A}{H_i}
+  \end{equation*}
+\end{proof}
+
+\subheader{Формула Байеса (формула проверки гипотез)}
+
+\begin{theorem}
+  Пусть \(H_1, \dotsc, H_n\)~--- полная группа событий. Известно, что событие
+  \(A\) произошло. Тогда
+
+  \begin{equation*}
+    \condprob{H_k}{A}
+    = \frac{\prob{H_k} \condprob{A}{H_k}}
+      {\sum_{i = 1}^{\infty} \prob{H_i} \condprob{A}{H_i}}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Раскрываем условную вероятность по определению, после чего в числителе
+  применяем формулу произведения вероятностей, а в знаменателе~--- формулу
+  полной вероятности.
+
+  \begin{equation*}
+    \condprob{H_k}{A}
+    = \frac{\prob{H_k A}}{\prob{A}}
+    = \frac{\prob{H_k} \condprob{A}{H_k}}
+      {\sum_{i = 1}^{\infty} \prob{H_i} \condprob{A}{H_i}}
+  \end{equation*}
+\end{proof}
+
+\begin{example}
+  В первой коробке \(4\) белых и \(2\) черных шара, а во второй~--- \(1\) белый
+  и \(2\) черных. Из первой коробки во вторую переложили два шара. Затем из
+  второй коробки достали шар. Какова вероятность того, что он оказался белым?
+
+  \solution{} пусть \(H_1\)~--- во вторую коробку переложили \(2\) белых шара,
+  \(H_2\)~--- переложили \(2\) черных шара, \(H_3\)~--- переложили \(2\) шара
+  разного цвета. \(A\)~--- из второй коробки достали белый шар, тогда
+
+  \begin{equation*}
+    \begin{array}{lll}
+      \prob{H_1} = \frac{4}{6} \cdot \frac{3}{5}= \frac{6}{15}
+      &
+      \prob{H_2} = \frac{2}{6} \cdot \frac{1}{5} = \frac{1}{15}
+      &
+      \prob{H_3}
+        = \frac{4}{6} \cdot \frac{2}{5} + \frac{2}{6} \cdot \frac{4}{5}
+        = \frac{8}{15}
+    \\ \\
+      \condprob{A}{H_1} = \frac{3}{5}
+      &
+      \condprob{A}{H_2} = \frac{1}{5}
+      &
+      \condprob{A}{H_3} = \frac{2}{5}
+    \end{array}
+  \end{equation*}
+
+  По формуле полной вероятности получаем
+
+  \begin{equation*}
+    \prob{A}
+    = \prob{H_1} \condprob{A}{H_1}
+      + \prob{H_2} \condprob{A}{H_2}
+      + \prob{H_3} \condprob{A}{H_3}
+    = \frac{6}{15} \cdot \frac{3}{5}
+      + \frac{1}{15} \cdot \frac{1}{5}
+      + \frac{8}{15} \cdot \frac{2}{5}
+    = \frac{18 + 1 + 16}{75}
+    = \frac{7}{15}
+  \end{equation*}
+\end{example}
+
+\begin{example} \label{ex:Bayes}
+  По статистике раком болен \(1\)\% населения. Тест дает правильный результат в 
+  \(99\)\% случаев. Анализ оказался положительным. Какова вероятность того, что
+  человек болен?
+
+  \solution{} пусть \(H_1\)~--- человек болен, а \(H_2\)~--- здоров. Событие
+  \(A\)~--- анализ положительный. Тогда
+
+  \begin{equation*}
+    \begin{array}{ll}
+      \prob{H_1} = 0.01
+      &
+      \prob{H_2} = 0.99
+    \\
+      \condprob{A}{H_1} = 0.99
+      &
+      \condprob{A}{H_2} = 0.01
+    \end{array}
+  \end{equation*}
+
+  Применяем формулу Байеса.
+
+  \begin{equation*}
+    \condprob{H_1}{A}
+    = \frac{\prob{H_1} \condprob{A}{H_1}}
+      {\prob{H_1} \condprob{A}{H_1} + \prob{H_2} \condprob{A}{H_2}}
+    = \frac{0.01 \cdot 0.99}{0.01 \cdot 0.99 + 0.99 \cdot 0.01}
+    = \frac{1}{2}
+  \end{equation*}
+\end{example}
+
+\begin{example}
+  Пусть после ситуации, описанной в \ref{ex:Bayes}, провели второй
+  \textbf{независимый} анализ, и он оказался положительным. Какова вероятность
+  того, что человек болен?
+
+  \solution{} используя обозначения из предыдущего примера получаем
+
+  \begin{equation*}
+    \begin{array}{ll}
+      \prob{H_1} = 0.01
+      &
+      \prob{H_2} = 0.99
+    \\
+      \condprob{A A}{H_1} = 0.99 \cdot 0.99
+      &
+      \condprob{A A}{H_2} = 0.01 \cdot 0.01
+    \end{array}
+  \end{equation*}
+
+  Применяем формулу Байеса.
+
+  \begin{equation*}
+    \condprob{H_1}{A A}
+    = \frac{\prob{H_1} \condprob{A A}{H_1}}
+      {\prob{H_1} \condprob{A A}{H_1} + \prob{H_2} \condprob{A A}{H_2}}
+    = \frac{0.01 \cdot 0.99^2}{0.01 \cdot 0.99^2 + 0.99 \cdot 0.01^2}
+    = 0.99
+  \end{equation*}
+\end{example}
+
+\subheader{Статистические рассуждения}
+
+Пусть проверили \(10\,000\) человек. По статистике из них \(100\) больных и
+\(9\,900\) здоровых. У \(99\) человек из \(100\) больных анализ окажется
+положительным, а у одного~--- отрицательным. У \(99\) из \(9900\) здоровых людей
+теста будет положительным, а у остальных~--- отрицательным. Таким образом мы
+видим, что даже у человека положительный тест, то вероятность того, что он болен
+лишь \(50\)\%.
+
+\begin{example}
+  В студии три двери. За одной из них приз. Ведущий предлагает игроку
+  угадывать дверь с призом, после чего он открывает одну из оставшихся дверей
+  и показывает, что за ней приза нет. Затем он предлагает игроку поменять свой
+  выбор. Следует ли игроку соглашаться?
+
+  \solution{} пользоваться формулой Байеса здесь нельзя, т.к. выбор ведущего
+  (событие \(A\) в формуле) это не случайное событие. Можно воспользоваться
+  примерными статистическими рассуждениями. Пусть игрок сыграл в эту игру
+  \(300\) раз. Тогда он \(100\) раз изначально выбрал верную дверь и \(200\)
+  раз~--- неверную. Если он после вопроса ведущего поменяет свой выбор, то
+  окажется прав в \(200\) случаях из \(300\). Таким образом, если игрок поменяет
+  свой выбор, то вероятность его победы будет равна \(\frac{2}{3}\).
+\end{example}

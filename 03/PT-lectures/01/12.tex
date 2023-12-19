@@ -1,0 +1,503 @@
+\subsection{%
+  Лекция \texttt{23.11.21}.%
+}
+
+\subheader{Функции от двух случайных величин}
+
+Если известно совместное распределение двух или нескольких случайных величин, то
+можно найти распределение их суммы, произведения и иных функций от этих
+случайных величин.
+
+Пусть \(\xi_1\) и \(\xi_2\)~--- случайные величины с плотностью совместного
+распределения \(f_{\xi_1, \xi_2} (x, y)\). Дана \(g(x, y) \colon \RR^2 \to
+\RR\)~--- борелевская функция. Требуется найти функцию распределения случайной
+величины \(\eta = g(\xi_1, \xi_2)\).
+
+\begin{theorem} \label{thr:dst-func-joint-dst}
+  Функция распределения случайной величины \(\eta\)
+
+  \begin{equation*}
+    F_{\eta} (z) = \iint_{D_z} f_{\xi_1, \xi_2} (x, y) \dd x \dd y
+    \qquad
+    D_z = \set{\pair{x, y} \given g(x, y) < z}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  \begin{equation*}
+    F_{\eta} (z)
+    = \prob{\eta < z}
+    = \prob{g(\xi_1, \xi_2) < z}
+    = \prob{(x, y) \in D_z}
+    = \iint_{D_z} f_{\xi_1, \xi_2} (x, y) \dd x \dd y
+  \end{equation*}  
+\end{proof}
+
+\begin{example}
+  Двое договариваются встретиться между \texttt{12:00} и \texttt{13:00}.
+  Случайная величина \(\eta\)~--- время ожидания. Найти ее функцию
+  распределения.
+
+  \solution{} Пусть случайные величины \(\xi_1, \xi_2\)~--- это время прихода
+  первого и второго человека соответственно. Тогда \(\eta = \abs{\xi_1 -
+  \xi_2}\). Имеем
+
+  \begin{equation*}
+    \xi_1, \xi_2 \in \evenly{0}{1}
+    \implies
+    \begin{cases}
+      \displaystyle f_{\xi_1} (x) =
+      \begin{cases}
+        1, & x \in \segment{0}{1} \\
+        0, & x \notin \segment{0}{1}
+      \end{cases}
+    \\
+      \displaystyle f_{\xi_2} (y) =
+      \begin{cases}
+        1, & y \in \segment{0}{1} \\
+        0, & y \notin \segment{0}{1}
+      \end{cases}
+    \end{cases}
+  \end{equation*}
+
+  Т.к. \(\xi_1\) и \(\xi_2\) независимы, то
+
+  \begin{equation*}
+    f_{\xi_1, \xi_2} (x, y)
+    = f_{\xi_1} (x) f_{\xi_2} (y)
+    = 1
+    \qquad 0 \le x \le 1, 0 \le y \le 1
+  \end{equation*}
+
+  Далее применяем теорему \ref{thr:dst-func-joint-dst} и получаем, что
+
+  \begin{equation*}
+    \begin{aligned}
+      F_{\eta} (z)
+      = \iint_{D_z} f_{\xi_1, \xi_2} (x, y) \dd x \dd y
+      \qquad
+      D_z = \set{\pair{x, y} \given \abs{x - y} < z}
+    \\
+      F_{\eta} (z)
+      = \iint_{D_z} \dd x \dd y
+      = S_{D_z}
+      \eqby{\figref{01_12_01}}
+      1 - 2 \cdot \frac{1}{2} (1 - z)^2
+      = 2 z - z^2
+      \qquad
+      z \in \segment{0}{1}
+    \end{aligned}
+  \end{equation*}
+\end{example}
+
+\galleryone{01_12_01}{Иллюстрация к задаче о встрече}
+
+\subheader{Формула свертки}
+
+\galleryone{01_12_02}{Иллюстрация области \(D_z\) в формуле свертки}
+
+\begin{theorem}
+  Пусть \(\xi_1\) и \(\xi_2\) независимые абсолютно непрерывные случайные
+  величины с плотностями \(f_{\xi_1} (x)\) и \(f_{\xi_2} (y)\) тогда плотность
+  суммы \(\xi_1 + \xi_2\) существует и равна свертке плотностей \(f_{\xi_1}
+  (x)\) и \(f_{\xi_2} (y)\):
+
+  \begin{equation*}
+    f_{\xi_1 + \xi_2} (t)
+    = \int_{-\infty}^{\infty} f_{\xi_1} (x) f_{\xi_2} (t - x) \dd x
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Т.к. \(\xi_1\) и \(\xi_2\) независимые, то \(f_{\xi_1, \xi_2} (x, y) =
+  f_{\xi_1} (x) f_{\xi_2} (y)\). Применим \ref{thr:dst-func-joint-dst}.
+
+  \begin{equation*}
+    \begin{aligned}
+      g(\xi_1, \xi_2) = \xi_1 + \xi_2
+      \implies
+      D_z = \set{\pair{x, y} \in \RR^2 \given x + y < z}
+    \\
+      \text{Для перехода к кратному интегралу смотрим на \figref{01_12_02}}
+    \\
+      F_{\xi_1 + \xi_2} (z)
+      = \iint_{D_z} f_{\xi_1} (x) f_{\xi_2} (y) \dd x \dd y
+      = \int_{-\infty}^{+\infty} \dd x
+        \int_{-\infty}^{z - x} f_{\xi_1} (x) f_{\xi_2} (y) \dd y
+    \\
+      \mtxb{
+        y = t - x & \dd y = \dd t & t = y + x \\
+        t(-\infty) = -\infty & t(z - x) = z
+      }
+    \\
+      F_{\xi_1 + \xi_2} (z)
+      = \int_{-\infty}^{\infty} \dd x \int_{-\infty}^z
+        f_{\xi_1} (x) f_{\xi_2} (t - x) \dd t
+    \\
+      \text{Поменяем порядок интегрирования}
+    \\
+      F_{\xi_1 + \xi_2} (z)
+      = \int_{-\infty}^z \prh{
+        \int_{-\infty}^{\infty} f_{\xi_1} (x) f_{\xi_2} (t - x) \dd x
+      } \dd t
+      \implies
+      f_{\xi_1 + \xi_2} (t)
+      = \int_{-\infty}^{\infty} f_{\xi_1} (x) f_{\xi_2} (t - x) \dd x
+    \end{aligned}
+  \end{equation*}
+\end{proof}
+
+\begin{remark}
+  Сумма независимых абсолютно непрерывных случайных величин также имеет
+  абсолютно непрерывное распределение. Для зависимых случайных величин это в
+  общем случае неверно. Например, \(\eta = -\xi\). Тогда \(\eta + \xi = 0\)~---
+  вырожденное распределение.
+\end{remark}
+
+\begin{remark}
+  Если \(\xi\) и \(\eta\) независимые случайные величины, \(\xi\) имеет
+  абсолютно непрерывное распределение, а \(\eta\)~--- дискретное, то их сумма
+  также имеет абсолютно непрерывное распределение.
+\end{remark}
+
+\subheader{Суммы стандартных распределений. Устойчивость относительно
+суммирования}
+
+\begin{definition}
+  Если сумма двух независимых случайных величин одного типа распределений также
+  будет этого типа, то говорят, что распределение устойчиво относительно
+  суммирования.
+\end{definition}
+
+\begin{example}
+  Пусть \(\xi \in B_{n, p}\) и \(\eta \in B_{m, p}\)~--- независимые случайные
+  величины. Тогда \(\xi + \eta \in B_{n + m, p}\). Т.к. \(\xi\) и \(\eta\) это
+  число появления события с вероятностью \(p\) в сериях из \(n\) и \(m\)
+  испытаний, то их сумма это число успехов в серии из \(n + m\) испытаний.
+\end{example}
+
+\begin{remark}
+  Если второй параметр \(p\) разный, то распределение не будет устойчивым.
+\end{remark}
+
+\begin{lemma}
+  Пусть \(\xi \in \Pi_{\alpha}\) и \(\eta \in \Pi_{\mu}\)~--- независимые
+  случайные величины. Тогда \(\xi + \eta \in \Pi_{\lambda + \mu}\).
+\end{lemma}
+
+\begin{proof}
+  Пусть \(k \ge 0\). По формуле Пуассона \(\prob{\xi = k} = \frac{\lambda^k}{k!}
+  e^{-\lambda}\). Получаем
+
+  \begin{equation*}
+    \begin{aligned}
+      \prob{\xi + \eta = k}
+      & =  \sum_{i = 0}^k \prob{\xi = i, \eta = k - i}
+    \\
+      &  = \sum_{i = 0}^k \prob{\xi = i} \prob{\eta = k - i}
+    \\
+      & = \sum_{i = 0}^k \frac{\lambda^i}{i!} e^{-\lambda}
+        \cdot \frac{\mu^{k - i}}{(k - i)!} e^{-\mu}
+    \\
+      & = e^{-\lambda - \mu}
+        \sum_{i = 0}^k \frac{\lambda^i \mu^{k - i}}{i! (k - i)!}
+    \\
+      & = e^{-\lambda - \mu} \frac{1}{k!}
+        \sum_{i = 0}^k \frac{k!}{i! (k - i)!} \cdot \lambda^i \mu^{k - i}
+    \\
+      & = e^{-\lambda - \mu} \frac{1}{k!}
+        \sum_{i = 0}^k \comb{i}{k} \cdot \lambda^i \mu^{k - i}
+    \\
+      & = \frac{(\lambda + \mu)^k}{k!} e^{-(\lambda + \mu)}
+    \end{aligned}
+  \end{equation*}
+
+  Таким образом \(\xi + \eta \in \Pi_{\lambda + \mu}\).
+\end{proof}
+
+\begin{lemma}
+  Пусть \(\xi \in N(0; 1)\) и \(\eta \in N(0; 1)\)~--- независимые
+  случайные величины. Тогда \(\xi + \eta \in N(0; 2)\).
+\end{lemma}
+
+\begin{proof}
+  \begin{equation*}
+    \begin{aligned}
+      \begin{rcases}
+        \displaystyle f_{\xi} (x) = \frac{1}{\sqrt{2 \pi}} e^{-\frac{x^2}{2}} \\
+        \displaystyle f_{\eta} (y) = \frac{1}{\sqrt{2 \pi}} e^{-\frac{y^2}{2}}
+      \end{rcases}
+      \implies
+      f_{\xi + \eta} (t)
+      = \int_{-\infty}^{\infty} f_{\xi} (x) f_{\eta} (t - x) \dd x
+      = \frac{1}{2 \pi} \int_{-\infty}^{\infty}
+        e^{-(x^2 - t x + \frac{t^2}{2})} \dd x
+      = \frac{1}{2 \pi} e^{-\frac{t^2}{4}} \int_{-\infty}^{\infty}
+        e^{-(x^2 - t x + \frac{t^2}{4})} \dd x
+    \\
+      f_{\xi + \eta} (t)
+      = \frac{1}{2 \pi} e^{-\frac{t^2}{4}} \under{
+        \int_{-\infty}^{\infty}
+        e^{-\prh{x - \frac{t}{2}}^2} \dd \prh{x - \frac{t}{2}}
+      }{\text{Интеграл Пуассона } = \sqrt{\pi}}
+      = \frac{1}{\sqrt{2} \sqrt{2 \pi}} e^{-\frac{t^2}{2 (\sqrt{2})^2}}
+    \end{aligned}
+  \end{equation*}
+
+  Таким образом \(\xi + \eta \in N(0; (\sqrt{2})^2)\).
+\end{proof}
+
+\begin{remark}
+  Пусть \(\xi \in N(a_1; \sigma_1)\) и \(\eta \in N(a_2; \sigma_2)\)~---
+  независимые случайные величины. Тогда \(\xi + \eta \in N(a_1 + a_2; \sigma_1 +
+  \sigma_2)\). Это можно доказать аналогично доказательству выше, но далее будет
+  приведен более простой способ.
+\end{remark}
+
+\gallerytwo{01_12_03}{Площадь области \(D_z\)}
+  {\(0 \le z \le 1\)}
+  {\(1 \le z \le 2\)}
+
+\begin{lemma}
+  Равномерное распределение не является устойчивым относительно суммирования.
+\end{lemma}
+
+\begin{proof}
+  Пусть \(\xi \in \evenly{0}{1}\) и \(\eta \in \evenly{0}{1}\)~--- независимые
+  случайные величины.
+
+  \begin{equation*}
+    \begin{aligned}
+      \begin{rcases}
+        f_{\xi} (x) = 1, x \in \segment{0}{1} \\
+        f_{\eta} (y) = 1, y \in \segment{0}{1}
+      \end{rcases}
+      \implies
+      f_{\xi, \eta} (x, y) = f_{\xi} (x) f_{\eta} (y) = 1
+    \\
+      F_{\xi + \eta} (z) = \iint_{D_z} f_{\xi, \eta} (x, y) \dd x \dd y
+      \qquad
+      D_z = \set{\pair{x, y} \given x + y < z}
+    \\
+      \text{Для вычисления площади области \(D_z\) смотрим на \figref{01_12_03}}
+    \\
+      F_{\xi + \eta} (z)
+      = \iint_{D_z} \dd x \dd y
+      = S_{D_z} = \begin{cases}
+        0, & z < 0 \\
+        \frac{1}{2} z^2, & 0 \le z < 1 \\
+        1 - \frac{1}{2} (2 - z)^2, & 1 \le z < 2 \\
+        1, & z > 2
+      \end{cases}
+    \\  
+      f_{\xi + \eta} (z)
+      = F'_{\xi + \eta} (z)
+      = \begin{cases}
+        0, & z < 0 \\
+        z, & 0 \le z < 1 \\
+        2 - z, & 1 \le z < 2 \\
+        0, & z > 2
+      \end{cases}
+    \end{aligned}
+  \end{equation*}
+
+  Полученная плотность очевидно не является константой, значит полученное
+  распределение не является равномерным. Оно называется треугольным
+  распределением Симпсона.
+\end{proof}
+
+\subheader{Условное распределение}
+
+\begin{definition}
+  Условным распределением случайной величины из системы случайных величин
+  \(\tuple{\xi, \eta}\) называется ее распределение найденное при условии, что
+  другая случайная величина приняла определенное значение.
+  
+  Обозначается \(\xi \mid \eta = y\), \(\eta \mid \xi = x\).
+\end{definition}
+
+\begin{definition}
+  Условным математическим ожиданием (УМО) \(\expected{\xi \mid \eta = y}\)
+  называется математическое ожидание случайной величины \(\xi\) при
+  соответствующем условном распределении.
+\end{definition}
+
+\subsubheader{I.}{Условное распределение в дискретной системе двух случайных
+величин}
+
+Пусть двумерная случайная величина \(\tuple{\xi, \eta}\) задана законом
+распределения:
+
+\begin{table}[h]
+  \centering
+
+  \begin{tabular}{c|c|c|c|c}
+    \diagbox{\(\xi\)}{\(\eta\)}
+               & \(y_1\)     & \(y_2\)     & \(\dotsc\) & \(y_m\)     \\ \hline
+    \(x_1\)    & \(p_{1,1}\) & \(p_{1,2}\) & \(\dotsc\) & \(p_{1,m}\) \\ \hline
+    \(x_2\)    & \(p_{2,1}\) & \(p_{2,2}\) & \(\dotsc\) & \(p_{2,m}\) \\ \hline
+    \(\vdots\) & \(\vdots\)  & \(\vdots\)  & \(\ddots\) & \(\vdots\)  \\ \hline
+    \(x_n\)    & \(p_{n,1}\) & \(p_{n,2}\) & \(\dotsc\) & \(p_{n,m}\)
+  \end{tabular}
+\end{table}
+
+\(x_i\)~--- значения случайной величины \(\xi\), \(y_j\)~--- значения случайной
+величины \(\eta\), \(p_{i,j}\)~--- вероятность появления точки \((x_i, y_j)\).
+
+При составлении условных распределений используем формулы, вытекающие из формулы
+условной вероятности:
+
+\begin{equation*}
+  \begin{aligned}
+    \xi \mid \eta = y_j \colon
+    & \qquad &
+    p_i
+    = \prob{\xi = x_i \mid \eta = y_j}
+    = \frac{\prob{\xi = x_i, \eta = y_j}}{\prob{\eta = y_j}}
+    = \frac{p_{i, j}}{q_j}
+    & \qquad &
+    \text{вероятности \(i\)-той строки делим на их сумму}
+  \\
+    \eta \mid \xi = x_i \colon
+    & \qquad &
+    q_j
+    = \prob{\eta = y_j \mid \xi = x_i}
+    = \frac{\prob{\eta = y_j, \xi = x_i}}{\prob{\eta = x_i}}
+    = \frac{p_{i, j}}{p_i}
+    & \qquad &
+    \text{вероятности \(j\)-ого столбца делим на их сумму}
+  \end{aligned}
+\end{equation*}
+
+\subsubheader{II.}{Условное распределение в непрерывной системе двух случайных
+величин}
+
+Пусть имеется двумерная абсолютно непрерывная случайная величина \(\tuple{\xi,
+\eta}\), которая задана плотностью совместного распределения \(f_{\xi, \eta} (x,
+y)\). Тогда плотность условного распределения \(\xi \mid \eta = y\) будет равна
+
+\begin{equation*}
+  f(x \mid y)
+  = \frac{f_{\xi, \eta} (x, y)}
+    {\int_{-\infty}^{\infty} f_{\xi, \eta} (x, y = const) \dd x}
+  = \frac{f_{\xi, \eta} (x, y)} {f_{\eta} (y)}
+\end{equation*}
+
+Аналогично
+
+\begin{equation*}
+  f(y \mid x)
+  = \frac{f_{\xi, \eta} (x, y)}{f_{\xi} (x)}
+\end{equation*}
+
+\begin{definition}
+  Функция
+
+  \begin{equation*}
+    f(x \mid y)
+    = \frac{f_{\xi, \eta} (x, y)} {f_{\eta} (y)}
+  \end{equation*}
+
+  называется условной плотностью.
+\end{definition}
+
+\begin{remark}
+  Условное математическое ожидание вычисляется по формуле
+
+  \begin{equation*}
+    \expected{\xi \mid \eta = y}
+    = \int_{-\infty}^{\infty} x f(x \mid y) \dd x
+    \qquad
+    \expected{\eta \mid \xi = x}
+    = \int_{-\infty}^{\infty} y f(y \mid x) \dd y
+  \end{equation*}
+
+  Это можно рассматривать как обобщение формулы Байеса.
+\end{remark}
+
+\begin{remark}
+  При фиксированном значении переменной \(x\) условная плотность зависит только
+  от \(y\), а условное математическое ожидание \(\expected{\eta \mid \xi =
+  x}\)~--- число. Если считать \(x\) переменной, то условное математическое
+  ожидание является функцией, зависящей от \(x\), и называется функцией
+  регрессии \(\eta\) на \(\xi\).
+\end{remark}
+
+\begin{remark}
+  Т.к. \(\eta\) случайная величина, то условное математическое ожидание
+  \(\expected{\xi \mid \eta}\) также можно считать случайной величиной.
+\end{remark}
+
+\begin{example}
+  Пусть даны независимые случайные величины \(\xi_1, \dotsc, \xi_n \in
+  \Pi_{\lambda}\). Обозначим \(S_n = \xi_1 + \dotsc + \xi_n\). Найти
+  \(\expected{\xi_1 \mid S_n = m}\).
+
+  \solution{} Найдем условное распределение. Пусть \(S_n = m\), тогда при \(k
+  \le m\)
+
+  \begin{equation*}
+    \begin{aligned}
+      \prob{\xi_1 = k \mid S_n = m}
+      = \frac{\prob{\xi_1 = k, S_n = m}}{\prob{S_n = m}}
+      = \frac{\prob{\xi_1 = k, \xi_2 + \dotsc + \xi_n = m - k}}{\prob{S_n = m}}
+      = \frac{\prob{\xi_1 = k} \prob{\xi_2 + \dotsc + \xi_n = m - k}}
+        {\prob{S_n = m}}
+      \\
+        \text{Распределение Пуассона устойчиво относительно суммирования,
+        поэтому }
+        \begin{cases}
+          S_n \in \Pi_{n \lambda} \\
+          \xi_2 + \dotsc + \xi_n \in \Pi_{(n - 1) \lambda}
+        \end{cases}
+    \end{aligned}
+  \end{equation*}
+
+  \begin{equation*}
+    \begin{aligned}
+      \prob{\xi_1 = k \mid S_n = m}
+      & = \frac{\lambda^k}{k!} e^{-\lambda} \cdot
+        \frac{\prh{(n - 1) \lambda}^{m - k}}{(m - k)!}
+          e^{-(n - 1) \lambda} \cdot
+        \frac{m!}{(n \lambda)^m} e^{n \lambda}
+    \\
+      & = \frac{\lambda^k}{k!} e^{-\lambda} \cdot
+        \frac{(n - 1)^{m - k} \lambda^{m - k}}{(m - k)!}
+          e^{-n \lambda + \lambda} \cdot
+        \frac{m!}{n^m \lambda^m} e^{n \lambda}
+    \\
+      & = \frac{m!}{k! (m - k)!} \cdot \frac{(n - 1)^{m - k}}{n^m}
+    \\
+      & = \comb{m}{k} \prh{\frac{1}{n}}^k \prh{1 - \frac{1}{n}}^{m - k}
+    \end{aligned}
+  \end{equation*}
+
+  Таким образом
+
+  \begin{equation*}
+    \xi_1 \mid S_n = m \in B_{m, \frac{1}{n}}
+    \quad \implies \quad
+    \expected{\xi_1 \mid S_n = m} = \frac{m}{n}
+  \end{equation*}
+
+  \solution{} Приведем другое решение. В силу симметрии
+
+  \begin{equation*}
+    \expected{\xi_1 \mid S_n = m}
+    = \expected{\xi_2 \mid S_n = m}
+    = \dotsc
+    = \expected{\xi_n \mid S_n = m}
+  \end{equation*}
+
+  По формуле полной вероятности получаем
+
+  \begin{equation*}
+    n \expected{\xi_1 \mid S_n = m}
+    = \expected{\xi_1 \mid S_n = m} + \dotsc + \expected{\xi_n \mid S_n = m}
+    = \expected{\xi_1 + \dotsc + \xi_n \mid S_n = m}
+    = \expected{S_n \mid S_n = m}
+    = m
+  \end{equation*}
+
+  Откуда \(\expected{\xi_1 \mid S_n = m} = \frac{m}{n}\).
+\end{example}

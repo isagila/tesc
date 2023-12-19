@@ -1,0 +1,21 @@
+\begin{tikzpicture}
+
+  \draw[->, thick] (-1, 0) -- (6, 0)
+    node[below] {\(x\)};
+  \draw[->, thick] (0, -1) -- (0, 4)
+    node[left] {\(f_{\xi} (x)\)};
+  \draw (0, 2) node[left] {\(\frac{1}{b - a}\)};
+
+  \draw[very thick] (-1, 0) -- (1, 0)
+    node[below] {\(a\)};
+  \draw[dashed, thick] (1, 0) -- (1, 2);
+
+  \draw[very thick] (4, 0) -- (6, 0)
+    node[pos = 0, below] {\(b\)};
+  \draw[dashed, thick] (4, 0) -- (4, 2);
+
+  \draw[very thick] (1, 2) -- (4, 2);
+  \draw[fill = white] (1, 0) circle (2pt);
+  \draw[fill = white] (4, 0) circle (2pt);
+
+\end{tikzpicture}

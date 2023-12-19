@@ -1,0 +1,19 @@
+\begin{tikzpicture}[scale = 2]
+  \draw[->, thick] (-0.5, 0) -- (3, 0)
+    node[below] {\(x\)};
+  \draw[->, thick] (0, -0.5) -- (0, 3)
+    node[left] {\(y\)};
+
+  \draw[fill = green!30]
+    (0, 0) -- (2, 0) -- (2, 0.7) -- (0.7, 2) -- (0, 2) -- cycle;
+  \draw (0.9, 0.9) node {\(D_z\)};
+
+  \draw[thick] (2, 0) -- (2, 2) -- (0, 2);
+  \draw (2, 0) node[below] {\(1\)};
+  \draw (0, 2) node[left] {\(1\)};
+
+  \draw[<->, thick] (2.1, 2) -- (2.1, 0.7)
+    node[midway, right] {\(2 - z\)};
+  \draw[thick] (2, 0.7) -- (2.2, 0.7);
+  \draw[thick] (2, 2) -- (2.2, 2);
+\end{tikzpicture}

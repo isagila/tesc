@@ -1,0 +1,618 @@
+\subsection{%
+  Лекция \texttt{23.11.28}.%
+}
+
+\subheader{Пространство случайных величин}
+
+\begin{remark}
+  Если случайные величины \(\xi\) и \(\eta\) равны \quote{почти наверное}
+  (\(\prob{\xi = \eta} = 1 \)), то будем считать, что \(\xi = \eta\).
+\end{remark}
+
+Пусть дано вероятностное пространство \(\tuple{\Omega, \euF, \probP}\). Введем
+пространство \(L_2\) как множество случайных величин с конечным вторым моментом.
+
+\begin{equation*}
+  L_2 (\Omega, \euF, \probP) = \set{\xi \given \variance{\xi} < \infty}
+\end{equation*}
+
+Ясно, что это линейное пространство.
+
+\begin{definition}
+  Скалярным произведением случайных величин \(\xi, \eta \in L_2\) называется
+  \(\dotpdt{\xi}{\eta} = \expected{\xi \eta}\).
+\end{definition}
+
+\begin{remark}
+  Если \(\tuple{\xi, \eta}\) имеет дискретное распределение, то \(\expected{\xi
+  \eta} = \sum_{i, j} x_i y_j p_{i, j}\).
+
+  Если \(\tuple{\xi, \eta}\) имеет абсолютно непрерывное распределение с
+  плотностью \(f_{\xi, \eta} (x, y)\), то \(\expected{\xi \eta} = \iint_{\RR^2}
+  x y f_{\xi, \eta} (x, y) \dd x \dd y\).
+\end{remark}
+
+\begin{remark}
+  Т.к. дисперсии конечны, то данное скалярное произведение существует и конечно.
+\end{remark}
+
+\begin{equation*}
+  \begin{rcases}
+    \dotpdt{\xi}{\eta} = \dotpdt{\eta}{\xi}
+  \\
+    \dotpdt{C \xi}{\eta} = C \dotpdt{\xi}{\eta}
+  \\
+    \dotpdt{\xi_1 + \xi_2}{\eta} = \dotpdt{\xi_1}{\eta} + \dotpdt{\xi_2}{\eta}
+  \\
+    \dotpdt{\xi}{\xi} = \expected{\xi^2} \ge 0
+  \\
+    \dotpdt{\xi}{\xi} = 0 \implies \xi = 0 \text{ п.н.}
+  \end{rcases}
+  \implies
+  \expected{\xi \eta} \text{ действительно скалярное произведение}
+\end{equation*}
+
+\begin{definition}
+  Норма случайной величины определяется стандартно как корень из скалярного
+  квадрата: \(\norm{\xi} = \sqrt{\dotpdt{\xi}{\xi}}\).
+\end{definition}
+
+\begin{remark}
+  Расстояние между случайными величинами (метрику) определим как норму разности:
+  \(\norm{\xi - \eta}\).
+\end{remark}
+
+\begin{remark}
+  Таким образом рассматриваемое пространство является Гильбертовым (и даже
+  Банаховым).
+\end{remark}
+
+\begin{theorem}[Неравенство Коши-Буняковского-Шварца] \label{thr:C-B-inequality}
+  Пусть случайные величины \(\xi\) и \(\eta\) имеют конечные вторые моменты,
+  тогда
+
+  \begin{equation*}
+    \abs{\expected{\xi \eta}} \le \sqrt{\expected{\xi^2} \expected{\eta^2}}
+  \end{equation*}
+
+  Причем равенство достигается тогда и только тогда, когда \(\xi = C \eta\).
+\end{theorem}
+
+\begin{proof}
+  Доказательство аналогично приведенному ранее в курсе линейной алгебры.
+  Рассмотрим квадратный трехчлен:
+
+  \begin{equation*}
+    P_2 (x)
+    = \expected{(x \xi - \eta)^2}
+    = x^2 \expected{\xi^2} - 2 x \expected{\xi \eta} + \expected{\eta^2}
+  \end{equation*}
+
+  Т.к. \(\forall x\) это трехчлен неотрицательный, то его дискриминант
+  неположительный. Имеем
+
+  \begin{equation*}
+    D = 4 \expected{\xi \eta} - 4 \expected{\xi^2} \expected{\eta^2} \le 0
+    \implies
+    \abs{\expected{\xi \eta}} \le \sqrt{\expected{\xi^2} \expected{\eta^2}}
+  \end{equation*}
+
+  Далее покажем, когда достигается равенство.
+
+  \begin{equation*}
+    \abs{\expected{\xi \eta}} = \sqrt{\expected{\xi^2} \expected{\eta^2}}
+    \iff
+    D = 0
+    \implies
+    \exists C = const \given
+    \expected{(C \xi - \eta)^2} = 0
+    \implies
+    C \xi = \eta \text{ п.н.}
+  \end{equation*}
+\end{proof}
+
+\subheader{Условное математическое ожидание}
+
+Рассмотрим линейное подпространство, образованное множеством случайных величин
+\(g(\eta)\) (функция \(g\)~--- борелевская) с конечным вторым моментом.
+
+\begin{equation*}
+  L
+  = L (\eta)
+  = \set{g(\eta) \given \variance{g(\eta)} < \infty}
+  \subset L_2 (\Omega, \euF, \probP)
+\end{equation*}
+
+\begin{definition}
+  Условным математическим ожиданием (УМО) \(\expected{\xi \mid \eta}\)
+  называется ортогональная проекция случайной величины \(\xi\) на
+  подпространство \(L(\eta)\).
+\end{definition}
+
+Далее будем обозначать \(\hat{\xi} = \expected{\xi \mid \eta}\).
+
+\begin{lemma}[Тождество ортопроекции] \label{lem:ortoproj}
+  Пусть \(\hat{\xi} \in L(\eta)\), тогда
+
+  \begin{equation*}
+    \hat{\xi} = \expected{\xi \mid \eta}
+    \iff
+    \expected{\xi g(\eta)} = \expected{\hat{\xi} g(\eta)}
+    \qquad
+    \forall g(\eta) \in L(\eta)
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  \begin{equation*}
+    \begin{aligned}
+      \hat{\xi} = \expected{\xi \mid \eta}
+      \iff
+      \xi - \hat{\xi} \perp g(\eta) \in L(\eta)
+      \qquad
+      \forall g(\eta)
+    \\
+      \dotpdt{\xi - \hat{\xi}}{g(\eta)}
+      = \expected{(\xi - \hat{\xi}) g(\eta)}
+      = 0
+      \iff
+      \expected{\xi g(\eta)} = \expected{\hat{\xi} g(\eta)}
+      \qquad
+      \forall g(\eta) \in L(\eta)
+    \end{aligned}
+  \end{equation*}
+\end{proof}
+
+\begin{lemma}[Формула полного математического ожидания]
+  \begin{equation*}
+    \expected{\xi}
+    = \expected{\expected{\xi \mid \eta}}
+    = \expected{\hat{\xi}}
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  Искомое равенство можно легко получить, если в \ref{lem:ortoproj} положить
+  \(g(\eta) \equiv 1\).
+\end{proof}
+
+\begin{remark}
+  В случае распределения Бернулли эта формула является уже знакомой формулой
+  полной вероятности.
+\end{remark}
+
+\begin{lemma}[Линейность]
+  \begin{equation*}
+    \expected{C_1 \xi_1 + C_2 \xi_2 \mid \eta}
+    = C_1 \expected{\xi_1 \mid \eta} + C_2 \expected{\xi_2 \mid \eta}
+  \end{equation*}
+\end{lemma}
+
+\begin{lemma}
+  Если случайные величины \(\xi\) и \(\eta\) независимы, то
+
+  \begin{equation*}
+    \expected{\xi \mid \eta} = \expected{\xi}
+  \end{equation*}  
+\end{lemma}
+
+\begin{proof}
+  Проверим тождество ортопроекции.
+
+  \begin{equation*}
+    \expected{\expected{\xi} g(\eta)}
+    = \expected{\xi} \expected{g(\eta)}
+    \eqby{независимость}
+    \expected{\xi g(\eta)}
+  \end{equation*}
+
+  Тождество выполняется, значит \(\expected{\xi} = \expected{\xi \mid \eta}\).
+\end{proof}
+
+\begin{lemma}
+  Если случайные величины \(\xi\) и \(\eta\) независимы, то \(\xi -
+  \expected{\xi} \perp L(\eta)\) и, в частности, \(\xi - \expected{\xi} \perp
+  \eta\).
+\end{lemma}
+
+Покажем, что данное определение УМО согласуется с введенным ранее понятием
+математического ожидания условного распределения, т.е. \(\expected{\xi \mid
+\eta} = h(\eta)\), где \(h(y) = \expected{\xi \mid \eta = y}\). Рассмотрим
+случай абсолютно непрерывной системы случайных величин \(\tuple{\xi, \eta}\) с
+плотностью \(f_{\xi, \eta} (x, y)\). Тогда
+
+\begin{equation*}
+  h(y) = \int_{-\infty}^{\infty} x f(x \mid y) \dd x
+  \qquad
+  f(x \mid y) = \frac{f_{\xi, \eta} (x, y)}{f_{\eta} (y)}
+\end{equation*}
+
+Следует проверить, что \(h(y)\) удовлетворяет тождеству ортопроекции, т.е. то,
+что \(\expected{\xi g(\eta)} = \expected{h(\eta) g(\eta)}\).
+
+\begin{equation*}
+  \begin{aligned}
+    \expected{\xi g(\eta)}
+    = \iint_{\RR^2} x g(y) f_{\xi, \eta} (x, y) \dd x \dd y
+  \\
+    \expected{h(\eta) g(\eta)}
+    = \int_{-\infty}^{\infty} h(y) g(y) f_{\eta} (y) \dd y
+    = \int_{-\infty}^{\infty} \prh{
+        \int_{-\infty}^{\infty}
+        x \frac{f_{\xi, \eta} (x, y)}{f_{\eta} (y)} \dd x
+      } g(y) f_{\eta} (y) \dd y
+    = \iint_{\RR^2} x g(y) f_{\xi, \eta} (x, y) \dd x \dd y
+  \end{aligned}
+\end{equation*}
+
+\subheader{Условная дисперсия}
+
+\begin{definition}
+  Условной дисперсией случайной величины \(\xi\) относительно случайной величины
+  \(\eta\) называется случайная величина
+
+  \begin{equation*}
+    \variance{\xi \mid \eta}
+    = \expected{\prh{\xi - \expected{\xi \mid \eta}}^2 \mid \eta}
+  \end{equation*}
+
+  Т.е. это дисперсия соответствующего условного распределения.
+\end{definition}
+
+\begin{lemma} \label{lem:variance-formula}
+  \begin{equation*}
+    \variance{\xi \mid \eta}
+    = \expected{\xi^2 \mid \eta} - \prh{\expected{\xi \mid \eta}}^2
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  Доказательство аналогично доказательству такой же формулы для обычной
+  дисперсии.
+\end{proof}
+
+\begin{theorem}[Закон полной дисперсии]
+  \begin{equation*}
+    \variance{\xi}
+    = \expected{\variance{\xi \mid \eta}} + \variance{\expected{\xi \mid \eta}}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Известно, что \(\variance{\xi} = \expected{\xi^2} - \prh{\expected{\xi}}^2\).
+  Применим к каждого слагаемому формулу полного математического ожидания.
+
+  \begin{equation*} \label{eq:full-variance-law-1} \tag{1}
+    \variance{\xi}
+    = \expected{\expected{\xi^2 \mid \eta}}
+      - \prh{\expected{\expected{\xi \mid \eta}}}^2
+  \end{equation*}
+
+  Из \ref{lem:variance-formula} можно получить, что
+
+  \begin{equation*} \label{eq:full-variance-law-2} \tag{2}
+    \expected{\xi^2 \mid \eta}
+    = \variance{\xi \mid \eta} + \prh{\expected{\xi \mid \eta}}^2
+  \end{equation*}
+
+  Подставим \eqref{eq:full-variance-law-2} в \eqref{eq:full-variance-law-1}.
+
+  \begin{equation*}
+    \begin{aligned}
+      \variance{\xi}
+      & = \expected{\variance{\xi \mid \eta} + \prh{\expected{\xi \mid \eta}}^2}
+      - \prh{\expected{\expected{\xi \mid \eta}}}^2
+    \\
+      & = \expected{\variance{\xi \mid \eta}} + \under{
+        \expected{\prh{\expected{\xi \mid \eta}}^2}
+          - \prh{\expected{\expected{\xi \mid \eta}}}^2
+      }{\variance{\expected{\xi \mid \eta}}}
+    \\
+      & = \expected{\variance{\xi \mid \eta}}
+        + \variance{\expected{\xi \mid \eta}}
+    \end{aligned}
+  \end{equation*}
+\end{proof}
+
+\begin{remark}
+  Пусть \(\xi\) и \(\eta\) независимы, тогда
+
+  \begin{equation*}
+    \variance{\expected{\xi \mid \eta}}
+    = \variance{\expected{\xi}}
+    = 0
+    \implies
+    \variance{\xi} = \expected{\variance{\xi \mid \eta}}
+  \end{equation*}
+\end{remark}
+
+\begin{remark}
+  Если имеется функциональная зависимость \(\xi = g(\eta)\), то
+
+  \begin{equation*}
+    \variance{\expected{\xi \mid \eta}}
+    = \variance{\expected{g(\eta) \mid \eta}}
+    = \variance{g(\eta)}
+    = \variance{\xi}
+  \end{equation*}
+\end{remark}
+
+Таким образом доля
+
+\begin{equation*}
+  0 \le R^2 = \frac{\variance{\expected{\xi \mid \eta}}}{\variance{\xi}} \le 1
+\end{equation*}
+
+отражает уровень зависимости случайной величины \(\xi\) от случайной величины
+\(\eta\).
+
+\begin{definition}
+  Величина \(R\) называется корреляционным отношением.
+\end{definition}
+
+\subheader{Числовые характеристики зависимости случайных величин}
+
+Если \(\xi\) и \(\eta\) независимы, то \(\expected{\xi \eta} = \expected{\xi}
+\expected{\eta}\), поэтому в качестве индикатора наличия связи логично взять
+величину \(\expected{\xi \eta} - \expected{\xi} \expected{\eta} =
+\cov{\xi}{\eta}\).
+
+\begin{definition}
+  Ковариацией случайных величин \(\xi\) и \(\eta\) называется число
+
+  \begin{equation*}
+    \cov{\xi}{\eta}
+    = \expected{\prh{\xi - \expected{\xi}} \prh{\eta - \expected{\eta}}}
+  \end{equation*}
+\end{definition}
+
+\begin{lemma}[Равносильность определений]
+  \begin{equation*}
+    \cov{\xi}{\eta}
+    = \expected{\prh{\xi - \expected{\xi}} \prh{\eta - \expected{\eta}}}
+    = \expected{\xi \eta} - \expected{\xi} \expected{\eta}
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  \begin{equation*}
+    \begin{aligned}
+      \cov{\xi}{\eta}
+      & = \expected{\prh{\xi - \expected{\xi}} \prh{\eta - \expected{\eta}}}
+    \\
+      & = \expected{
+        \xi \eta
+        - \eta \expected{\xi}
+        - \xi \expected{\eta}
+        + \expected{\xi} \expected{\eta}
+      }
+    \\
+      & = \expected{\xi \eta}
+        - \expected{\xi} \expected{\eta}
+        - \expected{\xi} \expected{\eta}
+        + \expected{\xi} \expected{\eta}
+    \\
+      & = \expected{\xi \eta} - \expected{\xi} \expected{\eta}
+    \end{aligned}
+  \end{equation*}
+\end{proof}
+
+\subsubheader{}{Свойства ковариации}
+
+\begin{enumerate}
+\item
+  \(\display{
+    \cov{\xi}{\xi}
+    = \expected{\xi^2} - \prh{\expected{\xi}}^2
+    = \variance{\xi}
+  }\)
+
+\item
+  \(\display{
+    \cov{\xi}{\eta} = \cov{\eta}{\xi}
+  }\)
+
+\item
+  \(\display{
+    \cov{C \xi}{\eta} = C \cov{\xi}{\eta}
+  }\)
+
+\item
+  \(\display{
+    \cov{\xi_1 + \xi_2}{\eta} = \cov{\xi_1}{\eta} + \cov{\xi_2}{\eta}
+  }\)
+
+\item
+  \(\display{
+    \variance{\xi_1 + \dotsc + \xi_n}
+    = \variance{\xi_1} + \dots + \variance{\xi_n}
+      + 2 \sum_{i < j} \cov{\xi_i}{\xi_j}
+    = \sum_{i, j} \cov{\xi_i}{\xi_j}
+  }\)
+
+\item
+  Если \(\xi\) и \(\eta\) независимы, то \(\cov{\xi}{\eta} = 0\).
+
+\item
+  Если \(\cov{\xi}{\eta} \neq 0\), то \(\xi\) и \(\eta\)~--- зависимы.
+
+\item
+  Если \(\cov{\xi}{\eta} = 0\), то нельзя сделать никаких выводов.
+
+\item
+  Если \(\cov{\xi}{\eta} > 0\), то зависимость прямая.
+
+\item
+  Если \(\cov{\xi}{\eta} < 0\), то зависимость обратная.
+\end{enumerate}
+
+\begin{remark}
+  По величине ковариации нельзя судить о силе связи, т.к. она зависит от единиц
+  измерения. Ее следует \quote{нормировать}.
+\end{remark}
+
+\subheader{Коэффициент линейной корреляции}
+
+\begin{definition}
+  Коэффициентом линейной корреляции \(\rho_{\xi, \eta}\) случайных величин
+  \(\xi\) и \(\eta\) с конечным вторым моментом называется число
+
+  \begin{equation*}
+    \rho_{\xi, \eta}
+    = \frac{\cov{\xi}{\eta}}{\sqrt{\variance{\xi}} \sqrt{\variance{\eta}}}
+    = \frac{\expected{\xi \eta} - \expected{\xi} \expected{\eta}}
+      {\stder{\xi} \stder{\eta}}
+  \end{equation*}
+\end{definition}
+
+\begin{remark}
+  Эта безразмерная величина, поэтому по ней можно судить о силе связи.
+\end{remark}
+
+\begin{remark}
+  \begin{equation*}
+    \rho_{\xi, \eta}
+    = \frac{\expected{\prh{\xi - \expected{\xi}} \prh{\eta - \expected{\eta}}}}
+      {\sqrt{\expected{\xi - \expected{\xi}^2}}
+        \sqrt{\expected{\eta - \expected{\eta}^2}}}
+    = \frac{\dotpdt{\xi - \expected{\xi}}{\eta - \expected{\eta}}}
+        {\norm{\xi - \expected{\xi}} \cdot \norm{\eta - \expected{\eta}}}
+    = \cos \angle \prh[\Big]{\xi - \expected{\xi}, \eta - \expected{\eta}}
+  \end{equation*}
+\end{remark}
+
+\subsubheader{}{Свойства корреляции}
+
+\begin{enumerate}
+\item
+  \(\display{
+    \rho_{\xi, \eta} = \rho_{\eta, \xi}
+  }\)
+
+\item
+  Если \(\xi\) и \(\eta\) независимы, то \(\rho_{\xi, \eta} = 0\).
+
+\item
+  Если \(\rho_{\xi, \eta} \neq 0\), то \(\xi\) и \(\eta\)~--- зависимы.
+
+\item
+  Если \(\rho_{\xi, \eta} = 0\), то нельзя сделать никаких выводов.
+\end{enumerate}
+
+\begin{lemma}
+  \begin{equation*}
+    \abs{\rho_{\xi, \eta}} \le 1
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  По \ref{thr:C-B-inequality} имеем
+
+  \begin{equation*}
+    \abs{\expected{\prh{\xi - \expected{\xi}} \prh{\eta - \expected{\eta}}}}
+    \le \sqrt{\prh{\xi - \expected{\xi}}^2 \prh{\eta - \expected{\eta}}^2}
+  \end{equation*}
+
+  Подставив это в определение корреляции получаем искомую оценку.
+\end{proof}
+
+\begin{lemma} \label{lem:correlation-dependency}
+  \begin{equation*}
+    \abs{\rho_{\xi, \eta}} = 1
+    \iff
+    \eta = C \xi + b
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  По \ref{thr:C-B-inequality} имеем
+
+  \begin{equation*}
+    \begin{aligned}
+      \abs{\rho_{\xi, \eta}} = 1
+      \iff
+      \abs{\expected{\prh{\xi - \expected{\xi}} \prh{\eta - \expected{\eta}}}}
+      = \sqrt{\prh{\xi - \expected{\xi}}^2 \prh{\eta - \expected{\eta}}^2}
+    \\
+      \eta - \expected{\eta} = C \prh{\xi - \expected{\xi}}
+      \iff
+      \eta = C \xi + \under{\expected{\eta} - C \expected{\xi}}{b}
+    \end{aligned}
+  \end{equation*}
+\end{proof}
+
+\begin{lemma}
+  \begin{equation*}
+    \begin{aligned}
+      \rho_{\xi, \eta} = 1
+      \implies
+      \eta = a \xi + b
+      \qquad
+      a > 0 \text{ (прямая зависимость)}
+    \\
+      \rho_{\xi, \eta} = -1
+      \implies
+      \eta = a \xi + b
+      \qquad
+      a < 0 \text{ (обратная зависимость)}
+    \end{aligned}
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  По \ref{lem:correlation-dependency} получаем, что \(\eta = a \xi + b\).
+  Подставим это в определение корреляции.
+
+  \begin{equation*}
+    \begin{aligned}
+      \rho_{\xi, \eta}
+      & = \frac{\expected{\xi \eta} - \expected{\xi} \expected{\eta}}
+        {\sqrt{\variance{\xi}} \sqrt{\variance{\eta}}}
+    \\
+      & = \frac{\expected{\xi \prh{a \xi + b}}
+          - \expected{\xi} \expected{a \xi + b}}
+        {\sqrt{\variance{\xi}} \sqrt{\variance{a \xi + b}}}
+    \\
+      & = \frac{a \expected{\xi^2} + b \expected{\xi}
+          - a \prh{\expected{\xi}}^2 - b \expected{\xi}}
+        {\sqrt{\variance{\xi}} \sqrt{a^2 \variance{\xi}}}
+    \\
+      & = \frac{a \prh{\expected{\xi^2} - \prh{\expected{\xi}}^2}}
+        {\abs{a} \variance{\xi}}
+    \\
+      & = \frac{a \variance{\xi}}
+        {\abs{a} \variance{\xi}}
+    \\
+      & = \operatorname{sign} a
+    \end{aligned}
+  \end{equation*}  
+\end{proof}
+
+\begin{definition}
+  Если \(\rho_{\xi, \eta} \neq 0\), то говорят, что случайные величины \(\xi\) и
+  \(\eta\) коррелированны друг с другом. Если \(\rho_{\xi, \eta}\) больше нуля,
+  то имеется прямая корреляция между случайными величинами \(\xi\) и \(\eta\), а
+  если меньше нуля, то обратная корреляция.
+\end{definition}
+
+\begin{remark}
+  Коэффициент корреляции отражает преимущественно силу линейной части связи, а
+  саму силу лучше отражает корреляционное отношение.
+\end{remark}
+
+\begin{theorem}
+  \begin{equation*}
+    R \ge \rho_{\xi, \eta}
+  \end{equation*}
+\end{theorem}
+
+\begin{remark}
+  \(R = \rho_{\xi, \eta}\) тогда и только тогда, когда уравнение регрессии
+  является линейным.
+\end{remark}
+
+\begin{example}
+  Пусть между случайными величинами \(\xi_1\) и \(\xi_2\) прямая корреляция,
+  между \(\xi_2\) и \(\xi_3\) также прямая корреляция. Однако из этого
+  \textbf{не следует}, что между \(\xi_1\) и \(\xi_3\) будет прямая корреляция.
+\end{example}

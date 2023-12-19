@@ -1,0 +1,334 @@
+\subsection{%
+  Лекция \texttt{23.10.03}.%
+}
+
+\subheader{Схемы испытаний и соответствующие распределения}
+
+Обозначим \(n\)~--- число испытаний, \(p\)~--- вероятность успеха при одном
+испытании, \(q = 1 - p\)~--- вероятность неудачи при одном испытании.
+
+\subsubheader{Схема I.}{Схема Бернулли}
+
+Пусть \(Y_n\)~--- число успехов при \(n\) испытаниях. По формуле Бернулли
+
+\begin{equation*}
+  \probP_n (Y_n = k) = \comb{n}{k} p^k q^{n - k}
+  \qquad
+  0 \le k \le n
+\end{equation*}
+
+\begin{definition}
+  Соответствие \(k \to \comb{n}{k} p^k q^{n - k}\), \(0 \le k \le n\) называется
+  биномиальным распределением вероятностей и обозначается \(\bindst{n}{p}\) или
+  \(\bindstB \prh{n, p}\).
+\end{definition}
+
+\subsubheader{Схема II.}{Схема до первого успешного испытания}
+
+Пусть проводится бесконечная серия независимых испытаний, которая заканчивается
+после первого успешного испытания под номером \(\tau\).
+
+\begin{lemma}
+  \begin{equation*}
+    \prob{\tau = k} = q^{k - 1} p
+    \qquad
+    k = 0, 1, \dotsc
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  \begin{equation*}
+    \prob{\tau = k}
+    = \prob{\under{N \dotsc N}{k - 1} Y} 
+    = q^{k - 1} p
+  \end{equation*}
+\end{proof}
+
+\begin{definition}
+  Соответствие \(k \to q^{k - 1} p\), \(k \in \NN\) называется геометрическим
+  распределением и обозначается \(\geodst{p}\).
+\end{definition}
+
+Геометрическое распределение обладает свойством \quote{не старения} или
+\quote{отсутствия последействия}.
+
+\begin{theorem}
+  \begin{equation*}
+    \prob{\tau = k} = q^{k - 1} p, k \in \NN
+    \implies
+    \forall n, k \ge 0 \given
+    \condprob{\tau > n + k}{\tau > n} = \prob{\tau > k}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Заметим, что \(\prob{\tau > m} = q^m\), т.к. нас интересуют ситуации, в
+  которых каким минимум первые \(m\) испытаний были неудачными. Применим
+  определение и получим
+
+  \begin{equation*}
+    \condprob{\tau > n + k}{\tau > n}
+    = \frac{\prob{\tau > n + k, \tau > n} }{\prob{\tau > n}}
+    = \frac{q^{n + k}}{q^n}
+    = q^k
+    = \prob{\tau > k} 
+  \end{equation*}
+\end{proof}
+
+\subsubheader{Схема III.}{Испытания с несколькими исходами (полиномиальная
+схема)}
+
+Пусть при \(n\) независимых испытаниях могут произойти \(m\) несовместных
+исходов, вероятности которых равны \(p_i\) при одном отдельном испытании.
+
+\begin{theorem}
+  Вероятность того, что при \(n\) испытаниях первый исход произойдет \(n_1\)
+  раз, второй~--- \(n_2\) раз, \(\dotsc\), \(m\)-ый~--- \(n_m\) раз равна
+
+  \begin{equation*}
+    \probP_n (n_1, \dotsc, n_m)
+    = \frac{n!}{n_1! \cdot \dotsc n_m!}
+      \cdot p_1^{n_1} \cdot \dotsc \cdot p_m^{n_m}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Рассмотрим один элементарный исход благоприятный данному событию.
+
+  \begin{equation*}
+    A_1
+    = \under{1 \dotsc 1}{n_1} \under{2 \dotsc 2}{n_2}
+      \dotsc \under{m \dotsc m}{n_m}
+    = p_1^{n_1} \cdot \dotsc \cdot p_m^{n_m}
+  \end{equation*}
+
+  Остальные благоприятные исходы имеют те же вероятности и отличаются лишь
+  расстановкой \(i\)-ых исходов по \(n\) местам. Число таких исходов равно
+
+  \begin{equation*}
+    \comb{n}{n_1} \cdot \comb{n - n_1}{n_2} \dotsc \cdot \comb{n_m}{n_m}
+    = \under{1 \dotsc 1}{n_1} \under{2 \dotsc 2}{n_2}
+      \dotsc \under{m \dotsc m}{n_m}
+  \end{equation*}
+
+  Это формула перестановок с повторениями. В итоге получаем требуемую формулу.
+\end{proof}
+
+\begin{remark}
+  При \(n = 2\) доказанная формула превращается в уже рассмотренную формулу
+  Бернулли.
+\end{remark}
+
+\begin{example}
+  Два одинаковых по силе шахматиста играют матч из шести партий. Вероятность
+  ничьи при одной партии \(0.5\). Какова вероятность того, что второй игрок
+  выиграет две партии, а еще три сведет к ничьей.
+
+  \solution{} Обозначим \(n = 6\), \(m = 3\) (победа, поражение, ничья), \(p_3 =
+  0.5\), \(p_1 = p_2 = 0.25\). По формуле получаем
+
+  \begin{equation*}
+    \probP_6 (1, 2, 3)
+    = \frac{6!}{1! \cdot 2! \cdot 3!}
+      \cdot \prh{\frac{1}{4}}^1
+      \cdot \prh{\frac{1}{4}}^2
+      \cdot \prh{\frac{1}{2}}^3
+    = \frac{15}{128}
+    \approx 0.12
+  \end{equation*}
+\end{example}
+
+\subsubheader{Схема IV.}{\quote{Урновая} схема}
+
+В урне \(N\) шаров, из которых \(K\)~--- белые, \(N - K\)~--- черные. Выбираем
+\(n\) шаров без учета порядка, обозначим \(k\)~--- число белых шаров в выборке.
+
+\subsubheader{Схема IV. (a)}{С возвратом}
+
+Пусть после вытаскивания шара мы сразу же возвращаем его в урну. Вероятность
+выбрать белый шар не меняется и равна \(p = \frac{K}{N}\). Таким образом
+получается обычная схема Бернулли.
+
+\begin{equation*}
+  \probP_n (k)
+  = \comb{n}{k} \cdot \prh{\frac{K}{N}}^k \cdot \prh{1 - \frac{K}{N}}^{n - k}
+\end{equation*}
+
+\subsubheader{Схема IV. (b)}{Без возврата}
+
+\begin{equation*}
+  \probP_{N, K} (n, k)
+  = \frac{\comb{K}{k} \cdot \comb{N - K}{n - k}}{\comb{N}{n}}
+  \qquad 0 \le k \le K
+\end{equation*}
+
+\begin{definition}
+  Соответствие \(\display{k \to \frac{\comb{K}{k} \cdot \comb{N - K}{n -
+  k}}{\comb{N}{n}}}\), \(0 \le k \le K\) называется гипергеометрическим
+  распределением.
+\end{definition}
+
+Интуитивно ясно, что если число шаров \(N\) велико, а \(n\)~--- нет, то
+извлечение без возврата белых шаров не сильно влияет на пропорцию шаров в урне и
+поэтому результате по схеме (b) будут стремиться к схеме (a), а
+гипергеометрическое распределение будет приближаться к биномиальному.
+
+\begin{lemma} \label{lem:comb-equiv}
+  \begin{equation*}
+    \comb{K}{k} \sim \frac{K^k}{k!}
+    \qquad
+    K \to \infty, k = const
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  \begin{equation*}
+    \begin{aligned}
+      \comb{K}{k}
+     & = \frac{K!}{k! (K - k)!}
+    \\
+      & = \frac{K \cdot (K - 1) \cdot \dotsc \cdot (K - k + 1)}{k!}
+    \\
+      & = \frac{K \cdot (K - 1) \cdot \dotsc \cdot (K - k + 1)}{K^k}
+      \cdot \frac{K^k}{k!}
+    \\
+      & = \under{
+        \prh{1 - \frac{1}{K}}
+        \prh{1 - \frac{2}{K}}
+        \cdot \dotsc \cdot
+        \prh{1 - \frac{k - 1}{K}}
+      }{\to 1} \cdot \frac{K^k}{k!}
+      \sim \frac{K^k}{k!}
+    \end{aligned}
+  \end{equation*}
+ 
+\end{proof}
+
+\begin{theorem}
+  Если \(N \to \infty\) и \(K \to \infty\), таким образом что \(\frac{K}{N} \to
+  p \in \interval{0}{1}\), \(n\) и \(0 \le k \le n\) фиксированны, то
+
+  \begin{equation*}
+    \probP_{N, K} (n, k)
+    = \frac{\comb{K}{k} \cdot \comb{N - K}{n - k}}{\comb{N}{n}}
+    \Rarr{n \to \infty}
+    \comb{n}{k} \cdot p^k \cdot \prh{1 - p}^{n - k}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  К каждому сочетанию применим лемму \ref{lem:comb-equiv}.
+
+  \begin{equation*}
+    \frac{\comb{K}{k} \cdot \comb{N - K}{n - k}}{\comb{N}{n}}
+    \sim \frac{K^k}{k!} \cdot \frac{(N - K)^{n - k}}{(n - k)!}
+      \cdot \frac{n!}{N^n}
+    = \comb{k}{n} \cdot \frac{K^k \cdot (N - K)^{n - k}}{N^n}
+    = \comb{k}{n} \cdot \frac{K^k}{N^k} \cdot \frac{(N - K)^{n - k}}{N^{n - k}}
+    = \comb{k}{n} \prh{\frac{K}{N}}^k \cdot \prh{1 - \frac{K}{N}}^{n - k}
+  \end{equation*}
+
+  Используя обозначение \(p = \frac{K}{N}\) получаем искомую формулу.
+\end{proof}
+
+\subsubheader{Схема V.}{Схема Пуассона}
+
+Вероятность успеха \(p_n\) зависит от числа испытаний \(n\) таким образом, что
+их произведение \(n p_n \approx \lambda = const\). Под \(\lambda\) можно
+понимать интенсивность появления редких событий в заданную единицу времени.
+
+\begin{theorem}[Формула Пуассона]
+  Пусть \(n \to \infty\), тогда \(p_n \to 0\) так, что \(n \cdot p_n \to \lambda
+  > 0\). Тогда вероятность \(k\) успехов при \(n\) испытаниях будет равна
+
+  \begin{equation*}
+    \prob{Y_n = k}
+    = \comb{k}{n} \cdot p_n^k \cdot (1 - p_n)^{n - k}
+  \Rarr{n \to \infty}
+    \frac{\lambda^k}{k!} e^{-\lambda}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Положим \(\lambda_n = n \cdot p_n\), тогда \(\lambda_n \to \lambda\), \(p_n =
+  \frac{\lambda_n}{n}\). Имеем
+
+  \begin{equation*}
+    \prob{Y_n = k}
+    = \comb{k}{n} \cdot p_n^k \cdot (1 - p_n)^{n - k}
+    = \comb{k}{n} \cdot \prh{\frac{\lambda_n}{n}}^k
+      \cdot \prh{1 - \frac{\lambda_n}{n}} ^{n - k}
+  \end{equation*}
+
+  Далее применим лемму \ref{lem:comb-equiv}.
+
+  \begin{equation*}
+    \prob{Y_n = k}
+    \Rarr{n \to \infty}
+    \frac{n^k}{k!} \cdot \frac{\lambda_n^k}{n^k}
+      \cdot \prh{1 - \frac{\lambda_n}{n}}^{n - k}
+    = \frac{\lambda_n^k}{k!} \cdot \prh{1 - \frac{\lambda_n}{n}}^n
+      \cdot \under{\prh{1 - \frac{\lambda_n}{n}}^{-k}}{\to 1}
+  \end{equation*}
+
+  Т.к. \(\frac{\lambda_n}{n} = p_n \to 0\) при \(n \to \infty\), а \(k =
+  const\), то вторая скобка стремится к единице. Первую же скобку в пределе
+  можно раскрыть с помощью второго замечательного предела. Итого
+
+  \begin{equation*}
+    \begin{aligned}
+      \prh{1 - \frac{\lambda_n}{n}}^n
+      = \prh{1 - \frac{\lambda_n}{n}}^{\frac{-n}{\lambda_n} \cdot (-\lambda_n)}
+      \Rarr{n \to \infty}
+      e^{-\lambda_n}
+    \\
+      \prob{Y_n = k}
+      \Rarr{n \to \infty}
+      \frac{\lambda_n^k}{k!} \cdot e^{-\lambda_n}
+      \Rarr{n \to \infty}
+      \frac{\lambda^k}{k!} \cdot e^{-\lambda}
+    \end{aligned}
+  \end{equation*}
+\end{proof}
+
+\begin{theorem}[Оценка погрешности в формуле Пуассона] \label{thr:P-err}
+  Пусть \(Y_n\) это число успехов при \(n\) испытаниях в схеме Бернулли с
+  вероятностью успеха \(p\). Обозначим \(\lambda = n p\) и \(A \subset \set{0,
+  1, \dots, n}\) произвольное подмножество целых чисел. Тогда
+
+  \begin{equation*}
+    \abs{\prob{Y_n = k} - \sum_{k \in A} \frac{\lambda^k}{k!} \cdot
+      e^{-\lambda}} \le \min \prh{p, \lambda p}
+  \end{equation*}
+\end{theorem}
+
+\begin{definition}
+  Соответствие \(\display{k \to \frac{\lambda^k}{k!} \cdot e^{-\lambda}}\), \(k
+  \in \NN_0\) называется распределением Пуассона с параметром \(\lambda > 0\) и
+  обозначается \(\Pi_{\lambda}\).
+\end{definition}
+
+\begin{example}
+  Прибор состоит из \(1000\) элементов. Вероятность отказа каждого элемента
+  \(0.001\). Какова вероятность отказа больше двух элементов?
+
+  \solution{} Обозначим \(n = 1000\), \(p = 0.001\), \(\lambda = n p = 1\), \(k
+  > 2\). Применим формулу Пуассона.
+
+  \begin{equation*}
+    \prob{k > 2}
+    = 1 - \prob{k \le 2}
+    = 1 - \prob{0} - \prob{1} - \prob{2}
+    = 1 - \frac{1^0}{0!} \cdot e^{-1}
+      - \frac{1^1}{1!} \cdot e^{-1}
+      - \frac{1^2}{2!} \cdot e^{-1}
+    = 1 - e^{-1} \cdot \prh{1 + 1 + \frac{1}{2}}
+    \approx 0.0803
+  \end{equation*}
+
+  Применим \ref{thr:P-err}, чтобы оценить погрешность.
+
+  \begin{equation*}
+    \epsilon \le \min \prh{p, \lambda p} = 0.001
+  \end{equation*}
+\end{example}

@@ -1,0 +1,18 @@
+\begin{tikzpicture}
+  \draw[thick] (0, 0) -- (6, 0);
+  \draw[thick] (0, 4) -- (6, 4);
+
+  \draw[thick] (1, 1) -- (2.5, 2)
+    node[midway, above, sloped] {\(l\)};
+  \draw[thick] (2.5, 2) -- (4, 3)
+    node[midway, above, sloped] {\(l\)};
+  \point{2.5, 2};
+
+  \draw[dashed, thick] (1, 1) --  (5, 1);
+  \draw[dashed, thick] (2.5, 2) --  (2.5, 0)
+    node[pos = 0.7, right] {\(x\)};
+  
+  \draw (2, 1) arc (0 : 33 : 1)
+    node[midway, right] {\(\phi\)};
+
+\end{tikzpicture}
