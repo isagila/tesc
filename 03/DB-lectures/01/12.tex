@@ -1,0 +1,47 @@
+\subsection{%
+  Лекция \texttt{23.11.17}.%
+}
+
+Причины появления NoSQL решений:
+
+\begin{enumerate}
+\item
+  Big Data
+
+\item
+  Взаимосвязность данных
+
+\item
+  Слабо структурированные данные
+
+\item
+  Архитектура информационных систем
+\end{enumerate}
+
+Свойства NoSQL хранилища:
+
+\begin{enumerate}
+\item
+  Не используем язык SQL для запросов
+
+\item
+  Schemaless
+
+\item
+  Aggregates (сразу храним частично агрегированные данные, несмотря на то, что
+  это может привести к проблемам)
+
+\item
+  Weak ACID \(\to\) BASE
+
+  \begin{enumerate}
+  \item
+    Basic availability: каждый запрос гарантированно завершается.
+  
+  \item
+    Soft state: база находится в гибком состоянии.
+
+  \item
+    Eventual consistency: данные станут консистентными в конечном случае.
+  \end{enumerate}
+\end{enumerate}
