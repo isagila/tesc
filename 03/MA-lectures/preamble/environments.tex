@@ -1,0 +1,106 @@
+\sectionfont{\color{blue}}
+\subsectionfont{\color{blue}}
+
+\renewcommand{\thesection}{\arabic{section}.}
+\renewcommand{\thesubsection}{\thesection\arabic{subsection}.}
+
+\newcounter{points}[subsection]
+\renewcommand{\thepoints}{\thesubsection\arabic{points}}
+
+\declaretheoremstyle[
+  headfont = \normalfont\bfseries,
+  notefont = \normalfont\bfseries,
+  bodyfont = \normalfont,
+  headpunct = {},
+  headformat={\NAME~\NUMBER.\NOTE},
+]{theoremstyle}
+
+\declaretheoremstyle[
+  spaceabove = 6pt,
+  spacebelow = 6pt,
+  headfont = \normalfont\itshape,
+  notefont = \normalfont,
+  bodyfont = \normalfont,
+  postheadspace = 3pt,
+]{remarkstyle}
+
+\declaretheoremstyle[
+  spaceabove = 6pt,
+  spacebelow = 6pt,
+  headfont = \normalfont\bfseries,
+  notefont = \normalfont,
+  bodyfont = \normalfont,
+  postheadspace = 3pt,
+]{definitionstyle}
+
+\declaretheorem[
+  title = Теорема,
+  sibling = points,
+  style = theoremstyle
+]{theorem}
+
+\declaretheorem[
+  title = Замечание,
+  sibling = points,
+  style = remarkstyle
+]{remark}
+
+\declaretheorem[
+  title = Следствие,
+  sibling = points,
+  style = remarkstyle
+]{corollary}
+
+\declaretheorem[
+  title = Пример,
+  sibling = points,
+  style = remarkstyle
+]{example}
+
+\declaretheorem[
+  title = Def,
+  sibling = points,
+  style = definitionstyle
+]{definition}
+
+\declaretheorem[
+  title = \underline{Lm},
+  sibling = points,
+  style = definitionstyle
+]{lemma}
+
+\addto\captionsrussian{\renewcommand{\proofname}{\(\square\)\nopunct}}
+\renewcommand{\qedsymbol}{\(\blacksquare\)}
+
+\addto\captionsrussian{\renewcommand{\figurename}{Рис.}}
+\renewcommand{\thefigure}{%
+  \arabic{section}.\arabic{subsection}.\arabic{points}%
+}
+
+\newcommand{\subheader}[1]{\textbf{#1} \medskip}
+\newcommand{\subsubheader}[2]{\medskip \textbf{#1} \vspace{6pt} #2 \smallskip}
+
+\pagestyle{fancy}
+\fancyhead{}
+\fancyfoot{}
+\fancyfoot[C]{\thepage/\pageref*{LastPage}}
+\fancypagestyle{mainpage}{
+  \fancyfoot{}
+  \fancyfoot[C]{\url{\githublink}}
+}
+\renewcommand{\headrulewidth}{0pt}
+
+\setlist[enumerate]{ topsep = 0pt }
+
+\lstset{
+  basicstyle = \small\ttfamily,
+  tabsize = 2,
+  showstringspaces = false,
+  numbers = left,
+  commentstyle = \color{green},
+  morecomment = [l][\color{magenta}]{\#},
+  keywordstyle = \color{blue},
+  language = C++,
+  stringstyle = \color{red}\ttfamily,
+  breaklines = true
+}

@@ -1,0 +1,352 @@
+\subsection{%
+  Лекция \texttt{23.11.17}.%
+}
+
+\begin{theorem}[Условия Коши-Римана (условия аналитичности функции)]
+\label{thr:C-R-cond}
+  \(f(z) \colon D \to \CC\) аналитическая в \(z_0 \in D\) тогда и только тогда,
+  когда функции \(u(x, y) = \Re f(z)\) и \(v(x, y) = \Im f(z)\) дифференцируемы,
+  имеют непрерывные производные в точках \(x_0 = \Re z_0\) и \(y_0 = \Im z_0\) и
+  выполнены условия:
+
+  \begin{equation*}
+    \partder{u}{x} = \partder{v}{y}
+    \qquad
+    \partder{u}{y} = -\partder{v}{x}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  \suff{}
+  \begin{equation*}
+    \begin{aligned}
+      \exists f'(z_0) \in \CC
+    \\
+      \lim_{\Delta z \to 0} \frac{\Delta f}{\Delta z}
+      = \lim_{\Delta z \to 0} \frac{f(z_0 + \Delta z) - f(z_0)}{\Delta z}
+    \\
+      = \lim_{\Delta z \to 0} \frac{
+          \prh[\Big]{u(x_0 + \Delta x, y_0 + \Delta y)
+            + i v(x_0 + \Delta x, y_0 + \Delta y)}
+          -
+          \prh[\Big]{u(x_0, y_0) + i v(x_0, y_0)}
+        }{(x + i y) - (x_0 + i y_0)}
+    \end{aligned}
+  \end{equation*}
+
+  Выберем направление для \(\Delta z \to 0\). Пусть \(\Delta z = \Delta x \to
+  0\), тогда
+
+  \begin{equation*}
+    \lim_{\Delta z \to 0} \frac{\Delta f}{\Delta z}
+    = \lim_{\Delta x \to 0} \frac{
+        u(x_0 + \Delta x, y_0) - u(x_0, y_0)
+        + i v(x_0 + \Delta x, y_0) - i v(x_0, y_0)
+      }{\Delta x}
+    = \lim_{\Delta x \to 0} \frac{\Delta_x u}{\Delta x}
+      - i \lim_{\Delta x \to 0} \frac{\Delta_x v}{\Delta x} 
+    = u_x (x, y) - i v_x (x, y)
+  \end{equation*}
+
+  Аналогично, если \(\Delta = i \Delta y \to 0\), то
+
+  \begin{equation*}
+    \lim_{\Delta z \to 0}  \frac{\Delta f}{\Delta z}
+    = v_y (x, y) - i u_y (x, y)
+  \end{equation*}
+
+  Итого имеем
+
+  \begin{equation*}
+    f' (z_0)
+    = \partder{u}{x} + i \partder{v}{x}
+    = \partder{v}{y} - i \partder{u}{y}
+    \implies
+    \begin{cases}
+      \displaystyle \partder{u}{x} = \partder{v}{y} \\
+      \displaystyle \partder{v}{x} = \partder{u}{y}
+    \end{cases}
+  \end{equation*}
+
+  Дифференцируемость функций \(u(x, y)\) и \(v(x, y)\) следует из существования
+  пределов частных приращений, а непрерывность производных следует из
+  аналитичности функции \(f(z)\).
+
+  \ness{}
+  \(u(x, y)\) и \(v(x, y)\) дифференцируемы в точке \((x_0, y_0)\).
+
+  \begin{equation*}
+    \begin{aligned}
+      \abs{\Delta z} = \sqrt{(\Delta x)^2 + (\Delta y)^2}
+    \\
+      \Delta u = \partder{u}{x} \Delta x + \partder{u}{y} \Delta y
+      + \under{\smallo(\Delta z)}{\epsilon_1}
+      \qquad
+      \Delta v = \partder{u}{x} \Delta x + \partder{u}{y} \Delta y
+        + \under{\smallo(\Delta z)}{\epsilon_2}
+    \end{aligned}
+  \end{equation*}
+
+  Таким образом
+
+  \begin{equation*}
+    \frac{\Delta f}{\Delta z}
+    = \frac{\Delta u + i \Delta v}{\Delta x + i \Delta y}
+    = \frac{
+        u_x \Delta x + u_y \Delta y
+        + i v_x \Delta x + i v_y \Delta y
+        + \epsilon_1 + \epsilon_2
+      }{\Delta x + i \Delta y}
+    = \frac{u_x \Delta x + i v_y \Delta y}{\Delta x + i \Delta y}
+      + \frac{u_y \Delta y + i v_x \Delta x}{\Delta x + i \Delta y}
+      + \frac{\epsilon_1 + \epsilon_2}{\Delta x + i \Delta y}
+  \end{equation*}
+
+  Используем условия Коши-Римана: \(v_y = u_x\) и \(u_y = i^2 v_x\).
+
+  \begin{equation*}
+    \frac{\Delta f}{\Delta z}
+    = \frac{u_x \Delta x + i u_x \Delta y}{\Delta x + i \Delta y}
+      + i \cdot \frac{i v_x \Delta y + v_x \Delta x}{\Delta x + i \Delta y}
+      + \frac{\epsilon_1 + \epsilon_2}{\Delta x + i \Delta y}
+    = \frac{u_x (\Delta x + i \Delta y)}{\Delta x + i \Delta y}
+      + i \cdot \frac{v_x (i \Delta y + \Delta x)}{\Delta x + i \Delta y}
+      + \frac{\epsilon_1 + \epsilon_2}{\Delta x + i \Delta y}
+    = u_x + i v_x + \frac{\epsilon_1 + \epsilon_2}{\Delta x + i \Delta y}
+  \end{equation*}
+
+  Тогда
+
+  \begin{equation*}
+    \exists \lim_{\Delta z \to 0} \frac{\Delta f}{\Delta z}
+    = u_x + i v_x
+  \end{equation*}
+
+  Причем \(u_x\) и \(v_x\) непрерывны по условию, а полученный предел конечен.
+\end{proof}
+
+\begin{remark}
+  В условиях теоремы \ref{thr:C-R-cond} справедливо
+
+  \begin{equation*}
+    f'(z_0) = \partder{u}{x} (x_0, y_0) + i \partder{v}{x} (x_0, y_0)
+  \end{equation*}
+\end{remark}
+
+\subheader{Условия Коши-Римана в полярной системе координат}
+
+Зададим полярную систему координат.
+
+\begin{equation*}
+  \begin{cases}
+    x = r \cos \phi \\
+    y = r \sin \phi
+  \end{cases}
+  \qquad
+  \begin{cases}
+    r = \sqrt{x^2 + y^2} \\
+    \phi = \arctan \frac{y}{x} \text{ + надо учесть знак}
+  \end{cases}
+\end{equation*}
+
+\begin{lemma}
+  В полярных координатах условия Коши-Римана имеют вид
+
+  \begin{equation*}
+    \partder{u}{r} = \frac{1}{r} \partder{v}{\phi}
+    \qquad
+    \partder{u}{\phi} = -r \partder{v}{r}
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  \begin{equation*}
+    \begin{aligned}
+      \partder{v}{\phi}
+      = \partder{v}{x} \partder{x}{\phi} + \partder{v}{y} \partder{y}{\phi}
+      = \partder{v}{x} (-r \sin \phi) + \partder{v}{y} r \cos \phi
+    \\
+      \partder{u}{r}
+      = \partder{u}{x} \partder{x}{r} + \partder{u}{y} \partder{y}{r}
+      = \partder{u}{x} \cos \phi + \partder{u}{y} \sin \phi
+    \end{aligned}
+  \end{equation*}
+
+  Во втором полученном равенстве воспользуемся условиями Коши-Римана, получим
+
+  \begin{equation*}
+    \partder{u}{r}
+    = \partder{u}{x} \cos \phi + \partder{u}{y} \sin \phi
+    = \partder{v}{y} \cos \phi - \partder{v}{x} \sin \phi
+    = \frac{1}{r} \partder{v}{\phi}
+  \end{equation*}
+
+  Доказательство второго равенства аналогично.
+
+  \begin{equation*}
+    \begin{aligned}
+      \partder{v}{r}
+      = \partder{v}{x} \partder{x}{r} + \partder{v}{y} \partder{y}{r}
+      = \partder{v}{x} \cos \phi + \partder{v}{y} \sin \phi
+    \\
+      \partder{u}{\phi}
+      = \partder{u}{x} \partder{x}{\phi} + \partder{u}{y} \partder{y}{\phi}
+      = \partder{u}{x} (-r \sin \phi) + \partder{u}{y} r \cos \phi
+    \end{aligned}
+  \end{equation*}
+
+  Во втором полученном равенстве воспользуемся условиями Коши-Римана, получим
+
+  \begin{equation*}
+    \partder{u}{\phi}
+    = \partder{v}{y} (-r \sin \phi) - \partder{v}{x} r \cos \phi
+    = -r \prh{\partder{v}{y} \sin \phi + \partder{v}{x} \cos \phi}
+    = -r \partder{v}{r}
+  \end{equation*}
+\end{proof}
+
+\begin{lemma}
+  \begin{equation*}
+    f'(z) = \prh{\partder{u}{r} + i \partder{v}{r}} \cdot \frac{r}{z}
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  \begin{equation*} \label{eq:complex-derivate-polar-1} \tag{1}
+    f'(z)
+    = \partder{u}{x} + i \partder{v}{x}
+    = \prh{
+        \partder{u}{r} \cdot \partder{r}{x}
+        + \partder{u}{\phi} \cdot \partder{\phi}{x}
+      }
+      + i \prh{
+        \partder{v}{r} \cdot \partder{r}{x}
+        + \partder{v}{\phi} \cdot \partder{\phi}{x}
+      }
+    = \prh{\partder{u}{r} + i \partder{v}{r}} \cdot \partder{r}{x}
+      + \prh{\partder{u}{\phi} + i \partder{v}{\phi}} \cdot \partder{\phi}{x}
+  \end{equation*}
+
+  Теперь заметим, что
+
+  \begin{equation*} \label{eq:complex-derivate-polar-2} \tag{2}
+    \begin{aligned}
+      \partder{r}{x}
+      = \partder{\sqrt{x^2 + y^2}}{x}
+      = \frac{x}{\sqrt{x^2 + y^2}}
+      = \frac{x}{r}
+    \\
+      \partder{\phi}{x}
+      = \partder{\arctan{\frac{y}{x}}}{x}
+      = \frac{1}{1 + \frac{y^2}{x^2}} \cdot \prh{-\frac{y}{x^2}}
+      = -\frac{y}{x^2 + y^2}
+      = -\frac{y}{r^2}
+    \end{aligned}
+  \end{equation*}
+
+  Подставим \eqref{eq:complex-derivate-polar-2} в
+  \eqref{eq:complex-derivate-polar-1} и получим
+
+  \begin{equation*} \label{eq:complex-derivate-polar-3} \tag{3}
+    f'(z) = \prh{\partder{u}{r} + i \partder{v}{r}} \cdot \frac{x}{r}
+      + \prh{\partder{u}{\phi} + i \partder{v}{\phi}} \cdot \prh{-\frac{y}{r^2}}
+  \end{equation*}
+  
+  Для второй скобки применим условия Коши-Римана в полярных координатах.
+
+  \begin{equation*} \label{eq:complex-derivate-polar-4} \tag{4}
+    \begin{aligned}
+      f'(z)
+      & = \prh{\partder{u}{r} + i \partder{v}{r}} \cdot \frac{x}{r}
+      + \prh{-r \partder{v}{r} + i r \partder{u}{r}} \cdot \prh{-\frac{y}{r^2}}
+    \\
+      & = \prh{\partder{u}{r} + i \partder{v}{r}} \cdot \frac{x}{r}
+      + \prh{\partder{v}{r} - i \partder{u}{r}} \cdot \frac{y}{r}
+    \\
+      & = \prh{\partder{u}{r} + i \partder{v}{r}} \cdot \frac{x}{r}
+        - i \prh{\partder{u}{r} + i \partder{v}{r}} \cdot \frac{y}{r}
+    \\
+      & = \prh{\partder{u}{r} + i \partder{v}{r}}
+        \cdot \prh{\frac{x}{r} - i \frac{y}{r}}
+    \\
+      & = \prh{\partder{u}{r} + i \partder{v}{r}} \cdot \frac{\bar{z}}{r}
+    \\
+      & = \prh{\partder{u}{r} + i \partder{v}{r}}
+        \cdot \frac{\bar{z}}{r} \cdot \frac{z}{z}
+    \\
+      & = \prh{\partder{u}{r} + i \partder{v}{r}}
+        \cdot \frac{r^2}{r z}
+    \\
+      & = \prh{\partder{u}{r} + i \partder{v}{r}}
+        \cdot \frac{r}{z}
+    \end{aligned}
+  \end{equation*}
+\end{proof}
+
+\begin{remark}
+  Аналогично доказательству выше можно показать, что
+
+  \begin{equation*}
+    f'(z) = \frac{1}{z} \prh{\partder{v}{\phi} - i \partder{u}{\phi}}
+  \end{equation*}
+\end{remark}
+
+\begin{remark}
+  Свойства дифференцируемых функций комплексного переменного полностью
+  аналогичны свойствам дифференцируемых вещественных функций (дифференцируемость
+  суммы, произведения, частного, композиции).
+\end{remark}
+
+\begin{example}
+  Рассмотрим гладкую кривую в области \(D\): \(z = \phi(t) + i \psi(t) =
+  \sigma(t)\).
+
+  \begin{equation*}
+    \omega'(t_0) = f'(z(t_0)) = f'(z_0) \sigma' (t_0)
+  \end{equation*}
+
+  Если потребуем \(f'(z_0) \neq 0\), то \(\omega'(t_0) \neq 0\).
+
+  \begin{equation*}
+    \begin{aligned}
+      \Theta = \arg \sigma' (t_0)
+      \qquad
+      \widetilde{\Theta} = \arg \omega'(t_0)
+    \\
+      \under{\arg \omega'(t_0)}{\widetilde{\Theta}}
+      = \arg f'(z_0) + \under{\arg \sigma'(t_0)}{\Theta}
+    \\
+      \widetilde{\Theta} - \Theta = \arg f'(z_0) = \alpha
+    \end{aligned}
+  \end{equation*}
+
+  Таким образом \(\alpha\) это угол поворота. Он не зависит от вида кривой,
+  значит функция \(\omega = f(z)\) сохраняет углы между кривыми.
+\end{example}
+
+\begin{example}
+  Рассмотрим окружность \(\abs{z - z_0} = \rho\). Пусть \(\omega = f(z)\)~---
+  аналитическая. Тогда
+
+  \begin{equation*}
+    \begin{aligned}
+      \Delta z = f'(z_0) \Delta z + \smallo(\Delta z)
+    \\
+      \lim_{\Delta z \to 0} \abs{\frac{\Delta \omega}{\Delta z}}
+      = \abs{f'(z_0)}
+      \implies
+      \abs{\Delta \omega}
+      = \abs{\omega - \omega_0}
+      = \abs{f'(z_0)} \under{\abs{z - z_0}}{\rho} + \smallo(\abs{\Delta z})
+    \end{aligned}
+  \end{equation*}
+
+  Окружность \(\abs{z - z_0} = \rho\) переходит в окружность \(\abs{\omega -
+  \omega_0}\) с постоянным растяжением \(\abs{f'(z_0)}\). Таким образом
+  аналитическая функция сохраняет постоянство растяжения области \(D\) в область
+  \(D'\).
+\end{example}
+
+\begin{definition}
+  Отображение, сохраняющее углы  и постоянное растяжение, называется конформным.
+\end{definition}

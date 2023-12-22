@@ -1,0 +1,299 @@
+\subsection{%
+  Лекция \texttt{23.10.06}.%
+}
+
+\begin{theorem}[Формула Тейлора]
+  \begin{equation*}
+    \begin{rcases}
+      f(x) \isdiff[\infty]{\near{x_0}{\delta}} \\
+      \forall x \in \interval{-R}{R}
+        \sum_{n = 0}^{\infty} \frac{f^{(n)}(x_0)}{n!} (x - x_0)^n = T \\
+      \lim_{n \to \infty} R_{n + 1}(x) = 0
+    \end{rcases}
+    \implies
+    f(x) = T
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  \begin{equation*} \label{eq:T-ser-1} \tag{1}
+    f(x)
+    = T_n (x) + R_{n + 1} (x)
+    = \sum_{k = 1}^{n}  \frac{f^{(k)} (x_0)}{k!} (x - x_0)^k
+      + \frac{f^{(n + 1)} (\xi)}{(n + 1)!} (x - x_0)^{n + 1}
+  \end{equation*}
+
+  Заметим, что \(T_n (x)\) это частичная сумма ряда \eqref{eq:T-ser-2}. 
+  
+  \begin{equation*} \label{eq:T-ser-2} \tag{2}
+    \sum_{n = 0}^{\infty} \frac{f^{(n)} (x_0)}{n!} (x - x_0)^n
+  \end{equation*}
+
+  Т.к. ряд степенной, то можно найти радиус сходимости. Пусть в круге радиуса
+  \(R\) ряд Тейлора \eqref{eq:T-ser-2} сходится к сумме \(T\), тогда перейдем к
+  пределу
+
+  \begin{equation*}
+    \lim_{n \to \infty} f(x)
+    = \under{\lim_{n \to \infty} T_n (x)}{T}
+      + \under{\lim_{n \to \infty} R_{n + 1} (x)}{= 0}
+    \implies f(x) = T
+  \end{equation*}
+\end{proof}
+
+\begin{definition}[Ряд Маклорена]
+  \begin{equation*}
+    \sum_{n = 0}^{\infty} \frac{f^{(n)} (0)}{n!} x^n
+  \end{equation*}
+
+  Такое разложение \(f(x)\) называется стандартным.
+\end{definition}
+
+\subheader{Стандартные разложения элементарных фукнций}
+
+\subsubheader{I}{\(f(x) = e^x\)}
+
+\begin{equation*}
+  \begin{aligned}
+    e^x
+    = \sum_{n = 0}^{\infty} \frac{x^n}{n!}
+    = 1 + \frac{x}{1!} + \frac{x^2}{2!} + \frac{x^3}{3!} + \dotsc
+  \\
+    R_{n + 1} (x) = \frac{e^{\xi}}{(n + 1)!} x^{n + 1}
+    \Rarr{n \to \infty} 0
+  \\
+    \lim_{n \to \infty} \abs{\frac{u_{n + 1}}{u_n}}
+    = \frac{\abs{x}}{n + 1} < 1
+    \implies
+    \text{область сходимости } \RR
+  \end{aligned}
+\end{equation*}
+
+\subsubheader{II}{\(f(x) = \sin x\)}
+
+\begin{equation*}
+  \begin{aligned}
+    f^{(n)} (x) = \sin \prh{x + \frac{\pi n}{2}}
+  \\
+    \sin x
+    = \sum_{n = 0}^{\infty} \frac{\sin \prh{\frac{\pi n}{2}}}{n!}
+    = \sum_{k = 0}^{\infty} \frac{(-1)^k}{(2 k + 1)!} x^{2 k + 1}
+    = \frac{x}{1!} - \frac{x^3}{3!} + \frac{x^5}{5!}
+  \\
+    R_{n + 1} (x)
+    = \frac{\sin \prh{\frac{\pi}{2} (n + 1) + \xi}}{(n + 1)!} x^{n + 1}
+    \le \frac{x^{n + 1}}{(n + 1)!}
+    \Rarr{n \to \infty} 0
+  \\
+    \lim_{k \to \infty} \abs{\frac{u_{k + 1}}{u_k}}
+    = \lim_{k \to \infty} \frac{x^2}{(2 k + 2) (2 k + 3)}
+    = 0
+    \implies
+    \text{область сходимости } \RR
+  \end{aligned}
+\end{equation*}
+
+\subsubheader{III}{\(f(x) = \cos x\)}
+
+\begin{equation*}
+  \begin{aligned}
+    \cos x
+    = \sum_{k = 0}^{\infty} \frac{(-1)^k}{(2 k)!} x^{2 k}
+    = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \frac{x^6}{6!} + \dotsc
+  \\
+    R_{n + 1} (x) \Rarr{n \to \infty} 0
+  \\
+    \text{область сходимости } \RR
+  \end{aligned}
+\end{equation*}
+
+\subsubheader{IV.1}{\(f(x) = \sinh x\)}
+
+\begin{equation*}
+  \sinh x
+  = \frac{e^x - e^{-x}}{2}
+  = \frac{1}{2} \prh{\sum_{n = 0}^{\infty} \frac{x^n}{n!}
+    - \sum_{n = 0}^{\infty} \frac{(-x)^n}{n!}}
+  = x + \frac{x^3}{3} + \frac{x^5}{5} + \dotsc
+  = \sum_{n = 0}^{\infty} \frac{x^{2 n + 1}}{(2 n + 1)!}
+\end{equation*}
+
+\subsubheader{IV.2}{\(f(x) = \cosh x\)}
+
+\begin{equation*}
+  \cosh x
+  = \frac{e^x + e^{-x}}{2}
+  = 1 + \frac{x^2}{2} + \frac{x^4}{4} + \dotsc
+  = \sum_{n = 0}^{\infty} \frac{x^{2 n}}{(2 n)!}
+\end{equation*}
+
+\begin{remark}
+  \begin{equation*}
+    e^{i \pi}
+    = \sum_{(i \pi)^n}^{n!} 
+    = 1 + \frac{i \pi}{1!} - \frac{\pi^2}{2!} - \frac{i \pi^3}{3!}
+      + \frac{\pi^4}{4!}
+    = \under{\prh{1 - \frac{\pi^2}{2!} + \frac{\pi^4}{4!} - \dotsc}}{\cos \pi}
+      + i \under{\prh{\frac{\pi}{1!} - \frac{\pi^3}{3!} + \frac{\pi^5}{5!}
+        - \dots}}{\sin \pi}
+    = -1 + 0
+    = -1
+  \end{equation*}
+
+  Или, если обобщить, \(e^{i x} = \cos x + i \sin x\).
+\end{remark}
+
+\subsubheader{V}{Биномиальный ряд \(f(x) = (1 + x)^m\), \(m \in \RR\)}
+
+\begin{remark}
+  Представление остаточного члена в форме Лагранжа и доказательство его
+  сходимости к нулю это сложная задача, поэтому получим представление другим
+  способом.
+\end{remark}
+
+\begin{equation*}
+  \begin{aligned}
+    f'(x) = m (1 + x)^{m - 1}
+  \\
+    (1 + x) f'(x) = m (1 + x)^m = m f(x)
+  \\
+    \begin{cases}
+      (1 + x) f'(x) = m f(x) \\
+      f(0) = 1
+    \end{cases}
+  \end{aligned}
+\end{equation*}
+
+Получили задачу Коши. Запишем ее для суммы ряда.
+
+\begin{equation*}
+  \begin{aligned}
+    \begin{cases}
+      (1 + x) S'(x) = m S(x) \\
+      S(0) = 1
+    \end{cases}
+    \qquad
+    \begin{cases}
+      S(x) = 1 + a_1 x + a_2 x^2 + \dotsc + a_n x^n + \dotsc \\
+      S'(x) = a_1 + 2 a_2 x + \dotsc + n a_n x^{n - 1} + \dotsc
+    \end{cases}
+  \\
+    (1 + x) S'(x)
+    = a_1 + \under{a_1 x + 2 a_2 x}{}
+      + \under{2 a_2 x^2 + 3 a_3 x^2}{} + 3 a_3 x^3 + \dotsc
+    = m S(x)
+    = m + m a_1 x + m a_2 x^2 + m a_3 x^3 + \dotsc
+  \end{aligned}
+\end{equation*}
+
+Приравняем коэффициенты.
+
+\begin{equation*}
+  \begin{aligned}
+    a_1 = m
+    & \qquad
+    a_1 = \frac{m}{1}
+  \\
+    a_1 + 2 a_2 = m a_1
+    & \qquad
+    2 a_2 = a_1 (m - 1) \implies a_2 = \frac{m (m - 1)}{2}
+  \\
+    2 a_2 + 3 a_3 = m a_2
+    & \qquad
+    3 a_3 = m a_2 - 2 a_2 \implies a_3 = \frac{m (m - 1) (m - 2)}{2 \cdot 3}
+  \\
+    \vdots
+    & \qquad
+    \vdots
+  \\
+    & \qquad
+    a_n
+    = \frac{m (m - 1) \dotsc (m - n + 1)}{n!}
+    = \frac{m!}{n! (m - n)!}
+    = \binom{m}{n}
+  \end{aligned}
+\end{equation*}
+
+Итого \((1 + x)^m = \sum_{n = 0}^{\infty} \comb{m}{n} x^n\). Выясним радиус
+сходимости.
+
+\begin{equation*}
+  \begin{aligned}
+    u_{n - 1} = \frac{m (m - 1) \dotsc (m - n + 2)}{(n - 1)!} x^{n - 1}
+    \qquad
+    u_n = \frac{m (m - 1) \dotsc (m - n + 1)}{n!} x^n
+  \\
+    \lim_{n \to \infty} \abs{\frac{u_n}{u_{n - 1}}}
+    = \lim_{n \to \infty} \abs{\frac{(m - n + 1) x}{n}}
+    = \abs{x} \lim_{n \to \infty} \abs{\frac{m}{n} - 1 + \frac{1}{n}}
+    = \abs{x} < 1
+  \end{aligned}
+\end{equation*}
+
+Таким образом, область сходимости \(\interval{-1}{1}\).
+
+\begin{remark}
+  В некоторых случаях (например \(m \in \ZZ^-\)) \(x = 1\) входит в область
+  сходимости.
+\end{remark}
+
+\subsubheader{VI}{\(f(x) = \ln (1 + x)\)}
+
+Заметим, что \(f'(x) = \frac{1}{1 + x} = (1 + x)^{-1}\) это бином. Получаем
+
+\begin{equation*}
+  \begin{aligned}
+    f'(x)
+    = \sum_{n = 0}^{\infty} \comb{m}{n} x^n
+    = 1 - x + x^2 - x^3 + \dotsc
+  \\
+    f(x)
+    = \ln (1 + x)
+    = \int_0^x (1 - x + x^2 - x^3 + \dotsc) \dd x
+    = x - \frac{x^2}{2} + \frac{x^3}{3} - \frac{x^4}{4} + \dotsc
+    = \sum_{n = 1}^{\infty} \frac{(-1)^{n + 1} x^n}{n!}
+  \end{aligned}
+\end{equation*}
+
+Область сходимости, как и у бинома, будет равна \(\interval{-1}{1}\).
+
+\begin{remark}
+  Если взять \(x = \frac{1}{k}\), то тогда
+
+  \begin{equation*}
+    \ln \prh{1 + x}
+    = \ln \prh{1 + \frac{1}{k}}
+    = \ln \prh{\frac{k + 1}{k}}
+    = \ln \prh{k + 1} - \ln k
+  \end{equation*}
+
+  Т.е. можно рекурсивно получать значения натуральных логарифмов с помощью
+  рядов.
+\end{remark}
+
+\begin{remark}[О применении к приближенным вычислениям]
+  Рассмотрим \quote{неберущийся} интеграл.
+
+  \begin{equation*}
+    \begin{aligned}
+      \int_0^a \frac{\sin x}{x} \dd x
+      & = \int_0^a \frac{1}{x}
+        \prh{\sum_{n = 0}^{\infty} \frac{(-1)^n x^{2 n + 1}}{(2 n + 1)!}} \dd x
+    \\
+      & = \int_0^a \sum_{n = 0}^{\infty} \frac{(-1)^n x^{2 n}}{(2 n + 1)!} \dd x
+    \\
+      & = \sum_{n = 0}^{\infty} \frac{(-1)^n}{(2 n + 1)!} \int_0^a x^{2 n} \dd x
+    \\
+      & = \sum_{n = 0}^{\infty} \frac{(-1)^n}{(2 n + 1)!}
+        \cdot \frac{a^{2 n + 1}}{(2 n + 1)}
+    \end{aligned}
+  \end{equation*}
+
+  Рассмотрим другой \quote{неберущийся} интеграл.
+
+  \begin{equation*}
+    \int_0^a e^{-x^2} \dd x
+    = \int_0^a \sum_{n = 0}^{\infty} \frac{(-x^2)^n}{n!} \dd x
+    = \sum_{n = 0}^{\infty} \frac{(-1)^n}{n!} \cdot \frac{a^{2 n + 1}}{2 n + 1}
+  \end{equation*}
+\end{remark}

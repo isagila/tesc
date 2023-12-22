@@ -1,0 +1,412 @@
+\subsection{%
+  Лекция \texttt{23.12.22}.%
+}
+
+\begin{remark}
+  Рассматриваем только изолированные точки однозначного характера (не
+  ветвления).
+\end{remark}
+
+\begin{example}
+  \begin{equation*}
+    \begin{aligned}
+      f(z) = \frac{\sin z}{z}
+      & \qquad &
+      z_0 = 0
+      & \qquad &
+      \lim_{z \to z_0} \frac{\sin z}{z} = 1
+      \implies
+      z_0 \text{ устранимая}
+    \\
+      f(z) = \frac{z}{z - 1}
+      & \qquad &
+      z_0 = 1
+      & \qquad &
+      \lim_{z \to z_0} \frac{z}{z - 1} = \infty
+      \implies
+      z_0 \text{ полюс}
+    \\
+      f(z) = e^{-\frac{1}{z^2}}
+      & \qquad &
+      z_0 = 0
+      & \qquad &
+      \begin{rcases}
+        \lim_{z = x \to z_0} e^{-\frac{1}{x^2}} = 0 \\
+        \lim_{z = i y \to z_0} e^{\frac{1}{y^2}} = \infty
+      \end{rcases}
+      \implies
+      z_0 \text{ существенно особая точка}
+    \end{aligned}
+  \end{equation*}
+\end{example}
+
+\begin{remark}
+  Особые точки находятся только на границе области аналитичности. В случае, если
+  особая точка находится в области аналитичности, то мы окружаем ее бесконечно
+  малым контуром, который является одной из границ области аналитичности.
+\end{remark}
+
+\subheader{Ряды Лорана в особых точках}
+
+Если \(z = z_0 \in \CC\), то
+
+\begin{equation*}
+  f(z)
+  = \under{\sum_{n = 0}^{\infty} c_n (z - z_0)^n}{\text{правильная часть}}
+    + \under{\sum_{n = 1}^{\infty} \frac{c_{-n}}{(z - z_0)^n}}
+      {\text{главная часть}}
+\end{equation*}
+
+Если \(z = \infty\), то
+
+\begin{equation*}
+  f(z)
+  = \under{\sum_{n = 1}^{\infty} c_n z^n}{\text{главная часть}}
+    + \under{\sum_{n = 0}^{\infty} \frac{c_{-n}}{z^n}}{\text{правильная часть}}
+  \eqby{\(z = \frac{1}{\omega}\)}
+  \sum_{n = 1}^{\infty} \frac{c_n}{\omega^n} + \sum_{n = 0}^{c_{-n} \omega^n}
+\end{equation*}
+
+Причем правильная часть стремится к нулю, а главная часть~--- к бесконечности.
+
+\begin{theorem}
+  \(z_o \in \CC\)~--- устранимая особая точка для \(f(z) \iff\) главная часть
+  ряда Лорана равна нулю.
+\end{theorem}
+
+\begin{proof}
+  \ness{} Пусть \(\display{\lim_{z \to z_0} f(z) = A \in \CC}\). Разложим
+  \(f(z)\) в ряд Лорана, получим
+
+  \begin{equation*}
+    f(z) = \sum_{-\infty}^{\infty} c_n (z - z_0)^n
+    \qquad
+    c_n = \frac{1}{2 \pi i} \int_{\gamma_{\rho}}
+      \frac{f(\zeta)}{(\zeta - z_0)^{n + 1}} \dd \zeta
+  \end{equation*}
+
+  Вычетом \(f(z)\) в точке \(z_0\) называется
+
+  \begin{equation*}
+    \res f(z_0) \bydef c_{-1}
+    = \frac{1}{2 \pi i} \int_{\gamma} f(\zeta) \dd \zeta
+  \end{equation*}
+
+  Т.к. в \(z_0\) предел конечен, то
+
+  \begin{equation*}
+    \exists \nearo{z_0}{\rho} \colon
+    \abs{f(z)} < M
+    \qquad
+    \forall z \in \nearo{z_0}{\rho}
+    \qquad
+    0 < \abs{z - z_0} < \rho
+  \end{equation*}
+
+  Рассмотрим \(\abs{c_n}\).
+
+  \begin{equation*}
+    \begin{aligned}
+      c_n = \frac{1}{2 \pi i} \int_{\gamma_{\rho}}
+        \frac{f(\zeta) \dd \prh{z_0 + \rho e^{i \phi}}}
+          {\prh{\rho e^{i \phi}}^{n + 1}}
+    \\
+      \abs{c_n}
+      = \abs{
+        \frac{1}{2 \pi} \int_0^{2 \pi}
+        \frac{f(\zeta) \rho e^{i \phi} \dd \phi}{\prh{\rho e^{i \phi}}^{n + 1}}
+      }
+      = \mtxb{
+        \abs{e^{i \phi}} = 1 \\
+        \abs{f(\zeta)} < M
+      }
+      \le \frac{1}{2 \pi} \int_0^{2 \pi} \frac{M \rho}{\rho^{n + 1}} \dd \phi
+      = \frac{1}{2 \pi} \cdot \frac{M}{\rho^n} \cdot 2 \pi
+      = \frac{M}{\rho^n}
+    \end{aligned}
+  \end{equation*}
+
+  Т.к. \(n < 0\), то \(\frac{M}{\rho^n} \Rarr{\rho \to 0} 0\). Таким образом
+  \(\forall c_{-n} = 0\), где \(n = 1, 2, \dotsc\). Т.е. главная часть равна
+  нулю.
+
+  \suff{} Если главная часть ряда Лорана равна нулю, то
+
+  \begin{equation*}
+    f(z)
+    = \sum_{n = 0}^{\infty} c_n (z - z_0)^n
+    = c_0 + c_1 (z - z_0) + \dotsc
+  \end{equation*}
+
+  При \(z \to z_0\) эта сумма стремится к \(c_0\). Таким образом
+
+  \begin{equation*}
+    \lim_{z \to z_0} f(z) = c_0 \in \CC
+  \end{equation*}
+\end{proof}
+
+\begin{remark}
+  Таким образом функцию \(f(z)\) можно доопределить в устранимой особой точке
+  \(z_0\) значением \(f(z_0) = c_0\), тогда \(f(z)\) будет аналитична в круге
+  \(\abs{z - z_0} < R\) (включая центр круга \(z_0\)).
+\end{remark}
+
+\begin{definition}
+  Полюсом порядка \(m\) называется особая точка функции \(f(z)\) такая, что
+  \(g(z) = \frac{1}{f(z)}\) число в этой точке нуль порядка \(m\), т.е. \(g(z)\)
+  представима в виде \(\display{g(z) = (z - z_0)^m h(z)}\), где \(h(z)\)
+  аналитична в \(z_0\) и \(h(z_0) \neq 0\).
+\end{definition}
+
+\begin{remark}
+  Справедливость представления можно доказать, разложив \(g(z)\) в ряд.
+\end{remark}
+
+\begin{theorem}
+  \(z_0 \in \CC\)~--- полюс \(\iff\) главная часть содержит \(m \in \NN\)
+  ненулевых членов, причем \(\forall n \ge m + 1 \given c_{-n} = 0\), но
+  остальные \(c_{-n} \neq 0\). Говорят, что в этом случае \(f(z)\) имеет полюс
+  порядка \(m\). Если \(m = 1\), то полюс называется простым.
+\end{theorem}
+
+\begin{proof}
+  \ness{} Т.к. \(h(z)\) аналитична в \(z_0\) и \(h(z_0) \neq 0\), то разложим в
+  ряд функцию
+
+  \begin{equation*}
+    \frac{1}{h(z)} = \sum_{n = 0}^{\infty} b_n (z - z_0)^n
+  \end{equation*}
+
+  Имеем
+
+  \begin{equation*}
+    f(z)
+    = \frac{1}{g(z)}
+    = \frac{1}{(z - z_0)^m h(z)}
+    = \frac{1}{(z - z_0)^m} \sum_{n = 0}^{\infty} b_n (z - z_0)^n
+    = \under{b_0 (z - z_0)^{-m} + b_1 (z - z_0)^{-m + 1} + \dotsc}
+      {\text{главная часть}}
+      + \under{b_m + b_{m + 1} (z - z_0) + \dotsc}
+      {\text{правильная часть}}
+  \end{equation*}
+
+  Переобозначим и получим
+
+  \begin{equation*}
+    f(z) = \frac{c_{-m}}{(z - z_0)^m} + \dotsc + \frac{c_{-1}}{z - z_0}
+      + \sum_{n = 0}^{\infty} c_n (z - z_0)^n
+  \end{equation*}
+
+  Причем
+
+  \begin{equation*}
+    c_{-1} = b_0 = \lim_{z \to z_0} \frac{1}{h(z)} \neq 0
+  \end{equation*}
+
+  Т.к. \(h(z_0) \neq \infty\) в силу аналитичности.
+
+  \suff{} Рассмотрим разложение в ряд Лорана.
+
+  \begin{equation*}
+    f(z) = \frac{c_{-m}}{(z - z_0)^m} + \dotsc + \frac{c_{-1}}{z - z_0}
+      + \sum_{n = 0}^{\infty} c_n (z - z_0)^n
+  \end{equation*}
+
+  Умножив на \((z - z_0)^m\) получим аналитичную функцию \(\frac{1}{h(z)}\).
+  Тогда \(g(z) = \frac{1}{f(z)}\), которая представима в виде \((z - z_0)^m
+  f(z)\). Таким образом \(z = z_0\)~--- это ноль порядка \(m\), т.е. по
+  определению является полюсом \(m\)-ого порядка для \(f(z)\).
+\end{proof}
+
+\begin{theorem}
+  \(z_0 \in \CC\) является существенно особой точкой \(\iff\) главная часть ряда
+  Лорана содержит бесконечное число ненулевых членов.
+\end{theorem}
+
+\begin{proof}
+  Это следствие из двух предыдущих теорем.
+\end{proof}
+
+\begin{remark}
+  Таким образом, если \(z_0\) это устранимая особая точка, то \(\res f(z_0) =
+  0\), в остальных случаях \(\res f(z_0) \neq 0\).
+\end{remark}
+
+\begin{remark}
+  Определение и критерии особых точек сохраняются для \(z = \infty\), но \(\res
+  f(\infty) = -c_{-1}\).
+\end{remark}
+
+\begin{example}
+  \begin{equation*}
+    \begin{aligned}
+      f(z)
+      = \frac{\prh{e^z - 1}^2}{1 - \cos z}
+      \sim
+      \frac{z^2}{\frac{z^2}{2}} = 2
+      \implies \text{ устранимая }
+      \implies c_{-1} = 0
+    \\
+      f(z) = \frac{1}{\sin \frac{1}{z}}
+      \Rarr{\frac{1}{z} = \pi k} \infty
+      \implies
+      z_k = \frac{1}{\pi k}
+      \text{ полюсы}
+    \\
+      z_0 = \infty
+      \qquad
+      \frac{1}{\sin \frac{1}{z}}
+      = \mtxb{
+        z = \frac{1}{\omega} \\
+        \omega \to 0
+      }
+      = \frac{1}{\sin \omega}
+      \Rarr{\omega \to 0} \infty
+      \implies z_0 = \infty \text{ простой полюс}
+    \end{aligned}
+  \end{equation*}
+\end{example}
+
+\begin{remark}
+  Вычет всегда можно найти разложением в ряд Лорана, но чаще всего это бывает
+  неудобно, поэтому вычеты ищут с помощью специальных формул и теорем о вычетах.
+\end{remark}
+
+\subheader{Теоремы о вычетах}
+
+\begin{theorem}[Основная]
+  Если \(f(z)\) аналитична в односвязной области \(D\) кроме конечного числа
+  точек \(z_1, \dotsc, z_N \in \CC\), то
+
+  \begin{equation*}
+    \oint_{\gamma_{\rho}} f(\zeta) \dd \zeta
+    = 2 \pi i \sum_{k = 1}^N \res f(z_k)
+  \end{equation*}
+
+  при условии, что \(\forall z_k\) внутри контура \(\gamma_{\rho}\).
+\end{theorem}
+
+\begin{proof}
+  По теореме Коши для многосвязной области
+
+  \begin{equation*}
+    \int_{\text{внеш}} f(\zeta) \dd \zeta
+    = \sum \int_{\text{внут}} f(\zeta) \dd \zeta
+    = \int \frac{f(\zeta)}{(\zeta - z)^0} \dd \zeta
+    = 2 \pi i c_{-1}
+    = 2 \pi i \res f(z_0)
+  \end{equation*}
+\end{proof}
+
+\begin{theorem}
+  Пусть \(z_1, \dotsc, z_N\)~--- особые точки \(f(z)\), причем \(z_k \in
+  \bar{\CC}\). В области \(\bar{\CC} \setminus \set{z_k}\) функция аналитична.
+  Тогда
+
+  \begin{equation*}
+    \sum_{p = 1}^N \res f(z_p)
+    = \sum_{k = 1}^{N - 1} \res f(z_k) + \res f(\infty)
+    = 0
+    \qquad
+    z_k \in \CC
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Пусть контур \(C\) это окружность с центром в нуле, которая охватывает все
+  конечные особые точки и имеет радиус \(R\). Тогда по предыдущей теореме
+
+  \begin{equation*}
+    \int_C f(\zeta) \dd \zeta
+     = 2 \pi i \sum_{k = 1}^{N - 1} \res f(z_k)
+  \end{equation*}
+
+  Контур \(C\), пройденный в обратном направлении, охватывает \(z = \infty\),
+  поэтому
+
+  \begin{equation*}
+    \int_C f(\zeta) \dd \zeta
+    = -\int_{C^-} f(\zeta) \dd \zeta
+    = -\res f(\infty)
+  \end{equation*}
+\end{proof}
+
+\begin{remark}
+  Таким образом, если вычеты в конечных точках посчитать проще, чем разложить
+  функцию в ряд Лорана, то оставшийся вычет получается как минус сумма первых.
+\end{remark}
+
+\subheader{Вычисление вычетов в полюсе}
+
+\subsubheader{I.}{\(m = 1\)}
+
+\begin{equation*}
+  f(z) = c_{-1} (z - z_0)^{-1} + c_0 + c_1 (z - z_0) + c_2 (z - z_0)^2 + \dotsc
+\end{equation*}
+
+Умножим это на \((z - z_0)\) и устремим \(z \to z_0\). Получим
+
+\begin{equation*}
+  (z - z_0) f(z) = c_1 + \under{\dotsc}{\to 0}
+\end{equation*}
+
+Итого
+
+\begin{equation*}
+  c_{-1} = \lim_{z \to z_0} (z - z_0) f(z)
+\end{equation*}
+
+\subsubheader{I.}{\(m > 1\)}
+
+\begin{equation*}
+  (z - z_0)^m f(z) = c_{-m} + \dotsc + c_{-1} (z - z_0)^{m - 1} + \dotsc
+\end{equation*}
+
+Продифференцируем это \(m - 1\) раз, тогда
+
+\begin{equation*}
+  \lim_{z \to z_0} \prh{(z - z_0)^m f(z)}^{(m - 1)}_z = c_{-1} m!
+\end{equation*}
+
+\subheader{Вычисление несобственных вещественных интегралов}
+
+\begin{lemma}
+  Пусть \(\display{I = \int_{-\infty}^{\infty} f(x) \dd x \converge}\). Построим
+  контур \(C\), который будет представлять их себя полуокружность радиуса \(R\)
+  в верхней полуплоскости и будет охватывать все особые точки. \(f(z)\)
+  аналитична в \(\Im z > 0\) и  \(\display{\lim_{R \to \infty} \int_C f(\zeta)
+  \dd \zeta = 0}\). Тогда
+
+  \begin{equation*}
+    I = 2 \pi i \sum_{k = 1}^N \res f(z_0) 
+  \end{equation*}
+\end{lemma}
+
+\begin{example}
+  Дан интеграл
+
+  \begin{equation*}
+    I = \int_{-\infty}^{\infty} \frac{\dd x}{\prh{x^2 + 1}^4}
+  \end{equation*}
+
+  Рассмотрим
+
+  \begin{equation*}
+    \int_C \frac{\dd \zeta}{(\zeta^2 + 1)^4}
+    = \int_C \frac{\dd \zeta}{(\zeta - i)^4 (\zeta + i)^4}
+  \end{equation*}
+
+  где \(C \colon \abs{z} = 2\). Получаем, что
+
+  \begin{equation*}
+    I
+    = 2 \pi i \res f(i)
+    = 2 \pi i c_{-1}
+    = 2 \pi i \cdot \frac{1}{3!} \lim_{z \to z_0}
+      \frac{\dd^3 \prh{\frac{1}{(z + i)^4}}}{\dd z^3}
+    = \dotsc
+    = \frac{-5 i}{32}
+  \end{equation*}
+
+  т.к. \(i\) это полюс.
+\end{example}

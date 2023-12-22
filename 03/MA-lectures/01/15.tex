@@ -1,0 +1,261 @@
+\subsection{%
+  Лекция \texttt{23.12.08}.%
+}
+
+\subheader{3. Ряды}
+
+\subsubheader{3.1}{Числовые ряды}
+
+\begin{definition}
+   \(\display{\sum c_n}\), где \(c_n \in \CC\) называется числовым рядом.
+\end{definition}
+
+\begin{definition}
+  \(\display{S_n = \sum_{k = 1}^n}\)~--- частичная сумма ряда
+\end{definition}
+
+\begin{definition}
+  \(\display{S = \lim_{n \to \infty} S_n \in \CC}\)~--- сумма ряда.
+\end{definition}
+
+\begin{remark}
+  Для исследования можно использовать те же условия сходимости, что и в
+  вещественном случае
+
+  \begin{enumerate}
+  \item
+    Необходимое условие сходимости \(\display{\lim_{n \to \infty} c_n = 0}\)
+
+  \item
+    Признак сравнения (по модулю)
+
+  \item
+    Абсолютная сходимость
+
+  \item
+    Признаки Даламбера, Коши и т.п. (везде считаем по модулю)
+  \end{enumerate}
+\end{remark}
+
+\begin{remark}[Критерий Коши]
+  Ряд \(\display{\sum c_n}\) сходится к \(S \in \CC\) тогда и только тогда,
+  когда
+
+  \begin{equation*}
+    \forall \epsilon > 0 \given
+    \exists N(\epsilon) \in \NN \given
+    \forall n > N \colon
+    \abs{S_n - S} < \epsilon
+  \end{equation*}
+
+  Т.е. остаток ряда \(r_{n + 1} = S - S_n\) стремится к нулю (\(\abs{r_{n + 1}}
+  < \epsilon\)).
+\end{remark}
+
+\subsubheader{3.2}{Функциональные ряды}
+
+\begin{definition}
+  \(\display{\sum u_n (z)}\)~--- функциональный ряд.
+\end{definition}
+
+\begin{definition}
+  \(\display{f(z) = \sum u_n (z)}\)~--- сумма ряда, т.к. \(\forall z \in D\)
+  определена сумма соответствующего числового ряда.
+\end{definition}
+
+\begin{definition}
+  Сходящийся числовой ряд \(\sum c_n\) называется мажорирующим, если \(\forall z
+  \in D \colon \abs{u_n (z)} < \abs{c_n}\).
+\end{definition}
+
+\begin{lemma}[Признак Вейерштрасса]
+  Если ряд мажорируем в области \(D\), то он равномерно сходится в области \(D\)
+  и \(f(z)\) непрерывна в \(D\).
+\end{lemma}
+
+\begin{remark}
+  Сходимость функционального ряда означает, что
+
+  \begin{equation*}
+    \forall \epsilon > 0 \given
+    \exists N(\epsilon, z) \in \NN \given
+    \forall n > N \colon
+    \abs{f(z) - \sum_{k = 1}^n u_k (z)} < \epsilon
+  \end{equation*}
+\end{remark}
+
+\begin{remark}
+  В случае равномерной сходимости \(N = N(\epsilon)\) и
+
+  \begin{equation*}
+    \abs{r_{n + 1} (z)}
+    = \abs{f(z) - \sum_{k = 1}^n u_k (z)} < \epsilon
+    < \epsilon
+  \end{equation*}
+\end{remark}
+
+\begin{theorem}[Почленное интегрирование равномерносходящегося ряда]
+  Пусть \(\display{f(z) = \sum u_n (z)}\) сходится равномерно в области \(D\),
+  тогда
+
+  \begin{equation*}
+    \int_C f(\zeta) \dd \zeta
+    = \sum_{n = 1}^{\infty}  \int_C f(\zeta) \dd \zeta
+  \end{equation*}
+
+  где \(C\) это кривая в области \(D\).
+\end{theorem}
+
+\begin{proof}
+  Т.к. ряд сходится равномерно, то \(\abs{r_{n + 1} (z)} < \epsilon' =
+  \frac{\epsilon}{l}\), где \(l\) это длина кривой \(C\). Рассмотрим
+
+  \begin{equation*}
+    \begin{aligned}
+      \abs{\int_C f(\zeta) \dd \zeta
+        - \sum_{k = 1}^n \int_C u_k (\zeta) \dd \zeta}
+      & = \abs{\int_C \prh{f(\zeta) - \sum_{k = 1}^n u_k (\zeta)} \dd \zeta}
+    \\
+      & \le \int_C \abs{f(\zeta) - \sum_{k = 1}^n u_k (\zeta)} \dd \zeta
+    \\
+      & = \int_C \abs{r_{n + 1} (\zeta)} \dd \zeta
+    \\
+      & < \int_C \frac{\epsilon}{l} \dd \zeta
+    \\
+      & = \epsilon
+    \end{aligned}
+  \end{equation*}
+\end{proof}
+
+\subsubheader{3.3}{Степенные ряды}
+
+\begin{definition}
+  \(\display{\sum c_n (z - a)^n}\)~--- степенной ряд в точке \(z = a\).
+\end{definition}
+
+\begin{remark}
+  Обозначив \(\zeta = z - a\), получим более удобный ряд \(\display{\sum c_n
+  \zeta^n}\) (ряд в \(\zeta = 0\)).
+\end{remark}
+
+\begin{theorem}[Абеля]
+  Если ряд \(\sum c_n z^n\) сходится в точке \(z_1\), то он сходится
+  равномерно и абсолютно в точках \(z\) в круге радиуса \(\abs{z_1}\). Если ряд
+  \(\sum c_n z^n\) расходится в точке \(z_2\), то он расходится \(\forall z\) за
+  пределами круга радиуса \(\abs{z_2}\).
+\end{theorem}
+
+\begin{remark}
+  Существует \(R \in \RR\)~--- радиус сходимости такой, что в круге радиуса
+  \(R\) степенной ряд сходится.
+\end{remark}
+
+\begin{definition}
+  Функция \(f(z)\) представима степенным рядом \(\sum c_n (z - a)^n\), то она
+  называется регулярной в точке \(a\).
+\end{definition}
+
+\begin{remark}
+  Далее докажем, что регулярность функции в области равносильна аналитичности в
+  этой области.
+\end{remark}
+
+\begin{theorem}
+  Регулярная в области \(D\) функция \(f(z)\) дифференцируема в \(D\) и
+
+  \begin{equation*}
+    f'(z) = \prh{\sum c_n z^n}' = \sum \prh{c_n z^n}'
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Рассмотрим функцию \(S(z) = \sum_{n = 1}^{\infty} n c_n z^{n - 1}\). Ряд
+  равномерно сходится в радиусе \(\rho\). Тогда \(S(z)\) непрерывна и определен
+  интеграл \(\int_C S(\zeta) \dd \zeta\), где \(C\) это кривая в круге радиуса
+  \(\rho\).
+  
+  Проинтегрируем функции \(\zeta^k\), где \(k \in \NN_0\). Отметим, что
+  \(\zeta^k\) аналитическая в \(\CC\), поэтому по \ref{thr:C-loop-int}
+  \(\display{\oint_K \zeta^k \dd \zeta = 0}\), таким образом интеграл \(\int_C
+  \zeta^k \dd \zeta\) не зависит от пути, поэтому
+
+  \begin{equation*}
+    \int_C \zeta^k \dd \zeta
+    = \frac{\zeta^{k + 1}}{k + 1} \bigg\rvert_0^z
+  \end{equation*}
+
+  где кривая \(C\) связывает точки \(0\) и \(z\). Получаем, что
+
+  \begin{equation*}
+    \sum_{k = 0}^{\infty} \int_C \zeta^k \dd \zeta
+    = \sum_{k = 0}^{\infty} \frac{z^{k + 1}}{k + 1}
+    \eqby{k + 1 = n}
+    \sum_{n = 1}^{\infty} \frac{z^n}{n}   
+  \end{equation*}
+
+  Используем полученное равенство и получим
+
+  \begin{equation*}
+    \int_C S(\zeta) \dd \zeta
+    = \int_C \sum_{n = 1}^{\infty} n c_n \zeta^{n - 1} \dd \zeta
+    = \sum_{n = 1}^{\infty} \int_C n c_n \zeta^{n - 1} \dd \zeta
+    = \sum_{n = 1}^{\infty} c_n z^n
+    = \sum_{n = 0}^{\infty} c_n z^n - c_0
+    = f(z) - c_0
+  \end{equation*}
+
+  Таким образом \(\display{f(z) = \int_0^z S(\zeta) \dd \zeta + c_0}\), т.е.
+  \(f(z)\) является первообразной для \(S(z)\) и \(f'(z) = S(z)\).
+\end{proof}
+
+\begin{remark}
+  Очевидно, что регулярную функцию можно продифференцировать еще раз и сколько
+  угодно раз (т.к. производная также степенной ряд), значит она является
+  аналитической.
+\end{remark}
+
+\begin{remark}
+  Запишем
+
+  \begin{equation*}
+    \begin{aligned}
+      f^{(n)} (z) & = \prh{\sum c_k z^k}^{(n)}
+    \\
+      f(z)        & = c_0    & + & c_1 z                 & + & \dotsc
+    \\
+      f'(z)       & = c_1    & + & 2 c_2 z               & + & \dotsc
+    \\
+      f''(z)      & = 2 c_2  & + & 3 \cdot 2 \cdot c_3 z & + & \dotsc
+    \\
+                  & \vdots   &   & \vdots                &   & \vdots
+    \\
+      f^{(n)} (z) & = n! c_n & + & (n + 1)! c_{n + 1} z  & + & \dotsc
+    \end{aligned}
+  \end{equation*}
+
+  Отсюда получаем, что
+
+  \begin{equation*}
+    \begin{aligned}
+      \begin{rcases}
+        f(0)        & = c_0   \\
+        f'(0)       & = c_1   \\
+        f''(0)      & = 2 c_2 \\
+        f^{(n)} (0) & = n! c_n
+      \end{rcases}
+      \implies
+      c_n = \frac{f^{(n)} (0)}{n!}
+    \end{aligned}
+  \end{equation*}
+
+  Для ряда \(\sum c_n (z - a)^n\) имеем \(\display{c_n =
+  \frac{f^{(n)} (a)}{n!}}\) Таким образом получаем ряд Тейлора
+
+  \begin{equation*}
+    f(z) = \sum_{n = 0}^{\infty} \frac{f^{(n)} (a)}{n!} (z - a)^n
+  \end{equation*}
+\end{remark}
+
+\begin{remark}
+  Ряд Тейлора единственный. Доказательство аналогично вещественному случаю.
+\end{remark}

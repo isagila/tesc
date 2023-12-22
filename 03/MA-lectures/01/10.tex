@@ -1,0 +1,243 @@
+\subsection{%
+  Лекция \texttt{23.11.03}.%
+}
+
+\subheader{Теория функции комплексного переменного (элементы)}
+
+\subsubheader{1.}{Основные понятия}
+
+\(z \in CC\)~--- комплексное число. \(z = \pair{x, y}\)~--- упорядоченная пара
+вещественных чисел \(x\) и \(y\).
+
+\begin{equation*}
+  0_{\CC} = \pair{0, 0}
+  \qquad
+  1_{\CC} = \pair{1, 0}
+  \qquad
+  \pair{0, 1} \bydef i
+  \qquad
+  i^2 = -1
+\end{equation*}
+
+Алгебраическая форма \(z = x + i y\), \(x = \Re z\), \(y = \Im z\). Базовые
+операции определяем как
+
+\begin{equation*}
+  z_1 + z_2 = \pair{x_1 + x_2, y_1 + y_2}
+  \qquad
+  z_1 z_2 = \pair{x_1 x_2 - y_1 y_2, x_1 y_2 + x_2 y_1}
+\end{equation*}
+
+Если \(z = x + i y\), то \(\bar{z} = x - i y\) называется комплексным
+сопряженным.
+
+\begin{equation*}
+  \frac{z_1}{z_2} = \frac{z_1 \bar{z_2}}{\abs{z_2}^2}
+  \qquad
+  \abs{z} = \sqrt{x^2 + y^2}
+\end{equation*}
+
+\galleryone{01_10_01}{Геометрическая интерпретация}
+
+Комплексные числа можно изображать на плоскости (\figref{01_10_01}) Тогда
+аргументом (главным значением аргумента) называется \(\arg z = \phi\) при
+условии, что \(0 \le \phi < 2 \pi\). При этом \(\Arg z = \arg z + 2 \pi k\).
+
+\begin{equation*}
+  \begin{cases}
+    \cos \phi = \frac{x}{\rho} \\
+    \sin \phi = \frac{y}{\rho} \\
+  \end{cases}
+  \qquad
+  \rho = \abs{z}
+\end{equation*}
+
+Комплексное число также имеем тригонометрическую форму \(z = \rho (\cos \phi + i
+\sin \phi)\) и показательную форму \(z = \rho e^{i \phi} = \rho e^{i (\arg z + 2
+\pi k)}\).
+
+\subsubheader{2.}{Множества}
+
+\begin{definition}
+  Окрестностью радиуса \(\delta\) с центром \(z_0\) называется
+
+  \begin{equation*}
+    \near{z_0}{\delta} \bydef \set{z \in \CC \given \abs{z - z_0} < \delta}
+  \end{equation*}
+\end{definition}
+
+\begin{remark}
+  \begin{equation*}
+    \nearo{z_0}{\delta} \bydef \near{z_0}{\delta} \setminus \set{z_0}
+  \end{equation*}
+\end{remark}
+
+\begin{definition}
+  Окрестностью бесконечно удаленной точки называется
+
+  \begin{equation*}
+    \near{\infty}{\delta} \bydef \set{z \in \CC \given \abs{z} > \delta}
+  \end{equation*}
+\end{definition}
+
+\begin{remark}
+  Почему \quote{точка}? Введем понятие стереографической проекции (сферы
+  Римана). Это взаимнооднозначное соответствие между точками сферы и точками
+  комплексной плоскости (кроме одной, которую и называем бесконечно удаленной)
+\end{remark}
+
+\begin{remark}
+  Операции сложения и умножения вида \(z + \infty\), \(z \cdot \infty\),
+  \(\infty + \infty\) не определены, поскольку в общем случае про \(\zeta =
+  \infty\) нельзя сказать каковы \(\Re z\), \(\Im z\), \(\Arg z\).
+\end{remark}
+
+\begin{remark}
+  Хотя мы не можем явно обозначить координаты бесконечно удаленной точки, мы
+  можем задавать направления стремления к ней. Например, \(\pair{-\infty,
+  \infty}\) это \(\Re z\), а \(\pair{-i \infty, i \infty}\)~--- \(\Im z\).
+\end{remark}
+
+\begin{definition}
+  Точка \(z_0 \in E\) называется внутренней точкой множества \(E\), если
+
+  \begin{equation*}
+    \exists \near{z_0}{\delta} \given \near{z_0}{\delta} \subset E
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  Точка \(\hat{z} \in \CC\) называется граничной точкой множества \(E\), если
+
+  \begin{equation*}
+    \forall \near{\hat{z}}{\delta} \qquad \begin{cases}
+      \exists z \in E \given z \in \near{\hat{z}}{\delta} \\
+      \exists z' \notin E \given z' \in \near{\hat{z}}{\delta}
+    \end{cases}
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  Множество граничных точек называется границей \(\Gamma_E\) множества \(E\).
+\end{definition}
+
+\begin{definition}
+  Открытое множество это множество, у которого все точки внутренние.
+\end{definition}
+
+\begin{definition}
+  Замкнутое множество это множество, включающее в себя все свои граничные точки.
+\end{definition}
+
+\begin{definition}
+  Множество \(D \subset \CC\) называется областью, если
+
+  \begin{enumerate}
+  \item
+    \(D\) это открытое множество
+
+  \item
+    Любые две точки множества \(D\) можно соединить ломаной с конечным числом
+    звеньев, которая вся лежит в этой области.
+  \end{enumerate}
+
+  Таким образом область это открытое и связное множество.
+\end{definition}
+
+\begin{definition}[Кривая на комплексной плоскости (комплексная переменная)]
+  \(z = \phi(t) + i \psi(t)\)~--- переменная \(\CC\)-величина, \(t \in
+  \segment{t_1}{t_2} \in \RR\). Если \(t\) меняется от \(t_1\) до \(t_2\), то
+  \(z\) движется ориентированно. Тогда если \(\phi(t)\), \(\phi(t)\) непрерывны,
+  то \(z = \phi(t) + i \psi(t)\) задает параметрически заданную непрерывную
+  ориентированную кривую.
+\end{definition}
+
+\begin{remark}
+  Если \(\phi(t)\) и \(\psi(t)\) имеют непрерывные производные, то кривая
+  гладкая.
+\end{remark}
+
+\begin{definition}
+  Замкнутая простая кривая называется контуром.
+\end{definition}
+
+\begin{definition}
+  Область \(D\) называется односвязной, если всякий контур, лежащий в ней, может
+  быть непрерывно стянут в точку области \(D\). В противном случае область
+  называется многосвязной.
+\end{definition}
+
+\begin{example}
+  Область \(D \colon 0 < \abs{z - a} < \epsilon\) не будет односвязной. Точка
+  \(a\) в данном примере будет изолированной.
+\end{example}
+
+\begin{example}
+  Пусть \(D \colon \abs{z} < 1, 0 < \arg z < 2 \pi\). Тогда \(\Gamma_D\) это
+  окружность радиуса \(1\) и отрезок \(\segment{0}{1}\) проходится в двух
+  направлениях (при этом  область является односвязной).
+\end{example}
+
+\begin{remark}
+  Далее будем рассматривать области с кусочно-гладкой границей \(+\) с
+  изолированные точки.
+\end{remark}
+
+\begin{definition}
+  \(\bar{\CC} = \CC \cup \set{\infty}\)~--- расширенная \(\CC\)-плоскость.
+\end{definition}
+
+\begin{remark}
+  В расширенной \(\CC\)-плоскости определение односвязной сохраняется, но
+  стягивание контура к бесконечно удаленной точке следует рассматривать на сфере
+  Римана.
+\end{remark}
+
+\begin{example}
+  Пусть \(D \subset \bar{\CC} \colon z \neq a\). Данная область будет
+  односвязной, т.к. любой контур можно стянуть в \(\infty\) (бесконечно
+  удаленную точку).
+\end{example}
+
+\begin{remark}
+  Любой контур стягивается в точку может быть равную бесконечности.
+\end{remark}
+
+\begin{theorem}[Жордана]
+  Всякая непрерывная замкнутая кривая разбивает расширенную \(\CC\)-плоскость на
+  две односвязные области.
+\end{theorem}
+
+\subsubheader{3.}{Предел последовательности}
+
+\begin{equation*}
+  z_n = \set{z_1, z_2, \dotsc, z_n, \dotsc},
+  \qquad
+  z_n = x_n + i y_n
+\end{equation*}
+
+Таким образом последовательность \(z_n\) определена парой вещественных
+последовательностей \(\set{x_n}\) и \(\set{y_n}\).
+
+\begin{equation*}
+  L \in CC \bydef \lim_{n \to \infty} z_n
+  \iff
+  \forall \epsilon > 0 \given
+  \exists N(\epsilon) \in \NN \given
+  \forall n > N \colon
+  \abs{z_n - L} < \epsilon
+\end{equation*}
+
+\begin{remark}
+  Пусть \(z_n\) такова, что
+
+  \begin{equation*}
+    \forall \epsilon > 0 \given
+    \exists N(\epsilon) \in \NN \given
+    \forall n > N \colon
+    \abs{z_n} > \epsilon
+  \end{equation*}
+
+  Т.е. \(\lim_{n \to \infty} z_n = \infty\)~--- определение бесконечно удаленной
+  точки.
+\end{remark}

@@ -1,0 +1,309 @@
+\subsection{%
+  Лекция \texttt{23.09.01}.%
+}
+
+\begin{definition}
+  Числовым рядом называется выражение \(u_1 + u_2 + \dotsc + u_n\), где
+  \(\seq{u_n}\) это некоторая числовая последовательность. Обозначается
+  \(\sum_{n = 1}^{\infty} u_n\).
+\end{definition}
+
+\begin{remark}
+  Нумерация может вестись с любого целого числа.
+\end{remark}
+
+\begin{definition}
+  \(u_n\) называется общим членом ряда.
+\end{definition}
+
+\begin{definition}
+  \(S_n = u_1 + \dotsc + u_k\) называется частичной суммой ряда.
+\end{definition}
+
+\begin{remark}
+  \(S_n\) также образуют последовательность.
+\end{remark}
+
+\begin{definition}
+  Если последовательность частичных сумм сходится, т.е. \(\display{\lim_{n \to
+  \infty} S_n = S \in \RR}\), то говорят, что ряд сходится к сумме \(S\) (\(S\)
+  называется суммой ряда). Если предел равен бесконечности или не существует, то
+  ряд расходится.
+\end{definition}
+
+Иногда сумму ряда можно найти простой арифметикой.
+
+\begin{example}[Непосредственное вычисление суммы ряда]
+  \begin{equation*}
+    \begin{aligned}
+      u_n = \frac{1}{n (n + 1)}
+      \implies
+      \sum_{n = 1}^{\infty} \frac{1}{n (n + 1)}
+      = \sum_{n = 1}^{\infty} \prh{\frac{1}{n} - \frac{1}{n + 1}}
+    \\
+      S_n
+      = \sum_{k = 1}^{n} \prh{\frac{1}{k} - \frac{1}{k + 1}}
+      = \under{\prh{1 - \frac{1}{2}}}{k = 1}
+        + \under{\prh{\frac{1}{2} - \frac{1}{3}}}{k = 2}
+        + \under{\prh{\frac{1}{3} - \frac{1}{4}}}{k = 3}
+        + \dotsc +
+        + \under{\prh{\frac{1}{n} - \frac{1}{n}}}{k = n - 1}
+        + \under{\prh{\frac{1}{n} - \frac{1}{n + 1}}}{k = n}
+      = 1 - \frac{1}{n + 1}
+    \\
+      \lim_{n \to \infty} S_n = 1 = S
+    \end{aligned}
+  \end{equation*}
+\end{example}
+
+\begin{example}[Геометрический ряд (эталонный)]
+  Пусть \(b \neq 0, b \in \RR\).
+
+  \begin{equation*}
+    \begin{aligned}
+      \sum_{n = 0}^{\infty} b q^n
+      = b + b q + b q^2 + b q^3 + \dotsc + b q^n
+      = b (1 + q + q^2 + q^3 + \dotsc + q^n)
+      = b \frac{1 - q^{n + 1}}{1 - q}
+      = S_n
+    \\
+      \lim_{n \to \infty} S_n
+      = \frac{b}{1 - q} \lim_{n \to \infty} (1 - q^{n + 1})
+    \end{aligned}
+  \end{equation*}
+
+  Далее значение предела зависит от \(q\).
+
+  \begin{enumerate}
+  \item
+    \(\display{
+      \abs{q} < 1
+    \implies
+      q^n \to 0
+    \implies
+      \lim_{n \to \infty} S_n = \frac{b}{1 - q} = S
+    }\)
+
+  \item
+    \(\display{
+      \abs{q} > 1
+      \implies
+      q^n \to \infty
+      \implies
+    }\) ряд расходится.
+
+  \item
+    \(\display{
+      q = 1
+      \implies
+      S_n = b (n + 1) \to \infty
+      \implies
+    }\) ряд расходится.
+  
+  \item
+    \(\display{
+      q = -1
+      \implies
+      S_n
+      = \frac{b}{2} (1 + 1 - 1 + \dotsc + 1 - 1)
+      = \begin{cases}
+        b \\
+        0
+      \end{cases}
+      \implies
+    }\) две подпоследовательность сходятся к разным числам, значит предела нет и
+    ряд расходится.
+  
+  \end{enumerate}
+\end{example}
+
+\begin{remark}
+  Чаще требуется только определить сходимость ряда не вычисляя его сумму.
+\end{remark}
+
+\subheader{Свойства числовых рядов}
+
+\begin{theorem} \label{thr:srs-discard}
+  \begin{equation*}
+    \begin{aligned}
+      \sum_{n = 1}^{\infty} u_n \converge
+      \iff
+      \sum_{n = k > 1}^{\infty} u_n \converge
+    \\
+      \sum_{n = 1}^{\infty} u_n \diverge
+      \iff
+      \sum_{n = k > 1}^{\infty} u_n \diverge
+    \end{aligned}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  \begin{equation*}
+    \begin{aligned}
+      \sum_{n = 1}^{\infty} u_n \converge
+      \iff
+      \exists \lim_{n \to \infty} S_n \in \RR
+    \\
+      \lim_{n \to \infty} S_n
+      = \lim_{n \to \infty} \prh{
+        \under{u_1 + u_2 + \dotsc + u_k}{v} + u_{k + 1} + \dotsc + u_n
+      }
+      = \under{\lim_{n \to \infty} v}{v \in \RR} + \lim_{n \to \infty} \prh{
+        u_{k + 1} + \dotsc + u_n
+      }
+    \end{aligned}
+  \end{equation*}
+
+  Для расходящихся доказательство аналогично.
+\end{proof}
+
+\begin{remark}
+  Теорему \ref{thr:srs-discard} можно сформулировать по-другому (не формально):
+  ряд и его \quote{хвост} одновременно сходятся и расходятся.
+\end{remark}
+
+\begin{theorem}
+  \begin{equation*}
+    \begin{rcases}
+      \sum_{n = 1}^{\infty} u_n = S \in \RR \\
+      \alpha \in \RR
+    \end{rcases}
+    \implies
+    \sum_{n = 1}^{\infty} \alpha u_n = \alpha S
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  \begin{equation*}
+    \begin{aligned}
+      \sum_{n = 1}^{\infty} u_n \converge
+      \iff
+      \exists \lim_{n \to \infty} S_n \in \RR
+    \\
+      \lim_{n \to \infty} \prh{\alpha u_1 + \dotsc + \alpha u_n}
+      = \alpha \lim_{n \to \infty} \prh{u_1 + \dotsc + u_n}
+      = \alpha S
+    \end{aligned}
+  \end{equation*}
+\end{proof}
+
+\begin{remark}
+  Если ряд расходится, то умножение на \(\alpha \neq 0\) не меняет его
+  расходимости.
+\end{remark}
+
+\begin{theorem}
+  \begin{equation*}
+    \begin{rcases}
+      \sum_{n = 1}^{\infty} u_n = S \in \RR \\
+      \sum_{n = 1}^{\infty} v_n = \sigma \in \RR \\
+    \end{rcases}
+    \implies
+    \sum_{n = 1}^{\infty} (u_n \pm v_n) = S \pm \sigma
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  \begin{equation*}
+    \under{\lim_{n \to \infty} S_n}{S} \pm
+      \under{\lim_{n \to \infty} \sigma_n}{\sigma}
+    = \lim_{n \to \infty} \prh{S_n \pm \sigma_n}
+    = \sum_{n = 1}^{\infty} \prh{u_n \pm v_n}
+  \end{equation*}
+\end{proof}
+
+\begin{remark}
+  Ряды складываются и вычитаются почленно.
+\end{remark}
+
+\begin{remark}
+  Из сходимости разности рядов \textbf{не следует} сходимость самих рядов.
+  Например,
+
+  \begin{equation*}
+    \sum_{n = 1}^{\infty} \frac{1}{n (n + 1)}
+    = \sum_{n = 1}^{\infty} \prh{\frac{1}{n} - \frac{1}{n + 1}}
+      \neq \under{\sum_{n = 1}^{\infty} \frac{1}{n}
+      - \sum_{n = 1}^{\infty} \frac{1}{n + 1}}{\text{расходятся}}
+  \end{equation*}
+\end{remark}
+
+
+\subheader{Гармонический ряд (эталонный)}
+
+\begin{equation*}
+  \sum_{n = 1}^{\infty} \frac{1}{n}
+  = \frac{1}{1} + \frac{1}{2} + \frac{1}{3} + \frac{1}{4} + \frac{1}{5}
+    + \frac{1}{6} + \frac{1}{7} + \frac{1}{8} + \frac{1}{9} + \frac{1}{10}
+    + \frac{1}{11} + \frac{1}{12} + \frac{1}{13} + \frac{1}{14} + \frac{1}{15}
+    + \frac{1}{16} + \dotsc
+\end{equation*}
+
+Рассмотрим вспомогательный ряд и вычислим его частичные суммы
+
+\begin{equation*}
+  \begin{aligned}
+    \frac{1}{1} + \frac{1}{2} + \under{\frac{1}{4} + \frac{1}{4}}{\frac{1}{2}}
+    + \under{\frac{1}{8} + \frac{1}{8} + \frac{1}{8} + \frac{1}{8}}{\frac{1}{2}}
+    + \under{\frac{1}{16} + \frac{1}{16} + \frac{1}{16} + \frac{1}{16}
+    + \frac{1}{16} + \frac{1}{16} + \frac{1}{16} + \frac{1}{16}}{\frac{1}{2}}
+    + \dotsc
+  \\
+    \sigma_1 = 1 + 0 \cdot \frac{1}{2} \qquad
+    \sigma_2 = 1 + 1 \cdot \frac{1}{2} \qquad  
+    \sigma_n = 1 + (n - 1) \cdot \frac{1}{2}
+  \end{aligned}
+\end{equation*}
+
+Последовательность частичных сумм \(\sigma_n\) расходится при \(n \to \infty\).
+Последовательность частичных сумм исходного ряда почленно не меньше
+\(\sigma_n\), значит \(\display{\lim_{n \to \infty} S_n = \infty}\).
+
+\begin{theorem}
+  Члены сходящегося ряда можно группировать произвольным образом \textbf{не
+  переставляя}.
+\end{theorem}
+
+\begin{proof}
+  Группируя члены ряда получаем подпоследовательность последовательности
+  частичных сумм. Если существует предел исходной последовательности, то
+  существует и предел любой ее подпоследовательности.
+\end{proof}
+
+\begin{remark}
+  Перестановка членов ряда может изменить сумму. Например, рассмотрим ряд
+  \(\display{\sum_{n = 1}^{\infty} \frac{(-1)^{n + 1}}{n}}\). Он сходится
+  (без доказательства). Далее имеем
+
+  \begin{equation*}
+    \begin{aligned}
+      \sum_{n = 1}^{\infty} \frac{(-1)^{n + 1}}{n}
+      & = 1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \frac{1}{5}
+        - \frac{1}{6} + \frac{1}{7} - \frac{1}{8} + \frac{1}{9} - \frac{1}{10}
+        + \frac{1}{11} - \frac{1}{12} + \frac{1}{13} - \frac{1}{14} 
+        + \frac{1}{15} - \frac{1}{16} + \dotsc
+    \\
+      & = \prh{1 - \frac{1}{2}} - \frac{1}{4}
+        + \prh{\frac{1}{3} - \frac{1}{6}} - \frac{1}{8}
+        + \prh{\frac{1}{5} - \frac{1}{10}} - \frac{1}{16}
+        + \prh{\frac{1}{7} - \frac{1}{14}} - \frac{1}{32}
+        + \dotsc
+    \\
+      & = \prh{1 - \frac{1}{2}} - \frac{1}{4}
+        + \frac{1}{3} \cdot \prh{1 - \frac{1}{2}} - \frac{1}{8}
+        + \frac{1}{5} \cdot \prh{1 - \frac{1}{2}} - \frac{1}{16}
+        + \frac{1}{7} \cdot \prh{1 - \frac{1}{2}} - \frac{1}{32}
+        + \dotsc
+    \\
+      & = \frac{1}{2} \prh{1 + \frac{1}{3} + \frac{1}{5} + \frac{1}{7} + \dotsc}
+        - \frac{1}{4} - \frac{1}{8} - \frac{1}{16} - \frac{1}{32} - \dotsc
+    \\
+      & = \frac{1}{2} \prh{1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} +
+        \frac{1}{5} - \frac{1}{6} + \frac{1}{7} + \dotsc}
+    \\
+      & = \frac{1}{2} \sum_{n = 1}^{\infty} \frac{(-1)^{n + 1}}{n}
+    \end{aligned}
+  \end{equation*}
+  
+  Получили, что сумма ряда равна своей половине.
+\end{remark}
