@@ -1,1 +1,25 @@
 \newcommand{\LeC}{\hbox{L\kern-.125em\lower.5ex\hbox{E}\kern-.075em C}}
+
+\newcommand{\probP}{\mathsf{P}}
+\newcommand{\expected}[1]{\mathbb{E} \prh{#1}}
+\newcommand{\variance}[1]{\mathbb{D} \prh{#1}}
+
+\newcommand{\segment}[2]{\left[ #1; #2 \right]}
+\newcommand{\interval}[2]{\left( #1; #2 \right)}
+
+\newcommand{\avg}[1]{\bar{x}}
+\newcommand{\sample}[1]{\vec{#1}}
+\newcommand{\svarianceD}{\mathbb{D}_{B}}
+\newcommand{\sstderS}{\sigma_{B}}
+
+\newenvironment{ttable}[2]{
+  \table[h]
+    \centering
+  
+    \tabularx{#1}{#2}
+      \setlength{\tabcolsep}{10pt}
+      \renewcommand{\arraystretch}{2}
+}{
+    \endtabularx
+  \endtable
+}
