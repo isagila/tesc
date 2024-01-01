@@ -7,10 +7,19 @@
 \newcommand{\segment}[2]{\left[ #1; #2 \right]}
 \newcommand{\interval}[2]{\left( #1; #2 \right)}
 
-\newcommand{\avg}[1]{\bar{x}}
+\newcommand{\evenly}[2]{U \left( #1; #2 \right)}
+
+\newcommand{\avg}[1]{\bar{#1}}
 \newcommand{\sample}[1]{\vec{#1}}
-\newcommand{\svarianceD}{\mathbb{D}_{B}}
-\newcommand{\sstderS}{\sigma_{B}}
+\newcommand{\svariance}[1]{\mathbb{D}_x^* \prh{#1}}
+
+\newcommand{\svarianceD}{\mathbb{D}_x^*}
+\newcommand{\sstderS}{\sigma_x^*}
+
+\newcommand{\sMe}{Me^*}
+\newcommand{\sMo}{Mo^*}
+
+\newcommand{\solution}{\textbf{Решение:}}
 
 \newenvironment{ttable}[2]{
   \table[h]
