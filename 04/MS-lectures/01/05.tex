@@ -1,0 +1,385 @@
+\subsection{%
+  Лекция \texttt{24.??.??}.%
+}
+
+\subheader{Квантили распределений}
+
+Предполагаем, что распределение абсолютно непрерывно и \(F(X)\)~--- его функция
+распределения.
+
+\begin{definition}[A]
+  Число \(t_{\gamma}\) называется квантилем распределения уровня \(\gamma\),
+  если \(F \prh{t_{\gamma}} = \gamma\). Таким образом \(t_{\gamma} = F^{-1}
+  (\gamma)\).
+\end{definition}
+
+\begin{remark}
+  Медиана это квантиль уровня \(\frac{1}{2}\).
+\end{remark}
+
+\todo image 4:30
+
+В ряде источников под квантилем понимается несколько иное.
+
+\begin{definition}[B]
+  Число \(t_{\alpha}\) называется квантилем уровня значимости \(\alpha\), если
+  \(\prob{x > t_{\alpha}} = \alpha\) или \(F \prh{t_{\alpha}} = 1 - \alpha\).
+  Таким образом \(t_{\alpha}\) соответствует вероятности попадания величины в
+  правостороннюю область.
+\end{definition}
+
+\begin{remark}
+  Будем использовать оба определения, но во втором случае добавлять
+  \quote{уровня значимости} и использовать символ \(\alpha\), а не \(\gamma\).
+\end{remark}
+
+\subsubheader{Квантили основных распределений в Excel}
+
+\begin{enumerate}
+\item
+  \texttt{НОРМ.СТ.ОБР}~--- обратная функция к функции стандартного нормального
+  распределения.
+
+  \begin{equation*}
+    F(x)
+    = \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^x \exp \prh{-\frac{z^2}{2}} \dd z
+  \end{equation*}
+
+  Тогда \texttt{НОРМ.СТ.ОБР \((x + 0.5)\)} это обратная функция к функции
+  Лапласа \(\Phi (x)\).
+
+  \begin{equation*}
+    \Phi (x)
+    = \frac{1}{\sqrt{2 \pi}} \int_0^x \exp \prh{-\frac{z^2}{2}} \dd z
+  \end{equation*}
+
+\item
+  \begin{enumerate}
+  \item
+    \texttt{СТЬЮДЕНТ.ОБР \((\gamma, n)\)}~--- функция, обратная к функции
+    распределения Стьюдента с \(n\) степенями свободы.
+
+    \begin{equation*}
+      t_n = \frac{X_0}{\sqrt{\frac{1}{n} \chi_n^2}}
+    \end{equation*}
+
+    Заметим, что это распределение симметричное относительно нулю, поэтому можно
+    использовать другой способ.
+
+  \item
+    \texttt{СТЬЮДЕНТ.ОБР.2Х}~--- так называемое двустороннее обратное
+    преобразование Стьюдента, которое возвращает \(t_{\alpha}\) такое, что
+    \(\prob{\abs{X} > t_{\alpha}} = \alpha\).
+
+    Таким образом \(\prob{\abs{X} < t_{\alpha}} = 1 - \alpha\), значит
+    \(t_{\gamma} = \) \texttt{СТЬЮДЕНТ.ОБР.2Х \((1 - \gamma, n)\)}.
+  \end{enumerate}
+
+\item
+  \begin{enumerate}
+  \item
+    \texttt{ХИ2.ОБР}~--- возвращает квантиль \(t_{\gamma}\) для распределения
+    \(\Hdist{n}\) с \(n\) степенями свободы.
+
+  \item
+    \texttt{ХИ2.ОБР.ПХ}~--- возвращает квантиль \(t_{\alpha}\). Заметим, что
+    \texttt{ХИ2.ОБР \((\gamma, n) = \) ХИ2.ОБР.ПХ \((1 - \gamma, n)\)}.
+  \end{enumerate}
+
+\item
+  \begin{enumerate}
+  \item
+    \texttt{F.ОБР}~--- возвращает \(t_{\gamma}\) для \(F\)-распределения.
+
+  \item
+    \texttt{F.ОБР.ПХ}~--- возвращает \(t_{\alpha}\). Заметим, что \texttt{F.ОБР
+    \((\gamma, n, m) = \) F.ОБР.ПХ \((1 - \gamma, n, m)\)}.
+  \end{enumerate}
+\end{enumerate}
+
+\subheader{Интервальные оценки}
+
+\begin{definition}
+  Интервал \(\interval{\Theta_{\gamma}^-}{\Theta_{\gamma}^+}\) называется
+  доверительным интервалом для параметра \(\Theta\) уровня надежности \(\gamma\)
+  если
+
+  \begin{equation*}
+    \Theta \in \interval{\Theta_{\gamma}^-}{\Theta_{\gamma}^+}
+    \text{ с вероятностью } \gamma
+    \qquad
+    \text{ или }
+    \qquad
+    \prob{\Theta_{\gamma}^- < \Theta < \Theta_{\gamma}^+} = \gamma
+  \end{equation*}
+\end{definition}
+
+\begin{remark}
+  В случае дискретного распределения более точным будет определение
+
+  \begin{equation*}
+    \prob{\Theta_{\gamma}^- < \Theta < \Theta_{\gamma}^+} \ge \gamma
+  \end{equation*}
+\end{remark}
+
+\begin{remark}
+  Неверно говорить, что \(\Theta\) лежит в данном интервале с вероятностью
+  \(\gamma\), т.к. параметр \(\Theta\) не является случайной величиной.
+  Правильнее говорить, что доверительный интервал накрывает параметр \(\Theta\)
+  с вероятностью \(\gamma\).
+\end{remark}
+
+\begin{remark}
+  Вероятность \(\alpha = 1 - \gamma\) называется уровнем значимости
+  доверительного интервала.
+\end{remark}
+
+\begin{remark}
+  Обычно пытаемся получить доверительный интервал симметричный относительно
+  несмещенной точной оценки \(\Theta^*\), но не всегда это возможно.
+\end{remark}
+
+\begin{remark}
+  Стандартные уровни надежности \(0.9\), \(0.95\), \(0.99\) и \(0.999\).
+  Наиболее распространенный \(0.95\).
+\end{remark}
+
+\begin{lemma}
+  Если случайная величина \(\xi\) имеет симметричное распределение относительно
+  точки \(x = 0\), то \(\prob{\abs{\xi} < t} = 2 F(t) - 1\).
+\end{lemma}
+
+\begin{proof}
+  Под симметричным распределением подразумевается распределение с симметричным
+  графиком плотности. Тогда
+
+  \begin{equation*}
+    \prob{\abs{\xi} < t} 
+    = 2 \prob{0 < \xi < t}
+    = 2 \prh{F(t) - F(0)}
+    = 2 F(t) - 1
+  \end{equation*}
+
+  т.к. \(F(0) = 0.5\) в силу симметрии.
+\end{proof}
+
+\subheader{Доверительные интервалы для параметров нормального распределения}
+
+Пусть \(\sample{X} = \prh{X_1, \dotsc, X_n}\)~--- выборка объема \(n\) из
+\(\ndist{a}{\sigma^2}\). Необходимо построить доверительные интервалы. Возможны
+\(4\) ситуации.
+
+\subsubheader{I.}{Доверительный интервал для параметра \(a\) при известном
+значении параметра \(\sigma^2\)}
+
+По \ref{lem:base-theorem-1} имеем
+
+\begin{equation*}
+  \sqrt{n} \cdot \frac{\avg{x} - a}{\sigma} \in \ndist{0}{1}
+\end{equation*}
+
+Будем искать интервал в виде
+
+\begin{equation*}
+  \prob{-t_{\gamma} < \sqrt{n} \cdot \frac{\avg{x} - a}{\sigma} < t_{\gamma}}
+  = \prob{\abs{\sqrt{n} \cdot \frac{\avg{x} - a}{\sigma}} < t_{\gamma}} 
+  = 2 \Phi \prh{t_{\gamma}}
+  = \gamma
+  \implies
+  \Phi \prh{t_{\gamma}} = \frac{\gamma}{2}
+\end{equation*}
+
+Таким образом \(t_{\gamma}\)~--- обратное значение функции Лапласа или квантиль
+уровня \(\frac{1 + \gamma}{2}\) стандартного нормального распределения. Остается
+решить изначальное неравенство относительно параметра \(a\), получаем
+
+\begin{equation*}
+  \begin{aligned}
+    -t_{\gamma} < \sqrt{n} \cdot \frac{\avg{x} - a}{\sigma} < t_{\gamma}
+  \\
+    -t_{\gamma} \frac{\sigma}{\sqrt{n}} < \avg{x} - a
+      < t_{\gamma} \frac{\sigma}{\sqrt{n}}
+  \\
+    \avg{x} - t_{\gamma} \frac{\sigma}{\sqrt{n}} < a
+      < \avg{x} + t_{\gamma} \frac{\sigma}{\sqrt{n}}
+  \end{aligned}
+\end{equation*}
+
+Итак, получили доверительный интервал для параметра \(a\) надежности \(\gamma\)
+вида \(\display{\interval{\avg{x} - t_{\gamma} \frac{\sigma}{\sqrt{n}}}
+{\avg{x} + t_{\gamma} \frac{\sigma}{\sqrt{n}}}}\), где \(t_{\gamma}\) находится
+из условия \(\display{\Phi \prh{t_{\gamma}} = \frac{\gamma}{2}}\).
+
+\subsubheader{II.}{Доверительный интервал для параметра \(a\) при неизвестном
+значении параметра \(\sigma^2\)}
+
+По \ref{lem:base-theorem-4} имеем
+
+\begin{equation*}
+  \sqrt{n} \cdot \frac{\avg{x} - a}{S} \in \Tdist{n - 1}
+\end{equation*}
+
+Проведем аналогичные рассуждения, что и в прошлом пункте.
+
+\begin{equation*}
+  \prob{-t_{\gamma} < \sqrt{n} \cdot \frac{\avg{x} - a}{S} < t_{\gamma}}
+  = \prob{\abs{\sqrt{n} \cdot \frac{\avg{x} - a}{S}} < t_{\gamma}} 
+  = 2 F_{\Tdist{n - 1}} \prh{t_{\gamma}} - 1
+  = \gamma
+  \implies
+  F_{\Tdist{n - 1}} \prh{t_{\gamma}} = \frac{1 + \gamma}{2}
+\end{equation*}
+
+Таким образом \(t_{\gamma}\) это квантиль распределения Стьюдента уровня
+\(\frac{1 + \gamma}{2}\). Решаем неравенство и получаем
+
+\begin{equation*}
+  \avg{x} - t_{\gamma} \frac{S}{\sqrt{n}} < a
+    < \avg{x} + t_{\gamma} \frac{S}{\sqrt{n}}
+\end{equation*}
+
+\begin{remark}
+  Заметим, что в обоих случаях получили симметричные интервалы относительно
+  точечной оценки \(\avg{x}\).
+\end{remark}
+
+\begin{remark}
+  В Excel квантиль \(t_{\gamma}\) удобнее находить как \texttt{\(t_{\gamma} =\)
+  СТЬЮДЕНТ.ОБ.2Х \((1 - \gamma, n - 1)\)}.
+\end{remark}
+
+\subsubheader{III.}{Доверительный интервал для параметра \(\sigma^2\) при
+неизвестном значении параметра \(a\)}
+
+По \ref{lem:base-theorem-3} имеем
+
+\begin{equation*}
+  \frac{(n - 1) S^2}{\sigma^2} \in \Hdist{n - 1}
+\end{equation*}
+
+Пусть \(\chi_1^2\) и \(\chi_2^2\) это квантили распределения \(\Hdist{n - 1}\)
+уровней \(\frac{1 - \gamma}{2}\) и \(\frac{1 + \gamma}{2}\). Тогда
+
+\begin{equation*}
+  \prob{\chi_1^2 < \frac{(n - 1) S^2}{\sigma^2} < \chi_2^2}
+  = F_{\Hdist{n - 1}} \prh{\chi_2^2} - F_{\Hdist{n - 1}} \prh{\chi_1^2}
+  = \frac{1 + \gamma}{2} - \frac{1 - \gamma}{2}
+  = \gamma
+\end{equation*}
+
+Решим неравенство относительно \(\sigma^2\).
+
+\begin{equation*}
+  \begin{aligned}
+    \chi_1^2 < \frac{(n - 1) S^2}{\sigma^2} < \chi_2^2
+  \\
+    \frac{1}{\chi_2^2} < \frac{\sigma^2}{(n - 1) S^2} < \frac{1}{\chi_1^2}
+  \\
+    \frac{(n - 1) S^2}{\chi_2^2} < \sigma^2 < \frac{(n - 1) S^2}{\chi_1^2}
+  \end{aligned}
+\end{equation*}
+
+Получили доверительный интервал \(\display{\interval{\frac{(n - 1) S^2}
+{\chi_2^2}}{\frac{(n - 1) S^2}{\chi_1^2}}}\), где \(\chi_1^2\) и \(\chi_2^2\)
+это квантили распределения \(\Hdist{n - 1}\) уровней \(\frac{1 - \gamma}{2}\) и
+\(\frac{1 + \gamma}{2}\).
+
+\begin{remark}
+  Получили доверительный интервал для среднего квадратического отклонения
+  \(\display{\interval{\frac{S \sqrt{n - 1}}{\chi_2}}{\frac{S \sqrt{n - 1}}
+  {\chi_1}}}\).
+\end{remark}
+
+\subsubheader{IV.}{Доверительный интервал для параметра \(\sigma^2\) при
+известном значении параметра \(a\)}
+
+По \ref{lem:base-theorem-2} имеем
+
+\begin{equation*}
+  \sum_{i = 1}^n \prh{\frac{x_i - a}{\sigma}}^2
+  = \frac{n \prh{\sigma^2}^*}{\sigma^2} \in \Hdist{n}
+\end{equation*}
+
+где \(\prh{\sigma^2}^* = \frac{1}{n} \sum_{i = 1}^n \prh{x_i - a}^2\). Пусть
+\(\chi_1^2\) и \(\chi_2^2\) это квантили распределения \(\Hdist{n}\) уровней
+\(\frac{1 - \gamma}{2}\) и \(\frac{1 + \gamma}{2}\). Тогда
+
+\begin{equation*}
+  \prob{\chi_1^2 < \frac{n \prh{\sigma^2}^*}{\sigma^2} < \chi_2^2}
+  = F_{\Hdist{n}} \prh{\chi_2^2} - F_{\Hdist{n}} \prh{\chi_1^2}
+  = \frac{1 + \gamma}{2} - \frac{1 - \gamma}{2}
+  = \gamma
+\end{equation*}
+
+Аналогично третьему пункту решим неравенство и получим
+
+\begin{equation*}
+  \frac{n \prh{\sigma^2}^*}{\chi_2^2} < \sigma^2
+    < \frac{n \prh{\sigma^2}^*}{\chi_1^2}
+\end{equation*}
+
+Итак, доверительный для \(\sigma^2\) имеет вид \(\display{\interval{\frac{n
+\prh{\sigma^2}^*}{\chi_2^2}}{\frac{n \prh{\sigma^2}^*}{\chi_1^2}}}\), где
+\(\chi_1^2\) и \(\chi_2^2\) это квантили распределения \(\Hdist{n}\) уровней
+\(\frac{1 - \gamma}{2}\) и \(\frac{1 + \gamma}{2}\).
+
+\begin{remark}
+  Получили доверительный интервал для \(\sigma\) вида
+  \(\display{\interval{\frac{\sqrt{n \prh{\sigma^2}^*}}{\chi_2}}{\frac{\sqrt{n
+  \prh{\sigma^2}^*}}{\chi_1}}}\).
+\end{remark}
+
+\begin{remark}
+  Доверительные интервалы полученные в третьем и четвертом пунктах не являются
+  симметричными относительно \(S^2\), но есть формулы для симметричных
+  доверительных интервалов.
+\end{remark}
+
+\begin{example}
+  Пусть \(X \in \ndist{a}{\sigma^2}\) причем известно, что \(\sigma = 3\). В
+  результате обработки выборки объема \(n = 36\) получили \(\avg{x} = 4.1\).
+  Найти доверительный интервал для параметра \(a\) надежности \(\gamma = 0.95\).
+
+  \solution{} Найдем \(t_{\gamma}\).
+
+  \begin{equation*}
+    2 \Phi \prh{t_{\gamma}} = 0.95
+    \implies \Phi \prh{t_{\gamma}} = 0.475
+    \implies t_{\gamma} = 1.96
+  \end{equation*}
+
+  Применим формулу из первого пункта.
+
+  \begin{equation*}
+    \begin{aligned}
+      \avg{x} - t_{\gamma} \frac{S}{\sqrt{n}} & < a
+      < & \avg{x} + t_{\gamma} \frac{S}{\sqrt{n}}
+    \\
+      4.1 - 1.96 \cdot \frac{3}{\sqrt{36}} & < a
+        < & 4.1 + 1.96 \cdot \frac{3}{\sqrt{36}}
+    \\
+      3.12 & < a < & 5.08
+    \end{aligned}
+  \end{equation*}
+\end{example}
+
+\begin{example}
+  Пусть \(X \in \ndist{a}{\sigma^2}\). В результате обработки выборки объема \(n
+  = 25\) получили \(\avg{x} = 42.32\) и \(S = 6.4\). Найти доверительный
+  интервал для параметра \(a\) при уровне надежности \(\gamma = 0.95\).
+
+  \solution{} Найдем \(t_{\gamma}\). Получим \texttt{СТЬЮДЕНТ.ОБР.2Х \((1 -
+  0.95, 25 - 1) = 2.064\)}. Подставим в формулу из второго пункта.
+
+  \begin{equation*}
+    \begin{aligned}
+      \avg{x} - t_{\gamma} \frac{S}{\sqrt{n}} & < a
+        < & \avg{x} + t_{\gamma} \frac{S}{\sqrt{n}}
+    \\
+      42.32 - 2.064 \cdot \frac{6.4}{\sqrt{25}} & < a
+        < & 42.32 + 2.064 \cdot \frac{6.4}{\sqrt{25}}
+    \\
+      39.678 & < a < & 44.962
+    \end{aligned}
+  \end{equation*}
+\end{example}
