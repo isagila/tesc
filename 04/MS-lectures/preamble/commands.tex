@@ -55,7 +55,7 @@
 \newcommand{\makesubfigure}[4]{
   \begin{subfigure}[b]{#4\textwidth}
     \centering
-    \input{figures/#1#2.tex}
+    \input{data/#1#2.tex}
     \caption{#3}
     \label{fig:#1#2}
   \end{subfigure}
@@ -64,7 +64,7 @@
   \refstepcounter{points}
   \begin{figure}[#1]
     \centering
-    \input{figures/#2.tex}
+    \input{data/#2.tex}
     \caption{#3}
     \label{fig:#2}
   \end{figure}
@@ -105,6 +105,18 @@
   \end{figure}
 }
 \newcommand{\figref}[1]{рис.~\ref{fig:#1}}
+
+\newcommand{\spreadsheet}[5]{
+  \refstepcounter{points}
+  \begin{table}[htbp]
+    \centering
+    \begin{tabularx}{#2}{#3}
+      \input{data/#1.tex}
+    \end{tabularx}
+    \caption{#4}
+    \label{tbl:#5}
+  \end{table}
+}
 
 \setlength{\columnsep}{1cm}
 \newenvironment{twocolumns}{
