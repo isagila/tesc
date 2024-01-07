@@ -1,0 +1,14 @@
+\begin{tikzpicture}
+  \draw[thick, ->] (-1, 0) -- (5, 0)
+    node[below] {\(x\)};
+  \draw[thick, ->] (0, -1) -- (0, 5)
+    node[right] {\(y\)};
+
+  \draw[
+    inner color = green!70,
+    outer color = green!10,
+    draw = none,
+    rotate around = { 45 : (2.5, 2.5) }
+  ]
+    (2.5, 2.5) ellipse (1.7cm and 0.5cm);
+\end{tikzpicture}

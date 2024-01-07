@@ -2,12 +2,15 @@
 
 \newcommand{\probP}{\mathsf{P}}
 \newcommand{\prob}[1]{\probP \prh{#1}}
-\newcommand{\expected}[1]{\mathbb{E} \prh{#1}}
-\newcommand{\variance}[1]{\mathbb{D} \prh{#1}}
 
+\newcommand{\expected}[1]{\mathbb{E} \prh{#1}}
+\newcommand{\varianceD}{\mathbb{D}}
+\newcommand{\variance}[1]{\varianceD \prh{#1}}
+\newcommand{\cov}[2]{\operatorname{cov} \prh{#1, #2}}
+
+\newcommand{\tuple}[1]{\left\langle #1 \right\rangle}
 \newcommand{\segment}[2]{\left[ #1; #2 \right]}
 \newcommand{\interval}[2]{\left( #1; #2 \right)}
-\newcommand{\cov}[2]{\operatorname{cov} \prh{#1, #2}}
 
 \newcommand{\udist}[2]{U \left( #1; #2 \right)}
 \newcommand{\ndist}[2]{N \left( #1; #2 \right)}
