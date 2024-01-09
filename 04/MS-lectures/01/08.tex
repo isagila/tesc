@@ -117,13 +117,13 @@ y}\) в любой прямоугольник равна произведени�
   (m - 1)}^2\).
 \end{theorem}
 
-Получили критерий: пусть \(t_{\text{кр}}\) это квантиль распределения
-\(\Hdist{(n - 1)(m - 1)}\) уровня значимости \(\alpha\), тогда
+Получили критерий: пусть \(\tcrit\) это квантиль распределения \(\Hdist{(n -
+1)(m - 1)}\) уровня значимости \(\alpha\), тогда
 
 \begin{equation*}
   \begin{cases}
-    H_0, & K < t_{\text{кр}} \\
-    H_1, & K \ge t_{\text{кр}}
+    H_0, & K < \tcrit \\
+    H_1, & K \ge \tcrit
   \end{cases}
 \end{equation*}
 
@@ -161,8 +161,7 @@ n_k\). Для нее вычислим общее выборочное средн
   = \frac{1}{n} \sum_{i, j} x_i^{(j)}
   = \frac{1}{n} \sum_{j = 1}^k \avg{x}^{(j)} n_j
   \qquad
-  \varianceD_{\text{О}}
-  = \frac{1}{n} \sum_{i, j} \prh{x_i^{(j)} - \avg{x}}^2
+  \varianceO = \frac{1}{n} \sum_{i, j} \prh{x_i^{(j)} - \avg{x}}^2
 \end{equation*}
 
 \begin{definition}
@@ -170,8 +169,7 @@ n_k\). Для нее вычислим общее выборочное средн
   дисперсий.
 
   \begin{equation*}
-    \varianceD_{\text{в}}
-    = \frac{1}{n} \sum_{j = 1}^k n_j \varianceD^{(j)}
+    \varianceB = \frac{1}{n} \sum_{j = 1}^k n_j \varianceD^{(j)}
   \end{equation*}
 \end{definition}
 
@@ -180,14 +178,14 @@ n_k\). Для нее вычислим общее выборочное средн
   называется величина
 
   \begin{equation*}
-    \varianceD_{\text{м}}
+    \varianceM
     = \frac{1}{n} \sum_{j = 1}^k \prh{\avg{x}^{(j)} - \avg{x}}^2 n_j
   \end{equation*}
 \end{definition}
 
 \begin{theorem}[О разложении дисперсии] \label{thr:variance-expansion}
   \begin{equation*}
-    \varianceD_{\text{О}} = \varianceD_{\text{м}} + \varianceD_{\text{в}}
+    \varianceO = \varianceM + \varianceB
   \end{equation*}
 \end{theorem}
 
@@ -199,8 +197,8 @@ n_k\). Для нее вычислим общее выборочное средн
   Ясно, что чем большее влияние оказывает \(Z\) на результат \(X\), тем больше
   получаются отдельные выборочные средние, а значит растет доля межгрупповой
   дисперсии в данной сумме. Таким образом величина корреляции характеризуется
-  отношением \(\display{\frac{\varianceD_{\text{м}}}{\varianceD_{\text{О}}}}\).
-  Если зависимость функциональная, то эта дробь будет равна единице.
+  отношением \(\display{\frac{\varianceM}{\varianceO}}\). Если зависимость
+  функциональная, то эта дробь будет равна единице.
 \end{remark}
 
 \subheader{Проверка гипотезы о влиянии фактора}
@@ -244,11 +242,10 @@ n_k\). Для нее вычислим общее выборочное средн
 
 \begin{equation*}
   \begin{aligned}
-    \varianceD_{\text{О}} = \varianceD_{\text{м}} + \varianceD_{\text{в}}
+    \varianceO = \varianceM + \varianceB
   \\
-    \frac{n \varianceD_{\text{О}}}{\sigma^2}
-    = \frac{n \varianceD_{\text{м}}}{\sigma^2}
-      + \frac{n \varianceD_{\text{в}}}{\sigma^2}
+    \frac{n \varianceO}{\sigma^2} = \frac{n \varianceM}{\sigma^2}
+      + \frac{n \varianceB}{\sigma^2}
   \end{aligned}
 \end{equation*}
 
@@ -258,33 +255,32 @@ n_k\). Для нее вычислим общее выборочное средн
 \(H_0\) получили, что
 
 \begin{equation*}
-  \frac{n \varianceD_{\text{м}}}{\sigma^2} \in \Hdist{k - 1}
-  \qquad \frac{n \varianceD_\text{в}}{\sigma^2} \in \Hdist{n - k}
+  \frac{n \varianceM}{\sigma^2} \in \Hdist{k - 1}
+  \qquad
+  \frac{n \varianceB}{\sigma^2} \in \Hdist{n - k}
 \end{equation*}
 
 Значит
 
 \begin{equation*}
-  \frac{n \varianceD_{\text{м}}}{\sigma^2 (k - 1)}
-  \cdot \frac{\sigma^2 (n - k)}{n \varianceD_{\text{в}}}
-  = \frac{n - k}{k - 1}
-    \cdot \frac{\varianceD_{\text{м}}}{\varianceD_{\text{в}}}
+  \frac{n \varianceM}{\sigma^2 (k - 1)}
+  \cdot \frac{\sigma^2 (n - k)}{n \varianceB}
+  = \frac{n - k}{k - 1} \cdot \frac{\varianceM}{\varianceB}
     \in \Fdist{k - 1}{n - k}
 \end{equation*}
 
 Таким образом в качестве статистики критерия берем функцию
 
 \begin{equation*}
-  K = \frac{n - k}{k - 1}
-    \cdot \frac{\varianceD_{\text{м}}}{\varianceD_{\text{в}}}
+  K = \frac{n - k}{k - 1} \cdot \frac{\varianceM}{\varianceB}
 \end{equation*}
 
-В результате получили критерий: пусть \(t_{\text{кр}}\) это квантиль
-распределения \(\Fdist{k - 1}{n - k}\) уровня значимости \(\alpha\), тогда
+В результате получили критерий: пусть \(\tcrit\) это квантиль распределения
+\(\Fdist{k - 1}{n - k}\) уровня значимости \(\alpha\), тогда
 
 \begin{equation*}
   \begin{cases}
-    H_0, & K < t_{\text{кр}} \\
-    H_1, & K \ge t_{\text{кр}}
+    H_0, & K < \tcrit \\
+    H_1, & K \ge \tcrit
   \end{cases}
 \end{equation*}

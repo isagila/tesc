@@ -32,7 +32,7 @@
 \end{definition}
 
 \begin{definition}
-  Точки \(t_{\text{кр}}\) на границе двух областей называются критическими.
+  Точки \(\tcrit\) на границе двух областей называются критическими.
 \end{definition}
 
 \begin{definition}
@@ -126,14 +126,14 @@
   \(n \to \infty\).
 \end{enumerate}
 
-Для заданного уровня значимости \(\epsilon\) находим квантиль \(t_{\text{кр}}\)
-такой, что \(\prob{\abs{z} \ge t_{\text{кр}}} = \epsilon\). В результате
-получаем критерий с уровнем значимости \(\alpha\). Итого
+Для заданного уровня значимости \(\epsilon\) находим квантиль \(\tcrit\) такой,
+что \(\prob{\abs{z} \ge \tcrit} = \epsilon\). В результате получаем критерий с
+уровнем значимости \(\alpha\). Итого
 
 \begin{equation*}
   \begin{cases}
-    H_0, & \text{ если } \abs{K} < t_{\text{кр}} \\
-    H_1, & \text{ если } \abs{K} \ge t_{\text{кр}}
+    H_0, & \text{ если } \abs{K} < \tcrit \\
+    H_1, & \text{ если } \abs{K} \ge \tcrit
   \end{cases}
 \end{equation*}
 
@@ -161,11 +161,11 @@
 
   \begin{equation*}
     \alpha
-    = \prob{\abs{K} \ge t_{\text{кр}} \given H_0}
-    = 1 - \prh{F_K \prh{t_{\text{кр}}} - F_K \prh{-t_{\text{кр}}}}
+    = \prob{\abs{K} \ge \tcrit \given H_0}
+    = 1 - \prh{F_K \prh{\tcrit} - F_K \prh{-\tcrit}}
     \Rarr{n \to \infty}
-    1 - \prh{F_z \prh{t_{\text{кр}}} - F_z \prh{-t_{\text{кр}}}}
-    = \prob{\abs{z} \ge t_{\text{кр}}}
+    1 - \prh{F_z \prh{\tcrit} - F_z \prh{-\tcrit}}
+    = \prob{\abs{z} \ge \tcrit}
     = \epsilon
   \end{equation*}
 
@@ -219,25 +219,25 @@
 \end{enumerate}
 
 Итак, получили следующий критерий: для уровня значимости \(\alpha\) выберем
-\(t_{\text{кр}}\) такую, что
+\(\tcrit\) такую, что
 
 \begin{equation*}
   \alpha
-  = \prob{\abs{K} \ge t_{\text{кр}}}
-  = 1 - 2 \Phi \prh{t_{\text{кр}}}
+  = \prob{\abs{K} \ge \tcrit}
+  = 1 - 2 \Phi \prh{\tcrit}
   \implies
-  \Phi \prh{t_{\text{кр}}}
+  \Phi \prh{\tcrit}
   = \frac{1 - \alpha}{2}
 \end{equation*}
 
-Значит \(t_{\text{кр}}\) это обратное значение функции Лапласа в точке
-\(\frac{1 - \alpha}{2}\) или квантиль уровня \(1 - \frac{\alpha}{2}\)
-стандартного нормального распределения. Получаем критерий согласия
+Значит \(\tcrit\) это обратное значение функции Лапласа в точке \(\frac{1 -
+\alpha}{2}\) или квантиль уровня \(1 - \frac{\alpha}{2}\) стандартного
+нормального распределения. Получаем критерий согласия
 
 \begin{equation*}
   \begin{cases}
-    H_0, & \abs{K} < t_{\text{кр}} \\
-    H_1, & \abs{K} \ge t_{\text{кр}}
+    H_0, & \abs{K} < \tcrit \\
+    H_1, & \abs{K} \ge \tcrit
   \end{cases}
 \end{equation*}
 
@@ -281,16 +281,16 @@
 \end{enumerate}
 
 Итак, получили следующий критерий: для уровня значимости \(\alpha\) выберем
-\(t_{\text{кр}}\) такую, что \(\display{\prob{\abs{t_{n - 1}} \ge t_{\text{кр}}}
-= \alpha}\). Таким образом \(t_{\text{кр}}\) это квантиль уровня \(\frac{1 -
-\alpha}{2}\) распределения \(\Tdist{n - 1}\) или \(t_{\text{кр}}\) это квантиль
-уровня значимости \(\alpha\) двустороннего распределения \(\abs{\Tdist{n -
-1}}\). Получаем критерий согласия
+\(\tcrit\) такую, что \(\display{\prob{\abs{t_{n - 1}} \ge \tcrit} = \alpha}\).
+Таким образом \(\tcrit\) это квантиль уровня \(\frac{1 - \alpha}{2}\)
+распределения \(\Tdist{n - 1}\) или \(\tcrit\) это квантиль уровня значимости
+\(\alpha\) двустороннего распределения \(\abs{\Tdist{n - 1}}\). Получаем
+критерий согласия
 
 \begin{equation*}
   \begin{cases}
-    H_0, & \abs{K} < t_{\text{кр}} \\
-    H_1, & \abs{K} \ge t_{\text{кр}}
+    H_0, & \abs{K} < \tcrit \\
+    H_1, & \abs{K} \ge \tcrit
   \end{cases}
 \end{equation*}
 
@@ -356,13 +356,13 @@
   Теперь ищем критическую точку.
 
   \begin{equation*}
-    \Phi \prh{t_{\text{кр}}}
+    \Phi \prh{\tcrit}
     = \frac{1 - \alpha}{2}
     = 0.475
-    \implies t_{\text{кр}} = 1.96
+    \implies \tcrit = 1.96
   \end{equation*}
 
-  Т.к. \(\abs{K} > t_{\text{кр}}\), то основная гипотеза \(H_0\) отклоняется, и
+  Т.к. \(\abs{K} > \tcrit\), то основная гипотеза \(H_0\) отклоняется, и
   принимается альтернативная гипотеза \(H_1\).
 \end{example}
 
