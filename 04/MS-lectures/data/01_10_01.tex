@@ -1,0 +1,23 @@
+\begin{tikzpicture}
+  \draw[thick, ->] (-1, 0) -- (9, 0)
+    node[below] {\(Z_p\)};
+  \draw[thick, ->] (0, -1) -- (0, 6)
+    node[left] {\(X\)};
+  
+  \draw[thick, dashed] (3.97, 0) -- (3.97, 3)
+    node[pos = 0, below] {\(\avg{z}\)};
+  \draw[thick, dashed] (0, 2.97) -- (4, 2.97)
+    node[pos = 0, left] {\(\avg{x}\)};
+
+  \draw[thick, dashed, color = red] (3.0469, 4.5892) -- (4.8853, 1.3720);
+  \draw[very thick, color = green] (0.5, 1) -- (7.5, 5);
+  \draw[thick, fill = black] (3.97, 2.97) circle (2pt);
+
+  \draw[thick, color = blue]
+    (0.4460, 2.2105) edge[bend right = 20] (6.4749, 5.6778);
+  \draw[thick, color = blue]
+    (1.5155, 0.3388) edge[bend left = 20] (7.5635, 3.7726);
+
+  \draw[<->] (4.27, 3.63) -- (4.5048, 3.2884)
+    node[pos = 0.5, right, rotate = 30] {\(\approx \sigma\)};
+\end{tikzpicture}
