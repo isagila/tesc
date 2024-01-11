@@ -1,0 +1,17 @@
+\documentclass[a4paper]{article}
+\usepackage{preamble/isapreamble}
+\input{misc/meta.tex}
+
+\begin{document}
+  \input{misc/head.tex}
+
+  \section{Вопросы к экзамену}
+  \foreach \i in {1,...,34} {
+	\edef\FileName{q\i}
+	\IfFileExists{questions/\FileName}{
+		\input{questions/\FileName}
+		\pagebreak
+	}
+  }
+
+\end{document}
