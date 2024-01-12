@@ -1,1 +1,29 @@
 \subsection{Градиент скалярной функции. Связь между напряженностью и потенциалом. Расчет напряженности по заданному распределению потенциалов}
+
+\begin{definition}
+    Градиент — вектор, своим направлением указывающий направление возрастания некоторой скалярной величины
+
+    $$grad\varphi=\big(\frac{\partial\varphi}{\partial x};\frac{\partial\varphi}{\partial y};\frac{\partial\varphi}{\partial z}\big)$$
+
+\end{definition}
+
+\begin{definition}
+    Связь между напряжённостью и потенциалом.
+
+    Напряжённость электрического поля равна градиенту его электрического потенциала, взятого с обратным знаком:
+
+    $$E=-grad\varphi$$
+\end{definition}
+
+Зависимость электрического потенциала можно записать уравнением $\varphi=f(x,y,z)$, 
+тогда проекции вектора напряженности на оси координат имеют вид:
+
+$$E_x=-\frac{\partial\varphi}{\partial x},\ E_y=-\frac{\partial\varphi}{\partial y},\ E_z=-\frac{\partial\varphi}{\partial z},\ $$
+
+Сам  вектор можно представить в виде
+
+$$\vec{E} = E_x \vec{i} + E_y \vec{j} + E_z \vec{k} = -\left( \frac{d\phi}{dx}\vec{i} + \frac{d\phi}{dy}\vec{j} + \frac{d\phi}{dz}\vec{k}\right)$$
+
+, что является градиентом функции $\varphi$:
+
+$$E=-grad\varphi$$
