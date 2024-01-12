@@ -16,3 +16,4 @@
 - [Дополнительные главы высшей математики (лекции)](https://isagila.github.io/tesc/03/MA-lectures.pdf)
 - [Теория вероятности (лекции)](https://isagila.github.io/tesc/03/PT-lectures.pdf)
 - [Базы данных (лекции)](https://isagila.github.io/tesc/03/DB-lectures.pdf)
+- [Физика](https://isagila.github.io/tesc/03/PH.pdf)
