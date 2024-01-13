@@ -1,0 +1,309 @@
+\subsection{%
+  Лекция \texttt{24.??.??}.%
+}
+
+\subheader{Нюансы регрессионного анализа}
+
+Пусть имеется линейное уравнение регрессии в матричной форме \(\display{\vec{X}
+= Z^T \vec{\beta} + \vec{\epsilon}}\), где \(\vec{X} = \prh{X_1, \dotsc, X_n}\)
+это столбец результатов \(n\) экспериментов, \(Z_{k \times n}\) это матрица
+плана, \(\vec{\beta} = \prh{\beta_1, \dotsc, \beta_k}^T\) это столбец
+неизвестных (теоретических) коэффициентов регрессии и \(\vec{\epsilon} =
+\prh{\epsilon_1, \dotsc, \epsilon_n}^T\) это вектор теоретических ошибок,
+возникающих из-за возможной нелинейности модели, невключенных факторов, случая и
+ошибок измерения.
+
+Ранее предполагали, что строки матрицы плана \(Z\) независимы, т.е. \(\rank Z =
+k\) (на практике почти всегда выполнено), а также \(\forall i \given[\big]
+\epsilon_i \in \ndist{0}{\sigma}\) и независимы. На практике часто бывают
+ситуации, когда ошибки коррелированны между собой и дисперсия зависит от
+эксперимента.
+
+\subheader{Взвешенный метод наименьших квадратов}
+
+Пусть ошибки \(\epsilon_i\) некоррелированны, имеют нормальное распределение с
+первым параметром \(0\), но их дисперсия зависит от эксперимента, т.е.
+
+\begin{equation*}
+  \begin{aligned}
+    \cov{\epsilon_i}{\epsilon_j} = 0
+    \qquad
+    \avg{\epsilon}_i = 0
+    \qquad
+    \variance{\epsilon_i} = \sigma^2 v_i
+  \\
+    \variance{\vec{\epsilon}}
+    = \sigma^2 \diag \prh{v_1, \dotsc, v_n}
+    = \sigma^2 V
+  \end{aligned}
+\end{equation*}
+
+В этом случае оценки по методу наименьших квадратов неэффективные. Логично
+придать наблюдениям с меньшей дисперсией больший вес. Обозначим \(w_i =
+\frac{1}{v_i}\) и каждое уравнение из системы \(\display{\vec{X} = Z^T
+\vec{\beta} + \vec{\epsilon}}\) умножим на \(\sqrt{w_i}\). Тогда
+
+\begin{equation*}
+  \widetilde{X}_i = \sqrt{w_i} X_i
+  \qquad
+  \widetilde{Z}_i^{(j)} = \sqrt{w_j} Z_i^{(j)}
+  \qquad
+  \widetilde{\epsilon}_i = \sqrt{w_i} \epsilon_i
+\end{equation*}
+
+При этом
+
+\begin{equation*}
+  \avg{\widetilde{\epsilon}}_i = 0
+  \qquad
+  \variance{\widetilde{\epsilon}_i}
+    = w_i \variance{\epsilon_i}
+    = \frac{1}{v_i} \cdot \sigma^2 v_i
+    = \sigma^2
+\end{equation*}
+
+Таким образом \(\variance{\vec{\widetilde{\epsilon}}} = \sigma^2 E\), т.е.
+получили классическую ситуацию, и при применении к этим данным метода наименьших
+квадратов получаем эффективные оценки неизвестных коэффициентов регрессии.
+
+Рассмотрим несколько приложений этой модели.
+
+\subsubheader{I.}{Модель \(\vec{X} = \beta_0 Z + \vec{\epsilon}\)}
+
+\begin{equation*}
+  \vec{X} = \mtxp{
+    x_1 \\ \vdots \\ x_n
+  }
+  \qquad
+  \vec{\beta} = \beta_0
+  \qquad
+  \vec{\epsilon} = \mtxp{
+    \epsilon_1 \\ \vdots \\ \epsilon_n
+  }
+  \qquad
+  Z^T = \mtxp{
+    z_1 \\ \vdots \\ z_n
+  }
+\end{equation*}
+
+Подставим эти данные в нормальные уравнения \(A \vec{B} = Z \vec{X}\), где
+
+\begin{equation*}
+  Z = \prh{z_1, \dotsc, z_n}
+  \qquad
+  A
+    = Z Z^T
+    = z_1^2 + \dotsc + z_n^2
+  \qquad
+  Z \vec{X}
+    = \prh{z_1, \dotsc, z_n} \mtxp{x_1 \\ \vdots \\ x_n}
+    = z_1 x_1 + \dotsc + z_n x_n
+\end{equation*}
+
+Таким образом нормальные уравнения приобретают вид
+
+\begin{equation*}
+  \begin{aligned}
+    \sum_{i = 1}^n z_i^2 \beta_0 = \sum_{i = 1}^n z_i x_i
+  \\
+    \widehat{\beta}_0 = \frac{\sum_{i = 1}^n z_i x_i}{\sum_{i = 1}^n z_i^2}
+  \end{aligned}
+\end{equation*}
+
+При взвешенном методе наименьших квадратов получаем оценку
+
+\begin{equation*}
+  \widetilde{\beta}_0
+  = \frac{\sum_{i = 1}^n w_i z_i x_i}{\sum_{i = 1}^n w_i z_i^2}
+\end{equation*}
+
+\begin{example}
+  Рассмотрим модель \(X = \beta_0 + \epsilon\), т.е. \(Z \equiv \prh{1, \dotsc,
+  1}\). Тогда
+
+  \begin{equation*}
+    \widetilde{\beta}_0
+    = \frac{\sum_{i = 1}^n w_i x_i}{\sum_{i = 1}^n w_i}
+  \end{equation*}
+
+  Это можно трактовать как результат измерений скоропортящегося измерительного
+  инструмента.
+\end{example}
+
+\begin{example}
+  Пусть проводится \(n\) серий по \(k_i\) измерений (повторные измерения).
+  Обозначим \(\avg{x}_i\) это среднее арифметическое измерений в \(i\)-ой серии,
+  а \(\epsilon_i\)~--- ошибка среднего измерения в \(i\)-ой серии. Тогда
+  дисперсия \(\variance{\epsilon_i} = \frac{\sigma^2}{k_i}\), где \(\sigma^2\)
+  это дисперсия ошибки при одном измерении. Тогда \(w_i = k_i\) и получаем
+  формулу
+
+  \begin{equation*}
+    \widetilde{\beta}_0
+    = \frac{\sum k_i x_i}{\sum k_i}
+  \end{equation*}
+\end{example}
+
+\begin{example}
+  Пусть \(X\) это потери тепла в квартире. Логично предположить, что основной
+  фактор это разница температур снаружи и внутри. Рассмотрим уравнение \(X =
+  \beta Z + \epsilon\), где \(Z\) это разница температур. Логично предположить,
+  что с возрастанием \(Z\) возрастает дисперсия ошибки. Рассмотрим две ситуации.
+
+  \subsubheader{I.}{\(\variance{\epsilon_i} = c z_i\)}
+
+  \begin{equation*}
+      \variance{\epsilon_i} = \sigma^2 \cdot \frac{c z_i}{\sigma^2}
+    \implies
+      w_i = \frac{\sigma^2}{c z_i}
+    \implies
+      \widetilde{\beta}_0
+      = \frac{\sum \frac{\sigma^2}{c z_i} z_i x_i}
+        {\sum \frac{\sigma^2}{c z_i} z_i^2}
+      = \frac{\sum x_i}{\sum z_i}
+      = \frac{\avg{x}}{\avg{z}}
+  \end{equation*}
+
+  \subsubheader{II.}{\(\variance{\epsilon_i} = c z_i^2\)}
+
+  \begin{equation*}
+      \variance{\epsilon_i} = \sigma^2 \cdot \frac{c z_i^2}{\sigma^2}
+    \implies
+      w_i = \frac{\sigma^2}{c z_i^2}
+    \implies
+      \widetilde{\beta}_0
+      = \frac{\sum \frac{\sigma^2}{c z_i^2} z_i x_i}
+        {\sum \frac{\sigma^2}{c z_i^2} z_i^2}
+      = \frac{\sum \frac{x_i}{z_i}}{\sum 1}
+      = \avg{\prh{\frac{x_i}{z_i}}}
+  \end{equation*}
+\end{example}
+
+\subheader{Коррелированные наблюдения}
+
+Пусть дисперсии ошибок \(\variance{\epsilon_i}\) различны и ошибки
+\(\epsilon_i\) коррелированны между собой, причем эта корреляция известна
+\(\cov{\epsilon_i}{\epsilon_j} = \sigma^2 v_{i, j}\). Тогда матрица ковариаций
+ошибок будет равна \(\variance{\vec{\epsilon}} = \sigma^2 V\), где \(V =
+\prh{v_{i, j}}\). Т.к. матрица \(V\) симметричная и положительно определенная,
+то существует \(\sqrt{V}\). Умножим обе части модели на \(\prh{\sqrt{V}}^{-1}\)
+слева. В результате получаем новую модель
+
+\begin{equation*}
+  \begin{aligned}
+    \vec{\widetilde{X}}
+    = \widetilde{Z}^T \vec{\beta} + \vec{\widetilde{\epsilon}}
+  \\
+    \vec{\widetilde{X}} = \sqrt{V^{-1}} \vec{X}
+    \qquad
+    \widetilde{Z}^T = \sqrt{V} Z^T
+    \qquad
+    \vec{\widetilde{\epsilon}} = \sqrt{V} \vec{\epsilon}
+  \end{aligned}
+\end{equation*}
+
+Заметим, что \(\avg{\widetilde{\epsilon}}_i = 0\) и 
+
+\begin{equation*}
+  \variance{\vec{\widetilde{\epsilon}}}
+  = \variance{\sqrt{V^{-1}} \vec{\epsilon}}
+  = \sqrt{V^{-1}} \variance{\epsilon} \prh{\sqrt{V^{-1}}}^T
+  = \sqrt{V^{-1}} \sigma^2 V \sqrt{V^{-1}}
+  = \sigma^2 E
+\end{equation*}
+
+Таким образом получили стандартную ситуацию теоремы \ref{thr:G-M} и при этих
+данных получаем эффективные оценки неизвестных коэффициентов регрессии.
+
+\subheader{Нелинейная регрессия}
+
+Помимо общего метода наименьших квадратов многие нелинейные зависимости могут
+быть сведены к линейным при помощи простых приемов. Рассмотрим несколько
+случаев.
+
+\subsubheader{I.}{\(X = \alpha + \beta f(Z) + \epsilon\)}
+
+Пусть \(f(Z)\) это известная функция, например \(f(Z) = \ln Z\)
+(быстрозамедляющийся процесс). Вычислим новые данные \(Z_i' = f(Z_i)\) и
+получим стандартную модель парной линейной регрессии \(X = \alpha + \beta Z' +
+\epsilon\).
+
+\subsubheader{II.}{Степенная \(X = \alpha Z^{\beta} \epsilon\)}
+
+Прологарифмируем обе части и получим
+
+\begin{equation*}
+  \begin{aligned}
+    \ln X = \ln \alpha + \beta \ln Z + \ln \epsilon
+  \\
+    X' = \alpha' + \beta Z' + \epsilon'
+  \end{aligned}
+\end{equation*}
+
+Далее по найденным \(\alpha'\) и \(\beta'\) находим исходные \(\alpha\) и
+\(\beta\).
+
+\subsubheader{III.}{Показательная \(X = \alpha e^{\beta Z} \epsilon\)}
+
+Прологарифмируем обе части и получим
+
+\begin{equation*}
+  \begin{aligned}
+    \ln X = \ln \alpha + \beta Z + \ln \epsilon
+  \\
+    X' = \alpha' + \beta Z + \epsilon'
+  \end{aligned}
+\end{equation*}
+
+\subsubheader{IV.}{Полиномиальная \(X = \alpha + \beta_1 Z + \dotsc + \beta_k
+Z^k + \epsilon\)}
+
+Введем новые переменные, положим \(u_i = Z^i\), тогда
+
+\begin{equation*}
+  X = \alpha + \beta_1 u_1 + \dotsc + \beta_k u_k + \epsilon
+\end{equation*}
+
+Полученное уравнение можно рассматривать как уравнение общей (множественной)
+регрессии.
+
+\begin{remark}
+  На практике обычно \(k \le 4\) во избежание мультиколлинеарности.
+\end{remark}
+
+\begin{remark}
+  При выборе между несколькими моделями выбираем ту, где коэффициент
+  детерминации больше (т.е. меньше дисперсия экспериментальных ошибок).
+\end{remark}
+
+\begin{remark}
+  Построение даже удачной регрессионной модели не означает выявления
+  причинно-следственной связи. Одна из причин заключается в том, что не учтен
+  скрытый фактор.
+\end{remark}
+
+\begin{example}
+  Строилась модель точности бомбометания. Были выбраны факторы \(Z_1\)~---
+  высота, \(Z_2\)~--- ветер и \(Z_3\)~--- количество истребителей противника.
+  В итоге была получена модель
+
+  \begin{equation*}
+    X = \beta_0 + \beta_1 Z_1 + \beta_2 Z_2 + \beta_3 Z_3 + \epsilon
+  \end{equation*}
+
+  где коэффициент \(\beta_3\) оказался больше нуля, что противоречит логике. Это
+  произошло из-за того, что в модель не был включен фактор \(Z_4\)~---
+  облачность.
+\end{example}
+
+\begin{remark}
+  Пусть эксперимент управляем и матрицу плана можно выбирать (почти)
+  произвольно. Наиболее эффективные оценки получаются в том случае, когда строки
+  матрицы плана ортогональны.
+\end{remark}
+
+\begin{remark}
+  Иногда вместо метода наименьших квадратов используется метод главных осей.
+  Допустим, что есть корреляционное облако в виде эллипса. Согласно этому методу
+  уравнение регрессии строим так, чтобы прямая совпадала с главной осью эллипса.
+\end{remark}
