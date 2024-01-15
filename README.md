@@ -17,3 +17,7 @@
 - [Теория вероятности (лекции)](https://isagila.github.io/tesc/03/PT-lectures.pdf)
 - [Базы данных (лекции)](https://isagila.github.io/tesc/03/DB-lectures.pdf)
 - [Физика](https://isagila.github.io/tesc/03/PH.pdf)
+
+### IV семестр (!pre)
+
+- [Математическая статистика (лекции)](https://isagila.github.io/tesc/04/MS-lectures.pdf)
