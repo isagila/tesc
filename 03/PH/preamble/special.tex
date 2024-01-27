@@ -1,0 +1,44 @@
+\newcommand{\LeC}{\hbox{L\kern-.125em\lower.5ex\hbox{E}\kern-.075em C}}
+
+\newcommand{\euF}{\EuScript{F}}
+\newcommand{\probP}{\mathsf{P}}
+\newcommand{\seq}[1]{\left\{ #1 \right\}}
+
+\newcommand{\bindstB}{B}
+\newcommand{\bindst}[2]{\bindstB_{#1, #2}}
+\newcommand{\geodst}[1]{G_{#1}}
+
+\newcommand{\Me}{Me}
+\newcommand{\Mo}{Mo}
+\newcommand{\smallo}{o}
+
+\newcommand{\expected}[1]{\mathbb{E} \prh{#1}}
+\newcommand{\variance}[1]{\mathbb{D} \prh{#1}}
+\newcommand{\stder}[1]{\sigma \prh{#1}}
+\newcommand{\cov}[2]{\operatorname{cov} \prh{#1, #2}}
+
+\newcommand{\tuple}[1]{\left\langle #1 \right\rangle}
+\newcommand{\segment}[2]{\left[ #1; #2 \right]}
+\newcommand{\interval}[2]{\left( #1; #2 \right)}
+
+\newcommand{\evenly}[2]{U \left( #1; #2 \right)}
+
+\newcommand{\prob}[1]{\probP \prh{#1}}
+\newcommand{\condprob}[3][\big]{\prob{#2 \given[#1] #3}}
+\newcommand{\dotpdt}[2]{\left(#1; #2\right)}
+
+\newcommand{\comb}[2]{C_{#1}^{#2}}
+\newcommand{\place}[2]{A_{#1}^{#2}}
+\newcommand{\solution}{\textbf{Решение:}}
+
+\newenvironment{ttable}[2]{
+  \table[h]
+    \centering
+  
+    \tabularx{#1}{#2}
+      \setlength{\tabcolsep}{10pt}
+      \renewcommand{\arraystretch}{2}
+}{
+    \endtabularx
+  \endtable
+}
