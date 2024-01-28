@@ -1,0 +1,334 @@
+\subsection{%
+  Лекция \texttt{24.??.??}.%
+}
+
+\subheader{Исследование статистической зависимости}
+
+Пусть случайная величина \(X\) зависит от величины \(Z\) (не обязательно
+случайной).
+
+\begin{definition}
+  Регрессией \(X\) на \(Z\) называется функция
+
+  \begin{equation*}
+    f(z) = \expected{X \given Z = z}
+  \end{equation*}
+
+  Она показывает зависимость среднего значения \(X\) от значения \(Z\).
+  Уравнение \(x = f(z)\) называется уравнением регрессии, а ее график~--- линей
+  регрессии.
+\end{definition}
+
+Пусть при \(n\) экспериментах при значениях \(z_1, \dotsc, z_n\) величины \(Z\)
+наблюдались соответствующие значения \(x_1, \dotsc, x_n\) случайной величины
+\(X\). Обозначим через \(\epsilon_i = x_i - f(z_i)\) разницу между
+экспериментальными и теоретическими значениями \(X\). Тогда \(x_i = f(z_i) +
+\epsilon_i\), где \(\epsilon_i\) можно считать ошибкой наблюдения, случая и
+влияния неучтенный факторов.
+
+\begin{remark}
+  Обычно можно считать, что \(\epsilon_i\)~--- независимые одинаковые нормальные
+  случайные величины с нулевым первым моментом, т.к.
+
+  \begin{equation*}
+    a
+    = \expected{\epsilon_i}
+    = \expected{X_i} - \expected{X \given Z = z_i}
+    = \expected{X \given Z = z_i} - \expected{X \given Z = z_i}
+    = 0
+  \end{equation*}
+\end{remark}
+
+\begin{remark}
+  Второй параметр \(\sigma^2\) не всегда одинаковый, в некоторых ситуациях
+  (временные ряды) ошибки \(\epsilon_i\) могут быть зависимы.
+\end{remark}
+
+Задача состоит в том, чтобы по данным значениям \((z_1, x_1), \dotsc, (z_n,
+x_n)\) как можно точнее оценить функцию регрессии \(f(z)\). При этом
+предполагаем (часто из теории), что функция \(f(z)\) определенного типа, но
+параметры которой не известны. В противном случае лучший решением была бы любая
+кривая, проходящая через данные точки.
+
+\subheader{Метод наименьших квадратов}
+
+Этот метод состоит в выборе параметром функции \(f(z)\) таким образом, чтобы
+сумма квадратов ошибок была наименьшей.
+
+\begin{definition}
+  Пусть \(\Theta = \prh{\Theta_1, \dotsc, \Theta_k}\)~--- набор неизвестных
+  параметров функции \(f(z)\). Оценка \(\widehat{\Theta}\), при которой
+  достигается минимум \(\sum \epsilon_i^2\), называется оценкой метода
+  наименьших квадратов.
+\end{definition}
+
+\subheader{Линейная парная регрессия}
+
+Пусть имеется линейная регрессия \(f(z) = a + b z\), тогда \(X_i = a + b z_i +
+\epsilon_i\). Найдем оценки неизвестных параметров \(a\) и \(b\) методом
+наименьших квадратов.
+
+\begin{equation*}
+  \sum_{i = 1}^n \epsilon_i^2
+    = \sum_{i = 1}^n \prh{x_i - a - b z_i}^2
+    \to \min
+\end{equation*}
+
+Найдем частные производные.
+
+\begin{equation*}
+  \begin{aligned}
+    \frac{\partial}{\partial a} \sum_{i = 1}^n \epsilon_i^2
+    = 2 \sum_{i = 1}^n \prh{x_i - a - b z_i} \cdot (-1)
+    = -2 \prh{\sum_{i = 1}^n x_i - \sum_{i = 1}^n a - b \sum_{i = 1}^n z_i}
+    = -2 \prh{n \avg{x} - n a - b n \avg{z}}
+  \\
+    \frac{\partial}{\partial b} \sum_{i = 1}^n \epsilon_i^2
+    = 2 \sum_{i = 1}^n \prh{x_i - a - b z_i} \cdot (-z_i)
+    = -2 \prh{
+      \sum_{i = 1}^n x_i z_i
+      - \sum_{i = 1}^n a z_i
+      - b \sum_{i = 1}^n z_i^2
+    }
+    = -2 \prh{n \avg{x z} - a n \avg{z} - b n \avg{z^2}}
+  \end{aligned}  
+\end{equation*}
+
+Приравняем их к нулю.
+
+\begin{equation*}
+  \begin{cases}
+    -2 \prh{n \avg{x} - n a - b n \avg{z}} = 0 \\
+    -2 \prh{n \avg{x z} - a n \avg{z} - b n \avg{z^2}} = 0
+  \end{cases}
+  \iff
+  \begin{cases}
+    a + b \avg{z} = \avg{x} \\
+    a \avg{z} + b \avg{z^2} = \avg{x z}
+  \end{cases}
+\end{equation*}
+
+Получаем нормальную систему уравнений. Решим ее
+
+\begin{equation*}
+  \begin{cases}
+    a = \avg{x} - b \avg{z} \\
+    \prh{\avg{x} - b \avg{z}} \avg{z} + b \avg{z^2} = \avg{x z}
+  \end{cases}
+  \iff
+  \begin{cases}
+    a = \avg{x} - b \avg{z} \\
+    b \prh{\avg{z^2} - \prh{\avg{z}}^2} = \avg{x z} - \avg{x} \ \avg{z}
+  \end{cases}
+  \iff
+  \begin{cases}
+    \widehat{a} = \avg{x} - b \avg{z} \\
+    \widehat{b} = \frac{\avg{x z} - \avg{x} \ \avg{z}}{\widehat{\sigma}_z^2}
+  \end{cases}
+\end{equation*}
+
+Получили оценки параметров \(a\) и \(b\) методов наименьших квадратов. Обозначим
+\(\avg{x}_z = \expected{X \given Z = z}\)~--- условное среднее. Запишем
+уравнение линейной регрессии в более удобном виде
+
+\begin{equation*}
+  \begin{aligned}
+    \avg{x}_z & = & a + b z
+  \\
+    \avg{x}_z & = & \avg{x} - b \avg{z} + b z
+  \\
+    \avg{x}_z - \avg{x} & = & b \prh{z - \avg{z}}
+  \\
+    \avg{x}_z - \avg{x} & = &
+      \frac{\avg{x z} - \avg{x} \ \avg{z}}{\widehat{\sigma}_z^2}
+      \cdot \prh{z - \avg{z}}
+  \\
+    \avg{x}_z - \avg{x} & = &
+      \frac{\avg{x z} - \avg{x} \ \avg{z}}
+        {\widehat{\sigma}_x \widehat{\sigma}_z}
+      \cdot \frac{\widehat{\sigma}_x}{\widehat{\sigma}_z}
+      \cdot \prh{z - \avg{z}}
+  \\
+    \avg{x}_z - \avg{x} & = &
+      \rho^* \cdot \frac{\widehat{\sigma}_x}{\widehat{\sigma}_z}
+      \cdot \prh{z - \avg{z}}
+  \\
+    \frac{\avg{x}_z - \avg{x}}{\widehat{\sigma}_x} & = & \rho^*
+      \cdot \frac{z - \avg{z}}{\widehat{\sigma}_z}
+  \end{aligned}
+\end{equation*}
+
+где
+
+\begin{equation*}
+  \rho^* = \frac{\avg{x z} - \avg{x} \ \avg{z}}
+    {\widehat{\sigma}_x \widehat{\sigma}_z}
+\end{equation*}
+
+это выборочный коэффициент линейной корреляции. Итого получили выборочное
+уравнение линейной регрессии
+
+\begin{equation*}
+  \frac{\avg{x}_z - \avg{x}}{\widehat{\sigma}_x} = \rho^*
+    \cdot \frac{z - \avg{z}}{\widehat{\sigma}_z}
+\end{equation*}
+
+\begin{remark}
+  При \(n \to \infty\) имеем \(\avg{x} \to \expected{X}\), \(\avg{z} \to
+  \expected{Z}\), \(\avg{x z} \to \expected{x z}\) и следовательно выборочное
+  уравнение регрессии стремится к
+
+  \begin{equation*}
+    \frac{\expected{X \given Z = z} - \expected{X}}{\sigma_x} = \rho
+      \frac{z - \expected{Z}}{\sigma_z}
+  \end{equation*}
+
+  Это теоретическое уравнение линейной регрессии, где
+
+  \begin{equation*}
+    \rho = \frac{\expected{x z} - \expected{x} \expected{z}}{\sigma_x \sigma_z}
+  \end{equation*}
+  
+  это теоретический коэффициент линейной корреляции.
+\end{remark}
+
+\galleryone{01_09_01}{Геометрический смысл прямой линейной регрессии}
+
+Прямая строится таким образом, чтобы сумма квадратов длин синих отрезков была
+наименьшей.
+
+\subheader{Выборочный коэффициент линейной корреляции}
+
+\begin{definition}
+  Выборочным коэффициентом линейной корреляции называется величина
+
+  \begin{equation*}
+    \rho^* = \frac{\avg{x z} - \avg{x} \ \avg{z}}
+      {\widehat{\sigma}_x \widehat{\sigma}_z}
+  \end{equation*}
+
+  Т.к. при замене в этой формуле средних на математические ожидания и выборочных
+  средних квадратических отклонений на теоретические получаем теоретический
+  коэффициент линейной корреляции \(\rho_{x z}\), то данная величина является
+  его точной оценкой. Таким образом выборочный коэффициент линейной корреляции
+  характеризует силу линейной связи между случайными величинами. Его знак
+  показывает, является ли она прямой или обратной.
+\end{definition}
+
+Для оценки коэффициента линейной корреляции обычно используется шкала Чеддока
+(\ref{tbl:chaddock}).
+
+\spreadsheet{01_09_02}{0.6 \linewidth}{X|X}
+  {Шкала Чеддока}{chaddock}
+
+\subheader{Проверка гипотезы о значимости выборочного коэффициента корреляции}
+
+Пусть двумерная случайная величина \(\tuple{z, x}\) распределена нормально. По
+выборке объема \(n\) найден выборочный коэффициент линейной корреляции
+\(\rho^*\). Теоретический коэффициент линейной корреляции обозначим \(\rho\).
+Проверяется основная гипотеза \(H_0\) о том, что \(\rho = 0\), т.е. коэффициент
+\(\rho^*\) статистически не значим, против альтернативной гипотезы \(H_1\) о
+том, что \(\rho \neq 0\), т.е. коэффициент \(\rho^*\) статистически значим.
+
+\begin{theorem}
+  Если гипотеза \(H_0\) верна, то
+
+  \begin{equation*}
+    K = \frac{\rho^* \sqrt{n - 2}}{\sqrt{1 - \prh{\rho^*}^2}}
+    \in \Tdist{n - 2}
+  \end{equation*}
+\end{theorem}
+
+На основе этой теоремы получаем критерий: пусть \(\tcrit\) это квантиль
+распределения \(\abs{\Tdist{n - 2}}\) уровня значимости \(\alpha\), тогда
+
+\begin{equation*}
+  \begin{cases}
+    H_0, & \abs{K} < \tcrit \\
+    H_1, & \abs{K} \ge \tcrit
+  \end{cases}
+\end{equation*}
+
+\subheader{Исторический смысл понятия регрессия}
+
+Исследовалась зависимость роста детей от роста родителей (Гальтон, \(\approx
+1886\) год). На основе собранных данных были получены следующие формулы
+
+\begin{equation*}
+  \begin{aligned}
+    \expected{P_s \given z_f = z_1; z_m = z_2}
+    = 0.27 z_1 + 0.2 z_2 + const
+  \\
+    \expected{P_d \given z_f = z_1; z_m = z_2}
+    = \frac{1}{1.08} P_s
+  \end{aligned}
+\end{equation*}
+
+Казалось бы, что чем выше родители, тем выше должны быть их дети (прямая
+корреляция). В целом так и есть, но есть исключение: дети самых высоких
+родителей как правило были среднего роста, т.е. все сходилось к среднему
+значению. Отсюда и название \quote{эффект регрессии} и \quote{уравнение
+регрессии}.
+
+\subheader{Выборочное корреляционное отношение}
+
+Пусть имеется \(k\) выборок случайной величины \(X\) при значениях \(z_1,
+\dotsc, z_k\) фактора \(Z\).
+
+\begin{definition}
+  Выборочным корреляционным отношением называется величина
+
+  \begin{equation*}
+    \eta_{x z} = \sqrt{\frac{\varianceM}{\varianceO}}
+  \end{equation*}
+\end{definition}
+
+\begin{lemma}
+  \begin{equation*}
+    0 \le \eta_{x z} \le 1
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  По \ref{thr:variance-expansion}
+
+  \begin{equation*}
+    \begin{rcases}
+      \varianceO = \varianceM + \varianceB \\
+      \varianceO \ge 0 \\
+      \varianceB \ge 0 \\
+      \varianceM \ge 0 \\
+    \end{rcases}
+    \implies
+    0 \le \varianceM \le \varianceO
+    \implies
+    0 \le \frac{\varianceM}{\varianceO} \le 1
+  \end{equation*}
+\end{proof}
+
+\begin{lemma}
+  Если \(\eta_{x z} = 1\), то имеется функциональная зависимость \(x = f(z)\).
+\end{lemma}
+
+\begin{proof}
+  Если \(\eta_{x z} = 1\), то \(\varianceM = \varianceO\) и \(\varianceB = 0\).
+  Т.е. при определенном значении \(z\) случайная величина \(X\) всегда принимает
+  одно и то же значение, что является функциональной зависимостью.
+\end{proof}
+
+\begin{lemma}
+  Если \(\eta_{x z} = 0\), то корреляция отсутствует.
+\end{lemma}
+
+\begin{proof}
+  Если \(\eta_{x z} = 0\), то \(\varianceM = 0\), т.е. при разных уровнях \(z\)
+  получили одно и то же выборочное среднее, что и означает отсутствие
+  корреляции.
+\end{proof}
+
+\begin{lemma}
+  Имеет место неравенство \(\eta \ge \abs{\rho^*}\). Причем \(\eta =
+  \abs{\rho^*}\) тогда и только тогда, когда имеет место точная корреляционная
+  зависимость (все точки экспериментальных данных \((z_i, x_i)\) лежат на одной
+  прямой).
+\end{lemma}

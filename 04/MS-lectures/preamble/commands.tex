@@ -1,0 +1,153 @@
+\newcommand{\todo}{\textbf{\color{red} TODO: \hspace{6pt}}}
+
+\renewcommand{\dateseparator}{.}
+\setlength\parindent{0pt}
+\DeclareSymbolFontAlphabet{\mathbbold}{bbold}
+\DeclareSymbolFontAlphabet{\mathbb}{AMSb}
+
+\let\pair\relax
+\let\abs\relax
+\newcommand{\pair}[1]{\left\langle #1 \right\rangle}
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\NewDocumentCommand{\prh}{o m}{%
+  \IfNoValueTF{#1}%
+  { \left( #2 \right) }%
+  { #1( #2 #1) }%
+}
+\newcommand{\given}[1][\Big]{\nonscript\,#1\vert\nonscript\,\mathopen{}}
+
+\renewcommand{\phi}{\varphi}
+\renewcommand{\epsilon}{\varepsilon}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+
+\renewcommand{\bar}{\overline}
+\renewcommand{\vec}[1]{\vv{\vphantom{b}#1}}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\le}{\leqslant}
+
+\newcommand{\display}[1]{\displaystyle{#1}}
+\newcommand{\existsone}{\exists!\,}
+\renewcommand{\quote}[1]{\enquote{#1}}
+
+\renewcommand{\iff}[1][]{\xLongleftrightarrow{\text{#1}}}
+\renewcommand{\implies}[1][]{\xLongrightarrow{\text{#1}}}
+\renewcommand{\impliedby}[1][]{\xLongleftarrow{\text{#1}}}
+\newcommand{\bydef}{\iff{\text{def}}}
+\newcommand{\eqby}[1]{\xlongequal{\text{#1}}}
+
+\newcommand{\ness}{\((\impliedby)\) }
+\newcommand{\suff}{\((\implies)\) }
+
+\newcommand{\larr}[1]{\xleftarrow{#1}}
+\newcommand{\rarr}[1]{\xrightarrow{#1}}
+\newcommand{\Larr}[1]{\xlongleftarrow{#1}}
+\newcommand{\Rarr}[1]{\xlongrightarrow{#1}}
+
+\newcommand{\mtx}[1]{\begin{matrix} #1 \end{matrix}}
+\newcommand{\mtxp}[1]{\begin{pmatrix} #1 \end{pmatrix}}
+\newcommand{\mtxv}[1]{\begin{vmatrix} #1 \end{vmatrix}}
+\newcommand{\mtxb}[1]{\begin{bmatrix} #1 \end{bmatrix}}
+
+\newcommand{\makesubfigure}[4]{
+  \begin{subfigure}[b]{#4\textwidth}
+    \centering
+    \input{data/#1#2.tex}
+    \caption{#3}
+    \label{fig:#1#2}
+  \end{subfigure}
+}
+\newcommand{\galleryone}[3][h]{
+  \refstepcounter{points}
+  \begin{figure}[#1]
+    \centering
+    \input{data/#2.tex}
+    \caption{#3}
+    \label{fig:#2}
+  \end{figure}
+}
+\newcommand{\gallerytwo}[4]{
+  \refstepcounter{points}
+  \begin{figure}[h]
+    \centering
+    \makesubfigure{#1}{a}{#3}{0.48}
+    \makesubfigure{#1}{b}{#4}{0.48}
+    \caption{#2}
+    \label{fig:#1}
+  \end{figure}
+}
+\newcommand{\gallerydouble}[4]{
+  \begin{minipage}{\textwidth}
+    \centering
+    \begin{minipage}{0.45\textwidth}
+      \galleryone[H]{#1}{#2}
+    \end{minipage}%
+    \hspace{0.05\textwidth}%
+    \begin{minipage}{0.45\textwidth}
+      \galleryone[H]{#3}{#4}
+    \end{minipage}
+  \end{minipage}
+}
+\newcommand{\gallerythree}[5]{
+  \refstepcounter{points}
+  \begin{figure}[h]
+    \centering
+    \makesubfigure{#1}{a}{#3}{0.3}%
+    \hspace{0.03\textwidth}%
+    \makesubfigure{#1}{b}{#4}{0.3}%
+    \hspace{0.03\textwidth}%
+    \makesubfigure{#1}{c}{#5}{0.3}
+    \caption{#2}
+    \label{fig:#1}
+  \end{figure}
+}
+\newcommand{\figref}[1]{рис.~\ref{fig:#1}}
+
+\newcommand{\spreadsheet}[5]{
+  \refstepcounter{points}
+  \begin{table}[htbp]
+    \centering
+    \begin{tabularx}{#2}{#3}
+      \input{data/#1.tex}
+    \end{tabularx}
+    \caption{#4}
+    \label{tbl:#5}
+  \end{table}
+}
+
+\setlength{\columnsep}{1cm}
+\newenvironment{twocolumns}{
+  \begin{minipage}{\linewidth}
+    \begin{multicols}{2}
+}{
+    \end{multicols}
+  \end{minipage}
+  \medskip
+}
+
+\newenvironment{important}{
+  \begin{tcolorbox}[
+    colback = blue!5!white,
+    colframe = blue!75!black,
+    boxsep = 12pt,
+    left = 0pt,
+    right = 0pt,
+    top = 0pt,
+    bottom = 0pt,
+  ]
+}{
+  \end{tcolorbox}
+}
+
+\makeatletter
+\newcommand\underparen[1]{\@ifnextchar_{\uphelp{\uparen{#1}}}{\uparen{#1}}}
+\makeatother
+\def\uphelp#1_#2{\ensurestackMath{\stackunder[1pt]{#1}{\scriptstyle #2}}}
+\newcommand\uparen[1]{\setbox0=\hbox{$#1$}\ensurestackMath{%
+  \stackunder[0pt]{#1}{\rotatebox{90}{$\left(%
+  \rule[\dimexpr-.5\wd0+\dp\strutbox-1.3pt]{0pt}{\wd0}\right.$}}%
+}}
+\newcommand{\under}[2]{\underparen{#1}_{#2}}

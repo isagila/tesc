@@ -1,0 +1,463 @@
+\subsection{%
+  Лекция \texttt{24.??.??}.%
+}
+
+\subheader{Ковариация и ее свойства}
+
+\begin{definition}
+  Ковариацией случайных величин \(X\) и \(Y\) называется
+
+  \begin{equation*}
+    \cov{X}{Y}
+    = \expected{\prh{X - \expected{X}} \prh{Y - \expected{Y}}}
+    = \expected{X Y} - \expected{X} \expected{Y}
+  \end{equation*}
+
+  Она является индикатором наличия и направления связи.
+\end{definition}
+
+Пусть получены экспериментальные данные \((x_1, y_1), \dotsc, (x_n, y_n)\)
+случайных величин \(X\) и \(Y\).
+
+\begin{definition}
+  Выборочной ковариацией называется величина
+
+  \begin{equation*}
+    \scov{X}{Y}
+    = \frac{1}{n} \sum_{i, j} \prh{x_i - \avg{x}} \prh{y_j - \avg{y}}
+    = \frac{1}{n} \sum_{i, j} x_i y_j - \avg{x} \ \avg{y}
+    = \avg{x y} - \avg{x} \ \avg{y}
+  \end{equation*}
+\end{definition}
+
+\begin{remark}
+  Ясно, что выборочная ковариация является точной оценкой теоретической, но это
+  смещенная оценка. Несмещенной оценкой будет \(\frac{n}{n - 1} \scov{X}{Y}\).
+\end{remark}
+
+\subsubheader{}{Свойства ковариации}
+
+\begin{enumerate}
+\item
+  \(\cov{X}{Y} = \cov{Y}{X}\)
+
+\item
+  \(\cov{X}{a} = 0\), где \(a = const\)
+
+\item
+  \(\cov{X}{b Y} = b \cov{X}{Y}\)
+
+\item
+  \(\cov{X + Y}{Z} = \cov{X}{Z} + \cov{Y}{Z}\)
+
+\item
+  \(\cov{X}{X} = \variance{X}\)
+
+\item
+  \(\variance{X + Y} = \variance{X} + \variance{Y} + 2 \cov{X}{Y}\)
+\end{enumerate}
+
+\begin{remark}
+  Эти же свойства имеет и выборочная ковариация.
+\end{remark}
+ 
+\subheader{Анализ модели парной линейной регрессии}
+
+Пусть при \(n\) экспериментах получены значения \((z_1, x_1), \dotsc, (z_n,
+x_n)\) величин \(X\) (случайная) и \(Z\) (фактор, не обязательно случайная).
+Пусть \(X = \alpha + \beta Z + \epsilon\) это теоретическая модель линейной
+регрессии. Случайный член \(\epsilon\) отражает влияние неучтенных факторов,
+возможную нелинейность модели, ошибок измерения и просто случая. Цель
+заключается в том, чтобы дать оценки неизвестным параметрам \(\alpha\),
+\(\beta\) и \(\epsilon\).
+
+Пусть при обработке данных методом наименьших квадратов нашли выборочное
+уравнение линейной регрессии \(\widehat{X} = a + b \widehat{Z}\). Тогда \(X_i =
+a + b Z_i + \epsilon_i\), где \(\epsilon_i = X_i - a - b Z_i\)~--- наблюдаемые
+ошибки. \(a\) и \(b\) это точные оценки неизвестных параметров \(\alpha\) и
+\(\beta\).
+
+\subsubheader{}{Свойства ошибок \(\epsilon_i\)}
+
+\begin{lemma}
+  \begin{equation*}
+    \avg{\epsilon_i} = 0
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  \begin{equation*}
+    \begin{aligned}
+      a = \avg{x} - b \avg{z}
+      \implies
+      a + b \avg{z} = \avg{x}
+    \\
+      \avg{\epsilon_i}
+      = \avg{X_i - a - b Z_i}
+      = \avg{X_i} - \avg{a + b z_i}
+      = \avg{x} - \avg{x}
+      = 0
+    \end{aligned}
+  \end{equation*}
+\end{proof}
+
+\begin{lemma}
+  \begin{equation*}
+    \cov{\widehat{x}}{\epsilon} = 0
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  \begin{equation*}
+    b
+    = \frac{\avg{x z} - \avg{x} \ \avg{z}}{\variance{Z}}
+    = \frac{\cov{X}{Z}}{\variance{Z}}
+    \implies
+    b \variance{Z} - \cov{X}{Z} = 0
+  \end{equation*}
+
+  Значит
+
+  \begin{equation*}
+    \cov{\widehat{x}}{\epsilon}
+    = \cov{a + b Z}{X - a - b Z}
+    = \cov{b Z}{X - b Z}
+    = b \cov{Z}{X} - b^2 \cov{Z}{Z}
+    = b \prh{\cov{Z}{X} - b \variance{Z}}
+    = 0
+  \end{equation*}
+\end{proof}
+
+\subheader{Анализ дисперсии результатов}
+
+Дисперсия наблюдаемых значений \(X_i\):
+
+\begin{equation*}
+  \variance{X} = \frac{1}{n} \sum_i \prh{x_i - \avg{x}}^2
+\end{equation*}
+
+Дисперсия расчетных значений \(\widehat{X}_i = a + b Z_i\):
+
+\begin{equation*}
+  \variance{\widehat{X}} = \frac{1}{n} \sum_i \prh{\widehat{x}_i - \avg{x}}^2
+\end{equation*}
+
+Дисперсия экспериментальных ошибок:
+
+\begin{equation*}
+  \variance{\epsilon}
+  = \frac{1}{n} \sum_i \prh{\epsilon_i - \avg{\epsilon}}^2
+  = \frac{1}{n} \sum_i \epsilon_i^2
+\end{equation*}
+
+Знаем, что \(X_i = a + b Z_i + \epsilon_i\), т.е. \(X_i = \widehat{X}_i +
+\epsilon_i\). Применим дисперсию к обеим частям, и получим
+
+\begin{equation*}
+  \variance{X}
+  = \variance{\widehat{X}} + \variance{\epsilon} + 2 \cov{\widehat{X}}{\epsilon}
+  = \variance{\widehat{X}} + \variance{\epsilon}
+\end{equation*}
+
+Получили разложение дисперсии. Ясно, что качестве модели будет тем лучше, чем
+меньше дисперсия ошибок (в этом и суть метода наименьших квадратов). Значит
+модель будет тем лучше, чем больше доля первого слагаемого.
+
+\begin{definition}
+  Коэффициентом детерминации называется величина
+
+  \begin{equation*}
+    R^2
+    = \frac{\variance{\widehat{X}}}{\variance{X}}
+    = 1 - \frac{\variance{\epsilon}}{\variance{X}}
+  \end{equation*}
+\end{definition}
+
+Смысл коэффициента детерминации заключается в том, что это доля дисперсии
+объясненной при помощи данной модели. Величину
+\(\display{\frac{\variance{\epsilon}}{\variance{X}}}\) можно трактовать как долю
+необъясненной дисперсии.
+
+\begin{remark}
+  Ясно, что \(0 \le R^2 \le 1\), причем чем больше \(R^2\), тем выше качество
+  модели. Если \(R^2 = 1\), то \(\variance{\epsilon} = 0\) и, т.к.
+  \(\avg{\epsilon} = 0\), то \(\forall i \given \epsilon_i = 0\). Таким образом
+  получили идеальную модель, все точки данных легли на прямую регрессии. Если
+  \(R^2 = 0\), то \(\variance{\widehat{X}} = 0\) и \(\widehat{X} = \avg{X}\),
+  т.е. построили ничего не объясняющую модель.
+\end{remark}
+
+\subheader{Проверка гипотезы о значимости уравнения регрессии}
+
+Проверяется основная гипотеза \(H_0\) о том, что \(R_{\text{т}}^2 = 0\) (т.е.
+\(R^2\) статистически не значим), против альтернативной \(H_1\) о том, что 
+\(R_{\text{т}}^2 \neq 0\) (т.е. \(R^2\) статистически значим).
+
+\begin{theorem}
+  Если нулевая гипотеза верна, то
+
+  \begin{equation*}
+    K = \frac{R^2 (n - 2)}{1 - R^2} \in \Fdist{1}{n - 2}
+  \end{equation*}
+\end{theorem}
+
+На основе этой теоремы получаем критерий: пусть \(\tcrit\) это квантиль
+распределения \(\Fdist{1}{n - 2}\) уровня значимости \(\alpha\), тогда
+
+\begin{equation*}
+  \begin{cases}
+    H_0, & \abs{K} < \tcrit \\
+    H_1, & \abs{K} \ge \tcrit
+  \end{cases}
+\end{equation*}
+
+\begin{remark}
+  Т.к. \(R^2 = 0 \iff b = 0\), то это одновременно равносильно проверке гипотезы
+  \(H_0\) о том, что \(\beta = 0\).
+\end{remark}
+
+\subheader{Связь между коэффициентом детерминации и коэффициентом линейной
+корреляции} 
+
+\begin{lemma}
+  \begin{equation*}
+    \sqrt{R^2} = \rho_{\widehat{X}, X}
+  \end{equation*}
+
+  где \(\rho_{\widehat{X}, X}\) это коэффициент линейной корреляции между
+  расчетными и наблюдаемыми значениями.
+\end{lemma}
+
+\begin{proof}
+  \begin{equation*}
+    \cov{\widehat{X}}{X}
+    = \cov{\widehat{X}}{\widehat{X} + \epsilon}
+    = \cov{\widehat{X}}{\widehat{X}} + \under{\cov{\widehat{X}}{\epsilon}}{= 0}
+    = \variance{\widehat{X}}
+  \end{equation*}
+
+  Таким образом
+
+  \begin{equation*}
+    \rho_{\widehat{X}, X}
+    = \frac{\cov{\widehat{X}}{X}}{\sqrt{\variance{\widehat{X}} \variance{X}}}
+    = \frac{\variance{\widehat{X}}}{\sqrt{\variance{\widehat{X}} \variance{X}}}
+    = \sqrt{\frac{\variance{\widehat{X}}}{\variance{X}}}
+    = \sqrt{R^2}
+  \end{equation*}
+\end{proof}
+
+\begin{lemma}
+  \begin{equation*}
+    \rho_{\widehat{X}, X} = \rho_{X, Z}
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  \begin{equation*}
+    \begin{aligned}
+      \cov{\widehat{X}}{X}
+      = \cov{a + b Z}{X}
+      = b \cov{Z}{X}
+    \\
+      \variance{\widehat{X}}
+      = \variance{a + b Z}
+      = b^2 \variance{Z}
+    \end{aligned}
+  \end{equation*}
+
+  Значит
+
+  \begin{equation*}
+    \rho_{\widehat{X}, X}
+    = \frac{\cov{\widehat{X}}{X}}{\sqrt{\variance{\widehat{X}} \variance{X}}}
+    = \frac{b \cov{Z}{X}}{\sqrt{b^2 \variance{Z} \variance{X}}}
+    = \frac{\cov{Z}{X}}{\sqrt{\variance{Z} \variance{X}}}
+    = \rho_{X, Z}
+  \end{equation*}
+\end{proof}
+
+\begin{remark}
+  В случае парной линейной регрессии коэффициент детерминации совпадает с
+  квадратом коэффициента корреляции, т.е. \(R^2 = \rho_{Z, X}^2\)
+\end{remark}
+
+\begin{remark}
+  В случае парной линейной регрессии совпадают результаты проверок гипотез
+  \(H_0 \colon R_{\text{t}}^2 = 0\), \(H_0 \colon \rho_{Z, X} = 0\) и \(H_0
+  \colon \beta = 0\).
+\end{remark}
+
+\subheader{Теорема Гаусса---Маркова}
+
+Пусть \(X_i = \alpha + \beta Z_i + \epsilon_i\) это теоретическая модель
+линейной регрессии, а \(\widehat{X} = a + b Z\) это выборочная уравнение
+линейной регрессии, полученное методом наименьших квадратов. Хотим узнать,
+насколько хороши оценки \(a\) и \(b\) неизвестных параметров \(\alpha\) и
+\(\beta\).
+
+\begin{theorem}[Гаусса---Маркова] \label{thr:G-M}
+  Пусть выполнены следующие условия:
+
+  \begin{enumerate}
+  \item
+    Случайные члены \(\epsilon_i\) независимы и имеют одинаковое нормальное
+    распределение \(\ndist{0}{\sigma^2}\).
+
+  \item
+    Случайные величины \(Z_i\) и \(\epsilon_i\) независимы.
+  \end{enumerate}
+
+  Тогда оценка \((a, b)\) является наилучшей линейной несмещенной оценкой
+  неизвестных параметров \(\alpha\) и \(\beta\), т.е.
+
+  \begin{enumerate}
+  \item
+    Состоятельность: \(a \Rarr{\probP} \alpha\) и \(b \Rarr{\probP} \beta\) при
+    \(n \to \infty\).
+
+  \item
+    Несмещенность: \(\expected{a} = \alpha\) и \(\expected{b} = \beta\).
+
+  \item
+    Эффективность: \(a\) и \(b\) имеют наименьшую дисперсию в классе линейных
+    оценок, равную
+
+    \begin{equation*}
+      \variance{a} = \frac{\avg{z^2} \sigma^2}{n \variance{Z}}
+      \qquad
+      \variance{b} = \frac{\sigma^2}{n \variance{Z}}
+    \end{equation*}
+  \end{enumerate}
+\end{theorem}
+
+\begin{remark}
+  Если \(\epsilon_i\) зависимы или имеют разные дисперсии, то оценки по методу
+  наименьших квадратов становятся неэффективными.
+\end{remark}
+
+\begin{remark}
+  Если случайные величины \(Z_i\) и \(\epsilon_i\) зависимы, то оценки
+  становятся смещенными и могут быть даже несостоятельными.
+\end{remark}
+
+\subheader{Стандартные ошибки коэффициентов регрессии}
+
+Видим, что дисперсии \(\variance{a}\) и \(\variance{b}\) зависят от дисперсии
+\(\sigma^2\) случайного члена. По данным выборки экспериментальных ошибок
+\(\epsilon_i\) получаем оценку дисперсии ошибок
+
+\begin{equation*}
+  \widehat{\sigma}^2 = \frac{1}{n} \sum_i \epsilon_i^2
+\end{equation*}
+
+Однако это оценка смещенная, т.к.
+
+\begin{equation*}
+  \expected{\frac{1}{n} \sum_i \epsilon_i^2} = \frac{n - 2}{n} \sigma^2
+\end{equation*}
+
+поэтому несмещенной оценкой дисперсии \(\sigma^2\) будет величина
+
+\begin{equation*}
+  S^2 = \frac{1}{n - 2} \sum_i \epsilon_i^2
+\end{equation*}
+
+\begin{definition}
+  Величина \(S\) это стандартная ошибка регрессии. Она характеризует разброс
+  результата вокруг линии регрессии.
+\end{definition}
+
+Из этой формулы и \ref{thr:G-M} получем оценки дисперсий \(\variance{a}\) и
+\(\variance{b}\):
+
+\begin{equation*}
+  S_a^2 = \frac{\avg{z^2} S^2}{n \variance{z}}
+  \qquad
+  S_b^2 = \frac{S^2}{n \variance{z}}
+\end{equation*}
+
+\begin{definition}
+  Коэффициенты \(S_a\) и \(S_b\) называются стандартными ошибками коэффициентов
+  регрессии.
+\end{definition}
+
+\subheader{Прогнозирование в регрессионных моделях}
+
+Пусть \(X_i = \alpha + \beta Z_i + \epsilon_i\) это теоретическая модель, а
+\(\widehat{X} = a + b Z\) это модель метода наименьших квадратов. С помощью
+данной модели надо дать прогноз значения \(X_p\) при данном значении фактор
+\(Z_p\). Тогда \(X_p = \alpha + \beta Z_p + \epsilon_i\) это реальное значение,
+а \(\widehat{X}_p = a + b Z_p\)~--- его точечная оценка (точечный прогноз).
+Обозначим \(\Delta_p = \widehat{X}_p - X_p\) ошибку прогноза.
+
+\begin{lemma}
+  \begin{equation*}
+    \expected{\Delta_p} = 0
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  \todo самостоятельно
+\end{proof}
+
+\begin{lemma}
+  \begin{equation*}
+    \variance{\Delta_p} = \prh{
+      1 + \frac{1}{n} + \frac{\prh{Z_p - \avg{z}}^2}{n \variance{Z}}
+    } \cdot \sigma^2
+  \end{equation*}
+
+  где \(\sigma^2 = \variance{\epsilon}\) это дисперсия случайного члена.
+\end{lemma}
+
+\begin{remark}
+  Если \(\sigma^2\) заменить на \(S^2\), то получаем стандартную ошибку прогноза
+
+  \begin{equation*}
+    S_{\Delta p} = S \sqrt{
+      1 + \frac{1}{n} + \frac{\prh{Z_p - \avg{z}}^2}{n \variance{Z}}
+    }
+  \end{equation*}
+\end{remark}
+
+\begin{remark}
+  Проанализируем полученное выражение для \(\variance{\Delta p}\).
+
+  \begin{enumerate}
+  \item
+    Точность прогноза ограничена значением \(\sigma^2\), т.е. \(\variance{\Delta
+    p} \ge \sigma^2\).
+
+  \item
+    \(\variance{\Delta p} \to \sigma^2\) при \(n \to \infty\), т.е. чем больше
+    объем выборки, тем более качественная модель.
+
+  \item
+    Чем дальше \(Z_p\) от \(\avg{Z}\), тем хуже качество прогноза
+    (\figref{01_10_01}). Наилучшая точность достигается при \(Z_p = \avg{Z}\),
+    тогда \(\variance{\Delta p} = \prh{1 + \frac{1}{n}} \sigma^2\).
+  \end{enumerate}
+\end{remark}
+
+\galleryone{01_10_01}{Точность прогноза}
+
+\subheader{Доверительные интервалы прогноза и коэффициентов уравнения линейной
+регрессии}
+
+Пусть \(t_{\gamma}\) это квантиль двустороннего распределения Стьюдента с \(n -
+2\) степенями свободы уровня \(\gamma\). Тогда доверительные интервалы
+надежности \(\gamma\) для параметров \(\alpha\) и \(\beta\) имеют вид
+
+\begin{equation*}
+  \interval{a - t_{\gamma} S_a}{a + t_{\gamma} S_a}
+  \qquad
+  \interval{b - t_{\gamma} S_b}{b + t_{\gamma} S_b}
+\end{equation*}
+
+Доверительный интервал прогноза надежности \(\gamma\) имеет вид
+
+\begin{equation*}
+  \interval{\widehat{X}_p - t_{\gamma} S_{\Delta p}}
+    {\widehat{X}_p + t_{\gamma} S_{\Delta p}}
+\end{equation*}

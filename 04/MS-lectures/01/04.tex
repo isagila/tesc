@@ -1,0 +1,465 @@
+\subsection{%
+  Лекция \texttt{24.??.??}.%
+}
+
+\subheader{Основные распределения математической статистики}
+
+\begin{definition}
+  Случайная величина имеет нормальное распределение \(\ndist{a}{\sigma^2}\) с
+  параметрами \(a \in \RR\) и \(\sigma^2 (\sigma > 0)\), если его плотность
+  имеет вид
+
+  \begin{equation*}
+    f(x)
+    = \frac{1}{\sigma \sqrt{2 \pi}} \exp \prh{-\frac{(x - a)^2}{2 \sigma^2}}
+    \qquad
+    x \in \RR
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  Распределение \(\ndist{0}{1}\) с параметрами \(a = 0, \sigma = 1\) называется
+  стандартным нормальным распределением. Его плотность имеет вид
+
+  \begin{equation*}
+    f(x) = \frac{1}{\sqrt{2 \pi}} \exp \prh{-\frac{x^2}{2}}
+  \end{equation*}
+\end{definition}
+
+Свойства нормального распределения
+
+\begin{enumerate}
+\item
+  Смысл параметров
+
+  \begin{equation*}
+    \expected{X} = a \qquad \variance{X} = \sigma^2
+  \end{equation*}
+
+\item
+  Линейность
+
+  \begin{equation*}
+    \xi \in \ndist{a}{\sigma^2}
+    \implies
+    b \xi + c \in \ndist{a b + c}{b^2 \sigma^2}
+  \end{equation*}
+
+\item
+  Стандартизация
+
+  \begin{equation*}
+    \xi \in \ndist{a}{\sigma^2}
+    \implies
+    \frac{\xi - a}{\sigma} \in \ndist{0}{1}
+  \end{equation*}
+
+\item
+  Устойчивость относительно суммирования
+
+  \begin{equation*}
+    \begin{rcases}
+      \xi_1 \in \ndist{a_1}{\sigma_1^2} \\
+      \xi_2 \in \ndist{a_2}{\sigma_2^2}
+    \end{rcases}
+    \implies
+    \xi_1 + \xi_2 \in \ndist{a_1 + a_2}{\sigma_1^2 + \sigma_2^2}
+  \end{equation*}
+\end{enumerate}
+
+\subsubheader{I.}{Распределение \quote{хи---квадрат}}
+
+\begin{definition}
+  Распределением \quote{хи---квадрат} \(\Hdist{k}\) с \(k\) степенями свободы
+   называется распределение суммы \(k\) квадратов независимых стандартных
+   нормальных величин.
+
+   \begin{equation*}
+     \chi_k^2 = X_1^2 + \dotsc + X_k^2
+     \qquad
+     X_i \in \ndist{0}{1} \text{ независимые}
+   \end{equation*}
+\end{definition}
+
+Свойства распределения \quote{хи---квадрат}
+
+\begin{lemma}
+  \begin{equation*}
+    \expected{\chi_k^2} = k
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  \begin{equation*}
+    \begin{aligned}
+      \variance{X_1}
+      = \expected{X_1^2} - \prh{\expected{X_1}}^2
+      = \expected{X_1^2}
+      = 1
+    \\
+      \expected{\chi_k^2}
+      = \expected{X_1^2 + \dotsc + X_k^2}
+      = k \expected{X_1^2}
+      = k
+    \end{aligned}
+  \end{equation*}
+\end{proof}
+
+\begin{remark}
+  Распределение \quote{хи-квадрат} устойчиво относительно суммирования.
+
+  \begin{equation*}
+    \begin{rcases}
+      X_1 \in \chi_n^2 \\
+      X_2 \in \chi_m^2 \\
+      X_1, X_2 \text{ независимы}
+    \end{rcases}
+    \implies
+    X_1 + X_2 \in \chi_{n + m}^2
+  \end{equation*}
+\end{remark}
+
+\subsubheader{II.}{Распределение Стьюдента}
+
+\begin{definition}
+  Пусть случайные величины \(X_0, \dotsc, X_k\) независимы и имеют стандартное
+  нормальное распределение. Распределением Стьюдента \(\Tdist{k}\) с \(k\)
+  степенями свободы называется распределение случайной величины
+
+  \begin{equation*}
+    t_k
+    = \frac{X_0}{\sqrt{\frac{1}{k} \prh{X_1^2 + \dotsc + X_k^2}}}
+    = \frac{X_0}{\sqrt{\frac{1}{k} \chi_k^2}}
+  \end{equation*}
+\end{definition}
+
+Свойства распределения Стьюдента
+
+\begin{remark}
+  \begin{equation*}
+    \expected{t_k} = 0
+  \end{equation*}
+\end{remark}
+
+\begin{lemma}
+  \begin{equation*}
+    t_k \rightrightarrows \ndist{0}{1}
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  \begin{equation*}
+    \frac{\chi_k^2}{k} \Rarr{\probP} \expected{X_1^2} = 1
+    \implies
+    t_k = \frac{X_0}{\sqrt{\frac{1}{k} \chi_k^2}} \Rarr{\probP} X_0
+  \end{equation*}
+\end{proof}
+
+\subsubheader{III.}{Распределение Фишера---Снедекора (F---распределение)}
+
+\begin{definition}
+  Распределение Фишера---Снедекора \(\Fdist{m}{n}\) с \(m\) и \(n\) степенями
+  свободы называется случайной величины
+
+  \begin{equation*}
+    f_{m, n} = \frac{n \chi_m^2}{m \chi_n^2}
+  \end{equation*}
+\end{definition}
+
+\begin{remark}
+  \begin{equation*}
+    \expected{f_{m, n}} = \frac{n}{n - 2}
+  \end{equation*}
+\end{remark}
+
+\subheader{Преобразование нормальных выборок}
+
+Пусть \(\sample{X} = \prh{X_1, \dotsc, X_n}^T\)~--- выборка из \(\ndist{0}{1}\),
+т.е. \(X_i \in \ndist{0}{1}\)~--- независимы. \(A\) это невырожденная матрица
+порядка \(n\). Рассмотрим \(\sample{Y} = A \sample{X}\), где  \(Y_i = a_{i, 1}
+X_1 + \dotsc + a_{i, n} X_n\). По свойствам нормального распределения эти
+компоненты будут нормальными случайными величинами, но в общем случае
+зависимыми. Нас в основном интересует случай, когда \(A\)~--- ортогональная
+матрица.
+
+\subheader{Многомерное нормальное распределение}
+
+\begin{definition}
+  Пусть случайный вектор \(\vec{\xi} = \prh{\xi_1, \dotsc, \xi_n}\) имеет вектор
+  средних \(\expected{\vec{\xi}} = \vec{a} = \prh{\expected{\xi_1}, \dotsc,
+  \expected{\xi_n}}^T\), а \(K\)~--- симметричная положительно определенная
+  матрица. Вектор \(\vec{\xi}\) имеет многомерное нормальное распределение в
+  \(\RR^n\) с параметрами \(\vec{a}\) и \(K\), если его плотность имеет вид
+
+  \begin{equation*}
+    f_{\vec{a}, K} \prh{\vec{x}}
+    = \frac{1}{\prh{\sqrt{2 \pi}}^n \sqrt{\det K}} \exp \prh{
+      -\frac{1}{2} \prh{\vec{x} - \vec{a}}^T K^{-1} \prh{\vec{x} - \vec{a}}
+    }
+  \end{equation*}
+
+  Многомерное нормальное распределение обозначается как \(\vec{\xi} \in
+  \ndist{\vec{a}}{K}\).
+\end{definition}
+
+\begin{remark}
+  Матрица \(K = \variance{\vec{\xi}} = \prh{\cov{\xi_i}{\xi_j}}\)~--- матрица
+  ковариаций.
+\end{remark}
+
+\begin{lemma} \label{lem:md-std-ndist}
+  Если \(K = E\) и \(\vec{a} = \vec{0}\), то имеем вектор из независимых
+  стандартных нормальных случайных величин.
+\end{lemma}
+
+\begin{proof}
+  Запишем плотность с данными параметрами
+
+  \begin{equation*}
+    f_{\xi} \prh{\vec{x}}
+    = \frac{1}{\prh{\sqrt{2 \pi}}^n} \exp \prh{
+      -\frac{1}{2} \prh{\vec{x}}^T \vec{x}
+    }
+    = \frac{1}{\prh{\sqrt{2 \pi}}^n} \exp \prh{
+      -\frac{1}{2} \prh{x_1^2 + \dotsc + x_n^2}
+    }
+    = f_{\xi_1} (x_1) \cdot \dotsc \cdot f_{\xi_n} (x_n)
+  \end{equation*}
+
+  где \(f_{\xi_i} (x_i)\)~--- плотность стандартного нормального распределения.
+  Заметим, что случайные величины \(\xi_i\) независимы, т.к. плотность
+  совместного распределения равна произведению частных плотностей.
+\end{proof}
+
+\begin{remark}
+  Пусть \(\vec{X}\) состоит из независимых нормальных стандартных случайных
+  величин, \(B\)~--- невырожденная матрица порядка \(n\). Тогда \(\vec{Y} = B
+  \vec{X} + \vec{a}\) имеет многомерное нормальное распределение с параметрами
+  \(\vec{a}\) и \(K = B B^T\). Это эквивалентное определение многомерных
+  нормальных распределений~--- все они получаются таким образом.
+\end{remark}
+
+\begin{remark}
+  Случайный вектор имеет многомерное нормальное распределение, если всего его
+  компоненты это нормальные случайные величины и нет функциональной зависимости
+  одной компоненты от остальных.
+\end{remark}
+
+\begin{lemma} \label{lem:ort-transform-ind}
+  Пусть случайный вектор \(\vec{X}\) состоит из независимых стандартных
+  нормальных случайных величин, а \(C\) это ортогональная матрица. Тогда
+  \(\vec{Y} = C \vec{X}\) также состоит из независимых стандартных нормальных
+  случайных величин.
+\end{lemma}
+
+\begin{proof}
+  Т.к. \(C\)~--- ортогональная матрица, то \(C^{-1} = C^T\), поэтому \(K = C
+  C^{-1} = E\). По лемме \ref{lem:md-std-ndist} получаем, что \(\vec{Y}\)
+  состоит из независимых стандартных нормальных случайных величин.
+\end{proof}
+
+\begin{lemma}
+  Пусть случайный вектор \(\vec{\xi}\) имеет многомерное нормальное
+  распределение с параметрами \(\vec{a}\) и \(K\). Тогда \(\vec{\eta} = B^{-1}
+  \prh{\vec{\xi} - \vec{a}}\), где \(B = \sqrt{K}\), состоит из независимых
+  стандартных нормальных случайных величин.
+\end{lemma}
+
+\begin{lemma}
+  Пусть случайный вектор \(\vec{\xi}\) имеет многомерное нормальное
+  распределение с параметрами \(\vec{a}\) и \(K\). Координаты вектора
+  \(\vec{\xi}\) независимы тогда и только тогда, когда они не коррелированны,
+  т.е. матрица ковариаций \(K\) диагональная.
+\end{lemma}
+
+\begin{remark}
+  Если плотность совместного распределения нормальных случайных величин \(\xi\)
+  и \(\eta\) ненулевая, то они независимы тогда и только тогда, когда их
+  коэффициент корреляции равен нулю.
+\end{remark}
+
+\begin{theorem}[Многомерная центральная предельная теорема]
+  Среднее арифметическое независимых одинаково распределенных случайных векторов
+  слабо сходится к многомерному нормальному распределению.
+\end{theorem}
+
+\subheader{Лемма Фишера}
+
+\begin{lemma}[Фишера] \label{lem:fisher}
+  Пусть \(\vec{X}\) состоит из независимых нормальных стандартных величин, а
+  \(\vec{Y} = C \vec{X}\), где \(C\)~--- ортогональная матрица. Тогда случайная
+  величина
+
+  \begin{equation*}
+    T \prh{\vec{X}} = \sum_{i = 1}^n X_i^2 - \sum_{i = 1}^k Y_i^2
+    \qquad
+    \forall 1 \le k \le n - 1
+  \end{equation*}
+
+  не зависит от случайных величин \(Y_1, \dotsc, Y_k\) и имеет распределение
+  \(\Hdist{n - k}\).
+\end{lemma}
+
+\begin{proof}
+  Т.к. \(C\) ортогональная матрица, то \(\norm{\vec{X}} = \norm{\vec{Y}}\),
+  значит
+
+  \begin{equation*}
+    \sum_{i = 1}^n X_i^2 = \sum_{i = 1}^n Y_i^2
+    \implies
+    T \prh{\vec{X}}
+    = \sum_{i = 1}^n Y_i^2 - \sum_{i = 1}^k Y_i^2
+    = \sum_{i = k + 1}^n Y_i^2
+  \end{equation*}
+
+  Таким образом \(T \prh{\vec{X}} \in \Hdist{n - k}\), т.к. по
+  \ref{lem:ort-transform-ind} случайные величины \(Y_i\) независимы и имеют
+  стандартное нормальное распределение.
+\end{proof}
+
+\subheader{Основная теорема}
+
+\begin{remark}
+  Название неофициальное и актуально только в рамках курса, т.к. мы будем часто
+  ссылаться на эту теорему.
+\end{remark}
+
+Пусть имеется выборка \(\sample{X} = \prh{X_1, \dotsc, X_n}\) из
+\(\ndist{a}{\sigma^2}\). Обозначим \(\avg{x}\)~--- выборочное среднее, а
+\(S^2\)~--- исправленную выборочную дисперсию. Тогда имеют место следующие
+утверждения.
+
+\begin{lemma} \label{lem:base-theorem-1}
+  \begin{equation*}
+    \sqrt{n} \cdot \frac{\avg{x} - a}{\sigma} \in \ndist{0}{1}
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  \begin{equation*}
+    X \in \ndist{a}{\sigma^2}
+    \implies \sum_{i = 1}^n X_i \in \ndist{n a}{n \sigma^2}
+    \implies \avg{x} \in \ndist{a}{\frac{\sigma^2}{n}}
+    \implies \avg{x} - a \in \ndist{0}{\frac{\sigma^2}{n}}
+    \implies \sqrt{n} \cdot \frac{\avg{x} - a}{\sigma} \in \ndist{0}{1}
+  \end{equation*}
+\end{proof}
+
+\begin{lemma} \label{lem:base-theorem-2}
+  \begin{equation*}
+    \sum_{i = 1}^n \prh{\frac{x_i - a}{\sigma}}^2 \in \Hdist{n}
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  \begin{equation*}
+    \forall i \given \frac{x_i - a}{\sigma} \in \ndist{0}{1}
+    \implies \sum_{i = 1}^n \prh{\frac{x_i - a}{\sigma}}^2 \in \Hdist{n}
+    \text{ по определению}
+  \end{equation*}
+\end{proof}
+
+\begin{lemma} \label{lem:base-theorem-3}
+  \begin{equation*}
+    \sum_{i = 1}^n \prh{\frac{x_i - \avg{x}}{\sigma}}^2
+    = \frac{(n - 1) S^2}{\sigma^2} \in \Hdist{n - 1}
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  \begin{equation*}
+    \sum_{i = 1}^n \prh{\frac{x_i - \avg{x}}{\sigma}}^2
+    = \sum_{i = 1}^n \prh{\frac{x_i - a}{\sigma} - \frac{\avg{x} - a}{\sigma}}^2
+    = \sum_{i = 1}^n \prh{z_i - \avg{z}}^2 
+  \end{equation*}
+
+  где
+
+  \begin{equation*}
+    \begin{aligned}
+      z_i = \frac{x_i - a}{\sigma} \in \ndist{0}{1}
+    \\
+      \avg{z}
+      = \frac{z_1 + \dotsc + z_n}{n}
+      = \frac{1}{n} \sum_{i = 1}^n \frac{x_i - a}{\sigma}
+      = \frac{\sum x_i - n a}{n \sigma}
+      = \frac{n \avg{x} - n a}{n \sigma}
+      = \frac{\avg{x} - a}{\sigma}
+    \end{aligned}
+  \end{equation*}
+
+  Применим \ref{lem:fisher}. Сначала рассмотрим
+
+  \begin{equation*}
+    T \prh{\vec{z}}
+    = \sum_{i = 1}^n \prh{z_i - \avg{z}}^2
+    = n \svarianceD
+    = \sum_{i = 1}^n z_i^2 - n \prh{\avg{z}}^2
+    = \sum_{i = 1}^n z_i^2 - \prh{\sqrt{n} \avg{z}}^2
+  \end{equation*}
+
+  Рассмотрим второе слагаемое.
+
+  \begin{equation*}
+    \sqrt{n} \cdot \avg{z}
+    = \frac{z_1 + \dotsc + z_n}{\sqrt{n}}
+    = \frac{1}{\sqrt{n}} z_1 + \dotsc + \frac{1}{\sqrt{n}} z_n
+  \end{equation*}
+
+  Строка \(\prh{\frac{1}{\sqrt{n}}, \dotsc, \frac{1}{\sqrt{n}}}\) имеет
+  единичную длину, поэтому, как известно из курса линейной алгебры, мы можем ее
+  дополнить до ортогональной матрицы \(C\). Тогда \(\sqrt{n} \cdot \avg{z} =
+  Y_1\)~--- первая компонента вектора \(\vec{Y} = C \vec{Z}\). Отсюда по
+  \ref{lem:fisher} имеем
+
+  \begin{equation*}
+    T \prh{\vec{z}}
+    = \sum_{i = 1}^n \prh{z_i - \avg{z}}^2 \in \Hdist{n - 1}
+  \end{equation*}
+
+  Причем он не зависит от \(Y_1 = \sqrt{n} \cdot \avg{z}\).
+\end{proof}
+
+\begin{lemma} \label{lem:base-theorem-4}
+  \begin{equation*}
+    \sqrt{n} \cdot \frac{\avg{x} - a}{S} \in \Tdist{n - 1}
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  \begin{equation*}
+    \sqrt{n} \cdot \frac{\avg{x} - a}{S}
+    = \sqrt{n} \cdot \frac{\avg{x} - a}{\sigma} \cdot \frac{1}{\sqrt{
+      \frac{(n - 1) S^2}{\sigma^2} \cdot \frac{1}{n - 1}
+    }}
+    = \frac{X_0}{\sqrt{\frac{\chi_{n - 1}^2}{n - 1}}}
+  \end{equation*}
+
+  где \(X_0 \in \ndist{0}{1}\) по \ref{lem:base-theorem-1}, а
+  \(\display{\frac{(n - 1) S^2}{\sigma^2} \in \Hdist{n - 1}}\) по
+  \ref{lem:base-theorem-3}. Итого по определению получаем распределение
+  Стьюдента с \(n - 1\) степенями свободы. Стоит отметить, что в определении
+  распределения Стьюдента числитель и знаменатель должны быть независимы. У нас
+  с этим проблем нет, т.к. \(\avg{x}\) и \(S^2\) независимы согласно
+  \ref{lem:base-theorem-5}.
+\end{proof}
+
+\begin{lemma} \label{lem:base-theorem-5}
+  \begin{equation*}
+    \avg{x}, S^2 \text{ независимые случайные величины}
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  В \ref{lem:base-theorem-3} показали, что
+
+  \begin{equation*}
+    \sum_{i = 1}^n \prh{\frac{x_i - \avg{x}}{\sigma}}^2
+    = \frac{(n - 1) S^2}{\sigma^2}
+    \text{ не зависит от }
+    \sqrt{n} \cdot \avg{x}
+  \end{equation*}
+
+  Умножение на константу не влияет на независимость, поэтому получаем, что
+  \(S^2\) не зависит от \(\avg{x}\).
+\end{proof}

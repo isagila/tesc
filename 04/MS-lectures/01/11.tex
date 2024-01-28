@@ -1,0 +1,455 @@
+\subsection{%
+  Лекция \texttt{24.??.??}.%
+}
+
+\subheader{Математическое ожидание и дисперсия случайного вектора}
+
+Пусть имеется случайный вектор \(\vec{X} = \prh{X_1, \dotsc, X_n}^T\), где
+случайные величины \(X_i\) это компоненты случайного вектора.
+
+\begin{definition}
+  Математическим ожиданием случайного вектора \(\vec{X}\) называется вектор
+  с координатами из математических ожиданий компонент.
+
+  \begin{equation*}
+    \expected{\vec{X}} = \begin{pmatrix}
+      \expected{X_1} \\
+      \vdots \\
+      \expected{X_n}
+    \end{pmatrix}
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  Дисперсией (или матрицей ковариаций) случайного вектора \(\vec{X}\) называется
+  матрица
+
+  \begin{equation*}
+    \variance{\vec{X}}
+    = \expected{\vec{X} - \expected{X}} \prh{\vec{X} - \expected{X}}^T
+  \end{equation*}
+
+  Или, более просто, это матрица, состоящая из элементов \(d_{i, j} =
+  \cov{X_i}{X_j}\).
+\end{definition}
+
+\begin{remark}
+  На главной диагонали матрицы ковариаций стоят дисперсии компонент.
+\end{remark}
+
+\subsubheader{}{Свойства}
+
+\begin{enumerate}
+\item
+  \(\expected{A \vec{X}} = A \expected{\vec{X}}\), где \(A\) это матрица размера
+  \(n \times n\).
+
+\item
+  \(\expected{\vec{X} + \vec{B}} = \expected{\vec{X}} + \vec{B}\)
+
+\item
+  \(\variance{A \vec{X}} = A \variance{\vec{X}} A^T\)
+
+\item
+  \(\variance{\vec{X} + \vec{B}} = \variance{\vec{X}}\)
+\end{enumerate}
+
+\subheader{Общая модель линейной регрессии}
+
+Пусть результат \(X\) зависит от факторов \(Z_1, \dotsc, Z_k\). Рассматривается
+теоретическая модель линейной регрессии.
+
+\begin{equation*}
+  \expected{\vec{X} \given \vec{Z}}
+  = f \prh{\vec{Z}}
+  = \beta_1 Z_1 + \dotsc + \beta_k Z_k + \epsilon
+\end{equation*}
+
+где \(\vec{Z} = \prh{z_1, \dotsc, z_k}^T\). Обозначим \(\vec{\beta} =
+\prh{\beta_1, \dotsc, \beta_k}^T\)~--- вектор неизвестных параметров регрессии,
+\(\epsilon\)~--- случайный член (ошибка), отражающая нелинейность модели,
+влияние неучтенных факторов и т.д.
+
+Пусть проведено \(n \ge k\) экспериментов. Обозначим \(\vec{Z}^{(i)} =
+\prh{z_1^{(i)}, \dotsc, z_k^{(i)}}\) набор значений факторов при \(i\)-ом
+эксперименте. Пусть \(\vec{X} = \prh{X_1, \dotsc, X_n}\) это набор результатов
+при \(n\) экспериментах. Согласно модели
+
+\begin{equation*}
+  \begin{cases}
+    X_1 = \beta_1 z_1^{(1)} + \dotsc + \beta_k z_k^{(1)} + \epsilon_1 \\
+    X_2 = \beta_1 z_1^{(2)} + \dotsc + \beta_k z_k^{(2)} + \epsilon_2 \\
+    \vdots \\
+    X_n = \beta_1 z_1^{(n)} + \dotsc + \beta_k z_k^{(n)} + \epsilon_n
+  \end{cases}
+\end{equation*}
+
+где \(\epsilon_i\) это теоретическая ошибка при \(i\)-ом эксперименте (она
+неизвестна). В матричной форме
+
+\begin{equation*}
+  \vec{X} = Z^T \vec{\beta} + \vec{\epsilon}
+\end{equation*}
+
+где \(\vec{\epsilon} = \prh{\epsilon_1, \dotsc, \epsilon_n}\) это столбец
+ошибок, а матрица \(Z\) называется матрицей плана и имеет вид
+
+\begin{equation*}
+  Z_{k \times n} = \begin{pmatrix}
+    z_1^{(1)} & z_1^{(2)} & \dotsc & z_1^{(n)} \\
+    z_2^{(1)} & z_2^{(2)} & \dotsc & z_2^{(n)} \\
+    \vdots    & \vdots    & \ddots & \vdots    \\
+    z_k^{(1)} & z_k^{(2)} & \dotsc & z_k^{(n)} \\
+  \end{pmatrix}
+\end{equation*}
+
+Требуется по данной матрице плана \(Z\) и вектору результатов \(\vec{X}\) найти
+оценки \(\vec{B} = \prh{b_1, \dotsc, b_k}\) для параметров регрессии
+\(\vec{\beta} = \prh{\beta_1, \dotsc, \beta_k}\) и параметров ошибок
+\(\epsilon_i\).
+
+\begin{remark}
+  В данной модели мы не теряем свободный член \(a\), т.к. можно считать, что
+  \(z_1 \equiv 1\) и ей соответствует строка \(\prh{1, \dotsc, 1}\) в матрице
+  плана \(Z\).
+\end{remark}
+
+\subheader{Метод наименьших квадратов и нормальные уравнения}
+
+Будем считать, что выполнено условие о том, что \(\rank Z = k\), т.е. все строки
+матрицы плана независимы. Обозначим \(A = Z Z^T\)~--- это будет квадратная
+матрица размера \(k \times k\). Заметим, что
+
+\begin{enumerate}
+\item
+  Матрица \(A\) симметричная, т.е. \(A^T = A\).
+
+\item
+  Матрица \(A\) будет положительно определенной.
+
+\item
+  Существенная вещественная матрица \(\sqrt{A}\) такая, что \(\prh{\sqrt{A}}^2 =
+  A\).
+\end{enumerate}
+
+Экспериментальная модель имеет вид
+
+\begin{equation*}
+  X_i = b_1 Z_1 + \dotsc b_k Z_k + \widehat{\epsilon}_i
+\end{equation*}
+
+где \(\widehat{\epsilon}_i = X_i - \prh{b_1 Z_1 + \dotsc + b_k Z_k}\).
+
+При методе наименьших квадратов находим оценку \(\vec{B} = \prh{b_1, \dotsc,
+b_k}^T\), которая минимизирует функцию
+
+\begin{equation*}
+  L \prh{\vec{B}}
+  = \sum_{i = 1}^n \widehat{\epsilon}_i^2
+  = \norm{\widehat{\epsilon}}^2
+  = \norm{\vec{X} - Z^T \vec{B}}^2
+\end{equation*}
+
+Заметим, что \(\norm{\vec{X} - Z^T \vec{B}}^2\) это квадрат расстояния от точки
+\(\vec{X} \in \RR^n\) до точки \(Z^T \vec{B} \in \RR^n\). Причем \(Z^T \vec{B}\)
+это произвольная точка подпространства \(Z^T \vec{t}\), где \(\vec{t} \in
+\RR^k\). Заметим, что \(\dim Z^T \vec{t} = k\), т.к. все строки матрицы плана
+независимы. Таким образом, искомое минимальное расстояние это расстояние от
+точки \(\vec{X} \in \RR^n\) до подпространства \(Z^T \vec{t}, \vec{t} \in
+\RR^k\). Это длина перпендикуляра, т.е. нужное расстояние получаем при условии,
+что вектор \(\vec{X} - Z^T \vec{B}\) будет ортогонален всем векторам данного
+подпространства. Значит \(\forall \vec{t} \in \RR^k\) справедливо
+
+\begin{equation*}
+  \dotpdt{Z^T \vec{t}}{\vec{X} - Z^T \vec{B}}
+  = \prh{Z^T \vec{t}}^T \cdot \prh{\vec{X} - Z^T \vec{B}}
+  = \vec{t}^T Z \prh{\vec{X} - Z^T \vec{B}}
+  = \vec{t}^T \prh{Z \vec{X} - Z Z^T \vec{B}}
+  = \vec{t}^T \prh{Z \vec{X} - A \vec{B}}
+  = 0
+\end{equation*}
+
+Т.к. всем векторам данного пространства может быть ортогонален только нулевой
+вектор, то получаем, что
+
+\begin{equation*}
+  Z \vec{X} - A \vec{B} = \vec{0}
+  \iff
+  A \vec{B} = Z \vec{X}
+  \iff
+  \vec{B} = A^{-1} Z \vec{X}
+\end{equation*}
+
+Это нормальное уравнение или система нормальных уравнений с неизвестными \(b_1,
+\dotsc, b_k\). Получили оценки по методу наименьших квадратов.
+
+\subheader{Свойства оценок по методу наименьших квадратов}
+
+Далее предполагаем, что выполнено условие \(\rank Z = k\) и ошибки
+\(\epsilon_i\)~--- независимые нормальные случайные величины с распределением
+\(\ndist{0}{\sigma^2}\). Таким образом \(\variance{\vec{\epsilon}} = \sigma^2
+E_n\).
+
+\begin{lemma}
+  \begin{equation*}
+    \vec{B} - \vec{\beta} = A^{-1} Z \vec{\epsilon}
+  \end{equation*}  
+\end{lemma}
+
+\begin{proof}
+  \begin{equation*}
+    \begin{aligned}
+      \vec{B} - \vec{\beta}
+      & = A^{-1} Z \vec{X} - \vec{\beta}
+    \\
+      & = A^{-1} Z \prh{Z^T \vec{\beta} + \vec{\epsilon}} - \vec{\beta}
+    \\
+      & = A^{-1} Z Z^T \vec{\beta} + A^{-1} Z \vec{\epsilon} - \vec{\beta}
+    \\
+      & = A^{-1} A \vec{\beta} + A^{-1} Z \vec{\epsilon} - \vec{\beta}
+    \\
+      & = \vec{\beta} + A^{-1} Z \vec{\epsilon} - \vec{\beta}
+    \\
+      & = A^{-1} Z \vec{\epsilon}
+    \end{aligned}
+  \end{equation*}
+\end{proof}
+
+\begin{lemma}
+  Оценка \(\vec{B}\) это несмещенная оценка для параметра \(\vec{\beta}\).
+\end{lemma}
+
+\begin{proof}
+  \begin{equation*}
+    \expected{\vec{B} - \vec{\beta}}
+    = \expected{A^{-1} Z \vec{\epsilon}}
+    = A^{-1} Z \expected{\vec{\epsilon}}
+    = A^{-1} Z \vec{0}
+    = \vec{0}
+    \implies
+    \expected{\vec{B}} = \vec{\beta}
+  \end{equation*}  
+\end{proof}
+
+\begin{lemma}
+  \begin{equation*}
+    \variance{\vec{B}} = \sigma^2 A^{-1}
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  \begin{equation*}
+    \begin{aligned}
+      \variance{\vec{B}}
+      & = \variance{\vec{B} - \vec{\beta}}
+    \\
+      & = \variance{A^{-1} Z \vec{\epsilon}}
+    \\
+      & = A^{-1} Z \variance{\vec{\epsilon}} \prh{A^{-1} Z}^T
+    \\
+      & = A^{-1} Z \sigma^2 E_n Z^T A^{-1}
+    \\
+      & = \sigma^2 A^{-1} Z Z^T A^{-1}
+    \\
+      & = \sigma^2 A^{-1} A A^{-1}
+    \\
+      & = \sigma^2 A^{-1}
+    \end{aligned}
+  \end{equation*}
+\end{proof}
+
+\begin{remark} \label{rem:variance-b-i}
+  Таким образом \(\display{\variance{b_i} = \sigma^2 \prh{A^{-1}}_{i, i}}\).
+\end{remark}
+
+Введем обозначение \(\widehat{\sigma}^2\), которое определим как
+
+\begin{equation*}
+  \widehat{\sigma}^2
+  = \frac{1}{n} \sum_{i = 1}^n \widehat{\epsilon}_i^2
+  = \frac{1}{n} \norm{\vec{X} - Z^T \vec{B}}
+  = \frac{1}{n} L \prh{\vec{B}}
+\end{equation*}
+
+Заметим, что \(\widehat{\sigma}^2\) это оценка неизвестной дисперсии ошибки
+\(\sigma^2\).
+
+\begin{theorem} \label{thr:md-err}
+  Пусть выполнено условие \(\rank Z = k\) и ошибки \(\epsilon_i\)~---
+  независимые нормальные случайные величины с распределением
+  \(\ndist{0}{\sigma^2}\). Тогда
+
+  \begin{enumerate}
+  \item
+    Вектор \(\display{\frac{1}{\sigma} \sqrt{A} \prh{\vec{B} - \vec{\beta}}}\)
+    состоит из независимых случайных величин со стандартным нормальным
+    распределением.
+
+  \item
+    \begin{equation*}
+      \frac{n \widehat{\sigma}^2}{\sigma^2} \in \Hdist{n - k}
+      \text{ и не зависит от } \vec{B}
+    \end{equation*}
+
+  \item
+    \begin{equation*}
+      S^2
+      = \frac{n \widehat{\sigma}^2}{(n - k) \sigma^2}
+      = \frac{1}{n - k} \sum_{i = 1}^n \widehat{\epsilon}_i^2 
+      \qquad
+      \text{Это несмещенная оценка для } \sigma^2
+    \end{equation*}
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  \subsubheader{I}{ пункт}
+
+  \begin{equation*}
+    \frac{1}{\sigma} \sqrt{A} \prh{\vec{B} - \vec{\beta}}
+    = \frac{1}{\sigma} \sqrt{A} A^{-1} Z \vec{\epsilon}
+    = \frac{1}{\sigma} \sqrt{A^{-1}} Z \vec{\epsilon}
+  \end{equation*}
+
+  Получили линейное преобразование нормального вектора \(\vec{\epsilon}\), и
+  поэтому оно также является нормальным вектором.
+
+  \begin{equation*}
+    \expected{\frac{1}{\sigma} \sqrt{A} \prh{\vec{B} - \vec{\beta}}}
+    = \frac{1}{\sigma} \sqrt{A} \expected{\vec{B} - \vec{\beta}}
+    = \frac{1}{\sigma} \sqrt{A} \vec{0}
+    = \vec{0}
+  \end{equation*}
+
+  Таким образом первый параметр компонент равен нулю.
+
+  \begin{equation*}
+    \variance{\frac{1}{\sigma} \sqrt{A} \prh{\vec{B} - \vec{\beta}}}
+    = \frac{1}{\sigma^2} \sqrt{A} \variance{\vec{B} - \vec{\beta}} \sqrt{A^T}
+    = \frac{1}{\sigma^2} \sqrt{A} \sigma^2 A^{-1} \sqrt{A}
+    = E_k
+  \end{equation*}
+
+  Значит все координаты не коррелированны и имеют дисперсию равную единице.
+
+  \subsubheader{II}{ пункт}
+
+  По построению метода наименьших квадратов имеем
+
+  \begin{equation*}
+    \forall \vec{t} \in \RR^k \given \vec{X} - Z^T \vec{B} \perp Z^T \vec{t}
+  \end{equation*}
+
+  В частости это верно для \(\vec{t} = \vec{B} - \vec{\beta}\). По обобщенной
+  теореме Пифагора
+
+  \begin{equation*} \label{eq:md-err-1} \tag{1}
+    \begin{aligned}
+      \norm{\vec{X} - Z^T \vec{B}}^2 + \norm{Z^T \prh{\vec{B} - \vec{\beta}}}^2
+      = \norm{\vec{X} - Z^T \vec{B} + Z^T \prh{\vec{B} - \vec{\beta}}}^2
+      = \norm{\vec{X} - Z^T \vec{\beta}}^2
+    \\
+      \norm{\vec{X} - Z^T \vec{B}}^2
+      = \norm{\vec{X} - Z^T \vec{\beta}}^2
+        - \norm{Z^T \prh{\vec{B} - \vec{\beta}}}^2
+      = \norm{\vec{\epsilon}}^2 - \norm{Z^T \prh{\vec{B} - \vec{\beta}}}^2
+    \end{aligned}
+  \end{equation*}
+
+  Далее работает со вторым слагаемым.
+
+  \begin{equation*} \label{eq:md-err-2} \tag{2}
+    \begin{aligned}
+      \norm{Z^T \prh{\vec{B} - \vec{\beta}}}^2
+      & = \prh{\vec{B} - \vec{\beta}}^T Z Z^T \prh{\vec{B} - \vec{\beta}}
+    \\
+      & = \prh{\vec{B} - \vec{\beta}}^T A \prh{\vec{B} - \vec{\beta}}
+    \\
+      & = \prh{\vec{B} - \vec{\beta}}^T \sqrt{A^T}
+        \sqrt{A} \prh{\vec{B} - \vec{\beta}}
+    \\
+      & = \norm{\sqrt{A} \prh{\vec{B} - \vec{\beta}}}^2
+    \\
+      & = \norm{\sqrt{A} A^{-1} Z \vec{\epsilon}}^2
+    \\
+      & = \norm{\sqrt{A^{-1}} Z \vec{\epsilon}}^2
+    \end{aligned}
+  \end{equation*}
+
+  Заметим, что строки матрицы \(\sqrt{A^{-1}} Z\) ортогональны, т.к.
+
+  \begin{equation*}
+    \prh{\sqrt{A^{-1}} Z} \prh{\sqrt{A^{-1}} Z}^T
+    = \sqrt{A^{-1}} Z Z^T \prh{\sqrt{A^{-1}}}^T
+    = \sqrt{A^{-1}} A \sqrt{A^{-1}}
+    = E
+  \end{equation*}
+
+  \(\sqrt{A^{-1}} Z\) это прямоугольная матрица размера \(k \times n\). Из курса
+  линейной алгебры известно, что ее можно дополнить до ортогональной матрицы
+  \(C\) размера \(n \times n\). Тогда первые \(k\) координат \(n\)-мерного
+  вектора \(\vec{Y} = \frac{1}{\sigma} C \vec{\epsilon}\) совпадают с
+  координатами вектора \(\vec{Y} = \frac{1}{\sigma} \sqrt{A^{-1}} Z
+  \vec{\epsilon}\).
+
+  В результате из \eqref{eq:md-err-1} и \eqref{eq:md-err-2} получаем
+
+  \begin{equation*} \label{eq:md-err-3} \tag{3}
+    \begin{aligned}
+      \frac{n \widehat{\sigma}^2}{\sigma^2}
+      & = \frac{1}{\sigma^2} \sum_{i = 1}^n \widehat{\epsilon}_i^2
+    \\
+      & = \frac{1}{\sigma^2} \norm{\vec{X} - Z^T \vec{B}}^2
+    \\
+      & \eqby{\eqref{eq:md-err-1}}
+        \frac{1}{\sigma^2} \norm{\vec{\epsilon}}^2
+          - \frac{1}{\sigma^2} \norm{Z^T \prh{\vec{B} - \vec{\beta}}}^2
+    \\
+      & = \norm{\frac{\vec{\epsilon}}{\sigma}}^2
+          - \norm{\frac{Z^T \prh{\vec{B} - \vec{\beta}}}{\sigma}}^2
+    \\
+      & \eqby{\eqref{eq:md-err-2}}
+        \norm{\frac{\vec{\epsilon}}{\sigma}}^2
+          - \norm{\frac{\sqrt{A^{-1}} Z \vec{\epsilon}}{\sigma}}^2
+    \\
+      & = \sum_{i = 1}^n \prh{\frac{\epsilon_i}{\sigma}}^2
+        - Y_1^2 - Y_2^2 - \dotsc - Y_k^2
+    \end{aligned}
+  \end{equation*}
+
+  Вектор \(\frac{\vec{\epsilon}}{\sigma}\) имеет \(n\)-мерное стандартное
+  нормальное распределение, а \(Y_1, \dotsc, Y_k\) это первые \(k\) координат
+  ортогонального преобразования данного вектора, поэтому \eqref{eq:md-err-3}
+  согласно \ref{lem:fisher} имеет распределение \(\Hdist{n - k}\) и не зависит
+  от вычитаемых координат вектора \(\frac{\sqrt{A^{-1}} Z
+  \vec{\epsilon}}{\sigma}\), а значит и от вектора
+
+  \begin{equation*}
+    \vec{B}
+    = A^{-1} Z \vec{\epsilon} + \vec{\beta}
+    = \sigma \sqrt{A^{-1}} \prh{\frac{1}{\sigma} \sqrt{A^{-1}} Z \vec{\epsilon}}
+  \end{equation*}
+
+  которые являются их линейными комбинациями.
+
+  \subsubheader{III}{ пункт}
+
+  Т.к. \(\expected{\chi_{n - k}^2} = n - k\), то
+
+  \begin{equation*}
+    \expected{\widehat{\sigma}^2}
+    = \frac{\sigma^2}{n} \expected{\frac{n \widehat{\sigma}^2}{\sigma^2}}
+    = \frac{\sigma^2}{n} \cdot \prh{n - k}
+    = \frac{n - k}{n} \cdot \sigma^2
+  \end{equation*}
+
+  Это не равно \(\sigma^2\), т.е. оценка будет смещенной. Значит оценка
+
+  \begin{equation*}
+    S^2
+    = \frac{n}{n - k} \widehat{\sigma}^2
+    = \frac{1}{n - k} \sum_{i = 1}^n \widehat{\epsilon}_i^2
+  \end{equation*}
+
+  будет несмещенной.
+\end{proof}

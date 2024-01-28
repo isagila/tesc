@@ -1,0 +1,454 @@
+\subsection{%
+  Лекция \texttt{24.??.??}.%
+}
+
+Пусть имеется выборка распределения известного нам типа, но с неизвестными
+параметрами. Требуется найти эти параметры. На прошлой лекции был рассмотрен
+метод моментов. Его недостаток заключается в том, что он не гарантирует
+эффективность оценок.
+
+\subheader{Метод максимального правдоподобия (Фишера)}
+
+Пусть имеется выборка \(\sample{X} = \prh{X_1, \dots, X_n}\) распределения
+известного типа, задаваемого параметрами \(\Theta = \prh{\Theta_1, \dotsc,
+\Theta_k}\).
+
+Идея метода заключается в подборе параметров таким образом, чтобы вероятность
+получения данной выборки при случайной эксперименте была наибольшей. Например,
+если распределение дискретное, то эта вероятность будет равна
+
+\begin{equation*}
+  \probP_{\Theta} (x_1, \dotsc, x_n)
+  = \probP_{\Theta} (x = x_1)
+    \cdot \dotsc
+    \cdot \probP_{\Theta} (x = x_n)
+\end{equation*}
+
+\begin{definition}
+  Функцией правдоподобия \(L \prh{\sample{X}, \Theta}\) называется функция
+
+  \begin{equation*}
+    \begin{aligned}
+      L \prh{\sample{X}, \Theta}
+      = \prod_{i = 1}^n \prob{x = x_i}
+      & \qquad & \text{при дискретном распределении}
+    \\
+      L \prh{\sample{X}, \Theta}
+      = \prod_{i = 1}^n f_{\Theta} (x_i)
+      & \qquad & \text{при непрерывном распределении}
+    \end{aligned}
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  Логарифмической Функцией правдоподобия называется функция \(\ln L
+  \prh{\sample{X}, \Theta}\).
+\end{definition}
+
+\begin{remark}
+  Т.к. \(y = \ln x\) возрастающая функция, то их точки экстремума совпадают, но
+  искать их проще во втором случае.
+\end{remark}
+
+\begin{definition}
+  Оценкой максимального правдоподобия \(\widehat{\Theta}\) называется значение
+  \(\Theta\), при котором функция правдоподобия достигает наибольшего значения
+  (при фиксированных значениях \(x_1, \dotsc, x_n\)).
+\end{definition}
+
+\begin{example}
+  Пусть \(\sample{X} = \prh{X_1, \dotsc, X_n}\) из распределения Пуассона с
+  неизвестным параметром \(\lambda > 0\). Требуется найти оценку максимального
+  правдоподобия параметра \(\lambda\).
+  
+  \solution{} Составим функцию правдоподобия.
+
+  \begin{equation*}
+    L \prh{\sample{X}, \alpha}
+    = \prod_{i = 1}^n \frac{\lambda^{x_i}}{x_i!} e^{-\lambda}
+    = \frac{\lambda^{n \avg{x}}}{\prod_{i = 1}^n x_i!} e^{-n \lambda}
+  \end{equation*}
+
+  Перейдем к логарифмической функции правдоподобия.
+
+  \begin{equation*}
+    \ln L \prh{\sample{X}, \lambda}
+    = n \avg{x} \ln \lambda - \ln \prod_{i = 1}^n x_i! - n \lambda
+  \end{equation*}
+
+  Вычислим производную по \(\lambda\) и приравняем ее к нулю, чтобы найти
+  экстремум.
+
+  \begin{equation*}
+    \frac{\dd }{\dd \lambda} \prh{\ln L \prh{\sample{X}, \lambda}}
+    = \frac{n \avg{x}}{\lambda} - n
+    = 0
+    \implies
+    \lambda = \avg{x}
+  \end{equation*}
+
+  Покажем, что это действительно точка максимума.
+
+  \begin{equation*}
+    \frac{\dd^2 }{\dd \lambda^2} \prh{\ln L \prh{\sample{X}, \lambda}}
+    = -\frac{n \avg{x}}{\lambda^2}
+    < 0
+  \end{equation*}
+
+  Итого \(\lambda = \avg{x}\) это оценка максимального правдоподобия.
+\end{example}
+
+\begin{example}
+  Пусть \(\sample{X} = \prh{X_1, \dotsc, X_n}\)~--- выборка из
+  \(\ndist{a}{\sigma^2}\), где \(a \in \RR\) и \(\sigma > 0\). Требуется найти
+  оценку максимального правдоподобия.
+
+  \solution{} Составим функцию правдоподобия.
+
+  \begin{equation*}
+    L \prh{\sample{X}, a, \sigma}
+    = \prod_{i = 1}^n \frac{1}{\sigma \sqrt{2 \pi}}
+      \exp \prh{-\frac{(x_i - a)^2}{2 \sigma^2}}
+    = \frac{1}{\sigma^n \prh{2 \pi}^{n / 2}} \exp \prh{
+      -\frac{1}{2 \sigma^2} \sum_{i = 1}^n \prh{x_i - a}^2
+    }
+  \end{equation*}
+
+  Перейдем к логарифмической функции правдоподобия.
+
+  \begin{equation*}
+    \ln L \prh{\sample{X}, a, \sigma}
+    = -n \ln \sigma - \frac{n}{2} \ln (2 \pi)
+      - \frac{1}{2 \sigma^2} \sum_{i = 1}^n \prh{x_i - a}^2
+  \end{equation*}
+
+  Найдем частные производные по \(a\) и \(\sigma\).
+
+  \begin{equation*}
+    \begin{aligned}
+      \frac{\partial}{\partial a} \ln L \prh{\sample{X}, a, \sigma}
+      = -\frac{1}{2 \sigma^2} \sum_{i = 1}^n 2 (x_i - a) \cdot (-1)
+      = \frac{1}{\sigma^2} \sum_{i = 1}^n (x_i - a)
+      = \frac{n}{\sigma^2} \prh{\avg{x} - a}
+    \\
+      \frac{\partial}{\partial \sigma} \ln L \prh{\sample{X}, a, \sigma}
+      = -\frac{n}{\sigma} - \frac{1}{2} \cdot (-2) \sigma^{-3}
+        \cdot \sum_{i = 1}^n \prh{x_i - a}^2
+      = \frac{1}{\sigma^3} \sum_{i = 1}^n \prh{x_i - a}^2 - \frac{n}{\sigma}
+    \end{aligned}
+  \end{equation*}
+
+  Приравняем их к нулю. Из производной по \(a\) получаем \(\widehat{a} =
+  \avg{x}\). Поработаем с производной по \(\sigma\).
+
+  \begin{equation*}
+    \frac{1}{\sigma^3} \sum_{i = 1}^n \prh{x_i - a}^2 - \frac{n}{\sigma} = 0
+    \implies
+    \widehat{\sigma}^2 = \frac{1}{n} \sum_{i = 1}^n \prh{x_i - a}^2
+    \implies
+    \widehat{\sigma}^2 = \svarianceD
+  \end{equation*}
+
+  То, что это действительно точка максимума можно показать с помощью вторых
+  дифференциалов (самостоятельно).
+\end{example}
+
+\begin{example}
+  Пусть \(\sample{X} = \prh{X_1, \dotsc, X_n}\) из \(\udist{0}{\Theta}\), где
+  \(\Theta > 0\). Найти оценки \(\Theta\) методом моментов и методом
+  максимального правдоподобия. Сравнить результаты.
+
+  \solution{} По методу моментов
+
+  \begin{equation*}
+    \expected{X} = \frac{0 + \Theta}{2}
+    \implies
+    \avg{x} = \frac{\Theta^*}{2}
+    \implies
+    \Theta^* = 2 \avg{x}
+  \end{equation*}
+
+  Далее рассмотрим метод максимального правдоподобия. Обозначим \(X_{(n)}\)
+  \(n\)-ую порядковую статистику (т.е. максимальный элемент выборки), тогда
+
+  \begin{equation*}
+    L \prh{\sample{X}, \Theta}
+    = \prod_{i = 1}^n f_{\Theta} (x_i)
+    = \begin{cases}
+      0, & \Theta < X_{(n)} \\
+      \frac{1}{\Theta^n}, & \Theta \ge X_{(n)}
+    \end{cases}
+  \end{equation*}
+
+  Значит \(\widehat{\Theta} = X_{(n)}\) это оценка максимального правдоподобия.
+
+  Видим, что полученные оценки отличаются. Сравним их. Сначала рассмотрим оценку
+  по методу моментов. Отметим, что она будет несмещенной, т.к.
+
+  \begin{equation*}
+    \Theta^* = 2 \avg{x}
+    \qquad
+    \expected{\Theta^*}
+    = 2 \expected{\avg{x}}
+    = 2 \expected{x}
+    = \Theta
+  \end{equation*}
+
+  Таким образом
+
+  \begin{equation*}
+    \expected{\prh{\Theta^* - \Theta}^2}
+    = \variance{\Theta^*}
+    = 4 \variance{\avg{x}}
+    = 4 \frac{\variance{x}}{n}
+    = \frac{4}{n} \cdot \frac{\Theta^2}{12}
+    = \frac{\Theta^2}{3 n}
+  \end{equation*}
+
+  Далее рассмотрим оценку по методу максимального правдоподобия. Вначале
+  рассмотрим случайную величину \(X_{(n)} = \max \prh{X_1, \dotsc, X_n}\).
+  Найдем ее функцию распределения.
+
+  \begin{equation*}
+    F_{X_{(n)}}
+    = \prob{X_{(n)} < x}
+    = \prob{X_1 < x, \dotsc, X_n < x}
+    = \prob{X_1 < x} \cdot \dotsc \cdot \prob{X_n < x}
+    = \prh{F(x)}^n
+    = \begin{cases}
+      0, & x < 0 \\
+      \frac{x^n}{\Theta^n}, & 0 \le x \le \Theta \\
+      1, & x > \Theta
+    \end{cases}
+  \end{equation*}
+
+  Далее найдем плотность.
+
+  \begin{equation*}
+    f_{X_{(n)}} (x)
+    = F'_{X_{(n)}} (x)
+    = \begin{cases}
+      0, & x < 0 \\
+      \frac{n x^{n - 1}}{\Theta^n}, & 0 \le x \le \Theta \\
+      0, & x > \Theta
+    \end{cases}
+  \end{equation*}
+
+  Вычислим первый момент.
+
+  \begin{equation*}
+    \expected{X_{(n)}}
+    = \int_0^{\Theta} x \cdot \frac{n x^{n - 1}}{\Theta^n} \dd x
+    = \frac{1}{\Theta^n} \int_0^{\Theta} n x^n \dd x
+    = \frac{1}{\Theta^n}
+      \left. \frac{n x^{n + 1}}{n + 1} \right\rvert_0^{\Theta}
+    = \frac{1}{\Theta^n} \cdot \frac{n \Theta^{n + 1}}{n + 1}
+    = \frac{n}{n + 1} \Theta
+  \end{equation*}
+
+  Значит эта оценка будет смещенной вниз. Подправим ее следующим образом
+
+  \begin{equation*}
+    \widetilde{\Theta}
+    = \frac{n + 1}{n} \widehat{\Theta}
+    = \frac{n + 1}{n} X_{(n)}
+  \end{equation*}
+
+  Такая оценка будет уже несмещенной. Вычислим ее второй момент.
+
+  \begin{equation*}
+    \expected{\widetilde{\Theta}^2}
+    = \frac{(n + 1)^2}{n^2}
+      \int_0^{\Theta} x^2 \frac{n x^{n - 1}}{\Theta^n} \dd x
+    = \frac{(n + 1)^2}{n} \cdot \frac{1}{\Theta^n}
+      \int_0^{\Theta} x^{n + 1} \dd x
+    = \frac{(n + 1)^2}{n \Theta^n} \cdot 
+      \left. \frac{x^{n + 2}}{n + 2} \right.\rvert_0^{\Theta}
+    = \frac{(n + 1)^2 \Theta^2}{n (n + 2)}
+  \end{equation*}
+
+  Теперь вычислим дисперсию этой несмещенной оценки.
+
+  \begin{equation*}
+    \expected{\prh{\widetilde{\Theta} - \Theta}^2}
+    = \variance{\widetilde{\Theta}}
+    = \expected{\widetilde{\Theta}^2} - \prh{\expected{\widetilde{\Theta}}}^2
+    = \frac{(n + 1)^2 \Theta^2}{n (n + 2)} - \Theta^2
+    = \frac{n^2 + 2 n + 1 - n^2 - 2 n}{n (n + 2)} \cdot \Theta^2
+    = \frac{\Theta^2}{n (n + 2)}
+  \end{equation*}
+
+  Итак, теперь можно сравнить эти две оценки.
+
+  \begin{equation*}
+    \variance{\Theta^*} = \frac{\Theta^2}{3 n}
+    \qquad
+    \variance{\widetilde{\Theta}} = \frac{\Theta^2}{n (n + 2)}
+  \end{equation*}
+
+  Хорошо видно, что вторая оценка сходится быстрее, т.е. эффективность оценки по
+  методу максимального правдоподобия заметно выше. Оценка по методу моментов
+  сходится со скоростью \(\sim \frac{1}{\sqrt{n}}\), а по методу максимального
+  правдоподобия со скоростью \(\sim \frac{1}{n}\).
+\end{example}
+
+\begin{remark}
+  Т.к. \(\expected{X} = \frac{\Theta}{2}\), то из примера выше следует, что
+  оценка \(\avg{x}\) не является эффективной оценкой математического ожидания.
+  В данном случае оценка \(\widetilde{\expected{X}} = \frac{n + 1}{2 n}
+  X_{(n)}\) будет лучше. Можно показать, что эта оценка является эффективной.
+\end{remark}
+
+\begin{remark}
+  В общем случае равномерного распределения несмещенной эффективной оценкой
+  математического ожидания будет \(\frac{1}{2} \prh{X_{(1)} + X_{(n)}}\). А
+  несмещенной эффективной оценкой длины интервала будет \(\frac{n + 1}{n - 1}
+  \prh{X_{(n)} - X_{(1)}}\).
+\end{remark}
+
+\begin{remark}
+  Таким образом мы видим, что при равномерном распределении нельзя откидывать
+  крайние значения выборки.
+\end{remark}
+
+\begin{remark}
+  При методе максимального правдоподобия как правило получем состоятельные и
+  эффективные оценки.
+\end{remark}
+
+\subheader{Неравенство Рао---Крамера}
+
+Пусть известно, что случайная величина \(X \in \mathcal{F}_{\Theta}\), где
+\(\mathcal{F}_{\Theta}\) это семейство распределений с параметром \(\Theta\).
+
+\begin{definition}
+  Носителем семейства распределений \(\mathcal{F}_{\Theta}\) называется
+  множество \(C \in \RR\) такое, что \(\forall \Theta \given \prob{X \in C} =
+  1\).
+\end{definition}
+
+\begin{remark}
+  Далее для того, чтобы не формулировать теорему дважды, под плотностью будем
+  иметь в виду
+
+  \begin{equation*}
+    f_{\Theta} (x) = \begin{cases}
+      \text{плотность } f_{\Theta} (x),
+        & \text{если распределение абсолютно непрерывное}
+    \\
+      \probP_{\Theta} (X = x), & \text{если распределение дискретное}
+    \end{cases}
+  \end{equation*}
+\end{remark}
+
+\begin{definition}
+  Информацией Фишера \(I(\Theta)\) семейства распределений
+  \(\mathcal{F}_{\Theta}\) называется величина
+
+  \begin{equation*}
+    I(\Theta)
+    = \expected{\prh{\frac{\partial}{\partial \Theta} \ln f_{\Theta} (x)}^2}
+  \end{equation*}
+
+  при условии, что она существует.
+\end{definition}
+
+\begin{definition} \label{def:reg-fam}
+  Семейство распределений \(\mathcal{F}_{\Theta}\) называется регулярным, если
+
+  \begin{enumerate}
+  \item
+    \(\exists C\)~--- носитель \(\mathcal{F}_{\Theta}\) такой, что
+    \(\forall x \in C \given\) функция \(\ln f_{\Theta} (x)\) непрерывно
+    дифференцируема по \(\Theta\).
+  
+  \item
+    Информация Фишера \(I(\Theta)\) существует и непрерывна по \(\Theta\).
+  \end{enumerate}
+\end{definition}
+
+\begin{theorem}[Неравенство Рао---Крамера] \label{thr:rao-cra-ineq}
+  Пусть \(\prh{X_1, \dotsc, X_n}\) это выборка из регулярного семейства
+  \(\mathcal{F}_{\Theta}\), \(\Theta^* = \Theta^* \prh{X_1, \dotsc, X_n}\)~---
+  несмещенная оценка параметра \(\Theta\), дисперсия \(\variance{\Theta^*}\)
+  ограничена на любом компакте (компакт \(\approx\) ограниченное замкнутое
+  множество). Тогда
+
+  \begin{equation*}
+    \variance{\Theta^*} \ge \frac{1}{n I(\Theta)}
+  \end{equation*}
+\end{theorem}
+
+\begin{remark}
+  Если \(\variance{\Theta^*} = \frac{1}{n I(\Theta)}\), то оценка \(\Theta^*\)
+  будет эффективной.
+\end{remark}
+
+\begin{example}
+  Пусть \(\sample{X} = \prh{X_1, \dotsc, X_n}\)~--- выборка из
+  \(\ndist{a}{\sigma^2}\), где \(a \in \RR\) и \(\sigma > 0\). Проверим
+  эффективность оценки \(a^* = \avg{x}\).
+
+  \solution{} В качестве носителя выберем \(C = \interval{-\infty}{\infty}\).
+  Далее вычислим \(\ln f (x)\).
+
+  \begin{equation*}
+    f(x) = \frac{1}{\sigma \sqrt{2 \pi}} \exp \prh{
+      -\frac{(x - a)^2}{2 \sigma^2}
+    }
+    \implies
+    \ln f(x) = -\ln \sigma - \ln \sqrt{2 \pi} - \frac{(x - a)^2}{2 \sigma^2}
+  \end{equation*}
+
+  Теперь вычислим частную производную по \(a\).
+
+  \begin{equation*}
+    \frac{\partial}{\partial a} \ln f(x)
+    = -\frac{1}{2 \sigma^2} \cdot 2 (x - a) \cdot (-1)
+    = \frac{x - a}{\sigma^2}
+  \end{equation*}
+
+  Видим, что эта производная непрерывна по \(a\). Значит первое условие из
+  определения \ref{def:reg-fam} выполнено. Теперь вычислим информацию Фишера.
+
+  \begin{equation*}
+    I(\Theta)
+    = \expected{\prh{\frac{\partial}{\partial a} \ln f(x)}^2}
+    = \expected{\prh{\frac{X - a}{\sigma^2}}^2}
+    = \frac{\expected{\prh{X -\expected{X}}^2}}{\sigma^4}
+    = \frac{\variance{X}}{\sigma^4}
+    = \frac{1}{\sigma^2}
+  \end{equation*}
+
+  Видим, что информация Фишера существует и непрерывна по \(a\). Значит
+  выполнено второе условие из определения \ref{def:reg-fam}. Таком образом
+  семейство нормальных распределений \(\ndist{a}{\sigma^2}\) регулярно
+  относительно параметра \(a\). Аналогично можно показать, что оно будет
+  регулярно относительно параметра \(\sigma\). Вычислим дисперсию оценки.
+
+  \begin{equation*}
+    \variance{a^*}
+    = \variance{\avg{x}}
+    = \frac{\variance{X}}{n}
+    = \frac{\sigma^2}{n}
+  \end{equation*}
+
+  В правой части неравенства \ref{thr:rao-cra-ineq} имеем
+
+  \begin{equation*}
+    \frac{1}{n I(\Theta)}
+    = \frac{\sigma^2}{n}
+  \end{equation*}
+
+  Видим, что дисперсия оценки получилась минимально возможной. Значит
+  \(\avg{x}\) это эффективная оценка параметра \(a\). Аналогично можно показать,
+  что \(S^2\)~--- несмещенная эффективная оценка \(\sigma^2\).
+\end{example}
+
+\begin{remark}
+  В практической статистике часто используют линейные оценки \(\Theta^* = \sum
+  c_i x_i\). Лучшая оценка в таком классе называется наилучшей линейной
+  несмещенной оценкой или BLUE-оценкой. В примере с нормальным распределение
+  оценка \(a^* = \avg{x}\) будет BLUE-оценкой, а в примере с равномерным
+  распределением оценка \(\Theta^* = 2 \avg{x}\) будет BLUE-оценкой.
+\end{remark}

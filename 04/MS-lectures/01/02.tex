@@ -1,0 +1,345 @@
+\subsection{%
+  Лекция \texttt{24.??.??}.%
+}
+
+\subheader{Точечные оценки}
+
+Пусть имеется выборка \(\sample{X} = (X_1, \dotsc, X_n)\) объема \(n\)~--- набор
+независимых экземпляров случайной величины \(X\).
+
+\begin{definition}
+  Статистикой называется измеримая функция \(\Theta^* = \Theta^* (X_1, \dotsc,
+  X_n)\).
+\end{definition}
+
+Пусть требуется найти приближенную оценку неизвестного параметра \(\Theta\) по
+выборке \((X_1, \dotsc, X_n)\). Оценка считается при помощи некоторой статистики
+\(\Theta^* = \Theta^* (X_1, \dotsc, X_n)\).
+
+\subheader{Свойства статистических оценок}
+
+\begin{definition}
+  Статистика \(\Theta^* = \Theta^* (X_1, \dotsc, X_n)\) неизвестного параметра
+  \(\Theta\) называется состоятельной, если \(\Theta^* \Rarr{\probP} \Theta\)
+  при \(n \to \infty\).
+\end{definition}
+
+\begin{definition}
+  Статистика \(\Theta^* = \Theta^* (X_1, \dotsc, X_n)\) неизвестного параметра
+  \(\Theta\) называется несмещенной, если \(\expected{\Theta^*} = \Theta\).
+\end{definition}
+
+\begin{remark}
+  Оценка называется асимптотически несмещенной, если \(\expected{\Theta^*} \to
+  \Theta\) при \(n \to \infty\).
+\end{remark}
+
+\begin{definition}
+  Оценка \(\Theta_1^*\) не хуже оценки \(\Theta_2^*\), если
+
+  \begin{equation*}
+    \expected{\prh{\Theta_1^* - \Theta}^2}
+      \le \expected{\prh{\Theta_2^* - \Theta}^2}
+  \end{equation*}
+
+  Если \(\Theta_1^*\) и \(\Theta_2^*\)~--- несмещенные оценки, то это
+  равносильно тому, что \(\variance{\Theta_1^*} \le \variance{\Theta_2^*}\).
+\end{definition}
+
+\begin{definition}
+  Оценка \(\Theta^*\) называется эффективной, если она не хуже всех остальных
+  оценок.
+\end{definition}
+
+\begin{remark}
+  В классе всех возможных оценок не существует эффективной оценки.  
+\end{remark}
+
+\begin{theorem}
+  В классе несмещенных оценок существует эффективная оценка, причем
+  единственная.
+\end{theorem}
+
+\subheader{Точечные оценки моментов}
+
+\begin{definition}
+  Выборочным средним \(\avg{x}\) называется величина
+
+  \begin{equation*}
+    \avg{x} = \frac{1}{n} \sum_{i = 1}^n x_i
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  Выборочной дисперсией \(\svarianceD\) называется величина
+
+  \begin{equation*}
+    \svarianceD = \frac{1}{n} \sum_{i = 1}^n \prh{x_i - \avg{x}}^2
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  Исправленной выборочной дисперсией \(S^2\) называется величина
+
+  \begin{equation*}
+    S^2
+    = \frac{1}{n - 1} \sum_{i = 1}^n \prh{x_i - \avg{x}}^2
+    = \frac{n}{n - 1} \svarianceD
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  Выборочным среднеквадратичным отклонением называется величина
+
+  \begin{equation*}
+    \sstderS = \sqrt{\svarianceD}
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  Исправленным выборочным среднеквадратичным отклонением называется величина
+
+  \begin{equation*}
+    S = \sqrt{S^2}
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  Выборочным \(k\)-ым моментов \(\avg{x^k}\) называется величина
+
+  \begin{equation*}
+    \avg{x^k} = \frac{1}{n} \sum_{i = 1}^n x_i^k
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  Выборочной модой \(\sMo\) называется варианта с наибольшей частотой.
+
+  \begin{equation*}
+    \sMo = x_i \given n_i = \max(n_1, \dotsc, n_k)
+  \end{equation*}
+\end{definition}
+
+\begin{definition}
+  Выборочной медианой \(\sMe\) называется значение варианты \(x_i\) в середине
+  ряда.
+
+  \begin{equation*}
+    \sMe = \begin{cases}
+      x_{(k)}, & \text{ если } n = 2 k - 1 \\
+      \frac{1}{2} \prh{x_{(k)} + x_{(k + 1)}}, & \text{ если } n = 2 k
+    \end{cases}
+  \end{equation*}
+\end{definition}
+
+\begin{theorem}
+  Выборочное среднее \(\avg{x}\) является несмещенной состоятельной оценкой для
+  математического ожидания.
+
+  \begin{equation*}
+    \begin{aligned}
+      \expected{\avg{x}} = \expected{X} = a
+      \qquad
+      \avg{x} \Rarr{\probP} \expected{X} = a
+    \end{aligned}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Покажем несмещенность.
+
+  \begin{equation*}
+    \expected{\avg{x}}
+    = \expected{\frac{x_1 + \dotsc + x_n}{n}}
+    = \frac{1}{n} \cdot n \cdot \expected{x_1}
+    = \expected{x_1}
+  \end{equation*}
+
+  Покажем состоятельность.
+
+  \begin{equation*}
+    \avg{x} = \frac{x_1 + \dotsc + x_n}{n} \Rarr{\probP} \expected{X}
+    \text{ при } n \to \infty
+  \end{equation*}
+
+  Это закон больших чисел.
+\end{proof}
+
+\begin{theorem}
+  Выборочный \(k\)-ый момент \(\avg{x^k}\) является несмещенной состоятельной
+  оценкой для теоретического \(k\)-ого момента.
+
+  \begin{equation*}
+    \begin{aligned}
+      \expected{\avg{x^k}} = \expected{X^k} = m_k
+      \qquad
+      \expected{\avg{x^k}} \Rarr{\probP} \expected{X^k} = m_k
+      \text{ при } n \to \infty
+    \end{aligned}
+  \end{equation*}
+\end{theorem}
+
+\begin{proof}
+  Это следует из предыдущей теоремы, если в качестве случайной величины взять
+  \(x^k\).
+\end{proof}
+
+\begin{theorem}
+  Выборочные дисперсии \(\svarianceD\) и \(S^2\) являются состоятельным оценками
+  для дисперсии. При этом \(\svarianceD\)~--- смещенная оценка (есть
+  систематическая вниз), а \(S^2\)~--- несмещенная оценка.
+\end{theorem}
+
+\begin{proof}
+  Заметим, что
+
+  \begin{equation*}
+    \begin{aligned}
+      \svarianceD
+      = \frac{1}{n} \sum \prh{x_i - \avg{x}}^2
+      = \avg{x^2} - \prh{\avg{x}}^2
+    \\
+      \variance{\avg{x}}
+      = \expected{\prh{\avg{x}}^2} - \prh{\expected{\avg{x}}}^2
+      \implies
+      \expected{\prh{\avg{x}}^2}
+      = \prh{\expected{\avg{x}}}^2 + \variance{\avg{x}}
+    \end{aligned}
+  \end{equation*}
+
+  Таким образом
+
+  \begin{equation*}
+    \expected{\svarianceD}
+    = \expected{\avg{x^2}} - \expected{\prh{\avg{x}}^2}
+    = \expected{x^2} - \prh{
+      \prh{\expected{x}}^2 + \variance{\avg{x}}
+    }
+    = \prh{\expected{x^2} - \prh{\expected{x}}^2} - \variance{\avg{x}}
+    = \variance{x} - \variance{\avg{x}}
+  \end{equation*}
+
+  Видно, что будет смещение на величину \(\variance{\avg{x}}\). Преобразуем
+  полученное выражение в более удобную форму.
+
+  \begin{equation*}
+    \variance{x} - \variance{\avg{x}}
+    = \variance{x} - \frac{1}{n^2} \sum_{i = 1}^n \variance{x_i}
+    = \variance{x} - \frac{1}{n} \cdot \variance{x}
+    = \frac{n - 1}{n} \cdot \variance{x}
+   \end{equation*} 
+
+   Значит
+
+   \begin{equation*}
+     \expected{S^2}
+     = \expected{\frac{n}{n - 1} \svarianceD}
+     = \frac{n}{n - 1} \cdot \frac{n - 1}{n} \cdot \variance{x}
+     = \variance{x}
+   \end{equation*}
+
+   Т.е.  \(S^2\) это несмещенная оценка. Далее покажем состоятельность оценок.
+
+   \begin{equation*}
+     \begin{aligned}
+        \svarianceD = \avg{x^2} - \prh{\avg{x}}^2
+        \Rarr{\probP}
+        \expected{x^2} - \prh{\expected{x}}^2 = \variance{x}
+      \\
+        S^2 = \under{\frac{n}{n - 1}}{\to 1} \svarianceD
+        \Rarr{\probP}
+        \variance{x}
+     \end{aligned}
+   \end{equation*}
+\end{proof}
+
+\begin{remark}
+  Т.к. \(\frac{n}{n - 1} \to 1\) при \(n \to \infty\), то
+  \(\expected{\svarianceD} \Rarr{\probP} \variance{x}\) при \(n \to \infty\).
+  Значит выборочная дисперсия является асимптотически несмещенной оценкой,
+  поэтому на практике при \(n \ge 100\) можно считать обычную выборочную
+  дисперсию, а при \(n < 100\) следует ее заменить на исправленную выборочную
+  дисперсию.
+\end{remark}
+
+\subheader{Метод моментов (Пирсона)}
+
+Зная выборочные моменты можно дать оценки остальным параметрам распределения.
+Пусть имеется выборка \(\sample{X} = \prh{X_1, \dotsc, X_n}\) неизвестного
+распределения, но при этом знаем, что данное распределение определенного типа,
+задаваемого \(k\) параметрами \(\Theta = \prh{\Theta_1, \dotsc, \Theta_k}\).
+Зная параметры можем вычислить теоретические \(k\)-ые моменты. Например, если
+распределение непрерывное, то
+
+\begin{equation*}
+  m_i
+  = \int_{\RR} x^k f \prh{x, \Theta_1, \dotsc, \Theta_k} \dd x
+  = h_i \prh{\Theta_1, \dotsc, \Theta_k}
+\end{equation*}
+
+Вычислим выборочные моменты и подставим в эти формулы, получим систему
+уравнений.
+
+\begin{equation*}
+  \begin{cases}
+    \avg{x}   = & h_1 \prh{\Theta_1, \dotsc, \Theta_k} \\
+    \avg{x^2} = & h_2 \prh{\Theta_1, \dotsc, \Theta_k} \\
+                & \vdots                               \\
+    \avg{x^k} = & h_k \prh{\Theta_1, \dotsc, \Theta_k}
+  \end{cases}
+\end{equation*}
+
+Решив эту систему, находим оценки \(\Theta_1^*, \dotsc, \Theta_k^*\) неизвестных
+параметров.
+
+\begin{remark}
+  При этом обычно получаем состоятельные оценки, но смещенные.
+\end{remark}
+
+\begin{example}
+  Пусть \(X \in \udist{a}{b}\). При обработке статданных получили оценки первого
+  и второго момента \(\avg{x} = 2.25\) и \(\avg{x^2} = 6.75\). Необходимо дать
+  оценки неизвестных параметров \(a\) и \(b\).
+
+  \solution{} Плотность будет иметь вид
+
+  \begin{equation*}
+    f(x, a, b) = \begin{cases}
+      0, & x < a \\
+      \frac{1}{b - a}, & a \le x \le b \\
+      0, & x > b
+    \end{cases}
+  \end{equation*}
+
+  Тогда
+
+  \begin{equation*}
+    \expected{x} = \frac{a + b}{2}
+    \qquad
+    \expected{x^2} = \frac{a^2 + a b + b^2}{3}
+  \end{equation*}
+
+  Составим систему
+
+  \begin{equation*}
+    \begin{cases}
+      2.25 = \frac{a^* + b^*}{2} \\
+      6.75 = \frac{\prh{a^*}^2 + a^* b^* + \prh{b^*}^2}{3}
+    \end{cases}
+    \iff
+    \begin{cases}
+      a^* + b^* = 4.5 \\
+      \prh{a^*}^2 + a^* b^* + \prh{b^*}^2 = 20.25
+    \end{cases}
+    \iff
+    \begin{cases}
+      a^* + b^* = 4.5 \\
+      a^* b^* = 0
+    \end{cases}
+    \iff[a < b]
+    \begin{cases}
+      a^* = 0 \\
+      b^* = 4.5 
+    \end{cases}
+  \end{equation*}
+\end{example}
