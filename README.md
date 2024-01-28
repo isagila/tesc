@@ -13,11 +13,11 @@
 
 ### III семестр
 
-- [Дополнительные главы высшей математики (лекции)](https://isagila.github.io/tesc/03/MA-lectures.pdf)
-- [Теория вероятности (лекции)](https://isagila.github.io/tesc/03/PT-lectures.pdf)
-- [Базы данных (лекции)](https://isagila.github.io/tesc/03/DB-lectures.pdf)
+- [Дополнительные главы высшей математики](https://isagila.github.io/tesc/03/MA.pdf)
+- [Теория вероятности](https://isagila.github.io/tesc/03/PT.pdf)
+- [Базы данных](https://isagila.github.io/tesc/03/DB.pdf)
 - [Физика](https://isagila.github.io/tesc/03/PH.pdf)
 
 ### IV семестр (!pre)
 
-- [Математическая статистика (лекции)](https://isagila.github.io/tesc/04/MS-lectures.pdf)
+- [Математическая статистика](https://isagila.github.io/tesc/04/MS.pdf)
