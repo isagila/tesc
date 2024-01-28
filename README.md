@@ -1,5 +1,8 @@
 # tEsc
 
+> [!CAUTION]
+> Now this repo is for pdfs only. If you want to contribute see https://github.com/tesc-tex
+
 ### I семестр
 
 - [Линейная алгебра](https://isagila.github.io/tesc/01/LA.pdf)
