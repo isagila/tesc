@@ -21,6 +21,7 @@
 - [Базы данных](https://isagila.github.io/tesc/03/DB.pdf)
 - [Физика](https://isagila.github.io/tesc/03/PH.pdf)
 
-### IV семестр (!pre)
+### IV семестр
 
 - [Математическая статистика](https://isagila.github.io/tesc/04/MS.pdf)
+- [Операционные системы](https://isagila.github.io/tesc/04/OS.pdf)
